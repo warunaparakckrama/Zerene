@@ -1,0 +1,92 @@
+1. app/config/config.php
+	-change sitename, folder in htdocs
+	(-create database)
+	-change DB_NAME
+	-define URLROOT
+
+2. public/.htaccess
+	-change RewriteBase foldername
+
+3. app/views/inc/
+	-navbar, header, footer
+
+
+--Users controller--
+
+4. app/controllers
+	-Users.php
+	(check sharepots folder)
+
+--Register/Login form--
+
+5. app/views/users/
+	-register.php
+	-login.php
+	(check shareposts folder)
+
+--Form Validation--
+
+6. app/controllers/Users
+	-init data on register()
+	-sanitize POST data
+	-validate email, name, password, confirm password
+	-make sure errors are empty
+	-do the same for login()
+
+--Reach to DB/ checking email is already there--
+
+7. app/controllers/Users.php
+	-"$this->userModel = $this->model('User');" in __construct()
+	-(might have to include a private $userModel in Users class)
+	-create User.php in app/models (check shareposts file)
+	-again Users.php in app/controllers
+	-in register(), after //validate email, put //check email part
+
+
+--User registration--
+
+8. app/controllers/Users.php
+	-in register(), remove die('SUCCESS')
+	-hash password
+	-//register user (shareposts file)
+
+9. app/models/USer.php
+	-register user
+	-bind values
+
+10. app/helpers
+	-create url_helper.php
+	-create function redirect() (sharposts file)
+
+11. app/bootstrap
+	-//load helpers
+
+12. app/controllers/Users.php
+	-redirect('users/login');
+
+-- flash messaging --
+
+13. create app/helpers/session_helper.php
+
+14. in app/controllers/Users.php, add flash(); under //register user comment (check shareposts file)
+
+-- user login --
+
+15. app/controllors/Users.php, create //check for user email (shareposts file)
+    check //check and set loggedin user
+    check //create session
+
+16. app/models/user.php, check //login user
+
+-- user session data (after login) --
+
+17. app/controllers/Users.php, erase die('Success')
+    add //create session code
+    create createUserSession function
+
+18. app/views/inc/navbar.php
+    register login button hide
+    create logout link
+
+19. app/controllers/Users.php, logout function
+    create isloggedin function
