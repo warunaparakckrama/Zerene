@@ -3,7 +3,7 @@
 class Pages extends Controller{
 
     //modifide code: created postModel
-    private $postModel;
+    // private $postModel;
 
     public function __construct()
     {
@@ -13,7 +13,7 @@ class Pages extends Controller{
     public function index(){
         // $this->view('Hello');
         $data = [
-            'title' => 'ZereneMVC',
+            'title' => 'Zerene',
         ];
 
 
