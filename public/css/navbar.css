@@ -1,0 +1,29 @@
+@import url("root.css");
+
+.sec-nav{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    background-color: var(--zerene-green);
+    height: 70px;
+    width: 100%;
+    padding-left: 100px;
+    padding-right: 100px;
+    position: fixed;
+    top: 0;
+    box-shadow:inset;
+    /* border: 1px solid black; */
+}
+
+.nav-grid-1{
+    display: grid;
+    align-items: center;
+    
+}
+
+.nav-grid-2{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content:right;
+    padding-right: 200px;
+}

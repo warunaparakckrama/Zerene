@@ -1,3 +1,439 @@
-body{
-    background: red;
+@import url("root.css");
+
+*{
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: var(--zerene-light);
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+}
+
+
+/* section */
+
+.section{
+    display: flex;
+    height:100vh;
+}
+
+.sec-div-left{
+    display: flex;
+    flex: 0.5;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 100px;
+}
+
+.sec-div-right{
+    display: flex;
+    flex: 0.5;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* section end */
+
+
+/* text */
+
+.h1-light{
+    font-weight:200;
+    font-size: 100px;
+    overflow: hidden;
+    /* border: 2px solid black; */
+}
+
+.h1-bold{
+    font-weight:500;
+    overflow: hidden;
+    /* border: 2px solid black; */
+}
+
+.p-regular{
+    font-size: 20px;
+    text-align: left;
+    overflow:hidden;
+    width: fit-content;
+    height: fit-content;
+    /* border: 2px solid black; */
+}
+
+.p-bold{
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+    text-align: left;
+    overflow:hidden;
+    height: fit-content;
+    width: fit-content;
+    /* border: 2px solid black; */
+}
+
+.a-style{
+    align-items: center;
+    justify-content: right;
+    text-decoration: none;
+    color: var(--zerene-light);
+}
+
+.a-name{
+    text-decoration: none;
+    color: var(--zerene-black);
+}
+
+.a-name:hover{
+    text-decoration: underline;
+}
+
+/* text end */
+
+
+/* buttons */
+
+.button-main{
+    display: flex;
+    cursor: pointer;
+    background-color: var(--zerene-green);
+    border: 1px solid var(--zerene-green);
+    color: var(--zerene-white);
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    width: fit-content;
+    height: fit-content;
+    margin: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.button-main:hover{
+    background-color: var(--zerene-white);
+    color: var(--zerene-green);
+    border: 1px solid var(--zerene-white);
+}
+
+.button-second{
+    display: flex;
+    cursor: pointer;
+    background-color: var(--zerene-white);
+    border: 1px solid var(--zerene-white);
+    color: var(--zerene-green);
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    height: fit-content;
+    width: fit-content;
+    margin: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.button-second:hover{
+    background-color: var(--zerene-light);
+    color: var(--zerene-green);
+    border: 1px solid var(--zerene-light);
+}
+
+button.notify{
+    display: flex;
+    cursor: pointer;
+    background-color: var(--zerene-white);
+    border: 1px solid var(--zerene-white);
+    border-radius: 6px;
+    height: fit-content;
+    width: fit-content;
+    padding: 5px;
+
+}
+
+button.notify:hover{
+    box-shadow: inset;
+}
+
+/* buttons end */
+
+
+/* card */
+
+.card-white{
+    background-color: var(--zerene-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding-15);
+    align-items: top;
+    height: fit-content;
+    margin-bottom: 10px;
+}
+
+.card-green{
+    display: grid;
+    grid-template-columns: 20% 50% 30%;
+    gap: 10px;
+    background-color: var(--zerene-light);
+    border-radius: var(--border-radius-8);
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    height: fit-content;
+    border: var(--zerene-green);
+}
+.card-green-2{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    gap: 10px;
+    background-color: var(--zerene-light);
+    border-radius: var(--border-radius-8);
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    height: fit-content;
+    border: var(--zerene-green);
+}
+
+
+.card-profile{
+    width: 80px;
+    height: 80px;
+}
+
+.card-profile-2{
+    width: 120px;
+    height: 120px;
+}
+
+.btn-container{
+    display: flex;
+    justify-content: right;
+    padding-right: 10px;
+}
+
+.text-container{
+    display: flex;
+    justify-content: right;
+    padding-right: 20px;
+}
+
+/* card end */
+
+
+.form{
+    border: 1px solid var(--zerene-white);
+    color: var(--zerene-white);
+    border-radius: 4px;
+    font-family: "Poppins", sans-serif;
+
+}
+
+.button-scroll {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: var(--zerene-green);
+    color: var(--zerene-light);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.button-scroll:hover {
+    background-color: var(--zerene-white);
+    color: var(--zerene-green);
+}
+
+
+
+/* Sign up */
+
+.grid-signup{
+    display: grid;
+    grid-template-columns: 55% 45%;
+    height: 100vh;
+    align-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
+    /* border: 1px solid black; */
+}
+
+.grid-signup-container1{
+    display: grid;
+    /* border: 1px solid black; */
+    align-items: center;
+    justify-items:left;
+    /* padding-left: 100px; */
+}
+.grid-signup-container2{
+    display: grid;
+    /* border: 1px solid black; */
+    align-items: center;
+    justify-items: center;
+}
+
+.grid-form{
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+    gap: 10px;
+}
+
+.form-signup{
+    border: 1px solid var(--zerene-light);
+    color: var(--zerene-white);
+    border-radius: 6px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    width: 300px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
+/* signup end */
+
+
+/* login */
+
+.sec-login{
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 15% 30% 55%;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.log-grid-container1{
+    display: grid;
+    align-items:left;
+    padding-top: 30px;
+    /* border: 1px solid black; */
+}
+
+.log-grid-container2{
+    display: grid;
+    align-items: top;
+    justify-items: center;
+    /* border: 1px solid black; */
+}
+
+.log-grid-container3{
+    display: grid;
+    align-items: top;
+    justify-items: center;
+    height: fit-content;
+    /* border: 1px solid black; */
+}
+
+.log-sub-container1{
+    display: grid;
+    width: fit-content;
+    height: fit-content;
+    /* border: 1px solid black; */
+}
+
+.log-sub-container2{
+    display: grid;
+    width: 350px;
+    height: fit-content;
+    justify-items: right;
+    /* border: 1px solid black; */
+}
+
+.input{
+    border: 1px solid var(--zerene-white);
+    color: var(--zerene-white);
+    border-radius: 6px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    padding-left: 5px;
+    width: 350px;
+    height: 30px;
+}
+
+.input::placeholder{
+    opacity: 50%;
+}
+
+/* login-end */
+
+
+/* Select dropdown */
+
+/*the container must be positioned relative:*/
+.custom-select {
+    position: relative;
+    color: var(--zerene-green);
+  }
+  
+  .custom-select select {
+    display: none; /*hide original SELECT element:*/
+  }
+  
+  .select-selected {
+    background-color: var(--zerene-light);
+  }
+  
+  /*style the arrow inside the select element:*/
+  .select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+  }
+  
+  /*point the arrow upwards when the select box is open (active):*/
+  .select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+  }
+  
+  /*style the items (options), including the selected item:*/
+  .select-items div,.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  /*style items (options):*/
+  .select-items {
+    position: absolute;
+    background-color: DodgerBlue;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+  }
+  
+  /*hide the items when the select box is closed:*/
+  .select-hide {
+    display: none;
+  }
+  
+  .select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+/* Select dropdown end */
