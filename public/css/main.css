@@ -1,4 +1,5 @@
-@import url("root.css");
+@import url("links.css");
+@import url('navbar.css');
 
 *{
     margin: 0;
@@ -17,218 +18,32 @@ body{
 }
 
 
-/* section */
+/* index */
 
-.section{
-    display: flex;
-    height:100vh;
-}
-
-.sec-div-left{
-    display: flex;
-    flex: 0.5;
-    flex-direction: column;
-    justify-content: center;
+.sec-home{
+    display: grid;
+    grid-template-columns: 50% 50%;
     padding-left: 100px;
+    padding-right: 100px;
+    align-items: center;
+    height:100vh;
+    /* border: 1px solid black; */
 }
 
-.sec-div-right{
-    display: flex;
-    flex: 0.5;
-    flex-direction: column;
+.home-grid-left{
+    display: grid;
+    align-items: left;
+    border: 1px solid red;
+}
+
+.home-grid-right{
+    display: grid;
+    align-items: center;
     justify-content: center;
+    /* border: 1px solid red; */
 }
 
-/* section end */
-
-
-/* text */
-
-.h1-light{
-    font-weight:200;
-    font-size: 100px;
-    overflow: hidden;
-    /* border: 2px solid black; */
-}
-
-.h1-bold{
-    font-weight:500;
-    overflow: hidden;
-    /* border: 2px solid black; */
-}
-
-.p-regular{
-    font-size: 20px;
-    text-align: left;
-    overflow:hidden;
-    width: fit-content;
-    height: fit-content;
-    /* border: 2px solid black; */
-}
-
-.p-bold{
-    font-size: 20px;
-    margin: 0;
-    font-weight: bold;
-    text-align: left;
-    overflow:hidden;
-    height: fit-content;
-    width: fit-content;
-    /* border: 2px solid black; */
-}
-
-.a-style{
-    align-items: center;
-    justify-content: right;
-    text-decoration: none;
-    color: var(--zerene-light);
-}
-
-.a-name{
-    text-decoration: none;
-    color: var(--zerene-black);
-}
-
-.a-name:hover{
-    text-decoration: underline;
-}
-
-/* text end */
-
-
-/* buttons */
-
-.button-main{
-    display: flex;
-    cursor: pointer;
-    background-color: var(--zerene-green);
-    border: 1px solid var(--zerene-green);
-    color: var(--zerene-white);
-    font-size: 15px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    width: fit-content;
-    height: fit-content;
-    margin: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.button-main:hover{
-    background-color: var(--zerene-white);
-    color: var(--zerene-green);
-    border: 1px solid var(--zerene-white);
-}
-
-.button-second{
-    display: flex;
-    cursor: pointer;
-    background-color: var(--zerene-white);
-    border: 1px solid var(--zerene-white);
-    color: var(--zerene-green);
-    font-size: 15px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    height: fit-content;
-    width: fit-content;
-    margin: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.button-second:hover{
-    background-color: var(--zerene-light);
-    color: var(--zerene-green);
-    border: 1px solid var(--zerene-light);
-}
-
-button.notify{
-    display: flex;
-    cursor: pointer;
-    background-color: var(--zerene-white);
-    border: 1px solid var(--zerene-white);
-    border-radius: 6px;
-    height: fit-content;
-    width: fit-content;
-    padding: 5px;
-
-}
-
-button.notify:hover{
-    box-shadow: inset;
-}
-
-/* buttons end */
-
-
-/* card */
-
-.card-white{
-    background-color: var(--zerene-white);
-    border-radius: var(--card-border-radius);
-    padding: var(--card-padding-15);
-    align-items: top;
-    height: fit-content;
-    margin-bottom: 10px;
-}
-
-.card-green{
-    display: grid;
-    grid-template-columns: 20% 50% 30%;
-    gap: 10px;
-    background-color: var(--zerene-light);
-    border-radius: var(--border-radius-8);
-    padding: 10px;
-    margin-bottom: 10px;
-    align-items: center;
-    height: fit-content;
-    border: var(--zerene-green);
-}
-.card-green-2{
-    display: grid;
-    grid-template-columns: 20% 80%;
-    gap: 10px;
-    background-color: var(--zerene-light);
-    border-radius: var(--border-radius-8);
-    padding: 10px;
-    margin-bottom: 10px;
-    align-items: center;
-    height: fit-content;
-    border: var(--zerene-green);
-}
-
-
-.card-profile{
-    width: 80px;
-    height: 80px;
-}
-
-.card-profile-2{
-    width: 120px;
-    height: 120px;
-}
-
-.btn-container{
-    display: flex;
-    justify-content: right;
-    padding-right: 10px;
-}
-
-.text-container{
-    display: flex;
-    justify-content: right;
-    padding-right: 20px;
-}
-
-/* card end */
+/* index end */
 
 
 .form{
@@ -236,33 +51,13 @@ button.notify:hover{
     color: var(--zerene-white);
     border-radius: 4px;
     font-family: "Poppins", sans-serif;
-
+    margin-bottom: 10px;
 }
-
-.button-scroll {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    background-color: var(--zerene-green);
-    color: var(--zerene-light);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    padding: 10px;
-}
-
-.button-scroll:hover {
-    background-color: var(--zerene-white);
-    color: var(--zerene-green);
-}
-
 
 
 /* Sign up */
 
-.grid-signup{
+.sec-signup{
     display: grid;
     grid-template-columns: 55% 45%;
     height: 100vh;
@@ -272,28 +67,28 @@ button.notify:hover{
     /* border: 1px solid black; */
 }
 
-.grid-signup-container1{
+.grid-signup-1{
     display: grid;
-    /* border: 1px solid black; */
     align-items: center;
     justify-items:left;
-    /* padding-left: 100px; */
-}
-.grid-signup-container2{
-    display: grid;
     /* border: 1px solid black; */
+
+}
+.grid-signup-2{
+    display: grid;
     align-items: center;
     justify-items: center;
+    /* border: 1px solid black; */
 }
 
-.grid-form{
+.grid-signup-form{
     display: grid;
     grid-template-rows: repeat(8, 1fr);
     gap: 10px;
 }
 
 .form-signup{
-    border: 1px solid var(--zerene-light);
+    border: none;
     color: var(--zerene-white);
     border-radius: 6px;
     font-family: "Poppins", sans-serif;
@@ -318,21 +113,21 @@ button.notify:hover{
     padding-right: 100px;
 }
 
-.log-grid-container1{
+.log-grid-1{
     display: grid;
     align-items:left;
     padding-top: 30px;
     /* border: 1px solid black; */
 }
 
-.log-grid-container2{
+.log-grid-2{
     display: grid;
     align-items: top;
     justify-items: center;
     /* border: 1px solid black; */
 }
 
-.log-grid-container3{
+.log-grid-3{
     display: grid;
     align-items: top;
     justify-items: center;
@@ -340,14 +135,14 @@ button.notify:hover{
     /* border: 1px solid black; */
 }
 
-.log-sub-container1{
+.log-subgrid-1{
     display: grid;
     width: fit-content;
     height: fit-content;
     /* border: 1px solid black; */
 }
 
-.log-sub-container2{
+.log-subgrid-2{
     display: grid;
     width: 350px;
     height: fit-content;
