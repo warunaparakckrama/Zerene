@@ -17,7 +17,8 @@
                     <h1 class="h1-bold" style=" padding-bottom: 5px; font-size: 100px;">Zerene</h1>
                 </div>
                 <div>
-                    <p class="p-regular">online mental health care system.</p>
+                    <p class="p-regular">Mental Healthcare Services Platform,</p>
+                    <p class="p-regular">Exclusively for Undergraduates...</p>
                 </div>
                 <div style="display: flex; flex-direction: row; gap: 10px;">
                     <a href="<?php echo URLROOT; ?>users/login" style="text-decoration: none;"><button class="button-main">Log in</button></a>
@@ -65,7 +66,7 @@
                 </div>
             </div>
 
-            <div class="home-grid-right">
+            <div class="home-grid-right" style="padding-top: 110px;">
                 <div style="padding-bottom: 25px;">
                     <p class="p-bold" style="width: fit-content; line-height:20px;">Standard</p>
                     <p class="p-bold" style="width: fit-content; line-height:20px; padding-bottom: 5px;">Questionaaires</p>
@@ -73,7 +74,7 @@
                 </div>
                 <div style="padding-bottom: 25px;">
                     <p class="p-bold" style="width: fit-content; line-height:20px;">Educational</p>
-                    <p class="p-bold" style="width: fit-content; line-height:20px;">Resources</p>
+                    <p class="p-bold" style="width: fit-content; line-height:20px; padding-bottom: 5px;">Resources</p>
                     <p class="p-regular" style="width: 400px;">Lorem ipsum dolor sit amet consectetur. lorem ipsum dolor sit amet</p>
                 </div>
                 <div style="padding-bottom: 25px;">
