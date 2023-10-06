@@ -33,7 +33,7 @@ body{
 .home-grid-left{
     display: grid;
     align-items: left;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .home-grid-right{

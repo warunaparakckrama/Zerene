@@ -2,6 +2,7 @@
     <head>
         <title><?php echo SITENAME;?></title>
         <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
+        <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
     </head>
 
     <body>
