@@ -1,0 +1,50 @@
+
+.h1-light{
+    font-weight:200;
+    overflow: hidden;
+    height: fit-content;
+    width: fit-content;
+    /* border: 2px solid black; */
+}
+
+.h1-bold{
+    font-weight:500;
+    overflow: hidden;
+    height: fit-content;
+    width: fit-content;
+    /* border: 2px solid black; */
+}
+
+.p-regular{
+    text-align: left;
+    overflow:hidden;
+    width: fit-content;
+    height: fit-content;
+    /* border: 2px solid black; */
+}
+
+.p-bold{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    overflow:hidden;
+    height: fit-content;
+    width: fit-content;
+    /* border: 2px solid black; */
+}
+
+.a-style{
+    align-items: center;
+    justify-content: right;
+    text-decoration: none;
+    color: var(--zerene-light);
+}
+
+.a-name{
+    text-decoration: none;
+    color: var(--zerene-black);
+}
+
+.a-name:hover{
+    text-decoration: underline;
+}

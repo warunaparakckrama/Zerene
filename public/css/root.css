@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500&display=swap');
+
+:root{
+    --zerene-light: #E5F3F6;
+    --zerene-green: #3E8F9C;
+    --zerene-purple-bright: #7E6CFB;
+    --zerene-purple-light: #D3CDFF;
+    --zerene-white: #FEFEFE;
+    --zerene-black: #000000;
+    --zerene-grey: #545454;
+    --zerene-danger: #C83A3A;
+
+    --card-border-radius: 10px;
+    --border-radius-8: 8px;
+    --border-radius-6: 6px;
+    --border-radius-4: 4px;
+
+    --card-padding-15: 15px;
+}

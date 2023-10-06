@@ -1,3 +1,234 @@
-body{
-    background: red;
+@import url("links.css");
+@import url('navbar.css');
+
+*{
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: var(--zerene-light);
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+}
+
+
+/* index */
+
+.sec-home{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding-left: 100px;
+    padding-right: 100px;
+    align-items: center;
+    height:100vh;
+    /* border: 1px solid black; */
+}
+
+.home-grid-left{
+    display: grid;
+    align-items: left;
+    /* border: 1px solid red; */
+}
+
+.home-grid-right{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid red; */
+}
+
+/* index end */
+
+
+.form{
+    border: 1px solid var(--zerene-white);
+    color: var(--zerene-white);
+    border-radius: 4px;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 10px;
+}
+
+
+/* Sign up */
+
+.sec-signup{
+    display: grid;
+    grid-template-columns: 55% 45%;
+    height: 100vh;
+    align-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
+    /* border: 1px solid black; */
+}
+
+.grid-signup-1{
+    display: grid;
+    align-items: center;
+    justify-items:left;
+    /* border: 1px solid black; */
+
+}
+.grid-signup-2{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    /* border: 1px solid black; */
+}
+
+.grid-signup-form{
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+    gap: 10px;
+}
+
+.form-signup{
+    border: none;
+    color: var(--zerene-white);
+    border-radius: 6px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    width: 300px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
+/* signup end */
+
+
+/* login */
+
+.sec-login{
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 15% 30% 55%;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.log-grid-1{
+    display: grid;
+    align-items:left;
+    padding-top: 30px;
+    /* border: 1px solid black; */
+}
+
+.log-grid-2{
+    display: grid;
+    align-items: top;
+    justify-items: center;
+    /* border: 1px solid black; */
+}
+
+.log-grid-3{
+    display: grid;
+    align-items: top;
+    justify-items: center;
+    height: fit-content;
+    /* border: 1px solid black; */
+}
+
+.log-subgrid-1{
+    display: grid;
+    width: fit-content;
+    height: fit-content;
+    /* border: 1px solid black; */
+}
+
+.log-subgrid-2{
+    display: grid;
+    width: 350px;
+    height: fit-content;
+    justify-items: right;
+    /* border: 1px solid black; */
+}
+
+.input{
+    border: 1px solid var(--zerene-white);
+    color: var(--zerene-white);
+    border-radius: 6px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    padding-left: 5px;
+    width: 350px;
+    height: 30px;
+}
+
+.input::placeholder{
+    opacity: 50%;
+}
+
+/* login-end */
+
+
+/* Select dropdown */
+
+/*the container must be positioned relative:*/
+.custom-select {
+    position: relative;
+    color: var(--zerene-green);
+  }
+  
+  .custom-select select {
+    display: none; /*hide original SELECT element:*/
+  }
+  
+  .select-selected {
+    background-color: var(--zerene-light);
+  }
+  
+  /*style the arrow inside the select element:*/
+  .select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+  }
+  
+  /*point the arrow upwards when the select box is open (active):*/
+  .select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+  }
+  
+  /*style the items (options), including the selected item:*/
+  .select-items div,.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  /*style items (options):*/
+  .select-items {
+    position: absolute;
+    background-color: DodgerBlue;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+  }
+  
+  /*hide the items when the select box is closed:*/
+  .select-hide {
+    display: none;
+  }
+  
+  .select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+/* Select dropdown end */

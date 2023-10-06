@@ -1,0 +1,68 @@
+
+.btn-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.button-main{
+    display: flex;
+    cursor: pointer;
+    color: var(--zerene-white);
+    background-color: var(--zerene-green);
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    width: fit-content;
+    height: fit-content;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.button-main:hover{
+    background-color: var(--zerene-white);
+    color: var(--zerene-green);
+    border: none;
+}
+
+.button-second{
+    display: flex;
+    cursor: pointer;
+    color: var(--zerene-green);
+    background-color: var(--zerene-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    height: fit-content;
+    width: fit-content;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.button-second:hover{
+    background-color: var(--zerene-light);
+    color: var(--zerene-green);
+    border: none;
+}
+
+button.notify{
+    display: flex;
+    cursor: pointer;
+    background-color: var(--zerene-white);
+    border: 1px solid var(--zerene-white);
+    border-radius: 6px;
+    height: fit-content;
+    width: fit-content;
+    padding: 5px;
+}
+
+button.notify:hover{
+    box-shadow: inset;
+}
