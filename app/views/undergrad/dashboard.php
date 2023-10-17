@@ -16,7 +16,7 @@
                 <?php require APPROOT . '/views/inc/sidebar.php'; ?>
             </div>
 
-            <div class="content">
+            <div class="content" id="content">
                 <?php require APPROOT . '/views/undergrad/home.php'; ?>
             </div>
         </section>

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const contentDiv = document.querySelector(".content");
+    const contentDiv = document.querySelector("content");
     
     // Function to load views into the content area
     function loadView(viewName) {
