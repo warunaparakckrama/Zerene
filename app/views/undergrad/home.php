@@ -33,7 +33,7 @@
                         <p class="p-regular-grey" style="font-size: 80px; line-height: 80px; padding-bottom: 10px;">Champ!</p>
                         <p class="p-regular">Hope you’re having a good day...</p>
                         <p class="p-regular">Off to a great start, Shall we?</p>
-                        <div style="display: flex; flex-direction: row; margin-top: 20px;">
+                        <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
                             <button class="button-main" style="margin-left: 0px">View Profile</button>
                             <button class="button-main">Try a Quiz</button>
                         </div>

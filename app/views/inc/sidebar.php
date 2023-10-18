@@ -17,8 +17,8 @@
                 <button class="button-second">Edit</button>
             </div>
             <div class="sidebar-container3">
-                <a href="Home" class="top" id="sb-link1">Home</a>
-                <a href="Questionnaires" class="top" id="sb-link2">Questionnaires</a>
+                <a href="../undergrad/home" class="top" id="sb-link1">Home</a>
+                <a href="<?php echo URLROOT; ?>undergrad/questionnaires" class="top" id="sb-link2">Questionnaires</a>
                 <a class="top dd-btn">Counsellors</a>
                     <div class="dropdown-container">
                         <a href="Professional Counsellors" class="dd-content" id="sb-link3">Professional</a>
@@ -36,6 +36,7 @@
         </div>
 
         <script src="<?php echo JS;?>sidebar.js"></script>
+        <script src="<?php echo JS;?>dashboard.js"></script>
 
     </body>
 </html>

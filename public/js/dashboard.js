@@ -1,13 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const contentDiv = document.querySelector("content");
+    const contentDiv = document.querySelector(".content");
+    const urlroot = "http://localhost/Zerene/undergrad";
     
     // Function to load views into the content area
     function loadView(viewName) {
-        fetch("../../app/views/undergrad/"+ viewName + ".php") // Replace with your view file names
+        //window.location.href=`${urlroot}/${viewName}`;
+        fetch(`${urlroot}/${viewName}`) // Replace with your view file names
             .then(response => response.text())
-            .then(data => {
-                contentDiv.innerHTML = data;
-            });
+                .then(data => {
+                    // console.log(data); - Use the data as needed
+                    contentDiv.innerHTML = data;
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+            // console.log(response.text())})
+            // .then(data => {
+            //     contentDiv.innerHTML = data;
+            // })
+            // .catch((e)=>{console.log(e)}); - commented for view error fixing. 18.10.2023
     }
 
     // Attach click event listeners to sidebar links
@@ -55,5 +66,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Call the default view or homepage view
-    loadView("home"); // Load homepage.html by default
+    //loadView("home"); // Load homepage.html by default
 });

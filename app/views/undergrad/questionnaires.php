@@ -20,7 +20,7 @@
                 <div class="card-white">
                     <p class="p-regular">Available Questionnaires</p>
                     <div class="card-green">
-                        <img src="../images/quiz.svg" alt="quiz" class="card-profile">
+                        <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
                         <div>
                             <a href="" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">DASS-21</p></a>
                             <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">General Questionnaire for Anxiety, Depression & Stress</p>
@@ -34,7 +34,7 @@
                 <div class="card-white">
                     <p class="p-regular">Completed Questionnaires</p>
                     <div class="card-green">
-                        <img src="../images/quiz.svg" alt="quiz" class="card-profile">
+                        <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
                         <div>
                             <a href="" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">DASS-21</p></a>
                             <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">General Questionnaire for Anxiety, Depression & Stress</p>
@@ -48,7 +48,7 @@
                 <div class="card-white">
                     <p class="p-regular">Drafts</p>
                     <div class="card-green">
-                        <img src="../images/quiz.svg" alt="quiz" class="card-profile">
+                        <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
                         <div>
                             <a href="" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">DASS-21</p></a>
                             <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">General Questionnaire for Anxiety, Depression & Stress</p>

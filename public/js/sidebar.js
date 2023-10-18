@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function ()
                 links.forEach(function (link) {
                     link.addEventListener("click", function (e) {
                         // Prevent the default link behavior (e.g., navigating to a new page)
-                        e.preventDefault();
+                        //e.preventDefault(); - commented for view error fixing
 
                         // Remove the "active" class from all links
                         links.forEach(function (otherLink) {
