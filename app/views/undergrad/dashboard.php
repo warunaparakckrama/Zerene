@@ -13,7 +13,7 @@
         
         <section class="sec-1">
             <div>
-                <?php require APPROOT . '/views/inc/sidebar.php'; ?>
+                <?php require APPROOT . '/views/inc/sidebar-ug.php'; ?>
             </div>
 
             <div class="content" id="content">
@@ -21,7 +21,7 @@
             </div>
         </section>
 
-        <script src="<?php echo JS;?>dashboard.js"></script>
+        <script src="<?php echo JS;?>dashboard-ug.js"></script>
     </body>
 
 </html>

@@ -36,7 +36,5 @@
         </div>
 
         <script src="<?php echo JS;?>sidebar.js"></script>
-        <script src="<?php echo JS;?>dashboard.js"></script>
-
     </body>
 </html>
