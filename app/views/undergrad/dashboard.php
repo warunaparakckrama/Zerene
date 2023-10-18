@@ -11,7 +11,7 @@
 
     <body>
         
-        <section class="sec-dashb">
+        <section class="sec-1">
             <div>
                 <?php require APPROOT . '/views/inc/sidebar.php'; ?>
             </div>

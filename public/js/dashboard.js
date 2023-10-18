@@ -42,17 +42,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sblink3.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("Pcounsellor"); // Load Pcounsellor.php
+        loadView("pc"); // Load Pcounsellor.php
     });
 
     sblink4.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("Acounsellor"); // Load Acounsellor.php
+        loadView("ac"); // Load Acounsellor.php
     });
 
     sblink5.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("doctor"); // Load doctor.php
+        loadView("doctors"); // Load doctor.php
     });
 
     sblink6.addEventListener("click", function (e) {

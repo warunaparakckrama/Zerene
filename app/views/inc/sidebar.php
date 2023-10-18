@@ -17,12 +17,12 @@
                 <button class="button-second">Edit</button>
             </div>
             <div class="sidebar-container3">
-                <a href="../undergrad/home" class="top" id="sb-link1">Home</a>
+                <a href="<?php echo URLROOT; ?>undergrad/home" class="top" id="sb-link1">Home</a>
                 <a href="<?php echo URLROOT; ?>undergrad/questionnaires" class="top" id="sb-link2">Questionnaires</a>
                 <a class="top dd-btn">Counsellors</a>
                     <div class="dropdown-container">
                         <a href="Professional Counsellors" class="dd-content" id="sb-link3">Professional</a>
-                        <a href="Academic Counsellors" class="dd-content" id="sb-link4">Academic</a>
+                        <a href="<?php echo URLROOT; ?>undergrad/ac" class="dd-content" id="sb-link4">Academic</a>
                     </div>
                 <a href="Psychiatrists" class="top" id="sb-link5">Psychiatrists</a>
                 <a href="Chats" class="top" id="sb-link6">Chats</a>

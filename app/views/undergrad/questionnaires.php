@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
-    <link rel="stylesheet" href="<?php echo CSS; ?>undergrad.css">
+    <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
 </head>
 <body>
     <section>
-        <div class="grid-container2">
-            <div class="sub-container4">
-                <div class="sub-container5">
+        <div class="grid-1">
+            <div class="subgrid-1">
+                <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Questionnaires</p>
                 </div>
             </div>
