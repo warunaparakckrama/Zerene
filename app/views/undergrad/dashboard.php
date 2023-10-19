@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><?php echo SITENAME;?></title>
+        <title><?php echo SITENAME;?> | Undergrad</title>
         <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
         <link rel="stylesheet" href="<?php echo CSS; ?>undergrad.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
