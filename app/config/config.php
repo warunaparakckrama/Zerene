@@ -16,3 +16,5 @@ define('SITENAME', 'Zerene'); //our sitename
 define('CSS', 'http://localhost/Zerene/public/css/');
 //img root
 define('IMG', 'http://localhost/Zerene/public/img/');
+//js root
+define('JS', 'http://localhost/Zerene/public/js/');

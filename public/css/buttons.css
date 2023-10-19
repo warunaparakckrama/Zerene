@@ -2,6 +2,8 @@
 .btn-container{
     display: flex;
     flex-direction: row;
+    margin-right: 10px;
+    gap: 10px;
 }
 
 .button-main{

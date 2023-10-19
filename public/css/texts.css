@@ -15,12 +15,22 @@
     /* border: 2px solid black; */
 }
 
+.p-title{
+    color: var(--zerene-green);
+}
+
 .p-regular{
     text-align: left;
     overflow:hidden;
     width: fit-content;
     height: fit-content;
     /* border: 2px solid black; */
+}
+
+.p-regular-grey{
+    color: var(--zerene-grey);
+    font-weight: 400;
+    width: fit-content;
 }
 
 .p-bold{
@@ -31,6 +41,12 @@
     height: fit-content;
     width: fit-content;
     /* border: 2px solid black; */
+}
+
+.p-bold-grey{
+    color: var(--zerene-grey);
+    font-weight: bold;
+    width: fit-content;
 }
 
 .a-style{
