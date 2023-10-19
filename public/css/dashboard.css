@@ -4,7 +4,7 @@
 .sec-1{
     display: grid;
     grid-template-columns: 20% 80%;
-    padding-right: 100px;
+    margin-right: 100px;
     height: 100vh;
     /* border: 1px solid blue; */
 }
@@ -12,7 +12,6 @@
 .grid-1{
     display: grid;
     grid-template-rows: 10% 90%;
-    padding-left: 50px;
     height: 100vh;
     /* border: 1px solid red; */
 }

@@ -1,30 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
-    <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
-    <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
-</head>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
+        <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
+        <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+    </head>
     <body>
         <section>
-            <div class="grid-1">
+            <div class="grid-1">  
+                
                 <div class="subgrid-1">
-
-                    <div class="subgrid-2">
-                        <p class="p-title" style="font-size: 40px;">Home</p>
-                    </div>
-
-                    <div class="subgrid-3" style="gap: 50px;">
-                        <button class="notify">
-                            <img src="<?php echo IMG; ?>search.svg" alt="notification" width="25" height="25">
-                        </button>
-                        <button class="notify">
-                            <img src="<?php echo IMG; ?>bell.svg" alt="notification" width="25" height="25">
-                        </button>
-                    </div>
-
+                    <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Home</p></div>
+                    <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
                 </div>
 
                 <div class="subgrid-1">
@@ -38,11 +26,9 @@
                             <button class="button-main">Try a Quiz</button>
                         </div>
                     </div>
-
                     <div class="subgrid-2" style="justify-content: center;">
                         <img src="<?php echo IMG; ?>ug-home.svg" alt="ug home" width="338" height="461">
                     </div>
-
                 </div>
 
             </div>
