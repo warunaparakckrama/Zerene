@@ -17,9 +17,21 @@
             </div>
             <div class="log-grid-3">
                 <div class="log-subgrid-1">
-                    <p class="p-regular">Username</p>
+                    <form action="/action_page.php">
+                            <label for="cars" style="font-size: 15px;">Choose User Type<sup>*</sup>:</label>
+                            <select name="users" id="users">
+                            <option value="volvo">Undergraduate</option>
+                            <option value="saab">Counsellor (Academic)</option>
+                            <option value="audi">Counsellor (Professional)</option>
+                            <option value="audi">Psychiatrist</option>
+                            </optgroup>
+                        </select>
+                    </form>
+                </div>
+                <div class="log-subgrid-1">
+                    <p class="p-regular">Username<sup>*</sup></p>
                     <input type="text" id="username" class="input" placeholder="username" style="margin-bottom: 10px;">
-                    <p class="p-regular">Password</p>
+                    <p class="p-regular">Password<sup>*</sup></p>
                     <input type="password" id="password" class="input" placeholder="password">
                 </div>
                 <div class="log-subgrid-2">
