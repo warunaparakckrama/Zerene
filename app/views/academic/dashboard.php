@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../undergrad/sidebar.css">
+    <link rel="stylesheet" href="./acad-counsellor.css">
+    <title>acad-dashboard</title>
+</head>
+<body>
+<section class="sec-dashb">
+            <div>
+                <?php
+                    include "./sidebar.php"
+                ?>
+            </div>
+
+            <div class="content">
+                <?php include "./home.php"?>
+            </div>
+        </section>
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const contentDiv = document.querySelector(".content");
+                
+                // Function to load views into the content area
+                function loadView(viewName) {
+                    fetch(viewName + ".php") // Replace with your view file names
+                        .then(response => response.text())
+                        .then(data => {
+                            contentDiv.innerHTML = data;
+                        });
+                }
+
+                // Attach click event listeners to sidebar links
+                const sblink1 = document.getElementById("sb-link1");
+                const sblink2 = document.getElementById("sb-link2");
+                const sblink3 = document.getElementById("sb-link3");
+                const sblink4 = document.getElementById("sb-link4");
+                const sblink5 = document.getElementById("sb-link5");
+                const sblink6 = document.getElementById("sb-link6");
+                const sblink7 = document.getElementById("sb-link7");
+                
+                sblink1.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    loadView("home"); // Load home.php
+                });
+
+                sblink2.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    loadView("opletter"); // Load opinion letter.php
+                });
+
+                sblink3.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    loadView("acundergraduate"); // Load Pcounsellor.php
+                });
+
+                sblink4.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    loadView("acchat"); // Load Acounsellor.php
+                });
+
+                sblink5.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    loadView("acprofessionals"); // Load doctor.php
+                });
+
+                sblink6.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    loadView("acprofessionals3"); // Load chats.php
+                });
+
+                sblink7.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    loadView("actimeslot"); // Load resources.php
+                });
+
+                // Call the default view or homepage view
+                loadView("home"); // Load homepage.html by default
+            });
+        </script>
+</body>
+</html>
