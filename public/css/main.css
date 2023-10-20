@@ -166,6 +166,24 @@ body{
     opacity: 50%;
 }
 
+select#users{
+    border: none;
+    background-color: var(--zerene-white);
+    color: var(--zerene-green);
+    border-radius: 6px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+}
+
+select#users option{
+    background-color: var(--zerene-white);
+}
+
+select#users option:hover{
+    background-color: var(--zerene-light);
+}
+
+
 /* login-end */
 
 
