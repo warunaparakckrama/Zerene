@@ -18,12 +18,12 @@
                 <div class="subgrid-1">
                     <div class="subgrid-2">
                         <p class="p-bold-grey" style="font-size: 80px; line-height: 80px;">Hello</p>
-                        <p class="p-regular-grey" style="font-size: 80px; line-height: 80px; padding-bottom: 10px;">Champ!</p>
+                        <p class="p-regular-grey" style="font-size: 80px; line-height: 80px; padding-bottom: 10px;">Mentor!</p>
                         <p class="p-regular">Hope you’re having a good day...</p>
-                        <p class="p-regular">Off to a great start, Shall we?</p>
+                        <p class="p-regular">Let's give a helping hand, Shall we?</p>
                         <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
                             <button class="button-main" style="margin-left: 0px">View Profile</button>
-                            <button class="button-main">Questionnaires</button>
+                            <a href="<?php echo URLROOT; ?>procounsellor/pc_reviewq" style="text-decoration: none;"><button class="button-main">Questionnaires</button></a>
                         </div>
                     </div>
                     <div class="subgrid-2" style="justify-content: center;">

@@ -32,37 +32,37 @@ document.addEventListener("DOMContentLoaded", function () {
     
     sblink1.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("home"); // Load home.php
+        loadView("pc_home"); // Load home.php
     });
 
     sblink2.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("reviewq"); // Load questionnaires.php
+        loadView("pc_reviewq"); // Load questionnaires.php
     });
 
     sblink3.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("pc"); // Load Pcounsellor.php
+        loadView(""); // Load Pcounsellor.php
     });
 
     sblink4.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("ac"); // Load Acounsellor.php
+        loadView("pc_undergrad"); // Load Acounsellor.php
     });
 
     sblink5.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("doctors"); // Load doctor.php
+        loadView("pc_chats"); // Load doctor.php
     });
 
     sblink6.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("chats"); // Load chats.php
+        loadView("pc_counselors"); // Load chats.php
     });
 
     sblink7.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("resources"); // Load resources.php
+        loadView("pc_doctors"); // Load resources.php
     });
 
     // Call the default view or homepage view

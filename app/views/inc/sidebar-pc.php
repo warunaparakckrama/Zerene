@@ -16,17 +16,24 @@
                 <p class="p-regular" style="color: var(--zerene-light);">Username</p>
                 <button class="button-second">Edit</button>
             </div>
+
             <div class="sidebar-container3">
-                <a href="<?php echo URLROOT; ?>procounsellor/home" class="top" id="sb-link1">Home</a>
+                <a href="<?php echo URLROOT; ?>procounsellor/pc_home" class="top" id="sb-link1">Home</a>
                 <a class="top dd-btn">Questionnaires</a>
                     <div class="dropdown-container">
-                        <a href="<?php echo URLROOT;?>procounsellor/reviewq" class="dd-content" id="sb-link2">Review</a>
-                        <a href="<?php echo URLROOT; ?>undergrad/ac" class="dd-content" id="sb-link3">Create</a>
+                        <a href="<?php echo URLROOT;?>procounsellor/pc_reviewq" class="dd-content" id="sb-link2">Review</a>
+                        <a href="" class="dd-content" id="sb-link3">Create</a>
                     </div>
-                <a href="Psychiatrists" class="top" id="sb-link5">Psychiatrists</a>
-                <a href="Chats" class="top" id="sb-link6">Chats</a>
-                <a href="Resources" class="top" id="sb-link7">Resources</a>
+                <a href="<?php echo URLROOT;?>procounsellor/pc_undergrad" class="top" id="sb-link4">Undergraduates</a>
+                <a href="<?php echo URLROOT;?>procounsellor/pc_chats" class="top" id="sb-link5">Chats</a>
+                <a class="top dd-btn">Professionals</a>
+                    <div class="dropdown-container">
+                        <a href="" class="dd-content" id="sb-link6">Counselors</a>
+                        <a href="" class="dd-content" id="sb-link7">Psychiatrists</a>
+                    </div>
+                <a href="" class="top" id="sb-link8">Timeslots</a>
             </div>
+
             <div class="sidebar-container3">
                 <a href="" class="bottom">Help & Info</a>
                 <a href="" class="bottom">Feedback</a>
