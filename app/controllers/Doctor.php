@@ -15,4 +15,9 @@ class Doctor extends Controller{
         $data = [];
         $this->view('doctor/home', $data);
     }
+
+    public function questionnaires(){
+        $data = [];
+        $this->view('doctor/questionnaires', $data);
+    }
 }
