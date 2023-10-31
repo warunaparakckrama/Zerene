@@ -84,13 +84,14 @@ body{
 
 .grid-signup-form{
     display: grid;
+    grid-template-columns: 50% 50%;
     grid-template-rows: repeat(8, 1fr);
     gap: 10px;
 }
 
 .form-signup{
     border: none;
-    color: var(--zerene-white);
+    background-color: var(--zerene-white);
     border-radius: 6px;
     font-family: "Poppins", sans-serif;
     font-size: 15px;
