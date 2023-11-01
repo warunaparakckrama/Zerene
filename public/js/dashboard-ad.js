@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sblink3.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView(""); // Load Pcounsellor.php
+        loadView("ad_reg_doctor"); // Load Pcounsellor.php
     });
 
     sblink4.addEventListener("click", function (e) {

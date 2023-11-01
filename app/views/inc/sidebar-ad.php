@@ -21,7 +21,7 @@
                 <a class="top dd-btn">Registrations</a>
                 <div class="dropdown-container">
                     <a href="<?php echo URLROOT;?>admin/ad_reg_counselor" class="dd-content" id="sb-link2">Counselors</a>
-                    <a href="" class="dd-content" id="sb-link3">Psychiatrists</a>
+                    <a href="<?php echo URLROOT;?>admin/ad_reg_doctor" class="dd-content" id="sb-link3">Psychiatrists</a>
                 </div>
                 <a href="" class="top" id="sb-link4">Verifications</a>
                 <a href="" class="top" id="sb-link5">Users</a>
