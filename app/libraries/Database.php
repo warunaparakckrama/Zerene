@@ -82,4 +82,9 @@ class database{
     public function rowCount(){
         return $this->stmt->rowCount();
     }
+
+    public function lastInsertedId() {
+        return $this->dbh->lastInsertId();
+        // 'pdo' might be the PDO object used for database operations
+    }
 }
