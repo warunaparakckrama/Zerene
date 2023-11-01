@@ -18,12 +18,21 @@
             </div>
             <div class="sidebar-container3">
                 <a href="<?php echo URLROOT; ?>admin/ad_home" class="top" id="sb-link1">Home</a>
-                <a href="<?php echo URLROOT; ?>admin/ad_registrations" class="top" id="sb-link2">Registrations</a>
+                <a class="top dd-btn">Registrations</a>
+                <div class="dropdown-container">
+                    <a href="<?php echo URLROOT;?>admin/ad_reg_counselor" class="dd-content" id="sb-link2">Counselors</a>
+                    <a href="" class="dd-content" id="sb-link3">Psychiatrists</a>
+                </div>
+                <a href="" class="top" id="sb-link4">Verifications</a>
+                <a href="" class="top" id="sb-link5">Users</a>
+                <a href="" class="top" id="sb-link6">Notifications</a>
+                <a href="" class="top" id="sb-link7">Newsletters</a>
+                <a href="" class="top" id="sb-link8">Feedback</a>
             </div>
             <div class="sidebar-container3">
                 <a href="" class="bottom">Help & Info</a>
                 <a href="" class="bottom">Feedback</a>
-                <a href="" class="bottom">Log out</a>
+                <a href="<?php echo URLROOT;?>users/logout" class="bottom">Log out</a>
             </div>
         </div>
 

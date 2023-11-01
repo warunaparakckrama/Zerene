@@ -203,16 +203,23 @@ class Users extends Controller{
     }
 
     public function createUserSession($user){
-        $_SESSION['user_id'] = $user->id;
-        $_SESSION['user_name'] = $user->name;
+        $_SESSION['user_id'] = $user->user_id;
+        $_SESSION['user_name'] = $user->username;
         $_SESSION['user_email'] = $user->email;
-        redirect('undergrad/dashboard');
+        $_SESSION['user_type'] = $user->user_type;
+
+        if ($user->user_type === 'undergraduate') {
+            redirect('undergrad/dashboard');
+        } elseif ($user->user_type === 'admin') {
+            redirect('admin/ad_dashboard');
+        }
     }
     
     public function logout(){
         unset($_SESSION['user_id']);
         unset($_SESSION['user_name']);
         unset($_SESSION['user_email']);
+        unset($_SESSION['user_type']);
         session_destroy();
         redirect('');
     }
