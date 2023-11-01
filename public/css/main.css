@@ -60,7 +60,7 @@ body{
 
 .sec-signup{
     display: grid;
-    grid-template-columns: 55% 45%;
+    grid-template-columns: 60% 40%;
     height: 100vh;
     align-items: center;
     padding-left: 100px;
@@ -84,8 +84,8 @@ body{
 
 .grid-signup-form{
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: 30% 40% 30%;
+    /* grid-template-rows: repeat(8, 1fr); */
     gap: 10px;
 }
 
@@ -154,7 +154,7 @@ body{
 
 .input{
     border: 1px solid var(--zerene-white);
-    color: var(--zerene-white);
+    background-color: var(--zerene-white);
     border-radius: 6px;
     font-family: "Poppins", sans-serif;
     font-size: 15px;
