@@ -44,6 +44,11 @@ class Doctor extends Controller{
     public function undergrad2(){
         $data = [];
         $this->view('doctor/undergrad.2', $data);
+    }
+    
+    public function prescription(){
+        $data = [];
+        $this->view('doctor/prescription', $data);
     } 
 
 
