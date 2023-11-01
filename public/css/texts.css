@@ -49,6 +49,11 @@
     width: fit-content;
 }
 
+.p-error{
+    color: var(--zerene-danger);
+    font-size: 15px;
+}
+
 .a-style{
     align-items: center;
     justify-content: right;
