@@ -20,4 +20,21 @@ class Doctor extends Controller{
         $data = [];
         $this->view('doctor/questionnaires', $data);
     }
+
+    public function d_doctor(){
+        $data = [];
+        $this->view('doctor/d_doctor', $data);
+    }
+
+    public function doc_chats(){
+        $data = [];
+        $this->view('doctor/doc_chats', $data);
+    }
+
+    public function doc_counselors(){
+        $data = [];
+        $this->view('doctor/doc_counselors', $data);
+    }
+
+
 }

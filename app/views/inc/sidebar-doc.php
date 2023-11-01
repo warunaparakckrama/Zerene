@@ -19,14 +19,14 @@
             <div class="sidebar-container3">
                 <a href="<?php echo URLROOT; ?>doctor/home" class="top" id="sb-link1">Home</a>
                 <a href="<?php echo URLROOT; ?>doctor/questionnaires" class="top" id="sb-link2">Questionnaires</a>
-                <a class="top dd-btn">Counsellors</a>
+                <a class="top dd-btn">Professionals</a>
                     <div class="dropdown-container">
-                        <a href="Professional Counsellors" class="dd-content" id="sb-link3">Professional</a>
-                        <a href="<?php echo URLROOT; ?>undergrad/ac" class="dd-content" id="sb-link4">Academic</a>
+                        <a href="<?php echo URLROOT; ?>doctor/doc_counselors" class="dd-content" id="sb-link3">Counsellor</a>
+                        <a href="<?php echo URLROOT; ?>doctor/d_doctor" class="dd-content" id="sb-link4">Psychiatrists</a>
                     </div>
-                <a href="Psychiatrists" class="top" id="sb-link5">Psychiatrists</a>
-                <a href="Chats" class="top" id="sb-link6">Chats</a>
-                <a href="Resources" class="top" id="sb-link7">Resources</a>
+                <a href="Psychiatrists" class="top" id="sb-link5">Undergraduates</a>
+                <a href="<?php echo URLROOT; ?>doctor/doc_chats" class="top" id="sb-link6">Chats</a>
+                <a href="Resources" class="top" id="sb-link7">time slots</a>
             </div>
             <div class="sidebar-container3">
                 <a href="" class="bottom">Help & Info</a>
