@@ -24,7 +24,7 @@
                         <a href="<?php echo URLROOT; ?>doctor/doc_counselors" class="dd-content" id="sb-link3">Counsellor</a>
                         <a href="<?php echo URLROOT; ?>doctor/d_doctor" class="dd-content" id="sb-link4">Psychiatrists</a>
                     </div>
-                <a href="Psychiatrists" class="top" id="sb-link5">Undergraduates</a>
+                <a href="<?php echo URLROOT; ?>doctor/doc_undergrad" class="top" id="sb-link5">Undergraduates</a>
                 <a href="<?php echo URLROOT; ?>doctor/doc_chats" class="top" id="sb-link6">Chats</a>
                 <a href="Resources" class="top" id="sb-link7">time slots</a>
             </div>

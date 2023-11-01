@@ -36,5 +36,11 @@ class Doctor extends Controller{
         $this->view('doctor/doc_counselors', $data);
     }
 
+    public function doc_undergrad(){
+        $data = [];
+        $this->view('doctor/doc_undergrad', $data);
+    }
+
+
 
 }

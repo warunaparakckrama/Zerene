@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sblink5.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("doctors"); // Load doctor.php
+        loadView("doc_undergrad"); // Load doctor.php
     });
 
     sblink6.addEventListener("click", function (e) {
