@@ -35,7 +35,8 @@ tr:nth-child(even) {
 
                 <div>
                     <div class="card-white">
-                        <p class="p-regular"></p>
+                    
+                        <p class="p-regular">undergraduate details</p>
                         
                         <div class="card-green-3">
                         <div>
@@ -45,7 +46,7 @@ tr:nth-child(even) {
                         <label for="pwd">ID:</label>
                         <input type="text" id="pwd" placeholder="undergraduate id" name="pswd">
                         <label for="pwd">date:</label>
-                        <input type="text" id="date" placeholder="date" name="date">
+                        <input type="date" id="date" placeholder="date" name="date">
                         <div class="btn-container">
                                 <button class="button-main">Add</button>
                             </div>
@@ -56,14 +57,14 @@ tr:nth-child(even) {
                     </div>    
     
                     <div class="card-white">
-                    <p class="p-regular"></p>
+                    <p class="p-regular">add medicine</p>
                         
                     <dev class="card-green-3">
                     <form class="form-inline" action="/action_page.php">
                         <label for="email">medicine:</label>
                         <input type="text" id="medicine" placeholder="name of medicine" name="medicine">
                         <label for="pwd">amount(mg):</label>
-                        <input type="text" id="amount" placeholder="amount in mg" name="amount">
+                        <input type="number" id="amount" placeholder="amount in mg" name="amount">
                         <label for="pwd">time:</label>
                         <input type="text" id="time" placeholder="morning/day/night" name="time">
                         <div class="btn-container">
@@ -75,7 +76,7 @@ tr:nth-child(even) {
 
                    </div>
                  <div class="card-white">
-                        <p class="p-regular"></p>
+                        <p class="p-regular">list of medicine</p>
                         
                         <div class="card-green-3">
                         <div>
