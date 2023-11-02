@@ -32,7 +32,7 @@
             <div class="sidebar-container3">
                 <a href="" class="bottom">Help & Info</a>
                 <a href="" class="bottom">Feedback</a>
-                <a href="" class="bottom">Log out</a>
+                <a href="<?php echo URLROOT;?>users/logout" class="bottom">Log out</a>
             </div>
         </div>
 
