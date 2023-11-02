@@ -65,6 +65,13 @@ document.addEventListener("DOMContentLoaded", function () {
         loadView("prescription"); // Load resources.php
     });
 
+    sblink8.addEventListener("click", function (e) {
+        e.preventDefault();
+        loadView("doc_timeslots"); // Load resources.php
+    });
+
+
+
     // Call the default view or homepage view
     //loadView("home"); // Load homepage.html by default
 });
