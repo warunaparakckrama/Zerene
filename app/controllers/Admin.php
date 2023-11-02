@@ -3,6 +3,9 @@
 class Admin extends Controller{
     public function __construct()
     {
+        if (!isset($_SESSION['user_id'])) {
+            redirect('users/login');
+        }
         $this->userModel=$this->model('User');
         // $this->adminModel=$this->model('Admin');
     }
@@ -283,5 +286,10 @@ class Admin extends Controller{
             }
         
         $this->view('admin/ad_reg_doctor', $data);
+    }
+
+    public function ad_users(){
+        $data = [];
+        $this->view('admin/ad_users', $data);
     }
 }
