@@ -22,7 +22,7 @@
                         <p class="p-regular">Hope you’re having a good day...</p>
                         <p class="p-regular">Let's give a helping hand, Shall we?</p>
                         <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
-                            <button class="button-main" style="margin-left: 0px">View Profile</button>
+                            <a href="<?php echo URLROOT; ?>procounsellor/pc_profileupdate" style="text-decoration: none;"><button class="button-main" style="margin-left: 0px">View Profile</button></a>
                             <a href="<?php echo URLROOT; ?>procounsellor/pc_reviewq" style="text-decoration: none;"><button class="button-main">Questionnaires</button></a>
                         </div>
                     </div>

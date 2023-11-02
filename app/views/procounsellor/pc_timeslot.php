@@ -12,7 +12,8 @@
     <section> -->
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Timeslots</p></div>
+                <a href="<?php echo URLROOT ?>procounsellor/dashboard">
+                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Timeslots</p></div></a>
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
             </div>
 
@@ -54,14 +55,22 @@
                     <?php
                     
                     if (sizeof($data) < 2){ ?>
-                        <div class="p-regular">No Available Timeslots</div>
+                        <div class="p-regular">No Available Timeslots</div><br>
                     <?php }                   
                     
 
                     else {?>
-                    <table>
+                    <div class="p-regular">Available Timeslots</div>
+                    <br>
+                    <table border="2" style="justify-content: space-between; width: 100%;">
+                        <tr class="p-regular" style="text-align: center; font-weight: bold">
+                            <td>Date</td>
+                            <td>Time</td>
+                            <td>Place</td>
+                            <td>Delete the Timeslot</td>
+                        </tr>                        
                         <?php for ($i = 0; $i < sizeof($data); $i++) {?>
-                            <tr>
+                            <tr style="text-align:center">
                                 <td>
                                     <?php echo $data[$i]->slot_date ?>
                                 </td>
@@ -71,18 +80,13 @@
                                 <td>
                                     <?php echo $data[$i]->slot_type ?>
                                 </td>
-                                <td style="text-align: center; display: flex">
-                                    &nbsp;
+                                <td>
+                                <div class="btn-container">
                                     <form action="<?php echo URLROOT ?>Timeslot/timeslotDelete" method="POST">
                                         <input type="text" value="<?php echo $data[0]->slot_id?>" name="slot_id" hidden>
-                                        <input type="submit" class="sub-option"  value="Delete" />
+                                        <input type="submit" class="button-main" value="Delete"/>
                                     </form>
-                                </td>
-                                <td style="text-align: center; display: flex">
-                                    &nbsp;
-                                    <form action="<?php echo URLROOT ?>/Timeslot/timeslotUpdate" method="POST">
-                                        <input type="submit" class="sub-option"  value="Update" />
-                                    </form>
+                                    </div>
                                 </td>
                             </tr>
                         <?php }?>
