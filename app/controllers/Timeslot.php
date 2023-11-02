@@ -29,26 +29,28 @@ class Timeslot extends Controller{
                 $data=[
                     'date'=>trim($_POST['date']),
                     'time'=>trim($_POST['time']),
-                    'place'=>trim($_POST['place']),
-                    'err'=>''
+                    'place'=>trim($_POST['place'])
+                ];
+                $error=[
+                    'error'=>"",
                 ];
                 //validate age
                 if(empty($data['date'])){
-                    $data['err']='Please enter date';
+                    $error['error']='Please enter date';
                 }
 
                 //validate gender
                 if(empty($data['time'])){
-                    $data['err']='Please enter time';
+                    $error['error']='Please enter time';
                 }
 
                 //validate email
                 if(empty($data['place'])){
-                    $data['err']='Please select place';
+                    $error['error']='Please select place';
                 }
 
                 //make sure errors are empty
-                if(empty($data['err'])){
+                if(empty($error['error'])){
                     //validate
                     if($this->timeslotModel->createTimeslot($data)){
                         // $this->view('procounsellor/pc_timeslot',$data);
@@ -58,20 +60,24 @@ class Timeslot extends Controller{
                     }
 
                 }else{
-                    $this->view('procounsellor/pc_timeslot',$data);
+                    $this->view('procounsellor/pc_timeslot',$error);
                 }
 
             } else {
                 //load form
-                $data=[
-                    'date'=>'',
-                    'time'=>'',
-                    'place'=>'',
-                    'err'=>''
+                // $data=[
+                //     'date'=>'',
+                //     'time'=>'',
+                //     'place'=>'',
+                //     'err'=>''
+                // ];
+
+                $error=[
+                    'error'=>"Empty",
                 ];
 
                 //load view
-                $this->view('procounsellor/pc_timeslot' , $data);
+                $this->view('procounsellor/pc_timeslot' , $error);
             }
 
     }

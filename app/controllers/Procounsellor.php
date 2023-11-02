@@ -49,4 +49,8 @@ class Procounsellor extends Controller{
         $data = [];
         $this->view('procounsellor/pc_doctors', $data);
     }
+
+    public function pc_timeslot(){
+        redirect('Timeslot/pc_timeslot');
+    }
 }

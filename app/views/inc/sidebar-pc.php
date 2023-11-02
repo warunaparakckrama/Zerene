@@ -32,7 +32,7 @@
                         <a href="" class="dd-content" id="sb-link6">Counselors</a>
                         <a href="" class="dd-content" id="sb-link7">Psychiatrists</a>
                     </div>
-                <a href="" class="top" id="sb-link8">Timeslots</a>
+                <a href="" class="top" id="sb-link9">Timeslots</a>
             </div>
 
             <div class="sidebar-container3">
