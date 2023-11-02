@@ -7,7 +7,8 @@ class Undergrad extends Controller{
         if (!isset($_SESSION['user_id'])) {
             redirect('users/login');
         }
-        $this->userModel=$this->model('User');  
+        $this->userModel=$this->model('User');
+        $this->adminModel=$this->model('Administrator');  
     }
 
     public function dashboard(){
@@ -51,7 +52,11 @@ class Undergrad extends Controller{
     }
 
     public function ug_profile(){
-        $data = [];
+
+        $undergrads = $this->adminModel->getUndergrads();
+        $data = [
+            'undergrads' => $undergrads
+        ];
         $this->view('undergrad/ug_profile', $data);
     }
 
