@@ -6,12 +6,18 @@
     gap: 10px;
 }
 
+.btn-container-2{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .button-main{
     display: flex;
     cursor: pointer;
     color: var(--zerene-white);
     background-color: var(--zerene-green);
-    border: none;
+    border: 1px solid var(--zerene-green);
     border-radius: 8px;
     font-size: 15px;
     font-family: "Poppins", sans-serif;
@@ -27,7 +33,7 @@
 .button-main:hover{
     background-color: var(--zerene-white);
     color: var(--zerene-green);
-    border: none;
+    /* border: none; */
 }
 
 .button-second{
@@ -51,7 +57,30 @@
 .button-second:hover{
     background-color: var(--zerene-light);
     color: var(--zerene-green);
-    border: none;
+    /* border: none; */
+}
+
+.button-danger{
+    display: flex;
+    cursor: pointer;
+    color: var(--zerene-white);
+    background-color: var(--zerene-danger);
+    border: 1px solid var(--zerene-danger);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    height: fit-content;
+    width: fit-content;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.button-danger:hover{
+    background-color: var(--zerene-white);
+    color: var(--zerene-danger);
 }
 
 button.notify{
