@@ -149,3 +149,16 @@ a.bottom:hover{
 /* dropdown end */
 
 /* sidebar end */
+
+
+.sidebar-button{
+    background-color: var(--zerene-white);
+    color: var(--zerene-green);
+    text-decoration: none;
+}
+
+.sidebar-button:hover{
+    background-color: var(--zerene-green);
+    color: var(--zerene-white);
+    border-color:  var(--zerene-white);
+}

@@ -14,7 +14,8 @@
                     <img src="<?php echo IMG;?>ug-avatar-1.svg" alt="ug avatar" width="80" height="80">
                 </a>
                 <p class="p-regular" style="color: var(--zerene-light);">Username</p>
-                <button class="button-second">Edit</button>
+                <a class="button-main sidebar-button" href="<?php echo URLROOT; ?>procounsellor/pc_profileupdate" id="sb-link8">Edit</a>
+                <!-- <a type="button" href="<?php echo URLROOT; ?>procounsellor/pc_profileupdate" id="sb-link8"></a> -->
             </div>
 
             <div class="sidebar-container3">

@@ -1,6 +1,7 @@
 <?php
 
 class Procounsellor extends Controller{
+    
     public function __construct()
     {
         if (!isset($_SESSION['user_id'])) {
@@ -37,6 +38,11 @@ class Procounsellor extends Controller{
     public function pc_counselors(){
         $data = [];
         $this->view('procounsellor/pc_counselors', $data);
+    }
+
+    public function pc_profileupdate(){
+        $data = [];
+        $this->view('procounsellor/pc_profileupdate', $data);
     }
 
     public function pc_doctors(){
