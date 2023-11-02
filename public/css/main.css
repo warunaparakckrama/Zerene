@@ -251,4 +251,17 @@ select#users option:hover{
     background-color: rgba(0, 0, 0, 0.1);
   }
 
+  .sub-container7{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    gap: 10px;
+    background-color: var(--zerene-light);
+    border-radius: var(--border-radius-8);
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    height: fit-content;
+    border: var(--zerene-green);
+}
+
 /* Select dropdown end */

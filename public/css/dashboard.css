@@ -47,5 +47,13 @@
     grid-template-columns: 50% 50%;
 }
 
+.grid-2{
+    display: grid;
+    grid-template-rows: 60% 40%;
+    height: 100vh;
+    padding-left: 50px;
+    /* border: 1px solid red; */
+}
+
 /* dashboard end */
 

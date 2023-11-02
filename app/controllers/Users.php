@@ -214,6 +214,10 @@ class Users extends Controller{
             redirect('admin/ad_dashboard');
         } elseif ($user->user_type === 'pcounsellor') {
             redirect('procounsellor/dashboard');
+        } elseif ($user->user_type === 'acounsellor') {
+            redirect('academic/dashboard');
+        } elseif ($user->user_type === 'doctor'){
+            redirect('doctor/dashboard');
         }
     }
     
