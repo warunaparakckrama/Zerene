@@ -17,7 +17,7 @@
             </div>
 
             <div class="content" id="content">
-                <?php require APPROOT . '/views/doctor/home.php'; ?>
+                <?php require APPROOT . '/views/doctor/doc_home.php'; ?>
             </div>
         </section>
 

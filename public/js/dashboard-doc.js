@@ -29,15 +29,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const sblink5 = document.getElementById("sb-link5");
     const sblink6 = document.getElementById("sb-link6");
     const sblink7 = document.getElementById("sb-link7");
+    const sblink8 = document.getElementById("sb-link8");
     
     sblink1.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("home"); // Load home.php
+        loadView("doc_home"); // Load home.php
     });
 
     sblink2.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("questionnaires"); // Load questionnaires.php
+        loadView("doc_questionnaires"); // Load questionnaires.php
     });
 
     sblink3.addEventListener("click", function (e) {
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sblink4.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("d_doctor"); // Load d_doctor.php
+        loadView("doc_doctors"); // Load d_doctor.php
     });
 
     sblink5.addEventListener("click", function (e) {

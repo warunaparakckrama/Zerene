@@ -11,19 +11,19 @@ class Doctor extends Controller{
         $this->view('doctor/dashboard', $data);
     }
 
-    public function home(){
+    public function doc_home(){
         $data = [];
-        $this->view('doctor/home', $data);
+        $this->view('doctor/doc_home', $data);
     }
 
-    public function questionnaires(){
+    public function doc_questionnaires(){
         $data = [];
-        $this->view('doctor/questionnaires', $data);
+        $this->view('doctor/doc_questionnaires', $data);
     }
 
-    public function d_doctor(){
+    public function doc_doctors(){
         $data = [];
-        $this->view('doctor/d_doctor', $data);
+        $this->view('doctor/doc_doctors', $data);
     }
 
     public function doc_chats(){
@@ -41,13 +41,11 @@ class Doctor extends Controller{
         $this->view('doctor/doc_undergrad', $data);
     }
 
-    
-
-    
     public function prescription(){
         $data = [];
         $this->view('doctor/prescription', $data);
     } 
+    
     public function doc_timeslots(){
         $data = [];
         $this->view('doctor/doc_timeslots', $data);

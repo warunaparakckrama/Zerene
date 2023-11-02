@@ -17,17 +17,17 @@
                 <button class="button-second">Edit</button>
             </div>
             <div class="sidebar-container3">
-                <a href="<?php echo URLROOT; ?>doctor/home" class="top" id="sb-link1">Home</a>
-                <a href="<?php echo URLROOT; ?>doctor/questionnaires" class="top" id="sb-link2">Questionnaires</a>
+                <a href="<?php echo URLROOT; ?>doctor/doc_home" class="top" id="sb-link1">Home</a>
+                <a href="<?php echo URLROOT; ?>doctor/doc_questionnaires" class="top" id="sb-link2">Questionnaires</a>
                 <a class="top dd-btn">Professionals</a>
                     <div class="dropdown-container">
-                        <a href="<?php echo URLROOT; ?>doctor/doc_counselors" class="dd-content" id="sb-link3">Counsellor</a>
-                        <a href="<?php echo URLROOT; ?>doctor/d_doctor" class="dd-content" id="sb-link4">Psychiatrists</a>
+                        <a href="<?php echo URLROOT; ?>doctor/doc_counselors" class="dd-content" id="sb-link3">Counsellors</a>
+                        <a href="<?php echo URLROOT; ?>doctor/doc_doctors" class="dd-content" id="sb-link4">Psychiatrists</a>
                     </div>
                 <a href="<?php echo URLROOT; ?>doctor/doc_undergrad" class="top" id="sb-link5">Undergraduates</a>
                 <a href="<?php echo URLROOT; ?>doctor/doc_chats" class="top" id="sb-link6">Chats</a>
-                <a href="<?php echo URLROOT; ?>doctor/prescription" class="top" id="sb-link7">Prescription</a>
-                <a href="<?php echo URLROOT; ?>doctor/doc_timeslots" class="top" id="sb-link8">time slots</a>
+                <a href="<?php echo URLROOT; ?>doctor/prescription" class="top" id="sb-link7">Prescriptions</a>
+                <a href="<?php echo URLROOT; ?>doctor/doc_timeslots" class="top" id="sb-link8">Timeslots</a>
             </div>
             <div class="sidebar-container3">
                 <a href="" class="bottom">Help & Info</a>
