@@ -74,7 +74,12 @@
                 $this->db->bind(':username', $data['username']);
                 $this->db->bind(':password', $data['password']);
                 $this->db->bind(':email', $data['email']);
-                $this->db->bind(':user_type', 'counsellor');
+                // $this->db->bind(':user_type', 'counsellor');
+                if ($data['coun_type'] === "Academic") {
+                    $this->db->bind(':user_type', 'acounsellor');
+                } elseif ($data['coun_type'] === "Professional") {
+                    $this->db->bind(':user_type', 'pcounsellor');
+                }
 
                 $userInserted = $this->db->execute();
 
