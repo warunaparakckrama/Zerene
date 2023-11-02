@@ -16,7 +16,8 @@
             </div>
 
             <div>
-                <div class="card-white">
+
+                <!-- <div class="card-white">
                     <p class="p-regular-grey">Total Users</p>
                     <div class="subgrid-5">
 
@@ -41,6 +42,46 @@
                         </div>
 
                     </div>
+                </div> -->
+
+                <div class="card-white">
+                    <p class="p-regular-grey">Undergraduates</p>
+                    <div>
+                        <table class="table-1">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>UG ID</th>
+                                    <th>Username</th>
+                                    <th>University</th>
+                                    <th>Faculty</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php foreach ($data['undergrads'] as $undergrad) : ?>
+                                <tr>
+                                    <td><?php echo $undergrad->user_id?></td>
+                                    <td><?php echo $undergrad->ug_id?></td>
+                                    <td><?php echo $undergrad->username?></td>
+                                    <td><?php echo $undergrad->university?></td>
+                                    <td><?php echo $undergrad->faculty?></td>
+                                    <td>
+                                        <form action="<?php echo URLROOT;?>admin/ad_users" method="POST">
+                                            <div class="btn-container-2">
+                                                <!-- <button class="button-main">View</button> -->
+                                                <button class="button-main">Edit</button>
+                                                <button class="button-danger" type="submit" value="user_id">Delete</button>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                                
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="card-white">
@@ -49,7 +90,8 @@
                         <table class="table-1">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <!-- <th>Counselor ID</th> -->
+                                    <th>User ID</th>
                                     <th>Type</th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
@@ -58,20 +100,67 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                                <?php foreach ($data['counselors'] as $counselor) : ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Academic</td>
-                                    <td>Ken</td>
-                                    <td>Adams</td>
-                                    <td>zereneac1</td>
+                                    <!-- <td><?php echo $counselor->coun_id?></td> -->
+                                    <td><?php echo $counselor->user_id?></td>
+                                    <td><?php echo $counselor->coun_type?></td>
+                                    <td><?php echo $counselor->first_name?></td>
+                                    <td><?php echo $counselor->last_name?></td>
+                                    <td><?php echo $counselor->username?></td>
                                     <td>
-                                        <div class="btn-container-2">
-                                            <button class="button-main">View</button>
-                                            <button class="button-main">Edit</button>
-                                            <button class="button-danger">Delete</button>
-                                        </div>
+                                        <form action="<?php echo URLROOT;?>admin/ad_users" method="POST">
+                                            <div class="btn-container-2">
+                                                <!-- <button class="button-main">View</button> -->
+                                                <button class="button-main">Edit</button>
+                                                <button class="button-danger" type="submit" value="user_id">Delete</button>
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
+                                <?php endforeach; ?>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-white">
+                    <p class="p-regular-grey">Doctors</p>
+                    <div>
+                        <table class="table-1">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                    <th>Hospital</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php foreach ($data['doctors'] as $doctor) : ?>
+                                <tr>
+                                    <td><?php echo $doctor->user_id?></td>
+                                    <td><?php echo $doctor->first_name?></td>
+                                    <td><?php echo $doctor->last_name?></td>
+                                    <td><?php echo $doctor->username?></td>
+                                    <td><?php echo $doctor->hospital?></td>
+                                    <td>
+                                        <form action="<?php echo URLROOT;?>admin/ad_users" method="POST">
+                                            <div class="btn-container-2">
+                                                <!-- <button class="button-main">View</button> -->
+                                                <button class="button-main">Edit</button>
+                                                <button class="button-danger" type="submit" value="user_id">Delete</button>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                                
                             </tbody>
                         </table>
                     </div>
