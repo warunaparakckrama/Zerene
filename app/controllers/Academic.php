@@ -2,8 +2,12 @@
 class Academic extends Controller{
     public function __construct()
     {
-        
+        if (!isset($_SESSION['user_id'])) {
+            redirect('users/login');
+        }
+        $this->userModel=$this->model('User');
     }
+
     public function dashboard(){
         $data = [];
         $this->view('academic/dashboard', $data);
