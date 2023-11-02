@@ -14,7 +14,7 @@
                     <img src="<?php echo IMG;?>ug-avatar-1.svg" alt="ug avatar" width="80" height="80">
                 </a>
                 <p class="p-regular" style="color: var(--zerene-light);">Username</p>
-                <button class="button-second">Edit</button>
+                <a href="<?php echo URLROOT; ?>undergrad/ug_profile" id="sb-link8" style="text-decoration: none;"><button class="button-second">View</button></a>
             </div>
             <div class="sidebar-container3">
                 <a href="<?php echo URLROOT; ?>undergrad/home" class="top" id="sb-link1">Home</a>

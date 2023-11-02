@@ -42,5 +42,10 @@
     /* border: 1px solid black; */
 }
 
+.subgrid-4{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
 /* dashboard end */
 

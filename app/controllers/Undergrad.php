@@ -47,4 +47,9 @@ class Undergrad extends Controller{
         $this->view('undergrad/resources', $data);
     }
 
+    public function ug_profile(){
+        $data = [];
+        $this->view('undergrad/ug_profile', $data);
+    }
+
 }
