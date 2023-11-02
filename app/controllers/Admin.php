@@ -3,6 +3,9 @@
 class Admin extends Controller{
     public function __construct()
     {
+        if (!isset($_SESSION['user_id'])) {
+            redirect('users/login');
+        }
         $this->userModel=$this->model('User');
         // $this->adminModel=$this->model('Admin');
     }
