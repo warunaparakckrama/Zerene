@@ -17,16 +17,16 @@
                 <button class="button-second">Edit</button>
             </div>
             <div class="sidebar-container3">
-                <a href="<?php echo URLROOT; ?>academic/home" class="top" id="sb-link1">Home</a>
-                <a href="<?php echo URLROOT; ?>academic/opletter" class="top" id="sb-link2">Opinion Letter</a>
-                <a href="<?php echo URLROOT; ?>academic/acundergraduate" class="top" id="sb-link3">Undergraduates</a>
-                <a href="<?php echo URLROOT; ?>academic/acchat" class="top" id="sb-link4">Chats</a>
-                <a class="top dd-btn">Counsellors</a>
+                <a href="<?php echo URLROOT; ?>academic/ac_home" class="top" id="sb-link1">Home</a>
+                <a href="<?php echo URLROOT; ?>academic/ac_opletters" class="top" id="sb-link2">Opinion Letters</a>
+                <a href="<?php echo URLROOT; ?>academic/ac_undergrads" class="top" id="sb-link3">Undergraduates</a>
+                <a class="top dd-btn">Professionals</a>
                 <div class="dropdown-container">
-                    <a href="<?php echo URLROOT;?>academic/acprofessionals" class="dd-content" id="sb-link5">Professional</a>
-                    <a href="<?php echo URLROOT; ?>academic/acprofessionals3" class="dd-content" id="sb-link6">Academic</a>
+                    <a href="<?php echo URLROOT;?>academic/ac_counselors" class="dd-content" id="sb-link4">Counsellors</a>
+                    <a href="<?php echo URLROOT; ?>academic/ac_doctors" class="dd-content" id="sb-link5">Psychiatrists</a>
                 </div>
-                <a href="<?php echo URLROOT; ?>academic/actimeslot" class="top" id="sb-link7">Timeslot</a>
+                <a href="<?php echo URLROOT; ?>academic/ac_chats" class="top" id="sb-link6">Chats</a>
+                <a href="<?php echo URLROOT; ?>academic/ac_timeslots" class="top" id="sb-link7">Timeslots</a>
 
                 </div>
             <div class="sidebar-container3">

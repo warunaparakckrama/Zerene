@@ -32,37 +32,37 @@ document.addEventListener("DOMContentLoaded", function () {
     
     sblink1.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("home"); // Load home.php
+        loadView("ac_home"); // Load home.php
     });
 
     sblink2.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("opletter"); // Load questionnaires.php
+        loadView("ac_opletters"); // Load questionnaires.php
     });
 
     sblink3.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("acundergraduate"); // Load Pcounsellor.php
+        loadView("ac_undergrads"); // Load Pcounsellor.php
     });
 
     sblink4.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("acchat"); // Load Acounsellor.php
+        loadView("ac_counselors"); // Load Acounsellor.php
     });
 
     sblink5.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("acprofessionals"); // Load doctor.php
+        loadView("ac_doctors"); // Load doctor.php
     });
 
     sblink6.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("acprofessionals3"); // Load chats.php
+        loadView("ac_chats"); // Load chats.php
     });
 
     sblink7.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("actimeslot"); // Load resources.php
+        loadView("ac_timeslots"); // Load resources.php
     });
 
     // Call the default view or homepage view
