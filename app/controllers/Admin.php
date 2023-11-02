@@ -284,4 +284,9 @@ class Admin extends Controller{
         
         $this->view('admin/ad_reg_doctor', $data);
     }
+
+    public function ad_users(){
+        $data = [];
+        $this->view('admin/ad_users', $data);
+    }
 }

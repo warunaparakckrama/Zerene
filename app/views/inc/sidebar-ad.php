@@ -24,7 +24,7 @@
                     <a href="<?php echo URLROOT;?>admin/ad_reg_doctor" class="dd-content" id="sb-link3">Psychiatrists</a>
                 </div>
                 <a href="" class="top" id="sb-link4">Verifications</a>
-                <a href="" class="top" id="sb-link5">Users</a>
+                <a href="<?php echo URLROOT;?>admin/ad_users" class="top" id="sb-link5">Users</a>
                 <a href="" class="top" id="sb-link6">Notifications</a>
                 <a href="" class="top" id="sb-link7">Newsletters</a>
                 <a href="" class="top" id="sb-link8">Feedback</a>

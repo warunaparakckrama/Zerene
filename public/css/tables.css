@@ -1,0 +1,15 @@
+.table-1{
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--zerne-green);
+}
+
+.table-1 th, .table-1 td{
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid var(--zerene-green);
+}
+
+.table-1 th{
+    background-color: var(--zerene-light);
+}
