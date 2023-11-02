@@ -61,12 +61,12 @@ tr:nth-child(even) {
                         
                     <dev class="card-green-3">
                     <form class="form-inline" action="/action_page.php">
-                        <label for="email">medicine:</label>
-                        <input type="text" id="medicine" placeholder="name of medicine" name="medicine">
-                        <label for="pwd">amount(mg):</label>
+                        <label for="drug">drug:</label>
+                        <input type="text" id="drug" placeholder="name of drug" name="medicine">
+                        <label for="amount">amount(mg):</label>
                         <input type="number" id="amount" placeholder="amount in mg" name="amount">
-                        <label for="pwd">time:</label>
-                        <input type="text" id="time" placeholder="morning/day/night" name="time">
+                        <label for="dosage">dosage:</label>
+                        <input type="number" id="dosage" placeholder="per day" name="dosage">
                         <div class="btn-container">
                                 <button class="button-main">Add</button>
                             </div>
