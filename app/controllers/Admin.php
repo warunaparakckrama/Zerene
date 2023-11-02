@@ -7,7 +7,7 @@ class Admin extends Controller{
             redirect('users/login');
         }
         $this->userModel=$this->model('User');
-        // $this->adminModel=$this->model('Admin');
+        $this->adminModel=$this->model('Administrator');
     }
 
     public function ad_dashboard(){
@@ -289,7 +289,28 @@ class Admin extends Controller{
     }
 
     public function ad_users(){
-        $data = [];
+
+        //get counsellors
+        $undergrads = $this->adminModel->getUndergrads();
+        $counselors = $this->adminModel->getCounselors();
+        $doctors = $this->adminModel->getDoctors();
+        $data = [
+            'undergrads' => $undergrads,
+            'counselors' => $counselors,
+            'doctors' => $doctors
+        ];
         $this->view('admin/ad_users', $data);
+    }
+
+    public function delete($user_id){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->adminModel->deleteUser($user_id)) {
+                redirect('admin/ad_dashboard');
+            } else{
+                die('something went wrong');
+            }
+        } else {
+            redirect('admin/ad_dashboard');
+        }
     }
 }
