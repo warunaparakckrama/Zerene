@@ -26,7 +26,8 @@
                     </div>
                 <a href="<?php echo URLROOT; ?>doctor/doc_undergrad" class="top" id="sb-link5">Undergraduates</a>
                 <a href="<?php echo URLROOT; ?>doctor/doc_chats" class="top" id="sb-link6">Chats</a>
-                <a href="Resources" class="top" id="sb-link7">time slots</a>
+                <a href="<?php echo URLROOT; ?>doctor/prescription" class="top" id="sb-link7">Prescription</a>
+                <a href="Resources" class="top" id="sb-link8">time slots</a>
             </div>
             <div class="sidebar-container3">
                 <a href="" class="bottom">Help & Info</a>

@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sblink7.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("resources"); // Load resources.php
+        loadView("prescription"); // Load resources.php
     });
 
     // Call the default view or homepage view
