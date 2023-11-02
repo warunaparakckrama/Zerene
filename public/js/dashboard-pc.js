@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const sblink5 = document.getElementById("sb-link5");
     const sblink6 = document.getElementById("sb-link6");
     const sblink7 = document.getElementById("sb-link7");
+    const sblink8 = document.getElementById("sb-link8");
+    const sblink9 = document.getElementById("sb-link9");
     
     sblink1.addEventListener("click", function (e) {
         e.preventDefault();
@@ -63,6 +65,16 @@ document.addEventListener("DOMContentLoaded", function () {
     sblink7.addEventListener("click", function (e) {
         e.preventDefault();
         loadView("pc_doctors"); // Load resources.php
+    });
+
+    sblink8.addEventListener("click", function (e) {
+        e.preventDefault();
+        loadView("pc_profileupdate"); // Load resources.php
+    });
+
+    sblink9.addEventListener("click", function (e) {
+        e.preventDefault();
+        loadView("pc_timeslot"); // Load resources.php
     });
 
     // Call the default view or homepage view
