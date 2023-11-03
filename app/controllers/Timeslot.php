@@ -54,7 +54,8 @@ class Timeslot extends Controller{
                     //validate
                     if($this->timeslotModel->createTimeslot($data)){
                         // $this->view('procounsellor/pc_timeslot',$data);
-                        $this->pc_timeslot();
+                        // $this->pc_timeslot();
+                        redirect('procounsellor/dashboard');
                     }else{
                         die('Something went wrong');
                     }
@@ -91,7 +92,7 @@ class Timeslot extends Controller{
             ];
 
                if($this->timeslotModel->deleteTimeslot($data)){
-                   redirect('procounsellor/pc_timeslot');
+                   redirect('procounsellor/dashboard');
                }
                else {
                    die('Something went wrong');

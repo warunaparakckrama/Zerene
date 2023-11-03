@@ -12,8 +12,9 @@
     <section> -->
         <div class="grid-1">
             <div class="subgrid-1">
-                <a href="<?php echo URLROOT ?>procounsellor/dashboard">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Timeslots</p></div></a>
+                <!-- <a href="<?php echo URLROOT ?>procounsellor/dashboard"> -->
+                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Timeslots</p></div>
+            <!-- </a> -->
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
             </div>
 
@@ -67,7 +68,7 @@
                             <td>Date</td>
                             <td>Time</td>
                             <td>Place</td>
-                            <td>Delete the Timeslot</td>
+                            <td>Actions</td>
                         </tr>                        
                         <?php for ($i = 0; $i < sizeof($data); $i++) {?>
                             <tr style="text-align:center">
@@ -84,7 +85,7 @@
                                 <div class="btn-container">
                                     <form action="<?php echo URLROOT ?>Timeslot/timeslotDelete" method="POST">
                                         <input type="text" value="<?php echo $data[0]->slot_id?>" name="slot_id" hidden>
-                                        <input type="submit" class="button-main" value="Delete"/>
+                                        <input type="submit" class="button-danger" value="Delete"/>
                                     </form>
                                     </div>
                                 </td>
