@@ -37,27 +37,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sblink2.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("ad_reg_counselor"); // Load registrations.php
+        loadView("ad_reg_admin"); // Load registrations.php
     });
 
     sblink3.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("ad_reg_doctor"); // Load Pcounsellor.php
+        loadView("ad_reg_counselor"); // Load Pcounsellor.php
     });
 
     sblink4.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView(""); // Load Acounsellor.php
+        loadView("ad_reg_doctor"); // Load Acounsellor.php
     });
 
     sblink5.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("ad_users"); // Load doctor.php
+        loadView(""); // Load doctor.php
     });
 
     sblink6.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView(""); // Load chats.php
+        loadView("ad_users"); // Load chats.php
     });
 
     sblink7.addEventListener("click", function (e) {

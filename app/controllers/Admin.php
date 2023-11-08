@@ -20,6 +20,83 @@ class Admin extends Controller{
         $this->view('admin/ad_home', $data);
     }
 
+    public function ad_reg_admin(){
+        //check for POST
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            //sanitize data
+            $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+
+            $data=[
+                'username'=>trim($_POST['username']),
+                'email'=>trim($_POST['email']),
+                'password'=>trim($_POST['password']),
+                'confirm_password'=>trim($_POST['confirm_password']),
+                'username_err'=>'',
+                'email_err'=>'',
+                'password_err'=>'',
+                'confirm_password_err'=>'',
+            ];
+
+            if(empty($data['username'])){
+                $data['username_err']='Please enter username';      
+            }else {
+                if($this->userModel->findUserByUsername($data['username'])){
+                    $data['username_err']='Username is already taken'; 
+                }
+            }
+
+            if(empty($data['email'])){
+                $data['email_err']='Please enter email';      
+            }else{
+                if($this->userModel->findUserByEmail($data['email'])){
+                    $data['email_err']='Email is already taken'; 
+                }
+            }
+
+            if(empty($data['password'])){
+                $data['password_err']='Please enter password';      
+            }elseif(strlen($data['password'])<6){
+                $data['password_err']='Password must be atleast 6 characters'; 
+            }
+
+             if(empty($data['confirm_password'])){
+                $data['confirm_password_err']='Please confirm password';      
+            }else{
+                if($data['password']!=$data['confirm_password']){
+                    $data['confirm_password_err']='passwords do not match';
+                }
+            }
+
+            if(empty($data['username_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
+
+                //hash password
+                $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
+
+                if($this->userModel->reg_admin($data)){
+                    // flash('register_success','You are registered and can login');
+                    redirect('admin/ad_dashboard');
+                }else{
+                    die('Something went wrong');
+                }
+
+            }else{
+                $this->view('admin/ad_reg_admin',$data);
+            }
+        } else{
+            $data=[
+                'username'=>'',
+                'email'=>'',
+                'password'=>'',
+                'confirm_password'=>'',
+                'username_err'=>'',
+                'email_err'=>'',
+                'password_err'=>'',
+                'confirm_password_err'=>''
+            ];
+            $this->view('admin/ad_reg_admin', $data);
+        }
+    }
+
     public function ad_reg_counselor(){
         //check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

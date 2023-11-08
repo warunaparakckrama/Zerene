@@ -51,6 +51,44 @@
             }
         }
 
+        public function reg_admin($data){
+            $this->db->query('INSERT INTO admin (username, email, password) VALUES(:username, :email, :password)');
+            // Bind values
+            $this->db->bind(':username', $data['username']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':password', $data['password']);
+
+            // Execute
+            $admin = $this->db->execute();
+            if($admin){
+                $admin_id = $this->db->lastInsertedId();
+                // If admin insertion is successful, proceed to insert email and password into 'users' table
+                $this->db->query('INSERT INTO users (username, password, email, user_type) VALUES (:username, :password, :email, :user_type)');
+                $this->db->bind(':username', $data['username']);
+                $this->db->bind(':password', $data['password']);
+                $this->db->bind(':email', $data['email']);
+                $this->db->bind(':user_type', 'admin');
+
+                $userInserted = $this->db->execute();
+
+                if ($userInserted){
+                    $user_id = $this->db->lastInsertedId();
+                    // Step 3: Update the 'admin' table with the 'user_id' from 'users' table
+                    $this->db->query('UPDATE admin SET user_id = :user_id WHERE admin_id = :admin_id');
+                    $this->db->bind(':user_id', $user_id);
+                    $this->db->bind(':admin_id', $admin_id);
+                    $this->db->execute();
+                    return true; // Both inserts successful
+                } else {
+                    return false;
+                }
+
+            
+                } else {
+                return false;
+            }
+        }
+
         public function reg_counselor($data){
             $this->db->query('INSERT INTO counsellor (coun_type, first_name, last_name, gender, dob, university, faculty, email, username, password) VALUES(:coun_type, :fname, :lname, :gender, :dob, :university, :faculty, :email, :username, :password)');
             // Bind values
