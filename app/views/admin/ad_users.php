@@ -70,9 +70,9 @@
                                     <td>
                                         <div class="btn-container-2">
                                             <div class="btn-container">
-                                                <form action="" method="POST">
-                                                    <button class="button-main">Edit</button>
-                                                </form>
+                                                <a href="<?php echo URLROOT;?>admin/ad_edit_user" style="text-decoration: none;"><button class="button-main">Edit</button></a>
+                                                <!-- <form action="" method="POST">
+                                                </form> -->
                                             </div>
 
                                             <div class="btn-container">
