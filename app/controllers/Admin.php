@@ -302,15 +302,4 @@ class Admin extends Controller{
         $this->view('admin/ad_users', $data);
     }
 
-    public function delete($user_id){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($this->adminModel->deleteUser($user_id)) {
-                redirect('admin/ad_dashboard');
-            } else{
-                die('something went wrong');
-            }
-        } else {
-            redirect('admin/ad_dashboard');
-        }
-    }
 }

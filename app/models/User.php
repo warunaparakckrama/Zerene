@@ -191,4 +191,76 @@
                 return false;
             }
         }
+
+        public function deleteUndergrad($id){
+            // Begin a transaction to ensure both deletes are successful or fail together
+            $this->db->beginTransaction();
+
+            // Then, delete from 'users' table
+            $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $userDeleted = $this->db->execute();
+
+            // First, delete from 'students' table
+            $this->db->query('DELETE FROM undergraduate WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $studentDeleted = $this->db->execute();
+
+            // Commit or rollback the transaction based on delete success
+            if ($studentDeleted && $userDeleted) {
+                $this->db->commit();
+                return true;
+            } else {
+                $this->db->rollBack();
+                return false;
+            }
+          }
+        
+        public function deleteCounselor($id){
+            // Begin a transaction to ensure both deletes are successful or fail together
+            $this->db->beginTransaction();
+
+            // Then, delete from 'users' table
+            $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $userDeleted = $this->db->execute();
+
+            // First, delete from 'students' table
+            $this->db->query('DELETE FROM counsellor WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $counselorDeleted = $this->db->execute();
+
+            // Commit or rollback the transaction based on delete success
+            if ($counselorDeleted && $userDeleted) {
+                $this->db->commit();
+                return true;
+            } else {
+                $this->db->rollBack();
+                return false;
+            }
+          }
+        
+        public function deleteDoctor($id){
+            // Begin a transaction to ensure both deletes are successful or fail together
+            $this->db->beginTransaction();
+
+            // Then, delete from 'users' table
+            $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $userDeleted = $this->db->execute();
+
+            // First, delete from 'students' table
+            $this->db->query('DELETE FROM doctor WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $doctorDeleted = $this->db->execute();
+
+            // Commit or rollback the transaction based on delete success
+            if ($doctorDeleted && $userDeleted) {
+                $this->db->commit();
+                return true;
+            } else {
+                $this->db->rollBack();
+                return false;
+            }
+          }
     }

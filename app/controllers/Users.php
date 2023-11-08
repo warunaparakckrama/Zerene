@@ -237,4 +237,36 @@ class Users extends Controller{
             return false;
         }
     }
+
+    public function deleteUG($id){
+        
+  
+        if($this->userModel->deleteUndergrad($id)){
+        //   flash('post_message', 'user Removed');
+          redirect('admin/ad_dashboard');
+        } else {
+          die('Something went wrong');
+        }
+    }
+
+    public function deleteCoun($id){
+        
+  
+        if($this->userModel->deleteCounselor($id)){
+        //   flash('post_message', 'user Removed');
+          redirect('admin/ad_dashboard');
+        } else {
+          die('Something went wrong');
+        }
+    }
+    public function deleteDoc($id){
+        
+  
+        if($this->userModel->deleteDoctor($id)){
+        //   flash('post_message', 'user Removed');
+          redirect('admin/ad_dashboard');
+        } else {
+          die('Something went wrong');
+        }
+    }
 }

@@ -68,13 +68,18 @@
                                     <td><?php echo $undergrad->university?></td>
                                     <td><?php echo $undergrad->faculty?></td>
                                     <td>
-                                        <form action="<?php echo URLROOT;?>admin/ad_users" method="POST">
-                                            <div class="btn-container-2">
-                                                <!-- <button class="button-main">View</button> -->
-                                                <button class="button-main">Edit</button>
-                                                <button class="button-danger" type="submit" value="user_id">Delete</button>
+                                        <div class="btn-container-2">
+                                            <div class="btn-container">
+                                                <form action="" method="POST">
+                                                    <button class="button-main">Edit</button>
+                                                </form>
                                             </div>
-                                        </form>
+
+                                            <div class="btn-container">
+                                                <a href="<?php echo URLROOT;?>Users/deleteUG/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-danger">Delete</button></a>
+                                            </div>
+
+                                        </div>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -110,13 +115,18 @@
                                     <td><?php echo $counselor->last_name?></td>
                                     <td><?php echo $counselor->username?></td>
                                     <td>
-                                        <form action="<?php echo URLROOT;?>admin/ad_users" method="POST">
-                                            <div class="btn-container-2">
-                                                <!-- <button class="button-main">View</button> -->
-                                                <button class="button-main">Edit</button>
-                                                <button class="button-danger" type="submit" value="user_id">Delete</button>
+                                        <div class="btn-container-2">
+                                            <div class="btn-container">
+                                                <form action="" method="POST">
+                                                    <button class="button-main">Edit</button>
+                                                </form>
                                             </div>
-                                        </form>
+
+                                            <div class="btn-container">
+                                                <a href="<?php echo URLROOT;?>Users/deleteCoun/<?php echo $counselor->user_id;?>" style="text-decoration: none;"><button class="button-danger">Delete</button></a>
+                                            </div>
+
+                                        </div>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -150,13 +160,18 @@
                                     <td><?php echo $doctor->username?></td>
                                     <td><?php echo $doctor->hospital?></td>
                                     <td>
-                                        <form action="<?php echo URLROOT;?>admin/ad_users" method="POST">
-                                            <div class="btn-container-2">
-                                                <!-- <button class="button-main">View</button> -->
-                                                <button class="button-main">Edit</button>
-                                                <button class="button-danger" type="submit" value="user_id">Delete</button>
+                                        <div class="btn-container-2">
+                                            <div class="btn-container">
+                                                <form action="" method="POST">
+                                                    <button class="button-main">Edit</button>
+                                                </form>
                                             </div>
-                                        </form>
+
+                                            <div class="btn-container">
+                                                <a href="<?php echo URLROOT;?>Users/deleteDoc/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-danger">Delete</button></a>
+                                            </div>
+
+                                        </div>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
