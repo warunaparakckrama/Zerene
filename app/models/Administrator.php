@@ -24,6 +24,12 @@
             return $results;
         }
 
+        public function getAdmins(){
+            $this->db->query('SELECT * FROM admin');
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
     }
 
         

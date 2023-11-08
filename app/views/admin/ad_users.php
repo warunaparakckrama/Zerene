@@ -181,6 +181,30 @@
                     </div>
                 </div>
 
+                <div class="card-white">
+                    <p class="p-regular-grey">Administrators</p>
+                    <div>
+                        <table class="table-1">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php foreach ($data['admins'] as $admin) : ?>
+                                <tr>
+                                    <td><?php echo $admin->username?></td>
+                                    <td><?php echo $admin->email?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>

@@ -93,6 +93,7 @@ class Admin extends Controller{
                 'password_err'=>'',
                 'confirm_password_err'=>''
             ];
+
             $this->view('admin/ad_reg_admin', $data);
         }
     }
@@ -371,10 +372,12 @@ class Admin extends Controller{
         $undergrads = $this->adminModel->getUndergrads();
         $counselors = $this->adminModel->getCounselors();
         $doctors = $this->adminModel->getDoctors();
+        $admins = $this->adminModel->getAdmins();
         $data = [
             'undergrads' => $undergrads,
             'counselors' => $counselors,
-            'doctors' => $doctors
+            'doctors' => $doctors,
+            'admins' => $admins
         ];
         $this->view('admin/ad_users', $data);
     }
