@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,34 +14,6 @@
             </div>
 
             <div>
-
-                <!-- <div class="card-white">
-                    <p class="p-regular-grey">Total Users</p>
-                    <div class="subgrid-5">
-
-                        <div class="rectangle">
-                        <p class="p-regular-grey">Administrators</p>
-                        <p>2</p>
-                        </div>
-
-                        <div class="rectangle">
-                        <p class="p-regular-grey">Undergraduates</p>
-                        <p>2</p>
-                        </div>
-
-                        <div class="rectangle">
-                        <p class="p-regular-grey">Counselors</p>
-                        <p>2</p>
-                        </div>
-
-                        <div class="rectangle">
-                        <p class="p-regular-grey">Psychiatrists</p>
-                        <p>2</p>
-                        </div>
-
-                    </div>
-                </div> -->
-
                 <div class="card-white">
                     <p class="p-regular-grey">Undergraduates</p>
                     <div>
@@ -70,7 +40,7 @@
                                     <td>
                                         <div class="btn-container-2">
                                             <div class="btn-container">
-                                                <a href="<?php echo URLROOT;?>admin/ad_edit_user" style="text-decoration: none;"><button class="button-main">Edit</button></a>
+                                                <a href="<?php echo URLROOT;?>Admin/ad_edit_user" style="text-decoration: none;"><button class="button-main">Edit</button></a>
                                                 <!-- <form action="" method="POST">
                                                 </form> -->
                                             </div>
@@ -209,4 +179,3 @@
         </div>
     </section>
 </body>
-</html>
