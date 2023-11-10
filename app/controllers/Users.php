@@ -268,5 +268,5 @@ class Users extends Controller{
         } else {
           die('Something went wrong');
         }
-    }
+    }   
 }

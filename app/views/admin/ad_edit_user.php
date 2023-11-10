@@ -19,7 +19,7 @@
                         <p class="p-regular">Edit Account</p>
 
                         <div class="card-green">
-                            <form action="" method="POST">
+                            <form action="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $undergrad->user_id;?>" method="POST">
                                 <div style="font-size: 15px;">
 
                                     <label for="username">Username: </label>

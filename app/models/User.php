@@ -9,7 +9,7 @@
 
         // Regsiter user
         public function register($data){
-            $this->db->query('INSERT INTO undergraduate (age, gender, stu_mail, university, faculty, study_year, username, password) VALUES(:age, :gender, :email, :university, :faculty, :year, :username, :password)');
+            $this->db->query('INSERT INTO undergraduate (age, gender, email, university, faculty, study_year, username, password) VALUES(:age, :gender, :email, :university, :faculty, :year, :username, :password)');
             // Bind values
             $this->db->bind(':age', $data['age']);
             $this->db->bind(':gender', $data['gender']);
@@ -230,6 +230,41 @@
             }
         }
 
+        //find details by 'users' table
+        public function findUserDetails($user_id){
+            $this->db->query('SELECT * from users where user_id=:id');
+            $this->db->bind(':id',$user_id);
+    
+            $row=$this->db->single();
+    
+            //check row
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
+        }
+
+        //update users
+        public function updateUser($data){
+            $this->db->query('UPDATE users SET username = :username, password = :password, email = :email WHERE user_id = :user_id');
+            // Bind values
+            $this->db->bind(':user_id', $data['user_id']);
+            $this->db->bind(':username', $data['username']);
+            $this->db->bind(':password', $data['password']);
+            $this->db->bind(':email', $data['email']);
+
+            // Execute
+            if($this->db->execute()){
+            //add a function to rlaod site
+              return true;
+            } else {
+              return false;
+            }
+
+          }
+
+        
         public function deleteUndergrad($id){
             // Begin a transaction to ensure both deletes are successful or fail together
             $this->db->beginTransaction();

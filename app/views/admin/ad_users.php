@@ -40,9 +40,7 @@
                                     <td>
                                         <div class="btn-container-2">
                                             <div class="btn-container">
-                                                <a href="<?php echo URLROOT;?>Admin/ad_edit_user" style="text-decoration: none;"><button class="button-main">Edit</button></a>
-                                                <!-- <form action="" method="POST">
-                                                </form> -->
+                                                <a href="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
                                             </div>
 
                                             <div class="btn-container">

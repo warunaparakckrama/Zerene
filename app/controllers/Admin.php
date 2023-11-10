@@ -382,9 +382,69 @@ class Admin extends Controller{
         $this->view('admin/ad_users', $data);
     }
 
-    public function ad_edit_user(){
-        $data = [];
+    public function ad_edit_user($user_id){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+        $data = [
+          'user_id' => '$user_id',
+          'username' => trim($_POST['username']),
+          'email' => trim($_POST['email']),
+          'password' => trim($_POST['password']),
+          'confirm_password' => $_SESSION['confirm_password'],
+          'username_err'=>'',
+          'email_err'=>'',
+          'password_err'=>'',
+          'confirm_password_err'=>'',
+          
+        ];
+
+        if($this->userModel->findUserByUsername($data['username'])){
+            $data['username_err']='Username is already taken'; 
+        }
+
+        if($this->userModel->findUserByEmail($data['email'])){
+            $data['email_err']='Email is already taken'; 
+        }
+
+        if($data['password']!=$data['confirm_password']){
+            $data['confirm_password_err']='passwords do not match';
+        }
+
+        if(empty($data['username_err']) && empty($data['email_err'])&& empty($data['confirm_password_err'])){
+            // Validated
+
+            //hash password
+            $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
+
+            if($this->userModel->updateUser($data)){
+              flash('user_message', 'user Updated');
+              redirect('admin/ad_dashboard');
+            } else {
+              die('Something went wrong');
+            }
+          } else {
+            // Load view with errors
+            $this->view('admin/ad_edit_user', $data);
+          }
+        
+        }   
+    
+        else {
+            $user=$this->userModel->findUserDetails($user_id);
+
+            $data = [
+            'user_id' => '$user_id',
+            'username' => $user->username,
+            'email'=>$user->email,
+            'password_err'=>'',
+          ];
+    
+          $this->view('admin/ad_edit_user', $data);
+        }
+
         $this->view('admin/ad_edit_user', $data);
     }
-
 }
