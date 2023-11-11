@@ -447,4 +447,9 @@ class Admin extends Controller{
 
         $this->view('admin/ad_edit_user', $data);
     }
+
+    public function ad_profile(){
+        $data = [];
+        $this->view('admin/ad_profile', $data);
+    }
 }

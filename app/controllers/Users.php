@@ -268,5 +268,75 @@ class Users extends Controller{
         } else {
           die('Something went wrong');
         }
-    }   
+    } 
+    
+    public function changePassword($user_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+        $data = [
+          'current_password' => trim($_POST['current_password']),
+          'new_password' => trim($_POST['new_password']),
+          'confirm_password' => trim($_POST['confirm_password']),
+          'current_password_err'=>'',
+          'new_password_err'=>'',
+          'confirm_password_err'=>''
+        ];
+
+        if(empty($data['current_password'])){
+            $data['current_password_err']='Please enter current password';      
+        }
+
+        if(empty($data['new_password'])){
+            $data['new_password_err']='Please enter new password';      
+        }elseif(strlen($data['new_password'])<6){
+            $data['new_password_err']='Password must be atleast 6 characters'; 
+        }
+
+        if(empty($data['confirm_password'])){
+            $data['confirm_password_err']='Please re-enter new password';      
+        }else{
+            if($data['new_password']!=$data['confirm_password']){
+                $data['confirm_password_err']='passwords do not match';
+            }
+        }
+
+        
+
+        if(empty($data['username_err']) && empty($data['email_err'])&& empty($data['confirm_password_err'])){
+            // Validated
+
+            //hash password
+            $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
+
+            if($this->userModel->updateUser($data)){
+              flash('user_message', 'user Updated');
+              redirect('admin/ad_dashboard');
+            } else {
+              die('Something went wrong');
+            }
+          } else {
+            // Load view with errors
+            $this->view('admin/ad_edit_user', $data);
+          }
+        
+        }   
+    
+        else {
+            $user=$this->userModel->findUserDetails($user_id);
+
+            $data = [
+            'user_id' => '$user_id',
+            'username' => $user->username,
+            'email'=>$user->email,
+            'password_err'=>'',
+          ];
+    
+          $this->view('admin/ad_edit_user', $data);
+        }
+
+        $this->view('admin/ad_edit_user', $data);
+
+    }
 }
