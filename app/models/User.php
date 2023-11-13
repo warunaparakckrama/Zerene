@@ -269,7 +269,36 @@
             $this->db->bind(':user_id', $user_id);
             
             $pwd_updated = $this->db->execute();
-            if ($pwd_updated){               
+            if ($pwd_updated){
+                
+                // Update password in the 'undergraduate' table
+                $sql_undergraduate = "UPDATE undergraduate SET password = :new_password WHERE user_id = :user_id";
+                $this->db->query($sql_undergraduate);
+                $this->db->bind(':new_password', $new_password);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+
+                // Update password in the 'counsellor' table
+                $sql_counsellor = "UPDATE counsellor SET password = :new_password WHERE user_id = :user_id";
+                $this->db->query($sql_counsellor);
+                $this->db->bind(':new_password', $new_password);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+
+                // Update password in the 'admin' table
+                $sql_admin = "UPDATE admin SET password = :new_password WHERE user_id = :user_id";
+                $this->db->query($sql_admin);
+                $this->db->bind(':new_password', $new_password);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+
+                // Update password in the 'doctor' table
+                $sql_doctor = "UPDATE doctor SET password = :new_password WHERE user_id = :user_id";
+                $this->db->query($sql_doctor);
+                $this->db->bind(':new_password', $new_password);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+                
                 return true; // Password update successful
             } else{
                 return false; // Password update failed
