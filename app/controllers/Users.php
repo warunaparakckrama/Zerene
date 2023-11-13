@@ -307,36 +307,46 @@ class Users extends Controller{
         if(empty($data['username_err']) && empty($data['email_err'])&& empty($data['confirm_password_err'])){
             // Validated
 
-            //hash password
-            $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
+            // Fetch the hashed password from the database based on the user ID
+            $hashed_password_from_db = $this->userModel->getPasswordById($user_id);
 
-            if($this->userModel->updateUser($data)){
-              flash('user_message', 'user Updated');
-              redirect('admin/ad_dashboard');
+            // Verify if the entered current password matches the hashed password from the database
+            if (!password_verify($data['current_password'], $hashed_password_from_db)) {
+                $data['current_password_err'] = 'Current password is incorrect';
             } else {
-              die('Something went wrong');
+                // Hash the new password
+                $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
+
+                // Update the user's password
+                if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
+                flash('user_message', 'Password updated successfully');
+                redirect('admin/ad_dashboard');
+                } else {
+                die('Something went wrong');
+                }
             }
+
           } else {
             // Load view with errors
-            $this->view('admin/ad_edit_user', $data);
+            $this->view('admin/ad_profile', $data);
           }
         
         }   
     
         else {
-            $user=$this->userModel->findUserDetails($user_id);
-
             $data = [
-            'user_id' => '$user_id',
-            'username' => $user->username,
-            'email'=>$user->email,
-            'password_err'=>'',
+            'current_password' => '',
+            'new_password' => '',
+            'confirm_password' => '',
+            'current_password_err'=>'',
+            'new_password_err'=>'',
+            'confirm_password_err'=>''
           ];
     
-          $this->view('admin/ad_edit_user', $data);
+          $this->view('admin/ad_profile', $data);
         }
 
-        $this->view('admin/ad_edit_user', $data);
+        $this->view('admin/ad_profile', $data);
 
     }
 }

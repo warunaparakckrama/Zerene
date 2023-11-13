@@ -44,14 +44,14 @@
 
                         <div class="rectangle">
                             <p>Change Password</p>
-                            <form action="<?php echo URLROOT;?>Users/" class="subgrid-1">
+                            <form action="<?php echo URLROOT;?>Users/changePassword/<?php echo $_SESSION['user_id'];?>" method="POST" class="subgrid-1">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
-                                <input type="password" id="fname" placeholder="" class="form-default">
+                                <input type="password" id="current_password" name="current_password" class="form-default">
                                 <label for="fname" class="p-regular-grey">New Password:</label>
-                                <input type="password" id="fname" placeholder="" class="form-default">
+                                <input type="password" id="new_password" name="new_password" class="form-default">
                                 <label for="fname" class="p-regular-grey">Confirm Password :</label>
-                                <input type="password" id="fname" placeholder="" class="form-default">
-                                <button class="button-main">Change</button>
+                                <input type="password" id="confirm_password" name="confirm_password" placeholder="" class="form-default">
+                                <button class="button-main" type="submit">Change</button>
                             </form>
                         </div>
                         

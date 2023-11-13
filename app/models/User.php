@@ -245,6 +245,37 @@
             }
         }
 
+        public function getPasswordById($user_id) {
+            $sql = "SELECT password FROM users WHERE user_id = :user_id";
+            $this->db->query($sql);
+            $this->db->bind(':user_id', $user_id);
+            
+            try {
+                $this->db->execute();
+                $result = $this->db->single();
+    
+                // Return the hashed password from the database
+                return $result->password;
+            } catch (PDOException $e) {
+                // Handle the error or return an indication of failure
+                return false;
+            }
+        }
+
+        public function updatePassword($user_id, $new_password) {
+            $sql = "UPDATE users SET password = :new_password WHERE user_id = :user_id";
+            $this->db->query($sql);
+            $this->db->bind(':new_password', $new_password);
+            $this->db->bind(':user_id', $user_id);
+            
+            $pwd_updated = $this->db->execute();
+            if ($pwd_updated){               
+                return true; // Password update successful
+            } else{
+                return false; // Password update failed
+            }
+        }
+
         //update users
         public function updateUser($data){
             $this->db->query('UPDATE users SET username = :username, password = :password, email = :email WHERE user_id = :user_id');
