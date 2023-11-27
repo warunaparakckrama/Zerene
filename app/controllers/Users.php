@@ -270,7 +270,7 @@ class Users extends Controller{
         }
     } 
     
-    public function changePassword($user_id){
+    public function changePwdAdmin($user_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);

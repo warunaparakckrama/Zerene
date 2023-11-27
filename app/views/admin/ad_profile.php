@@ -44,7 +44,7 @@
 
                         <div class="rectangle">
                             <p>Change Password</p>
-                            <form action="<?php echo URLROOT;?>Users/changePassword/<?php echo $_SESSION['user_id'];?>" method="POST" class="subgrid-1">
+                            <form action="<?php echo URLROOT;?>Users/changePwdAdmin/<?php echo $_SESSION['user_id'];?>" method="POST" class="subgrid-1">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
                                 <input type="password" id="current_password" name="current_password" class="form-default">
                                 <label for="fname" class="p-regular-grey">New Password:</label>
