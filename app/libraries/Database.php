@@ -87,4 +87,16 @@ class database{
         return $this->dbh->lastInsertId();
         // 'pdo' might be the PDO object used for database operations
     }
+
+    public function beginTransaction() {
+        return $this->dbh->beginTransaction(); // Start a transaction
+    }
+
+    public function commit() {
+        return $this->dbh->commit(); // Commit the transaction
+    }
+
+    public function rollBack() {
+        return $this->dbh->rollBack(); // Rollback the transaction
+    }
 }

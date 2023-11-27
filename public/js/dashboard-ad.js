@@ -29,6 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const sblink5 = document.getElementById("sb-link5");
     const sblink6 = document.getElementById("sb-link6");
     const sblink7 = document.getElementById("sb-link7");
+    const sblink8 = document.getElementById("sb-link8");
+    const sblink9 = document.getElementById("sb-link9");
+    const sblink10 = document.getElementById("sb-link10");
     
     sblink1.addEventListener("click", function (e) {
         e.preventDefault();
@@ -37,32 +40,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sblink2.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("ad_reg_counselor"); // Load registrations.php
+        loadView("ad_reg_admin"); // Load registrations.php
     });
 
     sblink3.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("ad_reg_doctor"); // Load Pcounsellor.php
+        loadView("ad_reg_counselor"); // Load Pcounsellor.php
     });
 
     sblink4.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView(""); // Load Acounsellor.php
+        loadView("ad_reg_doctor"); // Load Acounsellor.php
     });
 
     sblink5.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("ad_users"); // Load doctor.php
+        loadView(""); // Load doctor.php
     });
 
     sblink6.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView(""); // Load chats.php
+        loadView("ad_users"); // Load chats.php
     });
 
     sblink7.addEventListener("click", function (e) {
         e.preventDefault();
         loadView(""); // Load resources.php
+    });
+
+    sblink10.addEventListener("click", function (e) {
+        e.preventDefault();
+        loadView("ad_profile"); // Load resources.php
     });
 
     // Call the default view or homepage view

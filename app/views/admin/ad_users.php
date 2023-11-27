@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,34 +14,6 @@
             </div>
 
             <div>
-
-                <!-- <div class="card-white">
-                    <p class="p-regular-grey">Total Users</p>
-                    <div class="subgrid-5">
-
-                        <div class="rectangle">
-                        <p class="p-regular-grey">Administrators</p>
-                        <p>2</p>
-                        </div>
-
-                        <div class="rectangle">
-                        <p class="p-regular-grey">Undergraduates</p>
-                        <p>2</p>
-                        </div>
-
-                        <div class="rectangle">
-                        <p class="p-regular-grey">Counselors</p>
-                        <p>2</p>
-                        </div>
-
-                        <div class="rectangle">
-                        <p class="p-regular-grey">Psychiatrists</p>
-                        <p>2</p>
-                        </div>
-
-                    </div>
-                </div> -->
-
                 <div class="card-white">
                     <p class="p-regular-grey">Undergraduates</p>
                     <div>
@@ -68,13 +38,16 @@
                                     <td><?php echo $undergrad->university?></td>
                                     <td><?php echo $undergrad->faculty?></td>
                                     <td>
-                                        <form action="<?php echo URLROOT;?>admin/ad_users" method="POST">
-                                            <div class="btn-container-2">
-                                                <!-- <button class="button-main">View</button> -->
-                                                <button class="button-main">Edit</button>
-                                                <button class="button-danger" type="submit" value="user_id">Delete</button>
+                                        <div class="btn-container-2">
+                                            <div class="btn-container">
+                                                <a href="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
                                             </div>
-                                        </form>
+
+                                            <div class="btn-container">
+                                                <a href="<?php echo URLROOT;?>Users/deleteUG/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-danger">Delete</button></a>
+                                            </div>
+
+                                        </div>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -110,13 +83,18 @@
                                     <td><?php echo $counselor->last_name?></td>
                                     <td><?php echo $counselor->username?></td>
                                     <td>
-                                        <form action="<?php echo URLROOT;?>admin/ad_users" method="POST">
-                                            <div class="btn-container-2">
-                                                <!-- <button class="button-main">View</button> -->
-                                                <button class="button-main">Edit</button>
-                                                <button class="button-danger" type="submit" value="user_id">Delete</button>
+                                        <div class="btn-container-2">
+                                            <div class="btn-container">
+                                                <form action="" method="POST">
+                                                    <button class="button-main">Edit</button>
+                                                </form>
                                             </div>
-                                        </form>
+
+                                            <div class="btn-container">
+                                                <a href="<?php echo URLROOT;?>Users/deleteCoun/<?php echo $counselor->user_id;?>" style="text-decoration: none;"><button class="button-danger">Delete</button></a>
+                                            </div>
+
+                                        </div>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -150,14 +128,43 @@
                                     <td><?php echo $doctor->username?></td>
                                     <td><?php echo $doctor->hospital?></td>
                                     <td>
-                                        <form action="<?php echo URLROOT;?>admin/ad_users" method="POST">
-                                            <div class="btn-container-2">
-                                                <!-- <button class="button-main">View</button> -->
-                                                <button class="button-main">Edit</button>
-                                                <button class="button-danger" type="submit" value="user_id">Delete</button>
+                                        <div class="btn-container-2">
+                                            <div class="btn-container">
+                                                <form action="" method="POST">
+                                                    <button class="button-main">Edit</button>
+                                                </form>
                                             </div>
-                                        </form>
+
+                                            <div class="btn-container">
+                                                <a href="<?php echo URLROOT;?>Users/deleteDoc/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-danger">Delete</button></a>
+                                            </div>
+
+                                        </div>
                                     </td>
+                                </tr>
+                                <?php endforeach; ?>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-white">
+                    <p class="p-regular-grey">Administrators</p>
+                    <div>
+                        <table class="table-1">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php foreach ($data['admins'] as $admin) : ?>
+                                <tr>
+                                    <td><?php echo $admin->username?></td>
+                                    <td><?php echo $admin->email?></td>
                                 </tr>
                                 <?php endforeach; ?>
                                 
@@ -170,4 +177,3 @@
         </div>
     </section>
 </body>
-</html>

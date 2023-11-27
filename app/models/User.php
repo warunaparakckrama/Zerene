@@ -9,7 +9,7 @@
 
         // Regsiter user
         public function register($data){
-            $this->db->query('INSERT INTO undergraduate (age, gender, stu_mail, university, faculty, study_year, username, password) VALUES(:age, :gender, :email, :university, :faculty, :year, :username, :password)');
+            $this->db->query('INSERT INTO undergraduate (age, gender, email, university, faculty, study_year, username, password) VALUES(:age, :gender, :email, :university, :faculty, :year, :username, :password)');
             // Bind values
             $this->db->bind(':age', $data['age']);
             $this->db->bind(':gender', $data['gender']);
@@ -39,6 +39,44 @@
                     $this->db->query('UPDATE undergraduate SET user_id = :user_id WHERE ug_id = :ug_id');
                     $this->db->bind(':user_id', $user_id);
                     $this->db->bind(':ug_id', $ug_id);
+                    $this->db->execute();
+                    return true; // Both inserts successful
+                } else {
+                    return false;
+                }
+
+            
+                } else {
+                return false;
+            }
+        }
+
+        public function reg_admin($data){
+            $this->db->query('INSERT INTO admin (username, email, password) VALUES(:username, :email, :password)');
+            // Bind values
+            $this->db->bind(':username', $data['username']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':password', $data['password']);
+
+            // Execute
+            $admin = $this->db->execute();
+            if($admin){
+                $admin_id = $this->db->lastInsertedId();
+                // If admin insertion is successful, proceed to insert email and password into 'users' table
+                $this->db->query('INSERT INTO users (username, password, email, user_type) VALUES (:username, :password, :email, :user_type)');
+                $this->db->bind(':username', $data['username']);
+                $this->db->bind(':password', $data['password']);
+                $this->db->bind(':email', $data['email']);
+                $this->db->bind(':user_type', 'admin');
+
+                $userInserted = $this->db->execute();
+
+                if ($userInserted){
+                    $user_id = $this->db->lastInsertedId();
+                    // Step 3: Update the 'admin' table with the 'user_id' from 'users' table
+                    $this->db->query('UPDATE admin SET user_id = :user_id WHERE admin_id = :admin_id');
+                    $this->db->bind(':user_id', $user_id);
+                    $this->db->bind(':admin_id', $admin_id);
                     $this->db->execute();
                     return true; // Both inserts successful
                 } else {
@@ -191,4 +229,171 @@
                 return false;
             }
         }
+
+        //find details by 'users' table
+        public function findUserDetails($user_id){
+            $this->db->query('SELECT * from users where user_id=:id');
+            $this->db->bind(':id',$user_id);
+    
+            $row=$this->db->single();
+    
+            //check row
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
+        }
+
+        public function getPasswordById($user_id) {
+            $sql = "SELECT password FROM users WHERE user_id = :user_id";
+            $this->db->query($sql);
+            $this->db->bind(':user_id', $user_id);
+            
+            try {
+                $this->db->execute();
+                $result = $this->db->single();
+    
+                // Return the hashed password from the database
+                return $result->password;
+            } catch (PDOException $e) {
+                // Handle the error or return an indication of failure
+                return false;
+            }
+        }
+
+        public function updatePassword($user_id, $new_password) {
+            $sql = "UPDATE users SET password = :new_password WHERE user_id = :user_id";
+            $this->db->query($sql);
+            $this->db->bind(':new_password', $new_password);
+            $this->db->bind(':user_id', $user_id);
+            
+            $pwd_updated = $this->db->execute();
+            if ($pwd_updated){
+                
+                // Update password in the 'undergraduate' table
+                $sql_undergraduate = "UPDATE undergraduate SET password = :new_password WHERE user_id = :user_id";
+                $this->db->query($sql_undergraduate);
+                $this->db->bind(':new_password', $new_password);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+
+                // Update password in the 'counsellor' table
+                $sql_counsellor = "UPDATE counsellor SET password = :new_password WHERE user_id = :user_id";
+                $this->db->query($sql_counsellor);
+                $this->db->bind(':new_password', $new_password);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+
+                // Update password in the 'admin' table
+                $sql_admin = "UPDATE admin SET password = :new_password WHERE user_id = :user_id";
+                $this->db->query($sql_admin);
+                $this->db->bind(':new_password', $new_password);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+
+                // Update password in the 'doctor' table
+                $sql_doctor = "UPDATE doctor SET password = :new_password WHERE user_id = :user_id";
+                $this->db->query($sql_doctor);
+                $this->db->bind(':new_password', $new_password);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+                
+                return true; // Password update successful
+            } else{
+                return false; // Password update failed
+            }
+        }
+
+        //update users
+        public function updateUser($data){
+            $this->db->query('UPDATE users SET username = :username, password = :password, email = :email WHERE user_id = :user_id');
+            // Bind values
+            $this->db->bind(':user_id', $data['user_id']);
+            $this->db->bind(':username', $data['username']);
+            $this->db->bind(':password', $data['password']);
+            $this->db->bind(':email', $data['email']);
+
+            // Execute
+            if($this->db->execute()){
+            //add a function to rlaod site
+              return true;
+            } else {
+              return false;
+            }
+
+          }
+
+        
+        public function deleteUndergrad($id){
+            // Begin a transaction to ensure both deletes are successful or fail together
+            $this->db->beginTransaction();
+
+            // Then, delete from 'users' table
+            $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $userDeleted = $this->db->execute();
+
+            // First, delete from 'students' table
+            $this->db->query('DELETE FROM undergraduate WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $studentDeleted = $this->db->execute();
+
+            // Commit or rollback the transaction based on delete success
+            if ($studentDeleted && $userDeleted) {
+                $this->db->commit();
+                return true;
+            } else {
+                $this->db->rollBack();
+                return false;
+            }
+          }
+        
+        public function deleteCounselor($id){
+            // Begin a transaction to ensure both deletes are successful or fail together
+            $this->db->beginTransaction();
+
+            // Then, delete from 'users' table
+            $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $userDeleted = $this->db->execute();
+
+            // First, delete from 'students' table
+            $this->db->query('DELETE FROM counsellor WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $counselorDeleted = $this->db->execute();
+
+            // Commit or rollback the transaction based on delete success
+            if ($counselorDeleted && $userDeleted) {
+                $this->db->commit();
+                return true;
+            } else {
+                $this->db->rollBack();
+                return false;
+            }
+          }
+        
+        public function deleteDoctor($id){
+            // Begin a transaction to ensure both deletes are successful or fail together
+            $this->db->beginTransaction();
+
+            // Then, delete from 'users' table
+            $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $userDeleted = $this->db->execute();
+
+            // First, delete from 'students' table
+            $this->db->query('DELETE FROM doctor WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $doctorDeleted = $this->db->execute();
+
+            // Commit or rollback the transaction based on delete success
+            if ($doctorDeleted && $userDeleted) {
+                $this->db->commit();
+                return true;
+            } else {
+                $this->db->rollBack();
+                return false;
+            }
+          }
     }

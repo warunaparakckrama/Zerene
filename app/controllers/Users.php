@@ -237,4 +237,116 @@ class Users extends Controller{
             return false;
         }
     }
+
+    public function deleteUG($id){
+        
+  
+        if($this->userModel->deleteUndergrad($id)){
+        //   flash('post_message', 'user Removed');
+          redirect('admin/ad_dashboard');
+        } else {
+          die('Something went wrong');
+        }
+    }
+
+    public function deleteCoun($id){
+        
+  
+        if($this->userModel->deleteCounselor($id)){
+        //   flash('post_message', 'user Removed');
+          redirect('admin/ad_dashboard');
+        } else {
+          die('Something went wrong');
+        }
+    }
+    public function deleteDoc($id){
+        
+  
+        if($this->userModel->deleteDoctor($id)){
+        //   flash('post_message', 'user Removed');
+          redirect('admin/ad_dashboard');
+        } else {
+          die('Something went wrong');
+        }
+    } 
+    
+    public function changePassword($user_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+        $data = [
+          'current_password' => trim($_POST['current_password']),
+          'new_password' => trim($_POST['new_password']),
+          'confirm_password' => trim($_POST['confirm_password']),
+          'current_password_err'=>'',
+          'new_password_err'=>'',
+          'confirm_password_err'=>''
+        ];
+
+        if(empty($data['current_password'])){
+            $data['current_password_err']='Please enter current password';      
+        }
+
+        if(empty($data['new_password'])){
+            $data['new_password_err']='Please enter new password';      
+        }elseif(strlen($data['new_password'])<6){
+            $data['new_password_err']='Password must be atleast 6 characters'; 
+        }
+
+        if(empty($data['confirm_password'])){
+            $data['confirm_password_err']='Please re-enter new password';      
+        }else{
+            if($data['new_password']!=$data['confirm_password']){
+                $data['confirm_password_err']='passwords do not match';
+            }
+        }
+
+        
+
+        if(empty($data['username_err']) && empty($data['email_err'])&& empty($data['confirm_password_err'])){
+            // Validated
+
+            // Fetch the hashed password from the database based on the user ID
+            $hashed_password_from_db = $this->userModel->getPasswordById($user_id);
+
+            // Verify if the entered current password matches the hashed password from the database
+            if (!password_verify($data['current_password'], $hashed_password_from_db)) {
+                $data['current_password_err'] = 'Current password is incorrect';
+            } else {
+                // Hash the new password
+                $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
+
+                // Update the user's password
+                if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
+                flash('user_message', 'Password updated successfully');
+                redirect('admin/ad_dashboard');
+                } else {
+                die('Something went wrong');
+                }
+            }
+
+          } else {
+            // Load view with errors
+            $this->view('admin/ad_profile', $data);
+          }
+        
+        }   
+    
+        else {
+            $data = [
+            'current_password' => '',
+            'new_password' => '',
+            'confirm_password' => '',
+            'current_password_err'=>'',
+            'new_password_err'=>'',
+            'confirm_password_err'=>''
+          ];
+    
+          $this->view('admin/ad_profile', $data);
+        }
+
+        $this->view('admin/ad_profile', $data);
+
+    }
 }
