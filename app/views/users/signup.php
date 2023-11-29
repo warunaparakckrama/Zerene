@@ -29,13 +29,30 @@
                         <input type="text" id="signup-stumail" name="email" placeholder="Student Mail" class="form-signup <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
                         <p class="p-error"><?php echo $data['email_err']; ?></p>
 
-                        <label for="university">University: <sup>*</sup></label>
+                        <!-- <label for="university">University: <sup>*</sup></label>
                         <input type="text" id="signup-uni" name="university" placeholder="University" class="form-signup <?php echo (!empty($data['university_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['university']; ?>">
-                        <p class="p-error"><?php echo $data['university_err']; ?></p>
+                        <p class="p-error"><?php echo $data['university_err']; ?></p> -->
 
-                        <label for="faculty">Faculty: <sup>*</sup></label>
+                        <label for="university">University</label>
+                        <select name="university" id="signup-uni" value="<?php echo $data['university']; ?>">
+                            <option value="University of Colombo">University of Colombo</option>
+                            <option value="University of Kelaniya">University of Kelaniya</option>
+                            <option value="University of Jayawardhanapure">University of Jayawardhanapura</option>
+                        </select>
+                        <p class="p-error"></p>
+
+                        <!-- <label for="faculty">Faculty: <sup>*</sup></label>
                         <input type="text" id="signup-fac" name="faculty" placeholder="Faculty" class="form-signup <?php echo (!empty($data['faculty_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['faculty']; ?>">
-                        <p class="p-error"><?php echo $data['faculty_err']; ?></p>
+                        <p class="p-error"><?php echo $data['faculty_err']; ?></p> -->
+
+                        <label for="university">Faculty</label>
+                        <select name="faculty" id="signup-fac" value="<?php echo $data['faculty']; ?>">
+                            <option value="University of Colombo">Faculty of Science</option>
+                            <option value="University of Kelaniya">Faculty of Arts</option>
+                            <option value="University of Kelaniya">Faculty of Management & finance</option>
+                            <option value="University of Jayawardhanapure">School of Computing*(UOC)</option>
+                        </select>
+                        <p class="p-error"></p>
 
                         <label for="year">Study Year: <sup>*</sup></label>
                         <input type="text" id="signup-year" name="year" placeholder="Year of Study" class="form-signup <?php echo (!empty($data['year_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['year']; ?>">
