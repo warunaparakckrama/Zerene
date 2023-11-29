@@ -381,6 +381,11 @@ class Admin extends Controller{
         ];
         $this->view('admin/ad_users', $data);
     }
+  
+    public function ad_profile(){
+        $data = [];
+        $this->view('admin/ad_profile', $data);
+    }
 
     public function ad_edit_user($user_id){
 
@@ -446,13 +451,8 @@ class Admin extends Controller{
         }
 
         $this->view('admin/ad_edit_user', $data);
-    }
-
-    public function ad_profile(){
-        $data = [];
-        $this->view('admin/ad_profile', $data);
-    }
-
+    } //not yet used
+    
     public function changeUsernameAdmin($user_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array

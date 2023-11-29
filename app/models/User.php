@@ -7,7 +7,6 @@
             $this->db = new Database;
         }
 
-        // Regsiter user
         public function register($data){
             $this->db->query('INSERT INTO undergraduate (age, gender, email, university, faculty, study_year, username, password) VALUES(:age, :gender, :email, :university, :faculty, :year, :username, :password)');
             // Bind values
@@ -199,7 +198,6 @@
             }
         }
 
-        // Find user by username
         public function findUserByUsername($username){
             $this->db->query('SELECT * FROM users WHERE username = :username');
             // Bind value
@@ -215,7 +213,6 @@
             }
         }
 
-        //find by user email
         public function findUserByEmail($email){
             $this->db->query('SELECT * from users WHERE email=:email');
             $this->db->bind(':email',$email);
@@ -230,7 +227,6 @@
             }
         }
 
-        //find details by 'users' table
         public function findUserDetails($user_id){
             $this->db->query('SELECT * from users where user_id=:id');
             $this->db->bind(':id',$user_id);
@@ -371,7 +367,6 @@
             }
         }
 
-        //update users
         public function updateUser($data){
             $this->db->query('UPDATE users SET username = :username, password = :password, email = :email WHERE user_id = :user_id');
             // Bind values
@@ -388,7 +383,7 @@
               return false;
             }
 
-        }
+        } //not yet used
 
         public function deleteUndergrad($id){
             // Begin a transaction to ensure both deletes are successful or fail together
