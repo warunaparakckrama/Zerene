@@ -262,6 +262,23 @@
             }
         }
 
+        public function getUsernameById($user_id){
+            $sql = "SELECT username FROM users WHERE user_id = :user_id";
+            $this->db->query($sql);
+            $this->db->bind(':user_id', $user_id);
+
+            try {
+                $this->db->execute();
+                $result = $this->db->single();
+    
+                // Return the username from the database
+                return $result->username;
+            } catch (PDOException $e) {
+                // Handle the error or return an indication of failure
+                return false;
+            }
+        }
+
         public function updatePassword($user_id, $new_password) {
             $sql = "UPDATE users SET password = :new_password WHERE user_id = :user_id";
             $this->db->query($sql);
@@ -305,6 +322,55 @@
             }
         }
 
+        public function updateUsername($user_id, $new_username){
+            $sql = "UPDATE users SET username = :new_username WHERE user_id = :user_id";
+            $this->db->query($sql);
+            $this->db->bind(':new_username', $new_username);
+            $this->db->bind(':user_id', $user_id); 
+
+            $username_updated = $this->db->execute();
+
+            if ($username_updated){
+                
+                // Update username in the 'undergraduate' table
+                $sql_undergraduate = "UPDATE undergraduate SET username = :new_username WHERE user_id = :user_id";
+                $this->db->query($sql_undergraduate);
+                $this->db->bind(':new_username', $new_username);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+
+                // Update username in the 'counsellor' table
+                $sql_counsellor = "UPDATE counsellor SET username = :new_username WHERE user_id = :user_id";
+                $this->db->query($sql_counsellor);
+                $this->db->bind(':new_username', $new_username);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+
+                // Update username in the 'admin' table
+                $sql_admin = "UPDATE admin SET username = :new_username WHERE user_id = :user_id";
+                $this->db->query($sql_admin);
+                $this->db->bind(':new_username', $new_username);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+
+                // Update username in the 'doctor' table
+                $sql_doctor = "UPDATE doctor SET username = :new_username WHERE user_id = :user_id";
+                $this->db->query($sql_doctor);
+                $this->db->bind(':new_username', $new_username);
+                $this->db->bind(':user_id', $user_id);
+                $this->db->execute();
+                
+                return true; // username update successful
+            } else{
+                return false; // username update failed
+            }
+
+            if ($username_updated){
+                // Update session variable with the new username
+                $_SESSION['user_name'] = $new_username;
+            }
+        }
+
         //update users
         public function updateUser($data){
             $this->db->query('UPDATE users SET username = :username, password = :password, email = :email WHERE user_id = :user_id');
@@ -322,9 +388,8 @@
               return false;
             }
 
-          }
+        }
 
-        
         public function deleteUndergrad($id){
             // Begin a transaction to ensure both deletes are successful or fail together
             $this->db->beginTransaction();
@@ -347,7 +412,7 @@
                 $this->db->rollBack();
                 return false;
             }
-          }
+        }
         
         public function deleteCounselor($id){
             // Begin a transaction to ensure both deletes are successful or fail together
@@ -371,7 +436,7 @@
                 $this->db->rollBack();
                 return false;
             }
-          }
+        }
         
         public function deleteDoctor($id){
             // Begin a transaction to ensure both deletes are successful or fail together
