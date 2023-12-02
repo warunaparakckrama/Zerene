@@ -49,11 +49,42 @@ class Users extends Controller{
             }
 
             //validate email
-            if(empty($data['email'])){
-                $data['email_err']='Please enter email';      
-            }else{
-                if($this->userModel->findUserByEmail($data['email'])){
-                    $data['email_err']='Email is already taken'; 
+            // if(empty($data['email'])){
+            //     $data['email_err']='Please enter email';      
+            // }else{
+            //     if($this->userModel->findUserByEmail($data['email'])){
+            //         $data['email_err']='Email is already taken'; 
+            //     }
+            // }
+
+            if (empty($data['email'])) {
+                $data['email_err'] = 'Please enter an email';
+            } else {
+                // Check if the email is in a valid format
+                if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                    $data['email_err'] = 'Invalid email format';
+                } else {
+                    // Extract domain from the email address
+                    $emailParts = explode('@', $data['email']);
+                    $domain = isset($emailParts[1]) ? $emailParts[1] : '';
+            
+                    // Define allowed domain names
+                    $allowedDomains = [
+                        'stu.ucsc.cmb.ac.lk',
+                        'fos.uoc.cmb.ac.lk',
+                        'foa.uoc.cmb.ac.lk'
+                        // Add more allowed domains if needed
+                    ];
+            
+                    // Check if the extracted domain is in the allowed list
+                    if (!in_array($domain, $allowedDomains)) {
+                        $data['email_err'] = 'Email domain is not allowed';
+                    } else {
+                        // Check if the email is already taken
+                        if ($this->userModel->findUserByEmail($data['email'])) {
+                            $data['email_err'] = 'Email is already taken';
+                        }
+                    }
                 }
             }
 
