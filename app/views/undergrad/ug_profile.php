@@ -27,7 +27,7 @@
                                 <tr>
                                     <td class="p-regular-grey">Username</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title">User_01</td>
+                                    <td class="p-title"><?php echo $_SESSION['user_name'];?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">Age</td>
@@ -42,7 +42,7 @@
                                 <tr>
                                     <td class="p-regular-grey">E-mail</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title">2021is099@ucsc.cmb.lk</td>
+                                    <td class="p-title"><?php echo $_SESSION['user_email'];?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">Faculty</td>
@@ -54,14 +54,25 @@
 
                         <div class="rectangle">
                             <p>Change Password</p>
-                            <form action="" class="subgrid-1">
+                            <form action="<?php echo URLROOT;?>Undergrad/changePwdUG/<?php echo $_SESSION['user_id'];?>" method="POST" class="subgrid-1">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
-                                <input type="password" id="fname" placeholder="" class="form-default">
-                                <label for="fname" class="p-regular-grey">New Password:</label>
-                                <input type="password" id="fname" placeholder="" class="form-default">
+                                <input type="password" id="current_password" name="current_password" class="form-default">
+                                <label for="fname" class="p-regular-grey">New Password :</label>
+                                <input type="password" id="new_password" name="new_password" class="form-default">
                                 <label for="fname" class="p-regular-grey">Confirm Password :</label>
-                                <input type="password" id="fname" placeholder="" class="form-default">
-                                <button class="button-main">Change</button>
+                                <input type="password" id="confirm_password" name="confirm_password" placeholder="" class="form-default">
+                                <button class="button-main" type="submit">Change</button>
+                            </form>
+                        </div>
+
+                        <div class="rectangle">
+                            <p>Change Username</p>
+                            <form action="<?php echo URLROOT;?>Undergrad/changeUsernameUG/<?php echo $_SESSION['user_id'];?>" method="POST" class="subgrid-1">
+                                <label for="cusername" class="p-regular-grey">Current Username :</label>
+                                <input type="text" id="current_username" name="current_username" class="form-default">
+                                <label for="nusername" class="p-regular-grey">New Username :</label>
+                                <input type="text" id="new_username" name="new_username" class="form-default">
+                                <button class="button-main" type="submit">Change</button>
                             </form>
                         </div>
                         
