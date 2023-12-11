@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en"> -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
                 <form action="<?php echo URLROOT;?>users/signup" method="POST">
                     <div class="grid-signup-form">
                         
-                        <label for="age">Age: <sup>*</sup></label>
+                        <label for="age">Age:<sup>*</sup></label>
                         <input type="text" id="signup-age" name="age" placeholder="Age" class="form-signup <?php echo (!empty($data['age_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['age']; ?>">
                         <p class="p-error"><?php echo $data['age_err']; ?></p>
 
@@ -33,7 +33,7 @@
                         </select>
                         <p class="p-error"></p>
 
-                        <label for="email">Student Mail: <sup>*</sup></label>
+                        <label for="email">Student Mail:<sup>*</sup></label>
                         <input type="text" id="signup-stumail" name="email" placeholder="Student Mail" class="form-signup <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
                         <p class="p-error"><?php echo $data['email_err']; ?></p>
 
@@ -75,15 +75,15 @@
                         </select>
                         <p class="p-error"></p>
 
-                        <label for="username">Username: <sup>*</sup></label>
+                        <label for="username">Username:<sup>*</sup></label>
                         <input type="text" id="signup-username" name="username" placeholder="Username" class="form-signup <?php echo (!empty($data['username_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['username']; ?>">
                         <p class="p-error"><?php echo $data['username_err']; ?></p>
 
-                        <label for="password">Password: <sup>*</sup></label>
+                        <label for="password">Password:<sup>*</sup></label>
                         <input type="password" id="signup-password" name="password" placeholder="Create Password" class="form-signup <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>">
                         <p class="p-error"><?php echo $data['password_err']; ?></p>
 
-                        <label for="confirm_password">Re-enter: <sup>*</sup></label>
+                        <label for="confirm_password">Re-enter:<sup>*</sup></label>
                         <input type="password" id="signup-rpassword" name="confirm_password" placeholder="Re-enter Password" class="form-signup <?php echo (!empty($data['confirm_password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['confirm_password']; ?>">
                         <p class="p-error"><?php echo $data['confirm_password_err']; ?></p>
 
@@ -97,4 +97,4 @@
             </div>
         </section>
     </body>
-</html>
+<!-- </html> -->

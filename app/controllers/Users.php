@@ -39,9 +39,25 @@ class Users extends Controller{
 
             ];
             //validate age
-            if(empty($data['age'])){
-                $data['age_err']='Please enter age';      
+            // if(empty($data['age'])){
+            //     $data['age_err']='Please enter age';      
+            // }
+            if (empty($data['age'])) {
+                $data['age_err'] = 'Please enter age';
+            } else {
+                // Check if the entered age is a number
+                if (!is_numeric($data['age'])) {
+                    $data['age_err'] = 'Age must be a number';
+                } else {
+                    $age = (int)$data['age']; // Convert the age to an integer
+            
+                    // Check if the age is within the specified range
+                    if ($age < 18 || $age > 25) {
+                        $data['age_err'] = 'Age must be between 18 and 25';
+                    }
+                }
             }
+            
 
             //validate gender
             if(empty($data['gender'])){
