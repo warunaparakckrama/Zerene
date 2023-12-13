@@ -1,6 +1,6 @@
 <!-- <!DOCTYPE html> -->
 <!-- <html lang="en"> -->
-<?php $currentPage = 'ad_reg_admin'; // Set the current page identifier ?>
+<?php $currentPage = 'ad_reg_admin'; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

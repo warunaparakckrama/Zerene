@@ -67,7 +67,7 @@
     transition: all 300ms ease;
 }
 
-.top:active{
+.top.active{
     color: var(--zerene-green);
     background-color: var(--zerene-white);
     width: 210px;
@@ -113,8 +113,9 @@ a.bottom:hover{
     transition: all 300ms ease;
 }
 
-.dd-btn:active{
-    color: var(--zerene-light);
+.dd-btn.active{
+    color: var(--zerene-green);
+    background-color: var(--zerene-white);
     margin-left: 5px;
     transition: all 300ms ease;
 }
