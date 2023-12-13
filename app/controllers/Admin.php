@@ -486,7 +486,7 @@ class Admin extends Controller{
                     // Update the username
                     if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
                     flash('user_message', 'Username updated successfully');
-                    redirect('admin/ad_dashboard');
+                    redirect('admin/ad_profile');
                     } else {
                     die('Something went wrong');
                     }
@@ -494,7 +494,7 @@ class Admin extends Controller{
 
             } else {
                 // Load view with errors
-                $this->view('admin/ad_dashboard', $data);
+                $this->view('admin/ad_profile', $data);
             }
         } 
         
@@ -562,7 +562,7 @@ class Admin extends Controller{
                 // Update the user's password
                 if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
                 flash('user_message', 'Password updated successfully');
-                redirect('admin/ad_dashboard');
+                redirect('admin/ad_profile');
                 } else {
                 die('Something went wrong');
                 }
