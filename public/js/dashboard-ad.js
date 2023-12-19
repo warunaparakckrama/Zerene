@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sblink5.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView(""); // Load doctor.php
+        loadView("verifications"); // Load doctor.php
     });
 
     sblink6.addEventListener("click", function (e) {

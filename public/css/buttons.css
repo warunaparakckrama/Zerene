@@ -2,7 +2,7 @@
 .btn-container{
     display: flex;
     flex-direction: row;
-    /* margin-right: 10px; */
+    margin-right: 10px;
     gap: 10px;
 }
 
@@ -41,7 +41,7 @@
     cursor: pointer;
     color: var(--zerene-green);
     background-color: var(--zerene-white);
-    border: none;
+    border: 1px solid var(--zerene-green);
     border-radius: 8px;
     font-size: 15px;
     font-family: "Poppins", sans-serif;
@@ -55,8 +55,8 @@
 }
 
 .button-second:hover{
-    background-color: var(--zerene-light);
-    color: var(--zerene-green);
+    background-color: var(--zerene-green);
+    color: var(--zerene-white);
     /* border: none; */
 }
 

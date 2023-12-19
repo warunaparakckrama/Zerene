@@ -591,4 +591,9 @@ class Admin extends Controller{
         $this->view('admin/ad_profile', $data);
 
     }
+
+    public function verifications(){
+        $data = [];
+        $this->view('admin/verifications', $data);
+    }
 }

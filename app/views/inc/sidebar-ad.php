@@ -27,7 +27,7 @@
                     <a href="<?php echo URLROOT;?>admin/ad_reg_counselor" class="dd-content <?php echo ($currentPage === 'ad_reg_counselor') ? 'active' : ''; ?>" id="sb-link3">Counsellors</a>
                     <a href="<?php echo URLROOT;?>admin/ad_reg_doctor" class="dd-content <?php echo ($currentPage === 'ad_reg_doctor') ? 'active' : ''; ?>" id="sb-link4">Psychiatrists</a>
                 </div>
-                <a href="" class="top" id="sb-link5">Verifications</a>
+                <a href="<?php echo URLROOT;?>admin/verifications" class="top <?php echo ($currentPage === 'verifications') ? 'active' : ''; ?>" id="sb-link5">Verifications</a>
                 <a href="<?php echo URLROOT;?>admin/ad_users" class="top <?php echo ($currentPage === 'ad_users') ? 'active' : ''; ?>" id="sb-link6">Users</a>
                 <a href="" class="top" id="sb-link7">Notifications</a>
                 <a href="" class="top" id="sb-link8">Newsletters</a>
