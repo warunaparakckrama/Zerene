@@ -23,7 +23,7 @@
 
                 <div>
                     <div class="card-white">
-                        <p class="p-regular">Create Account (Counselor)</p>
+                        <p class="p-regular">Create Account (Counsellor)</p>
 
                         <div class="card-green">
                             <form action="<?php echo URLROOT;?>admin/ad_reg_counselor" method="POST">

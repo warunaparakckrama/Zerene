@@ -55,8 +55,8 @@
 }
 
 .button-second:hover{
-    background-color: var(--zerene-green);
-    color: var(--zerene-white);
+    background-color: var(--zerene-light);
+    color: var(--zerene-green);
     /* border: none; */
 }
 

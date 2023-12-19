@@ -596,4 +596,19 @@ class Admin extends Controller{
         $data = [];
         $this->view('admin/verifications', $data);
     }
+
+    public function support(){
+        $data = [];
+        $this->view('admin/support', $data);
+    }
+
+    public function notifications(){
+        $data = [];
+        $this->view('admin/notifications', $data);
+    }
+
+    public function newsletters(){
+        $data = [];
+        $this->view('admin/newsletters', $data);
+    }
 }
