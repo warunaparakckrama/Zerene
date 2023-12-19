@@ -74,7 +74,7 @@ class Admin extends Controller{
 
                 if($this->userModel->reg_admin($data)){
                     // flash('register_success','You are registered and can login');
-                    redirect('admin/ad_dashboard');
+                    redirect('admin/ad_reg_admin');
                 }else{
                     die('Something went wrong');
                 }
@@ -195,7 +195,7 @@ class Admin extends Controller{
                     //regsiter user
                     if($this->userModel->reg_counselor($data)){
                         // flash('register_success','You are registered and can login');
-                        redirect('admin/ad_dashboard');
+                        redirect('admin/ad_reg_counselor');
                     }else{
                         die('Something went wrong');
                     }
@@ -327,7 +327,7 @@ class Admin extends Controller{
                     //regsiter user
                     if($this->userModel->reg_doctor($data)){
                         // flash('register_success','You are registered and can login');
-                        redirect('admin/ad_dashboard');
+                        redirect('admin/ad_reg_doctor');
                     }else{
                         die('Something went wrong');
                     }

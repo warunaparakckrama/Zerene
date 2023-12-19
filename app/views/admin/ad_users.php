@@ -109,7 +109,7 @@
                 </div>
 
                 <div class="card-white">
-                    <p class="p-regular-grey">Doctors</p>
+                    <p class="p-regular-grey">Psychiatrists</p>
                     <div>
                         <table class="table-1">
                             <thead>
