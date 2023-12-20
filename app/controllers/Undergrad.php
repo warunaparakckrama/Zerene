@@ -93,7 +93,7 @@ class Undergrad extends Controller{
                     // Update the username
                     if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
                     flash('user_message', 'Username updated successfully');
-                    redirect('undergrad/dashboard');
+                    redirect('undergrad/ug_profile');
                     } else {
                     die('Something went wrong');
                     }
@@ -169,7 +169,7 @@ class Undergrad extends Controller{
                 // Update the user's password
                 if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
                 flash('user_message', 'Password updated successfully');
-                redirect('undergrad/dashboard');
+                redirect('undergrad/ug_profile');
                 } else {
                 die('Something went wrong');
                 }

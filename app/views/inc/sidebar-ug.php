@@ -17,16 +17,16 @@
                 <a href="<?php echo URLROOT; ?>undergrad/ug_profile" id="sb-link8" style="text-decoration: none;"><button class="button-second">View</button></a>
             </div>
             <div class="sidebar-container3">
-                <a href="<?php echo URLROOT; ?>undergrad/home" class="top" id="sb-link1">Home</a>
-                <a href="<?php echo URLROOT; ?>undergrad/questionnaires" class="top" id="sb-link2">Questionnaires</a>
+                <a href="<?php echo URLROOT; ?>undergrad/home" class="top <?php echo ($currentPage === 'home') ? 'active' : ''; ?>" id="sb-link1">Home</a>
+                <a href="<?php echo URLROOT; ?>undergrad/questionnaires" class="top <?php echo ($currentPage === 'questionnaires') ? 'active' : ''; ?>" id="sb-link2">Questionnaires</a>
                 <a class="top dd-btn">Counsellors</a>
                     <div class="dropdown-container">
-                        <a href="Professional Counsellors" class="dd-content" id="sb-link3">Professional</a>
-                        <a href="<?php echo URLROOT; ?>undergrad/ac" class="dd-content" id="sb-link4">Academic</a>
+                        <a href="<?php echo URLROOT; ?>undergrad/pc" class="dd-content <?php echo ($currentPage === 'pc') ? 'active' : ''; ?>" id="sb-link3">Professional</a>
+                        <a href="<?php echo URLROOT; ?>undergrad/ac" class="dd-content <?php echo ($currentPage === 'ac') ? 'active' : ''; ?>" id="sb-link4">Academic</a>
                     </div>
-                <a href="Psychiatrists" class="top" id="sb-link5">Psychiatrists</a>
-                <a href="Chats" class="top" id="sb-link6">Chats</a>
-                <a href="Resources" class="top" id="sb-link7">Resources</a>
+                <a href="<?php echo URLROOT; ?>undergrad/doctors" class="top <?php echo ($currentPage === 'doctors') ? 'active' : ''; ?>" id="sb-link5">Psychiatrists</a>
+                <a href="<?php echo URLROOT; ?>undergrad/chats" class="top <?php echo ($currentPage === 'chats') ? 'active' : ''; ?>" id="sb-link6">Chats</a>
+                <a href="<?php echo URLROOT; ?>undergrad/resources" class="top <?php echo ($currentPage === 'resources') ? 'active' : ''; ?>" id="sb-link7">Resources</a>
             </div>
             <div class="sidebar-container3">
                 <a href="" class="bottom">Help & Info</a>

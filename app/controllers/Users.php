@@ -256,7 +256,7 @@ class Users extends Controller{
         $_SESSION['user_type'] = $user->user_type;
 
         if ($user->user_type === 'undergraduate') {
-            redirect('undergrad/dashboard');
+            redirect('undergrad/home');
         } elseif ($user->user_type === 'admin') {
             redirect('admin/ad_home');
         } elseif ($user->user_type === 'pcounsellor') {
