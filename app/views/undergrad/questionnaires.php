@@ -29,7 +29,7 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">General Questionnaire for Anxiety, Depression & Stress</p>
                             </div>
                             <div class="btn-container">
-                                <button class="button-main">Start</button>
+                                <a href="<?php echo URLROOT;?>undergrad/dass21_start" style="text-decoration: none;"><button class="button-main">Start</button></a>
                             </div>
                         </div>
                     </div>

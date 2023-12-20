@@ -60,6 +60,11 @@ class Undergrad extends Controller{
         $this->view('undergrad/ug_profile', $data);
     }
 
+    public function dass21_start(){
+        $data = [];
+        $this->view('undergrad/dass21_start', $data);
+    }
+
     public function changeUsernameUG($user_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
