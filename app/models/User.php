@@ -390,12 +390,14 @@
             $this->db->beginTransaction();
 
             // Then, delete from 'users' table
-            $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            // $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            $this->db->query('UPDATE users SET is_deleted = TRUE WHERE user_id = :user_id');
             $this->db->bind(':user_id', $id);
             $userDeleted = $this->db->execute();
 
             // First, delete from 'students' table
-            $this->db->query('DELETE FROM undergraduate WHERE user_id = :user_id');
+            // $this->db->query('DELETE FROM undergraduate WHERE user_id = :user_id');
+            $this->db->query('UPDATE undergraduate SET is_deleted = TRUE WHERE user_id = :user_id');
             $this->db->bind(':user_id', $id);
             $studentDeleted = $this->db->execute();
 
@@ -414,12 +416,14 @@
             $this->db->beginTransaction();
 
             // Then, delete from 'users' table
-            $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            // $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            $this->db->query('UPDATE users SET is_deleted = TRUE WHERE user_id = :user_id');
             $this->db->bind(':user_id', $id);
             $userDeleted = $this->db->execute();
 
             // First, delete from 'students' table
-            $this->db->query('DELETE FROM counsellor WHERE user_id = :user_id');
+            // $this->db->query('DELETE FROM counsellor WHERE user_id = :user_id');
+            $this->db->query('UPDATE counsellor SET is_deleted = TRUE WHERE user_id = :user_id');
             $this->db->bind(':user_id', $id);
             $counselorDeleted = $this->db->execute();
 
@@ -438,12 +442,14 @@
             $this->db->beginTransaction();
 
             // Then, delete from 'users' table
-            $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            // $this->db->query('DELETE FROM users WHERE user_id = :user_id');
+            $this->db->query('UPDATE users SET is_deleted = TRUE WHERE user_id = :user_id');
             $this->db->bind(':user_id', $id);
             $userDeleted = $this->db->execute();
 
             // First, delete from 'students' table
-            $this->db->query('DELETE FROM doctor WHERE user_id = :user_id');
+            // $this->db->query('DELETE FROM doctor WHERE user_id = :user_id');
+            $this->db->query('UPDATE doctor SET is_deleted = TRUE WHERE user_id = :user_id');
             $this->db->bind(':user_id', $id);
             $doctorDeleted = $this->db->execute();
 
