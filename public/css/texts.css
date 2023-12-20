@@ -54,6 +54,10 @@
     font-size: 15px;
 }
 
+.p-regular-green{
+    color: var(--zerene-green);
+    width: fit-content;
+}
 .a-style{
     align-items: center;
     justify-content: right;

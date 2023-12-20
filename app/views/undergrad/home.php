@@ -1,4 +1,5 @@
-<html>
+<!-- <html> -->
+<?php $currentPage = 'home'; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,10 @@
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
     </head>
     <body>
-        <section>
+        <section class="sec-1">
+            <div>
+                <?php require APPROOT . '/views/inc/sidebar-ug.php'; ?>
+            </div>
             <div class="grid-1">  
                 
                 <div class="subgrid-1">
@@ -22,8 +26,8 @@
                         <p class="p-regular">Hope you’re having a good day...</p>
                         <p class="p-regular">Off to a great start, Shall we?</p>
                         <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
-                            <button class="button-main" style="margin-left: 0px">View Profile</button>
-                            <button class="button-main">Try a Quiz</button>
+                            <a href="<?php echo URLROOT; ?>undergrad/ug_profile" style="text-decoration: none;"><button class="button-main" style="margin-left: 0px">View Profile</button></a>
+                            <a href="<?php echo URLROOT; ?>undergrad/questionnaires" style="text-decoration: none;"><button class="button-main" style="margin-left: 0px">Try a Quiz</button></a>
                         </div>
                     </div>
                     <div class="subgrid-2" style="justify-content: center;">
@@ -35,4 +39,4 @@
         </section>
 
     </body>
-</html>
+<!-- </html> -->
