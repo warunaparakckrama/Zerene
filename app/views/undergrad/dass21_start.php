@@ -27,25 +27,15 @@
                                 <p class="p-regular-green" style="font-size: 15px;">Mental Health Questionnaires - Level 01</p>
                                 <p class="p-regular-green" style="font-size: 15px;">General Questionnaire for Stress, Anxiety and Depression</p>
                                 <p class="p-regular-green" style="font-size: 15px; font-weight:600;">General Guidelines</p>
+                                <p class="p-regular-green" style="font-size: 15px;">Following scores will be applied for your final calculation.</p>
+                                <p class="p-regular-green" style="font-size: 15px; font-weight:500;">0 -Did not apply to me at all</p>
+                                <p class="p-regular-green" style="font-size: 15px; font-weight:500;">1 -Applied to me to some degree, or some of the time</p>
+                                <p class="p-regular-green" style="font-size: 15px; font-weight:500;">2 -Applied to me to a considerable degree or a good part of time</p>
+                                <p class="p-regular-green" style="font-size: 15px; font-weight:500;">3 -Applied to me very much or most of the time</p>
                                 
                             </div>
                         </div>
                     </div>
-        
-                    <div class="card-white">
-                        <p class="p-regular">Completed Questionnaires</p>
-                        <div class="card-green">
-                            
-                        </div>
-                    </div>
-
-                    <div class="card-white">
-                        <p class="p-regular">Drafts</p>
-                        <div class="card-green">
-                            
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
