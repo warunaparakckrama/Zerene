@@ -54,62 +54,29 @@ tr:nth-child(even) {
                         
                         </div>
                         </div>
+                        <p class="p-regular">add medicine</p>
+                        
+                        <dev class="card-green-3">
+                        <form class="form-inline" action="/action_page.php">
+                            <label for="drug">drug:</label>
+                            <input type="text" id="drug" placeholder="name of drug" name="medicine">
+                            <label for="amount">amount(mg):</label>
+                            <input type="number" id="amount" placeholder="amount in mg" name="amount">
+                            <label for="dosage">dosage:</label>
+                            <input type="number" id="dosage" placeholder="per day" name="dosage">
+                            
+                            </form>
+
+
                     </div>    
     
-                    <div class="card-white">
-                    <p class="p-regular">add medicine</p>
-                        
-                    <dev class="card-green-3">
-                    <form class="form-inline" action="/action_page.php">
-                        <label for="drug">drug:</label>
-                        <input type="text" id="drug" placeholder="name of drug" name="medicine">
-                        <label for="amount">amount(mg):</label>
-                        <input type="number" id="amount" placeholder="amount in mg" name="amount">
-                        <label for="dosage">dosage:</label>
-                        <input type="number" id="dosage" placeholder="per day" name="dosage">
-                        <div class="btn-container">
-                                <button class="button-main">Add</button>
-                            </div>
-                        </form>
+                    
+                   
 
                    
 
                    </div>
-                 <div class="card-white">
-                        <p class="p-regular">list of medicine</p>
-                        
-                        <div class="card-green-3">
-                        <div>
-                        <table>
-                           <tr>
-                           <th>medicine</th>
-                           <th>dose</th>
-                           <th>time</th>
-                           <th></th>
-                           <th></th>
-                           </tr>
-                           <tr>
-                           <td>abc</td>
-                           <td>50mg</td>
-                           <td>night</td>
-                           <td><button class="button-main">edit</button></td>
-                           <td><button class="button-main">delete</button></td>
-                           </tr>
-                           <tr>
-                           <td>pqr</td>
-                           <td>20mg</td>
-                           <td>day and night</td>
-                           <td><button class="button-main">edit</button></td>
-                           <td><button class="button-main">delete</button></td>
-                          </tr>
-
-                        </table>
-                        
-
-
-                        </div>
-                        </div>
-                    </div>    
+                   
                
 
                  </div>
