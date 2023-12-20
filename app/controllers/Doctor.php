@@ -99,7 +99,7 @@ class Doctor extends Controller{
 
             } else {
                 // Load view with errors
-                $this->view('doctor/dashboard', $data);
+                $this->view('doctor/doc_profile', $data);
             }
         } 
         

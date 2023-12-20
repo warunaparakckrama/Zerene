@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+<?php $currentPage = 'prescription'; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +26,10 @@ tr:nth-child(even) {
 </style>
     </head>
     <body>
-        <section>
+        <section class='sec-1'>
+        <div>
+        <?php require APPROOT . '/views/inc/sidebar-doc.php'; ?>
+        </div>
 
             <div class="grid-1">
                 <div class="subgrid-1">
@@ -39,34 +43,53 @@ tr:nth-child(even) {
                         <p class="p-regular">undergraduate details</p>
                         
                         <div class="card-green-3">
-                        <div>
-                        <form class="form-inline" action="/action_page.php">
-                        <label for="email">Name:</label>
-                        <input type="text" id="email" placeholder="undergraduate name" name="email">
-                        <label for="pwd">ID:</label>
-                        <input type="text" id="pwd" placeholder="undergraduate id" name="pswd">
-                        <label for="pwd">date:</label>
-                        <input type="date" id="date" placeholder="date" name="date">
-                        <div class="btn-container">
-                                <button class="button-main">Add</button>
+                            <div>
+                                <form class="form-inline" action="/action_page.php">
+                                    <label for="name">Name of the patiant:</label>
+                                    <input type="text" id="name" placeholder="name of the patiant" name="name">
+                        
+                                </form>
+                        
                             </div>
-                        </form>
-                        
                         </div>
-                        </div>
-                        <p class="p-regular">add medicine</p>
+
+                        <!-- <p class="p-regular"></p> -->
                         
-                        <dev class="card-green-3">
-                        <form class="form-inline" action="/action_page.php">
-                            <label for="drug">drug:</label>
-                            <input type="text" id="drug" placeholder="name of drug" name="medicine">
-                            <label for="amount">amount(mg):</label>
-                            <input type="number" id="amount" placeholder="amount in mg" name="amount">
-                            <label for="dosage">dosage:</label>
-                            <input type="number" id="dosage" placeholder="per day" name="dosage">
+                        <div class="card-green-3">
+                            <div>
+
+                            <form class="form-inline" action="/action_page.php">
+                            <label for="drug">date of birth:</label>
+                            <input type="text" id="birth" placeholder="bithday" name="date of birth">
+                            <label for="amount">Age:</label>
+                            <input type="number" id="amount" placeholder="age" name="age">
+                            
                             
                             </form>
+                            </div>
+                        </div>
 
+                        <div class="card-green-3">
+                            <div>
+                                <form class="form-inline" action="/action_page.php">
+                                    <label for="name">contac details (mention complete contact details of the patiant):</label>
+                                    <input type="text" id="name" placeholder="" name="name">
+                        
+                                </form>
+                        
+                            </div>
+                        </div>
+
+                        <div class="card-green-3">
+                            <div>
+                                <form class="form-inline" action="/action_page.php">
+                                    <label for="name">diagnosed with :</label>
+                                    <input type="text" id="name" placeholder="name of the illness that the patient is suffered with" name="name">
+                        
+                                </form>
+                        
+                            </div>
+                        </div>
 
                     </div>    
     
@@ -84,4 +107,4 @@ tr:nth-child(even) {
 
         </section>
     </body>
-</html>
+<!-- </html> -->

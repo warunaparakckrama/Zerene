@@ -79,3 +79,16 @@
     height: fit-content;
     border: var(--zerene-green);
 }
+
+.card-green-4{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 50px;
+    background-color: var(--zerene-light);
+    border-radius: var(--border-radius-8);
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    height: fit-content;
+    border: var(--zerene-green);
+}
