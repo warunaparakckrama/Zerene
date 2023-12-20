@@ -60,6 +60,11 @@ class Undergrad extends Controller{
         $this->view('undergrad/ug_profile', $data);
     }
 
+    public function dass21_start(){
+        $data = [];
+        $this->view('undergrad/dass21_start', $data);
+    }
+
     public function changeUsernameUG($user_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
@@ -93,7 +98,7 @@ class Undergrad extends Controller{
                     // Update the username
                     if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
                     flash('user_message', 'Username updated successfully');
-                    redirect('undergrad/dashboard');
+                    redirect('undergrad/ug_profile');
                     } else {
                     die('Something went wrong');
                     }
@@ -169,7 +174,7 @@ class Undergrad extends Controller{
                 // Update the user's password
                 if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
                 flash('user_message', 'Password updated successfully');
-                redirect('undergrad/dashboard');
+                redirect('undergrad/ug_profile');
                 } else {
                 die('Something went wrong');
                 }
