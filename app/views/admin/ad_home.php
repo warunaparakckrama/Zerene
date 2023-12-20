@@ -26,8 +26,8 @@
                         <p class="p-regular">Hope you’re having a good day...</p>
                         <p class="p-regular">Let's look after the System, Shall we? </p>
                         <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
-                            <button class="button-main" style="margin-left: 0px">Registrations</button>
-                            <button class="button-main">Verifications</button>
+                            <a href="<?php echo URLROOT;?>admin/ad_users" style="text-decoration: none;"><button class="button-main" style="margin-left: 0px">Users</button></a>
+                            <a href="<?php echo URLROOT;?>admin/verifications" style="text-decoration: none;"><button class="button-main">Verifications</button></a>
                         </div>
                     </div>
                     <div class="subgrid-2" style="justify-content: center;">
