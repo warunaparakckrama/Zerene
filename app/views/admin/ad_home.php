@@ -1,4 +1,5 @@
-<html>
+<!-- <html> -->
+    <?php $currentPage = 'ad_home'; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,10 @@
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
     </head>
     <body>
-        <section>
+        <section class="sec-1">
+            <div>
+                <?php require APPROOT . '/views/inc/sidebar-ad.php'; ?>
+            </div>
             <div class="grid-1">  
                 
                 <div class="subgrid-1">
@@ -22,8 +26,8 @@
                         <p class="p-regular">Hope you’re having a good day...</p>
                         <p class="p-regular">Let's look after the System, Shall we? </p>
                         <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
-                            <button class="button-main" style="margin-left: 0px">Registrations</button>
-                            <button class="button-main">Verifications</button>
+                            <a href="<?php echo URLROOT;?>admin/ad_users" style="text-decoration: none;"><button class="button-main" style="margin-left: 0px">Users</button></a>
+                            <a href="<?php echo URLROOT;?>admin/verifications" style="text-decoration: none;"><button class="button-main">Verifications</button></a>
                         </div>
                     </div>
                     <div class="subgrid-2" style="justify-content: center;">
@@ -35,4 +39,4 @@
         </section>
 
     </body>
-</html>
+<!-- </html> -->
