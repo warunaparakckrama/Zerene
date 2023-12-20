@@ -46,7 +46,7 @@
     padding-left: 20px;
 }
 
-a.top{
+.top{
     display: block;
     text-decoration: none;
     color: var(--zerene-white);
@@ -57,7 +57,7 @@ a.top{
     margin-bottom: 10px;
 }
 
-a.top:hover{
+.top:hover{
     color: var(--zerene-green);
     /* padding-left: 20px; */
     background-color: var(--zerene-light);
@@ -67,7 +67,7 @@ a.top:hover{
     transition: all 300ms ease;
 }
 
-a.top.active{
+.top.active{
     color: var(--zerene-green);
     background-color: var(--zerene-white);
     width: 210px;
@@ -107,13 +107,15 @@ a.bottom:hover{
 }
 
 .dd-btn:hover{
-    color: var(--zerene-light);
+    color: var(--zerene-green);
+    background-color: var(--zerene-light);
     margin-left: 5px;
     transition: all 300ms ease;
 }
 
 .dd-btn.active{
-    color: var(--zerene-light);
+    color: var(--zerene-green);
+    background-color: var(--zerene-white);
     margin-left: 5px;
     transition: all 300ms ease;
 }

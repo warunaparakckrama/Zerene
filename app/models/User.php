@@ -199,7 +199,7 @@
         }
 
         public function findUserByUsername($username){
-            $this->db->query('SELECT * FROM users WHERE username = :username');
+            $this->db->query('SELECT * FROM users WHERE BINARY username = :username');
             // Bind value
             $this->db->bind(':username', $username);
     

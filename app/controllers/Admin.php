@@ -74,7 +74,7 @@ class Admin extends Controller{
 
                 if($this->userModel->reg_admin($data)){
                     // flash('register_success','You are registered and can login');
-                    redirect('admin/ad_dashboard');
+                    redirect('admin/ad_reg_admin');
                 }else{
                     die('Something went wrong');
                 }
@@ -195,7 +195,7 @@ class Admin extends Controller{
                     //regsiter user
                     if($this->userModel->reg_counselor($data)){
                         // flash('register_success','You are registered and can login');
-                        redirect('admin/ad_dashboard');
+                        redirect('admin/ad_reg_counselor');
                     }else{
                         die('Something went wrong');
                     }
@@ -327,7 +327,7 @@ class Admin extends Controller{
                     //regsiter user
                     if($this->userModel->reg_doctor($data)){
                         // flash('register_success','You are registered and can login');
-                        redirect('admin/ad_dashboard');
+                        redirect('admin/ad_reg_doctor');
                     }else{
                         die('Something went wrong');
                     }
@@ -486,7 +486,7 @@ class Admin extends Controller{
                     // Update the username
                     if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
                     flash('user_message', 'Username updated successfully');
-                    redirect('admin/ad_dashboard');
+                    redirect('admin/ad_profile');
                     } else {
                     die('Something went wrong');
                     }
@@ -494,7 +494,7 @@ class Admin extends Controller{
 
             } else {
                 // Load view with errors
-                $this->view('admin/ad_dashboard', $data);
+                $this->view('admin/ad_profile', $data);
             }
         } 
         
@@ -562,7 +562,7 @@ class Admin extends Controller{
                 // Update the user's password
                 if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
                 flash('user_message', 'Password updated successfully');
-                redirect('admin/ad_dashboard');
+                redirect('admin/ad_profile');
                 } else {
                 die('Something went wrong');
                 }
@@ -590,5 +590,25 @@ class Admin extends Controller{
 
         $this->view('admin/ad_profile', $data);
 
+    }
+
+    public function verifications(){
+        $data = [];
+        $this->view('admin/verifications', $data);
+    }
+
+    public function support(){
+        $data = [];
+        $this->view('admin/support', $data);
+    }
+
+    public function notifications(){
+        $data = [];
+        $this->view('admin/notifications', $data);
+    }
+
+    public function newsletters(){
+        $data = [];
+        $this->view('admin/newsletters', $data);
     }
 }

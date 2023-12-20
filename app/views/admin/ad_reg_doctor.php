@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+    <?php $currentPage = 'ad_reg_doctor'; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,10 @@
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
     </head>
     <body>
-        <section>
+        <section class="sec-1">
+            <div>
+                <?php require APPROOT . '/views/inc/sidebar-ad.php'; ?>
+            </div>
             <div class="grid-1">
 
                 <div class="subgrid-1">
@@ -18,7 +22,7 @@
 
                 <div>
                     <div class="card-white">
-                        <p class="p-regular">Create Account (Doctor)</p>
+                        <p class="p-regular">Create Account (Psychiatrist)</p>
 
                         <div class="card-green">
                             <form action="<?php echo URLROOT;?>admin/ad_reg_doctor" method="POST">
@@ -32,17 +36,34 @@
                                     <input type="text" name="lname" placeholder="Enter Last Name" class="<?php echo (!empty($data['lname_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['lname']; ?>">
                                     <p class="p-error"><?php echo $data['lname_err']; ?></p><br>
 
-                                    <label for="gender">Gender (Male/ Female): </label>
-                                    <input type="text" name="gender" placeholder="Enter type" class="<?php echo (!empty($data['gender_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['gender']; ?>">
-                                    <p class="p-error"><?php echo $data['gender_err']; ?></p><br>
+                                    <label for="gender">Gender: </label>
+                                    <select name="gender" id="">
+                                        <option value="Male" <?php echo ($data['gender'] === 'Male') ? 'selected' : ''; ?> >Male</option>
+                                        <option value="Female" <?php echo ($data['gender'] === 'Female') ? 'selected' : ''; ?> >Female</option>
+                                    </select>
+                                    <p class="p-error"></p><br>
+
+                                    <label for="hospital">Hospital in Charge: </label>
+                                    <select name="hospital" id="">
+                                        <option value="General Hospital - Colombo" <?php echo ($data['hospital'] === 'General Hospital - Colombo') ? 'selected' : ''; ?> >General Hospital - Colombo</option>
+                                        <option value="Teaching Hospital - Ragama" <?php echo ($data['hospital'] === 'Teaching Hospital - Ragama') ? 'selected' : ''; ?> >Teaching Hospital - Ragama</option>
+                                        <option value="Teaching Hospital - Lady Ridgeway Hospital for Children" <?php echo ($data['hospital'] === 'Teaching Hospital - Lady Ridgeway Hospital for Children') ? 'selected' : ''; ?> >Teaching Hospital - Lady Ridgeway Hospital for Children</option>
+                                        <option value="Mental Hospital - Angoda" <?php echo ($data['hospital'] === 'Mental Hospital - Ragama') ? 'selected' : ''; ?> >Mental Hospital - Angoda</option>
+                                    </select>
+                                    <p class="p-error"></p><br>
 
                                     <label for="university">University in Charge: </label>
-                                    <input type="text" name="university" placeholder="Enter University" class="<?php echo (!empty($data['university_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['university']; ?>">
-                                    <p class="p-error"><?php echo $data['university_err']; ?></p><br>
+                                    <select name="university" id="">
+                                        <option value="University of Colombo" <?php echo ($data['university'] === 'University of Colombo') ? 'selected' : ''; ?> >University of Colombo</option>
+                                        <option value="University of Kelaniya" <?php echo ($data['university'] === 'University of Kelaniya') ? 'selected' : ''; ?> >University of Kelaniya</option>
+                                        <option value="University of Sri Jayawardanapura" <?php echo ($data['university'] === 'University of Sri Jayawardanapura') ? 'selected' : ''; ?> >University of Sri Jayawardanapura</option>
+                                        <option value="University of Moratuwa" <?php echo ($data['university'] === 'University of Moratuwa') ? 'selected' : ''; ?> >University of Moratuwa</option>
+                                    </select>
+                                    <p class="p-error"></p><br>
 
-                                    <label for="hospital">Hospital: </label>
+                                    <!-- <label for="hospital">Hospital: </label>
                                     <input type="text" name="hospital" placeholder="Enter Hospital" class="<?php echo (!empty($data['hospital_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['hospital']; ?>">
-                                    <p class="p-error"><?php echo $data['hospital_err']; ?></p><br>
+                                    <p class="p-error"><?php echo $data['hospital_err']; ?></p><br> -->
 
                                     <label for="email">Email: </label>
                                     <input type="text" name="email" placeholder="Enter Email" class="<?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
@@ -73,4 +94,4 @@
         </section>
 
     </body>
-</html>
+<!-- </html> -->

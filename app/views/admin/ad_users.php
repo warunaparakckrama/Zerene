@@ -1,3 +1,4 @@
+<?php $currentPage = 'ad_users'; ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,7 +7,10 @@
     <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
 </head>
 <body>
-    <section>
+    <section class="sec-1">
+        <div>
+            <?php require APPROOT . '/views/inc/sidebar-ad.php'; ?>
+        </div>
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Users</p></div>
@@ -105,7 +109,7 @@
                 </div>
 
                 <div class="card-white">
-                    <p class="p-regular-grey">Doctors</p>
+                    <p class="p-regular-grey">Psychiatrists</p>
                     <div>
                         <table class="table-1">
                             <thead>
