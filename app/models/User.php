@@ -183,7 +183,7 @@
         }
 
         public function login($username,$password){
-            $this->db->query('SELECT * FROM users WHERE username=:username');
+            $this->db->query('SELECT * FROM users WHERE username=:username AND is_deleted = FALSE');
             $this->db->bind(':username',$username);
     
             $row=$this->db->single();
@@ -199,7 +199,7 @@
         }
 
         public function findUserByUsername($username){
-            $this->db->query('SELECT * FROM users WHERE BINARY username = :username');
+            $this->db->query('SELECT * FROM users WHERE BINARY username = :username AND is_deleted = FALSE');
             // Bind value
             $this->db->bind(':username', $username);
     
