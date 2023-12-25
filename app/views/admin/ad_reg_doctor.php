@@ -80,7 +80,7 @@
                                     <input type="password" name="password" placeholder="Enter Password" class="<?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>">
                                     <p class="p-error"><?php echo $data['password_err']; ?></p><br>
 
-                                    <button class="button-main" type="submit" onclick="alertbox1(event)">Register</button>
+                                    <button class="button-main" type="submit">Register</button>
                                 </div>
                             </form>
                         </div>

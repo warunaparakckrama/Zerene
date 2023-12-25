@@ -298,7 +298,7 @@ class Admin extends Controller{
                 }
 
                 if(empty($data['contact_num'])){
-                    $data['contact_num_err']='Please enter contact_number';      
+                    $data['contact_num_err']='Please enter contact number';      
                 }
     
                 //validate username
