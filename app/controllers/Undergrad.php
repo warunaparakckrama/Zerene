@@ -60,9 +60,14 @@ class Undergrad extends Controller{
         $this->view('undergrad/ug_profile', $data);
     }
 
-    public function dass21_start(){
+    public function dass21_1(){
         $data = [];
-        $this->view('undergrad/dass21_start', $data);
+        $this->view('undergrad/dass21_1', $data);
+    }
+    
+    public function dass21_2(){
+        $data = [];
+        $this->view('undergrad/dass21_2', $data);
     }
 
     public function changeUsernameUG($user_id){
