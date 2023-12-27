@@ -60,6 +60,11 @@ class Undergrad extends Controller{
         $this->view('undergrad/ug_profile', $data);
     }
 
+    public function dass21(){
+        $data = [];
+        $this->view('undergrad/dass21', $data);
+    }
+
     public function dass21_1(){
         $data = [];
         $this->view('undergrad/dass21_1', $data);
