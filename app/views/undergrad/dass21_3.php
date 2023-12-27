@@ -21,12 +21,12 @@
 
                 <div>
                     <div class="card-white">
-                        <p class="p-regular">Questionnaire (2/3 Pages)</p>
+                        <p class="p-regular">Questionnaire (3/3 Pages)</p>
                         <div class="card-green-4">
                             <!-- <form id="dass-21" action="" method="POST"> -->
                                 <div>
                                     <div style="margin-bottom: 10px;">
-                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">8.I was aware of dryness of my mouth</p>
+                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">15.I couldn’t seem to experience any positive feeling at all</p>
                                         <label class="radio">
                                             <input type="radio" name="q8" value="0"><p class="p-regular-green" style="font-size: 15px;">Did not apply to me at all</p>
                                         </label>
@@ -41,7 +41,7 @@
                                         </label>
                                     </div>
                                     <div style="margin-bottom: 10px;">
-                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">9.I experienced breathing difficulty (e.g. excessively rapid breathing, breathlessness in the absence of physical exertion)</p>
+                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">16.I felt that I had nothing to look forward to</p>
                                         <label class="radio">
                                             <input type="radio" name="q9" value="0"><p class="p-regular-green" style="font-size: 15px;">Did not apply to me at all</p>
                                         </label>
@@ -56,7 +56,7 @@
                                         </label>
                                     </div>
                                     <div style="margin-bottom: 10px;">
-                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">10.I experienced trembling (e.g. in the hands)</p>
+                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">17.I felt down-hearted and blue</p>
                                         <label class="radio">
                                             <input type="radio" name="q10" value="0"><p class="p-regular-green" style="font-size: 15px;">Did not apply to me at all</p>
                                         </label>
@@ -71,7 +71,7 @@
                                         </label>
                                     </div>
                                     <div style="margin-bottom: 10px;">
-                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">11.I was worried about situations in which I might panic and make a fool of myself</p>
+                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">18.I was unable to become enthusiastic about anything</p>
                                         <label class="radio">
                                             <input type="radio" name="q11" value="0"><p class="p-regular-green" style="font-size: 15px;">Did not apply to me at all</p>
                                         </label>
@@ -86,7 +86,7 @@
                                         </label>
                                     </div>
                                     <div style="margin-bottom: 10px;">
-                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">12.I felt I was close to panic</p>
+                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">19.I felt I wasn’t worth much as a person</p>
                                         <label class="radio">
                                             <input type="radio" name="q12" value="0"><p class="p-regular-green" style="font-size: 15px;">Did not apply to me at all</p>
                                         </label>
@@ -101,7 +101,7 @@
                                         </label>
                                     </div>
                                     <div style="margin-bottom: 10px;">
-                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">13.I was aware of the action of my heart in the absence of physical exertion (e.g. sense of heart rate increase, heart missing a beat)</p>
+                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">20.I felt that life was meaningless</p>
                                         <label class="radio">
                                             <input type="radio" name="q13" value="0"><p class="p-regular-green" style="font-size: 15px;">Did not apply to me at all</p>
                                         </label>
@@ -116,7 +116,7 @@
                                         </label>
                                     </div>
                                     <div style="margin-bottom: 10px;">
-                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">14.I felt scared without any good reason</p>
+                                        <p class="p-regular-green" style="font-size: 17px; font-weight:500;">21.I found it difficult to work up the initiative to do things</p>
                                         <label class="radio">
                                             <input type="radio" name="q14" value="0"><p class="p-regular-green" style="font-size: 15px;">Did not apply to me at all</p>
                                         </label>
@@ -132,10 +132,10 @@
                                     </div>
                                     <div class="btn-container-2">
                                         <button class="button-main">Previous</button>
-                                        <a href="<?php echo URLROOT;?>undergrad/dass21_3" style="text-decoration: none;"><button class="button-main" type="submit">Next</button></a>
+                                        <button class="button-main" type="submit">Submit</button>
                                     </div>
                                 </div>
-                            <!-- </form> -->
+                            </form>
                         </div>
                     </div>
                 </div>
