@@ -1,4 +1,5 @@
-<html>
+<!-- <html> -->
+    <?php $currentPage = 'ac_home'; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,11 @@
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
     </head>
     <body>
-        <section>
+        <section class="sec-1">
+            <div>
+            <?php require APPROOT . '/views/inc/sidebar-ac.php'; ?>
+            </div>
+            
             <div class="grid-1">  
                 
                 <div class="subgrid-1">
@@ -35,4 +40,4 @@
         </section>
 
     </body>
-</html>
+<!-- </html> -->

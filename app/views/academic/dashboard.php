@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en"> -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +11,7 @@
 
     <body>
         
-        <section class="sec-1">
-            <div>
-                <?php require APPROOT . '/views/inc/sidebar-ac.php'; ?>
-            </div>
-
+        <section>
             <div class="content" id="content">
                 <?php require APPROOT . '/views/academic/ac_home.php'; ?>
             </div>
@@ -24,4 +20,4 @@
         <script src="<?php echo JS;?>dashboard-ac.js"></script>
     </body>
 
-</html>
+<!-- </html> -->
