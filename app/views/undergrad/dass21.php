@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
         <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+        <title><?php echo SITENAME;?> | DASS-21</title>
     </head>
     <div class="page" id="page-1">
         <body>

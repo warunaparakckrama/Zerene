@@ -26,14 +26,14 @@ class Undergrad extends Controller{
         $this->view('undergrad/questionnaires', $data);
     }
 
-    public function ac(){
+    public function academiccounsellors(){
         $data = [];
-        $this->view('undergrad/ac', $data);
+        $this->view('undergrad/academiccounsellors', $data);
     }
 
-    public function pc(){
+    public function professionalcounsellors(){
         $data = [];
-        $this->view('undergrad/pc', $data);
+        $this->view('undergrad/professionalcounsellors', $data);
     }
 
     public function doctors(){

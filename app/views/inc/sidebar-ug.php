@@ -21,8 +21,8 @@
                 <a href="<?php echo URLROOT; ?>undergrad/questionnaires" class="top <?php echo ($currentPage === 'questionnaires') ? 'active' : ''; ?>" id="sb-link2">Questionnaires</a>
                 <a class="top dd-btn">Counsellors</a>
                     <div class="dropdown-container">
-                        <a href="<?php echo URLROOT; ?>undergrad/pc" class="dd-content <?php echo ($currentPage === 'pc') ? 'active' : ''; ?>" id="sb-link3">Professional</a>
-                        <a href="<?php echo URLROOT; ?>undergrad/ac" class="dd-content <?php echo ($currentPage === 'ac') ? 'active' : ''; ?>" id="sb-link4">Academic</a>
+                        <a href="<?php echo URLROOT; ?>undergrad/professionalcounsellors" class="dd-content <?php echo ($currentPage === 'pc') ? 'active' : ''; ?>" id="sb-link3">Professional</a>
+                        <a href="<?php echo URLROOT; ?>undergrad/academiccounsellors" class="dd-content <?php echo ($currentPage === 'ac') ? 'active' : ''; ?>" id="sb-link4">Academic</a>
                     </div>
                 <a href="<?php echo URLROOT; ?>undergrad/doctors" class="top <?php echo ($currentPage === 'doctors') ? 'active' : ''; ?>" id="sb-link5">Psychiatrists</a>
                 <a href="<?php echo URLROOT; ?>undergrad/chats" class="top <?php echo ($currentPage === 'chats') ? 'active' : ''; ?>" id="sb-link6">Chats</a>
