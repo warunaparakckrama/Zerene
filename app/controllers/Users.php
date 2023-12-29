@@ -306,6 +306,7 @@ class Users extends Controller{
           die('Something went wrong');
         }
     }
+    
     public function deleteDoc($id){
         
   

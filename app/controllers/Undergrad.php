@@ -184,23 +184,40 @@ class Undergrad extends Controller{
                 empty($data['q16_err']) && empty($data['q17_err']) && empty($data['q18_err']) && empty($data['q19_err']) && empty($data['q20_err']) && empty($data['q21_err'])) {
                 # code...
             }
+        } else {
+            $data = [
+                'q1'=>'',
+                'q2'=>'',
+                'q3'=>'',
+                'q4'=>'',
+                'q5'=>'',
+                'q6'=>'',
+                'q7'=>'',
+
+                'q8'=>'',
+                'q9'=>'',
+                'q10'=>'',
+                'q11'=>'',
+                'q12'=>'',
+                'q13'=>'',
+                'q14'=>'',
+
+                'q15'=>'',
+                'q16'=>'',
+                'q17'=>'',
+                'q18'=>'',
+                'q19'=>'',
+                'q20'=>'',
+                'q21'=>'',
+            ];
+            $this->view('undergrad/dass21', $data);
         }
         $this->view('undergrad/dass21', $data);
     }
 
-    public function dass21_1(){
+    public function dass21_review(){
         $data = [];
-        $this->view('undergrad/dass21_1', $data);
-    }
-    
-    public function dass21_2(){
-        $data = [];
-        $this->view('undergrad/dass21_2', $data);
-    }
-
-    public function dass21_3(){
-        $data = [];
-        $this->view('undergrad/dass21_3', $data);
+        $this->view('undergrad/dass21_review', $data);
     }
 
     public function changeUsernameUG($user_id){
