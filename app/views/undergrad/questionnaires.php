@@ -26,7 +26,7 @@
                         <div class="card-green">
                             <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
                             <div>
-                                <a href="" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">DASS-21</p></a>
+                                <a href="<?php echo URLROOT;?>undergrad/dass21" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">DASS-21</p></a>
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">General Questionnaire for Anxiety, Depression & Stress</p>
                             </div>
                             <div class="btn-container">

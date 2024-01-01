@@ -46,6 +46,11 @@ class Undergrad extends Controller{
         $this->view('undergrad/doctors', $data);
     }
 
+    public function doctorprofile(){
+        $data = [];
+        $this->view('undergrad/doctorprofile', $data);
+    }
+
     public function chats(){
         $data = [];
         $this->view('undergrad/chats', $data);
