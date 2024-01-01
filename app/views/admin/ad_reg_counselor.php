@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
         <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+        <title><?php echo SITENAME;?> | Administrator</title>
     </head>
     <body>
         <section class="sec-1">
@@ -26,7 +27,7 @@
                         <p class="p-regular">Create Account (Counsellor)</p>
 
                         <div class="card-green">
-                            <form action="<?php echo URLROOT;?>admin/ad_reg_counselor" method="POST">
+                            <form id="regcounsellor" action="<?php echo URLROOT;?>admin/ad_reg_counselor" method="POST">
                                 <div style="font-size: 15px;">
 
                                     <!-- <label for="coun_type">Type (Academic/ Professional): </label>
@@ -101,7 +102,7 @@
                                     <input type="password" name="password" placeholder="Enter Password" class="<?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>">
                                     <p class="p-error"><?php echo $data['password_err']; ?></p><br>
 
-                                    <button class="button-main" type="submit">Register</button>
+                                    <button class="button-main" type="submit" onclick="return confirmsubmit()">Register</button>
                                 </div>
                             </form>
                         </div>
@@ -113,5 +114,15 @@
             </div>
         </section>
 
+        <script>
+            function confirmSubmit() {
+                if (confirm("Are you sure you want to submit the form?")) {
+                    document.getElementById("regcounsellor").submit();
+                    return true; // Form will be submitted
+                } else {
+                    return false; // Form submission will be canceled
+                }
+                }
+        </script>
     </body>
 <!-- </html> -->

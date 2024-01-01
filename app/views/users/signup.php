@@ -29,7 +29,7 @@
                         <select name="gender" id="signup-gender">
                             <option value="Male" <?php echo ($data['gender'] === 'Male') ? 'selected' : ''; ?> >Male</option>
                             <option value="Female" <?php echo ($data['gender'] === 'Female') ? 'selected' : ''; ?> >Female</option>
-                            <option value="Other" <?php echo ($data['gender'] === 'Other') ? 'selected' : ''; ?> >Other</option>
+                            <option value="Other" <?php echo ($data['gender'] === 'Other') ? 'selected' : ''; ?> >Prefer not to say</option>
                         </select>
                         <p class="p-error"></p>
 
