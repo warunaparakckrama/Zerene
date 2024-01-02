@@ -30,10 +30,6 @@
                             <form id="regcounsellor" action="<?php echo URLROOT;?>admin/ad_reg_counselor" method="POST">
                                 <div style="font-size: 15px;">
 
-                                    <!-- <label for="coun_type">Type (Academic/ Professional): </label>
-                                    <input type="text" name="coun_type" placeholder="Enter type" class="<?php echo (!empty($data['coun_type_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['coun_type']; ?>">
-                                    <p class="p-error"><?php echo $data['coun_type_err']; ?></p><br> -->
-
                                     <label for="age">Type: </label>
                                     <select name="coun_type" id="">
                                         <option value="Academic" <?php echo ($data['coun_type'] === 'Academic') ? 'selected' : ''; ?> >Academic</option>
@@ -49,10 +45,6 @@
                                     <input type="text" name="lname" placeholder="Enter Last Name" class="<?php echo (!empty($data['lname_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['lname']; ?>">
                                     <p class="p-error"><?php echo $data['lname_err']; ?></p><br>
 
-                                    <!-- <label for="gender">Gender (Male/ Female): </label>
-                                    <input type="text" name="gender" placeholder="Enter type" class="<?php echo (!empty($data['gender_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['gender']; ?>">
-                                    <p class="p-error"><?php echo $data['gender_err']; ?></p><br> -->
-
                                     <label for="gender">Gender: </label>
                                     <select name="gender" id="">
                                         <option value="Male" <?php echo ($data['gender'] === 'Male') ? 'selected' : ''; ?> >Male</option>
@@ -64,10 +56,6 @@
                                     <input type="date" name="dob" placeholder="" class="<?php echo (!empty($data['dob_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['dob']; ?>">
                                     <p class="p-error"></p><br>
 
-                                    <!-- <label for="university">University: </label>
-                                    <input type="text" name="university" placeholder="Enter University" class="<?php echo (!empty($data['university_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['university']; ?>">
-                                    <p class="p-error"><?php echo $data['university_err']; ?></p><br> -->
-
                                     <label for="university">University: </label>
                                     <select name="university" id="">
                                         <option value="University of Colombo" <?php echo ($data['university'] === 'University of Colombo') ? 'selected' : ''; ?> >University of Colombo</option>
@@ -75,10 +63,6 @@
                                         <option value="University of Moratuwa" <?php echo ($data['university'] === 'University of Moratuwa') ? 'selected' : ''; ?> >University of Moratuwa</option>
                                     </select>
                                     <p class="p-error"></p><br>
-
-                                    <!-- <label for="faculty">Faculty: </label>
-                                    <input type="text" name="faculty" placeholder="Enter Faculty" class="<?php echo (!empty($data['faculty_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['faculty']; ?>">
-                                    <p class="p-error"><?php echo $data['faculty_err']; ?></p><br> -->
 
                                     <label for="faculty">Faculty: </label>
                                     <select name="faculty" id="">
@@ -117,7 +101,6 @@
         <script>
             function confirmSubmit() {
                 if (confirm("Are you sure you want to submit the form?")) {
-                    document.getElementById("regcounsellor").submit();
                     return true; // Form will be submitted
                 } else {
                     return false; // Form submission will be canceled
