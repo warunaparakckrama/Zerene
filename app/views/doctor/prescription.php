@@ -55,17 +55,17 @@ tr:nth-child(even) {
 
                         <!-- <p class="p-regular"></p> -->
                         
-                        <div class="card-green-3">
+                        <div class="card-green-5">
                             <div>
 
-                            <form class="form-inline" action="/action_page.php">
+                            <!-- <form class="form-inline" action="/action_page.php">
                             <label for="drug">date of birth:</label>
                             <input type="text" id="birth" placeholder="bithday" name="date of birth">
                             <label for="amount">Age:</label>
                             <input type="number" id="amount" placeholder="age" name="age">
                             
                             
-                            </form>
+                            </form> -->
                             </div>
                         </div>
 
