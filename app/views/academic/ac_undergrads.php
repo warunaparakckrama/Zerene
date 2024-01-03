@@ -26,7 +26,7 @@
                     <div class="card-green">
                         <img src="<?php echo IMG;?>ug-avatar1.svg" alt="pro pic" class="card-profile">
                         <div>
-                            <p class="p-regular" style="margin-bottom: -10px;"><a href="./acundergraduate2.php" class="a-name">Zerene_User08</a></p>
+                            <p class="p-regular" style="margin-bottom: -10px;"><a href="./ac_undergraduate2.php" class="a-name">Zerene_User08</a></p>
                             <p class="p-regular" style="color:var(--zerene-grey) ;">University of Colombo School of Computing</p>
                         </div>
                         <div style=" display:flex ; justify-content:center;gap:15px">

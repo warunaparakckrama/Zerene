@@ -5,7 +5,6 @@ class Academic extends Controller{
         if (!isset($_SESSION['user_id'])) {
             redirect('users/login');
         }
-        $this->userModel=$this->model('User');
     }
 
     public function dashboard(){
@@ -46,6 +45,10 @@ class Academic extends Controller{
     public function ac_timeslots(){
         $data = [];
         $this->view('academic/ac_timeslots', $data);
+    }
+    public function ac_undergraduate2(){
+        $data = [];
+        $this->view('academic/ac_undergraduate2', $data);
     }
 }
 
