@@ -58,7 +58,7 @@ class Doctor extends Controller{
         $data = [];
         $this->view('doctor/doc_profile', $data);
     }
-    public function changeUsernamedoctor($user_id){
+    public function changeUsernameDoc($user_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -91,7 +91,7 @@ class Doctor extends Controller{
                     // Update the username
                     if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
                     flash('user_message', 'Username updated successfully');
-                    redirect('doctor/dashboard');
+                    redirect('doctor/doc_profile');
                     } else {
                     die('Something went wrong');
                     }
@@ -117,7 +117,7 @@ class Doctor extends Controller{
         $this->view('doctor/doc_profile', $data);
     }
 
-    public function changePwddoctor($user_id){
+    public function changePwdDoc($user_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -167,7 +167,7 @@ class Doctor extends Controller{
                 // Update the user's password
                 if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
                 flash('user_message', 'Password updated successfully');
-                redirect('doctor/dashboard');
+                redirect('doctor/doc_profile');
                 } else {
                 die('Something went wrong');
                 }
