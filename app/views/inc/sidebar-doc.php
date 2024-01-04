@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,10 +18,10 @@
             </div>
             <div class="sidebar-container3">
                 <a href="<?php echo URLROOT; ?>doctor/doc_home" class="top <?php echo ($currentPage === 'doc_home') ? 'active' : ''; ?>" id="sb-link1">Home</a>
-                <a href="<?php echo URLROOT; ?>doctor/doc_questionnaires" class="top <?php echo ($currentPage === 'doc_questionnaries') ? 'active' : ''; ?>" id="sb-link2">Questionnaires</a>
-                <a class="top dd-btn">Professionals</a>
+                <a href="<?php echo URLROOT; ?>doctor/doc_questionnaires" class="top <?php echo ($currentPage === 'doc_questionnaires') ? 'active' : ''; ?>" id="sb-link2">Questionnaires</a>
+                <a  href="#" class="top dd-btn">Professionals</a>
                     <div class="dropdown-container">
-                        <a href="<?php echo URLROOT; ?>doctor/doc_counselors" class="dd-content <?php echo ($currentPage === 'doc_counsellors') ? 'active' : ''; ?>" id="sb-link3">Counsellors</a>
+                        <a href="<?php echo URLROOT; ?>doctor/doc_counselors" class="dd-content <?php echo ($currentPage === 'doc_counselors') ? 'active' : ''; ?>" id="sb-link3">Counsellors</a>
                         <a href="<?php echo URLROOT; ?>doctor/doc_doctors" class="dd-content <?php echo ($currentPage === 'doc_doctor') ? 'active' : ''; ?>" id="sb-link4">Psychiatrists</a>
                     </div>
                 <a href="<?php echo URLROOT; ?>doctor/doc_undergrad" class="top <?php echo ($currentPage === 'doc_undergrad') ? 'active' : ''; ?>" id="sb-link5">Undergraduates</a>
@@ -38,4 +38,4 @@
 
         <script src="<?php echo JS;?>sidebar.js"></script>
     </body>
-</html>
+<!-- </html> -->

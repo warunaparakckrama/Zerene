@@ -197,7 +197,10 @@ class Doctor extends Controller{
 
     }
 
-    
+    public function doc_template(){
+        $data = [];
+        $this->view('doctor/doc_template', $data);
+    }  
    
     
 

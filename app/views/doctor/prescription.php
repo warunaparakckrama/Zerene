@@ -1,5 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en"> -->
+
 <?php $currentPage = 'prescription'; ?>
     <head>
         <meta charset="UTF-8">
@@ -8,28 +7,28 @@
         <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
         <style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+            table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            }
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
+            td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
+            tr:nth-child(even) {
+            background-color: #dddddd;
+            }
+        </style>
     </head>
     <body>
         <section class='sec-1'>
-        <div>
-        <?php require APPROOT . '/views/inc/sidebar-doc.php'; ?>
-        </div>
+            <div>
+            <?php require APPROOT . '/views/inc/sidebar-doc.php'; ?>
+            </div>
 
             <div class="grid-1">
                 <div class="subgrid-1">
@@ -39,7 +38,6 @@ tr:nth-child(even) {
 
                 <div>
                     <div class="card-white">
-                    
                         <p class="p-regular">undergraduate details</p>
                         
                         <div class="card-green-3">
@@ -47,13 +45,9 @@ tr:nth-child(even) {
                                 <form class="form-inline" action="/action_page.php">
                                     <label for="name">Name of the patiant:</label>
                                     <input type="text" id="name" placeholder="name of the patiant" name="name">
-                        
                                 </form>
-                        
                             </div>
                         </div>
-
-                        <!-- <p class="p-regular"></p> -->
                         
                         <div class="card-green-5">
                             <div>
@@ -82,11 +76,11 @@ tr:nth-child(even) {
 
                         <div class="card-green-3">
                             <div>
-                                <form class="form-inline" action="/action_page.php">
-                                    <label for="name">diagnosed with :</label>
+                                <form class="form-inline">
+                                    <label for="name"> with :</label>
                                     <input type="text" id="name" placeholder="name of the illness that the patient is suffered with" name="name">
-                        
                                 </form>
+                                <a href="<?php echo URLROOT;?>doctor/doc_template"><button class="button-main">press</button></a>
                         
                             </div>
                         </div>
