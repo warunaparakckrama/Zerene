@@ -605,6 +605,7 @@ class Admin extends Controller{
     public function notifications(){
         $notifications = $this->adminModel->getNotifications();
         $data = [
+            'user_type' => '',
             'notifications' => $notifications
         ];
         $this->view('admin/notifications', $data);

@@ -69,7 +69,7 @@
                     <div class="card-white">
                         <p class="p-regular-grey">Create Notifications</p>
                         <div class="card-green">
-                            <form action="<?php echo URLROOT;?>admin/notifications/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST">
+                            <form action="<?php echo URLROOT;?>admin/submitNotifications/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST">
                                 <div style="font-size: 15px;">
                                     <label for="subject">Subject: </label>
                                     <input type="text" name="subject" placeholder="Enter your subject here" style="font-size: 15px;">
