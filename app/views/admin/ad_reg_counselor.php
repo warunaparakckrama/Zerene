@@ -30,7 +30,7 @@
                             <form id="regcounsellor" action="<?php echo URLROOT;?>admin/ad_reg_counselor" method="POST">
                                 <div style="font-size: 15px;">
 
-                                    <label for="age">Type: </label>
+                                    <label for="coun_type">Type: </label>
                                     <select name="coun_type" id="">
                                         <option value="Academic" <?php echo ($data['coun_type'] === 'Academic') ? 'selected' : ''; ?> >Academic</option>
                                         <option value="Professional" <?php echo ($data['coun_type'] === 'Professional') ? 'selected' : ''; ?> >Professional</option>
@@ -75,7 +75,7 @@
                                     <p class="p-error"></p><br>
 
                                     <label for="email">Email: </label>
-                                    <input type="text" name="email" placeholder="Enter Email" class="<?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
+                                    <input type="email" name="email" placeholder="Enter Email" class="<?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
                                     <p class="p-error"><?php echo $data['email_err']; ?></p><br>
        
                                     <label for="username">Username: </label>

@@ -35,7 +35,7 @@
                                     <p class="p-error"><?php echo $data['username_err']; ?></p><br>
 
                                     <label for="email">Email: </label>
-                                    <input type="text" name="email" placeholder="Enter Email" class="<?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
+                                    <input type="email" name="email" placeholder="Enter Email" class="<?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
                                     <p class="p-error"><?php echo $data['email_err']; ?></p><br>
 
                                     <label for="password">Password: </label>

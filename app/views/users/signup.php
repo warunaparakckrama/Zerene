@@ -18,10 +18,10 @@
                     <div class="grid-signup-form">
                         
                         <label for="age">Age: <sup>*</sup></label>
-                        <input type="number" id="signup-age" name="age" placeholder="Age" class="form-signup <?php echo (!empty($data['age_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['age']; ?>">
+                        <input type="number" id="signup-age" min="18" max="25" name="age" placeholder="Age" class="form-signup <?php echo (!empty($data['age_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['age']; ?>">
                         <p class="p-error"><?php echo $data['age_err']; ?></p>
 
-                        <label for="age">Gender: </label>
+                        <label for="gender">Gender: </label>
                         <select name="gender" id="signup-gender">
                             <option value="Male" <?php echo ($data['gender'] === 'Male') ? 'selected' : ''; ?> >Male</option>
                             <option value="Female" <?php echo ($data['gender'] === 'Female') ? 'selected' : ''; ?> >Female</option>
