@@ -603,12 +603,57 @@ class Admin extends Controller{
     }
 
     public function notifications(){
-        $data = [];
+        $notifications = $this->adminModel->getNotifications();
+        $data = [
+            'notifications' => $notifications
+        ];
         $this->view('admin/notifications', $data);
     }
 
     public function newsletters(){
         $data = [];
         $this->view('admin/newsletters', $data);
+    }
+
+    public function submitNotifications($user_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'author' => trim($_POST['author']),
+                'subject' => trim($_POST['subject']),
+                'user_type' => trim($_POST['user_type']),
+                'content' => trim($_POST['content']),
+                'subject_err' => '',
+                'content_err' => '',
+            ];
+        
+            if(empty($data['subject'])){
+                $data['subject_err']='Please enter the subject';  
+            }
+            if(empty($data['content'])){
+                $data['content_err']='Please enter the content';  
+            }
+
+            if(empty($data['subject_err']) && empty($data['content_err'])){
+                // Validated
+    
+                // Fetch the current username from db
+                $current_username = $this->userModel->getUsernameById($user_id);
+                $data['author'] = $current_username;
+
+                // post notifications
+                if ($this->adminModel->addNotifications($data)) {
+                    redirect('admin/notifications');
+                    } else {
+                    die('Something went wrong');
+                    }
+
+            } else {
+                // Load view with errors
+                $this->view('admin/notifications', $data);
+            }
+        }
     }
 }
