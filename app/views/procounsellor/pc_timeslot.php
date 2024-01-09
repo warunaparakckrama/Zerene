@@ -10,10 +10,7 @@
 <!-- </head>
 <body>
     <section> -->
-    <section class="sec-1">
-            <div>
-                <?php require APPROOT . '/views/inc/sidebar-pc.php'; ?>
-            </div>
+    
         <div class="grid-1">
             <div class="subgrid-1">
                 <!-- <a href="<?php echo URLROOT ?>procounsellor/dashboard"> -->
@@ -100,7 +97,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    
     <!-- </section>
 </body>
 </html> -->

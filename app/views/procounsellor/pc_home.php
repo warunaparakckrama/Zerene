@@ -8,10 +8,7 @@
     </head>
     <body>
         
-        <section class="sec-1">
-            <div>
-                <?php require APPROOT . '/views/inc/sidebar-pc.php'; ?>
-            </div>
+        <section></section>
             <div class="grid-1">  
                 
                 <div class="subgrid-1">
