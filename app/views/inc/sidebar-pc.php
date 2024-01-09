@@ -13,9 +13,8 @@
                 <a href="">
                     <img src="<?php echo IMG;?>ug-avatar-1.svg" alt="ug avatar" width="80" height="80">
                 </a>
-                <p class="p-regular" style="color: var(--zerene-light);">Username</p>
-                <a class="button-main sidebar-button" href="<?php echo URLROOT; ?>procounsellor/pc_profileupdate" id="sb-link8">Edit</a>
-                <!-- <a type="button" href="<?php echo URLROOT; ?>procounsellor/pc_profileupdate" id="sb-link8"></a> -->
+                <p class="p-regular" style="color: var(--zerene-light);"><?php echo $_SESSION['user_name'];?></p>
+                <a href="<?php echo URLROOT;?>procounsellor/pc_profileupdate" id="sb-link10" style="text-decoration: none;"><button class="button-second">Edit</button></a>
             </div>
 
             <div class="sidebar-container3">
