@@ -657,4 +657,13 @@ class Admin extends Controller{
             }
         }
     }
+
+    public function deleteNotifications($notify_id){
+        if($this->adminModel->deleteNotify($notify_id)){
+        //   flash('post_message', 'user Removed');
+            redirect('admin/notifications');
+        } else {
+            die('Something went wrong');
+        }
+    }
 }

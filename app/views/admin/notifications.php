@@ -52,7 +52,7 @@
                                                     </div>
 
                                                     <div class="btn-container">
-                                                        <a href="" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
+                                                        <a href="<?php echo URLROOT;?>Admin/deleteNotifications/<?php echo $notifications->notification_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                                     </div>
 
                                                 </div>
@@ -76,7 +76,7 @@
                                     <br><br>
 
                                     <label for="user_type">User Type: </label>
-                                    <select name="user_type">
+                                    <select name="user_type" id="">
                                         <option value="all users" <?php echo ($data['user_type'] === 'all users') ? 'selected' : ''; ?> >All Users</option>
                                         <option value="admin" <?php echo ($data['user_type'] === 'admin') ? 'selected' : ''; ?> >Administrators</option>
                                         <option value="undergrad" <?php echo ($data['user_type'] === 'undergrad') ? 'selected' : ''; ?> >Undergraduates</option>
@@ -99,6 +99,16 @@
 
             </div>
         </section>
-
+        <script>
+            function confirmDelete(event) {
+                event.preventDefault(); // Prevent the default action of the link
+                if (confirm("Are you sure you want to delete this notofication?")) {
+                    // If the user confirms the deletion, proceed with the link action
+                    window.location.href = event.target.parentElement.href; // Redirect to the link URL
+                } else {
+                    // If the user cancels, do nothing or handle as needed
+                }
+            }
+        </script>
     </body>
 <!-- </html> -->
