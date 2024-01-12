@@ -1,3 +1,5 @@
+<?php $currentPage = 'ad_users'; ?>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +24,7 @@
                         <p class="p-regular">Edit Account</p>
 
                         <div class="card-green">
-                            <form action="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $undergrad->user_id;?>" method="POST">
+                            <form action="" method="POST">
                                 <div style="font-size: 15px;">
 
                                     <label for="username">Username: </label>
@@ -39,10 +41,12 @@
 
                                     <label for="password">Confirm Password: </label>
                                     <input type="password" name="confirm_password" placeholder="Enter Password" value="">
-                                    <br>
+                                    <br><br>
 
-                                    <button class="button-danger" type="reset">Cancel</button>
-                                    <button class="button-main" type="submit">Update</button>
+                                    <div class="btn-container-2">
+                                        <button class="button-danger" type="reset">Cancel</button>
+                                        <button class="button-main" type="submit">Update</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>

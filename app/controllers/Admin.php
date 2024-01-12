@@ -392,7 +392,7 @@ class Admin extends Controller{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-  
+            
         $data = [
           'user_id' => '$user_id',
           'username' => trim($_POST['username']),
