@@ -389,69 +389,14 @@ class Admin extends Controller{
 
     public function ad_edit_user($user_id){
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            // Sanitize POST array
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            
-        $data = [
-          'user_id' => '$user_id',
-          'username' => trim($_POST['username']),
-          'email' => trim($_POST['email']),
-          'password' => trim($_POST['password']),
-          'confirm_password' => $_SESSION['confirm_password'],
-          'username_err'=>'',
-          'email_err'=>'',
-          'password_err'=>'',
-          'confirm_password_err'=>'',
-          
-        ];
-
-        if($this->userModel->findUserByUsername($data['username'])){
-            $data['username_err']='Username is already taken'; 
-        }
-
-        if($this->userModel->findUserByEmail($data['email'])){
-            $data['email_err']='Email is already taken'; 
-        }
-
-        if($data['password']!=$data['confirm_password']){
-            $data['confirm_password_err']='passwords do not match';
-        }
-
-        if(empty($data['username_err']) && empty($data['email_err'])&& empty($data['confirm_password_err'])){
-            // Validated
-
-            //hash password
-            $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
-
-            if($this->userModel->updateUser($data)){
-              flash('user_message', 'user Updated');
-              redirect('admin/ad_dashboard');
-            } else {
-              die('Something went wrong');
-            }
-          } else {
-            // Load view with errors
-            $this->view('admin/ad_edit_user', $data);
-          }
+        //get user data
+        $user = $this->userModel->findUserDetails($user_id);
         
-        }   
-    
-        else {
-            $user=$this->userModel->findUserDetails($user_id);
-
-            $data = [
-            'user_id' => '$user_id',
-            'username' => $user->username,
-            'email'=>$user->email,
-            'password_err'=>'',
-          ];
-    
-          $this->view('admin/ad_edit_user', $data);
-        }
-
+        $data =[
+            'user' => $user,
+        ];  
         $this->view('admin/ad_edit_user', $data);
-    } //not yet used
+    }
     
     public function changeUsernameAdmin($user_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -510,6 +455,65 @@ class Admin extends Controller{
         }
 
         $this->view('admin/ad_profile', $data);
+    }
+
+    public function changeUsernameUser($user_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'current_username' => trim($_POST['current_username']),
+                'new_username' => trim($_POST['new_username']),
+                'current_username_err'=>'',
+                'new_username_err'=>''
+            ];
+        
+            if(empty($data['current_username'])){
+                $data['current_username_err']='Please enter current username';  
+            }
+            if(empty($data['new_username'])){
+                $data['new_username_err']='Please enter new username';  
+            }
+
+            if(empty($data['current_username_err']) && empty($data['new_username_err'])){
+                // Validated
+    
+                // Fetch the current username from db
+                $current_username = $this->userModel->getUsernameById($user_id);
+    
+                //
+                if (($data['current_username'] != $current_username)) {
+                    $data['current_username_err'] = 'Current username is incorrect';
+                } else {
+
+                    // Update the username
+                    if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
+                    flash('user_message', 'Username updated successfully');
+                    redirect('admin/ad_users');
+                    } else {
+                    die('Something went wrong');
+                    }
+                }
+
+            } else {
+                // Load view with errors
+                $this->view('admin/ad_edit_user', $data);
+            }
+        } 
+        
+        else {
+            $data = [
+            'current_username' => '',
+            'new_username' => '',
+            'current_username_err'=>'',
+            'new_username_err'=>''
+          ];
+    
+          $this->view('admin/ad_edit_user', $data);
+        }
+
+        $this->view('admin/ad_edit_user', $data);
     }
 
     public function changePwdAdmin($user_id){
