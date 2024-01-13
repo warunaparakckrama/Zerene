@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en"> -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,15 +59,15 @@
                         </select>
                         <p class="p-error"></p>
 
-                        <label for="username">Username: <sup>*</sup></label>
+                        <label for="username">Username:<sup>*</sup></label>
                         <input type="text" id="signup-username" name="username" placeholder="Username" class="form-signup <?php echo (!empty($data['username_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['username']; ?>">
                         <p class="p-error"><?php echo $data['username_err']; ?></p>
 
-                        <label for="password">Password: <sup>*</sup></label>
+                        <label for="password">Password:<sup>*</sup></label>
                         <input type="password" id="signup-password" name="password" placeholder="Create Password" class="form-signup <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>">
                         <p class="p-error"><?php echo $data['password_err']; ?></p>
 
-                        <label for="confirm_password">Re-enter: <sup>*</sup></label>
+                        <label for="confirm_password">Re-enter:<sup>*</sup></label>
                         <input type="password" id="signup-rpassword" name="confirm_password" placeholder="Re-enter Password" class="form-signup <?php echo (!empty($data['confirm_password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['confirm_password']; ?>">
                         <p class="p-error"><?php echo $data['confirm_password_err']; ?></p>
 
@@ -81,4 +81,4 @@
             </div>
         </section>
     </body>
-</html>
+<!-- </html> -->

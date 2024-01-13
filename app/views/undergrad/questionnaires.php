@@ -1,4 +1,5 @@
-<html lang="en">
+<!-- <html lang="en"> -->
+<?php $currentPage = 'questionnaires'; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,10 @@
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
     </head>
     <body>
-        <section>
+        <section class="sec-1">
+            <div>
+                <?php require APPROOT . '/views/inc/sidebar-ug.php'; ?>
+            </div>
             <div class="grid-1">
                 
                 <div class="subgrid-1">
@@ -25,7 +29,7 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">General Questionnaire for Anxiety, Depression & Stress</p>
                             </div>
                             <div class="btn-container">
-                                <button class="button-main">Start</button>
+                                <a href="<?php echo URLROOT;?>undergrad/dass21_start" style="text-decoration: none;"><button class="button-main">Start</button></a>
                             </div>
                         </div>
                     </div>
@@ -63,4 +67,4 @@
             </div>
         </section>
     </body>
-</html>
+<!-- </html> -->

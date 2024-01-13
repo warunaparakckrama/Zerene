@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+<?php $currentPage = 'chats'; ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,11 @@
     <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
 </head>
 <body>
-    <section>
+    <section class="sec-1">
+        <div>
+            <?php require APPROOT . '/views/inc/sidebar-ug.php'; ?>
+        </div>
+        
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Chats</p></div>
@@ -33,4 +38,4 @@
         </div>
     </section>
 </body>
-</html>
+<!-- </html> -->
