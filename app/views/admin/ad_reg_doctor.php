@@ -1,5 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en"> -->
+
     <?php $currentPage = 'ad_reg_doctor'; ?>
     <head>
         <meta charset="UTF-8">
@@ -7,6 +6,7 @@
         <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
         <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+        <title><?php echo SITENAME;?> | Administrator</title>
     </head>
     <body>
         <section class="sec-1">
@@ -66,11 +66,11 @@
                                     <p class="p-error"><?php echo $data['hospital_err']; ?></p><br> -->
 
                                     <label for="email">Email: </label>
-                                    <input type="text" name="email" placeholder="Enter Email" class="<?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
+                                    <input type="email" name="email" placeholder="Enter Email" class="<?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
                                     <p class="p-error"><?php echo $data['email_err']; ?></p><br>
        
                                     <label for="contact_num">Contact Number: </label>
-                                    <input type="text" name="contact_num" placeholder="Enter Contact Number" class="<?php echo (!empty($data['contact_num_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['contact_num']; ?>">
+                                    <input type="tel" name="contact_num" placeholder="format: 012 345 6789" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" class="<?php echo (!empty($data['contact_num_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['contact_num']; ?>">
                                     <p class="p-error"><?php echo $data['contact_num_err']; ?></p><br>
 
                                     <label for="username">Username: </label>
@@ -92,6 +92,4 @@
 
             </div>
         </section>
-
     </body>
-<!-- </html> -->

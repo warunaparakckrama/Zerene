@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
         <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+        <title><?php echo SITENAME;?> | Administrator</title>
     </head>
     <body>
         <section class="sec-1">
@@ -26,14 +27,10 @@
                         <p class="p-regular">Create Account (Counsellor)</p>
 
                         <div class="card-green">
-                            <form action="<?php echo URLROOT;?>admin/ad_reg_counselor" method="POST">
+                            <form id="regcounsellor" action="<?php echo URLROOT;?>admin/ad_reg_counselor" method="POST">
                                 <div style="font-size: 15px;">
 
-                                    <!-- <label for="coun_type">Type (Academic/ Professional): </label>
-                                    <input type="text" name="coun_type" placeholder="Enter type" class="<?php echo (!empty($data['coun_type_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['coun_type']; ?>">
-                                    <p class="p-error"><?php echo $data['coun_type_err']; ?></p><br> -->
-
-                                    <label for="age">Type: </label>
+                                    <label for="coun_type">Type: </label>
                                     <select name="coun_type" id="">
                                         <option value="Academic" <?php echo ($data['coun_type'] === 'Academic') ? 'selected' : ''; ?> >Academic</option>
                                         <option value="Professional" <?php echo ($data['coun_type'] === 'Professional') ? 'selected' : ''; ?> >Professional</option>
@@ -48,10 +45,6 @@
                                     <input type="text" name="lname" placeholder="Enter Last Name" class="<?php echo (!empty($data['lname_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['lname']; ?>">
                                     <p class="p-error"><?php echo $data['lname_err']; ?></p><br>
 
-                                    <!-- <label for="gender">Gender (Male/ Female): </label>
-                                    <input type="text" name="gender" placeholder="Enter type" class="<?php echo (!empty($data['gender_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['gender']; ?>">
-                                    <p class="p-error"><?php echo $data['gender_err']; ?></p><br> -->
-
                                     <label for="gender">Gender: </label>
                                     <select name="gender" id="">
                                         <option value="Male" <?php echo ($data['gender'] === 'Male') ? 'selected' : ''; ?> >Male</option>
@@ -63,10 +56,6 @@
                                     <input type="date" name="dob" placeholder="" class="<?php echo (!empty($data['dob_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['dob']; ?>">
                                     <p class="p-error"></p><br>
 
-                                    <!-- <label for="university">University: </label>
-                                    <input type="text" name="university" placeholder="Enter University" class="<?php echo (!empty($data['university_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['university']; ?>">
-                                    <p class="p-error"><?php echo $data['university_err']; ?></p><br> -->
-
                                     <label for="university">University: </label>
                                     <select name="university" id="">
                                         <option value="University of Colombo" <?php echo ($data['university'] === 'University of Colombo') ? 'selected' : ''; ?> >University of Colombo</option>
@@ -74,10 +63,6 @@
                                         <option value="University of Moratuwa" <?php echo ($data['university'] === 'University of Moratuwa') ? 'selected' : ''; ?> >University of Moratuwa</option>
                                     </select>
                                     <p class="p-error"></p><br>
-
-                                    <!-- <label for="faculty">Faculty: </label>
-                                    <input type="text" name="faculty" placeholder="Enter Faculty" class="<?php echo (!empty($data['faculty_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['faculty']; ?>">
-                                    <p class="p-error"><?php echo $data['faculty_err']; ?></p><br> -->
 
                                     <label for="faculty">Faculty: </label>
                                     <select name="faculty" id="">
@@ -90,7 +75,7 @@
                                     <p class="p-error"></p><br>
 
                                     <label for="email">Email: </label>
-                                    <input type="text" name="email" placeholder="Enter Email" class="<?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
+                                    <input type="email" name="email" placeholder="Enter Email" class="<?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
                                     <p class="p-error"><?php echo $data['email_err']; ?></p><br>
        
                                     <label for="username">Username: </label>
@@ -101,7 +86,7 @@
                                     <input type="password" name="password" placeholder="Enter Password" class="<?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>">
                                     <p class="p-error"><?php echo $data['password_err']; ?></p><br>
 
-                                    <button class="button-main" type="submit">Register</button>
+                                    <button class="button-main" type="submit" onclick="return confirmsubmit()">Register</button>
                                 </div>
                             </form>
                         </div>
@@ -113,5 +98,14 @@
             </div>
         </section>
 
+        <script>
+            function confirmSubmit() {
+                if (confirm("Are you sure you want to submit the form?")) {
+                    return true; // Form will be submitted
+                } else {
+                    return false; // Form submission will be canceled
+                }
+                }
+        </script>
     </body>
 <!-- </html> -->

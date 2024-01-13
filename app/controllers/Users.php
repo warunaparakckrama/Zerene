@@ -290,7 +290,7 @@ class Users extends Controller{
   
         if($this->userModel->deleteUndergrad($id)){
         //   flash('post_message', 'user Removed');
-          redirect('admin/ad_dashboard');
+          redirect('admin/ad_users');
         } else {
           die('Something went wrong');
         }
@@ -301,7 +301,7 @@ class Users extends Controller{
   
         if($this->userModel->deleteCounselor($id)){
         //   flash('post_message', 'user Removed');
-          redirect('admin/ad_dashboard');
+          redirect('admin/ad_users');
         } else {
           die('Something went wrong');
         }
@@ -312,7 +312,7 @@ class Users extends Controller{
   
         if($this->userModel->deleteDoctor($id)){
         //   flash('post_message', 'user Removed');
-          redirect('admin/ad_dashboard');
+          redirect('admin/ad_users');
         } else {
           die('Something went wrong');
         }
