@@ -133,9 +133,7 @@
                                     <td>
                                         <div class="btn-container-2">
                                             <div class="btn-container">
-                                                <form action="" method="POST">
-                                                    <button class="button-main">Edit</button>
-                                                </form>
+                                                <a href="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
                                             </div>
 
                                             <div class="btn-container">

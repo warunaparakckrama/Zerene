@@ -10,6 +10,8 @@ class Admin extends Controller{
         $this->adminModel=$this->model('Administrator');
     }
 
+    //page view controllers
+
     public function ad_dashboard(){
         $data = [];
         $this->view('admin/ad_dashboard', $data);
@@ -397,7 +399,33 @@ class Admin extends Controller{
         ];  
         $this->view('admin/ad_edit_user', $data);
     }
-    
+
+    public function newsletters(){
+        $data = [];
+        $this->view('admin/newsletters', $data);
+    }
+
+    public function notifications(){
+        $notifications = $this->adminModel->getNotifications();
+        $data = [
+            'user_type' => '',
+            'notifications' => $notifications
+        ];
+        $this->view('admin/notifications', $data);
+    }
+
+    public function support(){
+        $data = [];
+        $this->view('admin/support', $data);
+    }
+
+    public function verifications(){
+        $data = [];
+        $this->view('admin/verifications', $data);
+    }
+
+    //function controllers
+
     public function changeUsernameAdmin($user_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
@@ -660,30 +688,6 @@ class Admin extends Controller{
 
         $this->view('admin/ad_edit_user/' . $user_id, $data);
 
-    }
-
-    public function verifications(){
-        $data = [];
-        $this->view('admin/verifications', $data);
-    }
-
-    public function support(){
-        $data = [];
-        $this->view('admin/support', $data);
-    }
-
-    public function notifications(){
-        $notifications = $this->adminModel->getNotifications();
-        $data = [
-            'user_type' => '',
-            'notifications' => $notifications
-        ];
-        $this->view('admin/notifications', $data);
-    }
-
-    public function newsletters(){
-        $data = [];
-        $this->view('admin/newsletters', $data);
     }
 
     public function submitNotifications($user_id){
