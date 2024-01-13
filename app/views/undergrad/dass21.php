@@ -24,7 +24,7 @@
                     <div>
                         <div class="card-white">
                             <p class="p-regular">General Guidelines</p>
-                            <div class="card-green-4">
+                            <div class="card-green-3">
                                 <div>
                                     <p class="p-regular-green" style="font-size: 15px;">-Mental Health Questionnaires - Level 01</p>
                                     <p class="p-regular-green" style="font-size: 15px;">-General Questionnaire for Stress, Anxiety and Depression</p>                               
@@ -35,7 +35,7 @@
                         <div class="card-white">
                             <p class="p-regular">Questionnaire</p>
     
-                            <div class="card-green-4">
+                            <div class="card-green-3">
                                 <form id="dass-21" action="<?php echo URLROOT;?>undergrad/dass21_review" method="POST">
                                     <div>
                                         <div style="margin-bottom: 10px;">

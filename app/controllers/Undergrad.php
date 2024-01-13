@@ -11,6 +11,8 @@ class Undergrad extends Controller{
         $this->adminModel=$this->model('Administrator');  
     }
 
+    //user view controllers
+
     public function dashboard(){
         $data = [];
         $this->view('undergrad/dashboard', $data);
@@ -229,6 +231,13 @@ class Undergrad extends Controller{
         $data = [];
         $this->view('undergrad/dass21_review', $data);
     }
+
+    public function feedback(){
+        $data = [];
+        $this->view('undergrad/feedback', $data);
+    }
+
+    //function controllers
 
     public function changeUsernameUG($user_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
