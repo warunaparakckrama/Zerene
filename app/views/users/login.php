@@ -18,19 +18,7 @@
             </div>
             <div class="log-grid-3">
 
-                <!-- <div class="log-subgrid-1">
-                    <form action="/action_page.php">
-                            <label for="cars" style="font-size: 15px;">Choose User Type<sup>*</sup>:</label>
-                            <select name="users" id="users">
-                            <option value="volvo">Undergraduate</option>
-                            <option value="saab">Counsellor (Academic)</option>
-                            <option value="audi">Counsellor (Professional)</option>
-                            <option value="audi">Psychiatrist</option>
-                            </optgroup>
-                        </select>
-                    </form>
-                </div> -->
-                <form action="<?php echo URLROOT;?>users/login" method="POST">
+                <form action="<?php echo URLROOT;?>users/login" method="POST" autocomplete="on">
                     <div class="log-subgrid-1">
                         <p class="p-regular">Username<sup>*</sup></p>
                         <input type="text" id="username" name="username" placeholder="username" style="margin-bottom: 10px; " class="input <?php echo (!empty($data['username_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['username']; ?>">
