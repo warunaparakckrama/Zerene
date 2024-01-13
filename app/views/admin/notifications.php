@@ -102,7 +102,7 @@
         <script>
             function confirmDelete(event) {
                 event.preventDefault(); // Prevent the default action of the link
-                if (confirm("Are you sure you want to delete this notofication?")) {
+                if (confirm("Are you sure you want to delete this notification?")) {
                     // If the user confirms the deletion, proceed with the link action
                     window.location.href = event.target.parentElement.href; // Redirect to the link URL
                 } else {
