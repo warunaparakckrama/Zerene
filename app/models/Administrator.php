@@ -121,6 +121,23 @@
                 return false;
             }
         }
+
+        public function solveFeedback($feedback_id){
+            $this->db->beginTransaction();
+
+            $this->db->query('UPDATE feedback SET status = "resolved" WHERE feedback_id = :feedback_id');
+            $this->db->bind(':feedback_id', $feedback_id);
+            $feedbackDeleted = $this->db->execute();
+
+            // Commit or rollback the transaction based on delete success
+            if ($feedbackDeleted) {
+                $this->db->commit();
+                return true;
+            } else {
+                $this->db->rollBack();
+                return false;
+            }
+        }
     }   
 
         

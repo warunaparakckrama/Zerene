@@ -30,7 +30,7 @@
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th>Title</th>
-                                        <th>Content</th>
+                                        <!-- <th>Content</th> -->
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -42,18 +42,15 @@
                                             <td><?php echo $feedback->username?></td>
                                             <td><?php echo $feedback->email?></td>
                                             <td><?php echo $feedback->title?></td>
-                                            <td><?php echo $feedback->content?></td>
+                                            <!-- <td><?php echo $feedback->content?></td> -->
                                             <td><?php echo $feedback->status?></td>
                                             <td>
                                                 <div class="btn-container-2">
                                                     <div class="btn-container">
-                                                        <a href="" style="text-decoration: none;"><button class="button-main">Edit</button></a>
-                                                    </div>
-
-                                                    <div class="btn-container">
+                                                        <a href="" style="text-decoration: none;"><button class="button-main">View</button></a>
+                                                        <a href="" style="text-decoration: none;"><button class="button-main">Resolve</button></a>
                                                         <a href="<?php echo URLROOT;?>Admin/delFeedback/<?php echo $feedback->feedback_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                                     </div>
-
                                                 </div>
                                             </td>
                                         </tr>
@@ -73,7 +70,7 @@
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th>Title</th>
-                                        <th>Content</th>
+                                        <!-- <th>Content</th> -->
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -85,18 +82,15 @@
                                             <td><?php echo $complaint->username?></td>
                                             <td><?php echo $complaint->email?></td>
                                             <td><?php echo $complaint->title?></td>
-                                            <td><?php echo $complaint->content?></td>
+                                            <!-- <td><?php echo $complaint->content?></td> -->
                                             <td><?php echo $complaint->status?></td>
                                             <td>
                                                 <div class="btn-container-2">
                                                     <div class="btn-container">
-                                                        <a href="" style="text-decoration: none;"><button class="button-main">Edit</button></a>
-                                                    </div>
-
-                                                    <div class="btn-container">
+                                                        <a href="" style="text-decoration: none;"><button class="button-main">View</button></a>
+                                                        <a href="" style="text-decoration: none;"><button class="button-main">Resolve</button></a>
                                                         <a href="<?php echo URLROOT;?>Admin/delFeedback/<?php echo $complaint->feedback_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                                     </div>
-
                                                 </div>
                                             </td>
                                         </tr>

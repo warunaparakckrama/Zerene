@@ -754,4 +754,13 @@ class Admin extends Controller{
             die('Something went wrong');
         }
     }
+
+    public function resolveFeedback($feedback_id){
+        if($this->adminModel->solveFeedback($feedback_id)){
+        //   flash('post_message', 'user Removed');
+            redirect('admin/support');
+        } else {
+            die('Something went wrong');
+        }
+    }
 }
