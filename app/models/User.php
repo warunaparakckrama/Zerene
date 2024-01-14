@@ -275,6 +275,23 @@
             }
         }
 
+        public function getEmailById($user_id){
+            $sql = "SELECT email FROM users WHERE user_id = :user_id";
+            $this->db->query($sql);
+            $this->db->bind(':user_id', $user_id);
+
+            try {
+                $this->db->execute();
+                $result = $this->db->single();
+    
+                // Return the email from the database
+                return $result->email;
+            } catch (PDOException $e) {
+                // Handle the error or return an indication of failure
+                return false;
+            }
+        }
+
         public function updatePassword($user_id, $new_password) {
             $sql = "UPDATE users SET password = :new_password WHERE user_id = :user_id";
             $this->db->query($sql);
@@ -461,5 +478,28 @@
                 $this->db->rollBack();
                 return false;
             }
-          }
+        }
+
+        public function addFeedback($data){
+            $this->db->query('INSERT INTO feedback (type, username, email, title, content) VALUES (:type, :username, :email, :title, :content)');
+            if ($data['type'] === "feedback") {
+                $this->db->bind(':type', 'feedback');
+            }
+            elseif ($data['type'] === 'complaint') {
+                $this->db->bind(':type', 'complaint');
+            }
+            $this->db->bind(':username', $data['username']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':title', $data['title']);
+            $this->db->bind(':content', $data['content']);
+            
+            $addfeedback = $this->db->execute();
+
+            if ($addfeedback) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
