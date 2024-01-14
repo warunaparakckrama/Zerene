@@ -91,6 +91,36 @@
                 return false;
             }
         }
+
+        public function getFeedback(){
+            $this->db->query('SELECT * FROM feedback WHERE type = "feedback" AND is_deleted = FALSE');
+            $results= $this->db->resultSet();
+            return $results;
+        }
+
+        public function getComplaint(){
+            $this->db->query('SELECT * FROM feedback WHERE type = "complaint" AND is_deleted = FALSE');
+            $results= $this->db->resultSet();
+            return $results;
+        }
+
+        public function deleteFeedback($feedback_id){
+            // Begin a transaction to ensure both deletes are successful or fail together
+            $this->db->beginTransaction();
+
+            $this->db->query('UPDATE feedback SET is_deleted = TRUE WHERE feedback_id = :feedback_id');
+            $this->db->bind(':feedback_id', $feedback_id);
+            $feedbackDeleted = $this->db->execute();
+
+            // Commit or rollback the transaction based on delete success
+            if ($feedbackDeleted) {
+                $this->db->commit();
+                return true;
+            } else {
+                $this->db->rollBack();
+                return false;
+            }
+        }
     }   
 
         

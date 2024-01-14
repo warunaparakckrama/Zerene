@@ -415,7 +415,12 @@ class Admin extends Controller{
     }
 
     public function support(){
-        $data = [];
+        $feedback = $this->adminModel->getFeedback();
+        $complaint = $this->adminModel->getComplaint();
+        $data = [
+            'feedback' => $feedback,
+            'complaint' => $complaint
+        ];
         $this->view('admin/support', $data);
     }
 
@@ -736,6 +741,15 @@ class Admin extends Controller{
         if($this->adminModel->deleteNotify($notify_id)){
         //   flash('post_message', 'user Removed');
             redirect('admin/notifications');
+        } else {
+            die('Something went wrong');
+        }
+    }
+
+    public function delFeedback($feedback_id){
+        if($this->adminModel->deleteFeedback($feedback_id)){
+        //   flash('post_message', 'user Removed');
+            redirect('admin/support');
         } else {
             die('Something went wrong');
         }
