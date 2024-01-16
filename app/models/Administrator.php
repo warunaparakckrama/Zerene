@@ -92,6 +92,19 @@
             }
         }
 
+        public function getFeedbackGeneral($feedback_id){
+            $this->db->query('SELECT * FROM feedback WHERE feedback_id = :feedback_id');
+            $this->db->bind(':feedback_id', $feedback_id);
+            $row=$this->db->single();
+    
+            //check row
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
+        }
+
         public function getFeedback(){
             $this->db->query('SELECT * FROM feedback WHERE type = "feedback" AND is_deleted = FALSE');
             $results= $this->db->resultSet();

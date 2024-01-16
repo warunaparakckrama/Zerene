@@ -42,13 +42,12 @@
                                             <td><?php echo $feedback->username?></td>
                                             <td><?php echo $feedback->email?></td>
                                             <td><?php echo $feedback->title?></td>
-                                            <!-- <td><?php echo $feedback->content?></td> -->
                                             <td><?php echo $feedback->status?></td>
                                             <td>
                                                 <div class="btn-container-2">
                                                     <div class="btn-container">
-                                                        <a href="" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                        <a href="" style="text-decoration: none;"><button class="button-main">Resolve</button></a>
+                                                        <a href="<?php echo URLROOT;?>admin/support_view/<?php echo $feedback->feedback_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
+                                                        <a href="<?php echo URLROOT;?>Admin/resolveFeedback/<?php echo $feedback->feedback_id;?>" style="text-decoration: none;"><button class="button-main">Resolve</button></a>
                                                         <a href="<?php echo URLROOT;?>Admin/delFeedback/<?php echo $feedback->feedback_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                                     </div>
                                                 </div>
@@ -82,13 +81,12 @@
                                             <td><?php echo $complaint->username?></td>
                                             <td><?php echo $complaint->email?></td>
                                             <td><?php echo $complaint->title?></td>
-                                            <!-- <td><?php echo $complaint->content?></td> -->
                                             <td><?php echo $complaint->status?></td>
                                             <td>
                                                 <div class="btn-container-2">
                                                     <div class="btn-container">
-                                                        <a href="" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                        <a href="" style="text-decoration: none;"><button class="button-main">Resolve</button></a>
+                                                        <a href="<?php echo URLROOT;?>admin/support_view/<?php echo $complaint->feedback_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
+                                                        <a href="<?php echo URLROOT;?>Admin/resolveFeedback/<?php echo $complaint->feedback_id;?>" style="text-decoration: none;"><button class="button-main">Resolve</button></a>
                                                         <a href="<?php echo URLROOT;?>Admin/delFeedback/<?php echo $complaint->feedback_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                                     </div>
                                                 </div>

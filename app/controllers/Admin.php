@@ -424,6 +424,14 @@ class Admin extends Controller{
         $this->view('admin/support', $data);
     }
 
+    public function support_view($feedback_id){
+        $feedback = $this->adminModel->getFeedbackGeneral($feedback_id);
+        $data = [
+            'feedback' => $feedback
+        ];
+        $this->view('admin/support_view', $data);
+    }
+
     public function verifications(){
         $data = [];
         $this->view('admin/verifications', $data);
