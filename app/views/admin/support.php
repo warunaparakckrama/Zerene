@@ -47,7 +47,7 @@
                                                 <div class="btn-container-2">
                                                     <div class="btn-container">
                                                         <a href="<?php echo URLROOT;?>admin/support_view/<?php echo $feedback->feedback_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                        <a href="<?php echo URLROOT;?>Admin/resolveFeedback/<?php echo $feedback->feedback_id;?>" style="text-decoration: none;"><button class="button-main">Resolve</button></a>
+                                                        <a href="<?php echo URLROOT;?>Admin/resolveFeedback/<?php echo $feedback->feedback_id;?>" style="text-decoration: none;"><button class="button-main" onclick="confirmResolve(event)">Resolve</button></a>
                                                         <a href="<?php echo URLROOT;?>Admin/delFeedback/<?php echo $feedback->feedback_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                                     </div>
                                                 </div>
@@ -86,7 +86,7 @@
                                                 <div class="btn-container-2">
                                                     <div class="btn-container">
                                                         <a href="<?php echo URLROOT;?>admin/support_view/<?php echo $complaint->feedback_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                        <a href="<?php echo URLROOT;?>Admin/resolveFeedback/<?php echo $complaint->feedback_id;?>" style="text-decoration: none;"><button class="button-main">Resolve</button></a>
+                                                        <a href="<?php echo URLROOT;?>Admin/resolveFeedback/<?php echo $complaint->feedback_id;?>" style="text-decoration: none;"><button class="button-main" onclick="confirmResolve(event)">Resolve</button></a>
                                                         <a href="<?php echo URLROOT;?>Admin/delFeedback/<?php echo $complaint->feedback_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                                     </div>
                                                 </div>
@@ -106,6 +106,16 @@
             function confirmDelete(event) {
                 event.preventDefault(); // Prevent the default action of the link
                 if (confirm("Are you sure you want to delete this feedback/ complaint?")) {
+                    // If the user confirms the deletion, proceed with the link action
+                    window.location.href = event.target.parentElement.href; // Redirect to the link URL
+                } else {
+                    // If the user cancels, do nothing or handle as needed
+                }
+            }
+
+            function confirmResolve(event) {
+                event.preventDefault(); // Prevent the default action of the link
+                if (confirm("Are you sure you want to mark this feedback/ complaint as 'Resolved'? ")) {
                     // If the user confirms the deletion, proceed with the link action
                     window.location.href = event.target.parentElement.href; // Redirect to the link URL
                 } else {
