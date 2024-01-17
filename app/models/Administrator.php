@@ -40,7 +40,7 @@
         }
 
         public function addNotifications($data){
-            $this->db->query('INSERT INTO notifications (author, subject, user_type, content) VALUES (:author, :subject, :user_type, :content)');
+            $this->db->query('INSERT INTO notifications (author, subject, user_type, content, created_at) VALUES (:author, :subject, :user_type, :content, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
             $this->db->bind(':author', $data['author']);
             $this->db->bind(':subject', $data['subject']);
             if ($data['user_type'] === "all users") {

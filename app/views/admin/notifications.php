@@ -31,7 +31,7 @@
                                         <th>Author</th>
                                         <th>Subject</th>
                                         <th>User Type</th>
-                                        <th>Content</th>
+                                        <th>Created at</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -44,17 +44,14 @@
                                             <td><?php echo $notifications->author?></td>
                                             <td><?php echo $notifications->subject?></td>
                                             <td><?php echo $notifications->user_type?></td>
-                                            <td><?php echo $notifications->content?></td>
+                                            <td><?php echo $notifications->created_at?></td>
                                             <td>
                                                 <div class="btn-container-2">
                                                     <div class="btn-container">
+                                                        <a href="" style="text-decoration: none;"><button class="button-main">View</button></a>
                                                         <a href="" style="text-decoration: none;"><button class="button-main">Edit</button></a>
-                                                    </div>
-
-                                                    <div class="btn-container">
                                                         <a href="<?php echo URLROOT;?>Admin/deleteNotifications/<?php echo $notifications->notification_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                                     </div>
-
                                                 </div>
                                             </td>
                                         </tr>
@@ -69,7 +66,7 @@
                     <div class="card-white">
                         <p class="p-regular-grey">Create Notifications</p>
                         <div class="card-green">
-                            <form action="<?php echo URLROOT;?>admin/submitNotifications/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST">
+                            <form action="<?php echo URLROOT;?>Admin/submitNotifications/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST">
                                 <div style="font-size: 15px;">
                                     <label for="subject">Subject: </label>
                                     <input type="text" name="subject" placeholder="Enter your subject here" style="font-size: 15px;">
