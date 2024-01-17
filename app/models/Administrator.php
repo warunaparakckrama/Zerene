@@ -39,6 +39,19 @@
             return $results;
         }
 
+        public function getNotificationsfromId($notification_id){
+            $this->db->query('SELECT * FROM notifications WHERE notification_id = :notification_id');
+            $this->db->bind(':notification_id', $notification_id);
+            $row=$this->db->single();
+    
+            //check row
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
+        }
+
         public function addNotifications($data){
             $this->db->query('INSERT INTO notifications (author, subject, user_type, content, created_at) VALUES (:author, :subject, :user_type, :content, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
             $this->db->bind(':author', $data['author']);
@@ -73,6 +86,23 @@
             }
 
         }
+
+        public function updateNotifications($data){
+            $this->db->query('UPDATE notifications SET subject = :subject, user_type = :user_type, content = :content WHERE notification_id = :notification_id');
+            // Bind values
+            $this->db->bind(':user_id', $data['user_id']);
+            $this->db->bind(':username', $data['username']);
+            $this->db->bind(':password', $data['password']);
+            $this->db->bind(':email', $data['email']);
+
+            // Execute
+            if($this->db->execute()){
+            //add a function to rlaod site
+              return true;
+            } else {
+              return false;
+            }
+        }//yet to finish
 
         public function deleteNotify($notify_id){
             // Begin a transaction to ensure both deletes are successful or fail together
