@@ -755,6 +755,7 @@ class Admin extends Controller{
     }
 
     public function editNotifications($user_id){
+        
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -783,8 +784,8 @@ class Admin extends Controller{
                 $data['author'] = $current_username;
 
                 // post notifications
-                if ($this->adminModel->addNotifications($data)) {
-                    redirect('admin/notifications');
+                if ($this->adminModel->updateNotifications($data)) {
+                    redirect('admin/notifications_view' . $notification_id);
                     } else {
                     die('Something went wrong');
                     }
