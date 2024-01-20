@@ -54,6 +54,80 @@ class Academic extends Controller{
         $data = [];
         $this->view('academic/ac_undergraduate4',$data);
     }
+    public function ac_profile(){
+        $data = [];
+        $this->view('academic/ac_profile',$data);
+    }
+    public function changePwdAcademic ($user_id){
+        if($_SERVER['Request Method']== 'POST'){
+
+            
+            $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+            
+            $data = [
+                'current_password' =>trim($_POST['current password']),
+                'new_password'=>trim($_POST['new password']),
+                'confirm_password'=>trim($_POST['confirm password']),
+                'current_password err'=>'',
+                'new_password_err'=>'',
+            'confirm_password_err'=>''
+        ];
+        
+        if(empty($data['current_password'])){
+            $data['current_password']='please enter the current password';
+        }
+        
+        if(empty($data['new_password'])){
+            $data['new_password_err']='please enter the new password';
+        }elseif(strlen($data['new_password']<6)){
+            $data['new_password_err']= 'please enter 6 or more characters';
+        }
+        if(empty($data['confirm_password_err'])){
+            $data['confirm_password']='please re-enter new password';
+        }else{
+            if($data['new_password']!= $data['confirm_password']){
+                $data['confrim_password_err']='password does not match';
+            }
+        }
+        
+        if(empty($data['username_err']) && empty($data['emai_err']) && empty($data['confirm_password_err'])){
+
+            $hashed_pwd_from_db = $this->UserModel->getPasswordById($user_id);
+            
+            if(!password_verify($data['current_password'],$hashed_pwd_from_db)){
+                $data['current_password_err']= 'current password is incorrect';
+            }else{
+                $data['new_password']= password_hash($data['new_password'],PASSWORD_DEFAULT);
+                
+                if($this->userModel->updatePassword($user_id, $data['new_password'])) {
+                    flash('user_message', 'Password updated successfully');
+                    redirect('academic/ac_profile');
+                } else {
+                    die('Something went wrong');
+                }
+            }
+            
+        }else{
+            $this->view('academic/ac_profile',$data);
+        }
+    }else{
+        $data = [
+            'current_password' => '',
+            'new_password' => '',
+            'confirm_password' => '',
+            'current_password_err'=>'',
+            'new_password_err'=>'',
+            'confirm_password_err'=>''
+          ];
+    
+          $this->view('academic/ac_profile', $data);
+        }
+
+        $this->view('academic/ac_profile', $data);
+
+        
+    }
+
 
 }
 

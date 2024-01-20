@@ -17,7 +17,7 @@
                     <img src="<?php echo IMG;?>ug-avatar-1.svg" alt="ug avatar" width="80" height="80">
                 </a>
                 <p class="p-regular" style="color: var(--zerene-light);">Username</p>
-                <button class="button-second">Edit</button>
+                <button class="button-second"><a href="<?php echo URLROOT;?>academic/ac_profile" class="a-name">Edit</a></button>
             </div>
 
             <div class="sidebar-container3">
