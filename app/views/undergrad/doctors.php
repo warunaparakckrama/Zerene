@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+    <title><?php echo SITENAME;?> | Psychiatrists</title>
 </head>
 <body>
     <section class="sec-1">
@@ -26,7 +27,7 @@
                     <div class="card-green">
                         <img src="<?php echo IMG;?>doc-avatar1.svg" alt="quiz" class="card-profile">
                         <div>
-                            <a href="" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">Dr. Malani Fonseka</p></a>
+                            <a href="<?php echo URLROOT;?>undergrad/doctorprofile" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">Dr. Malani Fonseka</p></a>
                             <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">University of Colombo</p>
                             <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Weekdays from 2.00pm to 5.00pm</p>
                         </div>

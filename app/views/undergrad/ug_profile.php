@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+    <title><?php echo $_SESSION['user_name'];?> | Profile</title>
 </head>
 <body>
     <section class="sec-1">
