@@ -385,7 +385,13 @@ class Admin extends Controller{
     }
   
     public function ad_profile(){
-        $data = [];
+        $data = [
+            'current_password_err' => '',
+            'new_password_err' => '',
+            'confirm_password_err' => '',
+            'current_username_err' => '',
+            'new_username_err' => ''
+        ];
         $this->view('admin/ad_profile', $data);
     }
 
