@@ -50,6 +50,11 @@ class Academic extends Controller{
         $data = [];
         $this->view('academic/ac_undergraduate2', $data);
     }
+    public function ac_undergraduate4(){
+        $data = [];
+        $this->view('academic/ac_undergraduate4',$data);
+    }
+
 }
 
 
