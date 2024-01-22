@@ -47,7 +47,7 @@
 
                         <div class="rectangle">
                             <p>Change Password</p>
-                            <form action="<?php echo URLROOT;?>Admin/changePwdAdmin/<?php echo $_SESSION['user_id'];?>" method="POST" class="subgrid-1">
+                            <form action="<?php echo URLROOT;?>Admin/changePwdAcademic/<?php echo $_SESSION['user_id'];?>" method="POST" class="subgrid-1">
                                 <label for="fname" class="p-regular-grey">Current Password :</label
                                 <input type="password" id="current_password" name="current_password" class="form-default">
                                 <label for="fname" class="p-regular-grey">New Password :</label>
@@ -62,7 +62,7 @@
 
                         <div class="rectangle">
                             <p>Change Username</p>
-                            <form action="<?php echo URLROOT;?>Admin/changeUsernameAdmin/<?php echo $_SESSION['user_id'];?>" method="POST" class="subgrid-1">
+                            <form action="<?php echo URLROOT;?>Academic/changeUsernameAcademic/<?php echo $_SESSION['user_id'];?>" method="POST" class="subgrid-1">
                                 <label for="cusername" class="p-regular-grey">Current Username :</label>
                                 <input type="text" id="current_username" name="current_username" class="form-default">
                                 <label for="nusername" class="p-regular-grey">New Username :</label>
