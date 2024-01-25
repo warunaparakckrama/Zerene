@@ -606,7 +606,7 @@ class Admin extends Controller{
 
         
 
-        if(empty($data['username_err']) && empty($data['email_err'])&& empty($data['confirm_password_err'])){
+        if(empty($data['current_password_err']) && empty($data['new_password_err'])&& empty($data['confirm_password_err'])){
             // Validated
 
             // Fetch the hashed password from the database based on the user ID
