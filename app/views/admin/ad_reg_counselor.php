@@ -86,7 +86,7 @@
                                     <input type="password" name="password" placeholder="Enter Password" class="<?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>">
                                     <p class="p-error"><?php echo $data['password_err']; ?></p><br>
 
-                                    <button class="button-main" type="submit" onclick="return confirmsubmit()">Register</button>
+                                    <button class="button-main" type="submit" onclick="">Register</button>
                                 </div>
                             </form>
                         </div>
@@ -99,13 +99,7 @@
         </section>
 
         <script>
-            function confirmSubmit() {
-                if (confirm("Are you sure you want to submit the form?")) {
-                    return true; // Form will be submitted
-                } else {
-                    return false; // Form submission will be canceled
-                }
-                }
+            
         </script>
     </body>
 <!-- </html> -->
