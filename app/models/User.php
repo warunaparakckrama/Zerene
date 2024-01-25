@@ -241,6 +241,22 @@
             }
         }
 
+        public function findUserTypebyUserid($user_id){
+            $sql = "SELECT user_type FROM users WHERE user_id = :user_id";
+            $this->db->query($sql);
+            $this->db->bind(':user_id', $user_id);
+
+            try {
+                $this->db->execute();
+                $result = $this->db->single();
+
+                return $result->user_type;
+            } catch (PDOException $e) {
+                // Handle the error or return an indication of failure
+                return false;
+            }
+        }
+
         public function getPasswordById($user_id) {
             $sql = "SELECT password FROM users WHERE user_id = :user_id";
             $this->db->query($sql);
