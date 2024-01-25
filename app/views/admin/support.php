@@ -116,7 +116,7 @@
             function confirmResolve(event) {
                 event.preventDefault(); // Prevent the default action of the link
                 if (confirm("Are you sure you want to mark this feedback/ complaint as 'Resolved'? ")) {
-                    // If the user confirms the deletion, proceed with the link action
+                    // If the user confirms the resolvement, proceed with the link action
                     window.location.href = event.target.parentElement.href; // Redirect to the link URL
                 } else {
                     // If the user cancels, do nothing or handle as needed
