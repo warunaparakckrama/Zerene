@@ -79,9 +79,7 @@ tr:nth-child(even) {
                         <input type="text" id="pwd" placeholder="undergraduate id" name="pswd">
                         <label for="pwd">date:</label>
                         <input type="date" id="date" placeholder="date" name="date">
-                        <div class="btn-container">
-                                <button class="button-main">Add</button>
-                            </div>
+                       
                         </form>
                         
                         </div>
@@ -95,7 +93,7 @@ tr:nth-child(even) {
                     <form class="form-inline" action="/action_page.php">
                         <label for="drug">drug:</label>
                         <input type="text" id="drug" placeholder="name of drug" name="medicine">
-                        <label for="amount">amount(mg):</label>
+                        <label for="amount">Unit(mg):</label>
                         <input type="number" id="amount" placeholder="amount in mg" name="amount">
                         <label for="dosage">dosage:</label>
                         <input type="number" id="dosage" placeholder="per day" name="dosage">
@@ -142,6 +140,22 @@ tr:nth-child(even) {
                         </div>
                         </div>
                     </div> 
+                    <div class="card-white">
+                    <p class="p-regular"></p>
+                        
+                    <dev class="card-green-3">
+                    <form action="/action_page.php">
+                       
+                        <label for="amount">Diagnosis with:</label>
+                        <input type="text" id="amount" placeholder="amount in mg" name="amount">
+                        <br>
+                        <label for="dosage">things to be done</label>
+                        <input type="text" id="dosage" placeholder="per day" name="dosage">
+                        <br>
+
+                       
+                        </form>
+                    </div>
                     <a href="<?php echo URLROOT;?>doctor/doc_template"><button class="button-main">press</button></a>  
                
 
