@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+    <title><?php echo SITENAME;?> | Users</title>
 </head>
 <body>
     <section class="sec-1">
@@ -48,7 +49,7 @@
                                             </div>
 
                                             <div class="btn-container">
-                                                <a href="<?php echo URLROOT;?>Users/deleteUG/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-danger">Delete</button></a>
+                                                <a href="<?php echo URLROOT;?>Users/deleteUG/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                             </div>
 
                                         </div>
@@ -89,13 +90,11 @@
                                     <td>
                                         <div class="btn-container-2">
                                             <div class="btn-container">
-                                                <form action="" method="POST">
-                                                    <button class="button-main">Edit</button>
-                                                </form>
+                                                <a href="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $counselor->user_id;?>" style="text-decoration: none;"><button class="button-main">Edit</button></a> 
                                             </div>
 
                                             <div class="btn-container">
-                                                <a href="<?php echo URLROOT;?>Users/deleteCoun/<?php echo $counselor->user_id;?>" style="text-decoration: none;"><button class="button-danger">Delete</button></a>
+                                                <a href="<?php echo URLROOT;?>Users/deleteCoun/<?php echo $counselor->user_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                             </div>
 
                                         </div>
@@ -134,13 +133,11 @@
                                     <td>
                                         <div class="btn-container-2">
                                             <div class="btn-container">
-                                                <form action="" method="POST">
-                                                    <button class="button-main">Edit</button>
-                                                </form>
+                                                <a href="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
                                             </div>
 
                                             <div class="btn-container">
-                                                <a href="<?php echo URLROOT;?>Users/deleteDoc/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-danger">Delete</button></a>
+                                                <a href="<?php echo URLROOT;?>Users/deleteDoc/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                             </div>
 
                                         </div>
@@ -180,4 +177,16 @@
             </div>
         </div>
     </section>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault(); // Prevent the default action of the link
+            if (confirm("Are you sure you want to delete this item?")) {
+                // If the user confirms the deletion, proceed with the link action
+                window.location.href = event.target.parentElement.href; // Redirect to the link URL
+            } else {
+                // If the user cancels, do nothing or handle as needed
+            }
+        }
+
+    </script>
 </body>

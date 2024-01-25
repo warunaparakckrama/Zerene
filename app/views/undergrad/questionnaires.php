@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
         <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+        <title><?php echo SITENAME;?> | Questionnaires</title>
     </head>
     <body>
         <section class="sec-1">
@@ -25,11 +26,11 @@
                         <div class="card-green">
                             <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
                             <div>
-                                <a href="" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">DASS-21</p></a>
+                                <a href="<?php echo URLROOT;?>undergrad/dass21" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">DASS-21</p></a>
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">General Questionnaire for Anxiety, Depression & Stress</p>
                             </div>
                             <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>undergrad/dass21_start" style="text-decoration: none;"><button class="button-main">Start</button></a>
+                                <a href="<?php echo URLROOT;?>undergrad/dass21" style="text-decoration: none;"><button class="button-main">Start</button></a>
                             </div>
                         </div>
                     </div>

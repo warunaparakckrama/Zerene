@@ -19,10 +19,10 @@
             <div class="sidebar-container3">
                 <a href="<?php echo URLROOT; ?>undergrad/home" class="top <?php echo ($currentPage === 'home') ? 'active' : ''; ?>" id="sb-link1">Home</a>
                 <a href="<?php echo URLROOT; ?>undergrad/questionnaires" class="top <?php echo ($currentPage === 'questionnaires') ? 'active' : ''; ?>" id="sb-link2">Questionnaires</a>
-                <a class="top dd-btn">Counsellors</a>
+                <a href="#" class="top dd-btn">Counsellors</a>
                     <div class="dropdown-container">
-                        <a href="<?php echo URLROOT; ?>undergrad/pc" class="dd-content <?php echo ($currentPage === 'pc') ? 'active' : ''; ?>" id="sb-link3">Professional</a>
-                        <a href="<?php echo URLROOT; ?>undergrad/ac" class="dd-content <?php echo ($currentPage === 'ac') ? 'active' : ''; ?>" id="sb-link4">Academic</a>
+                        <a href="<?php echo URLROOT; ?>undergrad/professionalcounsellors" class="dd-content <?php echo ($currentPage === 'pc') ? 'active' : ''; ?>" id="sb-link3">Professional</a>
+                        <a href="<?php echo URLROOT; ?>undergrad/academiccounsellors" class="dd-content <?php echo ($currentPage === 'ac') ? 'active' : ''; ?>" id="sb-link4">Academic</a>
                     </div>
                 <a href="<?php echo URLROOT; ?>undergrad/doctors" class="top <?php echo ($currentPage === 'doctors') ? 'active' : ''; ?>" id="sb-link5">Psychiatrists</a>
                 <a href="<?php echo URLROOT; ?>undergrad/chats" class="top <?php echo ($currentPage === 'chats') ? 'active' : ''; ?>" id="sb-link6">Chats</a>
@@ -30,7 +30,7 @@
             </div>
             <div class="sidebar-container3">
                 <a href="" class="bottom">Help & Info</a>
-                <a href="" class="bottom">Feedback</a>
+                <a href="<?php echo URLROOT; ?>undergrad/feedback" class="bottom <?php echo ($currentPage === 'feedback') ? 'active' : ''; ?>">Feedback</a>
                 <a href="<?php echo URLROOT;?>users/logout" class="bottom">Log out</a>
             </div>
         </div>

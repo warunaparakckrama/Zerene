@@ -76,7 +76,7 @@
     transition: all 300ms ease;
 }
 
-a.bottom{
+.bottom{
     display: block;
     text-decoration: none;
     opacity: 70%;
@@ -87,10 +87,19 @@ a.bottom{
     margin-bottom: 10px;
 }
 
-a.bottom:hover{
+.bottom:hover{
     color: var(--zerene-white);
     /* padding-left: 20px; */
     width: fit-content;
+    margin-left: 5px;
+    transition: all 300ms ease;
+}
+
+.bottom.active{
+    color: var(--zerene-green);
+    background-color: var(--zerene-white);
+    width: 210px;
+    border-radius: 6px;
     margin-left: 5px;
     transition: all 300ms ease;
 }

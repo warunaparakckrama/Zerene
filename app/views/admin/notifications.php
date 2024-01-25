@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
         <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+        <title><?php echo SITENAME;?> | Notifications</title>
     </head>
     <body>
         <section class="sec-1">
@@ -26,31 +27,36 @@
                             <table class="table-1">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
+                                        <th>Author</th>
                                         <th>Subject</th>
-                                        <th>User type</th>
-                                        <th>Content</th>
+                                        <th>User Type</th>
+                                        <th>Created at</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>System Update</td>
-                                        <td>All Users</td>
-                                        <td><p>Dear Users, There will be a system upgrade at 00.00hrs.</p></td>
-                                        <td>
-                                            <div class="btn-container">
-                                                <div class="btn-container">
-                                                    <a href="" style="text-decoration: none;"><button class="button-main">Edit</button></a>
-                                                </div>
 
-                                                <div class="btn-container">
-                                                    <a href="" style="text-decoration: none;"><button class="button-danger">Remove</button></a>
+                                    <?php foreach ($data['notifications'] as $notifications) : ?>
+                                        <tr>
+                                            <td><?php echo $notifications->notification_id?></td>
+                                            <td><?php echo $notifications->author?></td>
+                                            <td><?php echo $notifications->subject?></td>
+                                            <td><?php echo $notifications->user_type?></td>
+                                            <td><?php echo $notifications->created_at?></td>
+                                            <td>
+                                                <div class="btn-container-2">
+                                                    <div class="btn-container">
+                                                        <a href="<?php echo URLROOT;?>Admin/notifications_view/<?php echo $notifications->notification_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
+                                                        <a href="" style="text-decoration: none;"><button class="button-main">Edit</button></a>
+                                                        <a href="<?php echo URLROOT;?>Admin/deleteNotifications/<?php echo $notifications->notification_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
+                                                    </div>
                                                 </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
 
-                                            </div>
-                                        </td>
-                                    </tr>
                                 </tbody>
 
                             </table>
@@ -60,19 +66,20 @@
                     <div class="card-white">
                         <p class="p-regular-grey">Create Notifications</p>
                         <div class="card-green">
-                            <form action="">
+                            <form action="<?php echo URLROOT;?>Admin/submitNotifications/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST">
                                 <div style="font-size: 15px;">
                                     <label for="subject">Subject: </label>
                                     <input type="text" name="subject" placeholder="Enter your subject here" style="font-size: 15px;">
                                     <br><br>
 
                                     <label for="user_type">User Type: </label>
-                                    <select name="user_type" id="user_type">
-                                        <option value="All Users" >All Users</option>
-                                        <option value="Administrators" >Administrators</option>
-                                        <option value="Undergraduates" >Undergraduates</option>
-                                        <option value="Counsellors" >Counsellors</option>
-                                        <option value="Psychiatrists" >Psychiatrists</option>
+                                    <select name="user_type" id="">
+                                        <option value="all users" <?php echo ($data['user_type'] === 'all users') ? 'selected' : ''; ?> >All Users</option>
+                                        <option value="admin" <?php echo ($data['user_type'] === 'admin') ? 'selected' : ''; ?> >Administrators</option>
+                                        <option value="undergrad" <?php echo ($data['user_type'] === 'undergrad') ? 'selected' : ''; ?> >Undergraduates</option>
+                                        <option value="academic" <?php echo ($data['user_type'] === 'academic') ? 'selected' : ''; ?> >Counsellors (Academic)</option>
+                                        <option value="professional" <?php echo ($data['user_type'] === 'professional') ? 'selected' : ''; ?> >Counsellors (Professional)</option>
+                                        <option value="doctors" <?php echo ($data['user_type'] === 'doctor') ? 'selected' : ''; ?> >Psychiatrists</option>
                                     </select><br>
                                     
                                     <label for="content">Content: </label>
@@ -89,6 +96,16 @@
 
             </div>
         </section>
-
+        <script>
+            function confirmDelete(event) {
+                event.preventDefault(); // Prevent the default action of the link
+                if (confirm("Are you sure you want to delete this notification?")) {
+                    // If the user confirms the deletion, proceed with the link action
+                    window.location.href = event.target.parentElement.href; // Redirect to the link URL
+                } else {
+                    // If the user cancels, do nothing or handle as needed
+                }
+            }
+        </script>
     </body>
 <!-- </html> -->

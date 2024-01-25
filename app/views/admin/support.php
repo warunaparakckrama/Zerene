@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
         <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+        <title><?php echo SITENAME;?> | Support</title>
     </head>
     <body>
         <section class="sec-1">
@@ -21,37 +22,38 @@
 
                 <div>
                     <div class="card-white">
-                        <p class="p-regular-grey">Complaints</p>
+                        <p class="p-regular-grey">Feedback</p>
                         <div>
                             <table class="table-1">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>User type</th>
+                                        <th>Username</th>
                                         <th>Email</th>
                                         <th>Title</th>
+                                        <!-- <th>Content</th> -->
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>Ryan Gosling</td>
-                                        <td>Undergraduate</td>
-                                        <td>goslingr@stu.ucsc.cmb.ac.lk</td>
-                                        <td>Login issue</td>
-                                        <td>unresolved</td>
-                                        <td>
-                                            <div class="btn-container">
-                                                <div class="btn-container">
-                                                    <a href="" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                    <a href="" style="text-decoration: none;"><button class="button-main">Resolve</button></a>
-                                                    <a href="" style="text-decoration: none;"><button class="button-danger">Remove</button></a>
+                                    <?php foreach ($data['feedback'] as $feedback) : ?>
+                                        <tr>
+                                            <td><?php echo $feedback->username?></td>
+                                            <td><?php echo $feedback->email?></td>
+                                            <td><?php echo $feedback->title?></td>
+                                            <td><?php echo $feedback->status?></td>
+                                            <td>
+                                                <div class="btn-container-2">
+                                                    <div class="btn-container">
+                                                        <a href="<?php echo URLROOT;?>admin/support_view/<?php echo $feedback->feedback_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
+                                                        <a href="<?php echo URLROOT;?>Admin/resolveFeedback/<?php echo $feedback->feedback_id;?>" style="text-decoration: none;"><button class="button-main" onclick="confirmResolve(event)">Resolve</button></a>
+                                                        <a href="<?php echo URLROOT;?>Admin/delFeedback/<?php echo $feedback->feedback_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
 
                             </table>
@@ -59,37 +61,38 @@
                     </div>
 
                     <div class="card-white">
-                        <p class="p-regular-grey">Feedback</p>
+                        <p class="p-regular-grey">Complaints</p>
                         <div>
                             <table class="table-1">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>User type</th>
+                                        <th>Username</th>
                                         <th>Email</th>
                                         <th>Title</th>
+                                        <!-- <th>Content</th> -->
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>Ryan Gosling</td>
-                                        <td>Undergraduate</td>
-                                        <td>goslingr@stu.ucsc.cmb.ac.lk</td>
-                                        <td>Login issue</td>
-                                        <td>unresolved</td>
-                                        <td>
-                                            <div class="btn-container">
-                                                <div class="btn-container">
-                                                    <a href="" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                    <a href="" style="text-decoration: none;"><button class="button-main">Resolve</button></a>
-                                                    <a href="" style="text-decoration: none;"><button class="button-danger">Remove</button></a>
+                                    <?php foreach ($data['complaint'] as $complaint) : ?>
+                                        <tr>
+                                            <td><?php echo $complaint->username?></td>
+                                            <td><?php echo $complaint->email?></td>
+                                            <td><?php echo $complaint->title?></td>
+                                            <td><?php echo $complaint->status?></td>
+                                            <td>
+                                                <div class="btn-container-2">
+                                                    <div class="btn-container">
+                                                        <a href="<?php echo URLROOT;?>admin/support_view/<?php echo $complaint->feedback_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
+                                                        <a href="<?php echo URLROOT;?>Admin/resolveFeedback/<?php echo $complaint->feedback_id;?>" style="text-decoration: none;"><button class="button-main" onclick="confirmResolve(event)">Resolve</button></a>
+                                                        <a href="<?php echo URLROOT;?>Admin/delFeedback/<?php echo $complaint->feedback_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
 
                             </table>
@@ -99,6 +102,26 @@
 
             </div>
         </section>
+        <script>
+            function confirmDelete(event) {
+                event.preventDefault(); // Prevent the default action of the link
+                if (confirm("Are you sure you want to delete this feedback/ complaint?")) {
+                    // If the user confirms the deletion, proceed with the link action
+                    window.location.href = event.target.parentElement.href; // Redirect to the link URL
+                } else {
+                    // If the user cancels, do nothing or handle as needed
+                }
+            }
 
+            function confirmResolve(event) {
+                event.preventDefault(); // Prevent the default action of the link
+                if (confirm("Are you sure you want to mark this feedback/ complaint as 'Resolved'? ")) {
+                    // If the user confirms the resolvement, proceed with the link action
+                    window.location.href = event.target.parentElement.href; // Redirect to the link URL
+                } else {
+                    // If the user cancels, do nothing or handle as needed
+                }
+            }
+        </script>
     </body>
 <!-- </html> -->

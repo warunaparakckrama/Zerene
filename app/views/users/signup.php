@@ -17,29 +17,21 @@
                 <form action="<?php echo URLROOT;?>users/signup" method="POST">
                     <div class="grid-signup-form">
                         
-                        <label for="age">Age:<sup>*</sup></label>
-                        <input type="text" id="signup-age" name="age" placeholder="Age" class="form-signup <?php echo (!empty($data['age_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['age']; ?>">
+                        <label for="age">Age: <sup>*</sup></label>
+                        <input type="number" id="signup-age" min="18" max="25" name="age" placeholder="Age" class="form-signup <?php echo (!empty($data['age_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['age']; ?>">
                         <p class="p-error"><?php echo $data['age_err']; ?></p>
 
-                        <!-- <label for="gender">Gender: <sup>*</sup></label>
-                        <input type="text" id="signup-gender" name="gender" placeholder="Gender" class="form-signup <?php echo (!empty($data['gender_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['gender']; ?>">
-                        <p class="p-error"><?php echo $data['gender_err']; ?></p> -->
-
-                        <label for="age">Gender: </label>
+                        <label for="gender">Gender: </label>
                         <select name="gender" id="signup-gender">
                             <option value="Male" <?php echo ($data['gender'] === 'Male') ? 'selected' : ''; ?> >Male</option>
                             <option value="Female" <?php echo ($data['gender'] === 'Female') ? 'selected' : ''; ?> >Female</option>
-                            <option value="Other" <?php echo ($data['gender'] === 'Other') ? 'selected' : ''; ?> >Other</option>
+                            <option value="Other" <?php echo ($data['gender'] === 'Other') ? 'selected' : ''; ?> >Prefer not to say</option>
                         </select>
                         <p class="p-error"></p>
 
-                        <label for="email">Student Mail:<sup>*</sup></label>
-                        <input type="text" id="signup-stumail" name="email" placeholder="Student Mail" class="form-signup <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
+                        <label for="email">Student Mail: <sup>*</sup></label>
+                        <input type="email" id="signup-stumail" name="email" placeholder="Student Mail" class="form-signup <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
                         <p class="p-error"><?php echo $data['email_err']; ?></p>
-
-                        <!-- <label for="university">University: <sup>*</sup></label>
-                        <input type="text" id="signup-uni" name="university" placeholder="University" class="form-signup <?php echo (!empty($data['university_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['university']; ?>">
-                        <p class="p-error"><?php echo $data['university_err']; ?></p> -->
 
                         <label for="university">University</label>
                         <select name="university" id="signup-uni">
@@ -49,10 +41,6 @@
                         </select>
                         <p class="p-error"></p>
 
-                        <!-- <label for="faculty">Faculty: <sup>*</sup></label>
-                        <input type="text" id="signup-fac" name="faculty" placeholder="Faculty" class="form-signup <?php echo (!empty($data['faculty_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['faculty']; ?>">
-                        <p class="p-error"><?php echo $data['faculty_err']; ?></p> -->
-
                         <label for="university">Faculty</label>
                         <select name="faculty" id="signup-fac">
                             <option value="Faculty of Science" <?php echo ($data['faculty'] === 'Faculty of Science') ? 'selected' : ''; ?> >Faculty of Science</option>
@@ -61,10 +49,6 @@
                             <option value="School of Computing" <?php echo ($data['faculty'] === 'School of Computing') ? 'selected' : ''; ?> >School of Computing*(UOC)</option>
                         </select>
                         <p class="p-error"></p>
-
-                        <!-- <label for="year">Study Year: <sup>*</sup></label>
-                        <input type="text" id="signup-year" name="year" placeholder="Year of Study" class="form-signup <?php echo (!empty($data['year_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['year']; ?>">
-                        <p class="p-error"><?php echo $data['year_err']; ?></p> -->
 
                         <label for="year">Study Year: </label>
                         <select name="year" id="signup-year">
