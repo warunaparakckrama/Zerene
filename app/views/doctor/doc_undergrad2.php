@@ -33,7 +33,7 @@
                             
                             </div>
                             <div class="btn-container">
-                            <a href="<?php echo URLROOT;?>doctor/doc_undergrad4"><button class="button-main">Add Notes</button></a>
+                            <a href="<?php echo URLROOT;?>doctor/doc_undergrad4" id="sb-link9" style="text-decoration: none;"><button class="button-main">Add Notes</button></a>
                             </div>  
                         </div>
                     </div>

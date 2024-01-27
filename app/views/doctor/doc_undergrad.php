@@ -32,8 +32,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Nilani Thushanthika</p>
                             </div>
                             <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2"><button class="button-main">Profile</button></a>  
-                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3"><button class="button-main">Past Records</button></a>
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2" id="sb-link9" style="text-decoration: none;"><button class="button-main">Profile</button></a>  
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3" id="sb-link9" style="text-decoration: none;"><button class="button-main">Past Records</button></a>
                             </div>
                         </div>
     
@@ -45,8 +45,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Nilani Thushanthika</p>
                             </div>
                             <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2"><button class="button-main">Profile</button></a>  
-                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3"><button class="button-main">Past Records</button></a>
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2" id="sb-link9" style="text-decoration: none;"><button class="button-main">Profile</button></a>  
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3" id="sb-link9" style="text-decoration: none;"><button class="button-main">Past Records</button></a>
                             </div>
                         </div>
     
@@ -58,8 +58,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Nilani Thushanthika</p>
                             </div>
                             <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2"><button class="button-main">Profile</button></a>  
-                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3"><button class="button-main">Past Records</button></a>
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2" id="sb-link9" style="text-decoration: none;"><button class="button-main">Profile</button></a>  
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3" id="sb-link9" style="text-decoration: none;"><button class="button-main">Past Records</button></a>
                             </div>
                         </div>
                     </div>
@@ -75,8 +75,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Pasindi Vindula</p>
                             </div>
                             <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2"><button class="button-main">Profile</button></a>  
-                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3"><button class="button-main">Past Records</button></a>
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2" id="sb-link9" style="text-decoration: none;"><button class="button-main">Profile</button></a>  
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3" id="sb-link9" style="text-decoration: none;"><button class="button-main">Past Records</button></a>
                             </div>
                         </div>
     
@@ -88,8 +88,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Ashan Pabodha</p>
                             </div>
                             <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2"><button class="button-main">Profile</button></a>  
-                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3"><button class="button-main">Past Records</button></a>
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2" id="sb-link9" style="text-decoration: none;"><button class="button-main">Profile</button></a>  
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3" id="sb-link9" style="text-decoration: none;"><button class="button-main">Past Records</button></a>
                             </div>
                         </div>
                     </div>
