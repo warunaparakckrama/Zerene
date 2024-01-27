@@ -202,7 +202,18 @@ class Doctor extends Controller{
         $this->view('doctor/doc_template', $data);
     }  
    
-    
+    public function doc_undergrad2(){
+        $data = [];
+        $this->view('doctor/doc_undergrad2', $data);
+    }  
+    public function doc_undergrad3(){
+        $data = [];
+        $this->view('doctor/doc_undergrad3', $data);
+    }  
+    public function doc_undergrad4(){
+        $data = [];
+        $this->view('doctor/doc_undergrad4', $data);
+    }  
 
 
 
