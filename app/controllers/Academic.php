@@ -8,6 +8,7 @@ class Academic extends Controller
         }
         $this->userModel = $this->model('User');
         $this->adminModel = $this->model('Administrator');
+        $this->acModel = $this->model('ACounsellor');
     }
 
     //page view controllers
@@ -79,6 +80,8 @@ class Academic extends Controller
         $data = [];
         $this->view('academic/ac_profile', $data);
     }
+
+    //function controllers
 
     public function changePwdAcademic($user_id)
     {
@@ -205,5 +208,26 @@ class Academic extends Controller
         $this->view('academic/ac_profile', $data);
     }
 
-    //function controllers
+    public function addTimeslots($user_id){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
+            
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'slot_date' => trim($_POST['slot_date']),
+                'slot_time' => trim($_POST['slot_time']),
+                'slot_type' => trim($_POST['slot_type']),
+                'slot_status' => trim($_POST['slot_status']),
+                'created_by' => trim($_POST['created_by']),
+            ];
+
+            $current_username = $this->userModel->getUsernameById($user_id);
+            $data['created_by'] = $current_username;
+
+            if (condition) {
+                # code...
+            }
+
+        }
+    }
 }

@@ -29,19 +29,19 @@
                         <div>
                             <form action="" method="POST">
                                 <label for="slot_date">Date : </label>
-                                <input type="date" id="date" name="slot_date" class="dropbtn">
+                                <input type="date" id="" name="slot_date" class="dropbtn">
                                 <label for="slot_time">Time : </label>
-                                <input type="time" id="time" name="slot_time" class="dropbtn">
+                                <input type="time" id="" name="slot_time" class="dropbtn">
                                 <label for="slot_type">Type : </label>
                                 <select name="slot_type" class="dropbtn">
                                     <option value="online" <?php echo ($data['slot_type'] === 'online') ? 'selected' : ''; ?> >Online</option>
-                                    <option value="physical <?php echo ($data['slot_type'] === 'physical') ? 'selected' : ''; ?> ">Physical</option>
+                                    <option value="physical" <?php echo ($data['slot_type'] === 'physical') ? 'selected' : ''; ?>>Physical</option>
                                 </select>
+                                <div class="btn-container-2">
+                                    <button class="button-main" type="submit">Create</button>
+                                    <button class="button-danger" type="reset" >Cancel</button>
+                                </div>
                             </form>
-                        </div>
-                        <div class="btn-container-2">
-                            <button class="button-main" type="submit">Create</button>
-                            <button class="button-danger" type="reset" >Cancel</button>
                         </div>
                     </div>
 
