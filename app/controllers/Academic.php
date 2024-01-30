@@ -208,9 +208,10 @@ class Academic extends Controller
         $this->view('academic/ac_profile', $data);
     }
 
-    public function addTimeslots($user_id){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
-            
+    public function addTimeslots($user_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
@@ -224,10 +225,11 @@ class Academic extends Controller
             $current_username = $this->userModel->getUsernameById($user_id);
             $data['created_by'] = $current_username;
 
-            if (condition) {
-                # code...
+            if ($this->acModel->createTimeslots($data)) {
+                redirect('academic/ac_timeslots');
+            } else {
+                die('Something went wrong');
             }
-
         }
     }
 }

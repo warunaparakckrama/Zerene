@@ -17,7 +17,7 @@
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2">
-                    <p class="p-title" style="font-size: 40px;">Questionnaires</p>
+                    <p class="p-title" style="font-size: 40px;">Timeslots</p>
                 </div>
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
@@ -25,9 +25,9 @@
             <div>
                 <div class="card-white">
                     <p class="p-regular">Create New </p>
-                    <div class="sub-container7">
+                    <div class="card-green-6">
                         <div>
-                            <form action="" method="POST">
+                            <form action="<?php echo URLROOT;?>Academic/addTimeslots/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST">
                                 <label for="slot_date">Date : </label>
                                 <input type="date" id="" name="slot_date" class="dropbtn">
                                 <label for="slot_time">Time : </label>
@@ -47,7 +47,39 @@
 
                 </div><br>
                 <div class="card-white">
-                    <p class="p-regular">Available</p>
+                    <p class="p-regular">Created</p>
+                    <div class="card-green-2">
+                        <div>
+                            <p class="p-regular-grey" style="font-size: 20px;">Monday</p>
+                            <p class="p-regular-grey" style="font-size: 15px;">2024-01-29</p>
+                        </div>
+                        <div class="btn-container-2">
+                            <button class="button-main">2.00-2.30pm</button>
+                            <button class="button-main">2.00-2.30pm</button>
+                            <button class="button-main">2.00-2.30pm</button>
+                            <button class="button-main">2.00-2.30pm</button>
+                            <button class="button-main">2.00-2.30pm</button>
+                            <button class="button-main">2.00-2.30pm</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-white">
+                    <p class="p-regular">Reserved</p>
+                    <div class="card-green-2">
+                        <div>
+                            <p class="p-regular-grey" style="font-size: 20px;">Monday</p>
+                            <p class="p-regular-grey" style="font-size: 15px;">2024-01-29</p>
+                        </div>
+                        <div class="btn-container-2">
+                            <button class="button-second">2.00-2.30pm</button>
+                            <button class="button-second">2.00-2.30pm</button>
+                            <button class="button-second">2.00-2.30pm</button>
+                            <button class="button-second">2.00-2.30pm</button>
+                            <button class="button-second">2.00-2.30pm</button>
+                            <button class="button-second">2.00-2.30pm</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
