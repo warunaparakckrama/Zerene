@@ -27,5 +27,12 @@
                 return false;
             }
         }
+
+        public function getTimeslots($username){
+            $this->db->query('SELECT * FROM timeslot WHERE is_deleted = FALSE AND created_by = :username');
+            $this->db->bind(':username', $username);
+            $results = $this->db->resultSet();
+            return $results;
+        }
     }
 ?>

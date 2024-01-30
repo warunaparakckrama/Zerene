@@ -48,20 +48,18 @@
                 </div><br>
                 <div class="card-white">
                     <p class="p-regular">Created</p>
-                    <div class="card-green-2">
-                        <div>
-                            <p class="p-regular-grey" style="font-size: 20px;">Monday</p>
-                            <p class="p-regular-grey" style="font-size: 15px;">2024-01-29</p>
+                    <?php foreach ($data['timeslot'] as $timeslot): ?>
+                        <div class="card-green-2">
+                            <div>
+                                <p class="p-regular-grey" style="font-size: 20px;">Monday</p>
+                                <p class="p-regular-grey" style="font-size: 15px;"><?php echo $timeslot->slot_date?></p>
+                            </div>
+                            <div class="btn-container-2">
+                                
+                                <button class="button-main"><?php echo $timeslot->slot_time?></button>
+                            </div>
                         </div>
-                        <div class="btn-container-2">
-                            <button class="button-main">2.00-2.30pm</button>
-                            <button class="button-main">2.00-2.30pm</button>
-                            <button class="button-main">2.00-2.30pm</button>
-                            <button class="button-main">2.00-2.30pm</button>
-                            <button class="button-main">2.00-2.30pm</button>
-                            <button class="button-main">2.00-2.30pm</button>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
 
                 <div class="card-white">

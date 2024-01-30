@@ -56,9 +56,12 @@ class Academic extends Controller
     }
 
     public function ac_timeslots()
-    {
+    {   
+        $username = $this->userModel->getUsernameById($_SESSION['user_id']);
+        $timeslot = $this->acModel->getTimeslots($username);
         $data = [
-            'slot_type' => ''
+            'slot_type' => '',
+            'timeslot' => $timeslot,
         ];
         $this->view('academic/ac_timeslots', $data);
     }
