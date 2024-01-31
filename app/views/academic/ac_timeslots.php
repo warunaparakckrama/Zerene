@@ -45,8 +45,8 @@
                         </div>
                     </div>
 
-                </div><br>
-                <div class="card-white">
+                </div>
+                <!-- <div class="card-white">
                     <p class="p-regular">Created</p>
                     <?php foreach ($data['timeslot'] as $timeslot): ?>
                         <div class="card-green-2">
@@ -60,6 +60,37 @@
                             </div>
                         </div>
                     <?php endforeach; ?>
+                </div> -->
+
+                <div class="card-white">
+                    <p class="p-regular">Created</p>
+                    <?php
+                    // Grouping timeslots by date
+                    $groupedTimeslots = [];
+                    foreach ($data['timeslot'] as $timeslot) {
+                        $date = date('l', strtotime($timeslot->slot_date)); // Get the day name (e.g., Monday)
+                        $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
+                        $time = date('h:ia', strtotime($timeslot->slot_time));
+                        $groupedTimeslots[$formattedDate][$date][] = $time;
+                    }
+
+                    // Displaying grouped timeslots
+                    foreach ($groupedTimeslots as $formattedDate => $days) {
+                        echo "<div class='card-green-2'>";
+                        foreach ($days as $day => $times) {
+                            echo "<div>";
+                            echo "<p class='p-regular-grey' style='font-size: 20px;'>$day</p>";
+                            echo "<p class='p-regular-grey' style='font-size: 15px;'>$formattedDate</p>";
+                            echo "</div>";
+                            echo "<div class='btn-container-2'>";
+                            foreach ($times as $time) {
+                                echo "<button class='button-main'>$time</button>";
+                            }
+                            echo "</div>";
+                        }
+                        echo "</div>";
+                    }
+                    ?>
                 </div>
 
                 <div class="card-white">
