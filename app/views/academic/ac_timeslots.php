@@ -29,11 +29,13 @@
                         <div>
                             <form action="<?php echo URLROOT;?>Academic/addTimeslots/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST">
                                 <label for="slot_date">Date : </label>
-                                <input type="date" id="" name="slot_date" class="dropbtn">
-                                <label for="slot_time">Time : </label>
-                                <input type="time" id="" name="slot_time" class="dropbtn">
+                                <input type="date" id="" name="slot_date" class="">
+                                <label for="slot_start">Start : </label>
+                                <input type="time" id="" name="slot_start" class="">
+                                <label for="slot_finish">Finish : </label>
+                                <input type="time" id="" name="slot_finish" class="">
                                 <label for="slot_type">Type : </label>
-                                <select name="slot_type" class="dropbtn">
+                                <select name="slot_type" class="">
                                     <option value="online" <?php echo ($data['slot_type'] === 'online') ? 'selected' : ''; ?> >Online</option>
                                     <option value="physical" <?php echo ($data['slot_type'] === 'physical') ? 'selected' : ''; ?>>Physical</option>
                                 </select>
@@ -70,21 +72,24 @@
                     foreach ($data['timeslot'] as $timeslot) {
                         $date = date('l', strtotime($timeslot->slot_date)); // Get the day name (e.g., Monday)
                         $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
-                        $time = date('h:ia', strtotime($timeslot->slot_time));
-                        $groupedTimeslots[$formattedDate][$date][] = $time;
+                        $start_time = date('h:ia', strtotime($timeslot->slot_start));
+                        $end_time = date('h:ia', strtotime($timeslot->slot_finish));
+                        $formattedTimeRange = "$start_time - $end_time";
+                        // $time = date('h:ia', strtotime($timeslot->slot_time));
+                        $groupedTimeslots[$formattedDate][$date][] = $formattedTimeRange;
                     }
 
                     // Displaying grouped timeslots
                     foreach ($groupedTimeslots as $formattedDate => $days) {
                         echo "<div class='card-green-2'>";
-                        foreach ($days as $day => $times) {
+                        foreach ($days as $day => $timeRanges) {
                             echo "<div>";
                             echo "<p class='p-regular-grey' style='font-size: 20px;'>$day</p>";
                             echo "<p class='p-regular-grey' style='font-size: 15px;'>$formattedDate</p>";
                             echo "</div>";
                             echo "<div class='btn-container-2'>";
-                            foreach ($times as $time) {
-                                echo "<button class='button-main'>$time</button>";
+                            foreach ($timeRanges as $timeRange) {
+                                echo "<button class='button-main'>$timeRange</button>";
                             }
                             echo "</div>";
                         }

@@ -7,9 +7,10 @@
         }
 
         public function createTimeslots($data){
-            $this->db->query('INSERT INTO timeslot (slot_date, slot_time, slot_type, created_by) VALUES (:slot_date, :slot_time, :slot_type, :created_by)');
+            $this->db->query('INSERT INTO timeslot (slot_date, slot_start, slot_finish, slot_type, created_by) VALUES (:slot_date, :slot_start, :slot_finish, :slot_type, :created_by)');
             $this->db->bind(':slot_date', $data['slot_date']);
-            $this->db->bind(':slot_time', $data['slot_time']);
+            $this->db->bind(':slot_start', $data['slot_start']);
+            $this->db->bind(':slot_finish', $data['slot_finish']);
             if ($data['slot_type'] === "online") {
                 $this->db->bind(':slot_type', 'online');
             }
