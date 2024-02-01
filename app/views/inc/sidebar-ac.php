@@ -24,7 +24,7 @@
                 <a href="<?php echo URLROOT; ?>academic/ac_home" class="top <?php echo ($currentPage === 'ac_home') ? 'active' : ''; ?>" id="sb-link1">Home</a>
                 <a href="<?php echo URLROOT; ?>academic/ac_opletters" class="top <?php echo ($currentPage === 'ac_opletters') ? 'active' : ''; ?>" id="sb-link2">Opinion Letters</a>
                 <a href="<?php echo URLROOT; ?>academic/ac_undergrads" class="top <?php echo ($currentPage === 'ac_undergrads') ? 'active' : ''; ?>" id="sb-link3">Undergraduates</a>
-                <a class="top dd-btn">Professionals</a>
+                <a href="#" class="top dd-btn">Professionals</a>
                 <div class="dropdown-container">
                     <a href="<?php echo URLROOT;?>academic/ac_counselors" class="dd-content <?php echo ($currentPage === 'ac_counselors') ? 'active' : ''; ?>" id="sb-link4">Counsellors</a>
                     <a href="<?php echo URLROOT; ?>academic/ac_doctors" class="dd-content <?php echo ($currentPage === 'ac_doctors') ? 'active' : ''; ?>" id="sb-link5">Psychiatrists</a>
@@ -35,7 +35,7 @@
                 </div>
             <div class="sidebar-container3">
                 <a href="" class="bottom">Help & Info</a>
-                <a href="" class="bottom">Feedback</a>
+                <a href="<?php echo URLROOT;?>academic/ac_feedback" class="bottom <?php echo($currentPage === 'ac_feedback')? 'active' : ''; ?>" id="sb-link8">Feedback</a>
                 <a href="<?php echo URLROOT;?>users/logout" class="bottom">Log out</a>
             </div>
         </div>

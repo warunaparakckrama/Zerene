@@ -84,6 +84,12 @@ class Academic extends Controller
         $this->view('academic/ac_profile', $data);
     }
 
+    public function ac_feedback()
+    {
+        $data = [];
+        $this->view('academic/ac_feedback', $data);
+    }
+
     //function controllers
 
     public function changePwdAcademic($user_id)
@@ -233,6 +239,51 @@ class Academic extends Controller
                 redirect('academic/ac_timeslots');
             } else {
                 die('Something went wrong');
+            }
+        }
+    }
+
+    public function sentFeedback($user_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'type' => trim($_POST['type']),
+                'username' => trim($_POST['username']),
+                'email' => trim($_POST['email']),
+                'title' => trim($_POST['title']),
+                'content' => trim($_POST['content']),
+                'title_err' => '',
+                'content_err' => '',
+            ];
+        
+            if(empty($data['title'])){
+                $data['title_err']='Please enter the title';  
+            }
+            if(empty($data['content'])){
+                $data['content_err']='Please enter the content';  
+            }
+
+            if(empty($data['title_err']) && empty($data['content_err'])){
+                // Validated
+    
+                // Fetch the current username from db
+                $username = $this->userModel->getUsernameById($user_id);
+                $email = $this->userModel->getEmailById($user_id);
+                $data['username'] = $username;
+                $data['email'] = $email;
+
+                // post notifications
+                if ($this->userModel->addFeedback($data)) {
+                    redirect('undergrad/feedback');
+                    } else {
+                    die('Something went wrong');
+                    }
+
+            } else {
+                // Load view with errors
+                $this->view('academic/ac_feedback', $data);
             }
         }
     }
