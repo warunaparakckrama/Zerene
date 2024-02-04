@@ -1,7 +1,7 @@
 <?php
 
 class Users extends Controller{
-
+    private $userModel;
 
     public function __construct()
     {
