@@ -24,21 +24,21 @@
                     <p class="p-regular">Create New </p>
                         <div class="sub-container7">
                             <div>
-                                <form action="/action_page.php">
-                                    <label for="Date" style="color:grey;">Date : </label>
-                                    <input type="date" id="Date" name="date" class="dropbtn">
-                                    <label for="time" style="color:grey;">Time : </label>
-                                    <input type="Time" id="Time" name="time" class="dropbtn">
-                                    <select id="timeslotm" class="dropbtn">
-                                        <option value="physical">Physical</option>
-                                        <option value="online">Online</option>       
+                                <form action="/action_page.php" methord="post">
+                                    <label for="slot_date" style="color:grey;">Date : </label>
+                                    <input type="date" id="Date" name="slot_date" class="dropbtn">
+                                    <label for="slot_time" style="color:grey;">Time : </label>
+                                    <input type="Time" id="Time" name="slot_time" class="dropbtn">
+                                    <select name="slot_type" class="dropbtn">
+                                        <option value="physical" <?echo($data['slot_type']=== 'online')? 'selected': ''; ?> >Online</option>
+                                        <option value="online" <?echo($data['slot_type']=== 'Physical')? 'selected': ''; ?> >Physical</option>       
                                     </select>             
                                 </form>
                             </div>
                             <div class="subcontainer6">
-                                <button class="button-main">
-                                    Create
-                                </button>
+                                <a href="<?php echo URLROOT;?>Admin/notifications_view/<?php echo $notifications->notification_id;?>" ><button class="button-main" type="submit">Create</button></a>
+                                <button class="button-main" type="reset">Cancel</button>    
+                                
                             </div>
                         </div>
                     

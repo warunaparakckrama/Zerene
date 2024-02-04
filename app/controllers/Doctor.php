@@ -213,7 +213,25 @@ class Doctor extends Controller{
     public function doc_undergrad4(){
         $data = [];
         $this->view('doctor/doc_undergrad4', $data);
-    }  
+    } 
+    
+    public function addTimeslots($user_id){
+        if ($_SERVER['REQUEST_METHORD']=='POST'){
+            $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+
+           $data = [
+                'slot_date'=>trim($_POST['slot_date']),
+                'slot_time'=>trim($_POST['slot_time']),
+                'slot_type'=>trim($_POST['slot_type']),
+                'slot_status'=>trim($_POST['slot_status']),
+                'created_by'=>trim($_POST['created_by']),
+           ];
+           $current_username = $this->userModel->getUsernameById($user_id);
+           $data['created_by'] = $current_username;
+
+
+        }
+    }
 
 
 
