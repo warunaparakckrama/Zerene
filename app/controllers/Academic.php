@@ -1,6 +1,10 @@
 <?php
 class Academic extends Controller
 {
+    private $userModel;
+    private $adminModel;
+    private $acModel;
+
     public function __construct()
     {
         if (!isset($_SESSION['user_id'])) {

@@ -282,6 +282,7 @@
             try {
                 $this->db->execute();
                 $result = $this->db->single();
+                
     
                 // Return the username from the database
                 return $result->username;
