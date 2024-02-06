@@ -54,6 +54,11 @@ class Procounsellor extends Controller{
         redirect('Timeslot/pc_timeslot');
     }
 
+    public function pc_feedback(){
+        $data = [];
+        $this->view('procounsellor/pc_feedback', $data);
+    }
+
     public function changePwdProcounsellor($user_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
