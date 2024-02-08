@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<?php $currernt_page = 'ac_feedback'; ?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
+    <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
+    <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+    <title><?php echo SITENAME;?> | Feedback</title>
+
+</head>
+<body>
+    <section class="sec-1">
+        <div>
+            <?php require APPROOT . '/views/inc/sidebar-ac.php'; ?>
+        </div>
+        <div class="grid-1">
+            <div class="subgrid-1">
+                <p class="p-title" style="font-size: 40px;">Feedback</p>
+                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
+            </div>
+
+            <div>
+                    <div class="card-white">
+                        <p class="p-regular">Submit Feedback/ Complaints</p>
+
+                        <div class="card-green">
+                            <form action="<?php echo URLROOT;?>Academic/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST">
+                            
+                       <!-- //notification success      -->
+                       
+                       <!-- <div class="error">
+                           <div class="error__icon">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none"><path fill="#393a37" d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"></path></svg>
+                           </div>
+                           <div class="error__title">Feedback submitted</div>
+                           <div class="error__close"><svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20"><path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path></svg></div>
+                       </div><br -->
+
+
+                       <div style="font-size: 15px;">
+                        
+                       <label for="type">Type: </label>
+                       <select name="type">
+                           <option value="feedback">Feedback</option>
+                           <option value="complaint">Complaint</option>
+                        </select><br>
+                        
+                        <label for="title">Title: </label>
+                        <input type="text" name="title" class="" value=""><br>
+                        
+                        <label for="content">Content: </label>
+                        <textarea name="content" id="" cols="30" rows="10" style="margin-bottom: 10px;" placeholder="Enter your concern here..."></textarea>
+                        
+                        <div class="btn-container-2">
+                            <a href="" style="text-decoration: none;"><button class="button-main" type="submit">Submit</button></a>
+                            <a href="" style="text-decoration: none;"><button class="button-danger" type="reset">Cancel</button></a>
+                        </div>
+                    </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+
+        </div>
+    </section>
+    
+</body>
+</html>
