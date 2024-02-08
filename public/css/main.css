@@ -253,15 +253,58 @@ select#users option:hover{
 
   .sub-container7{
     display: grid;
-    grid-template-columns: 80% 20%;
-    gap: 10px;
+    grid-template-columns: 90% 10%;
+    gap: 5px;
     background-color: var(--zerene-light);
     border-radius: var(--border-radius-8);
     padding: 10px;
     margin-bottom: 10px;
     align-items: center;
     height: fit-content;
+
     border: var(--zerene-green);
 }
+
+/* error css */
+/* .error {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 320px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    background: var(--zerene-green);
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px -3px #111;
+  }
+  
+  .error__icon {
+    width: 20px;
+    height: 20px;
+    transform: translateY(-2px);
+    margin-right: 8px;
+  }
+  
+  .error__icon path {
+    fill: #130606;
+  }
+  
+  .error__title {
+    font-weight: 500;
+    font-size: 14px;
+    color: #0e0a0a;
+  }
+  
+  .error__close {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  
+  .error__close path {
+    fill: #0d0909;
+  } */
 
 /* Select dropdown end */

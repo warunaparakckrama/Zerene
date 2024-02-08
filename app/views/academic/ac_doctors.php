@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+    <?php $currentPage ='ac_doctors' ; ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,10 @@
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
 </head>
 <body>
-    <section> 
+    <section class="sec-1">
+        <div>
+        <?php require APPROOT . '/views/inc/sidebar-ac.php'; ?>
+        </div> 
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Questionnaires</p></div>
@@ -99,4 +103,4 @@
 
     
 </body>
-</html>
+<!-- </html> -->

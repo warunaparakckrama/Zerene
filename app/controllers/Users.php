@@ -1,7 +1,7 @@
 <?php
 
 class Users extends Controller{
-
+    private $userModel;
 
     public function __construct()
     {
@@ -264,7 +264,7 @@ class Users extends Controller{
         } elseif ($user->user_type === 'pcounsellor') {
             redirect('procounsellor/dashboard');
         } elseif ($user->user_type === 'acounsellor') {
-            redirect('academic/dashboard');
+            redirect('academic/ac_home');
         } elseif ($user->user_type === 'doctor'){
             redirect('doctor/dashboard');
         }
