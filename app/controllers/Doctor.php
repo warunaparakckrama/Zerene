@@ -216,7 +216,7 @@ class Doctor extends Controller{
     } 
     
     public function addTimeslots($user_id){
-        if ($_SERVER['REQUEST_METHORD']=='POST'){
+        if ($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
 
            $data = [
@@ -228,6 +228,8 @@ class Doctor extends Controller{
            ];
            $current_username = $this->userModel->getUsernameById($user_id);
            $data['created_by'] = $current_username;
+
+           if
 
 
         }
