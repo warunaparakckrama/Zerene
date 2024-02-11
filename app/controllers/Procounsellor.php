@@ -25,6 +25,11 @@ class Procounsellor extends Controller{
         $this->view('procounsellor/pc_reviewq', $data);
     }
 
+    public function pc_createq(){
+        $data = [];
+        $this->view('procounsellor/pc_createq', $data);
+    }
+
     public function pc_undergrad(){
         $data = [];
         $this->view('procounsellor/pc_undergrad', $data);
