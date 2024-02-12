@@ -10,6 +10,8 @@ class Procounsellor extends Controller{
         $this->userModel=$this->model('User');
     }
 
+    //page view controllers
+
     public function dashboard(){
         $data = [];
         $this->view('procounsellor/dashboard', $data);
@@ -63,6 +65,8 @@ class Procounsellor extends Controller{
         $data = [];
         $this->view('procounsellor/pc_feedback', $data);
     }
+
+    //function controllers
 
     public function changePwdProcounsellor($user_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -143,5 +147,68 @@ class Procounsellor extends Controller{
         $this->view('procounsellor/pc_profileupdate', $data);
 
     }
+
+    public function changeUsernameProcounsellor($user_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+        $data = [
+          'current_username' => trim($_POST['current_username']),
+          'new_username' => trim($_POST['new_username']),
+          'current_username_err'=>'',
+          'new_username_err'=>'',
+        ];
+
+        if(empty($data['current_username'])){
+            $data['current_username_err']='Please enter current username';      
+        }
+
+        if(empty($data['new_username'])){
+            $data['new_username_err']='Please enter new username';      
+        }elseif(strlen($data['new_username'])<6){
+            $data['new_username_err']='Username must be atleast 6 characters'; 
+        }
+
+        if(empty($data['current_username_err']) && empty($data['new_username_err'])){
+            // Validated
+
+            // Fetch the username from the database based on the user ID
+            $current_username = $this->userModel->getUsernameById($user_id);
+
+            // Verify if the entered current username matches the username from the database
+            if ($data['current_username']!=$current_username) {
+                $data['current_username_err'] = 'Current username is incorrect';
+            } else {
+                // Update the user's username
+                if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
+                flash('user_message', 'Username updated successfully');
+                redirect('procounsellor/pc_profileupdate');
+                } else {
+                die('Something went wrong');
+                }
+            }
+
+          } else {
+            // Load view with errors
+            $this->view('procounsellor/pc_profileupdate', $data);
+          }
+        
+        }   
+    
+        else {
+            $data = [
+            'current_username' => '',
+            'new_username' => '',
+            'current_username_err'=>'',
+            'new_username_err'=>''
+            ];
+    
+          $this->view('procounsellor/pc_profileupdate', $data);
+        }
+
+        $this->view('procounsellor/pc_profileupdate', $data);
+    }
+
 
 }

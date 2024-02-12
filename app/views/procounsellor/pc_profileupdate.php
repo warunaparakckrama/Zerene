@@ -63,7 +63,7 @@
 
                         <div class="rectangle">
                             <p>Change Username</p>
-                            <form action="<?php echo URLROOT; ?>Procounsellor/changePwdProcounsellor/<?php echo $_SESSION['user_id']; ?>" method="POST" class="subgrid-1">
+                            <form action="<?php echo URLROOT; ?>Procounsellor/changeUSernameProcounsellor/<?php echo $_SESSION['user_id']; ?>" method="POST" class="subgrid-1">
                                 <label for="cusername" class="p-regular-grey">Current Username :</label>
                                 <input type="text" id="current_username" name="current_username" class="form-default">
                                 <label for="nusername" class="p-regular-grey">New Username :</label>
