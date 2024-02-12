@@ -33,6 +33,7 @@
                         <div style="font-size: 15px;">
                             <label for="quizName">Questionnaire Name:</label>
                             <input type="text" id="quizName" name="quizName" required><br>
+                            <p class="p-error"><?php echo $data['quizName_err']; ?></p><br>
 
                             <label for="quizType">Questionnaire Type:</label>
                             <select name="quizType" id="quizType" required>
@@ -42,14 +43,17 @@
                                 <option value="GAD-7">Depression</option>
                                 <option value="GAD-7">Other</option>
                             </select><br>
+                            <p class="p-error"><?php echo $data['quizType_err']; ?></p><br>
 
                             <label for="numQuestions">Number of Questions: (max: 21)</label>
                             <input type="number" id="numQuestions" name="numQuestions" min="1" max="21" required oninput="generateQuestionFields()"><br>
+                            <p class="p-error"><?php echo $data['numQuestions_err']; ?></p><br>
 
                             <div id="questionField" style="padding-bottom: 10px;"></div><br>
 
                             <label for="numAnswers">Number of Answers: (max: 5)</label>
                             <input type="number" id="numAnswers" name="numAnswers" min="1" max="5" required oninput="generateAnswerFields()"><br>
+                            <p class="p-error"><?php echo $data['numAnswers_err']; ?></p><br>
 
                             <div id="answerField"></div><br>
 

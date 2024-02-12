@@ -28,7 +28,16 @@ class Procounsellor extends Controller{
     }
 
     public function pc_createq(){
-        $data = [];
+        $data = [
+            'quizName' => '',
+            'quizType' => '',
+            'numQuestions' => '',
+            'numAnswers' => '',
+            'quizName_err'=>'',
+            'quizType_err'=>'',
+            'numQuestions_err'=>'',
+            'numAnswers_err'=>''
+        ];
         $this->view('procounsellor/pc_createq', $data);
     }
 
@@ -210,5 +219,88 @@ class Procounsellor extends Controller{
         $this->view('procounsellor/pc_profileupdate', $data);
     }
 
+    public function createQuestionnaires($user_id){
+        $i = 1;
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Sanitize POST array
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+        $data = [
+          'quizName' => trim($_POST['quizName']),
+          'quizType' => trim($_POST['quizType']),
+          'numQuestions' => trim($_POST['numQuestions']),
+          'question' => trim($_POST['question$i']),
+          'numAnswers' => trim($_POST['numAnswers']),
+          'answer' => trim($_POST['answer$i']),
+          'quizName_err'=>'',
+          'quizType_err'=>'',
+          'numQuestions_err'=>'',
+          'numAnswers_err'=>'',
+          'question_err'=>'',
+          'answer_err'=>''
+        ];
+
+        if(empty($data['quizName'])){
+            $data['quizName_err']='Please enter questionnaire name';      
+        }
+
+        if(empty($data['quizType'])){
+            $data['quizType_err']='Please select questionnaire type';      
+        }
+
+        if(empty($data['numQuestions'])){
+            $data['numQuestions_err']='Please enter number of questions';      
+        }
+
+        if(empty($data['question$i'])){
+            $data['numQuestions_err']='Please enter number of questions';      
+        }
+
+        if(empty($data['numQuestions'])){
+            $data['numQuestions_err']='Please enter number of questions';      
+        }
+
+        if(empty($data['numAnswers'])){
+            $data['numAnswers_err']='Please enter number of answers';      
+        }
+
+        if(empty($data['answer$i'])){
+            $data['numQuestions_err']='Please enter number of questions';      
+        }
+
+        if(empty($data['quizName_err']) && empty($data['quizType_err']) && empty($data['numQuestions_err']) && empty($data['numAnswers_err'])){
+            // Validated
+
+            // Create the questionnaire
+            if ($this->userModel->createQuestionnaire($data)) {
+                flash('user_message', 'Questionnaire created successfully');
+                redirect('procounsellor/pc_createq');
+                } else {
+                die('Something went wrong');
+                }
+          } else {
+            // Load view with errors
+            $this->view('procounsellor/pc_createq', $data);
+          }
+        
+        }   
+    
+        else {
+            $data = [
+            'quizName' => '',
+            'quizType' => '',
+            'numQuestions' => '',
+            'numAnswers' => '',
+            'quizName_err'=>'',
+            'quizType_err'=>'',
+            'numQuestions_err'=>'',
+            'numAnswers_err'=>''
+          ];
+    
+          $this->view('procounsellor/pc_createq', $data);
+        }
+
+        $this->view('procounsellor/pc_createq', $data);
+    }
 
 }
