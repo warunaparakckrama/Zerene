@@ -29,31 +29,31 @@
             <div class="card-white">
                 <p class="p-regular">Create Questionnaires</p>
                 <div class="card-green-5">
-                    <form action="<?php echo URLROOT; ?>procounsellor/pc_createq" method="POST">
+                    <form action="<?php echo URLROOT; ?>Procounsellor/createQuestionnaire/<?php echo $_SESSION['user_id'];?>" method="POST">
                         <div style="font-size: 15px;">
                             <label for="quizName">Questionnaire Name:</label>
-                            <input type="text" id="quizName" name="quizName" required><br>
-                            <p class="p-error"><?php echo $data['quizName_err']; ?></p><br>
+                            <input type="text" id="quizName" name="quiz_name" required><br>
+                            <p class="p-error"><?php echo $data['quiz_name_err']; ?></p><br>
 
-                            <label for="quizType">Questionnaire Type:</label>
-                            <select name="quizType" id="quizType" required>
-                                <option value="DASS-21">General</option>
-                                <option value="PHQ-9">Stress</option>
-                                <option value="GAD-7">Anxiety</option>
-                                <option value="GAD-7">Depression</option>
-                                <option value="GAD-7">Other</option>
+                            <label for="quiz_type">Questionnaire Type:</label>
+                            <select name="quiz_type" id="quiz_type" required>
+                                <option value="general <?php echo ($data['quiz_type'] === 'general') ? 'selected' : ''; ?> ">General</option>
+                                <option value="stress <?php echo ($data['quiz_type'] === 'stress') ? 'selected' : ''; ?> ">Stress</option>
+                                <option value="anxiety <?php echo ($data['quiz_type'] === 'anxiety') ? 'selected' : ''; ?> ">Anxiety</option>
+                                <option value="depression <?php echo ($data['quiz_type'] === 'depression') ? 'selected' : ''; ?> ">Depression</option>
+                                <option value="other <?php echo ($data['quiz_type'] === 'other') ? 'selected' : ''; ?> ">Other</option>
                             </select><br>
-                            <p class="p-error"><?php echo $data['quizType_err']; ?></p><br>
+                            <p class="p-error"><?php echo $data['quiz_type_err']; ?></p><br>
 
-                            <label for="numQuestions">Number of Questions: (max: 21)</label>
-                            <input type="number" id="numQuestions" name="numQuestions" min="1" max="21" required oninput="generateQuestionFields()"><br>
-                            <p class="p-error"><?php echo $data['numQuestions_err']; ?></p><br>
+                            <label for="num_questions">Number of Questions: (max: 21)</label>
+                            <input type="number" id="numQuestions" name="num_questions" min="1" max="21" required oninput="generateQuestionFields()"><br>
+                            <p class="p-error"><?php echo $data['num_questions_err']; ?></p><br>
 
                             <div id="questionField" style="padding-bottom: 10px;"></div><br>
 
-                            <label for="numAnswers">Number of Answers: (max: 5)</label>
-                            <input type="number" id="numAnswers" name="numAnswers" min="1" max="5" required oninput="generateAnswerFields()"><br>
-                            <p class="p-error"><?php echo $data['numAnswers_err']; ?></p><br>
+                            <label for="num_answers">Number of Answers: (max: 5)</label>
+                            <input type="number" id="numAnswers" name="num_answers" min="1" max="5" required oninput="generateAnswerFields()"><br>
+                            <p class="p-error"><?php echo $data['num_answers_err']; ?></p><br>
 
                             <div id="answerField"></div><br>
 
