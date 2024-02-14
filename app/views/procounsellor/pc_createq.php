@@ -29,7 +29,7 @@
             <div class="card-white">
                 <p class="p-regular">Create Questionnaires</p>
                 <div class="card-green-5">
-                    <form action="<?php echo URLROOT; ?>Procounsellor/createQuestionnaire/<?php echo $_SESSION['user_id'];?>" method="POST">
+                    <form action="<?php echo URLROOT; ?>Procounsellor/createQuestionnaire/<?php echo $_SESSION['user_id']; ?>" method="POST">
                         <div style="font-size: 15px;">
                             <label for="quizName">Questionnaire Name:</label>
                             <input type="text" id="quizName" name="quiz_name" required><br>
@@ -58,7 +58,7 @@
                             <div id="answerField"></div><br>
 
                             <div class="btn-container-2">
-                                <a href="" style="text-decoration: none;"><button class="button-main" type="submit">Submit</button></a>
+                                <a href="" style="text-decoration: none;"><button class="button-main" type="submit" onclick="confirmSubmit(event)">Submit</button></a>
                                 <a href="" style="text-decoration: none;"><button class="button-danger" type="reset">Cancel</button></a>
                             </div>
                         </div>
@@ -101,6 +101,13 @@
 
                 container.appendChild(answerInput);
             }
+        }
+
+        function confirmSubmit(event) {
+            if (!confirm("You're about to add a questionnaire. Proceed?")) {
+                event.preventDefault(); // Prevent the default action of the link
+            }
+            alert("questionnaire submitted successfully!");
         }
     </script>
 </body>
