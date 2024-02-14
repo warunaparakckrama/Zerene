@@ -55,33 +55,32 @@
             }
         }
 
-        public function addAnswer($questionnaire_id, $number, $answerText) {
-            // Construct the column name for the answer based on the question_number
-            // $answer_column = 'answer_' . $number;
+        public function addAnswer($questionnaire_id, $number, $answerText) {        
+            // Check if there is already a row for this questionnaire_id
+            $this->db->query('SELECT * FROM answer WHERE questionnaire_id = :questionnaire_id');
+            $this->db->bind(':questionnaire_id', $questionnaire_id);
+            $existingRow = $this->db->single();
         
-            // Prepare the SQL query
-            $this->db->query('INSERT INTO answer (answer_1, answer_2, answer_3, answer_4, answer_5, questionnaire_id) VALUES (:answer_1, :answer_2, :answer_3, :answer_4, :answer_5, :questionnaire_id)');
+            if (!$existingRow) {
+                // If no row exists, create a new row
+                $this->db->query('INSERT INTO answer (questionnaire_id) VALUES (:questionnaire_id)');
+                $this->db->bind(':questionnaire_id', $questionnaire_id);
+                $this->db->execute();
+            }
         
-            // Bind parameters and execute the query
-            if ($number === 1) {
-                $this->db->bind(':answer_1', $answerText);
-            }
-            if ($number === 2) {
-                $this->db->bind(':answer_2', $answerText);
-            }
-            if ($number === 3) {
-                $this->db->bind(':answer_3', $answerText);
-            }
-            if ($number === 4) {
-                $this->db->bind(':answer_4', $answerText);
-            }
-            if ($number === 5) {
-                $this->db->bind(':answer_5', $answerText);
-            }
+            // Update the existing row with the answer
+            $updateQuery = 'UPDATE answer SET ';
+            $updateQuery .= 'answer_' . $number . ' = :answer_text ';
+            $updateQuery .= 'WHERE questionnaire_id = :questionnaire_id';
+        
+            $this->db->query($updateQuery);
+            $this->db->bind(':answer_text', $answerText);
             $this->db->bind(':questionnaire_id', $questionnaire_id);
         
             // Execute the query
             return $this->db->execute();
         }
+        
+        
         
     }

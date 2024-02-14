@@ -283,7 +283,7 @@ class Procounsellor extends Controller{
                                 $answerText = trim($_POST[$answerKey]);
 
                                 // Insert the answer into the database
-                                $this->counsellorModel->addAnswer($questionnaire_id, $j, $answerText);
+                                $this->counsellorModel->addAnswer($questionnaire_id, $i, $answerText);
                             }
                         
                     }
