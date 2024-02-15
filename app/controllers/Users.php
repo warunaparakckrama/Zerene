@@ -262,7 +262,7 @@ class Users extends Controller{
         } elseif ($user->user_type === 'admin') {
             redirect('admin/ad_home');
         } elseif ($user->user_type === 'pcounsellor') {
-            redirect('procounsellor/dashboard');
+            redirect('procounsellor/pc_home');
         } elseif ($user->user_type === 'acounsellor') {
             redirect('academic/ac_home');
         } elseif ($user->user_type === 'doctor'){
