@@ -50,8 +50,15 @@ class Procounsellor extends Controller{
         $this->view('procounsellor/pc_doctors', $data);
     }
 
-    public function pc_timeslot(){
-        redirect('Timeslot/pc_timeslot');
+    public function pc_timeslot()
+    {   
+        $username = $this->userModel->getUsernameById($_SESSION['user_id']);
+        $timeslot = $this->acModel->getTimeslots($username);
+        $data = [
+            'slot_type' => '',
+            'timeslot' => $timeslot,
+        ];
+        $this->view('procounsellor/pc_timeslot', $data);
     }
 
     public function changePwdProcounsellor($user_id){
