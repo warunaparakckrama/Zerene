@@ -291,4 +291,12 @@ class Academic extends Controller
             }
         }
     }
+
+    public function addOpLetter($user_id){
+
+        
+        $username= $this->userModel->getUsernameById($_SESSION['user_id']);
+    }
+
+
 }

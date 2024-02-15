@@ -34,7 +34,7 @@
                         </div>
                         <div class="btn-container">
                             <button class="button-main">Review</button>
-                            <button class="button-main">create </button>
+                            <button class="button-main"> <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4" class="a-name"> create </a></button>
                         </div>
                     </div>
                     <div class="card-green">
@@ -45,7 +45,7 @@
                         </div>
                         <div class="btn-container">
                             <button class="button-main">Review</button>
-                            <button class="button-main">Create</button>
+                            <button class="button-main"> <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4" class="a-name"> Create </a></button>
                         </div>
                     </div>
                 </div>
