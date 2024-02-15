@@ -24,7 +24,7 @@
                     <p class="p-regular">Create New </p>
                         <div class="sub-container7">
                             <div>
-                                <form action="<?php echo URLROOT;?>doctor/addTimeslots/<?php echo $user_id=$_SESSION['user_id'];?>"methord="post">
+                                <form action="<?php echo URLROOT;?>doctor/addTimeslotsDoc/<?php echo $user_id=$_SESSION['user_id'];?>"method="POST">
                                     <label for="slot_date" style="color:grey;">Date : </label>
                                     <input type="date" id="Date" name="slot_date" class="dropbtn">
                                     <label for="slot_time" style="color:grey;">Time : </label>

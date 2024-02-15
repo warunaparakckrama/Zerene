@@ -7,6 +7,7 @@ class Doctor extends Controller{
             redirect('users/login');
         }
         $this->userModel=$this->model('User');   
+        $this->acModel=$this->model('ACounsellor');   
     }
 
     public function dashboard(){
@@ -50,7 +51,13 @@ class Doctor extends Controller{
     } 
     
     public function doc_timeslots(){
-        $data = [];
+        $username = $this->userModel->getUsernameById($_SESSION['user_id']);
+        $timeslot = $this->acModel->getTimeslots($username);
+        $data = [
+            'slot_type' => '',
+            'timeslot' => $timeslot,
+        ];
+       
         $this->view('doctor/doc_timeslots', $data);
     }
     
@@ -215,7 +222,7 @@ class Doctor extends Controller{
         $this->view('doctor/doc_undergrad4', $data);
     } 
     
-    public function addTimeslots($user_id){
+    public function addTimeslotsDoc($user_id){
         if ($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
 
@@ -229,7 +236,12 @@ class Doctor extends Controller{
            $current_username = $this->userModel->getUsernameById($user_id);
            $data['created_by'] = $current_username;
 
-           if
+           if ($this->acModel->createTimeslots($data)) {
+            redirect('doctor/doc_timeslot');
+            # code...
+           }else{
+            die('Something went wrong');
+           }
 
 
         }
