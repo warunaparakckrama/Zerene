@@ -2,12 +2,17 @@
 
 class Procounsellor extends Controller{
     
+
+    private $userModel;
+    private $pcModel;
+
     public function __construct()
     {
         if (!isset($_SESSION['user_id'])) {
             redirect('users/login');
         }
         $this->userModel=$this->model('User');
+        $this->pcModel=$this->model('PCounsellor');
     }
 
     public function dashboard(){
@@ -53,7 +58,7 @@ class Procounsellor extends Controller{
     public function pc_timeslot()
     {   
         $username = $this->userModel->getUsernameById($_SESSION['user_id']);
-        $timeslot = $this->acModel->getTimeslots($username);
+        $timeslot = $this->pcModel->getTimeslots($username);
         $data = [
             'slot_type' => '',
             'timeslot' => $timeslot,

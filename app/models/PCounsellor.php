@@ -1,5 +1,5 @@
 <?php
-    class ACounsellor{
+    class PCounsellor{
         private $db;
 
         public function __construct(){
