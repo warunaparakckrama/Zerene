@@ -37,7 +37,7 @@
                             </div>
                             <div class="subcontainer6">
                                 <button class="button-main" type="submit">Create</button>
-                                <button class="button-main" type="reset">Cancel</button>    
+                                <!-- <button class="button-main" type="reset">Cancel</button>     -->
                                 
                             </div>
                         </div>
