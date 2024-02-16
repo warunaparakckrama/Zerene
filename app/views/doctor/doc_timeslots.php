@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
         <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+        <title><?php echo $_SESSION['user_name']; ?> | Timeslots</title>
 </head>
 <body>
     <section class='sec-1'>
@@ -24,12 +25,14 @@
                     <p class="p-regular">Create New </p>
                         <div class="sub-container7">
                             <div>
-                                <form action="<?php echo URLROOT;?>doctor/addTimeslotsDoc/<?php echo $user_id=$_SESSION['user_id'];?>"method="POST">
+                                <form action="<?php echo URLROOT;?>Doctor/addTimeslotsDoc/<?php echo $user_id=$_SESSION['user_id'];?>"method="POST">
                                     <label for="slot_date" style="color:grey;">Date : </label>
-                                    <input type="date" id="Date" name="slot_date" class="dropbtn">
-                                    <label for="slot_time" style="color:grey;">Time : </label>
-                                    <input type="Time" id="Time" name="slot_time" class="dropbtn">
-                                    <select name="slot_type" class="dropbtn">
+                                    <input type="date" id="Date" name="slot_date" class="">
+                                    <label for="slot_time" style="color:grey;">start : </label>
+                                    <input type="Time" id="Time" name="slot_start" class="">
+                                    <label for="slot_finish" style="color:gray">Finish : </label>
+                                    <input type="time" id="" name="slot_finish" class="">
+                                    <select name="slot_type" class="">
                                         <option value="physical" <?echo($data['slot_type']=== 'online')? 'selected': ''; ?> >Online</option>
                                         <option value="online" <?echo($data['slot_type']=== 'Physical')? 'selected': ''; ?> >Physical</option>       
                                     </select>             
@@ -37,6 +40,9 @@
                             </div>
                             <div class="subcontainer6">
                                 <button class="button-main" type="submit">Create</button>
+                            </div>
+                            <div class="subcontainer6">  
+                                <button class="button-main" type="reset">Cancel</button>
                                 <!-- <button class="button-main" type="reset">Cancel</button>     -->
                                 
                             </div>
