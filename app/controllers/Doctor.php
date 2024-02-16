@@ -1,12 +1,17 @@
 <?php
 
 class Doctor extends Controller{
+
+    private $userModel;
+    private $adminModel;
+    private $acModel;
     public function __construct()
     {
         if (!isset($_SESSION['user_id'])) {
             redirect('users/login');
         }
-        $this->userModel=$this->model('User');   
+        $this->userModel=$this->model('User'); 
+        $this->adminModel = $this->model('Administrator');  
         $this->acModel=$this->model('ACounsellor');   
     }
 
@@ -226,18 +231,19 @@ class Doctor extends Controller{
         if ($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
 
-           $data = [
-                'slot_date'=>trim($_POST['slot_date']),
-                'slot_time'=>trim($_POST['slot_time']),
-                'slot_type'=>trim($_POST['slot_type']),
-                'slot_status'=>trim($_POST['slot_status']),
-                'created_by'=>trim($_POST['created_by']),
-           ];
+            $data = [
+                'slot_date' => trim($_POST['slot_date']),
+                'slot_start' => trim($_POST['slot_start']),
+                'slot_finish' => trim($_POST['slot_finish']),
+                'slot_type' => trim($_POST['slot_type']),
+                'slot_status' => trim($_POST['slot_status']),
+                'created_by' => trim($_POST['created_by']),
+            ];
            $current_username = $this->userModel->getUsernameById($user_id);
            $data['created_by'] = $current_username;
 
            if ($this->acModel->createTimeslots($data)) {
-            redirect('doctor/doc_timeslot');
+            redirect('doctor/doc_timeslots');
             # code...
            }else{
             die('Something went wrong');
