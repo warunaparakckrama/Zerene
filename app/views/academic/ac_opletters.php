@@ -33,7 +33,7 @@
                             <p class="p-regular" style="color:var(--zerene-grey) ;">University of Colombo School of Computing</p>
                         </div>
                         <div class="btn-container">
-                            <button class="button-main">Review</button>
+                            <button class="button-main"> <a href="<?php echo URLROOT; ?>academic/req_letter" class="a-name">Review</a> </button>
                             <button class="button-main"> <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4" class="a-name"> create </a></button>
                         </div>
                     </div>

@@ -298,5 +298,10 @@ class Academic extends Controller
         $username= $this->userModel->getUsernameById($_SESSION['user_id']);
     }
 
+    public function req_letter(){
+        $data = [];
+        $this->view('academic/req_letter', $data);
+    }
+
 
 }
