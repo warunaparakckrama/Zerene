@@ -57,7 +57,7 @@
 
 
             <div>
-                <div class="card-white">
+                <div class="rectangle-2">
                     <!-- <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="pro pic" class="card-profile">
                         <div>
                             <p class="p-regular" style="margin-bottom: -10px;">Zerene_User07</p>
@@ -66,7 +66,7 @@
                     <div class="bodyBody">
                         <div class="divReturnAddress">
 
-                            <p class="p-regular ">Zerene_User07</p>
+                            <p class="p-regular ">Zerene_User07 <?php echo $_SESSION['user_name'];?></p>
                             <p class="p-regular">UCSC</p>
 
                             <!-- date below -->
