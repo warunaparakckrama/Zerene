@@ -17,8 +17,8 @@
 
         <h2>Timeslots Available</h2>
 
-        <?php if (!empty($data['timeslots'])) : ?>
-            <?php foreach ($data['timeslots'] as $timeslot) : ?>
+        <?php if (!empty($data['timeslot'])) : ?>
+            <?php foreach ($data['timeslot'] as $timeslot) : ?>
                 <div class="timeslot-item">
                     <p>Date: <?php echo $timeslot->slot_date; ?></p>
                     <p>Time: <?php echo $timeslot->slot_start . ' - ' . $timeslot->slot_finish; ?></p>

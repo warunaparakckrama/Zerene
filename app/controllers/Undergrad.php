@@ -5,6 +5,7 @@ class Undergrad extends Controller
 
     private $userModel;
     private $adminModel;
+    private $ugModel;
 
     public function __construct()
     {
@@ -13,6 +14,7 @@ class Undergrad extends Controller
         }
         $this->userModel = $this->model('User');
         $this->adminModel = $this->model('Administrator');
+        $this->ugModel = $this->model('Undergraduate');
     }
 
     //user view controllers
@@ -43,8 +45,12 @@ class Undergrad extends Controller
 
     public function view_timeslotpc()
     {
-        $data = [];
+        $timeslot = $this->ugModel->getTimeslotsForUndergrad();
+        $data = [
+            'timeslot' => $timeslot
+        ];
         $this->view('undergrad/view_timeslotpc', $data);
+
     }
 
     public function counsellorprofile()
