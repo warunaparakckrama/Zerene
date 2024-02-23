@@ -8,7 +8,11 @@
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
     <title><?php echo $_SESSION['user_name']; ?> | Timeslots</title>
 </head>
-
+<style>
+    .no-underline {
+        text-decoration: none;
+    }
+</style>
 <body>
     <section class="sec-1">
         <div>
@@ -64,27 +68,25 @@
                         $groupedTimeslots[$formattedDate][$date][] = $formattedTimeRange;
                     } ?>
 
-                    <?php
-                    foreach ($groupedTimeslots as $formattedDate => $days) {
-                        echo "<div class='card-green-2'>";
-                        foreach ($days as $day => $timeRanges) {
-                            echo "<div>";
-                            echo "<p class='p-regular-grey' style='font-size: 20px;'>$day</p>";
-                            echo "<p class='p-regular-grey' style='font-size: 15px;'>$formattedDate</p>";
-                            echo "</div>";
-                            echo "<div class='btn-container-2'>";
-                            foreach ($timeRanges as $timeRange) {
-                                echo "<div class='btn-container-2'>";
-                                echo "<button class='button-main'>$timeRange</button>";
-                                echo "<button class='button-danger' onclick='deleteTimeslots({$timeslot->slot_id})'>Delete</button>";
-                                echo "<button class='button-main' onclick='updateTimeslots({$timeslot->slot_id})'>Edit</button>";
-                                echo "</div>";
-                            }                            
-                            echo "</div>";
-                        }
-                        echo "</div>";
-                    }
-                    ?>
+                    <?php foreach ($groupedTimeslots as $formattedDate => $days) : ?>
+                        <div class='card-green-2'>
+                            <?php foreach ($days as $day => $timeRanges) : ?>
+                                <div>
+                                    <p class='p-regular-grey' style='font-size: 20px;'><?php echo $day; ?></p>
+                                    <p class='p-regular-grey' style='font-size: 15px;'><?php echo $formattedDate; ?></p>
+                                </div>
+                                <div class='btn-container-2'>
+                                    <?php foreach ($timeRanges as $timeRange) : ?>
+                                        <div class='btn-container-2'>
+                                            <a href="<?php echo URLROOT; ?>Procounsellor/deleteTimeslots/<?php echo $timeslot->slot_id; ?>" class='button-danger no-underline' onclick="return confirm('Are you sure you want to delete this timeslot?')">Delete</a>
+                                            <a href="<?php echo URLROOT; ?>Procounsellor/updateTimeslots/<?php echo $timeslot->slot_id; ?>" class='button-main no-underline'>Edit</a>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endforeach; ?>
+
 
                 </div>
 
@@ -110,26 +112,3 @@
 
     </section>
 </body>
-
-<script>
-    function deleteTimeslot(timeslotId) {
-        if (confirm('Are you sure you want to delete this timeslot?')) {
-            fetch(`/your-delete-endpoint/${timeslotId}`, {
-                method: 'DELETE',
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                location.reload();
-            })
-            .catch(error => {
-                console.error('Error deleting timeslot:', error);
-            });
-        }
-    }
-
-    function editTimeslot(timeslotId) {
-        console.log('Edit timeslot:', timeslotId);
-    }
-</script>
-
