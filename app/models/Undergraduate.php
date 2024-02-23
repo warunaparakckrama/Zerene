@@ -13,8 +13,5 @@ class Undergraduate
         $this->db->query('SELECT * FROM timeslot WHERE is_deleted = FALSE');
         $results = $this->db->resultSet();
         return $results;
-
-
-        // return $results;
     }
 }

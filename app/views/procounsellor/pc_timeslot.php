@@ -27,7 +27,7 @@
                     <p class="p-regular">Create New </p>
                     <div class="card-green-6">
                         <div>
-                            <form action="<?php echo URLROOT;?>Procounsellor/addTimeslots/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST">
+                            <form action="<?php echo URLROOT; ?>Procounsellor/addTimeslots/<?php echo $user_id = $_SESSION['user_id']; ?>" method="POST">
                                 <label for="slot_date">Date : </label>
                                 <input type="date" id="" name="slot_date" class="">
                                 <label for="slot_start">Start : </label>
@@ -36,12 +36,12 @@
                                 <input type="time" id="" name="slot_finish" class="">
                                 <label for="slot_type">Type : </label>
                                 <select name="slot_type" class="">
-                                    <option value="online" <?php echo ($data['slot_type'] === 'online') ? 'selected' : ''; ?> >Online</option>
+                                    <option value="online" <?php echo ($data['slot_type'] === 'online') ? 'selected' : ''; ?>>Online</option>
                                     <option value="physical" <?php echo ($data['slot_type'] === 'physical') ? 'selected' : ''; ?>>Physical</option>
                                 </select>
                                 <div class="btn-container-2">
                                     <button class="button-main" type="submit">Create</button>
-                                    <button class="button-danger" type="reset" >Cancel</button>
+                                    <button class="button-danger" type="reset">Cancel</button>
                                 </div>
                             </form>
                         </div>
@@ -62,9 +62,9 @@
                         $formattedTimeRange = "$start_time - $end_time";
                         // $time = date('h:ia', strtotime($timeslot->slot_time));
                         $groupedTimeslots[$formattedDate][$date][] = $formattedTimeRange;
-                    }
+                    } ?>
 
-                    // Displaying grouped timeslots
+                    <?php
                     foreach ($groupedTimeslots as $formattedDate => $days) {
                         echo "<div class='card-green-2'>";
                         foreach ($days as $day => $timeRanges) {
@@ -74,13 +74,18 @@
                             echo "</div>";
                             echo "<div class='btn-container-2'>";
                             foreach ($timeRanges as $timeRange) {
+                                echo "<div class='btn-container-2'>";
                                 echo "<button class='button-main'>$timeRange</button>";
-                            }
+                                echo "<button class='button-danger' onclick='deleteTimeslots({$timeslot->slot_id})'>Delete</button>";
+                                echo "<button class='button-main' onclick='updateTimeslots({$timeslot->slot_id})'>Edit</button>";
+                                echo "</div>";
+                            }                            
                             echo "</div>";
                         }
                         echo "</div>";
                     }
                     ?>
+
                 </div>
 
                 <div class="card-white">
@@ -105,3 +110,26 @@
 
     </section>
 </body>
+
+<script>
+    function deleteTimeslot(timeslotId) {
+        if (confirm('Are you sure you want to delete this timeslot?')) {
+            fetch(`/your-delete-endpoint/${timeslotId}`, {
+                method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error deleting timeslot:', error);
+            });
+        }
+    }
+
+    function editTimeslot(timeslotId) {
+        console.log('Edit timeslot:', timeslotId);
+    }
+</script>
+

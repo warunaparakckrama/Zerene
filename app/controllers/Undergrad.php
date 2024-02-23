@@ -403,11 +403,9 @@ class Undergrad extends Controller
     {
         $data['timeslots'] = $this->userModel->getTimeslotsForUndergrad();
 
-        // Check if $data['timeslots'] is set and not null
         if (isset($data['timeslots']) && is_array($data['timeslots'])) {
             $this->view('undergrad/view_timeslotpc', $data);
         } else {
-            // If not set or null, initialize it as an empty array
             $defaultData = ['timeslots' => []];
             $this->view('undergrad/view_timeslotpc', $defaultData);
         }

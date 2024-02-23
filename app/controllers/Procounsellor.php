@@ -231,4 +231,35 @@ class Procounsellor extends Controller
             }
         }
     }
+
+    public function deleteTimeslots($timeslotId)
+    {
+        if ($this->pcModel->deleteTimeslot($timeslotId)) {
+            redirect('procounsellor/pc_timeslot');
+        } else {
+            die('Something went wrong');
+        }
+    }
+
+    public function updateTimeslots($timeslotId)
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $data=[
+            'slot_id' => $timeslotId,
+            'slot_date' => trim($_POST['slot_date']),
+            'slot_start' => trim($_POST['slot_start']),
+            'slot_finish' => trim($_POST['slot_finish']),
+            'slot_type' => trim($_POST['slot_type']),
+            'slot_status' => trim($_POST['slot_status']),
+            'created_by' => trim($_POST['created_by']),
+        ];
+
+        if ($this->pcModel->updateTimeslot($data)) {
+            redirect('procounsellor/pc_timeslot');
+        } else {
+            die('Something went wrong');
+        }
+    } 
+}
+
 }
