@@ -2,8 +2,6 @@
 
 class Procounsellor extends Controller
 {
-
-
     private $userModel;
     private $pcModel;
 
