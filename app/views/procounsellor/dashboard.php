@@ -11,11 +11,8 @@
 
     <body>
         
-        <section class="sec-1">
-            <div>
-                <?php require APPROOT . '/views/inc/sidebar-pc.php'; ?>
-            </div>
-
+        <section>
+            
             <div class="content" id="content">
                 <?php require APPROOT . '/views/procounsellor/pc_home.php'; ?>
             </div>

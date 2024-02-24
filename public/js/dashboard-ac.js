@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const sblink5 = document.getElementById("sb-link5");
     const sblink6 = document.getElementById("sb-link6");
     const sblink7 = document.getElementById("sb-link7");
+    const sblink8 = document.getElementById("sb-link8");
     
     sblink1.addEventListener("click", function (e) {
         e.preventDefault();
@@ -63,6 +64,11 @@ document.addEventListener("DOMContentLoaded", function () {
     sblink7.addEventListener("click", function (e) {
         e.preventDefault();
         loadView("ac_timeslots"); // Load resources.php
+    });
+
+    sblink8.addEventListener("click", function (e) {
+        e.preventDefault();
+        loadView("ac_undergraduate4"); // Load resources.php
     });
 
     // Call the default view or homepage view
