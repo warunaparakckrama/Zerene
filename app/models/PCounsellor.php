@@ -37,4 +37,33 @@ class PCounsellor
         $results = $this->db->resultSet();
         return $results;
     }
+
+    public function deleteTimeslot($timeslotId)
+    {
+        $this->db->query('DELETE FROM timeslot WHERE slot_id = :timeslotId');
+        $this->db->bind(':timeslotId', $timeslotId);
+
+        return $this->db->execute();
+    }
+
+    public function getTimeslotById($slot_id)
+    {
+        $this->db->query('SELECT * FROM timeslot WHERE slot_id = :slot_id');
+        $this->db->bind(':slot_id', $slot_id);
+        return $this->db->single();
+    }
+
+    public function updateTimeslot($data)
+    {
+        $this->db->query('UPDATE timeslot SET slot_date = :slot_date, slot_start = :slot_start, slot_finish = :slot_finish, slot_type = :slot_type, slot_status = :slot_status WHERE slot_id = :slot_id');
+
+        $this->db->bind(':slot_id', $data['edit_slot_id']);
+        $this->db->bind(':slot_date', $data['slot_date']);
+        $this->db->bind(':slot_start', $data['slot_start']);
+        $this->db->bind(':slot_finish', $data['slot_finish']);
+        $this->db->bind(':slot_type', $data['slot_type']);
+        $this->db->bind(':slot_status', $data['slot_status']);
+
+        return $this->db->execute();
+    }
 }
