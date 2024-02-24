@@ -4,6 +4,8 @@ class Procounsellor extends Controller
 {
     private $userModel;
     private $pcModel;
+    private $adminModel;
+    private $counsellorModel;
 
     public function __construct()
     {
@@ -385,8 +387,6 @@ class Procounsellor extends Controller
 
         $this->view('procounsellor/pc_createq', $data);
     }
-
-}
 
     public function addTimeslots($user_id)
     {
