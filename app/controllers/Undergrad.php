@@ -82,7 +82,12 @@ class Undergrad extends Controller
 
         $undergrads = $this->adminModel->getUndergrads();
         $data = [
-            'undergrads' => $undergrads
+            'undergrads' => $undergrads,
+            'current_password_err' => '',
+            'new_password_err' => '',
+            'confirm_password_err' => '',
+            'current_username_err' => '',
+            'new_username_err' => ''
         ];
         $this->view('undergrad/ug_profile', $data);
     }
