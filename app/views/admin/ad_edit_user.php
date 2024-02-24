@@ -89,14 +89,14 @@
             if (!confirm("You're about to change the Username. Proceed?")) {
                 event.preventDefault(); // Prevent the default action of the link
             }
-        }
+            }
 
             function confirmEditPassword(event) {
             
             if (!confirm("You're about to change the Password. Proceed?")) {
                 event.preventDefault(); // Prevent the default action of the link
             }
-        }
+            }
         </script>
 
     </body>

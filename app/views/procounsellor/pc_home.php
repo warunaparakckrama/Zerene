@@ -1,4 +1,5 @@
-<html>
+<?php $currentPage = 'pc_home'; ?>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,10 @@
     </head>
     <body>
         
-    <section class="sec-1">
-        <div>
-            <?php require APPROOT . '/views/inc/sidebar-pc.php'; ?>
-        </div>
+        <section class="sec-1">
+            <div>
+                <?php require APPROOT . '/views/inc/sidebar-pc.php'; ?>
+            </div>
             <div class="grid-1">  
                 
                 <div class="subgrid-1">
@@ -38,4 +39,3 @@
             </div>
         </section>
     </body>
-</html>

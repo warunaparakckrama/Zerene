@@ -1,4 +1,4 @@
-<?php $currentPage = 'ac_timeslots'; ?>
+<?php $currentPage = 'pc_timeslot'; ?>
 
 <head>
     <meta charset="UTF-8">
