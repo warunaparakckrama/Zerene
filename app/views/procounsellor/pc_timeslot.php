@@ -8,11 +8,7 @@
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
     <title><?php echo $_SESSION['user_name']; ?> | Timeslots</title>
 </head>
-<style>
-    .no-underline {
-        text-decoration: none;
-    }
-</style>
+
 <body>
     <section class="sec-1">
         <div>
@@ -28,26 +24,32 @@
 
             <div>
                 <div class="card-white">
-                    <p class="p-regular"><?php echo isset($data['edit_mode']) && $data['edit_mode'] ? 'Edit' : 'Create'; ?> Timeslot</p>
+                    <p class="p-regular">Create Timeslot</p>
                     <div class="card-green-6">
                         <div>
-                            <form action="<?php echo URLROOT; ?>Procounsellor/addOrUpdateTimeslot/<?php echo $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
-                                <input type="hidden" name="edit_slot_id" value="<?php echo isset($data['edit_slot_id']) ? $data['edit_slot_id'] : ''; ?>">
+                            <form action="<?php echo URLROOT; ?>Procounsellor/addTimeslots/<?php echo $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
                                 <label for="slot_date">Date : </label>
-                                <input type="date" id="" name="slot_date" class="" value="<?php echo isset($data['edit_timeslot']) ? $data['edit_timeslot']->slot_date : ''; ?>">
+                                <input type="date" id="" name="slot_date" class="date" value="">
+                                <span class="error-message"><?php echo $data['slot_date_err']; ?></span><br>
+
                                 <label for="slot_start">Start : </label>
-                                <input type="time" id="" name="slot_start" class="" value="<?php echo isset($data['edit_timeslot']) ? $data['edit_timeslot']->slot_start : ''; ?>">
+                                <input type="time" id="" name="slot_start" class="time" value="">
+                                <span class="error-message"><?php echo $data['slot_start_err']; ?></span><br>
+
                                 <label for="slot_finish">Finish : </label>
-                                <input type="time" id="" name="slot_finish" class="" value="<?php echo isset($data['edit_timeslot']) ? $data['edit_timeslot']->slot_finish : ''; ?>">
+                                <input type="time" id="" name="slot_finish" class="time" value="">
+                                <span class="error-message"><?php echo $data['slot_finish_err']; ?></span><br>
+
                                 <label for="slot_type">Type : </label>
-                                <select name="slot_type" class="">
-                                    <option value="online" <?php echo (isset($data['edit_timeslot']) && $data['edit_timeslot']->slot_type === 'online') ? 'selected' : ''; ?>>Online</option>
-                                    <option value="physical" <?php echo (isset($data['edit_timeslot']) && $data['edit_timeslot']->slot_type === 'physical') ? 'selected' : ''; ?>>Physical</option>
+                                <select name="slot_type" class="type">
+                                    <option value="online">Online</option>
+                                    <option value="physical">Physical</option>
                                 </select>
+                                <span class="error-message"><?php echo $data['slot_type_err']; ?></span><br>
 
                                 <div class="btn-container-2">
-                                    <button class="button-main" type="submit"><?php echo isset($data['edit_mode']) && $data['edit_mode'] ? 'Update' : 'Create'; ?></button>
-                                    <button class="button-danger" type="reset" onclick="toggleForm()">Cancel</button>
+                                    <button class="button-main" type="submit">Create</button>
+                                    <button class="button-danger" type="button" onclick="cancelCreate()">Cancel</button>
                                 </div>
                             </form>
                         </div>
@@ -56,60 +58,44 @@
 
                 <div class="card-white">
                     <p class="p-regular">Created</p>
-                    <?php
-                    // Grouping timeslots by date
-                    $groupedTimeslots = [];
-                    foreach ($data['timeslot'] as $timeslot) {
-                        $date = date('l', strtotime($timeslot->slot_date)); // Get the day name (e.g., Monday)
-                        $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
-                        $start_time = date('h:ia', strtotime($timeslot->slot_start));
-                        $end_time = date('h:ia', strtotime($timeslot->slot_finish));
-                        $formattedTimeRange = "$start_time - $end_time";
-                        $groupedTimeslots[$formattedDate][$date][] = $formattedTimeRange;
-                    } ?>
+                    <?php if (isset($data['timeslot']) && !empty($data['timeslot'])) : ?>
+                        <?php
+                        // Grouping timeslots by date
+                        $groupedTimeslots = [];
+                        foreach ($data['timeslot'] as $timeslot) {
+                            $date = date('l', strtotime($timeslot->slot_date));
+                            $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
+                            $start_time = date('h:ia', strtotime($timeslot->slot_start));
+                            $end_time = date('h:ia', strtotime($timeslot->slot_finish));
+                            $formattedTimeRange = "$start_time - $end_time";
+                            $groupedTimeslots[$formattedDate][$date][] = $formattedTimeRange;
+                        }
 
-                    <!-- <?php foreach ($groupedTimeslots as $formattedDate => $days) : ?>
-                        <div class='card-green-2'>
-                            <?php foreach ($days as $day => $timeRanges) : ?>
-                                <div>
-                                    <p class='p-regular-grey' style='font-size: 20px;'><?php echo $day; ?></p>
-                                    <p class='p-regular-grey' style='font-size: 15px;'><?php echo $formattedDate; ?></p>
-                                </div>
-                                <div class='btn-container-2'>
-                                    <?php foreach ($timeRanges as $timeRange) : ?>
-                                        <div class='btn-container-2'>
-                                            <a href="<?php echo URLROOT; ?>Procounsellor/deleteTimeslots/<?php echo $timeslot->slot_id; ?>" class='button-danger no-underline' onclick="return confirm('Are you sure you want to delete this timeslot?')">Delete</a>
-                                            <a href="<?php echo URLROOT; ?>Procounsellor/updateTimeslots/<?php echo $timeslot->slot_id; ?>" class='button-main no-underline'>Edit</a>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endforeach; ?> -->
-
-                    <?php
-                    // Displaying grouped timeslots
-                    foreach ($groupedTimeslots as $formattedDate => $days) {
-                        echo "<div class='card-green-2'>";
-                        foreach ($days as $day => $timeRanges) {
-                            echo "<div>";
-                            echo "<p class='p-regular-grey' style='font-size: 20px;'>$day</p>";
-                            echo "<p class='p-regular-grey' style='font-size: 15px;'>$formattedDate</p>";
-                            echo "</div>";
-                            echo "<div class='btn-container-2'>";
-                            foreach ($timeRanges as $timeRange) {
-                                echo "<button class='button-main'>$timeRange</button>";
-                                echo "<button class='button-main' onclick='editTimeslot($timeslot->slot_id, \"$timeslot->slot_date\", \"$timeslot->slot_start\", \"$timeslot->slot_finish\", \"$timeslot->slot_type\")'>Edit</button>";
-                                echo "<form action='" . URLROOT . "Procounsellor/deleteTimeslot/{$timeslot->slot_id}' method='POST'>";
-                                echo "<button type='submit' class='button-danger' onclick='return confirm(\"Are you sure you want to delete this timeslot?\")'>Delete</button>";
-                                echo "</form>";
+                        // Displaying grouped timeslots
+                        foreach ($groupedTimeslots as $formattedDate => $days) {
+                            echo "<div class='card-green-2'>";
+                            foreach ($days as $day => $timeRanges) {
+                                echo "<div>";
+                                echo "<p class='p-regular-grey' style='font-size: 20px;'>$day</p>";
+                                echo "<p class='p-regular-grey' style='font-size: 15px;'>$formattedDate</p>";
+                                echo "</div>";
+                                echo "<div class='btn-container-2'>";
+                                foreach ($timeRanges as $timeRange) {
+                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $timeRange . '</a>';
+                                }
+                                echo "</div>";
                             }
                             echo "</div>";
                         }
-                        echo "</div>";
-                    }
-                    ?>
+                        ?>
+
+                    <?php else : ?>
+                        <p>No timeslots created yet.</p>
+                    <?php endif; ?>
                 </div>
+
+
+
 
                 <div class="card-white">
                     <p class="p-regular">Reserved</p>
@@ -133,20 +119,8 @@
     </section>
 
     <script>
-        function editTimeslot(slot_id, slot_date, slot_start, slot_finish, slot_type) {
-            document.getElementById('edit_slot_id').value = slot_id;
-            document.getElementById('slot_date').value = slot_date;
-            document.getElementById('slot_start').value = slot_start;
-            document.getElementById('slot_finish').value = slot_finish;
-            document.getElementById('slot_type').value = slot_type;
-
-            // Set edit mode to true
-            document.getElementById('edit_mode').value = '1';
-        }
-
-        function toggleForm() {
+        function cancelCreate() {
             document.getElementById('timeslotForm').reset();
-            document.getElementById('edit_mode').value = '0';
         }
     </script>
 

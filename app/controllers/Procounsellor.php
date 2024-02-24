@@ -18,7 +18,6 @@ class Procounsellor extends Controller
         $this->pcModel = $this->model('PCounsellor');
     }
 
-
     //page view controllers
 
     public function dashboard()
@@ -94,32 +93,28 @@ class Procounsellor extends Controller
     {
         $username = $this->userModel->getUsernameById($_SESSION['user_id']);
         $timeslot = $this->pcModel->getTimeslots($username);
+
         $data = [
             'slot_type' => '',
             'timeslot' => $timeslot,
+            'slot_date_err' => '',
+            'slot_start_err' => '',
+            'slot_finish_err' => '',
+            'slot_type_err' => '',
         ];
 
-        // Check for edit mode
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_slot_id'])) {
-            $slot_id = $_POST['edit_slot_id'];
-            $timeslot = $this->pcModel->getTimeslotById($slot_id);
-
-            $data['edit_mode'] = true;
-            $data['edit_slot_id'] = $slot_id;
-            $data['edit_timeslot'] = $timeslot;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->handleCreateTimeslot($data, $username);
         }
 
         $this->view('procounsellor/pc_timeslot', $data);
     }
-
-
 
     public function pc_feedback()
     {
         $data = [];
         $this->view('procounsellor/pc_feedback', $data);
     }
-
 
     //function controllers
     public function sentFeedback($user_id)
@@ -396,6 +391,100 @@ class Procounsellor extends Controller
         $this->view('procounsellor/pc_createq', $data);
     }
 
+    public function addTimeslots($user_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'slot_date' => trim($_POST['slot_date']),
+                'slot_start' => trim($_POST['slot_start']),
+                'slot_finish' => trim($_POST['slot_finish']),
+                'slot_type' => trim($_POST['slot_type']),
+                'slot_status' => '', // Add this line
+                'created_by' => '', // Add this line
+                'slot_date_err' => '',
+                'slot_start_err' => '',
+                'slot_finish_err' => '',
+                'slot_type_err' => '',
+            ];
+
+            if (empty($data['slot_date'])) {
+                $data['slot_date_err'] = 'Please select a date.';
+            }
+
+            if (empty($data['slot_start'])) {
+                $data['slot_start_err'] = 'Please select a start time.';
+            }
+
+            if (empty($data['slot_finish'])) {
+                $data['slot_finish_err'] = 'Please select a finish time.';
+            }
+
+            if (empty($data['slot_type'])) {
+                $data['slot_type_err'] = 'Please select a slot type.';
+            }
+            $this->handleCreateTimeslot($data, $user_id);
+
+            $username = $this->userModel->getUsernameById($user_id);
+            $data['timeslot'] = $this->pcModel->getTimeslots($username);
+
+            $this->view('procounsellor/pc_timeslot', $data);
+        }
+        $this->view('procounsellor/pc_timeslot');
+    }
+
+    public function editTimeslot($timeslotId)
+    {
+        $timeslot = $this->pcModel->getTimeslotById($timeslotId);
+
+        if (!$timeslot) {
+            die('Timeslot not found');
+        }
+
+        $data = [
+            'timeslot' => $timeslot,
+            'slot_date_err' => '',
+            'slot_start_err' => '',
+            'slot_finish_err' => '',
+            'slot_type_err' => ''
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data['timeslot']->slot_date = trim($_POST['slot_date']);
+            $data['timeslot']->slot_start = trim($_POST['slot_start']);
+            $data['timeslot']->slot_finish = trim($_POST['slot_finish']);
+            $data['timeslot']->slot_type = trim($_POST['slot_type']);
+
+            $this->handleEditTimeslot($data);
+        }
+
+        $this->view('procounsellor/pc_view_timeslot', $data);
+    }
+
+
+    private function handleEditTimeslot(&$data)
+    {
+        if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
+            if ($this->pcModel->updateTimeslot($data['timeslot'])) {
+                redirect('procounsellor/pc_timeslot');
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
+
+    private function handleCreateTimeslot(&$data, $user_id)
+    {
+        $current_username = $this->userModel->getUsernameById($user_id);
+        $data['created_by'] = $current_username;
+
+        if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
+            if ($this->pcModel->createTimeslots($data)) {
+                redirect('procounsellor/pc_timeslot');
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
 
     public function deleteTimeslot($timeslotId)
     {
@@ -408,68 +497,23 @@ class Procounsellor extends Controller
         }
     }
 
-    public function addOrUpdateTimeslot($user_id)
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+    public function pc_view_timeslot($timeslotId)
+    {
+        $timeslot = $this->pcModel->getTimeslotById($timeslotId);
+
+        if ($timeslot) {
             $data = [
-                'edit_slot_id' => isset($_POST['edit_slot_id']) ? $_POST['edit_slot_id'] : null,
-                'slot_date' => trim($_POST['slot_date']),
-                'slot_start' => trim($_POST['slot_start']),
-                'slot_finish' => trim($_POST['slot_finish']),
-                'slot_type' => trim($_POST['slot_type']),
-                'slot_status' => trim($_POST['slot_status']),
-                'created_by' => trim($_POST['created_by']),
+                'timeslot' => $timeslot, 
+                'slot_date_err' => '', 
+                'slot_start_err' => '',
+                'slot_finish_err' => '',
+                'slot_type_err' => ''
             ];
 
-            if ($data['edit_slot_id']) {
-                if ($this->pcModel->updateTimeslot($data)) {
-                    redirect('procounsellor/pc_timeslot');
-                } else {
-                    die('Something went wrong');
-                }
-            } else {
-                $current_username = $this->userModel->getUsernameById($user_id);
-                $data['created_by'] = $current_username;
-
-                if ($this->pcModel->createTimeslots($data)) {
-                    redirect('procounsellor/pc_timeslot');
-                } else {
-                    die('Something went wrong');
-                }
-            }
+            $this->view('procounsellor/pc_view_timeslot', $data);
+        } else {
+            die('Timeslot not found');
         }
     }
-
-    public function deleteTimeslots($timeslotId)
-    {
-        if ($this->pcModel->deleteTimeslot($timeslotId)) {
-            redirect('procounsellor/pc_timeslot');
-        } else {
-            die('Something went wrong');
-        }
-    }
-
-    public function updateTimeslots($timeslotId)
-{
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $data=[
-            'slot_id' => $timeslotId,
-            'slot_date' => trim($_POST['slot_date']),
-            'slot_start' => trim($_POST['slot_start']),
-            'slot_finish' => trim($_POST['slot_finish']),
-            'slot_type' => trim($_POST['slot_type']),
-            'slot_status' => trim($_POST['slot_status']),
-            'created_by' => trim($_POST['created_by']),
-        ];
-
-        if ($this->pcModel->updateTimeslot($data)) {
-            redirect('procounsellor/pc_timeslot');
-        } else {
-            die('Something went wrong');
-        }
-    } 
-}
-
 }

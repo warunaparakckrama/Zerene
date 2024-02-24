@@ -38,23 +38,45 @@ class PCounsellor
         return $results;
     }
 
+    public function getTimeslotById($timeslotId)
+{
+    $this->db->query('SELECT * FROM timeslot WHERE slot_id = :timeslotId');
+    $this->db->bind(':timeslotId', $timeslotId);
+
+    return $this->db->single(); // Ensure your database interaction methods are functioning correctly
+}
+
+
+
+
     public function deleteTimeslot($timeslotId)
     {
-        $this->db->query('UPDATE timeslot SET is_deleted = TRUE WHERE slot_id = :slot_id');
-        $this->db->bind(':slot_id', $timeslotId);
+        error_log('Deleting timeslot: ' . $timeslotId);
 
-        return $this->db->execute();
+        $this->db->query('DELETE FROM timeslot WHERE slot_id = :timeslotId');
+        $this->db->bind(':timeslotId', $timeslotId);
+
+        $result = $this->db->execute();
+
+        if ($result) {
+            error_log('Timeslot deleted successfully.');
+        } else {
+            error_log('Error deleting timeslot.');
+        }
+
+        return $result;
     }
 
 
-    public function updateTimeslot($data)
+    public function updateTimeslot($timeslot)
     {
-        $this->db->query('UPDATE timeslot SET slot_date = :slot_date, slot_start = :slot_start, slot_finish = :slot_finish, slot_type = :slot_type WHERE slot_id = :slot_id ');
-        $this->db->bind(':slot_id', $data['slot_id']);
-        $this->db->bind(':slot_date', $data['slot_date']);
-        $this->db->bind(':slot_start', $data['slot_start']);
-        $this->db->bind(':slot_finish', $data['slot_finish']);
-        $this->db->bind(':slot_type', $data['slot_type']);
+        $this->db->query('UPDATE timeslot SET slot_date = :slot_date, slot_start = :slot_start, slot_finish = :slot_finish, slot_type = :slot_type WHERE slot_id = :slot_id');
+
+        $this->db->bind(':slot_id', $timeslot->slot_id);
+        $this->db->bind(':slot_date', $timeslot->slot_date);
+        $this->db->bind(':slot_start', $timeslot->slot_start);
+        $this->db->bind(':slot_finish', $timeslot->slot_finish);
+        $this->db->bind(':slot_type', $timeslot->slot_type);
 
         return $this->db->execute();
     }
