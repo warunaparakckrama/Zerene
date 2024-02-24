@@ -49,7 +49,7 @@ class PCounsellor
 
     public function updateTimeslot($data)
     {
-        $this->db->query(' UPDATE timeslot SET slot_date = :slot_date, slot_start = :slot_start, slot_finish = :slot_finish, slot_type = :slot_type WHERE slot_id = :slot_id ');
+        $this->db->query('UPDATE timeslot SET slot_date = :slot_date, slot_start = :slot_start, slot_finish = :slot_finish, slot_type = :slot_type WHERE slot_id = :slot_id ');
         $this->db->bind(':slot_id', $data['slot_id']);
         $this->db->bind(':slot_date', $data['slot_date']);
         $this->db->bind(':slot_start', $data['slot_start']);

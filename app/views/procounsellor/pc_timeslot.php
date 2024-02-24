@@ -68,7 +68,7 @@
                         $groupedTimeslots[$formattedDate][$date][] = $formattedTimeRange;
                     } ?>
 
-                    <?php foreach ($groupedTimeslots as $formattedDate => $days) : ?>
+                    <!-- <?php foreach ($groupedTimeslots as $formattedDate => $days) : ?>
                         <div class='card-green-2'>
                             <?php foreach ($days as $day => $timeRanges) : ?>
                                 <div>
@@ -85,9 +85,9 @@
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                    <?php endforeach; ?>
+                    <?php endforeach; ?> -->
 
-
+                    <?php
                     // Displaying grouped timeslots
                     foreach ($groupedTimeslots as $formattedDate => $days) {
                         echo "<div class='card-green-2'>";
@@ -99,7 +99,7 @@
                             echo "<div class='btn-container-2'>";
                             foreach ($timeRanges as $timeRange) {
                                 echo "<button class='button-main'>$timeRange</button>";
-                                echo "<button class='button-main' style='background-color: #D3CDFF;' onclick='editTimeslot($timeslot->slot_id, \"$timeslot->slot_date\", \"$timeslot->slot_start\", \"$timeslot->slot_finish\", \"$timeslot->slot_type\")'>Edit</button>";
+                                echo "<button class='button-main' onclick='editTimeslot($timeslot->slot_id, \"$timeslot->slot_date\", \"$timeslot->slot_start\", \"$timeslot->slot_finish\", \"$timeslot->slot_type\")'>Edit</button>";
                                 echo "<form action='" . URLROOT . "Procounsellor/deleteTimeslot/{$timeslot->slot_id}' method='POST'>";
                                 echo "<button type='submit' class='button-danger' onclick='return confirm(\"Are you sure you want to delete this timeslot?\")'>Delete</button>";
                                 echo "</form>";
