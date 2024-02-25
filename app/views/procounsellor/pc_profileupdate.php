@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
-    <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+    <title><?php echo $_SESSION['user_name'];?> | Profile</title>
 </head>
 
 <body>
@@ -24,14 +25,14 @@
             <div>
 
                 <div class="card-white">
-                    <p class="p-regular-grey">User Account</p>
+                    <p class="p-regular-grey">Counsellor Account</p>
                     <div class="subgrid-4">
 
                         <div class="rectangle">
-                            <p>General</p>
+                            <p>General</p><br/>
                             <table>
                                 <tr>
-                                    <td class="p-regular-grey">Admin ID</td>
+                                    <td class="p-regular-grey">Counsellor ID</td>
                                     <td class="p-regular-grey">:</td>
                                     <td class="p-title"><?php echo $_SESSION['user_id']; ?></td>
                                 </tr>
@@ -53,10 +54,13 @@
                             <form action="<?php echo URLROOT; ?>Procounsellor/changePwdProcounsellor/<?php echo $_SESSION['user_id']; ?>" method="POST" class="subgrid-1">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
                                 <input type="password" id="current_password" name="current_password" class="form-default">
+                                <p class="p-error"><?php echo isset($data['current_password_err']) ? $data['current_password_err'] : ''; ?></p><br>
                                 <label for="fname" class="p-regular-grey">New Password :</label>
                                 <input type="password" id="new_password" name="new_password" class="form-default">
+                                <p class="p-error"><?php echo isset($data['new_password_err']) ? $data['new_password_err'] : ''; ?></p><br>
                                 <label for="fname" class="p-regular-grey">Confirm Password :</label>
                                 <input type="password" id="confirm_password" name="confirm_password" placeholder="" class="form-default">
+                                <p class="p-error"><?php echo isset($data['confirm_password_err']) ? $data['confirm_password_err'] : ''; ?></p><br>
                                 <button class="button-main" type="submit">Change</button>
                             </form>
                         </div>
@@ -66,8 +70,10 @@
                             <form action="<?php echo URLROOT; ?>Procounsellor/changeUSernameProcounsellor/<?php echo $_SESSION['user_id']; ?>" method="POST" class="subgrid-1">
                                 <label for="cusername" class="p-regular-grey">Current Username :</label>
                                 <input type="text" id="current_username" name="current_username" class="form-default">
+                                <p class="p-error"><?php echo isset($data['current_username_err']) ? $data['current_username_err'] : ''; ?></p><br>
                                 <label for="nusername" class="p-regular-grey">New Username :</label>
                                 <input type="text" id="new_username" name="new_username" class="form-default">
+                                <p class="p-error"><?php echo isset($data['new_username_err']) ? $data['new_username_err'] : ''; ?></p><br>
                                 <button class="button-main" type="submit">Change</button>
                             </form>
                         </div>

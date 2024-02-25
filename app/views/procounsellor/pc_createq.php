@@ -51,7 +51,7 @@
 
                             <div id="questionField" style="padding-bottom: 10px;"></div><br>
 
-                            <label for="num_answers">Number of Answers: (max: 5)</label>
+                            <label for="num_answers">Number of Answers: (min: 4 | max: 5)</label>
                             <input type="number" id="numAnswers" name="num_answers" min="1" max="5" required oninput="generateAnswerFields()"><br>
                             <p class="p-error"><?php echo $data['num_answers_err']; ?></p><br>
 
