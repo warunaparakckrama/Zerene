@@ -36,7 +36,7 @@
                         $formattedTimeRange = "$start_time - $end_time";
                         $groupedTimeslots[$formattedDate][$date][] = [
                             'timeRange' => $formattedTimeRange,
-                            'user' => isset($timeslot->user_name) ? $timeslot->user_name : 'Unknown', // Check if user_name exists
+                            'user' => isset($timeslot->created_by) ? $timeslot->created_by : 'Unknown', // Check if user_name exists
                             'reserved' => isset($timeslot->reserved_by) ? $timeslot->reserved_by : null, // Check if reserved_by exists
                             'id' => isset($timeslot->id) ? $timeslot->id : null, // Check if id exists
                         ];
