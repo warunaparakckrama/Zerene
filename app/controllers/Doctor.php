@@ -5,6 +5,8 @@ class Doctor extends Controller{
     private $userModel;
     private $adminModel;
     private $acModel;
+    private $docModel;
+
     public function __construct()
     {
         if (!isset($_SESSION['user_id'])) {
@@ -12,8 +14,11 @@ class Doctor extends Controller{
         }
         $this->userModel=$this->model('User'); 
         $this->adminModel = $this->model('Administrator');  
-        $this->acModel=$this->model('ACounsellor');   
-    }
+        $this->acModel=$this->model('ACounsellor');
+        $this->docModel=$this->model('psychiatrist');
+        
+    
+    }  
 
     public function dashboard(){
         $data = [];
@@ -51,7 +56,13 @@ class Doctor extends Controller{
     }
 
     public function prescription(){
-        $data = [];
+        $username = $this->userModel->getUsernameById($_SESSION['user_id']);
+        $prescription = $this->docModel->getPrescription($username);
+        $data = [
+            'gender' => '',
+            'prescription' => $prescription,
+        ];
+       
         $this->view('doctor/prescription', $data);
     } 
     
@@ -254,5 +265,45 @@ class Doctor extends Controller{
     }
 
 
+    public function addMedicine($user_id){
+        if ($_SERVER['REQUEST_METHOD']=='POST'){
+            $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
 
-}
+            $drugs = $_POST['drug'];
+            $units = $_POST['unit'];
+            $dosages = $_POST['dosage'];
+    
+            // Assuming all arrays have the same length
+            $numRecords = count($drugs);
+    
+            for ($i = 0; $i < $numRecords; $i++) {
+
+            $data = [
+                'pres_id' => trim($_POST['pres_id']),
+                'pres_date' => trim($_POST['pres_date']),
+                'ug_name' => trim($_POST['ug_name']),
+                'age' => trim($_POST['age']),
+                'gender' => trim($_POST['gender']),
+                'diagnosis_with' => trim($_POST['diagnosis_with']),
+                'drug' => $_POST['drug'],
+                'unit' => $_POST['unit'],
+                'dosage' => $_POST['dosage'],
+                'created_by' => trim($_POST['created_by']),
+            ];
+
+            $current_username = $this->userModel->getUsernameById($user_id);
+            $data['created_by'] = $current_username;
+ 
+            if ($this->docModel->createPrescription($data)) {
+             redirect('doctor/doc_template');
+             # code...
+            }else{
+             die('Something went wrong');
+            }
+ 
+            }
+
+        
+    }
+
+    }}
