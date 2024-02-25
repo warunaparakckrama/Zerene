@@ -35,6 +35,12 @@ class Undergrad extends Controller
         $this->view('undergrad/questionnaires', $data);
     }
 
+    public function professionalcounsellors()
+    {
+        $data = [];
+        $this->view('undergrad/professionalcounsellors', $data);
+    }
+
     public function academiccounsellors()
     {
         $data = [];

@@ -1,6 +1,6 @@
 <!-- <!DOCTYPE html>
 <html lang="en"> -->
-<?php $currentPage = 'ac'; ?>
+<?php $currentPage = 'academiccounsellors'; ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
         
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Counsellors</p></div>
+                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Academic Counsellors</p></div>
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
             </div>
             
