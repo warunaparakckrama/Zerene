@@ -19,10 +19,9 @@
             <div class="sidebar-container3">
                 <a href="<?php echo URLROOT; ?>undergrad/home" class="top <?php echo ($currentPage === 'home') ? 'active' : ''; ?>" id="sb-link1">Home</a>
                 <a href="<?php echo URLROOT; ?>undergrad/questionnaires" class="top <?php echo ($currentPage === 'questionnaires') ? 'active' : ''; ?>" id="sb-link2">Questionnaires</a>
-                <a href="<?php echo URLROOT; ?>undergrad/professionalcounsellors" class="top <?php echo ($currentPage === 'professionalcounsellors') ? 'active' : ''; ?>" id="sb-link3">Counsellors (Prof.)</a>
-                <a href="<?php echo URLROOT; ?>undergrad/academiccounsellors" class="top <?php echo ($currentPage === 'academiccounsellors') ? 'active' : ''; ?>" id="sb-link4">Counsellors (Acad.)</a>
-                
+                <a href="<?php echo URLROOT; ?>undergrad/academiccounsellors" class="top <?php echo ($currentPage === 'academiccounsellors') ? 'active' : ''; ?>" id="sb-link4">Counsellors</a>
                 <a href="<?php echo URLROOT; ?>undergrad/doctors" class="top <?php echo ($currentPage === 'doctors') ? 'active' : ''; ?>" id="sb-link5">Psychiatrists</a>
+                <a href="<?php echo URLROOT; ?>undergrad/view_timeslotpc" class="top <?php echo ($currentPage === 'view_timeslotpc') ? 'active' : ''; ?>" id="sb-link3">Timeslots</a>
                 <a href="<?php echo URLROOT; ?>undergrad/chats" class="top <?php echo ($currentPage === 'chats') ? 'active' : ''; ?>" id="sb-link6">Chats</a>
                 <a href="<?php echo URLROOT; ?>undergrad/resources" class="top <?php echo ($currentPage === 'resources') ? 'active' : ''; ?>" id="sb-link7">Resources</a>
             </div>
