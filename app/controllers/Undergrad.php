@@ -405,7 +405,6 @@ class Undergrad extends Controller
         $this->view('undergrad/ug_profile', $data);
     }
 
-
     public function viewTimeslots()
     {
         $data['timeslots'] = $this->userModel->getTimeslotsForUndergrad();
@@ -419,32 +418,36 @@ class Undergrad extends Controller
     }
 
     public function reserveTimeslot($timeslotId)
-    {
-        if (!isset($_SESSION['user_id'])) {
-            redirect('users/login');
-        }
-
-        $timeslot = $this->timeslotModel->getTimeslotById($timeslotId);
-
-        if (!$timeslot) {
-            redirect('timeslot/view');
-        }
-
-        $isReserved = $this->timeslotModel->isTimeslotReserved($timeslotId, $_SESSION['user_id']);
-
-        if ($isReserved) {
-            $result = $this->timeslotModel->cancelReservation($timeslotId, $_SESSION['user_id']);
-        } else {
-            $result = $this->timeslotModel->reserveTimeslot($timeslotId, $_SESSION['user_id']);
-        }
-
-        if ($result) {
-            $_SESSION['success_message'] = $isReserved ? 'Reservation canceled successfully' : 'Timeslot reserved successfully';
-        } else {
-            $_SESSION['error_message'] = 'Failed to reserve or cancel timeslot';
-        }
-
-        header('Location: ' . URLROOT . '/timeslot/view');
+{
+    if (!isset($_SESSION['user_id'])) {
+        redirect('users/login');
     }
+
+    $timeslotModel = new Timeslot();
+
+    $timeslot = $timeslotModel->getTimeslotById($timeslotId);
+
+    if (!$timeslot) {
+        redirect('undergrad/view_timeslotpc');
+    }
+
+    $isReserved = $timeslotModel->isTimeslotReserved($timeslotId, $_SESSION['user_id']);
+
+    if ($isReserved) {
+        $result = $timeslotModel->cancelReservation($timeslotId, $_SESSION['user_id']);
+    } else {
+        $result = $timeslotModel->reserveTimeslot($timeslotId, $_SESSION['user_id']);
+    }
+
+    if ($result) {
+        $_SESSION['success_message'] = $isReserved ? 'Reservation canceled successfully' : 'Timeslot reserved successfully';
+    } else {
+        $_SESSION['error_message'] = 'Failed to reserve or cancel timeslot';
+    }
+
+    redirect('undergrad/view_timeslotpc');
 }
 
+
+
+}
