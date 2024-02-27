@@ -51,11 +51,11 @@
 
         .prescription-table th {
          background-color: #f2f2f2;
-         height: 50px; /* Set header row height */
+         height: 80px; /* Set header row height */
 }
 
         .prescription-table td {
-         height: 60px; /* Set data row height */
+         height: 80px; /* Set data row height */
 }
 
 
@@ -71,6 +71,7 @@
         .col2, .col4 {
             width: 35%;
         }
+       
         
         
     </style>
