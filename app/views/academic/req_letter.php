@@ -66,7 +66,7 @@
                     <div class="bodyBody">
                         <div class="divReturnAddress">
 
-                            <p class="p-regular ">Zerene_User07 <?php echo $_SESSION['user_name'];?></p>
+                            <p class="p-regular ">Zerene_User07 </p>
                             <p class="p-regular">UCSC</p>
 
                             <!-- date below -->
@@ -75,7 +75,7 @@
                             </p><br>
                             
                             <p>
-                                Sehr geehrte Frau Graf,
+                            <?php echo $_SESSION['user_name'];?> ,
                             </p>
 
                         </div>

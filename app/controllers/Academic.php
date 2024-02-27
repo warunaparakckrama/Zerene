@@ -75,25 +75,30 @@ class Academic extends Controller
         $data = [];
         $this->view('academic/ac_undergraduate2', $data);
     }
-
+    
     public function ac_undergraduate4()
     {
         $data = [];
         $this->view('academic/ac_undergraduate4', $data);
     }
-
+    
     public function ac_profile()
     {
         $data = [];
         $this->view('academic/ac_profile', $data);
     }
-
+    
     public function ac_feedback()
     {
         $data = [];
         $this->view('academic/ac_feedback', $data);
     }
 
+    public function req_letter(){
+        $data = [];
+        $this->view('academic/req_letter', $data);
+    }
+    
     //function controllers
 
     public function changePwdAcademic($user_id)
@@ -292,16 +297,11 @@ class Academic extends Controller
         }
     }
 
-    public function addOpLetter($user_id){
-
-        
+    public function addOpLetter($user_id){   
         $username= $this->userModel->getUsernameById($_SESSION['user_id']);
     }
 
-    public function req_letter(){
-        $data = [];
-        $this->view('academic/req_letter', $data);
-    }
+
 
 
 }
