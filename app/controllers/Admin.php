@@ -760,14 +760,14 @@ class Admin extends Controller{
         }
     }
 
-    public function editNotifications($user_id){
+    public function editNotifications($notification_id){
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'author' => trim($_POST['author']),
+                'notification_id' => $notification_id,
                 'subject' => trim($_POST['subject']),
                 'user_type' => trim($_POST['user_type']),
                 'content' => trim($_POST['content']),
@@ -786,12 +786,12 @@ class Admin extends Controller{
                 // Validated
     
                 // Fetch the current username from db
-                $current_username = $this->userModel->getUsernameById($user_id);
-                $data['author'] = $current_username;
+                // $current_username = $this->userModel->getUsernameById($user_id);
+                // $data['author'] = $current_username;
 
                 // post notifications
                 if ($this->adminModel->updateNotifications($data)) {
-                    redirect('admin/notifications_view' . $notification_id);
+                    redirect('admin/notifications_view/' . $notification_id);
                     } else {
                     die('Something went wrong');
                     }
