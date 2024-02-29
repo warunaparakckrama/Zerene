@@ -29,9 +29,15 @@ class Academic extends Controller
         $this->view('academic/ac_home', $data);
     }
 
-    public function ac_opletters()
-    {
-        $data = [];
+    public function ac_opletters() {
+        // Load the model
+        // $this->acModel->model('YourModel');
+        $session_id=$_SESSION['user_id'];
+
+        // Get data from the model
+        $data['rletter'] = $this->acModel->getOpRequest($session_id);
+
+        // Load the view and pass the data to it
         $this->view('academic/ac_opletters', $data);
     }
 
@@ -60,7 +66,7 @@ class Academic extends Controller
     }
 
     public function ac_timeslots()
-    {   
+    {
         $username = $this->userModel->getUsernameById($_SESSION['user_id']);
         $timeslot = $this->acModel->getTimeslots($username);
         $data = [
@@ -75,30 +81,34 @@ class Academic extends Controller
         $data = [];
         $this->view('academic/ac_undergraduate2', $data);
     }
-    
+
     public function ac_undergraduate4()
     {
         $data = [];
         $this->view('academic/ac_undergraduate4', $data);
     }
-    
+
     public function ac_profile()
     {
         $data = [];
         $this->view('academic/ac_profile', $data);
     }
-    
+
     public function ac_feedback()
     {
         $data = [];
         $this->view('academic/ac_feedback', $data);
     }
 
-    public function req_letter(){
-        $data = [];
+    public function req_letter()
+    {
+        // $rletter = $this->acModel->getOpRequest();
+        $data = [
+            // 'rletter' => $rletter
+        ];
         $this->view('academic/req_letter', $data);
     }
-    
+
     //function controllers
 
     public function changePwdAcademic($user_id)
@@ -252,8 +262,9 @@ class Academic extends Controller
         }
     }
 
-    public function sentFeedback($user_id){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function sentFeedback($user_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -266,17 +277,17 @@ class Academic extends Controller
                 'title_err' => '',
                 'content_err' => '',
             ];
-        
-            if(empty($data['title'])){
-                $data['title_err']='Please enter the title';  
+
+            if (empty($data['title'])) {
+                $data['title_err'] = 'Please enter the title';
             }
-            if(empty($data['content'])){
-                $data['content_err']='Please enter the content';  
+            if (empty($data['content'])) {
+                $data['content_err'] = 'Please enter the content';
             }
 
-            if(empty($data['title_err']) && empty($data['content_err'])){
+            if (empty($data['title_err']) && empty($data['content_err'])) {
                 // Validated
-    
+
                 // Fetch the current username from db
                 $username = $this->userModel->getUsernameById($user_id);
                 $email = $this->userModel->getEmailById($user_id);
@@ -286,22 +297,13 @@ class Academic extends Controller
                 // post notifications
                 if ($this->userModel->addFeedback($data)) {
                     redirect('undergrad/feedback');
-                    } else {
+                } else {
                     die('Something went wrong');
-                    }
-
+                }
             } else {
                 // Load view with errors
                 $this->view('academic/ac_feedback', $data);
             }
         }
     }
-
-    public function addOpLetter($user_id){   
-        $username= $this->userModel->getUsernameById($_SESSION['user_id']);
-    }
-
-
-
-
 }
