@@ -40,7 +40,7 @@
                             <form action="<?php echo URLROOT;?>Undergrad/submitResponses/<?php echo $_SESSION['user_id'];?>" method="POST">
                             <input type="hidden" name="questionnaire_id" value="<?php echo $questionnaire->questionnaire_id; ?>">
                                 <div>
-                                    <?php foreach ($data['question'] as $question) : ?>
+                                    <!-- <?php foreach ($data['question'] as $question) : ?>
                                         <div style="margin-bottom: 10px;">
                                             <p class="p-regular-green" style="font-size: 17px; font-weight:500;"><?php echo $question->question_text?></p>
                                             <label class="radio">
@@ -57,10 +57,37 @@
                                             </label>
                                             <?php if ($answer->answer_5!==NULL) {
                                               echo '<label class="radio">';
-                                              echo '<input type="radio" name="a5" value="4"><p class="p-regular-green" style="font-size: 15px;">'.$answer->answer_5.'</p>';
+                                              echo '<input type="radio" name="" value="4"><p class="p-regular-green" style="font-size: 15px;">'.$answer->answer_5.'</p>';
                                                 echo '</label>';  
                                             }
                                             ?>
+                                        </div>
+                                    <?php endforeach; ?> -->
+                                    <?php foreach ($data['question'] as $i => $question) : ?>
+                                        <div style="margin-bottom: 10px;">
+                                            <p class="p-regular-green" style="font-size: 17px; font-weight:500;"><?php echo $question->question_text ?></p>
+                                            <label class="radio">
+                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="0">
+                                                <p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_1 ?></p>
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="1">
+                                                <p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_2 ?></p>
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="2">
+                                                <p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_3 ?></p>
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="3">
+                                                <p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_4 ?></p>
+                                            </label>
+                                            <?php if ($answer->answer_5 !== NULL) : ?>
+                                                <label class="radio">
+                                                    <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="4">
+                                                    <p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_5 ?></p>
+                                                </label>
+                                            <?php endif; ?>
                                         </div>
                                     <?php endforeach; ?>
                                     <div class="btn-container-2">
