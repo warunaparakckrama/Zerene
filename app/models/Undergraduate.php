@@ -60,24 +60,24 @@ class Undergraduate
 
     public function storeResponses($data)
     {
-        // Prepare the placeholders for responses
-        $responsePlaceholders = '';
-        foreach ($data['responses'] as $question_id => $answer_value) {
-            $responsePlaceholders .= ":q{$question_id}_response, ";
-        }
-
         // Build the SQL query
         $query = 'INSERT INTO response (';
-        $query .= implode(', ', array_keys($data['responses']));
-        $query .= ', questionnaire_id, user_id, attempted_at) VALUES (';
-        $query .= $responsePlaceholders . ':questionnaire_id, :user_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s")';
+        for ($i = 1; $i <= 21; $i++) {
+            $query .= "q{$i}_response, ";
+        }
+        $query .= 'questionnaire_id, user_id, attempted_at) VALUES (';
+        for ($i = 1; $i <= 21; $i++) {
+            $query .= ":q{$i}_response, ";
+        }
+        $query .= ':questionnaire_id, :user_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))';
 
         // Bind parameters
         $this->db->query($query);
 
         // Bind individual responses
-        foreach ($data['responses'] as $question_id => $answer_value) {
-            $this->db->bind(":q{$question_id}_response", $answer_value);
+        for ($i = 1; $i <= 21; $i++) {
+            $responseKey = "q{$i}_response";
+            $this->db->bind(":{$responseKey}", $data['responses'][$i]);
         }
 
         $this->db->bind(':questionnaire_id', $data['questionnaire_id']);
@@ -90,5 +90,7 @@ class Undergraduate
             return false;
         }
     }
+
+
 
 }

@@ -44,16 +44,16 @@
                                         <div style="margin-bottom: 10px;">
                                             <p class="p-regular-green" style="font-size: 17px; font-weight:500;"><?php echo $question->question_text?></p>
                                             <label class="radio">
-                                                <input type="radio" name="<?php echo $question->question_id?>" value="0"><p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_1?></p>
+                                                <input type="radio" name="<?php echo $question->question_id. '_response'?>" value="0"><p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_1?></p>
                                             </label>
                                             <label class="radio">
-                                                <input type="radio" name="<?php echo $question->question_id?>" value="1"><p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_2?></p>
+                                                <input type="radio" name="<?php echo $question->question_id. '_response'?>" value="1"><p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_2?></p>
                                             </label>
                                             <label class="radio">
-                                                <input type="radio" name="<?php echo $question->question_id?>" value="2"><p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_3?></p>
+                                                <input type="radio" name="<?php echo $question->question_id. '_response'?>" value="2"><p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_3?></p>
                                             </label>
                                             <label class="radio">
-                                                <input type="radio" name="<?php echo $question->question_id?>" value="3"><p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_4?></p>
+                                                <input type="radio" name="<?php echo $question->question_id. '_response'?>" value="3"><p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_4?></p>
                                             </label>
                                             <?php if ($answer->answer_5!==NULL) {
                                               echo '<label class="radio">';
