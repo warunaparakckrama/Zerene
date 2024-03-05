@@ -472,12 +472,13 @@ class Undergrad extends Controller
 
     public function submitResponses($user_id) //questionnaire_id need to be resolved
     {
+        $questionnaire_id = trim($_POST['questionnaire_id']);
         if ($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
                 'user_id' => $user_id,
-                'questionnaire_id' => '',
+                'questionnaire_id' => $questionnaire_id,
                 'responses' => []
             ];
 
@@ -501,7 +502,7 @@ class Undergrad extends Controller
             }
         }
         else {
-            redirect('undergrad/quiz_view/' );
+            redirect('undergrad/quiz_view/' . $questionnaire_id);
         } 
     }
 
