@@ -34,9 +34,31 @@ class Undergrad extends Controller
     }
 
     public function questionnaires()
+    {   
+        $questionnaire = $this->ugModel->getQuestionnaireDetails();
+        $data = [
+            'questionnaire' => $questionnaire
+        ];
+        $this->view('undergrad/questionnaires', $data);
+    }
+
+    public function quiz_view($questionnaire_id)
+    {   
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($questionnaire_id);
+        $question = $this->ugModel->getQuestionsfromQuestionnaireId($questionnaire_id);
+        $answer = $this->ugModel->getAnswersfromQuestionnaireId($questionnaire_id);
+        $data = [
+            'questionnaire' => $questionnaire,
+            'question' => $question,
+            'answer' => $answer
+        ];
+        $this->view('undergrad/quiz_view', $data);
+    }
+
+    public function professionalcounsellors()
     {
         $data = [];
-        $this->view('undergrad/questionnaires', $data);
+        $this->view('undergrad/professionalcounsellors', $data);
     }
 
     public function academiccounsellors()
@@ -418,35 +440,35 @@ class Undergrad extends Controller
     }
 
     public function reserveTimeslot($timeslotId)
-{
-    if (!isset($_SESSION['user_id'])) {
-        redirect('users/login');
-    }
+    {
+        if (!isset($_SESSION['user_id'])) {
+            redirect('users/login');
+        }
 
-    $timeslotModel = new Timeslot();
+        $timeslotModel = new Timeslot();
 
-    $timeslot = $timeslotModel->getTimeslotById($timeslotId);
+        $timeslot = $timeslotModel->getTimeslotById($timeslotId);
 
-    if (!$timeslot) {
+        if (!$timeslot) {
+            redirect('undergrad/view_timeslotpc');
+        }
+
+        $isReserved = $timeslotModel->isTimeslotReserved($timeslotId, $_SESSION['user_id']);
+
+        if ($isReserved) {
+            $result = $timeslotModel->cancelReservation($timeslotId, $_SESSION['user_id']);
+        } else {
+            $result = $timeslotModel->reserveTimeslot($timeslotId, $_SESSION['user_id']);
+        }
+
+        if ($result) {
+            $_SESSION['success_message'] = $isReserved ? 'Reservation canceled successfully' : 'Timeslot reserved successfully';
+        } else {
+            $_SESSION['error_message'] = 'Failed to reserve or cancel timeslot';
+        }
+
         redirect('undergrad/view_timeslotpc');
     }
-
-    $isReserved = $timeslotModel->isTimeslotReserved($timeslotId, $_SESSION['user_id']);
-
-    if ($isReserved) {
-        $result = $timeslotModel->cancelReservation($timeslotId, $_SESSION['user_id']);
-    } else {
-        $result = $timeslotModel->reserveTimeslot($timeslotId, $_SESSION['user_id']);
-    }
-
-    if ($result) {
-        $_SESSION['success_message'] = $isReserved ? 'Reservation canceled successfully' : 'Timeslot reserved successfully';
-    } else {
-        $_SESSION['error_message'] = 'Failed to reserve or cancel timeslot';
-    }
-
-    redirect('undergrad/view_timeslotpc');
-}
 
 
 
