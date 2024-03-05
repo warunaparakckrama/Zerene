@@ -37,7 +37,7 @@
                     <div class="card-white">
                         <p class="p-regular">Questionnaire</p>
                         <div class="card-green-3">
-                            <form action="" method="POST">
+                            <form action="<?php echo URLROOT;?>Undergrad/submitResponses/<?php echo $_SESSION['user_id'];?>" method="POST">
                                 <div>
                                     <?php foreach ($data['question'] as $question) : ?>
                                         <div style="margin-bottom: 10px;">

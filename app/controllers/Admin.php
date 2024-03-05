@@ -1,6 +1,9 @@
 <?php
 
 class Admin extends Controller{
+    private $userModel;
+    private $adminModel;
+
     public function __construct()
     {
         if (!isset($_SESSION['user_id'])) {
