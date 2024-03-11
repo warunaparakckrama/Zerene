@@ -26,6 +26,7 @@
             <div>
                 <div class="card-white">
                     <p class="p-regular">Recently recieved Documents</p>
+                    <br>
                     <!-- <div class="card-green">
                         <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="pro pic" class="card-profile">
                         <div>
@@ -58,8 +59,9 @@
                                 <!-- <th>Content</th> -->
                                 <!-- <th>file name</th> -->
                                 <th>ug_id</th>
-                                <th>coun_id</th>
+                                <!-- <th>coun_id</th> -->
                                 <th>date</th>
+                                <th></th>
 
                             </tr>
                         </thead>
@@ -72,13 +74,13 @@
                                     <!-- <td><?php echo $rletter->content ?></td> -->
                                     <!-- <td><?php echo $rletter->file_name ?></td> -->
                                     <td><?php echo $rletter->ug_id ?></td>
-                                    <td><?php echo $rletter->coun_id ?></td>
+                                    <!-- <td><?php echo $rletter->coun_id ?></td> -->
                                     <td><?php echo $rletter->date ?></td>
                                     <td>
                                         <div class="btn-container-2">
                                             <div class="btn-container">
-                                                <a href="<?php echo URLROOT; ?>academic/req_letter/"><button class="button-main">Review</button></a>
-                                                <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4/"><button class="button-main">Create</button></a>
+                                                <a href="<?php echo URLROOT; ?>academic/req_letter/" class="a-name"><button class="button-main">Review</button></a>
+                                                <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4/" class="a-name"><button class="button-main">Create</button></a>
                                                 <!-- <a href="<?php echo URLROOT; ?>Admin/delFeedback/<?php echo $rletter->feedback_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a> -->
                                             </div>
                                         </div>                                                                                                                                                                                                                  
