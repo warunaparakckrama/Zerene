@@ -29,8 +29,7 @@
                                 <thead>
                                     <tr>
                                         <th>Subject</th>
-                                        <th>User type</th>
-                                        <th>Content</th>
+                                        <th>Author</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -38,20 +37,8 @@
                                 <tbody>
                                     <tr>
                                         <td>System Update</td>
-                                        <td>All Users</td>
-                                        <td><p>Dear Users, There will be a system upgrade at 00.00hrs.</p></td>
-                                        <td>
-                                            <div class="btn-container">
-                                                <div class="btn-container">
-                                                    <a href="" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                </div>
-
-                                                <div class="btn-container">
-                                                    <a href="" style="text-decoration: none;"><button class="button-danger">Remove</button></a>
-                                                </div>
-
-                                            </div>
-                                        </td>
+                                        <td>Author</td>
+                                        <td><a href="" style="text-decoration: none;"><button class="button-main">View</button></a></td>
                                     </tr>
                                 </tbody>
 
@@ -67,15 +54,6 @@
                                     <label for="subject">Subject: </label>
                                     <input type="text" name="subject" placeholder="Enter your subject here" style="font-size: 15px;">
                                     <br><br>
-
-                                    <label for="user_type">User Type: </label>
-                                    <select name="user_type" id="user_type">
-                                        <option value="All Users" >All Users</option>
-                                        <option value="Administrators" >Administrators</option>
-                                        <option value="Undergraduates" >Undergraduates</option>
-                                        <option value="Counsellors" >Counsellors</option>
-                                        <option value="Psychiatrists" >Psychiatrists</option>
-                                    </select><br>
                                     
                                     <label for="content">Content: </label>
                                     <textarea name="content" id="content" cols="50" rows="2" placeholder="Enter your message here" style="font-family: Poppins, sans-serif;"></textarea>
