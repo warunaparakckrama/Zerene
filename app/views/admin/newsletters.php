@@ -59,10 +59,10 @@
                                     <textarea name="content" id="content" cols="50" rows="2" placeholder="Enter your message here" style="font-family: Poppins, sans-serif;"></textarea>
                                     <p></p><br>
 
-                                    <button class="button-main" type="submit">Send</button>
                                 </div>
                             </form>
-                            </div>
+                        </div>
+                        <a href="<?php echo URLROOT?>admin/newsletter_view" style="text-decoration: none;"><button class="button-main" type="submit">Create</button></a>
                         </div>
                     </div>
                 </div>

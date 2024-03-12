@@ -414,6 +414,11 @@ class Admin extends Controller{
         $this->view('admin/newsletters', $data);
     }
 
+    public function newsletter_view(){
+        $data = [];
+        $this->view('admin/newsletter_view', $data);
+    }
+
     public function notifications(){
         $notifications = $this->adminModel->getNotifications();
         $data = [
