@@ -1,0 +1,18 @@
+.chat-row-green{
+    display: grid;
+    background-color: var(--zerene-light);
+    border: 1px solid var(--zerene-green);
+    
+}
+
+.card-green-5{
+    display: grid;
+    background-color: var(--zerene-light);
+    border-radius: var(--border-radius-8);
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    height: fit-content;
+    border: var(--zerene-green);
+    gap: 20px;
+}
