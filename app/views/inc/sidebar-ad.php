@@ -21,7 +21,7 @@
 
             <div class="sidebar-container3">
                 <a href="<?php echo URLROOT; ?>admin/ad_home" class="top <?php echo ($currentPage === 'ad_home') ? 'active' : ''; ?>" id="sb-link1">Home</a>
-                <a href="#" class="top dd-btn" class="top">Registrations</a>
+                <a href="#" class="top dd-btn">Registrations</a>
                 <div class="dropdown-container">
                     <a href="<?php echo URLROOT;?>admin/ad_reg_admin" class="dd-content <?php echo ($currentPage === 'ad_reg_admin') ? 'active' : ''; ?>" id="sb-link2">Administrators</a>
                     <a href="<?php echo URLROOT;?>admin/ad_reg_counselor" class="dd-content <?php echo ($currentPage === 'ad_reg_counselor') ? 'active' : ''; ?>" id="sb-link3">Counsellors</a>

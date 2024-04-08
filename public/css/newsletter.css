@@ -1,0 +1,23 @@
+
+.nl-container {
+    max-width: 600px;
+    border: 2px solid var(--zerene-green);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.nl-header {
+    text-align: center;
+}
+
+.nl-header img {
+    max-width: 50%;
+    height: auto;
+}
+
+.nl-footer {
+    margin-top: 20px;
+    background-color: var(--zerene-light);
+    padding: 10px;
+    text-align: center;
+}
