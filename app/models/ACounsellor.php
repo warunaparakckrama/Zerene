@@ -35,5 +35,12 @@
             $results = $this->db->resultSet();
             return $results;
         }
+
+        public function getOpRequest($coun_id) {
+            $this->db->query('SELECT * FROM op_request WHERE coun_id = :coun_id');
+            $this->db->bind(':coun_id', $coun_id);
+            $results = $this->db->resultSet();
+            return $results;
+        }
     }
 ?>

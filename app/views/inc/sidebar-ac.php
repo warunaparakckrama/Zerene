@@ -16,7 +16,7 @@
                 <a href="">
                     <img src="<?php echo IMG;?>ug-avatar-1.svg" alt="ug avatar" width="80" height="80">
                 </a>
-                <p class="p-regular" style="color: var(--zerene-light);">Username</p>
+                <p class="p-regular" style="color: var(--zerene-light);"><?php echo $_SESSION['user_name'];?></p>
                 <button class="button-second"><a href="<?php echo URLROOT;?>academic/ac_profile" class="a-name">Edit</a></button>
             </div>
 

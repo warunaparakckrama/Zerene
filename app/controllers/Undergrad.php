@@ -312,6 +312,41 @@ class Undergrad extends Controller
         redirect('undergrad/view_timeslotpc');
     }
 
+    public function submitResponses($user_id) //questionnaire_id need to be resolved
+    {
+        $questionnaire_id = trim($_POST['questionnaire_id']);
+        if ($_SERVER['REQUEST_METHOD']=='POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'user_id' => $user_id,
+                'questionnaire_id' => $questionnaire_id,
+                'responses' => []
+            ];
+
+
+            // Loop through each question and capture user responses
+            for ($i = 1; $i <= 21; $i++) {
+                $responseKey = 'q' . $i . '_response';
+
+                if (isset($_POST[$responseKey])) {
+                    // Assuming radio button values are integers (0, 1, 2, 3)
+                    $data['responses'][$i] = intval($_POST[$responseKey]);
+                }
+            }
+
+            // Validate and store responses
+            if ($this->ugModel->storeResponses($data)) {
+                flash('user_message', 'Responses stored successfully');
+                redirect('undergrad/dass21_review'); // Adjust the redirect URL accordingly
+            } else {
+                die('Something went wrong');
+            }
+        }
+        else {
+            redirect('undergrad/quiz_view/' . $questionnaire_id);
+        } 
+    }
 
 
 }
