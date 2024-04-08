@@ -17,14 +17,11 @@
         
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Academic Counsellors</p></div>
+                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Counsellors</p></div>
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
             </div>
             
             <div>
-                <div class="card-white">
-                    <p class="p-regular">Select your Faculty</p>
-                </div>
                 <div class="card-white">
                     <p class="p-regular">Academic Counsellors</p>
                     <div class="card-green">
