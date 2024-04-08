@@ -39,15 +39,12 @@ class PCounsellor
     }
 
     public function getTimeslotById($timeslotId)
-{
-    $this->db->query('SELECT * FROM timeslot WHERE slot_id = :timeslotId');
-    $this->db->bind(':timeslotId', $timeslotId);
+    {
+        $this->db->query('SELECT * FROM timeslot WHERE slot_id = :timeslotId');
+        $this->db->bind(':timeslotId', $timeslotId);
 
-    return $this->db->single(); // Ensure your database interaction methods are functioning correctly
-}
-
-
-
+        return $this->db->single(); // Ensure your database interaction methods are functioning correctly
+    }
 
     public function deleteTimeslot($timeslotId)
     {
@@ -66,7 +63,6 @@ class PCounsellor
 
         return $result;
     }
-
 
     public function updateTimeslot($timeslot)
     {

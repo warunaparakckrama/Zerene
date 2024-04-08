@@ -57,4 +57,40 @@ class Undergraduate
             return null;
         }
     }
+
+    public function storeResponses($data)
+    {
+        // Build the SQL query
+        $query = 'INSERT INTO response (';
+        for ($i = 1; $i <= 21; $i++) {
+            $query .= "q{$i}_response, ";
+        }
+        $query .= 'questionnaire_id, user_id, attempted_at) VALUES (';
+        for ($i = 1; $i <= 21; $i++) {
+            $query .= ":q{$i}_response, ";
+        }
+        $query .= ':questionnaire_id, :user_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))';
+
+        // Bind parameters
+        $this->db->query($query);
+
+        // Bind individual responses
+        for ($i = 1; $i <= 21; $i++) {
+            $responseKey = "q{$i}_response";
+            $this->db->bind(":{$responseKey}", $data['responses'][$i]);
+        }
+
+        $this->db->bind(':questionnaire_id', $data['questionnaire_id']);
+        $this->db->bind(':user_id', $data['user_id']);
+
+        // Execute the query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
 }
