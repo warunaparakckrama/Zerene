@@ -116,3 +116,21 @@ button.notify:hover{
     border-radius:8px;
     margin:0 2.5rem;
 }
+
+/* timeslot */
+.button-third{
+    display: flex;
+    color: var(--zerene-green);
+    background-color: var(--zerene-white);
+    border: 1px solid var(--zerene-green);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    height: fit-content;
+    width: fit-content;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

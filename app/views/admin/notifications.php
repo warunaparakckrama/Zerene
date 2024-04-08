@@ -49,7 +49,6 @@
                                                 <div class="btn-container-2">
                                                     <div class="btn-container">
                                                         <a href="<?php echo URLROOT;?>Admin/notifications_view/<?php echo $notifications->notification_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                        <a href="" style="text-decoration: none;"><button class="button-main">Edit</button></a>
                                                         <a href="<?php echo URLROOT;?>Admin/deleteNotifications/<?php echo $notifications->notification_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                                     </div>
                                                 </div>

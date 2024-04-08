@@ -37,7 +37,7 @@
                         </div>
                         <p class="">Edit Notification</p>
                         <div class="card-green-5">
-                            <form action="" method="POST">
+                            <form action="<?php echo URLROOT;?>Admin/editNotifications/<?php echo $notification->notification_id;?>" method="POST">
                                 <div style="font-size: 15px;">
                                     <label for="subject">Subject: </label>
                                     <input type="text" name="subject" placeholder="Enter your subject here" style="font-size: 15px; margin-bottom: 10px;">
@@ -57,7 +57,7 @@
                                     <textarea name="content" id="content" cols="50" rows="2" placeholder="Enter your message here" style="font-family: Poppins, sans-serif;"></textarea>
                                     <p></p><br>
 
-                                    <button class="button-main" type="submit" onclick="confirmEdit(event)">Edit</button>
+                                    <button class="button-main" type="submit" onclick="">Edit</button>
                                 </div>
                             </form>
                         </div>
@@ -79,7 +79,7 @@
             function confirmEdit(event) {
                 event.preventDefault(); // Prevent the default action of the link
                 if (confirm("Are you sure you want to edit this Notification?")) {
-                    // If the user confirms the deletion, proceed with the link action
+                    // If the user confirms the edit, proceed with the link action
                     window.location.href = event.target.parentElement.href; // Redirect to the link URL
                 } else {
                     // If the user cancels, do nothing or handle as needed

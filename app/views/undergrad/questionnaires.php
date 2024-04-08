@@ -23,16 +23,18 @@
                 <div>
                     <div class="card-white">
                         <p class="p-regular">Available Questionnaires</p>
-                        <div class="card-green">
-                            <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
-                            <div>
-                                <a href="<?php echo URLROOT;?>undergrad/dass21" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">DASS-21</p></a>
-                                <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">General Questionnaire for Anxiety, Depression & Stress</p>
+                        <?php foreach ($data['questionnaire'] as $questionnaire) : ?>
+                            <div class="card-green">
+                                <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
+                                <div>
+                                    <a href="" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $questionnaire->questionnaire_name?></p></a>
+                                    <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">Questionnaire for: <?php echo $questionnaire->questionnaire_type?> conditions.</p>
+                                </div>
+                                <div class="btn-container">
+                                    <a href="<?php echo URLROOT;?>undergrad/quiz_view/<?php echo $questionnaire->questionnaire_id?>" style="text-decoration: none;"><button class="button-main">Start</button></a>
+                                </div>
                             </div>
-                            <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>undergrad/dass21" style="text-decoration: none;"><button class="button-main">Start</button></a>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
         
                     <div class="card-white">

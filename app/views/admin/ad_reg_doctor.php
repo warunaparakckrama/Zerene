@@ -1,4 +1,3 @@
-
     <?php $currentPage = 'ad_reg_doctor'; ?>
     <head>
         <meta charset="UTF-8">
@@ -60,10 +59,6 @@
                                         <option value="University of Moratuwa" <?php echo ($data['university'] === 'University of Moratuwa') ? 'selected' : ''; ?> >University of Moratuwa</option>
                                     </select>
                                     <p class="p-error"></p><br>
-
-                                    <!-- <label for="hospital">Hospital: </label>
-                                    <input type="text" name="hospital" placeholder="Enter Hospital" class="<?php echo (!empty($data['hospital_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['hospital']; ?>">
-                                    <p class="p-error"><?php echo $data['hospital_err']; ?></p><br> -->
 
                                     <label for="email">Email: </label>
                                     <input type="email" name="email" placeholder="Enter Email" class="<?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['email']; ?>">
