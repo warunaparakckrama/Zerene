@@ -28,13 +28,13 @@
                     <div class="card-green-6">
                         <div>
                             <form action="<?php echo URLROOT;?>Academic/addTimeslots/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST">
-                                <label for="slot_date">Date : </label>
+                                <label for="slot_date">Date :</label>
                                 <input type="date" id="" name="slot_date" class="">
-                                <label for="slot_start">Start : </label>
+                                <label for="slot_start">Start :</label>
                                 <input type="time" id="" name="slot_start" class="">
                                 <label for="slot_finish">Finish : </label>
                                 <input type="time" id="" name="slot_finish" class="">
-                                <label for="slot_type">Type : </label>
+                                <label for="slot_type">Type :</label>
                                 <select name="slot_type" class="">
                                     <option value="online" <?php echo ($data['slot_type'] === 'online') ? 'selected' : ''; ?> >Online</option>
                                     <option value="physical" <?php echo ($data['slot_type'] === 'physical') ? 'selected' : ''; ?>>Physical</option>
