@@ -90,19 +90,37 @@
         public function updateNotifications($data){
             $this->db->query('UPDATE notifications SET subject = :subject, user_type = :user_type, content = :content WHERE notification_id = :notification_id');
             // Bind values
-            $this->db->bind(':user_id', $data['user_id']);
-            $this->db->bind(':username', $data['username']);
-            $this->db->bind(':password', $data['password']);
-            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':notification_id', $data['notification_id']);
+            $this->db->bind(':subject', $data['subject']);
+            if ($data['user_type'] === "all users") {
+                $this->db->bind(':user_type', 'all users');
+            }
+            elseif ($data['user_type'] === 'admin') {
+                $this->db->bind(':user_type', 'admin');
+            }
+            elseif ($data['user_type'] === "undergrad") {
+                $this->db->bind(':user_type', 'undergrad');
+            }
+            elseif ($data['user_type'] === "academic") {
+                $this->db->bind(':user_type', 'academic');
+            }
+            elseif ($data['user_type'] === "professional") {
+                $this->db->bind(':user_type', 'professional');
+            }
+            elseif ($data['user_type'] === "doctor") {
+                $this->db->bind(':user_type', 'doctor');
+            }
+            $this->db->bind(':content', $data['content']);
+            $this->db->execute();
 
             // Execute
-            if($this->db->execute()){
-            //add a function to rlaod site
+            if($this->db->execute())
+            {
               return true;
             } else {
               return false;
             }
-        }//yet to finish
+        }
 
         public function deleteNotify($notify_id){
             // Begin a transaction to ensure both deletes are successful or fail together

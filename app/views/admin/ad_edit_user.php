@@ -70,7 +70,10 @@
                                         <input type="text" id="current_username" name="current_username" class="">
                                         <label for="nusername" class="p-regular-grey">New Username :</label>
                                         <input type="text" id="new_username" name="new_username" class="form-default">
-                                        <button class="button-main" type="submit" onclick="confirmEditUsername(event)">Change</button>
+                                        <div class="btn-container-2">
+                                            <button class="button-main" type="submit" onclick="confirmEditUsername(event)">Change</button>
+                                            <button class="button-danger" type="reset">Cancel</button>
+                                        </div>
                                     </form>
                                 </div>
 
