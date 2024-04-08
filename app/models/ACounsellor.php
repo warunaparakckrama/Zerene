@@ -42,5 +42,27 @@
             $results = $this->db->resultSet();
             return $results;
         }
+
+        public function insertOpLetterDetails($data){
+            $this->db->query('INSERT INTO opinion_letter (letter_subject, letter_body, ug_id, coun_id) VALUES (:letter_subject, :letter_body, :ug_id, :coun_id)');
+            $this->db->bind(':letter_subject', $data['subject']);
+            $this->db->bind(':letter_body', $data['body']);
+            $this->db->bind(':ug_id', $data['ug_id']);
+            $this->db->bind(':coun_id', $_SESSION['user_id']);
+    
+            if ($this->db->execute()) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        public function getCounsellorDetails($coun_id){
+            $this->db->query('SELECT * FROM counsellor WHERE coun_id = :coun_id');
+            $this->db->bind(':coun_id', $coun_id);
+            $results = $this->db->single();
+            return $results;
+        }
     }
 ?>
