@@ -24,64 +24,78 @@
 
             <div>
                 <div class="card-white">
-                    <p class="p-regular">Create New </p>
+                    <p class="p-regular">Create Timeslot</p>
                     <div class="card-green-6">
                         <div>
-                            <form action="<?php echo URLROOT;?>Procounsellor/addTimeslots/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST">
+                            <form action="<?php echo URLROOT; ?>Procounsellor/addTimeslots/<?php echo $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
                                 <label for="slot_date">Date : </label>
-                                <input type="date" id="" name="slot_date" class="">
+                                <input type="date" id="" name="slot_date" class="date" value="">
+                                <span class="error-message"><?php echo $data['slot_date_err']; ?></span><br>
+
                                 <label for="slot_start">Start : </label>
-                                <input type="time" id="" name="slot_start" class="">
+                                <input type="time" id="" name="slot_start" class="time" value="">
+                                <span class="error-message"><?php echo $data['slot_start_err']; ?></span><br>
+
                                 <label for="slot_finish">Finish : </label>
-                                <input type="time" id="" name="slot_finish" class="">
+                                <input type="time" id="" name="slot_finish" class="time" value="">
+                                <span class="error-message"><?php echo $data['slot_finish_err']; ?></span><br>
+
                                 <label for="slot_type">Type : </label>
-                                <select name="slot_type" class="">
-                                    <option value="online" <?php echo ($data['slot_type'] === 'online') ? 'selected' : ''; ?> >Online</option>
-                                    <option value="physical" <?php echo ($data['slot_type'] === 'physical') ? 'selected' : ''; ?>>Physical</option>
+                                <select name="slot_type" class="type">
+                                    <option value="online">Online</option>
+                                    <option value="physical">Physical</option>
                                 </select>
+                                <span class="error-message"><?php echo $data['slot_type_err']; ?></span><br>
+
                                 <div class="btn-container-2">
                                     <button class="button-main" type="submit">Create</button>
-                                    <button class="button-danger" type="reset" >Cancel</button>
+                                    <button class="button-danger" type="button" onclick="cancelCreate()">Cancel</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="card-white">
                     <p class="p-regular">Created</p>
-                    <?php
-                    // Grouping timeslots by date
-                    $groupedTimeslots = [];
-                    foreach ($data['timeslot'] as $timeslot) {
-                        $date = date('l', strtotime($timeslot->slot_date)); // Get the day name (e.g., Monday)
-                        $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
-                        $start_time = date('h:ia', strtotime($timeslot->slot_start));
-                        $end_time = date('h:ia', strtotime($timeslot->slot_finish));
-                        $formattedTimeRange = "$start_time - $end_time";
-                        // $time = date('h:ia', strtotime($timeslot->slot_time));
-                        $groupedTimeslots[$formattedDate][$date][] = $formattedTimeRange;
-                    }
+                    <?php if (isset($data['timeslot']) && !empty($data['timeslot'])) : ?>
+                        <?php
+                        // Grouping timeslots by date
+                        $groupedTimeslots = [];
+                        foreach ($data['timeslot'] as $timeslot) {
+                            $date = date('l', strtotime($timeslot->slot_date));
+                            $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
+                            $start_time = date('h:ia', strtotime($timeslot->slot_start));
+                            $end_time = date('h:ia', strtotime($timeslot->slot_finish));
+                            $formattedTimeRange = "$start_time - $end_time";
+                            $groupedTimeslots[$formattedDate][$date][] = $formattedTimeRange;
+                        }
 
-                    // Displaying grouped timeslots
-                    foreach ($groupedTimeslots as $formattedDate => $days) {
-                        echo "<div class='card-green-2'>";
-                        foreach ($days as $day => $timeRanges) {
-                            echo "<div>";
-                            echo "<p class='p-regular-grey' style='font-size: 20px;'>$day</p>";
-                            echo "<p class='p-regular-grey' style='font-size: 15px;'>$formattedDate</p>";
-                            echo "</div>";
-                            echo "<div class='btn-container-2'>";
-                            foreach ($timeRanges as $timeRange) {
-                                echo "<button class='button-main'>$timeRange</button>";
+                        // Displaying grouped timeslots
+                        foreach ($groupedTimeslots as $formattedDate => $days) {
+                            echo "<div class='card-green-2'>";
+                            foreach ($days as $day => $timeRanges) {
+                                echo "<div>";
+                                echo "<p class='p-regular-grey' style='font-size: 20px;'>$day</p>";
+                                echo "<p class='p-regular-grey' style='font-size: 15px;'>$formattedDate</p>";
+                                echo "</div>";
+                                echo "<div class='btn-container-2'>";
+                                foreach ($timeRanges as $timeRange) {
+                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $timeRange . '</a>';
+                                }
+                                echo "</div>";
                             }
                             echo "</div>";
                         }
-                        echo "</div>";
-                    }
-                    ?>
+                        ?>
+
+                    <?php else : ?>
+                        <p>No timeslots created yet.</p>
+                    <?php endif; ?>
                 </div>
+
+
+
 
                 <div class="card-white">
                     <p class="p-regular">Reserved</p>
@@ -102,6 +116,12 @@
                 </div>
             </div>
         </div>
-
     </section>
+
+    <script>
+        function cancelCreate() {
+            document.getElementById('timeslotForm').reset();
+        }
+    </script>
+
 </body>
