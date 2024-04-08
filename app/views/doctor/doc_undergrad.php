@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+<?php $currentPage = 'doc_undergrad'; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,10 @@
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
     </head>
     <body>
-        <section>
+        <section class='sec-1'>
+        <div>
+        <?php require APPROOT . '/views/inc/sidebar-doc.php'; ?>
+        </div>
 
             <div class="grid-1">
                 <div class="subgrid-1">
@@ -28,8 +32,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Nilani Thushanthika</p>
                             </div>
                             <div class="btn-container">
-                                <button class="button-main">Past Records</button>
-                                <button class="button-main">Profile</button>
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2" id="sb-link9" style="text-decoration: none;"><button class="button-main">Profile</button></a>  
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3" id="sb-link9" style="text-decoration: none;"><button class="button-main">Past Records</button></a>
                             </div>
                         </div>
     
@@ -41,8 +45,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Nilani Thushanthika</p>
                             </div>
                             <div class="btn-container">
-                                <button class="button-main">Past Records</button>
-                                <button class="button-main">Profile</button>                        
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2" id="sb-link9" style="text-decoration: none;"><button class="button-main">Profile</button></a>  
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3" id="sb-link9" style="text-decoration: none;"><button class="button-main">Past Records</button></a>
                             </div>
                         </div>
     
@@ -54,8 +58,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Nilani Thushanthika</p>
                             </div>
                             <div class="btn-container">
-                                <button class="button-main">Past Records</button>
-                                <button class="button-main">Profile</button>
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2" id="sb-link9" style="text-decoration: none;"><button class="button-main">Profile</button></a>  
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3" id="sb-link9" style="text-decoration: none;"><button class="button-main">Past Records</button></a>
                             </div>
                         </div>
                     </div>
@@ -71,8 +75,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Pasindi Vindula</p>
                             </div>
                             <div class="btn-container">
-                                <button class="button-main">Past Records</button>
-                                <button class="button-main">Profile</button>
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2" id="sb-link9" style="text-decoration: none;"><button class="button-main">Profile</button></a>  
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3" id="sb-link9" style="text-decoration: none;"><button class="button-main">Past Records</button></a>
                             </div>
                         </div>
     
@@ -84,8 +88,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Ashan Pabodha</p>
                             </div>
                             <div class="btn-container">
-                                <button class="button-main">Past Records</button>
-                                <button class="button-main">Profile</button>
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad2" id="sb-link9" style="text-decoration: none;"><button class="button-main">Profile</button></a>  
+                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3" id="sb-link9" style="text-decoration: none;"><button class="button-main">Past Records</button></a>
                             </div>
                         </div>
                     </div>

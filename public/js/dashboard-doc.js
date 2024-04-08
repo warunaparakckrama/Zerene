@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const sblink6 = document.getElementById("sb-link6");
     const sblink7 = document.getElementById("sb-link7");
     const sblink8 = document.getElementById("sb-link8");
+    const sblink9 = document.getElementById("sb-link9");
     
     sblink1.addEventListener("click", function (e) {
         e.preventDefault();
@@ -69,6 +70,10 @@ document.addEventListener("DOMContentLoaded", function () {
     sblink8.addEventListener("click", function (e) {
         e.preventDefault();
         loadView("doc_timeslots"); // Load resources.php
+    });
+    sblink9.addEventListener("click", function (e) {
+        e.preventDefault();
+        loadView("doc_profile"); // Load resources.php
     });
 
 
