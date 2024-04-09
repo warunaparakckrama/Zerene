@@ -61,10 +61,13 @@ class Undergrad extends Controller
         $this->view('undergrad/professionalcounsellors', $data);
     }
 
-    public function academiccounsellors()
-    {
-        $data = [];
-        $this->view('undergrad/academiccounsellors', $data);
+    public function counsellors()
+    {   
+        $counsellor = $this->userModel->getCounsellors();
+        $data = [
+            'counsellor' => $counsellor
+        ];
+        $this->view('undergrad/counsellors', $data);
     }
 
     public function view_timeslotpc()

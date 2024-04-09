@@ -8,6 +8,18 @@
     margin-bottom: 10px;
 }
 
+.card-white-scroll{
+    background-color: var(--zerene-white);
+    border-radius: var(--card-border-radius);
+    border: 2px var(--zerene-green);
+    border-style: solid;
+    padding: var(--card-padding-15);
+    align-items: top;
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
 .card-white-2{
     display: flex;
     grid-template-columns: 50% 50%;

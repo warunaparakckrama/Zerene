@@ -520,5 +520,9 @@
             }
         }
 
-        
+        public function getCounsellors(){
+            $this->db->query('SELECT * FROM counsellor WHERE is_deleted = FALSE');
+            $results = $this->db->resultSet();
+            return $results;
+        }
     }

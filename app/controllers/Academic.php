@@ -306,4 +306,6 @@ class Academic extends Controller
             }
         }
     }
+
+
 }
