@@ -102,6 +102,12 @@ class Undergraduate
         }
     }
 
+    public function getMsgRequest(){
+        $this->db->query('SELECT * FROM msg_request WHERE is_deleted = FALSE');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
 
 
 }

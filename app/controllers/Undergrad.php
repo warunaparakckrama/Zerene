@@ -103,7 +103,15 @@ class Undergrad extends Controller
 
     public function chats()
     {
-        $data = [];
+        $id = $_SESSION['user_id'];
+        $request = $this->ugModel->getMsgRequest();
+        $undergrad = $this->userModel->getUgById($id);
+        $counsellor = $this->userModel->getCounsellors();
+        $data = [
+            'request' => $request,
+            'undergrad' => $undergrad,
+            'counsellor' => $counsellor
+        ];
         $this->view('undergrad/chats', $data);
     }
 

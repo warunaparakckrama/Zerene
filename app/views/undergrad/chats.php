@@ -1,6 +1,10 @@
 <!-- <!DOCTYPE html>
 <html lang="en"> -->
 <?php $currentPage = 'chats'; ?>
+<?php $request = $data['request']; ?>
+<?php $counsellor = $data['counsellor']; ?>
+<?php $undergrad = $data['undergrad']; ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,17 +27,21 @@
 
             <div class="card-white">
                 <p class="p-regular">Recents</p>
+                <?php echo $request->ug_id; ?>
+                <!-- <?php foreach ($data['request'] as $request) : ?> -->
+                <!-- <?php if ($request->ug_id === $undergrad->ug_id && $request->coun_id === $counsellor->coun_id) : ?> -->
                 <div class="card-green">
                     <img src="<?php echo IMG;?>pro-avatar1.svg" alt="quiz" class="card-profile2">
                     <div>
-                        <a href="<?php echo URLROOT;?>undergrad/chatroom" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">Mrs. Nilani Thushanthika</p></a>
+                        <a href="<?php echo URLROOT;?>undergrad/chatroom" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
                         <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">(Sent) You: Okay Madam. I'll send you the activity.</p>
                     </div>
                     <div class="text-container">
-                        <!-- <button class="button-main">Start</button> -->
                         <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">4.15 PM</p>
                     </div>
                 </div>
+                <!-- <?php endif; ?> -->
+                <!-- <?php endforeach; ?> -->
             </div>
 
         </div>

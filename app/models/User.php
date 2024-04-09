@@ -522,8 +522,15 @@
 
         public function getCounsellors(){
             $this->db->query('SELECT * FROM counsellor WHERE is_deleted = FALSE');
-            $results = $this->db->resultSet();
-            return $results;
+            // $results = $this->db->resultSet();
+            // return $results;
+            $row = $this->db->single();
+            
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
         }
 
         public function getUgById($id){
