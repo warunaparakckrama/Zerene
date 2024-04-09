@@ -63,9 +63,12 @@ class Undergrad extends Controller
 
     public function counsellors()
     {   
+        $id = $_SESSION['user_id'];
+        $undergrad= $this->userModel->getUgById($id);
         $counsellor = $this->userModel->getCounsellors();
         $data = [
-            'counsellor' => $counsellor
+            'counsellor' => $counsellor,
+            'undergrad' => $undergrad
         ];
         $this->view('undergrad/counsellors', $data);
     }

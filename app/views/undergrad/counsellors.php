@@ -2,6 +2,8 @@
 <html lang="en"> -->
 <?php $currentPage = 'counsellors'; ?>
 <?php $counsellor = $data['counsellor']; ?>
+<?php $undergrad = $data['undergrad']; ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +28,7 @@
                 <p class="p-regular-green">Academic Counsellors</p>
                 <div class="card-white-scroll">
                     <?php foreach ($data['counsellor'] as $counsellor) : ?>
-                        <?php if ($counsellor->coun_type === 'Academic') : ?>
+                        <?php if ($counsellor->coun_type === 'Academic' && $undergrad->faculty === $counsellor->faculty) : ?>
                         <div class="card-green">
                             <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
                             <div>
@@ -46,7 +48,7 @@
                 <p class="p-regular-green">Professional Counsellors</p>
                 <div class="card-white-scroll">
                     <?php foreach ($data['counsellor'] as $counsellor) : ?>
-                        <?php if ($counsellor->coun_type === 'Professional') : ?>
+                        <?php if ($counsellor->coun_type === 'Professional' && $undergrad->university === $counsellor->university) : ?>
                         <div class="card-green">
                             <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
                             <div>
