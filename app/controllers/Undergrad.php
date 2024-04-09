@@ -360,5 +360,16 @@ class Undergrad extends Controller
         } 
     }
 
+    public function MsgRequest($counsellor_id){
+        $id = $_SESSION['user_id'];
+        $undergrad= $this->userModel->getUgById($id);
+        $ug_id = $undergrad->ug_id;
+        if ($this->ugModel->sendMsgRequest($ug_id, $counsellor_id)) {
+            redirect('undergrad/counsellors');
+        } else {
+            die('Something went wrong');
+        }
+    }
+
 
 }

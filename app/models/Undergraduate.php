@@ -91,6 +91,17 @@ class Undergraduate
         }
     }
 
+    public function sendMsgRequest($ug_id, $counsellor_id){
+        $this->db->query('INSERT INTO msg_request (ug_id, coun_id, sent_at) VALUES (:ug_id, :coun_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+        $this->db->bind(':ug_id', $ug_id);
+        $this->db->bind(':coun_id', $counsellor_id);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
 }
