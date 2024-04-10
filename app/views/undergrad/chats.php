@@ -33,7 +33,7 @@
                 <div class="card-green">
                     <img src="<?php echo IMG;?>pro-avatar1.svg" alt="quiz" class="card-profile2">
                     <div>
-                        <a href="<?php echo URLROOT;?>undergrad/chatroom" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name. ' ' .$counsellor->last_name;?></p></a>
+                        <a href="<?php echo URLROOT;?>undergrad/chatroom/<?php echo $request->coun_id;?>" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name. ' ' .$counsellor->last_name;?></p></a>
                         <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Counsellor( <?php echo $counsellor->coun_type;?>)</p>
                     </div>
                     <div class="text-container">

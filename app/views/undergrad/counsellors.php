@@ -57,7 +57,7 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $counsellor->university;?></p>
                             </div>
                             <div class="btn-container">
-                                <a href="" style="text-decoration: none;"><button class="button-main">Request</button></a>
+                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->coun_id;?>" style="text-decoration: none;"><button class="button-main">Request</button></a>
                                 <button class="button-main">Timeslots</button>
                             </div>
                         </div>
