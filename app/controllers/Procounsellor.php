@@ -76,7 +76,9 @@ class Procounsellor extends Controller
     }
 
     public function pc_chatroom($ug_id){
-        $data = [];
+        $data = [
+            'ug_id' => $ug_id
+        ];
         $this->view('procounsellor/pc_chatroom', $data);
     }
 

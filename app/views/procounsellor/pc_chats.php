@@ -37,7 +37,7 @@
                                     <div class="card-green">
                                         <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile2">
                                         <div>
-                                            <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $request->ug_id;?>" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
+                                            <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $undergrad->user_id;?>" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
                                             <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $undergrad->university . ' '. $undergrad->faculty;?></p>
                                         </div>
                                         <div class="text-container">
