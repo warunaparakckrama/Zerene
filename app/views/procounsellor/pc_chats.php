@@ -1,4 +1,9 @@
 <?php $currentPage = 'pc_chats'; ?>
+<?php 
+    $request = $data['request'];
+    $counsellor = $data['counsellor'];
+    $undergrad = $data['undergrad']; 
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -6,6 +11,7 @@
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <title><?php echo SITENAME; ?> | Chats</title>
 </head>
 
 <body>
@@ -24,11 +30,13 @@
             <div>
                 <div class="card-white">
                     <p class="p-regular">Recents</p>
+                    <?php foreach ($data['request'] as $request) : ?>
+                        <?php if ($request->coun_id === $counsellor->coun_id) : ?>
                     <div class="card-green">
                         <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile2">
                         <div>
                             <a href="" class="a-name">
-                                <p class="p-regular" style=" margin-bottom: -10px;">ZereneUser-07</p>
+                                <p class="p-regular" style=" margin-bottom: -10px;"><?php echo $request->ug_id?></p>
                             </a>
                             <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">(Sent) You: Okay Madam. I'll send you the activity.</p>
                         </div>
@@ -36,6 +44,8 @@
                             <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">4.15 PM</p>
                         </div>
                     </div>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
 

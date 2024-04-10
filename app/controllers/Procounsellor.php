@@ -4,6 +4,7 @@ class Procounsellor extends Controller
 {
     private $userModel;
     private $pcModel;
+    private $ugModel;
     private $adminModel;
     private $counsellorModel;
 
@@ -13,6 +14,7 @@ class Procounsellor extends Controller
             redirect('users/login');
         }
         $this->userModel = $this->model('User');
+        $this->ugModel = $this->model('Undergraduate');
         $this->adminModel = $this->model('Administrator');
         $this->counsellorModel = $this->model('Counsellor');
         $this->pcModel = $this->model('PCounsellor');
@@ -60,8 +62,16 @@ class Procounsellor extends Controller
     }
 
     public function pc_chats()
-    {
-        $data = [];
+    {   
+        $id = $_SESSION['user_id'];
+        $request = $this->ugModel->getMsgRequest();
+        $counsellor = $this->userModel->getCounsellorById($id);
+        $undergrad = $this->adminModel->getUndergrads();
+        $data = [
+            'request' => $request,
+            'counsellor' => $counsellor,
+            'undergrad' => $undergrad
+        ];
         $this->view('procounsellor/pc_chats', $data);
     }
 
