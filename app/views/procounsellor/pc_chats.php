@@ -31,20 +31,22 @@
                 <div class="card-white">
                     <p class="p-regular">Recents</p>
                     <?php foreach ($data['request'] as $request) : ?>
-                        <?php if ($request->coun_id === $counsellor->coun_id) : ?>
-                    <div class="card-green">
-                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile2">
-                        <div>
-                            <a href="" class="a-name">
-                                <p class="p-regular" style=" margin-bottom: -10px;"><?php echo $request->ug_id?></p>
-                            </a>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">(Sent) You: Okay Madam. I'll send you the activity.</p>
-                        </div>
-                        <div class="text-container">
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">4.15 PM</p>
-                        </div>
-                    </div>
-                    <?php endif; ?>
+                        <?php foreach ($data['undergrad'] as $undergrad):?>
+                            <?php if ($request->ug_id === $undergrad->ug_id) : ?>
+                                <?php if ($request->coun_id === $counsellor->coun_id) : ?>
+                                    <div class="card-green">
+                                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile2">
+                                        <div>
+                                            <a href="" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
+                                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $undergrad->university . ' '. $undergrad->faculty;?></p>
+                                        </div>
+                                        <div class="text-container">
+                                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">text</p>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     <?php endforeach; ?>
                 </div>
             </div>
