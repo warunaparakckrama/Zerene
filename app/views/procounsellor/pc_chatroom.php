@@ -70,12 +70,12 @@
                         }
                     }
 
-                    echo $roomid;
+                    // echo $roomid;
 
                     if ($roomid != 0) {
                         echo
-                        "<div class=''>
-                            <div class='' style=''>
+                        "<div class='card-white'>
+                            <div class='' style='border: 1px solid black'>
                                 <div class='' >
                                     <div class='' id='chat-window' style=''>";
                                     
@@ -105,7 +105,7 @@
 
                                     echo "</div>
                                     <div id='typing'></div>
-                                    <div id='form' class='' style=''>
+                                    <div id='form' class='' style='border: 1px solid black'>
                                         <input class='' onkeyup='typing()' id='comment-input' type='text' placeholder='enter your message'>
                                         <button id='send-button' class='' onclick='send()'>Send</button>
                                     </div>
@@ -135,7 +135,8 @@
 
         function typing(){
             conn.send(JSON.stringify({  
-                'typing': '<?php echo $_SESSION['user_name'];?>'
+                'typing': 'y',
+                'name': '<?= $user ?>'
             }));
         }
 
@@ -159,7 +160,7 @@
                 document.getElementById('chat-window').appendChild(commentElem);
             }
             else if(typeof data.typing !== 'undefined'){
-                document.getElementById('typing').innerHTML = data.typing + ' is typing...';
+                document.getElementById('typing').innerHTML = data.name + ' is typing...';
                 window.clearTimeout(timeoutHandle);
                 timeoutHandle = window.setTimeout(function(){ 
                     document.getElementById('typing').innerHTML = '';

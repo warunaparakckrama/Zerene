@@ -148,9 +148,11 @@ class Undergrad extends Controller
         $this->view('undergrad/feedback', $data);
     }
 
-    public function chatroom($coun_id)
+    public function chatroom($user_id)
     {
-        $data = [];
+        $data = [
+            'user_id' => $user_id
+        ];
         $this->view('undergrad/chatroom', $data);
     }
 

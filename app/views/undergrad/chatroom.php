@@ -21,7 +21,7 @@
             </div>
 
             <!-- chatbox section -->
-            <div class="subgrid-2"> 
+            <!-- <div class="subgrid-2"> 
                 <div class="card-white">
                     
                     <div class="" style="border: 1px solid black;">
@@ -36,8 +36,84 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
             <!-- chatbox section -->
+
+            <div>
+                <?php 
+                    $con = new mysqli("localhost", "root", "", "zerene-1");
+
+                    $to = $data['user_id'];
+                    $from = $_SESSION['user_id'];
+                    $roomid = 0;
+
+                    $user = $_SESSION['user_name'];
+
+                    // echo "From: " . $from;
+                    // echo "To: " . $to;
+
+                    $sql = "SELECT * FROM chat_connection WHERE from_user = '$from' AND to_user = '$to' OR from_user = '$to' AND to_user = '$from'";
+                    $result = $con->query($sql);
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $roomid = $row['conn_id'];
+                        }
+                    }
+                    else{
+                        $sql = "INSERT INTO chat_connection (from_user, to_user) VALUES ('$from', '$to')";
+                        $con->query($sql);
+                        if($con->affected_rows > 0){
+                            echo "Chat created successfully";
+                        }else{
+                            echo "Chat creation failed";
+                        }
+                    }
+
+                    // echo $roomid;
+
+                    if ($roomid != 0) {
+                        echo
+                        "<div class='card-white'>
+                            <div class='' style='border: 1px solid black'>
+                                <div class='' >
+                                    <div class='' id='chat-window' style=''>";
+                                    
+                                        $sql = "SELECT * FROM chat_record WHERE chat_id = $roomid";
+                                        $result = $con->query($sql);
+                                        if($result->num_rows > 0){
+                                            while($row = $result->fetch_assoc()){
+                                                if($row['sent_by'] == $_SESSION['user_name']){
+                                                    echo "<div class=''>";
+                                                    echo $row['sent_by'];
+                                                    echo " : ";
+                                                    echo $row['message'];
+                                                    echo " : ";
+                                                    echo $row['date'];
+                                                    echo "</div>";
+                                                } else {
+                                                    echo "<div class=''>";
+                                                    echo $row['sent_by'];
+                                                    echo " : ";
+                                                    echo $row['message'];
+                                                    echo " : ";
+                                                    echo $row['date'];
+                                                    echo "</div>";
+                                                }
+                                            }
+                                        }
+
+                                    echo "</div>
+                                    <div id='typing'></div>
+                                    <div id='form' class='' style='border: 1px solid black'>
+                                        <input class='' onkeyup='typing()' id='comment-input' type='text' placeholder='enter your message'>
+                                        <button id='send-button' class='' onclick='send()'>Send</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>";
+                    }
+                ?>
+            </div>
 
         </div>
     </section>
@@ -47,7 +123,7 @@
         conn.onopen = function(e) {
             console.log('Connection established!'); 
             conn.send(JSON.stringify({  
-                'newRoute': 'chat'
+                'newRoute': 'chat_connection-<?= $roomid ?>'
             }));
 
         };
@@ -55,6 +131,13 @@
         let timeoutHandle = window.setTimeout(function(){ 
             document.getElementById('typing').innerHTML = '';
         }, 2000);
+
+        function typing(){
+            conn.send(JSON.stringify({  
+                'typing': 'y',
+                'name': '<?= $user ?>'
+            }));
+        }
 
         conn.onmessage = function(e) {
             let data = JSON.parse(e.data);
@@ -76,7 +159,7 @@
                 document.getElementById('chat-window').appendChild(commentElem);
             }
             else if(typeof data.typing !== 'undefined'){
-                document.getElementById('typing').innerHTML = data.typing + ' is typing...';
+                document.getElementById('typing').innerHTML = data.name + ' is typing...';
                 window.clearTimeout(timeoutHandle);
                 timeoutHandle = window.setTimeout(function(){ 
                     document.getElementById('typing').innerHTML = '';
@@ -92,12 +175,6 @@
             }
         });
 
-        function typing(){
-            conn.send(JSON.stringify({  
-                'typing': '<?php echo $_SESSION['user_name'];?>'
-            }));
-        }
-
         function send(){
             <?php
             $datesent = date('M d, Y h.i A');
@@ -107,7 +184,8 @@
             // let msg = document.getElementById('msg').value;
             conn.send(JSON.stringify({  
                 'msg': input.value,
-                'name': '<?= $sender ?>'
+                'name': '<?= $sender ?>',
+                'date': '<?= $datesent ?>'
             }));
             // document.getElementById('msg').value = '';
 
