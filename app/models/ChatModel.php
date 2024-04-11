@@ -21,6 +21,12 @@ class ChatModel{
             return false;
         }
     }
+
+    public function getChatConnection(){
+        $this->db->query('SELECT * FROM chat_connection');
+        $results = $this->db->resultSet();
+        return $results;
+    }
 }
 
 ?>

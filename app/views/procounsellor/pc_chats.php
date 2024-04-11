@@ -2,7 +2,9 @@
 <?php 
     $request = $data['request'];
     $counsellor = $data['counsellor'];
+    $all_counsellors = $data['all_counsellors'];
     $undergrad = $data['undergrad']; 
+    $connection = $data['connection'];
 ?>
 
 <head>
@@ -28,8 +30,8 @@
             </div>
 
             <div>
-                <div class="card-white">
-                    <p class="p-regular">Recents</p>
+                <p class="p-regular-green">Undergraduates</p>
+                <div class="card-white-scroll">
                     <?php foreach ($data['request'] as $request) : ?>
                         <?php foreach ($data['undergrad'] as $undergrad):?>
                             <?php if ($request->ug_id === $undergrad->ug_id) : ?>
@@ -41,11 +43,31 @@
                                             <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $undergrad->university . ' '. $undergrad->faculty;?></p>
                                         </div>
                                         <div class="text-container">
-                                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">text</p>
+                                            <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">View Chat</button></a>
                                         </div>
                                     </div>
                                 <?php endif; ?>
                             <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </div>
+
+                <p class="p-regular-green">Professionals</p>
+                <div class="card-white-scroll">
+                    <?php foreach ($data['connection'] as $connection ): ?>
+                        <?php foreach ($data['all_counsellors'] as $all_counsellors):?>
+                            <?php if ($connection->from_user === $_SESSION['user_id'] && $connection->to_user === $all_counsellors->user_id):?>
+                                <div class="card-green">
+                                    <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile2">
+                                    <div>
+                                        <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $connection->to_user;?>" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $all_counsellors->first_name.' '.$all_counsellors->last_name;?></p></a>
+                                        <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $all_counsellors->university.' '.$all_counsellors->faculty;?></p>
+                                    </div>
+                                    <div class="text-container">
+                                        <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">View Chat</button></a>
+                                    </div>
+                                </div>
+                            <?php endif;?>
                         <?php endforeach; ?>
                     <?php endforeach; ?>
                 </div>

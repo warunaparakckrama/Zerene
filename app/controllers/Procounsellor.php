@@ -7,6 +7,7 @@ class Procounsellor extends Controller
     private $ugModel;
     private $adminModel;
     private $counsellorModel;
+    private $chatModel;
 
     public function __construct()
     {
@@ -18,6 +19,7 @@ class Procounsellor extends Controller
         $this->adminModel = $this->model('Administrator');
         $this->counsellorModel = $this->model('Counsellor');
         $this->pcModel = $this->model('PCounsellor');
+        $this->chatModel = $this->model('ChatModel');
     }
 
     //page view controllers
@@ -66,11 +68,15 @@ class Procounsellor extends Controller
         $id = $_SESSION['user_id'];
         $request = $this->ugModel->getMsgRequest();
         $counsellor = $this->userModel->getCounsellorById($id);
+        $all_counsellors= $this->userModel->getCounsellors();
         $undergrad = $this->adminModel->getUndergrads();
+        $connection = $this->chatModel->getChatConnection();
         $data = [
             'request' => $request,
             'counsellor' => $counsellor,
-            'undergrad' => $undergrad
+            'all_counsellors' => $all_counsellors,
+            'undergrad' => $undergrad,
+            'connection' => $connection
         ];
         $this->view('procounsellor/pc_chats', $data);
     }
