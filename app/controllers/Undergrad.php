@@ -150,8 +150,10 @@ class Undergrad extends Controller
 
     public function chatroom($user_id)
     {
+        $receiver = $this->userModel->findUserDetails($user_id);
         $data = [
-            'user_id' => $user_id
+            'user_id' => $user_id,
+            'receiver' => $receiver
         ];
         $this->view('undergrad/chatroom', $data);
     }

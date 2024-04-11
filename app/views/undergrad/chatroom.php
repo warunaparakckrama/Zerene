@@ -48,7 +48,10 @@
                     $roomid = 0;
 
                     $user = $_SESSION['user_name'];
+                    $receiver = $data['receiver'];
+                    $receiver_username = $receiver->username;
 
+                    // echo $receiver_username;
                     // echo "From: " . $from;
                     // echo "To: " . $to;
 
@@ -179,7 +182,6 @@
             <?php
             $datesent = date('M d, Y h.i A');
             $sender = $_SESSION['user_name'];
-            // $commentor = $_SESSION['Name'];
             ?>
             // let msg = document.getElementById('msg').value;
             conn.send(JSON.stringify({  
@@ -187,6 +189,9 @@
                 'name': '<?= $sender ?>',
                 'date': '<?= $datesent ?>'
             }));
+
+            sendMessage('<?= $user?>', '<?= $receiver_username?>', input.value, '<?= $roomid ?>');
+
             // document.getElementById('msg').value = '';
 
             var chatWindow = document.getElementById('chat-window');
@@ -198,12 +203,14 @@
         }
 
         // send messages to database
-        function sendMessage(comment, room) { 
+        function sendMessage(sender, receiver, message, roomid) { 
             let data = {
-                'message': comment,
-                'roomId': room
+                'sender': sender,
+                'receiver': receiver,
+                'message': message,
+                'roomid': roomid
             };
-            fetch('http://localhost/Ratchet-with-chat-room/Main/SendPrivate.php', {
+            fetch('<?php echo URLROOT;?>Chat/sendMessage', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
