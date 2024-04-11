@@ -84,10 +84,15 @@ class Procounsellor extends Controller
         $this->view('procounsellor/pc_chatroom', $data);
     }
 
-    public function pc_counselors()
-    {
-        $data = [];
-        $this->view('procounsellor/pc_counselors', $data);
+    public function pc_professionals()
+    {   
+        $counsellor = $this->userModel->getCounsellors();
+        $doctor = $this->adminModel->getDoctors();
+        $data = [
+            'counsellor' => $counsellor,
+            'doctor' => $doctor
+        ];
+        $this->view('procounsellor/pc_professionals', $data);
     }
 
     public function pc_profileupdate()
