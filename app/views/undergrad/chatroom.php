@@ -110,19 +110,18 @@
 
                                                 if($row['sent_by'] == $_SESSION['user_name']){
                                                     echo "<div class='chat-message-1'>";
-                                                    echo "~".$row['sent_by']."~";
-                                                    echo " <br> ";
+                                                    echo "-you-";
+                                                    echo "<br>";
                                                     echo $row['message'];
-                                                    echo " <br><br>";
-                                                    // echo "(".$row['date'].")";
+                                                    echo "<br><br>";
                                                     echo "(" . date('h:i A', strtotime($row['date'])) . ")";
                                                     echo "</div>";
                                                 } else {
                                                     echo "<div class='chat-message-2'>";
-                                                    echo "~".$counsellor->first_name.' '.$counsellor->last_name."~";
-                                                    echo " <br> ";
+                                                    echo "-".$counsellor->first_name."-";
+                                                    echo "<br>";
                                                     echo $row['message'];
-                                                    echo " <br><br> ";
+                                                    echo " <br><br>";
                                                     echo "(" . date('h:i A', strtotime($row['date'])) . ")";
                                                     echo "</div>";
                                                 }
@@ -174,23 +173,15 @@
             let data = JSON.parse(e.data);
             console.log(data);
             if(typeof data.msg !== 'undefined'){
-
-                // document.getElementById('typing').innerHTML = '';
-                // let commentElem = document.createElement('div');
-                // commentElem.classList.add('col-11');
-                // commentElem.classList.add('fill-container');
-                // commentElem.innerHTML = "<div class=''><div class=''>" + data.name + "</div><div class=''>" + data.msg + "</div><div class=''>" +data.date + "</div></div>";
-                
                 var chatWindow = document.getElementById('chat-window');
-
                 var newMessage = document.createElement('p');
-                newMessage.innerHTML = data.name + " : " + data.msg + " " + data.date;
+                newMessage.innerHTML = data.msg + "<br>(" + data.date + ")";
                 newMessage.classList.add('chat-message-2');
                 chatWindow.appendChild(newMessage);
                 document.getElementById('chat-window').appendChild(commentElem);
             }
             else if(typeof data.typing !== 'undefined'){
-                document.getElementById('typing').innerHTML = data.name + ' is typing...';
+                document.getElementById('typing').innerHTML = 'typing...';
                 window.clearTimeout(timeoutHandle);
                 timeoutHandle = window.setTimeout(function(){ 
                     document.getElementById('typing').innerHTML = '';

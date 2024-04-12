@@ -110,7 +110,7 @@
 
                                                 if($row['sent_by'] == $_SESSION['user_name']){
                                                     echo "<div class='chat-message-1'>";
-                                                    echo "~".$row['sent_by']."~";
+                                                    echo "-you-";
                                                     echo " <br> ";
                                                     echo $row['message'];
                                                     echo " <br><br> ";
@@ -118,7 +118,7 @@
                                                     echo "</div>";
                                                 } else {
                                                     echo "<div class='chat-message-2'>";
-                                                    echo "~".$row['sent_by']."~";
+                                                    echo "-".$row['sent_by']."-";
                                                     echo " <br> ";
                                                     echo $row['message'];
                                                     echo " <br><br> ";
@@ -189,7 +189,7 @@
                 document.getElementById('chat-window').appendChild(commentElem);
             }
             else if(typeof data.typing !== 'undefined'){
-                document.getElementById('typing').innerHTML = data.name + ' is typing...';
+                document.getElementById('typing').innerHTML = 'typing...';
                 window.clearTimeout(timeoutHandle);
                 timeoutHandle = window.setTimeout(function(){ 
                     document.getElementById('typing').innerHTML = '';
