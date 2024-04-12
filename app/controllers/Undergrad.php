@@ -151,9 +151,11 @@ class Undergrad extends Controller
     public function chatroom($user_id)
     {
         $receiver = $this->userModel->findUserDetails($user_id);
+        $counsellor = $this->userModel->getCounsellorById($user_id);
         $data = [
             'user_id' => $user_id,
-            'receiver' => $receiver
+            'receiver' => $receiver,
+            'counsellor' => $counsellor
         ];
         $this->view('undergrad/chatroom', $data);
     }

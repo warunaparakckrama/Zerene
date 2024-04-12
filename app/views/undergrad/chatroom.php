@@ -49,6 +49,7 @@
 
                     $user = $_SESSION['user_name'];
                     $receiver = $data['receiver'];
+                    $counsellor = $data['counsellor'];
                     $receiver_username = $receiver->username;
 
                     // echo $receiver_username;
@@ -74,6 +75,17 @@
 
                     // echo $roomid;
                     $previousDate = '';
+
+                    echo
+                        "<div class='name-card'>
+                            <div>
+                            <img src='".URLROOT."public/img/pro-avatar1.svg' alt='profile' class='profile-picture'>
+                            </div>
+                            <div>
+                            <p class='p-regular-green' style='font-size: 15px;'>$counsellor->first_name $counsellor->last_name | $counsellor->coun_type Counsellor</p>
+                            <p class='p-regular-grey' style='font-size: 15px;'>last seen just now</p>
+                            </div>
+                        </div>";
 
                     if ($roomid != 0) {
                         echo
@@ -103,15 +115,15 @@
                                                     echo $row['message'];
                                                     echo " <br><br>";
                                                     // echo "(".$row['date'].")";
-                                                    echo "(" . date('jS M h:i A', strtotime($row['date'])) . ")";
+                                                    echo "(" . date('h:i A', strtotime($row['date'])) . ")";
                                                     echo "</div>";
                                                 } else {
                                                     echo "<div class='chat-message-2'>";
-                                                    echo "~".$row['sent_by']."~";
+                                                    echo "~".$counsellor->first_name.' '.$counsellor->last_name."~";
                                                     echo " <br> ";
                                                     echo $row['message'];
                                                     echo " <br><br> ";
-                                                    echo "(" . date('jS M h:i A', strtotime($row['date'])) . ")";
+                                                    echo "(" . date('h:i A', strtotime($row['date'])) . ")";
                                                     echo "</div>";
                                                 }
                                             }

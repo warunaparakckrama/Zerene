@@ -10,7 +10,7 @@
 
 .chat-window{
     display: flex;
-    height: 500px;
+    height: 450px;
     overflow-y: auto;
     flex-direction: column;
     background-color: var(--zerene-light);
@@ -103,4 +103,22 @@
     flex: 1;
     border: 1px solid var(--zerene-green);
     margin: 10px;
+}
+
+.name-card{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    background-color: var(--zerene-white);
+    border-radius: var(--card-border-radius);
+    padding: 10px;
+    align-items: top;
+    height: fit-content;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.profile-picture{
+    height: 50px;
+    width: 50px;
 }
