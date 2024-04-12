@@ -225,7 +225,7 @@
             var chatWindow = document.getElementById('chat-window');
             var newMessage = document.createElement('p');
             newMessage.classList.add('chat-message-1');
-            newMessage.innerHTML = '<?= $sender?>' + " <br> " + input.value + "<br><br>" + " (" + '<?= $datesent ?>' + ")";
+            newMessage.innerHTML = "~" +'<?= $sender?>'+ "~" + " <br> " + input.value + "<br><br>" + " (" + '<?= $datesent ?>' + ")";
             chatWindow.appendChild(newMessage);
             input.value = '';
         }

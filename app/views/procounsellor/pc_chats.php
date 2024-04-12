@@ -39,8 +39,8 @@
                                     <div class="card-green">
                                         <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile2">
                                         <div>
-                                            <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $undergrad->user_id;?>" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
-                                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $undergrad->university . ' '. $undergrad->faculty;?></p>
+                                            <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $undergrad->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
+                                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $undergrad->university;?> | <?php echo $undergrad->faculty;?></p>
                                         </div>
                                         <div class="text-container">
                                             <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">View Chat</button></a>
@@ -60,11 +60,11 @@
                                 <div class="card-green">
                                     <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile2">
                                     <div>
-                                        <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $connection->to_user;?>" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $all_counsellors->first_name.' '.$all_counsellors->last_name;?></p></a>
-                                        <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $all_counsellors->university.' '.$all_counsellors->faculty;?></p>
+                                        <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $connection->to_user;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $all_counsellors->first_name.' '.$all_counsellors->last_name;?></p></a>
+                                        <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $all_counsellors->university;?> | <?php echo $all_counsellors->faculty;?></p>
                                     </div>
                                     <div class="text-container">
-                                        <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">View Chat</button></a>
+                                        <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $connection->to_user;?>" style="text-decoration: none;"><button class="button-main">View Chat</button></a>
                                     </div>
                                 </div>
                             <?php endif;?>

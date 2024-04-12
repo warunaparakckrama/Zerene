@@ -24,8 +24,8 @@
                 <a href="<?php echo URLROOT; ?>procounsellor/pc_createq" class="dd-content" id="sb-link3">Create</a>
             </div>
             <a href="<?php echo URLROOT; ?>procounsellor/pc_undergrad" class="top <?php echo ($currentPage === 'pc_undergrad') ? 'active' : ''; ?> " id="sb-link4">Undergraduates</a>
-            <a href="<?php echo URLROOT; ?>procounsellor/pc_chats" class="top <?php echo ($currentPage === 'pc_chats') ? 'active' : ''; ?>" id="sb-link5">Chats</a>
             <a  href="<?php echo URLROOT; ?>procounsellor/pc_professionals" class="top <?php echo ($currentPage === 'pc_professionals') ? 'active' : ''; ?>">Professionals</a>
+            <a href="<?php echo URLROOT; ?>procounsellor/pc_chats" class="top <?php echo ($currentPage === 'pc_chats') ? 'active' : ''; ?>" id="sb-link5">Chats</a>
             <a href="<?php echo URLROOT; ?>procounsellor/pc_timeslot" class="top <?php echo ($currentPage === 'pc_timeslot') ? 'active' : ''; ?> " id="sb-link9">Timeslots</a>
         </div>
 
