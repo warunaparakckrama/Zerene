@@ -1,4 +1,4 @@
-<?php $currentPage = 'pc_chats'; ?>
+<?php $currentPage = 'ac_chats'; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -8,11 +8,11 @@
     <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
     <title><?php echo SITENAME;?> | Chats</title>
 </head>
-<body>
 
+<body>
     <section class="sec-1">
         <div>
-            <?php require APPROOT . '/views/inc/sidebar-pc.php'; ?>
+        <?php require APPROOT . '/views/inc/sidebar-ac.php'; ?>
         </div>
 
         <div class="grid-1">
@@ -21,27 +21,8 @@
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
             </div>
 
-            <!-- chatbox section  - previous-->
-            <!-- <div class="subgrid-2"> 
-                <div class="card-white">
-                    
-                    <div class="" style="border: 1px solid black;">
-                        <div class="">
-                            <div class="" id="chat-window"></div>
-                            <div id='typing'></div>
-                            <div id='form' class="">
-                                <input class="" onkeyup="typing()" id="comment-input" type="text" placeholder="enter your message">
-                                <button id="send-button" class="" onclick="send()">Send</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div> -->
-            <!-- chatbox section  - previous-->
             <div>
                 <?php 
-
                     $con = new mysqli("localhost", "root", "", "zerene-1");
 
                     $to = $data['user_id'];
@@ -55,7 +36,7 @@
                     // echo $receiver_username;
                     // echo "From: " . $from;
                     // echo "To: " . $to;
-                    
+
                     $sql = "SELECT * FROM chat_connection WHERE from_user = '$from' AND to_user = '$to' OR from_user = '$to' AND to_user = '$from'";
                     $result = $con->query($sql);
                     if($result->num_rows > 0){
@@ -143,12 +124,13 @@
                         </div>";
                     }
                 ?>
+
             </div>
 
         </div>
     </section>
 
-   <script>
+    <script>
         var conn = new WebSocket('ws://localhost:8080');
         conn.onopen = function(e) {
             console.log('Connection established!'); 
@@ -249,6 +231,6 @@
                 console.log(json);
             });
         }
-
-   </script>
+    </script>
+    
 </body>

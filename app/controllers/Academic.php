@@ -4,6 +4,8 @@ class Academic extends Controller
     private $userModel;
     private $adminModel;
     private $acModel;
+    private $ugModel;
+    private $chatModel;
 
     public function __construct()
     {
@@ -13,6 +15,8 @@ class Academic extends Controller
         $this->userModel = $this->model('User');
         $this->adminModel = $this->model('Administrator');
         $this->acModel = $this->model('ACounsellor');
+        $this->ugModel = $this->model('Undergraduate');
+        $this->chatModel = $this->model('ChatModel');
     }
 
     //page view controllers
@@ -49,14 +53,41 @@ class Academic extends Controller
 
     public function ac_chats()
     {
-        $data = [];
+        $id = $_SESSION['user_id'];
+        $request = $this->ugModel->getMsgRequest();
+        $counsellor = $this->userModel->getCounsellorById($id);
+        $all_counsellors= $this->userModel->getCounsellors();
+        $undergrad = $this->adminModel->getUndergrads();
+        $connection = $this->chatModel->getChatConnection();
+        $data = [
+            'request' => $request,
+            'counsellor' => $counsellor,
+            'all_counsellors' => $all_counsellors,
+            'undergrad' => $undergrad,
+            'connection' => $connection
+        ];
         $this->view('academic/ac_chats', $data);
     }
 
-    public function ac_counselors()
+    public function ac_chatroom($user_id)
     {
-        $data = [];
-        $this->view('academic/ac_counselors', $data);
+        $receiver = $this->userModel->findUserDetails($user_id);
+        $data = [
+            'user_id' => $user_id,
+            'receiver' => $receiver
+        ];
+        $this->view('academic/ac_chatroom', $data);
+    }
+
+    public function ac_professionals()
+    {
+        $counsellor = $this->userModel->getCounsellors();
+        $doctor = $this->adminModel->getDoctors();
+        $data = [
+            'counsellor' => $counsellor,
+            'doctor' => $doctor
+        ];
+        $this->view('academic/ac_professionals', $data);
     }
 
     public function ac_doctors()
