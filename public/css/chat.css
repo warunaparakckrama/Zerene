@@ -89,3 +89,18 @@
     padding-right: 10px;
     width: 100%;
 }
+
+.date-divider{
+    display: flex;
+    color: var(--zerene-green);
+    font-size: 15px;
+    justify-content: center;
+}
+
+.date-divider::before,
+.date-divider::after{
+    content: "";
+    flex: 1;
+    border: 1px solid var(--zerene-green);
+    margin: 10px;
+}

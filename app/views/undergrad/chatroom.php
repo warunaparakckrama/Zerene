@@ -82,10 +82,20 @@
                                 <div class='chat-column-1'>
                                     <div class='chat-window' id='chat-window'>";
                                     
-                                        $sql = "SELECT * FROM chat_record WHERE chat_id = $roomid";
+                                        $sql = "SELECT * FROM chat_record WHERE chat_id = $roomid ORDER BY date ASC";
                                         $result = $con->query($sql);
                                         if($result->num_rows > 0){
                                             while($row = $result->fetch_assoc()){
+
+                                                $currentDate = date('jS M, Y', strtotime($row['date']));
+                                                // Check if the current date is different from the previous date
+                                                if ($currentDate != $previousDate) {
+                                                    // Add a divider between different days
+                                                    echo "<div class='date-divider'>" . $currentDate . "</div>";
+                                                    // Update the previous date
+                                                    $previousDate = $currentDate;
+                                                }
+
                                                 if($row['sent_by'] == $_SESSION['user_name']){
                                                     echo "<div class='chat-message-1'>";
                                                     echo "~".$row['sent_by']."~";
