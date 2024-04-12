@@ -73,43 +73,49 @@
                     }
 
                     // echo $roomid;
+                    $previousDate = '';
 
                     if ($roomid != 0) {
                         echo
                         "<div class='card-white'>
-                            <div class='' style='border: 1px solid black'>
-                                <div class='' >
-                                    <div class='' id='chat-window' style=''>";
+                            <div class='chat-row-1'>
+                                <div class='chat-column-1'>
+                                    <div class='chat-window' id='chat-window'>";
                                     
                                         $sql = "SELECT * FROM chat_record WHERE chat_id = $roomid";
                                         $result = $con->query($sql);
                                         if($result->num_rows > 0){
                                             while($row = $result->fetch_assoc()){
                                                 if($row['sent_by'] == $_SESSION['user_name']){
-                                                    echo "<div class=''>";
-                                                    echo $row['sent_by'];
-                                                    echo " : ";
+                                                    echo "<div class='chat-message-1'>";
+                                                    echo "~".$row['sent_by']."~";
+                                                    echo " <br> ";
                                                     echo $row['message'];
-                                                    echo " : ";
-                                                    echo $row['date'];
+                                                    echo " <br><br>";
+                                                    // echo "(".$row['date'].")";
+                                                    echo "(" . date('jS M h:i A', strtotime($row['date'])) . ")";
                                                     echo "</div>";
                                                 } else {
-                                                    echo "<div class=''>";
-                                                    echo $row['sent_by'];
-                                                    echo " : ";
+                                                    echo "<div class='chat-message-2'>";
+                                                    echo "~".$row['sent_by']."~";
+                                                    echo " <br> ";
                                                     echo $row['message'];
-                                                    echo " : ";
-                                                    echo $row['date'];
+                                                    echo " <br><br> ";
+                                                    echo "(" . date('jS M h:i A', strtotime($row['date'])) . ")";
                                                     echo "</div>";
                                                 }
                                             }
                                         }
 
                                     echo "</div>
-                                    <div id='typing'></div>
-                                    <div id='form' class='' style='border: 1px solid black'>
-                                        <input class='' onkeyup='typing()' id='comment-input' type='text' placeholder='enter your message'>
-                                        <button id='send-button' class='' onclick='send()'>Send</button>
+                                    <div class ='message-typing' id='typing'></div>
+                                    <div id='form' class='text-window'>
+                                        <div>   
+                                            <input class='textbox' onkeyup='typing()' id='comment-input' type='text' placeholder='enter your message'>
+                                        </div>
+                                        <div style='padding-left: 5px; padding-right: 10px;'>
+                                            <button id='send-button' class='send-button' onclick='send()'>Send</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +163,7 @@
 
                 var newMessage = document.createElement('p');
                 newMessage.innerHTML = data.name + " : " + data.msg + " " + data.date;
-                newMessage.classList.add();
+                newMessage.classList.add('chat-message-2');
                 chatWindow.appendChild(newMessage);
                 document.getElementById('chat-window').appendChild(commentElem);
             }
@@ -180,7 +186,7 @@
 
         function send(){
             <?php
-            $datesent = date('M d, Y h.i A');
+            $datesent = date('h:i A');
             $sender = $_SESSION['user_name'];
             ?>
             // let msg = document.getElementById('msg').value;
@@ -196,8 +202,8 @@
 
             var chatWindow = document.getElementById('chat-window');
             var newMessage = document.createElement('p');
-            newMessage.classList.add();
-            newMessage.innerHTML = '<?= $sender?>' + " : " + input.value + " (" + '<?= $datesent ?>' + ")";
+            newMessage.classList.add('chat-message-1');
+            newMessage.innerHTML = '<?= $sender?>' + " <br> " + input.value + "<br><br>" + " (" + '<?= $datesent ?>' + ")";
             chatWindow.appendChild(newMessage);
             input.value = '';
         }

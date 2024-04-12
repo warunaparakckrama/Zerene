@@ -1,18 +1,91 @@
-.chat-row-green{
-    display: grid;
-    background-color: var(--zerene-light);
-    border: 1px solid var(--zerene-green);
-    
+.chat-row-1{
+    display: flex;
+    flex-direction: row;
+    /* border: 1px solid black; */
 }
 
-.card-green-5{
-    display: grid;
+.chat-column-1{
+    flex: 1;
+}
+
+.chat-window{
+    display: flex;
+    height: 500px;
+    overflow-y: auto;
+    flex-direction: column;
     background-color: var(--zerene-light);
-    border-radius: var(--border-radius-8);
-    padding: 10px;
+    padding: 6px;
+    border-radius: 8px;
     margin-bottom: 10px;
+}
+
+.chat-message-1{
+    align-self: flex-end;
+    background-color: var(--zerene-green);
+    color: var(--zerene-white);
+    margin-right: auto;
+    font-size: 15px;
+    margin-left: auto;
+    width: fit-content;
+    border-radius: 12px;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: none;
+    margin: 4px;
+}
+
+.chat-message-2{
+    align-self: flex-start;
+    background-color: var(--zerene-white);
+    color: var(--zerene-green);
+    margin-left: auto;
+    font-size: 15px;
+    width: fit-content;
+    border-radius: 12px;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: none;
+    margin: 4px;
+}
+
+.message-typing{
+    color: var(--zerene-green);
+    font-size: 15px;
+}
+
+.text-window{
+    border: 2px solid var(--zerene-green);
+    border-radius: 8px;
+    padding: 6px;
+    display: grid;
+    grid-template-columns: 80% 20%;
     align-items: center;
-    height: fit-content;
-    border: var(--zerene-green);
-    gap: 20px;
+    gap: 10px;
+}
+
+.textbox{
+    width: 100%;
+    padding: 4px;
+    margin-left: 2px;
+}
+
+.send-button{
+    display: flex;
+    cursor: pointer;
+    color: var(--zerene-white);
+    background-color: var(--zerene-green);
+    border: 1px solid var(--zerene-green);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
 }
