@@ -28,7 +28,7 @@
             
             <div>
                 <p class="p-regular-green">Academic Counsellors</p>
-                <div class="card-white-scroll">
+                <div class="card-white-scroll" style="height: 215px;">
                     <?php foreach ($data['counsellor'] as $counsellor) : ?>
                         <?php if ($counsellor->coun_type === 'Academic' && $undergrad->faculty === $counsellor->faculty) : ?>
                         <div class="card-green">
@@ -47,7 +47,7 @@
                 </div>
                 
                 <p class="p-regular-green">Professional Counsellors</p>
-                <div class="card-white-scroll">
+                <div class="card-white-scroll" style="height: 215px;">
                     <?php foreach ($data['counsellor'] as $counsellor) : ?>
                         <?php if ($counsellor->coun_type === 'Professional' && $undergrad->university === $counsellor->university) : ?>
                         <div class="card-green">
@@ -66,7 +66,7 @@
                 </div>
 
                 <p class="p-regular-green">Psychiatrists</p>
-                <div class="card-white-scroll">
+                <div class="card-white-scroll" style="height: 215px;">
                     <?php foreach ($data['doctor'] as $doctor) : ?>
                         <?php if ($doctor->uni_in_charge === $undergrad->university) : ?>
                         <div class="card-green">
