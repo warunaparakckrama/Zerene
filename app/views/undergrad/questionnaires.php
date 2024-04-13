@@ -21,14 +21,14 @@
                 </div>
 
                 <div>
-                    <div class="card-white">
-                        <p class="p-regular">Available Questionnaires</p>
+                    <p class="p-regular-green">Available Questionnaires</p>
+                    <div class="card-white-scroll" style="height: 215px;">
                         <?php foreach ($data['questionnaire'] as $questionnaire) : ?>
                             <div class="card-green">
                                 <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
                                 <div>
-                                    <a href="" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $questionnaire->questionnaire_name?></p></a>
-                                    <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">Questionnaire for: <?php echo $questionnaire->questionnaire_type?> conditions.</p>
+                                    <a href="<?php echo URLROOT;?>undergrad/quiz_view/<?php echo $questionnaire->questionnaire_id?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $questionnaire->questionnaire_name?></p></a>
+                                    <p class="p-regular-grey" style="font-size: 18px;">Questionnaire suits for <?php echo $questionnaire->questionnaire_type?> conditions</p>
                                 </div>
                                 <div class="btn-container">
                                     <a href="<?php echo URLROOT;?>undergrad/quiz_view/<?php echo $questionnaire->questionnaire_id?>" style="text-decoration: none;"><button class="button-main">Start</button></a>
@@ -37,8 +37,8 @@
                         <?php endforeach; ?>
                     </div>
         
-                    <div class="card-white">
-                        <p class="p-regular">Completed Questionnaires</p>
+                    <p class="p-regular-green">Completed Questionnaires</p>
+                    <div class="card-white-scroll" style="height: 215px;">
                         <div class="card-green">
                             <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
                             <div>
@@ -47,20 +47,6 @@
                             </div>
                             <div class="btn-container">
                                 <button class="button-main">View</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-white">
-                        <p class="p-regular">Drafts</p>
-                        <div class="card-green">
-                            <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
-                            <div>
-                                <a href="" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;">DASS-21</p></a>
-                                <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">General Questionnaire for Anxiety, Depression & Stress</p>
-                            </div>
-                            <div class="btn-container">
-                                <button class="button-main">Complete</button>
                             </div>
                         </div>
                     </div>

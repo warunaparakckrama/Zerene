@@ -153,10 +153,20 @@ class Undergrad extends Controller
         $this->view('undergrad/ug_profile', $data);
     }
 
-    public function dass21_review()
-    {
-        $data = [];
-        $this->view('undergrad/dass21_review', $data);
+    public function quiz_review($quiz_id)
+    {   
+        $undergrad = $this->adminModel->getUgById($_SESSION['user_id']);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($quiz_id);
+        $counsellor = $this->adminModel->getCounselors();
+        $data = [
+            'id' => $_SESSION['user_id'],
+            'questionnaire_id' => $quiz_id,
+            'undergrad' => $undergrad,
+            'questionnaire' => $questionnaire,
+            'counsellor' => $counsellor
+
+        ];
+        $this->view('undergrad/quiz_review', $data);
     }
 
     public function feedback()
@@ -381,7 +391,7 @@ class Undergrad extends Controller
             // Validate and store responses
             if ($this->ugModel->storeResponses($data)) {
                 flash('user_message', 'Responses stored successfully');
-                redirect('undergrad/dass21_review'); // Adjust the redirect URL accordingly
+                redirect('undergrad/quiz_review/'. $questionnaire_id); // Adjust the redirect URL accordingly
             } else {
                 die('Something went wrong');
             }
