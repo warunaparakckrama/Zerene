@@ -1,4 +1,4 @@
-<?php $currentPage = 'pc_questions'; ?>
+<?php $currentPage = 'pc_questionnaires'; ?>
 
 <head>
     <meta charset="UTF-8">

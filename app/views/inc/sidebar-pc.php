@@ -18,18 +18,14 @@
 
         <div class="sidebar-container3">
             <a href="<?php echo URLROOT; ?>procounsellor/pc_home" class="top <?php echo ($currentPage === 'pc_home') ? 'active' : ''; ?> " id="sb-link1">Home</a>
-            <a href="#" class="top dd-btn">Questionnaires</a>
+            <a href="#" class="top dd-btn <?php echo ($currentPage === 'pc_questionnaires') ? 'active' : ''; ?>">Questionnaires</a>
             <div class="dropdown-container">
-                <a href="<?php echo URLROOT; ?>procounsellor/pc_reviewq" class="dd-content <?php echo ($currentPage === 'pc_reviewq') ? 'active' : ''; ?> " id="sb-link2">Review</a>
-                <a href="<?php echo URLROOT; ?>procounsellor/pc_createq" class="dd-content <?php echo ($currentPage === 'pc_createq') ? 'active' : ''; ?> " id="sb-link3">Create</a>
+                <a href="<?php echo URLROOT; ?>procounsellor/pc_reviewq" class="dd-content" id="sb-link2">Review</a>
+                <a href="<?php echo URLROOT; ?>procounsellor/pc_createq" class="dd-content" id="sb-link3">Create</a>
             </div>
             <a href="<?php echo URLROOT; ?>procounsellor/pc_undergrad" class="top <?php echo ($currentPage === 'pc_undergrad') ? 'active' : ''; ?> " id="sb-link4">Undergraduates</a>
+            <a  href="<?php echo URLROOT; ?>procounsellor/pc_professionals" class="top <?php echo ($currentPage === 'pc_professionals') ? 'active' : ''; ?>">Professionals</a>
             <a href="<?php echo URLROOT; ?>procounsellor/pc_chats" class="top <?php echo ($currentPage === 'pc_chats') ? 'active' : ''; ?>" id="sb-link5">Chats</a>
-            <a  href="#" class="top dd-btn">Professionals</a>
-            <div class="dropdown-container">
-                <a href="<?php echo URLROOT; ?>procounsellor/pc_counselors" class="dd-content <?php echo ($currentPage === 'pc_counselors') ? 'active' : ''; ?> " id="sb-link6">Counselors</a>
-                <a href="<?php echo URLROOT; ?>procounsellor/pc_doctors" class="dd-content <?php echo ($currentPage === 'pc_doctors') ? 'active' : ''; ?> " id="sb-link7">Psychiatrists</a>
-            </div>
             <a href="<?php echo URLROOT; ?>procounsellor/pc_timeslot" class="top <?php echo ($currentPage === 'pc_timeslot') ? 'active' : ''; ?> " id="sb-link9">Timeslots</a>
         </div>
 

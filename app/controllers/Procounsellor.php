@@ -4,8 +4,10 @@ class Procounsellor extends Controller
 {
     private $userModel;
     private $pcModel;
+    private $ugModel;
     private $adminModel;
     private $counsellorModel;
+    private $chatModel;
 
     public function __construct()
     {
@@ -13,9 +15,11 @@ class Procounsellor extends Controller
             redirect('users/login');
         }
         $this->userModel = $this->model('User');
+        $this->ugModel = $this->model('Undergraduate');
         $this->adminModel = $this->model('Administrator');
         $this->counsellorModel = $this->model('Counsellor');
         $this->pcModel = $this->model('PCounsellor');
+        $this->chatModel = $this->model('ChatModel');
     }
 
     //page view controllers
@@ -60,15 +64,41 @@ class Procounsellor extends Controller
     }
 
     public function pc_chats()
-    {
-        $data = [];
+    {   
+        $id = $_SESSION['user_id'];
+        $request = $this->ugModel->getMsgRequest();
+        $counsellor = $this->userModel->getCounsellorById($id);
+        $all_counsellors= $this->userModel->getCounsellors();
+        $undergrad = $this->adminModel->getUndergrads();
+        $connection = $this->chatModel->getChatConnection();
+        $data = [
+            'request' => $request,
+            'counsellor' => $counsellor,
+            'all_counsellors' => $all_counsellors,
+            'undergrad' => $undergrad,
+            'connection' => $connection
+        ];
         $this->view('procounsellor/pc_chats', $data);
     }
 
-    public function pc_counselors()
-    {
-        $data = [];
-        $this->view('procounsellor/pc_counselors', $data);
+    public function pc_chatroom($user_id){
+        $receiver = $this->userModel->findUserDetails($user_id);
+        $data = [
+            'user_id' => $user_id,
+            'receiver' => $receiver
+        ];
+        $this->view('procounsellor/pc_chatroom', $data);
+    }
+
+    public function pc_professionals()
+    {   
+        $counsellor = $this->userModel->getCounsellors();
+        $doctor = $this->adminModel->getDoctors();
+        $data = [
+            'counsellor' => $counsellor,
+            'doctor' => $doctor
+        ];
+        $this->view('procounsellor/pc_professionals', $data);
     }
 
     public function pc_profileupdate()

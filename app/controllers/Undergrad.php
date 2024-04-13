@@ -61,10 +61,16 @@ class Undergrad extends Controller
         $this->view('undergrad/professionalcounsellors', $data);
     }
 
-    public function academiccounsellors()
-    {
-        $data = [];
-        $this->view('undergrad/academiccounsellors', $data);
+    public function counsellors()
+    {   
+        $id = $_SESSION['user_id'];
+        $undergrad= $this->userModel->getUgById($id);
+        $counsellor = $this->userModel->getCounsellors();
+        $data = [
+            'counsellor' => $counsellor,
+            'undergrad' => $undergrad
+        ];
+        $this->view('undergrad/counsellors', $data);
     }
 
     public function view_timeslotpc()
@@ -97,7 +103,15 @@ class Undergrad extends Controller
 
     public function chats()
     {
-        $data = [];
+        $id = $_SESSION['user_id'];
+        $request = $this->ugModel->getMsgRequest();
+        $undergrad = $this->userModel->getUgById($id);
+        $counsellor = $this->userModel->getCounsellors();
+        $data = [
+            'request' => $request,
+            'undergrad' => $undergrad,
+            'counsellor' => $counsellor
+        ];
         $this->view('undergrad/chats', $data);
     }
 
@@ -132,6 +146,18 @@ class Undergrad extends Controller
     {
         $data = [];
         $this->view('undergrad/feedback', $data);
+    }
+
+    public function chatroom($user_id)
+    {
+        $receiver = $this->userModel->findUserDetails($user_id);
+        $counsellor = $this->userModel->getCounsellorById($user_id);
+        $data = [
+            'user_id' => $user_id,
+            'receiver' => $receiver,
+            'counsellor' => $counsellor
+        ];
+        $this->view('undergrad/chatroom', $data);
     }
 
     //function controllers
@@ -346,6 +372,17 @@ class Undergrad extends Controller
         else {
             redirect('undergrad/quiz_view/' . $questionnaire_id);
         } 
+    }
+
+    public function MsgRequest($counsellor_id){
+        $id = $_SESSION['user_id'];
+        $undergrad= $this->userModel->getUgById($id);
+        $ug_id = $undergrad->ug_id;
+        if ($this->ugModel->sendMsgRequest($ug_id, $counsellor_id)) {
+            redirect('undergrad/counsellors');
+        } else {
+            die('Something went wrong');
+        }
     }
 
 

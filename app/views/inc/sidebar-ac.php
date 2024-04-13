@@ -24,11 +24,7 @@
                 <a href="<?php echo URLROOT; ?>academic/ac_home" class="top <?php echo ($currentPage === 'ac_home') ? 'active' : ''; ?>" id="sb-link1">Home</a>
                 <a href="<?php echo URLROOT; ?>academic/ac_opletters" class="top <?php echo ($currentPage === 'ac_opletters') ? 'active' : ''; ?>" id="sb-link2">Opinion Letters</a>
                 <a href="<?php echo URLROOT; ?>academic/ac_undergrads" class="top <?php echo ($currentPage === 'ac_undergrads') ? 'active' : ''; ?>" id="sb-link3">Undergraduates</a>
-                <a href="#" class="top dd-btn">Professionals</a>
-                <div class="dropdown-container">
-                    <a href="<?php echo URLROOT;?>academic/ac_counselors" class="dd-content <?php echo ($currentPage === 'ac_counselors') ? 'active' : ''; ?>" id="sb-link4">Counsellors</a>
-                    <a href="<?php echo URLROOT; ?>academic/ac_doctors" class="dd-content <?php echo ($currentPage === 'ac_doctors') ? 'active' : ''; ?>" id="sb-link5">Psychiatrists</a>
-                </div>
+                <a href="<?php echo URLROOT;?>academic/ac_professionals" class="top <?php echo ($currentPage === 'ac_professionals') ? 'active' : ''; ?>">Professionals</a>
                 <a href="<?php echo URLROOT; ?>academic/ac_chats" class="top <?php echo ($currentPage === 'ac_chats') ? 'active' : ''; ?>" id="sb-link6">Chats</a>
                 <a href="<?php echo URLROOT; ?>academic/ac_timeslots" class="top <?php echo ($currentPage === 'ac_timeslots') ? 'active' : ''; ?>" id="sb-link7">Timeslots</a>
 

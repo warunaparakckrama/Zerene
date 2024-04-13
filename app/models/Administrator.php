@@ -21,7 +21,6 @@
         }
 
         public function getUndergrads(){
-            // $this->db->query('SELECT * FROM undergraduate');
             $this->db->query('SELECT * FROM undergraduate WHERE is_deleted = FALSE');
             $results = $this->db->resultSet();
             return $results;

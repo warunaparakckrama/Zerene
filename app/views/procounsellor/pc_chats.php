@@ -1,4 +1,11 @@
 <?php $currentPage = 'pc_chats'; ?>
+<?php 
+    $request = $data['request'];
+    $counsellor = $data['counsellor'];
+    $all_counsellors = $data['all_counsellors'];
+    $undergrad = $data['undergrad']; 
+    $connection = $data['connection'];
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -6,6 +13,7 @@
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <title><?php echo SITENAME; ?> | Chats</title>
 </head>
 
 <body>
@@ -22,20 +30,57 @@
             </div>
 
             <div>
-                <div class="card-white">
-                    <p class="p-regular">Recents</p>
-                    <div class="card-green">
-                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile2">
-                        <div>
-                            <a href="" class="a-name">
-                                <p class="p-regular" style=" margin-bottom: -10px;">ZereneUser-07</p>
-                            </a>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;">(Sent) You: Okay Madam. I'll send you the activity.</p>
-                        </div>
-                        <div class="text-container">
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">4.15 PM</p>
-                        </div>
-                    </div>
+                <p class="p-regular-green">Undergraduates</p>
+                <div class="card-white-scroll">
+                    <?php foreach ($data['request'] as $request) : ?>
+                        <?php foreach ($data['undergrad'] as $undergrad):?>
+                            <?php if ($request->ug_id === $undergrad->ug_id) : ?>
+                                <?php if ($request->coun_id === $counsellor->coun_id) : ?>
+                                    <div class="card-green">
+                                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile2">
+                                        <div>
+                                            <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $undergrad->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
+                                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $undergrad->university;?> | <?php echo $undergrad->faculty;?></p>
+                                        </div>
+                                        <div class="text-container">
+                                            <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">View Chat</button></a>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </div>
+
+                <p class="p-regular-green">Professionals</p>
+                <div class="card-white-scroll">
+                    <?php foreach ($data['connection'] as $connection ): ?>
+                        <?php foreach ($data['all_counsellors'] as $all_counsellors):?>
+                            <?php if ($connection->from_user === $_SESSION['user_id'] && $connection->to_user === $all_counsellors->user_id):?>
+                                <div class="card-green">
+                                    <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile2">
+                                    <div>
+                                        <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $connection->to_user;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $all_counsellors->first_name.' '.$all_counsellors->last_name;?></p></a>
+                                        <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $all_counsellors->university;?> | <?php echo $all_counsellors->faculty;?></p>
+                                    </div>
+                                    <div class="text-container">
+                                        <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $connection->to_user;?>" style="text-decoration: none;"><button class="button-main">View Chat</button></a>
+                                    </div>
+                                </div>
+                                <?php elseif (($connection->to_user === $_SESSION['user_id'] && $connection->from_user === $all_counsellors->user_id)):?>
+                                <div class="card-green">
+                                    <img src="<?php echo IMG; ?>pro-avatar2.svg" alt="quiz" class="card-profile2">
+                                    <div>
+                                        <a href="<?php echo URLROOT;?>academic/ac_chatroom/<?php echo $connection->from_user;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $all_counsellors->first_name.' '.$all_counsellors->last_name;?></p></a>
+                                        <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $all_counsellors->university;?> | <?php echo $all_counsellors->faculty;?></p>
+                                    </div>
+                                    <div class="text-container">
+                                        <a href="<?php echo URLROOT;?>academic/ac_chatroom/<?php echo $connection->from_user;?>" style="text-decoration: none;"><button class="button-main">View Chat</button></a>
+                                    </div>
+                                </div>
+                            <?php endif;?>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
 

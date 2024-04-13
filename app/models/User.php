@@ -520,5 +520,33 @@
             }
         }
 
-        
+        public function getCounsellors(){
+            $this->db->query('SELECT * FROM counsellor WHERE is_deleted = FALSE');
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
+        public function getCounsellorById($id){
+            $this->db->query('SELECT * FROM counsellor WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $row = $this->db->single();
+            
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
+        }
+
+        public function getUgById($id){
+            $this->db->query('SELECT * FROM undergraduate WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $row = $this->db->single();
+            
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
+        }
     }
