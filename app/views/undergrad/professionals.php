@@ -34,7 +34,7 @@
                         <div class="card-green">
                             <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
                             <div>
-                                <a href="" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
+                                <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $counsellor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;"><?php echo$counsellor->university. ' | '.$counsellor->faculty;?></p>
                             </div>
                             <div class="btn-container">
@@ -53,7 +53,7 @@
                         <div class="card-green">
                             <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
                             <div>
-                                <a href="" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
+                                <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $counsellor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
                                 <p class="p-regular" style="color: var(--zerene-grey);  font-size: 18px;"><?php echo $counsellor->university.' | '.$counsellor->faculty;?></p>
                             </div>
                             <div class="btn-container">
@@ -72,7 +72,7 @@
                         <div class="card-green">
                             <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
                             <div>
-                                <a href="" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $doctor->first_name.' '.$doctor->last_name;?></p></a>
+                                <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $doctor->user_id;?>" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $doctor->first_name.' '.$doctor->last_name;?></p></a>
                                 <p class="p-regular" style="color: var(--zerene-grey);"><?php echo$doctor->hospital;?></p>
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Assigned University: <?php echo $doctor->uni_in_charge;?></p>
                             </div>

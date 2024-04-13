@@ -40,7 +40,11 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px; margin-bottom: 5px;"><?php echo $counsellor->email;?></p>
                                 <div style="display: flex; flex-direction: row; gap: 10px;">
                                     <button class="button-main">Message Request</button>
-                                    <button class="button-main">Send a Request Letter</button>
+                                    <?php if ($counsellor->coun_type === 'Academic') : ?>
+                                        <a href="<?php echo URLROOT;?>Undergrad/send_req_letter/<?php echo $counsellor->coun_id;?>" style="text-decoration: none;"><button class="button-main">Send a Request Letter</button></a>
+                                    <?php elseif ($counsellor->coun_type === 'Professional') : ?>
+                                        <button class="button-main">option</button>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         <?php elseif ($doctor !== null && $id === $doctor->user_id) : ?>
@@ -52,8 +56,8 @@
                                 <p class="p-regular-grey" style="">Psychiatrist in charge on <?php echo $doctor->uni_in_charge?></p>
                                 <p class="p-regular-grey" style="font-size: 15px; margin-bottom: 5px;"><?php echo $doctor->email;?> | <?php echo $doctor->contact_num;?></p>
                                 <div style="display: flex; flex-direction: row; gap: 10px;">
-                                    <button class="button-main">Message Request</button>
-                                    <button class="button-main">Send a Request Letter</button>
+                                    <button class="button-main">option</button>
+                                    <button class="button-main">option</button>
                                 </div>
                             </div>
                         <?php endif; ?>
