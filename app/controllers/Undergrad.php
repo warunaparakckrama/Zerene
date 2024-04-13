@@ -64,8 +64,8 @@ class Undergrad extends Controller
     public function professionals()
     {   
         $id = $_SESSION['user_id'];
-        $undergrad= $this->userModel->getUgById($id);
-        $counsellor = $this->userModel->getCounsellors();
+        $undergrad= $this->adminModel->getUgById($id);
+        $counsellor = $this->adminModel->getCounselors();
         $doctor = $this->adminModel->getDoctors();
         $data = [
             'counsellor' => $counsellor,
@@ -111,8 +111,8 @@ class Undergrad extends Controller
     {
         $id = $_SESSION['user_id'];
         $request = $this->ugModel->getMsgRequest();
-        $undergrad = $this->userModel->getUgById($id);
-        $counsellor = $this->userModel->getCounsellors();
+        $undergrad = $this->adminModel->getUgById($id);
+        $counsellor = $this->adminModel->getCounselors();
         $data = [
             'request' => $request,
             'undergrad' => $undergrad,
@@ -157,7 +157,7 @@ class Undergrad extends Controller
     public function chatroom($user_id)
     {
         $receiver = $this->userModel->findUserDetails($user_id);
-        $counsellor = $this->userModel->getCounsellorById($user_id);
+        $counsellor = $this->adminModel->getCounsellorById($user_id);
         $data = [
             'user_id' => $user_id,
             'receiver' => $receiver,
@@ -382,7 +382,7 @@ class Undergrad extends Controller
 
     public function MsgRequest($counsellor_id){
         $id = $_SESSION['user_id'];
-        $undergrad= $this->userModel->getUgById($id);
+        $undergrad= $this->adminModel->getUgById($id);
         $ug_id = $undergrad->ug_id;
         if ($this->ugModel->sendMsgRequest($ug_id, $counsellor_id)) {
             redirect('undergrad/counsellors');
