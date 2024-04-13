@@ -55,8 +55,8 @@ class Academic extends Controller
     {
         $id = $_SESSION['user_id'];
         $request = $this->ugModel->getMsgRequest();
-        $counsellor = $this->userModel->getCounsellorById($id);
-        $all_counsellors= $this->userModel->getCounsellors();
+        $counsellor = $this->adminModel->getCounsellorById($id);
+        $all_counsellors= $this->adminModel->getCounselors();
         $undergrad = $this->adminModel->getUndergrads();
         $connection = $this->chatModel->getChatConnection();
         $data = [
@@ -81,7 +81,7 @@ class Academic extends Controller
 
     public function ac_professionals()
     {
-        $counsellor = $this->userModel->getCounsellors();
+        $counsellor = $this->adminModel->getCounselors();
         $doctor = $this->adminModel->getDoctors();
         $data = [
             'counsellor' => $counsellor,
