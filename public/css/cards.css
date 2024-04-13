@@ -15,7 +15,6 @@
     border-style: solid;
     padding: var(--card-padding-15);
     align-items: top;
-    height: 300px;
     overflow-y: auto;
     margin-bottom: 10px;
 }

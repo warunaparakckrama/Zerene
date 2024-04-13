@@ -108,6 +108,17 @@ class Undergraduate
         return $results;
     }
 
-
-
+    public function addRequestLetter($data){
+        $this->db->query('INSERT INTO request_letter (from_ug_id, to_coun_id, subject, content, document_path, sent_at) VALUES (:from, :to, :subject, :content, :document_path, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+        $this->db->bind(':from', $data['from']);
+        $this->db->bind(':to', $data['coun_id']);
+        $this->db->bind(':subject', $data['subject']);
+        $this->db->bind(':content', $data['content']);
+        $this->db->bind(':document_path', $data['document_path']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

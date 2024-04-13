@@ -25,11 +25,47 @@
             }
         }
 
+        public function getCounsellorByCounId($id){
+            $this->db->query('SELECT * FROM counsellor WHERE coun_id = :coun_id');
+            $this->db->bind(':coun_id', $id);
+            $row = $this->db->single();
+            
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
+        }
+
         public function getDoctors(){
             // $this->db->query('SELECT * FROM doctor');
             $this->db->query('SELECT * FROM doctor WHERE is_deleted = FALSE');
             $results = $this->db->resultSet();
             return $results;
+        }
+
+        public function getDoctorById($id){
+            $this->db->query('SELECT * FROM doctor WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $row = $this->db->single();
+            
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
+        }
+
+        public function getDoctorByDocId($id){
+            $this->db->query('SELECT * FROM doctor WHERE doc_id = :doc_id');
+            $this->db->bind(':doc_id', $id);
+            $row = $this->db->single();
+            
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
         }
 
         public function getUndergrads(){

@@ -61,16 +61,39 @@ class Undergrad extends Controller
         $this->view('undergrad/professionalcounsellors', $data);
     }
 
-    public function counsellors()
+    public function professionals()
     {   
         $id = $_SESSION['user_id'];
         $undergrad= $this->adminModel->getUgById($id);
         $counsellor = $this->adminModel->getCounselors();
+        $doctor = $this->adminModel->getDoctors();
         $data = [
             'counsellor' => $counsellor,
+            'undergrad' => $undergrad,
+            'doctor' => $doctor
+        ];
+        $this->view('undergrad/professionals', $data);
+    }
+
+    public function professional_profile($id)
+    {
+        $counsellor = $this->adminModel->getcounsellorById($id);
+        $doctor = $this->adminModel->getDoctorById($id);
+        $data = [
+            'counsellor' => $counsellor,
+            'doctor' => $doctor,
+            'id' => $id
+        ];
+        $this->view('undergrad/professional_profile', $data);
+    }
+
+    public function send_req_letter($id){
+        $undergrad = $this->adminModel->getUgById($_SESSION['user_id']);
+        $data = [
+            'id' => $id,
             'undergrad' => $undergrad
         ];
-        $this->view('undergrad/counsellors', $data);
+        $this->view('undergrad/send_req_letter', $data);
     }
 
     public function view_timeslotpc()
@@ -81,12 +104,6 @@ class Undergrad extends Controller
         ];
         $this->view('undergrad/view_timeslotpc', $data);
 
-    }
-
-    public function counsellorprofile()
-    {
-        $data = [];
-        $this->view('undergrad/counsellorprofile', $data);
     }
 
     public function doctors()
@@ -382,6 +399,53 @@ class Undergrad extends Controller
             redirect('undergrad/counsellors');
         } else {
             die('Something went wrong');
+        }
+    }
+
+    public function submitRequestLetter($id){
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'from' => $id,
+                'coun_id' => trim($_POST['coun_id']),
+                'subject' => trim($_POST['subject']),
+                'content' => trim($_POST['content']),
+                'document_path' => null
+            ];
+
+            // Handle file upload
+            if (isset($_FILES['document']) && $_FILES['document']['error'] === UPLOAD_ERR_OK) {
+                $document = $_FILES['document'];
+
+                $allowedMimeType = 'application/pdf';
+                $maxFileSize = 2 * 1024 * 1024; // 2MB
+
+                if ($document['type'] === $allowedMimeType && $document['size'] <= $maxFileSize) {
+                    $fileName = time() . '_' . basename($document['name']);
+                    $filePath = UPLOAD . 'documents/'.$fileName;
+                    
+                    // Move the uploaded file to the upload directory
+                    if (move_uploaded_file($document['tmp_name'], $filePath)) {
+                        // File uploaded successfully, set document_path
+                        $data['document_path'] = $filePath;
+                    } else {
+                        // Handle file upload error
+                        $data['upload_error'] = 'File upload failed';
+                    }
+                }   else {
+                    // Handle file size exceeding maximum limit
+                    $data['upload_error'] = 'File size exceeds the allowed limit';
+                }
+            }
+
+            $coun_id = $data['coun_id'];
+
+            if ($this->ugModel->addRequestLetter($data)) {
+                redirect('undergrad/send_req_letter/'.$coun_id);
+            } 
+            else {
+                die('something went wrong');
+            }    
         }
     }
 
