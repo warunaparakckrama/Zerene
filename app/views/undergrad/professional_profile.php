@@ -1,4 +1,9 @@
-<?php $currentpage = 'counsellors'?>
+<?php $currentPage = 'professionals';?>
+<?php 
+    $counsellor = $data['counsellor'];
+    $doctor = $data['doctor'];
+    $id = $data['id'];
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -6,7 +11,7 @@
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
-    <title><?php echo SITENAME;?> | Counsellors</title>
+    <title><?php echo SITENAME;?> | Professionals</title>
 </head>
 
 <body>
@@ -17,24 +22,41 @@
 
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Counsellors</p></div>
+                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Professional Profile</p></div>
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
             </div>
 
             <div>
                 <div class="card-white">
-                    <p class="p-regular">Profile</p>
+                    <p class="p-regular-green">Profile Details</p>
                     <div class="card-green-2">
-                        <div>
-                            <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile picture" class="card-profile-2">
-                        </div>
-                        <div>
-                            <p class="p-regular" style=" margin-bottom: -10px;">Mrs. Nilani Thushanthika</p>
-                            <p class="p-regular" style="color: var(--zerene-grey);">University of Colombo School of Computing</p>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">nth@ucsc.cmb.ac.lk</p>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">+94 77 123 4567</p>
-                            <button class="button-main">Request</button>
-                        </div>
+                        <?php if ($counsellor !== null && $id === $counsellor->user_id) : ?>
+                            <div>
+                                <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile picture" class="card-profile-2">
+                            </div>
+                            <div>
+                                <p class="p-regular" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p>
+                                <p class="p-regular" style="color: var(--zerene-grey);"><?php echo $counsellor->university. ' | '.$counsellor->faculty;?></p>
+                                <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px; margin-bottom: 5px;"><?php echo $counsellor->email;?></p>
+                                <div style="display: flex; flex-direction: row; gap: 10px;">
+                                    <button class="button-main">Message Request</button>
+                                    <button class="button-main">Send a Request Letter</button>
+                                </div>
+                            </div>
+                        <?php elseif ($doctor !== null && $id === $doctor->user_id) : ?>
+                            <div>
+                                <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile picture" class="card-profile-2">
+                            </div>
+                            <div>
+                                <p class="p-regular" style=" margin-bottom: -10px;"><?php echo $doctor->first_name.' '.$doctor->last_name;?></p>
+                                <p class="p-regular-grey" style="">Psychiatrist in charge on <?php echo $doctor->uni_in_charge?></p>
+                                <p class="p-regular-grey" style="font-size: 15px; margin-bottom: 5px;"><?php echo $doctor->email;?> | <?php echo $doctor->contact_num;?></p>
+                                <div style="display: flex; flex-direction: row; gap: 10px;">
+                                    <button class="button-main">Message Request</button>
+                                    <button class="button-main">Send a Request Letter</button>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
     

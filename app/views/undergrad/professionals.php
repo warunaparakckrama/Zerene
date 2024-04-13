@@ -38,8 +38,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;"><?php echo$counsellor->university. ' | '.$counsellor->faculty;?></p>
                             </div>
                             <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->coun_id;?>" style="text-decoration: none;"><button class="button-main">Request</button></a>
-                                <a href=""><button class="button-main">View Profile</button></a>
+                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->coun_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
                             </div>
                         </div>
                         <?php endif; ?>
@@ -57,8 +57,8 @@
                                 <p class="p-regular" style="color: var(--zerene-grey);  font-size: 18px;"><?php echo $counsellor->university.' | '.$counsellor->faculty;?></p>
                             </div>
                             <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->coun_id;?>" style="text-decoration: none;"><button class="button-main">Request</button></a>
-                                <button class="button-main">View Profile</button>
+                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
                             </div>
                         </div>
                         <?php endif; ?>
@@ -77,7 +77,7 @@
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Assigned University: <?php echo $doctor->uni_in_charge;?></p>
                             </div>
                             <div class="btn-container">
-                                <a href="" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
+                                <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
                             </div>
                         </div>
                         <?php endif; ?>

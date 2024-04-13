@@ -75,6 +75,18 @@ class Undergrad extends Controller
         $this->view('undergrad/professionals', $data);
     }
 
+    public function professional_profile($id)
+    {
+        $counsellor = $this->adminModel->getcounsellorById($id);
+        $doctor = $this->adminModel->getDoctorById($id);
+        $data = [
+            'counsellor' => $counsellor,
+            'doctor' => $doctor,
+            'id' => $id
+        ];
+        $this->view('undergrad/professional_profile', $data);
+    }
+
     public function view_timeslotpc()
     {
         $timeslot = $this->ugModel->getTimeslotsForUndergrad();
@@ -83,16 +95,6 @@ class Undergrad extends Controller
         ];
         $this->view('undergrad/view_timeslotpc', $data);
 
-    }
-
-    public function professional_profile($id)
-    {
-        $counsellor = $this->adminModel->getcounselors();
-        $data = [
-            'coun_id' => $id,
-            'counsellor' => $counsellor
-        ];
-        $this->view('undergrad/professional_profile', $data);
     }
 
     public function doctors()
