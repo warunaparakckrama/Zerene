@@ -31,7 +31,8 @@
                             <div>
                                 <p class="p-regular-green" style="font-size: 30px;">Good Job!</p>
                                 <p class="p-regular-green" style="font-size: 15px;">You just completed the <b><?php echo $questionnaire->questionnaire_name;?></b> questionnaire!</p>
-                                <p class="p-regular-green" style="font-size: 15px;">Based on your answers, below are some recommendations for Counsellors.</p>
+                                <p class="p-regular-green" style="font-size: 15px; margin-bottom: 20px;">Based on your answers, below are some recommendations for Counsellors.</p>
+                                <a href="<?php echo URLROOT;?>undergrad/questionnaires" style="text-decoration: none;"><button class="button-main">Back to questionnaires</button></a>
                             </div>
                         </div>
                     </div>

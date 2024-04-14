@@ -35,9 +35,12 @@ class Undergrad extends Controller
 
     public function questionnaires()
     {   
+        $id = $_SESSION['user_id'];
+        $response = $this->ugModel->getResponsesById($id);
         $questionnaire = $this->ugModel->getQuestionnaireDetails();
         $data = [
-            'questionnaire' => $questionnaire
+            'questionnaire' => $questionnaire,
+            'response' => $response
         ];
         $this->view('undergrad/questionnaires', $data);
     }
