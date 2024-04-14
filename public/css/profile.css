@@ -1,0 +1,31 @@
+.card-white-profile{
+    display: grid;
+    grid-template-rows: 50% 50%;
+    background-color: var(--zerene-white);
+    border-radius: var(--card-border-radius);
+    align-items: top;
+    height: fit-content;
+}
+
+.subgrid-profile{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 10px;
+    height: fit-content;
+    margin: 10px;
+}
+
+.card-green-profile-1{
+    background-color: var(--zerene-light);
+    border-radius: var(--card-border-radius);
+    padding: 10px;
+    height: fit-content;
+    margin-bottom: 10px;
+}
+
+.profile-picture{
+    width: 90px;
+    height: 90px;
+    border: 2px solid var(--zerene-green);
+    border-radius: 50%;
+}

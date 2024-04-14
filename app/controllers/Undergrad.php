@@ -189,6 +189,14 @@ class Undergrad extends Controller
         $this->view('undergrad/chatroom', $data);
     }
 
+    public function ug_view_profile($id){
+        $undergrad = $this->adminModel->getUgById($id);
+        $data = [
+            'undergrad' => $undergrad
+        ];
+        $this->view('undergrad/ug_view_profile', $data);
+    }
+
     //function controllers
 
     public function changeUsernameUG($user_id)
