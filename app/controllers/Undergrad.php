@@ -143,7 +143,6 @@ class Undergrad extends Controller
 
     public function ug_profile()
     {
-
         $undergrads = $this->adminModel->getUndergrads();
         $data = [
             'undergrads' => $undergrads,
