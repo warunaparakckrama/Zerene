@@ -11,7 +11,15 @@
             $this->db->query('INSERT INTO undergraduate (age, gender, email, university, faculty, study_year, username, password) VALUES(:age, :gender, :email, :university, :faculty, :year, :username, :password)');
             // Bind values
             $this->db->bind(':age', $data['age']);
-            $this->db->bind(':gender', $data['gender']);
+            if ($data['gender'] === "Male") {
+                $this->db->bind(':gender', 'Male');
+            }
+            if ($data['gender'] === "Female") {
+                $this->db->bind(':gender', 'Female');
+            }
+            if ($data['gender'] === "Not specified") {
+                $this->db->bind(':gender', 'Not specified');
+            }
             $this->db->bind(':email', $data['email']);
             $this->db->bind(':university', $data['university']);
             $this->db->bind(':faculty', $data['faculty']);
@@ -199,7 +207,7 @@
         }
 
         public function findUserByUsername($username){
-            $this->db->query('SELECT * FROM users WHERE BINARY username = :username AND is_deleted = FALSE');
+            $this->db->query('SELECT * FROM users WHERE username = :username AND is_deleted = FALSE');
             // Bind value
             $this->db->bind(':username', $username);
     
