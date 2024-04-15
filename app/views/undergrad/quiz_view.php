@@ -45,24 +45,24 @@
                                         <div style="margin-bottom: 10px;">
                                             <p class="p-regular-green" style="font-size: 17px; font-weight:500;"><?php echo ($i + 1).'. '. $question->question_text ?></p>
                                             <label class="radio">
-                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="0">
+                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="0" required>
                                                 <p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_1 ?></p>
                                             </label>
                                             <label class="radio">
-                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="1">
+                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="1" required>
                                                 <p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_2 ?></p>
                                             </label>
                                             <label class="radio">
-                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="2">
+                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="2" required>
                                                 <p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_3 ?></p>
                                             </label>
                                             <label class="radio">
-                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="3">
+                                                <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="3" required>
                                                 <p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_4 ?></p>
                                             </label>
                                             <?php if ($answer->answer_5 !== NULL) : ?>
                                                 <label class="radio">
-                                                    <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="4">
+                                                    <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="4" required>
                                                     <p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_5 ?></p>
                                                 </label>
                                             <?php endif; ?>
