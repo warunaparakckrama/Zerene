@@ -309,6 +309,12 @@
             }
         }
 
+        public function getUsernames(){
+            $this->db->query('SELECT username FROM users WHERE is_deleted = FALSE');
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
         public function updatePassword($user_id, $new_password) {
             $sql = "UPDATE users SET password = :new_password WHERE user_id = :user_id";
             $this->db->query($sql);

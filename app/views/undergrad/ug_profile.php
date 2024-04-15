@@ -1,6 +1,8 @@
 <!-- <!DOCTYPE html>
 <html lang="en"> -->
-<?php $currentPage = 'ug_profile'; ?>
+<?php $currentPage = 'ug_profile'; 
+    $undergrad = $data['undergrad'];
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,57 +34,59 @@
                                 <tr>
                                     <td class="p-regular-grey">Username</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $_SESSION['user_name'];?></td>
+                                    <td class="p-title"><?php echo $undergrad->username;?></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-regular-grey">Age</td>
+                                    <td class="p-regular-grey">Email</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title">21</td>
+                                    <td class="p-title"><?php echo $undergrad->email;?></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-regular-grey">Gender</td>
+                                    <td class="p-regular-grey">University</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title">Male</td>
-                                </tr>
-                                <tr>
-                                    <td class="p-regular-grey">E-mail</td>
-                                    <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $_SESSION['user_email'];?></td>
+                                    <td class="p-title"><?php echo $undergrad->university;?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">Faculty</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title">UCSC</td>
+                                    <td class="p-title"><?php echo $undergrad->faculty;?></td>
                                 </tr>
                             </table>
                         </div>
 
                         <div class="rectangle">
                             <p>Change Password</p>
-                            <form action="<?php echo URLROOT;?>Undergrad/changePwdUG/<?php echo $_SESSION['user_id'];?>" method="POST" class="subgrid-1">
+                            <form action="<?php echo URLROOT;?>Undergrad/changePwdUG/<?php echo $undergrad->user_id;?>" method="POST" class="subgrid-1" style="font-size: 15px;">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
-                                <input type="password" id="current_password" name="current_password" class="form-default">
-                                <p class="p-error"><?php echo isset($data['current_password_err']) ? $data['current_password_err'] : ''; ?></p><br>
+                                <input type="password" id="current_password" name="current_password" class="" required>
+
                                 <label for="fname" class="p-regular-grey">New Password :</label>
-                                <input type="password" id="new_password" name="new_password" class="form-default">
-                                <p class="p-error"><?php echo isset($data['new_password_err']) ? $data['new_password_err'] : ''; ?></p><br>
+                                <input type="password" id="new_password" name="new_password" class="" required>
+
                                 <label for="fname" class="p-regular-grey">Confirm Password :</label>
-                                <input type="password" id="confirm_password" name="confirm_password" placeholder="" class="form-default">
-                                <p class="p-error"><?php echo isset($data['confirm_password_err']) ? $data['confirm_password_err'] : ''; ?></p><br>
-                                <button class="button-main" type="submit">Change</button>
+                                <input type="password" id="confirm_password" name="confirm_password" class="" required>
+                                <div class="btn-container-2">
+                                    <button class="button-main" type="submit">Change</button>
+                                    <button class="button-danger" type="reset">Cancel</button>
+                                </div>
+                                <p class="p-error"><?php echo isset($data['password_alert']) ? $data['password_alert'] : ''; ?></p>
                             </form>
                         </div>
 
                         <div class="rectangle">
                             <p>Change Username</p>
-                            <form action="<?php echo URLROOT;?>Undergrad/changeUsernameUG/<?php echo $_SESSION['user_id'];?>" method="POST" class="subgrid-1">
-                                <label for="cusername" class="p-regular-grey">Current Username :</label>
-                                <input type="text" id="current_username" name="current_username" class="form-default">
-                                <p class="p-error"><?php echo isset($data['current_username_err']) ? $data['current_username_err'] : ''; ?></p><br>
-                                <label for="nusername" class="p-regular-grey">New Username :</label>
-                                <input type="text" id="new_username" name="new_username" class="form-default">
-                                <p class="p-error"><?php echo isset($data['new_username_err']) ? $data['new_username_err'] : ''; ?></p><br>
-                                <button class="button-main" type="submit">Change</button>
+                            <form action="<?php echo URLROOT;?>Undergrad/changeUsernameUG/<?php echo $undergrad->user_id;?>" method="POST" class="subgrid-1" style="font-size: 15px;">
+                                <label for="cusername" class="p-regular-grey">New Username :</label>
+                                <input type="text" name="new_username" style="margin-bottom: 5px;" required>
+                                
+                                <label for="nusername" class="p-regular-grey">Password :</label>
+                                <input type="password" name="password"  required>
+                                
+                                <div class="btn-container-2">
+                                    <button class="button-main" type="submit">Change</button>
+                                    <button class="button-danger" type="reset">Cancel</button>
+                                </div>
+                                <p class="p-error"><?php echo isset($data['username_alert']) ? $data['username_alert'] : ''; ?></p>
                             </form>
                         </div>
                         
