@@ -32,7 +32,7 @@
 
             <div>
                 <p class="p-regular-green">Undergraduates</p>
-                <div class="card-white-scroll">
+                <div class="card-white-scroll" style="height: 215px;">
                     <?php foreach ($data['request'] as $request) : ?>
                         <?php foreach ($data['undergrad'] as $undergrad):?>
                             <?php if ($request->ug_id === $undergrad->ug_id) : ?>
@@ -54,7 +54,7 @@
                 </div>
 
                 <p class="p-regular-green">Professionals</p>
-                <div class="card-white-scroll">
+                <div class="card-white-scroll" style="height: 215px;">
                     <?php foreach ($data['connection'] as $connection ): ?>
                         <?php foreach ($data['all_counsellors'] as $all_counsellors):?>
                             <?php if (($connection->from_user === $_SESSION['user_id'] && $connection->to_user === $all_counsellors->user_id)):?>
