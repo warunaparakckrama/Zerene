@@ -58,6 +58,11 @@
     color: var(--zerene-green);
     width: fit-content;
 }
+
+.p-regular-light{
+    color: var(--zerene-light);
+    width: fit-content;
+}
 .a-style{
     align-items: center;
     justify-content: right;
