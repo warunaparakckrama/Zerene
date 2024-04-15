@@ -395,7 +395,7 @@ class Academic extends Controller
             $mail->Port = 587;
     
             //Recipients
-    $mail->setFrom('zerenecounselor@gmail.com', 'Mailer');
+    $mail->setFrom('zerenecounselor@gmail.com', 'Zerene Counsellor');
     $mail->addAddress('111ashanpraboda@gmail.com', 'IUD');     //Add a recipient , name is optional
     // $mail->addCC('cc@example.com');
     // $mail->addBCC('bcc@example.com');
