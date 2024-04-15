@@ -99,6 +99,12 @@ class Undergraduate
         return $results;
     }
 
+    public function getResponses(){
+        $this->db->query('SELECT * FROM response ORDER BY attempted_at DESC');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
     public function sendMsgRequest($ug_id, $counsellor_id){
         $this->db->query('INSERT INTO msg_request (ug_id, coun_id, sent_at) VALUES (:ug_id, :coun_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
         $this->db->bind(':ug_id', $ug_id);

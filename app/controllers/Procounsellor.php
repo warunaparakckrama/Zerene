@@ -37,8 +37,15 @@ class Procounsellor extends Controller
     }
 
     public function pc_reviewq()
-    {
-        $data = [];
+    {   
+        $undergrad = $this->adminModel->getUndergrads();
+        $questionnaire = $this->ugModel->getQuestionnaireDetails();
+        $response = $this->ugModel->getResponses();
+        $data = [
+            'undergrad' => $undergrad,
+            'questionnaire' => $questionnaire,
+            'response' => $response
+        ];
         $this->view('procounsellor/pc_reviewq', $data);
     }
 
