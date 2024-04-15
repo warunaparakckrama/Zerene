@@ -1,6 +1,6 @@
 <!-- <!DOCTYPE html>
 <html lang="en"> -->
-<?php $currentPage = 'ac'; ?>
+<?php $currentPage = 'academiccounsellors'; ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,9 +22,6 @@
             </div>
             
             <div>
-                <div class="card-white">
-                    <p class="p-regular">Select your Faculty</p>
-                </div>
                 <div class="card-white">
                     <p class="p-regular">Academic Counsellors</p>
                     <div class="card-green">

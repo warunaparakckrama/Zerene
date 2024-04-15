@@ -5,6 +5,8 @@ class Undergrad extends Controller
 
     private $userModel;
     private $adminModel;
+    private $ugModel;
+    private $timeslotModel;
 
     public function __construct()
     {
@@ -13,6 +15,8 @@ class Undergrad extends Controller
         }
         $this->userModel = $this->model('User');
         $this->adminModel = $this->model('Administrator');
+        $this->ugModel = $this->model('Undergraduate');
+        $this->timeslotModel = $this->model('Timeslot');
     }
 
     //user view controllers
@@ -30,9 +34,31 @@ class Undergrad extends Controller
     }
 
     public function questionnaires()
+    {   
+        $questionnaire = $this->ugModel->getQuestionnaireDetails();
+        $data = [
+            'questionnaire' => $questionnaire
+        ];
+        $this->view('undergrad/questionnaires', $data);
+    }
+
+    public function quiz_view($questionnaire_id)
+    {   
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($questionnaire_id);
+        $question = $this->ugModel->getQuestionsfromQuestionnaireId($questionnaire_id);
+        $answer = $this->ugModel->getAnswersfromQuestionnaireId($questionnaire_id);
+        $data = [
+            'questionnaire' => $questionnaire,
+            'question' => $question,
+            'answer' => $answer
+        ];
+        $this->view('undergrad/quiz_view', $data);
+    }
+
+    public function professionalcounsellors()
     {
         $data = [];
-        $this->view('undergrad/questionnaires', $data);
+        $this->view('undergrad/professionalcounsellors', $data);
     }
 
     public function academiccounsellors()
@@ -43,8 +69,12 @@ class Undergrad extends Controller
 
     public function view_timeslotpc()
     {
-        $data = [];
+        $timeslot = $this->ugModel->getTimeslotsForUndergrad();
+        $data = [
+            'timeslot' => $timeslot
+        ];
         $this->view('undergrad/view_timeslotpc', $data);
+
     }
 
     public function counsellorprofile()
@@ -90,164 +120,6 @@ class Undergrad extends Controller
             'new_username_err' => ''
         ];
         $this->view('undergrad/ug_profile', $data);
-    }
-
-    public function dass21()
-    {
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $data = [
-                'q1' => trim($_POST['q1']),
-                'q2' => trim($_POST['q2']),
-                'q3' => trim($_POST['q3']),
-                'q4' => trim($_POST['q4']),
-                'q5' => trim($_POST['q5']),
-                'q6' => trim($_POST['q6']),
-                'q7' => trim($_POST['q7']),
-
-                'q8' => trim($_POST['q8']),
-                'q9' => trim($_POST['q9']),
-                'q10' => trim($_POST['q10']),
-                'q11' => trim($_POST['q11']),
-                'q12' => trim($_POST['q12']),
-                'q13' => trim($_POST['q13']),
-                'q14' => trim($_POST['q14']),
-
-                'q15' => trim($_POST['q15']),
-                'q16' => trim($_POST['q16']),
-                'q17' => trim($_POST['q17']),
-                'q18' => trim($_POST['q18']),
-                'q19' => trim($_POST['q19']),
-                'q20' => trim($_POST['q20']),
-                'q21' => trim($_POST['q21']),
-
-                'q1_err' => '',
-                'q2_err' => '',
-                'q3_err' => '',
-                'q4_err' => '',
-                'q5_err' => '',
-                'q6_err' => '',
-                'q7_err' => '',
-
-                'q8_err' => '',
-                'q9_err' => '',
-                'q10_err' => '',
-                'q11_err' => '',
-                'q12_err' => '',
-                'q13_err' => '',
-                'q14_err' => '',
-
-                'q15_err' => '',
-                'q16_err' => '',
-                'q17_err' => '',
-                'q18_err' => '',
-                'q19_err' => '',
-                'q20_err' => '',
-                'q21_err' => '',
-            ];
-
-            if (empty($data['q1'])) {
-                $data['q1_err'] = 'Please select your answer';
-            }
-            if (empty($data['q2'])) {
-                $data['q2_err'] = 'Please select your answer';
-            }
-            if (empty($data['q3'])) {
-                $data['q3_err'] = 'Please select your answer';
-            }
-            if (empty($data['q4'])) {
-                $data['q4_err'] = 'Please select your answer';
-            }
-            if (empty($data['q5'])) {
-                $data['q5_err'] = 'Please select your answer';
-            }
-            if (empty($data['q6'])) {
-                $data['q6_err'] = 'Please select your answer';
-            }
-            if (empty($data['q7'])) {
-                $data['q7_err'] = 'Please select your answer';
-            }
-
-            if (empty($data['q8'])) {
-                $data['q8_err'] = 'Please select your answer';
-            }
-            if (empty($data['q9'])) {
-                $data['q9_err'] = 'Please select your answer';
-            }
-            if (empty($data['q10'])) {
-                $data['q10_err'] = 'Please select your answer';
-            }
-            if (empty($data['q11'])) {
-                $data['q11_err'] = 'Please select your answer';
-            }
-            if (empty($data['q12'])) {
-                $data['q12_err'] = 'Please select your answer';
-            }
-            if (empty($data['q13'])) {
-                $data['q13_err'] = 'Please select your answer';
-            }
-            if (empty($data['q14'])) {
-                $data['q14_err'] = 'Please select your answer';
-            }
-
-            if (empty($data['q15'])) {
-                $data['q15_err'] = 'Please select your answer';
-            }
-            if (empty($data['q16'])) {
-                $data['q16_err'] = 'Please select your answer';
-            }
-            if (empty($data['q17'])) {
-                $data['q17_err'] = 'Please select your answer';
-            }
-            if (empty($data['q18'])) {
-                $data['q18_err'] = 'Please select your answer';
-            }
-            if (empty($data['q19'])) {
-                $data['q19_err'] = 'Please select your answer';
-            }
-            if (empty($data['q20'])) {
-                $data['q20_err'] = 'Please select your answer';
-            }
-            if (empty($data['q21'])) {
-                $data['q21_err'] = 'Please select your answer';
-            }
-
-            if (
-                empty($data['q1_err']) && empty($data['q2_err']) && empty($data['q3_err']) && empty($data['q4_err']) && empty($data['q5_err']) && empty($data['q6_err']) && empty($data['q7_err']) &&
-                empty($data['q8_err']) && empty($data['q9_err']) && empty($data['q10_err']) && empty($data['q11_err']) && empty($data['q12_err']) && empty($data['q13_err']) && empty($data['q14_err']) &&
-                empty($data['q16_err']) && empty($data['q17_err']) && empty($data['q18_err']) && empty($data['q19_err']) && empty($data['q20_err']) && empty($data['q21_err'])
-            ) {
-                # code...
-            }
-        } else {
-            $data = [
-                'q1' => '',
-                'q2' => '',
-                'q3' => '',
-                'q4' => '',
-                'q5' => '',
-                'q6' => '',
-                'q7' => '',
-
-                'q8' => '',
-                'q9' => '',
-                'q10' => '',
-                'q11' => '',
-                'q12' => '',
-                'q13' => '',
-                'q14' => '',
-
-                'q15' => '',
-                'q16' => '',
-                'q17' => '',
-                'q18' => '',
-                'q19' => '',
-                'q20' => '',
-                'q21' => '',
-            ];
-            $this->view('undergrad/dass21', $data);
-        }
-        $this->view('undergrad/dass21', $data);
     }
 
     public function dass21_review()
@@ -397,18 +269,84 @@ class Undergrad extends Controller
         $this->view('undergrad/ug_profile', $data);
     }
 
-
     public function viewTimeslots()
     {
         $data['timeslots'] = $this->userModel->getTimeslotsForUndergrad();
 
-        // Check if $data['timeslots'] is set and not null
         if (isset($data['timeslots']) && is_array($data['timeslots'])) {
             $this->view('undergrad/view_timeslotpc', $data);
         } else {
-            // If not set or null, initialize it as an empty array
             $defaultData = ['timeslots' => []];
             $this->view('undergrad/view_timeslotpc', $defaultData);
         }
     }
+
+    public function reserveTimeslot($timeslotId)
+    {
+        if (!isset($_SESSION['user_id'])) {
+            redirect('users/login');
+        }
+
+        $timeslotModel = new Timeslot();
+
+        $timeslot = $timeslotModel->getTimeslotById($timeslotId);
+
+        if (!$timeslot) {
+            redirect('undergrad/view_timeslotpc');
+        }
+
+        $isReserved = $timeslotModel->isTimeslotReserved($timeslotId, $_SESSION['user_id']);
+
+        if ($isReserved) {
+            $result = $timeslotModel->cancelReservation($timeslotId, $_SESSION['user_id']);
+        } else {
+            $result = $timeslotModel->reserveTimeslot($timeslotId, $_SESSION['user_id']);
+        }
+
+        if ($result) {
+            $_SESSION['success_message'] = $isReserved ? 'Reservation canceled successfully' : 'Timeslot reserved successfully';
+        } else {
+            $_SESSION['error_message'] = 'Failed to reserve or cancel timeslot';
+        }
+
+        redirect('undergrad/view_timeslotpc');
+    }
+
+    public function submitResponses($user_id) //questionnaire_id need to be resolved
+    {
+        $questionnaire_id = trim($_POST['questionnaire_id']);
+        if ($_SERVER['REQUEST_METHOD']=='POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'user_id' => $user_id,
+                'questionnaire_id' => $questionnaire_id,
+                'responses' => []
+            ];
+
+
+            // Loop through each question and capture user responses
+            for ($i = 1; $i <= 21; $i++) {
+                $responseKey = 'q' . $i . '_response';
+
+                if (isset($_POST[$responseKey])) {
+                    // Assuming radio button values are integers (0, 1, 2, 3)
+                    $data['responses'][$i] = intval($_POST[$responseKey]);
+                }
+            }
+
+            // Validate and store responses
+            if ($this->ugModel->storeResponses($data)) {
+                flash('user_message', 'Responses stored successfully');
+                redirect('undergrad/dass21_review'); // Adjust the redirect URL accordingly
+            } else {
+                die('Something went wrong');
+            }
+        }
+        else {
+            redirect('undergrad/quiz_view/' . $questionnaire_id);
+        } 
+    }
+
+
 }
