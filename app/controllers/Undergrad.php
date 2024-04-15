@@ -458,20 +458,20 @@ class Undergrad extends Controller
         }
     }
 
-    public function UGProfilePic(){
-        $id = $_SESSION['user_id'];
+    public function UGProfilePic($id) {
         $undergrad = $this->adminModel->getUgById($id);
-
+        
         if ($undergrad->gender === 'Male') {
-            return UGMALE;
+            $Url = UGMALE;
+        } elseif ($undergrad->gender === 'Female') {
+            $Url = UGFEMALE;
+        } else {
+            $Url = UGNS;
         }
-        elseif($undergrad->gender === 'Female'){
-            return UGFEMALE;
-        }
-        else {
-            return UGNS;
-        }
+    
+        return $Url;
     }
+    
 
 
 }
