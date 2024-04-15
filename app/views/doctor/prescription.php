@@ -102,9 +102,9 @@
                         <div class="card-white">
                             <p class="p-regular">Add medicine</p>
 
-                            <!-- Container for dynamic rows -->
+                            
                             <div id="medicine-container">
-                                <!-- Initial medicine input fields (template row) -->
+                                
                                 <div id="medicine-row" class="card-green-2">
                                     <label for="drug">Drug:</label>
                                     <input type="text" name="drug[]" class="medicine-input">

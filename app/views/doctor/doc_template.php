@@ -79,19 +79,19 @@
 <body>
     <div class= prescription-container>
     <table class="prescription-table">
-        <thead>
+    <tbody>
             <tr>
                 <th class="col1">name of the patiant</th>
                 <td class="col1 merged-cells" colspan="3"></td>
                
             </tr>
-        </thead>
-        <tbody>
-            
+       
+        
+         
             <tr>
-                <th class="col1">patiant ID</th>
+                <th class="col1">age</th>
                 <td class="col2"></td>
-                <th class="col3">age</th>
+                <th class="col3">gender</th>
                 <td class="col4"></td>
             </tr>
 
@@ -125,36 +125,19 @@
             </tr>
             </div>
 
-            <tr>
-                <th class="col1">Things to be done</th>
-                <td class="col2 merged-cells" colspan="3"></td>
-            </tr>
+           
             <tr>
                 <th class="col1">date</th>
                 <td class="col2"></td>
-                <th class="col3">signature</th>
+                <th class="col3">psychiatrist</th>
                 <td class="col4"></td>
             </tr>
 
         </div>
         </tbody>
     </table>
-</body>
+
         </style>
 
-                      
-
-                           
-
-
-
-
-                        
-                        
-
-
-                    
-
-            
-        </section>
+</section>
     </body>

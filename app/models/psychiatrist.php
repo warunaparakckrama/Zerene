@@ -30,33 +30,44 @@ class psychiatrist {
 
     }
 
-    public function createPrescription($data){
-        $this->db->query('INSERT INTO prescription (pres_id, pres_date, ug_name, age, gender, diagnosis_with, drug, unit, dosage, created_by) VALUES (:pres_id, :pres_date, :ug_name, :age, :gender, :diagnosis_with, :drug, :unit, :dosage, :created_by)');
-        $this->db->bind(':pres_id', $data['pres_id']);
-        $this->db->bind(':pres_date', $data['pres_date']);
-        $this->db->bind(':ug_name', $data['ug_name']);
-        $this->db->bind(':age', $data['age']);
-        $this->db->bind(':gender', $data['gender']);
-        if ($data['gender'] === "male") {
-            $this->db->bind(':gender', 'male');
-        }
-        elseif ($data['gender'] === "female") {
-            $this->db->bind(':gender', 'female');
-        }
-        $this->db->bind(':diagnosis_with', $data['diagnosis_with']);
-        $this->db->bind(':drug', $data['drug']);
-        $this->db->bind(':unit', $data['unit']);
-        $this->db->bind(':dosage', $data['dosage']);
-        $this->db->bind(':created_by', $data['created_by']);
-        $addmedicine = $this->db->execute();
+   public function createPrescription($data) {
+    $this->db->query('INSERT INTO prescription (pres_date, ug_name, age, gender, diagnosis_with, created_by) VALUES (:pres_date, :ug_name, :age, :gender, :diagnosis_with, :created_by)');
 
-        if ($addmedicine) {
-            return true;
-        }
-        else {
-            return false;
+    $this->db->bind(':pres_date', $data['pres_date']);
+    $this->db->bind(':ug_name', $data['ug_name']);
+    $this->db->bind(':age', $data['age']);
+    $this->db->bind(':gender', $data['gender']);
+    if ($data['gender'] === "male") {
+        $this->db->bind(':gender', 'male');
+    } elseif ($data['gender'] === "female") {
+        $this->db->bind(':gender', 'female');
+    }
+    $this->db->bind(':diagnosis_with', $data['diagnosis_with']);
+    $this->db->bind(':created_by', $data['created_by']);
+
+    return $this->db->execute();
+}
+
+public function addMedicineToTable($data) {
+    // Assuming all arrays have the same length
+    $numRecords = count($data['drugs']);
+
+    for ($i = 0; $i < $numRecords; $i++) {
+        $this->db->query('INSERT INTO medicine (drug, unit, dosage) VALUES (:drug, :unit, :dosage)');
+        $this->db->bind(':drug', $data['drug'][$i]);
+        $this->db->bind(':unit', $data['unit'][$i]);
+        $this->db->bind(':dosage', $data['dosage'][$i]);
+
+        $result = $this->db->execute();
+        if (!$result) {
+            return false; // Failed to insert at least one record
         }
     }
+
+    return true; // All records inserted successfully
+}
+
+    
 
     public function getPrescription($username){
         $this->db->query('SELECT * FROM prescription WHERE is_deleted = FALSE AND created_by = :username');
