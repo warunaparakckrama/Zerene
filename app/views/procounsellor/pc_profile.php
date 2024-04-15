@@ -26,7 +26,6 @@
             <div>
 
                 <div class="card-white">
-                    <p class="p-regular-grey">Counsellor Account</p>
                     <div class="subgrid-4">
 
                         <div class="rectangle">
