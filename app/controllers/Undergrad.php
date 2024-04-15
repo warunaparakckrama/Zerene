@@ -282,12 +282,12 @@ class Undergrad extends Controller
             ];
 
             if (strlen($data['new_password']) < 8) {
-                $data['alert'] = '*Password must be atleast 8 characters';
+                $data['password_alert'] = '*Password must be atleast 8 characters';
             }
 
             else {
                 if ($data['new_password'] != $data['confirm_password']) {
-                    $data['alert'] = '*passwords do not match';
+                    $data['password_alert'] = '*passwords do not match';
                 }
             }
 
@@ -455,6 +455,21 @@ class Undergrad extends Controller
             else {
                 die('something went wrong');
             }    
+        }
+    }
+
+    public function UGProfilePic(){
+        $id = $_SESSION['user_id'];
+        $undergrad = $this->adminModel->getUgById($id);
+
+        if ($undergrad->gender === 'Male') {
+            return UGMALE;
+        }
+        elseif($undergrad->gender === 'Female'){
+            return UGFEMALE;
+        }
+        else {
+            return UGNS;
         }
     }
 
