@@ -64,5 +64,33 @@
             $results = $this->db->single();
             return $results;
         }
+
+        public function getOpDetails($coun_id){
+            $this->db->query('SELECT * FROM opinion_letter WHERE coun_id = :coun_id');
+            $this->db->bind(':coun_id', $coun_id);
+            $results = $this->db->single();
+            return $results;
+        }
+
+        public function getUndergradDetails(){
+            $this->db->query('SELECT * FROM undergraduate');
+            $results = $this->db->resultSet();
+
+            return $results;
+        }
+
+        public function getProfCounsellers(){
+            $this->db->query('SELECT * FROM counsellor WHERE coun_type = "professional"');
+            $results = $this->db->resultSet();
+
+            return $results;
+        }
+
+        public function getAcCounsellers(){
+            $this->db->query('SELECT * FROM counsellor WHERE coun_type = "academic"');
+            $results = $this->db->resultSet();
+
+            return $results;
+        }
     }
 ?>

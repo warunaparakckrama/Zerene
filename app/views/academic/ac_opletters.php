@@ -56,7 +56,7 @@
                             <tr>
                                 <th>req_id</th>
                                 <th>Title</th>
-                                <!-- <th>Content</th> -->
+                                <th>Content</th>
                                 <!-- <th>file name</th> -->
                                 <th>ug_id</th>
                                 <!-- <th>coun_id</th> -->
@@ -71,7 +71,7 @@
                                 <tr>
                                     <td><?php echo $rletter->request_id ?></td>
                                     <td><?php echo $rletter->title ?></td>
-                                    <!-- <td><?php echo $rletter->content ?></td> -->
+                                    <!-- <td><?php echo $Oletter ?></td> -->
                                     <!-- <td><?php echo $rletter->file_name ?></td> -->
                                     <td><?php echo $rletter->ug_id ?></td>
                                     <!-- <td><?php echo $rletter->coun_id ?></td> -->
@@ -97,6 +97,8 @@
                 <!-- //created letters -->
                 <div>
                     <div class="card-white">
+
+
                         <p class="p-regular">created letters</p>
                         <div class="card-green">
                             <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="pro pic" class="card-profile">

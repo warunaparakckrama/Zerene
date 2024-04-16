@@ -40,14 +40,18 @@ class Academic extends Controller
 
         // Get data from the model
         $data['rletter'] = $this->acModel->getOpRequest($session_id);
+        $Oletter['data'] = $this->acModel->getOpDetails($session_id);
+       
 
         // Load the view and pass the data to it
-        $this->view('academic/ac_opletters', $data);
+        $this->view('academic/ac_opletters', $data,$Oletter);
     }
 
     public function ac_undergrads()
     {
-        $data = [];
+        $data['details'] = $this->acModel->getUndergradDetails();
+        
+
         $this->view('academic/ac_undergrads', $data);
     }
 
@@ -59,7 +63,8 @@ class Academic extends Controller
 
     public function ac_counselors()
     {
-        $data = [];
+        $data ['counsellors'] = $this->acModel->getProfCounsellers();
+        $data ['acCounsellors'] = $this->acModel->getAcCounsellers();
         $this->view('academic/ac_counselors', $data);
     }
 
@@ -430,6 +435,13 @@ class Academic extends Controller
             // Handle exceptions
             echo 'Error: ' . $mail->ErrorInfo;
         }
+
+    }
+
+    public function getOpDetails(){
+        $session_id=$_SESSION['user_id'];
+        $data = $this->acModel->getOpDetails($session_id);
+        $this->view('academic/ac_opletters', $data);
 
     }
 }
