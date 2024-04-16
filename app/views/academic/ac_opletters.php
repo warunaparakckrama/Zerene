@@ -17,7 +17,7 @@
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2">
-                    <p class="p-title" style="font-size: 40px;">Questionnaires</p>
+                    <p class="p-title" style="font-size: 40px;">Opinion Letters</p>
                 </div>
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
@@ -80,7 +80,7 @@
                                         <div class="btn-container-2">
                                             <div class="btn-container">
                                                 <a href="<?php echo URLROOT; ?>academic/req_letter/" class="a-name"><button class="button-main">Review</button></a>
-                                                <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4/" class="a-name"><button class="button-main">Create</button></a>
+                                                <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4/<?php echo $rletter->ug_id ?>" class="a-name"><button class="button-main">Create</button></a>
                                                 <!-- <a href="<?php echo URLROOT; ?>Admin/delFeedback/<?php echo $rletter->feedback_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a> -->
                                             </div>
                                         </div>                                                                                                                                                                                                                  
