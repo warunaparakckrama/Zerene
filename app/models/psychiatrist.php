@@ -30,6 +30,10 @@ class psychiatrist {
 
     }
 
+
+
+
+
    public function createPrescription($data) {
     $this->db->query('INSERT INTO prescription (pres_date, ug_name, age, gender, diagnosis_with, created_by) VALUES (:pres_date, :ug_name, :age, :gender, :diagnosis_with, :created_by)');
 
@@ -49,30 +53,24 @@ class psychiatrist {
 }
 
 public function addMedicineToTable($data) {
-    // Assuming all arrays have the same length
-    $numRecords = count($data['drugs']);
+    $this->db->query('INSERT INTO medicine (prescription_id, drug, unit, dosage, created_by) VALUES (:prescription_id, :drug, :unit, :dosage, :created_by)');
+    
+    $this->db->bind(':prescription_id', $data['prescription_id']);
+    $this->db->bind(':drug', $data['drug']);
+    $this->db->bind(':unit', $data['unit']);
+    $this->db->bind(':dosage', $data['dosage']);
+    $this->db->bind(':created_by', $data['created_by']);
 
-    for ($i = 0; $i < $numRecords; $i++) {
-        $this->db->query('INSERT INTO medicine (drug, unit, dosage) VALUES (:drug, :unit, :dosage)');
-        $this->db->bind(':drug', $data['drug'][$i]);
-        $this->db->bind(':unit', $data['unit'][$i]);
-        $this->db->bind(':dosage', $data['dosage'][$i]);
-
-        $result = $this->db->execute();
-        if (!$result) {
-            return false; // Failed to insert at least one record
-        }
-    }
-
-    return true; // All records inserted successfully
+    return $this->db->execute();
 }
+
 
     
 
     public function getPrescription($username){
         $this->db->query('SELECT * FROM prescription WHERE is_deleted = FALSE AND created_by = :username');
         $this->db->bind(':username', $username);
-        $results = $this->db->resultSet();
+        $results=$this->db->resultset();
         return $results;
     }
 

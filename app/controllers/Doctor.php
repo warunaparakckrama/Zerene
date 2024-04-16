@@ -223,8 +223,8 @@ class Doctor extends Controller{
     public function doc_template(){
         
         $session_id=$_SESSION['user_id'];
-        
-        $data['prescription'] = $this->docModel->getPrescription($session_id);
+        $prescription= $this->docModel->getPrescription($session_id);
+        $data = ['prescription'=> $prescription];
         $this->view('doctor/doc_template', $data);
     }  
    
@@ -287,51 +287,44 @@ class Doctor extends Controller{
             $data['created_by'] = $current_username;
  
             if ($this->docModel->createPrescription($data)) {
+                redirect('doctor/doc_template');
+                # code...
+               } else{
+                die('Something went wrong');
+               }
+
 
                 //insert data into 'medicine' table
 
+                $drugs = $_POST['drug'];
+                $units = $_POST['unit'];
+                $dosages = $_POST['dosage'];
+    
+                $numRecords = count($drugs);
+                for ($i = 0; $i < $numRecords; $i++) {
+                    $medicineData = [
+                        
+                        'drug' => $_POST['drug'][$i],
+                        'unit' => $_POST['unit'][$i],
+                        'dosage' => $_POST['dosage'][$i],
+                        'created_by' => $current_username,
+                    ];
+
+                    $current_username = $this->userModel->getUsernameById($user_id);
+                    $data['created_by'] = $current_username;
+         
+                    if ($this->docModel->addMedicineToTable($data)) {
+
              redirect('doctor/doc_template');
              # code...
-            }else{
+            } else{
              die('Something went wrong');
             }
             
         }
     }
+}
 
-    public function addDrug($user_id){
-        if ($_SERVER['REQUEST_METHOD']=='POST'){
-            $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
-
-            $drugs = $_POST['drug'];
-            $units = $_POST['unit'];
-            $dosages = $_POST['dosage'];
-
-            //  asumming all the array have the same length
-            $numRecords = count($drugs);
-            for ($i = 0; $i < $numRecords; $i++){
-
-            $data = [
-                'drug'=> $_POST['drug'][$i],
-                'unit'=> $_POST['unit'][$i],
-                'dosage'=> $_POST['dosage'][$i],
-            ];
-
-            $current_username = $this->userModel->getUsernameById($user_id);
-            $data['created_by'] = $current_username;
- 
-            if ($this->docModel->addMedicineToTable($data)) {
-
-                //insert data into 'medicine' table
-
-             redirect('doctor/doc_template');
-             # code...
-            }else{
-             die('Something went wrong');
-            }
-        }    
-        }
-    }
 
     public function doc_feedback()
     {
