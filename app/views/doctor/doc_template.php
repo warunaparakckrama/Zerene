@@ -80,9 +80,10 @@
     <div class= prescription-container>
     <table class="prescription-table">
     <tbody>
+    <?php foreach ($prescriptions as $prescription) : ?>
             <tr>
                 <th class="col1">name of the patiant</th>
-                <td class="col1 merged-cells" colspan="3"></td>
+                <td class="col1 merged-cells" colspan="3"><?php echo $prescription['ug_name']; ?></td>
                
             </tr>
        
@@ -135,6 +136,7 @@
 
         </div>
         </tbody>
+        <?php endforeach; ?>
     </table>
 
         </style>
