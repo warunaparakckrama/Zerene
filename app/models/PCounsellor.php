@@ -10,25 +10,37 @@ class PCounsellor
 
     public function createTimeslots($data)
     {
-        $this->db->query('INSERT INTO timeslot (slot_date, slot_start, slot_finish, slot_type, created_by) VALUES (:slot_date, :slot_start, :slot_finish, :slot_type, :created_by)');
-        $this->db->bind(':slot_date', $data['slot_date']);
-        $this->db->bind(':slot_start', $data['slot_start']);
-        $this->db->bind(':slot_finish', $data['slot_finish']);
-        if ($data['slot_type'] === "online") {
-            $this->db->bind(':slot_type', 'online');
-        } elseif ($data['slot_type'] === 'physical') {
-            $this->db->bind(':slot_type', 'physical');
-        }
-        $this->db->bind(':created_by', $data['created_by']);
+        $start = strtotime($data['slot_date'] . ' ' . $data['slot_start']);
+        $end = strtotime($data['slot_date'] . ' ' . $data['slot_finish']);
 
-        $addtimeslot = $this->db->execute();
-
-        if ($addtimeslot) {
-            return true;
-        } else {
-            return false;
+        // Generate timeslots in intervals
+        $timeslots = [];
+        $current = $start;
+        while ($current < $end) {
+            $timeslots[] = [
+                'slot_date' => $data['slot_date'],
+                'slot_start' => date('H:i:s', $current),
+                'slot_finish' => date('H:i:s', $current + 3600), // interval
+                'slot_type' => $data['slot_type'],
+                'created_by' => $data['created_by']
+            ];
+            $current += 3600; // Move to next interval
         }
+
+        // Insert timeslots into the database
+        foreach ($timeslots as $slot) {
+            $this->db->query('INSERT INTO timeslot (slot_date, slot_start, slot_finish, slot_type, created_by) VALUES (:slot_date, :slot_start, :slot_finish, :slot_type, :created_by)');
+            $this->db->bind(':slot_date', $slot['slot_date']);
+            $this->db->bind(':slot_start', $slot['slot_start']);
+            $this->db->bind(':slot_finish', $slot['slot_finish']);
+            $this->db->bind(':slot_type', $slot['slot_type']);
+            $this->db->bind(':created_by', $slot['created_by']);
+            $this->db->execute();
+        }
+
+        return true;
     }
+
 
     public function getTimeslots($username)
     {
@@ -77,7 +89,8 @@ class PCounsellor
         return $this->db->execute();
     }
 
-    public function getMsgRequestfromCounId($id){
+    public function getMsgRequestfromCounId($id)
+    {
         $this->db->query('SELECT * FROM msg_request WHERE coun_id = :coun_id');
         $this->db->bind(':coun_id', $id);
         $results = $this->db->resultSet();
