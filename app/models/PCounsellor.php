@@ -76,4 +76,11 @@ class PCounsellor
 
         return $this->db->execute();
     }
+
+    public function getMsgRequestfromCounId($id){
+        $this->db->query('SELECT * FROM msg_request WHERE coun_id = :coun_id');
+        $this->db->bind(':coun_id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
 }

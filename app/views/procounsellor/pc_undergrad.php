@@ -1,6 +1,9 @@
-<?php $currentPage = 'pc_undergrad'; ?>
-
-<html>
+<?php
+ $currentPage = 'pc_undergrad'; 
+ $undergrad = $data['undergrad'];
+ $counsellor = $data['counsellor'];
+ $request = $data['request'];
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -8,6 +11,7 @@
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <title><?php echo SITENAME; ?> | Undergraduates</title>
 </head>
 
 <body>
@@ -17,84 +21,47 @@
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2">
-                    <p class="p-title" style="font-size: 40px;">Undergraduates</p>
-                </div>
+                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Undergraduates</p></div>
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>
-                <div class="card-white">
-                    <p class="p-regular">Your Faculty</p>
-
-                    <div class="card-green">
-                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-proflie">
-                        <div>
-                            <p class="p-regular" style=" margin-bottom: -10px;">ZereneUser_07</p>
-                            <p class="p-regular" style="color: var(--zerene-grey);">University of Colombo School of Computing</p>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Nilani Thushanthika</p>
+                <p class="p-regular-green">Your Faculty</p>
+                <div class="card-white-scroll" style="height: 300px;">
+                    <?php foreach ($data['undergrad'] as $undergrad) : ?>
+                        <?php if ($undergrad->faculty === $counsellor->faculty) : ?>
+                        <div class="card-green">
+                            <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
+                            <div>
+                                <a href="<?php echo URLROOT;?>Procounsellor/pc_ug_profile/<?php echo $undergrad->user_id;?>"class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
+                                <p class="p-regular-grey"><?php echo $undergrad->university.' '.$undergrad->faculty;?></p>
+                            </div>
+                            <div class="btn-container">
+                                <button class="button-main">Profile</button>
+                            </div>
                         </div>
-                        <div class="btn-container">
-                            <button class="button-main">Past Records</button>
-                            <button class="button-main">Profile</button>
-                        </div>
-                    </div>
-
-                    <div class="card-green">
-                        <img src="<?php echo IMG; ?>ug-avatar2.svg" alt="profile pic" class="card-proflie">
-                        <div>
-                            <p class="p-regular" style=" margin-bottom: -10px;">ZereneUser_01</p>
-                            <p class="p-regular" style="color: var(--zerene-grey);">University of Colombo School of Computing</p>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Nilani Thushanthika</p>
-                        </div>
-                        <div class="btn-container">
-                            <button class="button-main">Past Records</button>
-                            <button class="button-main">Profile</button>
-                        </div>
-                    </div>
-
-                    <div class="card-green">
-                        <img src="<?php echo IMG; ?>ug-avatar2.svg" alt="profile pic" class="card-proflie">
-                        <div>
-                            <p class="p-regular" style=" margin-bottom: -10px;">ZereneUser_02</p>
-                            <p class="p-regular" style="color: var(--zerene-grey);">University of Colombo School of Computing</p>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Nilani Thushanthika</p>
-                        </div>
-                        <div class="btn-container">
-                            <button class="button-main">Past Records</button>
-                            <button class="button-main">Profile</button>
-                        </div>
-                    </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
 
-                <div class="card-white">
-                    <p class="p-regular">Other Faculties</p>
-
-                    <div class="card-green">
-                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-proflie">
-                        <div>
-                            <p class="p-regular" style=" margin-bottom: -10px;">ZereneUser_07</p>
-                            <p class="p-regular" style="color: var(--zerene-grey);">University of Colombo School of Computing</p>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Pasindi Vindula</p>
-                        </div>
-                        <div class="btn-container">
-                            <button class="button-main">Past Records</button>
-                            <button class="button-main">Profile</button>
-                        </div>
-                    </div>
-
-                    <div class="card-green">
-                        <img src="<?php echo IMG; ?>ug-avatar2.svg" alt="profile pic" class="card-proflie">
-                        <div>
-                            <p class="p-regular" style=" margin-bottom: -10px;">ZereneUser_01</p>
-                            <p class="p-regular" style="color: var(--zerene-grey);">University of Colombo School of Computing</p>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Directed by Mrs. Ashan Pabodha</p>
-                        </div>
-                        <div class="btn-container">
-                            <button class="button-main">Past Records</button>
-                            <button class="button-main">Profile</button>
-                        </div>
-                    </div>
+                <p class="p-regular-green">Other Faculties</p>
+                <div class="card-white-scroll"  style="height: 300px;">
+                    <?php foreach($data['request'] as $request) : ?>
+                        <?php foreach ($data['undergrad'] as $undergrad) : ?>
+                            <?php if ($undergrad->faculty !== $counsellor->faculty && $undergrad->ug_id === $request->ug_id) : ?>
+                                <div class="card-green">
+                                    <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
+                                    <div>
+                                        <a href="<?php echo URLROOT;?>Procounsellor/pc_ug_profile/<?php echo $undergrad->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
+                                        <p class="p-regular-grey" style="font-size: 15px;"><?php echo $undergrad->university.' '.$undergrad->faculty;?></p>
+                                    </div>
+                                    <div class="btn-container">
+                                        <button class="button-main">Profile</button>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
 
             </div>
@@ -103,5 +70,3 @@
 
     </section>
 </body>
-
-</html>

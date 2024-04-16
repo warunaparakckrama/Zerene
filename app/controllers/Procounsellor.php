@@ -65,8 +65,16 @@ class Procounsellor extends Controller
     }
 
     public function pc_undergrad()
-    {
-        $data = [];
+    {   
+        $id = $_SESSION['user_id'];
+        $counsellor = $this->adminModel->getCounsellorById($id);
+        $undergrad = $this->adminModel->getUndergrads();
+        $request = $this->pcModel->getMsgRequestfromCounId($counsellor->coun_id);
+        $data = [
+            'undergrad' => $undergrad,
+            'counsellor' => $counsellor,
+            'request' => $request
+        ];
         $this->view('procounsellor/pc_undergrad', $data);
     }
 
@@ -149,6 +157,14 @@ class Procounsellor extends Controller
     {
         $data = [];
         $this->view('procounsellor/pc_feedback', $data);
+    }
+
+    public function pc_ug_profile($id){
+        $undergrad = $this->adminModel->getUgById($id);
+        $data = [
+            'undergrad' => $undergrad,
+        ];
+        $this->view('procounsellor/pc_ug_profile', $data);
     }
 
     //function controllers
