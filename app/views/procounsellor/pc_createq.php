@@ -37,11 +37,11 @@
     
                                 <label for="quiz_type">Questionnaire Type:</label>
                                 <select name="quiz_type" id="quiz_type" required class="option">
-                                    <option value="general <?php echo ($data['quiz_type'] === 'general') ? 'selected' : ''; ?> ">General</option>
-                                    <option value="stress <?php echo ($data['quiz_type'] === 'stress') ? 'selected' : ''; ?> ">Stress</option>
-                                    <option value="anxiety <?php echo ($data['quiz_type'] === 'anxiety') ? 'selected' : ''; ?> ">Anxiety</option>
-                                    <option value="depression <?php echo ($data['quiz_type'] === 'depression') ? 'selected' : ''; ?> ">Depression</option>
-                                    <option value="other <?php echo ($data['quiz_type'] === 'other') ? 'selected' : ''; ?> ">Other</option>
+                                    <option value="General <?php echo ($data['quiz_type'] === 'General') ? 'selected' : ''; ?> ">General</option>
+                                    <option value="Stress <?php echo ($data['quiz_type'] === 'Stress') ? 'selected' : ''; ?> ">Stress</option>
+                                    <option value="Anxiety <?php echo ($data['quiz_type'] === 'Anxiety') ? 'selected' : ''; ?> ">Anxiety</option>
+                                    <option value="Depression <?php echo ($data['quiz_type'] === 'Depression') ? 'selected' : ''; ?> ">Depression</option>
+                                    <option value="Other <?php echo ($data['quiz_type'] === 'Other') ? 'selected' : ''; ?> ">Other</option>
                                 </select><br>
                                 <p class="p-error"><?php echo $data['quiz_type_err']; ?></p><br>
     

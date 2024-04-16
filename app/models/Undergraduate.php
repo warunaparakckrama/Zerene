@@ -105,6 +105,13 @@ class Undergraduate
         return $results;
     }
 
+    public function getResponseByResponseId($id){
+        $this->db->query('SELECT * FROM response WHERE response_id = :response_id');
+        $this->db->bind(':response_id', $id);
+        $row = $this->db->single();
+        return $row;
+    }
+
     public function sendMsgRequest($ug_id, $counsellor_id){
         $this->db->query('INSERT INTO msg_request (ug_id, coun_id, sent_at) VALUES (:ug_id, :coun_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
         $this->db->bind(':ug_id', $ug_id);

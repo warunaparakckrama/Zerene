@@ -167,6 +167,16 @@ class Procounsellor extends Controller
         $this->view('procounsellor/pc_ug_profile', $data);
     }
 
+    public function pc_quiz_review($id){
+        $response = $this->ugModel->getResponseByResponseId($id);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $data = [
+            'response' => $response,
+            'questionnaire' => $questionnaire
+        ];
+        $this->view('procounsellor/pc_quiz_review', $data);
+    }
+
     //function controllers
     public function sentFeedback($user_id)
     {
