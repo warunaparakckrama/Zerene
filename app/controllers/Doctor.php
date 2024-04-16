@@ -221,7 +221,10 @@ class Doctor extends Controller{
     }
 
     public function doc_template(){
-        $data = [];
+        
+        $session_id=$_SESSION['user_id'];
+        
+        $data['prescription'] = $this->docModel->getPrescription($session_id);
         $this->view('doctor/doc_template', $data);
     }  
    
@@ -329,30 +332,6 @@ class Doctor extends Controller{
         }    
         }
     }
- 
-    public function retievePrescription() {
-        
-            // Assuming you have a PrescriptionModel.php file for your model
-            require_once('psychiatrist.php');
-    
-            // Create an instance of the PrescriptionModel
-            $getPrescription = new getPrescription();
-    
-            // Call a method in the model to fetch data from the database
-            $prescriptions = $getPrescription->getAllPrescriptions(); // Assuming this method retrieves all prescriptions
-    
-            // Pass the retrieved data to the view
-            require_once('doc_template.php'); // Assuming doc_template.php is your view file
-        }
-
-          
-
-        
-
-
-    
-
-    
 
     public function doc_feedback()
     {

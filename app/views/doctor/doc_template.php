@@ -80,27 +80,21 @@
     <div class= prescription-container>
     <table class="prescription-table">
     <tbody>
-    <?php foreach ($prescriptions as $prescription) : ?>
+    <?php foreach ($data['prescription'] as $prescription) : ?>
             <tr>
                 <th class="col1">name of the patiant</th>
                 <td class="col1 merged-cells" colspan="3"><?php echo $prescription['ug_name']; ?></td>
                
             </tr>
-       
-        
-         
             <tr>
                 <th class="col1">age</th>
-                <td class="col2"></td>
+                <td class="col2"><?php echo $prescription['age']; ?></td>
                 <th class="col3">gender</th>
-                <td class="col4"></td>
+                <td class="col4"><?php echo $prescription['gender']; ?></td>
             </tr>
-
-           
-
-            <tr>
+             <tr>
                 <th class="col1">diagnosis with</th>
-                <td class="col2 merged-cells" colspan="3"></td>
+                <td class="col2 merged-cells" colspan="3"><?php echo $prescription['diagnosis_with']; ?></td>
                 
             </tr>
             <tr>
@@ -129,9 +123,9 @@
            
             <tr>
                 <th class="col1">date</th>
-                <td class="col2"></td>
+                <td class="col2"><?php echo $prescription['date']; ?></td>
                 <th class="col3">psychiatrist</th>
-                <td class="col4"></td>
+                <td class="col4"><?php echo $prescription['psychiatrist']; ?></td>
             </tr>
 
         </div>
