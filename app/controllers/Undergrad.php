@@ -35,9 +35,12 @@ class Undergrad extends Controller
 
     public function questionnaires()
     {   
+        $id = $_SESSION['user_id'];
+        $response = $this->ugModel->getResponsesById($id);
         $questionnaire = $this->ugModel->getQuestionnaireDetails();
         $data = [
-            'questionnaire' => $questionnaire
+            'questionnaire' => $questionnaire,
+            'response' => $response
         ];
         $this->view('undergrad/questionnaires', $data);
     }
@@ -61,10 +64,39 @@ class Undergrad extends Controller
         $this->view('undergrad/professionalcounsellors', $data);
     }
 
-    public function academiccounsellors()
+    public function professionals()
+    {   
+        $id = $_SESSION['user_id'];
+        $undergrad= $this->adminModel->getUgById($id);
+        $counsellor = $this->adminModel->getCounselors();
+        $doctor = $this->adminModel->getDoctors();
+        $data = [
+            'counsellor' => $counsellor,
+            'undergrad' => $undergrad,
+            'doctor' => $doctor
+        ];
+        $this->view('undergrad/professionals', $data);
+    }
+
+    public function professional_profile($id)
     {
-        $data = [];
-        $this->view('undergrad/academiccounsellors', $data);
+        $counsellor = $this->adminModel->getcounsellorById($id);
+        $doctor = $this->adminModel->getDoctorById($id);
+        $data = [
+            'counsellor' => $counsellor,
+            'doctor' => $doctor,
+            'id' => $id
+        ];
+        $this->view('undergrad/professional_profile', $data);
+    }
+
+    public function send_req_letter($id){
+        $undergrad = $this->adminModel->getUgById($_SESSION['user_id']);
+        $data = [
+            'id' => $id,
+            'undergrad' => $undergrad
+        ];
+        $this->view('undergrad/send_req_letter', $data);
     }
 
     public function view_timeslotpc()
@@ -75,12 +107,6 @@ class Undergrad extends Controller
         ];
         $this->view('undergrad/view_timeslotpc', $data);
 
-    }
-
-    public function counsellorprofile()
-    {
-        $data = [];
-        $this->view('undergrad/counsellorprofile', $data);
     }
 
     public function doctors()
@@ -97,7 +123,15 @@ class Undergrad extends Controller
 
     public function chats()
     {
-        $data = [];
+        $id = $_SESSION['user_id'];
+        $request = $this->ugModel->getMsgRequest();
+        $undergrad = $this->adminModel->getUgById($id);
+        $counsellor = $this->adminModel->getCounselors();
+        $data = [
+            'request' => $request,
+            'undergrad' => $undergrad,
+            'counsellor' => $counsellor
+        ];
         $this->view('undergrad/chats', $data);
     }
 
@@ -108,24 +142,29 @@ class Undergrad extends Controller
     }
 
     public function ug_profile()
-    {
-
-        $undergrads = $this->adminModel->getUndergrads();
+    {   
+        $id = $_SESSION['user_id'];
+        $undergrad = $this->adminModel->getUgById($id);
         $data = [
-            'undergrads' => $undergrads,
-            'current_password_err' => '',
-            'new_password_err' => '',
-            'confirm_password_err' => '',
-            'current_username_err' => '',
-            'new_username_err' => ''
+            'undergrad' => $undergrad
         ];
         $this->view('undergrad/ug_profile', $data);
     }
 
-    public function dass21_review()
-    {
-        $data = [];
-        $this->view('undergrad/dass21_review', $data);
+    public function quiz_review($quiz_id)
+    {   
+        $undergrad = $this->adminModel->getUgById($_SESSION['user_id']);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($quiz_id);
+        $counsellor = $this->adminModel->getCounselors();
+        $data = [
+            'id' => $_SESSION['user_id'],
+            'questionnaire_id' => $quiz_id,
+            'undergrad' => $undergrad,
+            'questionnaire' => $questionnaire,
+            'counsellor' => $counsellor
+
+        ];
+        $this->view('undergrad/quiz_review', $data);
     }
 
     public function feedback()
@@ -134,101 +173,125 @@ class Undergrad extends Controller
         $this->view('undergrad/feedback', $data);
     }
 
+    public function chatroom($user_id)
+    {
+        $receiver = $this->userModel->findUserDetails($user_id);
+        $counsellor = $this->adminModel->getCounsellorById($user_id);
+        $data = [
+            'user_id' => $user_id,
+            'receiver' => $receiver,
+            'counsellor' => $counsellor
+        ];
+        $this->view('undergrad/chatroom', $data);
+    }
+
+    public function ug_view_profile($id){
+        $undergrad = $this->adminModel->getUgById($id);
+        $data = [
+            'undergrad' => $undergrad
+        ];
+        $this->view('undergrad/ug_view_profile', $data);
+    }
+
     //function controllers
 
     public function changeUsernameUG($user_id)
-    {
+    {   
+        $undergrad = $this->adminModel->getUgById($user_id);
+        $current_username = $this->userModel->getUsernameById($user_id);
+        $username = $this->userModel->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'current_username' => trim($_POST['current_username']),
+                'undergrad' => $undergrad,
+                'current_username' => $current_username,
+                'username' => $username,
                 'new_username' => trim($_POST['new_username']),
-                'current_username_err' => '',
-                'new_username_err' => ''
+                'password' => trim($_POST['password']),
+                'username_alert' => ''
             ];
 
-            if (empty($data['current_username'])) {
-                $data['current_username_err'] = 'Please enter current username';
-            }
-            if (empty($data['new_username'])) {
-                $data['new_username_err'] = 'Please enter new username';
+            if (strlen($data['new_username']) < 8) {
+                $data['username_alert'] = '*Username must be atleast 8 characters';
             }
 
-            if (empty($data['current_username_err']) && empty($data['new_username_err'])) {
-                // Validated
+            elseif($data['new_username'] == $data['current_username']) {
+                $data['username_alert'] = '*New username cannot be same as the current username';
+            }
 
-                // Fetch the current username from db
-                $current_username = $this->userModel->getUsernameById($user_id);
-
-                // Verify if the entered current password matches the hashed password from the database
-                if (($data['current_username'] != $current_username)) {
-                    $data['current_username_err'] = 'Current username is incorrect';
-                } else {
-
-                    // Update the username
-                    if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                        flash('user_message', 'Username updated successfully');
-                        redirect('undergrad/ug_profile');
-                    } else {
-                        die('Something went wrong');
+            else {
+                // Convert the new_username to lowercase
+                $newUsernameLower = strtolower($data['new_username']);
+            
+                foreach ($data['username'] as $username) {
+                    // Convert each username in the array to lowercase
+                    $existingUsernameLower = strtolower($username->username);
+                    
+                    // Compare the lowercase versions of the usernames
+                    if ($newUsernameLower === $existingUsernameLower) {
+                        // If there is a match, set the alert message
+                        $data['username_alert'] = '*Username already exists/ is a variation of current username';
+                        break; // Exit the loop as soon as a match is found
                     }
                 }
-            } else {
+            }
+            
+            // Fetch the hashed password from the database based on the user ID
+            $hashed_password_from_db = $this->userModel->getPasswordById($user_id);
+
+            // Verify if the entered current password matches the hashed password from the database
+            if (!password_verify($data['password'], $hashed_password_from_db)) {
+                $data['username_alert'] = '*Incorrect Password';
+            }
+
+            if (empty($data['username_alert'])) {
+                // Update the username
+                if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
+                    flash('user_message', 'Username updated successfully');
+                    redirect('undergrad/ug_profile'); 
+                } else {
+                    die('Something went wrong');
+                }    
+            } 
+
+            else {
                 // Load view with errors
                 $this->view('undergrad/ug_profile', $data);
             }
-        } else {
-            $data = [
-                'current_username' => '',
-                'new_username' => '',
-                'current_username_err' => '',
-                'new_username_err' => ''
-            ];
 
-            $this->view('undergrad/ug_profile', $data);
-        }
-
+        } 
+        
         $this->view('undergrad/ug_profile', $data);
     }
 
     public function changePwdUG($user_id)
-    {
+    {   
+        $undergrad = $this->adminModel->getUgById($user_id);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'undergrad' => $undergrad,
                 'current_password' => trim($_POST['current_password']),
                 'new_password' => trim($_POST['new_password']),
                 'confirm_password' => trim($_POST['confirm_password']),
-                'current_password_err' => '',
-                'new_password_err' => '',
-                'confirm_password_err' => ''
+                'password_alert' => '',
             ];
 
-            if (empty($data['current_password'])) {
-                $data['current_password_err'] = 'Please enter current password';
+            if (strlen($data['new_password']) < 8) {
+                $data['alert'] = '*Password must be atleast 8 characters';
             }
 
-            if (empty($data['new_password'])) {
-                $data['new_password_err'] = 'Please enter new password';
-            } elseif (strlen($data['new_password']) < 6) {
-                $data['new_password_err'] = 'Password must be atleast 6 characters';
-            }
-
-            if (empty($data['confirm_password'])) {
-                $data['confirm_password_err'] = 'Please re-enter new password';
-            } else {
+            else {
                 if ($data['new_password'] != $data['confirm_password']) {
-                    $data['confirm_password_err'] = 'passwords do not match';
+                    $data['alert'] = '*passwords do not match';
                 }
             }
 
-
-
-            if (empty($data['username_err']) && empty($data['email_err']) && empty($data['confirm_password_err'])) {
+            if (empty($data['password_alert'])) {
                 // Validated
 
                 // Fetch the hashed password from the database based on the user ID
@@ -236,7 +299,7 @@ class Undergrad extends Controller
 
                 // Verify if the entered current password matches the hashed password from the database
                 if (!password_verify($data['current_password'], $hashed_password_from_db)) {
-                    $data['current_password_err'] = 'Current password is incorrect';
+                    $data['password_alert'] = '*Current password is incorrect';
                 } else {
                     // Hash the new password
                     $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
@@ -253,17 +316,6 @@ class Undergrad extends Controller
                 // Load view with errors
                 $this->view('undergrad/ug_profile', $data);
             }
-        } else {
-            $data = [
-                'current_password' => '',
-                'new_password' => '',
-                'confirm_password' => '',
-                'current_password_err' => '',
-                'new_password_err' => '',
-                'confirm_password_err' => ''
-            ];
-
-            $this->view('undergrad/ug_profile', $data);
         }
 
         $this->view('undergrad/ug_profile', $data);
@@ -338,7 +390,7 @@ class Undergrad extends Controller
             // Validate and store responses
             if ($this->ugModel->storeResponses($data)) {
                 flash('user_message', 'Responses stored successfully');
-                redirect('undergrad/dass21_review'); // Adjust the redirect URL accordingly
+                redirect('undergrad/quiz_review/'. $questionnaire_id); // Adjust the redirect URL accordingly
             } else {
                 die('Something went wrong');
             }
@@ -346,6 +398,64 @@ class Undergrad extends Controller
         else {
             redirect('undergrad/quiz_view/' . $questionnaire_id);
         } 
+    }
+
+    public function MsgRequest($counsellor_id){
+        $id = $_SESSION['user_id'];
+        $undergrad= $this->adminModel->getUgById($id);
+        $ug_id = $undergrad->ug_id;
+        if ($this->ugModel->sendMsgRequest($ug_id, $counsellor_id)) {
+            redirect('undergrad/counsellors');
+        } else {
+            die('Something went wrong');
+        }
+    }
+
+    public function submitRequestLetter($id){
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'from' => $id,
+                'coun_id' => trim($_POST['coun_id']),
+                'subject' => trim($_POST['subject']),
+                'content' => trim($_POST['content']),
+                'document_path' => null
+            ];
+
+            // Handle file upload
+            if (isset($_FILES['document']) && $_FILES['document']['error'] === UPLOAD_ERR_OK) {
+                $document = $_FILES['document'];
+
+                $allowedMimeType = 'application/pdf';
+                $maxFileSize = 2 * 1024 * 1024; // 2MB
+
+                if ($document['type'] === $allowedMimeType && $document['size'] <= $maxFileSize) {
+                    $fileName = time() . '_' . basename($document['name']);
+                    $filePath = UPLOAD . 'documents/'.$fileName;
+                    
+                    // Move the uploaded file to the upload directory
+                    if (move_uploaded_file($document['tmp_name'], $filePath)) {
+                        // File uploaded successfully, set document_path
+                        $data['document_path'] = $filePath;
+                    } else {
+                        // Handle file upload error
+                        $data['upload_error'] = 'File upload failed';
+                    }
+                }   else {
+                    // Handle file size exceeding maximum limit
+                    $data['upload_error'] = 'File size exceeds the allowed limit';
+                }
+            }
+
+            $coun_id = $data['coun_id'];
+
+            if ($this->ugModel->addRequestLetter($data)) {
+                redirect('undergrad/send_req_letter/'.$coun_id);
+            } 
+            else {
+                die('something went wrong');
+            }    
+        }
     }
 
 
