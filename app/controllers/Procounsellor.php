@@ -133,9 +133,9 @@ class Procounsellor extends Controller
     }
 
     public function pc_timeslot()
-    {
-        $username = $this->userModel->getUsernameById($_SESSION['user_id']);
-        $timeslot = $this->pcModel->getTimeslots($username);
+    {   
+        $id = $_SESSION['user_id'];
+        $timeslot = $this->pcModel->getTimeslots($id);
 
         $data = [
             'slot_type' => '',
@@ -147,7 +147,7 @@ class Procounsellor extends Controller
         ];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->handleCreateTimeslot($data, $username);
+            $this->handleCreateTimeslot($data);
         }
 
         $this->view('procounsellor/pc_timeslot', $data);
@@ -527,10 +527,9 @@ class Procounsellor extends Controller
         }
     }
 
-    private function handleCreateTimeslot(&$data, $user_id)
+    private function handleCreateTimeslot(&$data)
     {
-        $current_username = $this->userModel->getUsernameById($user_id);
-        $data['created_by'] = $current_username;
+        $data['created_by'] = $_SESSION['user_id'];
 
         if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
             if ($this->pcModel->createTimeslots($data)) {

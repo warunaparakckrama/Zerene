@@ -42,10 +42,10 @@ class PCounsellor
     }
 
 
-    public function getTimeslots($username)
+    public function getTimeslots($id)
     {
-        $this->db->query('SELECT * FROM timeslot WHERE is_deleted = FALSE AND created_by = :username');
-        $this->db->bind(':username', $username);
+        $this->db->query('SELECT * FROM timeslot WHERE is_deleted = FALSE AND created_by = :id');
+        $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
         return $results;
     }
