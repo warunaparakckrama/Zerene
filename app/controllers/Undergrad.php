@@ -396,7 +396,7 @@ class Undergrad extends Controller
         $undergrad= $this->adminModel->getUgById($id);
         $ug_id = $undergrad->ug_id;
         if ($this->ugModel->sendMsgRequest($ug_id, $counsellor_id)) {
-            redirect('undergrad/counsellors');
+            redirect('undergrad/professionals');
         } else {
             die('Something went wrong');
         }

@@ -183,7 +183,7 @@
                 var chatWindow = document.getElementById('chat-window');
 
                 var newMessage = document.createElement('p');
-                newMessage.innerHTML = data.name + " : " + data.msg + " " + data.date;
+                newMessage.innerHTML = data.msg + "<br>(" + data.date + ")";
                 newMessage.classList.add('chat-message-2');
                 chatWindow.appendChild(newMessage);
                 document.getElementById('chat-window').appendChild(commentElem);
