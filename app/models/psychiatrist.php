@@ -53,13 +53,13 @@ class psychiatrist {
 }
 
 public function addMedicineToTable($data) {
-    $this->db->query('INSERT INTO medicine (prescription_id, drug, unit, dosage, created_by) VALUES (:prescription_id, :drug, :unit, :dosage, :created_by)');
+    $this->db->query('INSERT INTO medicine (drug, unit, dosage,) VALUES (:drug, :unit, :dosage)');
     
-    $this->db->bind(':prescription_id', $data['prescription_id']);
+   
     $this->db->bind(':drug', $data['drug']);
     $this->db->bind(':unit', $data['unit']);
     $this->db->bind(':dosage', $data['dosage']);
-    $this->db->bind(':created_by', $data['created_by']);
+    
 
     return $this->db->execute();
 }

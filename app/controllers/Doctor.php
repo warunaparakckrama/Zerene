@@ -296,18 +296,20 @@ class Doctor extends Controller{
 
                 //insert data into 'medicine' table
 
-                $drugs = $_POST['drug'];
-                $units = $_POST['unit'];
-                $dosages = $_POST['dosage'];
+                $drug = $_POST['drug'];
+                $unit = $_POST['unit'];
+                $dosage = $_POST['dosage'];
+                var_dump($drug, $unit, $dosage);
     
-                $numRecords = count($drugs);
+                $numRecords = count($drug);
                 for ($i = 0; $i < $numRecords; $i++) {
-                    $medicineData = [
+                    
+                    $data = [
                         
                         'drug' => $_POST['drug'][$i],
                         'unit' => $_POST['unit'][$i],
                         'dosage' => $_POST['dosage'][$i],
-                        'created_by' => $current_username,
+                        
                     ];
 
                     $current_username = $this->userModel->getUsernameById($user_id);
