@@ -91,6 +91,42 @@ class Undergraduate
         }
     }
 
+    public function getResponsesbyId($id)
+    {
+        $this->db->query('SELECT * FROM response WHERE user_id = :user_id ORDER BY attempted_at DESC');
+        $this->db->bind(':user_id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
 
+    public function sendMsgRequest($ug_id, $counsellor_id){
+        $this->db->query('INSERT INTO msg_request (ug_id, coun_id, sent_at) VALUES (:ug_id, :coun_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+        $this->db->bind(':ug_id', $ug_id);
+        $this->db->bind(':coun_id', $counsellor_id);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    public function getMsgRequest(){
+        $this->db->query('SELECT * FROM msg_request WHERE is_deleted = FALSE');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function addRequestLetter($data){
+        $this->db->query('INSERT INTO request_letter (from_ug_id, to_coun_id, subject, content, document_path, sent_at) VALUES (:from, :to, :subject, :content, :document_path, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+        $this->db->bind(':from', $data['from']);
+        $this->db->bind(':to', $data['coun_id']);
+        $this->db->bind(':subject', $data['subject']);
+        $this->db->bind(':content', $data['content']);
+        $this->db->bind(':document_path', $data['document_path']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

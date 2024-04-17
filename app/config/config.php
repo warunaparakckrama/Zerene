@@ -18,3 +18,5 @@ define('CSS', 'http://localhost/Zerene/public/css/');
 define('IMG', 'http://localhost/Zerene/public/img/');
 //js root
 define('JS', 'http://localhost/Zerene/public/js/');
+//upload root
+define('UPLOAD', 'C:/xampp/htdocs/Zerene/app/uploads/');

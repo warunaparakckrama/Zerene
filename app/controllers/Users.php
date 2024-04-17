@@ -29,59 +29,19 @@ class Users extends Controller{
                 'username'=>trim($_POST['username']),
                 'password'=>trim($_POST['password']),
                 'confirm_password'=>trim($_POST['confirm_password']),
-                'age_err'=>'',
-                'gender_err'=>'',
-                'email_err'=>'',
-                'university_err'=>'',
-                'faculty_err'=>'',
-                'year_err'=>'',
-                'username_err'=>'',
-                'password_err'=>'',
-                'confirm_password_err'=>''
-
+                'signup_alert'=>'',
             ];
-            //validate age
-            // if(empty($data['age'])){
-            //     $data['age_err']='Please enter age';      
-            // }
-            if (empty($data['age'])) {
-                $data['age_err'] = 'Please enter age';
-            } else {
-                // Check if the entered age is a number
-                if (!is_numeric($data['age'])) {
-                    $data['age_err'] = 'Age must be a number';
-                } else {
-                    $age = (int)$data['age']; // Convert the age to an integer
-            
-                    // Check if the age is within the specified range
-                    if ($age < 18 || $age > 25) {
-                        $data['age_err'] = 'Age must be between 18 and 25';
-                    }
-                }
-            }
-            
 
-            //validate gender
-            if(empty($data['gender'])){
-                $data['gender_err']='Please enter gender';      
+            // Check if the age is within the specified range
+            if ($data['age'] < 18 || $data['age'] > 25) {
+                $data['signup_alert'] = 'Age must be between 18 and 25';
             }
 
-            //validate email
-            // if(empty($data['email'])){
-            //     $data['email_err']='Please enter email';      
-            // }else{
-            //     if($this->userModel->findUserByEmail($data['email'])){
-            //         $data['email_err']='Email is already taken'; 
-            //     }
-            // }
-
-            if (empty($data['email'])) {
-                $data['email_err'] = 'Please enter an email';
-            } else {
-                // Check if the email is in a valid format
-                if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                    $data['email_err'] = 'Invalid email format';
-                } else {
+            elseif(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                $data['signup_alert'] = 'Invalid email format';
+            } 
+            
+            else {
                     // Extract domain from the email address
                     $emailParts = explode('@', $data['email']);
                     $domain = isset($emailParts[1]) ? $emailParts[1] : '';
@@ -96,58 +56,30 @@ class Users extends Controller{
             
                     // Check if the extracted domain is in the allowed list
                     if (!in_array($domain, $allowedDomains)) {
-                        $data['email_err'] = 'Email domain is not allowed';
+                        $data['signup_alert'] = 'Email domain is not allowed';
                     } else {
                         // Check if the email is already taken
                         if ($this->userModel->findUserByEmail($data['email'])) {
-                            $data['email_err'] = 'Email is already taken';
+                            $data['signup_alert'] = 'Email is already taken';
                         }
                     }
                 }
+            
+
+            if($this->userModel->findUserByUsername($data['username'])){
+                $data['signup_alert']='Username is already taken'; 
+            }
+            
+            elseif(strlen($data['password'])<8){
+                $data['signup_alert']='Password must be atleast 8 characters'; 
             }
 
-            //validate university
-            if(empty($data['university'])){
-                $data['university_err']='Please enter university';      
+            elseif($data['password']!=$data['confirm_password']){
+                $data['signup_alert']='passwords do not match';
             }
-
-            //validate faculty
-            if(empty($data['faculty'])){
-                $data['faculty_err']='Please enter faculty';      
-            }
-
-            //validate year
-            if(empty($data['year'])){
-                $data['year_err']='Please enter year';      
-            }
-
-            //validate username
-            if(empty($data['username'])){
-                $data['username_err']='Please enter username';      
-            }else {
-                if($this->userModel->findUserByUsername($data['username'])){
-                    $data['username_err']='Username is already taken'; 
-                }
-            }
-
-            //validate password
-            if(empty($data['password'])){
-                $data['password_err']='Please enter password';      
-            }elseif(strlen($data['password'])<6){
-                $data['password_err']='Password must be atleast 6 characters'; 
-            }
-
-             //validate confirm password
-             if(empty($data['confirm_password'])){
-                $data['confirm_password_err']='Please confirm password';      
-            }else{
-                if($data['password']!=$data['confirm_password']){
-                    $data['confirm_password_err']='password not matching';
-                }
-            }
-
+            
             //make sure errors are empty
-            if(empty($data['age_err']) && empty($data['gender_err']) && empty($data['email_err']) && empty($data['university_err']) && empty($data['faculty_err']) && empty($data['year_err']) && empty($data['username_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
+            if(empty($data['signup_alert'])){
                 //validate
 
                 //hash password
@@ -177,16 +109,6 @@ class Users extends Controller{
                 'username'=>'',
                 'password'=>'',
                 'confirm_password'=>'',
-                'age_err'=>'',
-                'gender_err'=>'',
-                'email_err'=>'',
-                'university_err'=>'',
-                'faculty_err'=>'',
-                'year_err'=>'',
-                'username_err'=>'',
-                'password_err'=>'',
-                'confirm_password_err'=>''
-
             ];
             $this->view('users/signup', $data);
         }

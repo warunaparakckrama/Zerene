@@ -16,29 +16,28 @@
             <div class="grid-1">
 
                 <div class="subgrid-1">
-                        <p class="p-title" style="font-size: 40px;">Feedback</p>
+                    <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Feedback</p></div>
                     <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
                 </div>
 
                 <div>
                     <div class="card-white">
-                        <p class="p-regular">Submit Feedback/ Complaints</p>
-
-                        <div class="card-green">
+                        <p class="p-regular-green">Submit Feedback/ Complaints</p>
+                        <div class="card-green-5">
                             <form action="<?php echo URLROOT;?>Users/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST">
-                                <div style="font-size: 15px;">
+                                <div style="font-size: 18px; color: var(--zerene-green)">
 
                                     <label for="type">Type: </label>
                                     <select name="type">
                                         <option value="feedback">Feedback</option>
                                         <option value="complaint">Complaint</option>
-                                    </select><br>
+                                    </select><br><br>
 
                                     <label for="title">Title: </label>
-                                    <input type="text" name="title" class="" value=""><br>
+                                    <input type="text" name="title" placeholder="Enter your title" style="width: 50%;"><br><br>
 
                                     <label for="content">Content: </label>
-                                    <textarea name="content" id="" cols="30" rows="10" style="margin-bottom: 10px;">Please enter your concern here.</textarea>
+                                    <textarea name="content" rows="10" class="textarea-1"></textarea><br><br>
 
                                     <div class="btn-container-2">
                                         <a href="" style="text-decoration: none;"><button class="button-main" type="submit">Submit</button></a>
