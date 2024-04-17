@@ -170,9 +170,12 @@ class Procounsellor extends Controller
     public function pc_quiz_review($id){
         $response = $this->ugModel->getResponseByResponseId($id);
         $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $results = $this->quizResults($id);
+        
         $data = [
             'response' => $response,
-            'questionnaire' => $questionnaire
+            'questionnaire' => $questionnaire,
+            'results' => $results
         ];
         $this->view('procounsellor/pc_quiz_review', $data);
     }
@@ -567,5 +570,71 @@ class Procounsellor extends Controller
         } else {
             die('Timeslot not found');
         }
+    }
+
+    public function quizResults($id){
+        $response = $this->ugModel->getResponseByResponseId($id);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+
+        if ($questionnaire->questionnaire_name === 'DASS-21') {
+            $Depression = '';
+            $Anxiety = '';
+            $Stress = '';
+            $data = [
+                'depression' => $Depression,
+                'anxiety' => $Anxiety,
+                'stress' => $Stress,
+            ];
+            $i =1;
+            $mark = 0;
+            for ($i=1; $i <=21 ; $i++) { 
+                $mark = $response->{'q'.$i.'_response'}*2 + $mark;
+            }
+            
+            //Depression
+            if ($mark >= 28) {
+                $Depression = 'Extremely Severe';
+            } elseif ($mark >= 21) {
+                $Depression = 'Severe';
+            } elseif ($mark >= 14) {
+                $Depression = 'Moderate';
+            } elseif ($mark >= 10) {
+                $Depression = 'Mild';
+            } else {
+                $Depression = 'Normal';
+            }
+            $data['depression'] = $Depression;
+            
+            //Anxiety
+            if ($mark >= 20) {
+                $Anxiety = 'Extremely Severe';
+            } elseif ($mark >= 15) {
+                $Anxiety = 'Severe';
+            } elseif ($mark >= 10) {
+                $Anxiety = 'Moderate';
+            } elseif ($mark >= 8) {
+                $Anxiety = 'Mild';
+            } else {
+                $Anxiety = 'Normal';
+            }
+            $data['anxiety'] = $Anxiety;
+
+            //Stress
+            if ($mark >= 34) {
+                $Stress = 'Extremely Severe';
+            } elseif ($mark >= 26) {
+                $Stress = 'Severe';
+            } elseif ($mark >= 19) {
+                $Stress = 'Moderate';
+            } elseif ($mark >= 15) {
+                $Stress = 'Mild';
+            } else {
+                $Stress = 'Normal';
+            }
+            $data['stress'] = $Stress;
+
+            return $data;
+        }
+
     }
 }

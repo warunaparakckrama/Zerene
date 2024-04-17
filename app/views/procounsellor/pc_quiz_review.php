@@ -2,6 +2,7 @@
     $currentPage = 'pc_questionnaires'; 
     $questionnaire = $data['questionnaire'];
     $response = $data['response'];
+    $results = $data['results'];
 ?>
 
 <head>
@@ -42,7 +43,28 @@
                         </div>
                     </div>
                 </div>
+
+                <p class="p-regular-green">Results</p>
+                <div class="card-white">
+                    <?php if ($questionnaire->questionnaire_name === 'DASS-21') : ?>
+                        <div class="card-green-6">
+                            <div style="font-size: 15px;">
+                                <p class="p-regular-green">Undergraduate experiences <b><?php echo $results['depression'];?></b> condition in terms of <b>Depression.</b></p>
+                                <p class="p-regular-green">Undergraduate experiences <b><?php echo $results['anxiety'];?></b> condition in terms of <b>Anxiety.</b></p>
+                                <p class="p-regular-green">Undergraduate experiences <b><?php echo $results['stress'];?></b> condition in terms of <b>Stress.</b></p>
+                            </div>
+                        </div>
+                    <?php endif ; ?>
+                </div>
+
+                <p class="p-regular-green">Criteria</p>
+                <div class="card-white">
+                    <div class="card-green"></div>
+                </div>
+
             </div>
+
+                
         </div>
     </section>
 </body>
