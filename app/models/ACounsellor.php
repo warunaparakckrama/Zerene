@@ -37,7 +37,7 @@
         }
 
         public function getOpRequest($coun_id) {
-            $this->db->query('SELECT * FROM op_request WHERE coun_id = :coun_id');
+            $this->db->query('SELECT * FROM request_letter WHERE to_coun_id = :coun_id');
             $this->db->bind(':coun_id', $coun_id);
             $results = $this->db->resultSet();
             return $results;
@@ -90,6 +90,13 @@
             $this->db->query('SELECT * FROM counsellor WHERE coun_type = "academic"');
             $results = $this->db->resultSet();
 
+            return $results;
+        }
+
+        public function get_req_letter($letter_id){
+            $this->db->query('SELECT * FROM request_letter JOIN undergraduate ON request_letter.from_ug_id = undergraduate.ug_id WHERE request_letter.letter_id = :letter_id');
+            $this->db->bind(':letter_id', $letter_id);
+            $results = $this->db->single();
             return $results;
         }
     }

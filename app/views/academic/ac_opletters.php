@@ -54,12 +54,10 @@
                     <table class="table-1">
                         <thead>
                             <tr>
-                                <th>req_id</th>
+                                <!-- <th>req_id</th> -->
                                 <th>Title</th>
                                 <th>Content</th>
-                                <!-- <th>file name</th> -->
                                 <th>ug_id</th>
-                                <!-- <th>coun_id</th> -->
                                 <th>date</th>
                                 <th></th>
 
@@ -69,25 +67,22 @@
                         <tbody>
                             <?php foreach ($data['rletter'] as $rletter) : ?>
                                 <tr>
-                                    <td><?php echo $rletter->request_id ?></td>
-                                    <td><?php echo $rletter->title ?></td>
-                                    <!-- <td><?php echo $Oletter ?></td> -->
-                                    <!-- <td><?php echo $rletter->file_name ?></td> -->
-                                    <td><?php echo $rletter->ug_id ?></td>
-                                    <!-- <td><?php echo $rletter->coun_id ?></td> -->
-                                    <td><?php echo $rletter->date ?></td>
+                                    <td><?php echo $rletter->subject ?></td>
+                                    <td><?php echo $rletter->content ?></td>
+                                    <td><?php echo $rletter->from_ug_id ?></td>
+                                    <td><?php echo $rletter->sent_at ?></td>
                                     <td>
                                         <div class="btn-container-2">
                                             <div class="btn-container">
-                                                <a href="<?php echo URLROOT; ?>academic/req_letter/" class="a-name"><button class="button-main">Review</button></a>
-                                                <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4/<?php echo $rletter->ug_id ?>" class="a-name"><button class="button-main">Create</button></a>
-                                                <!-- <a href="<?php echo URLROOT; ?>Admin/delFeedback/<?php echo $rletter->feedback_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a> -->
+                                                <a href="<?php echo URLROOT; ?>academic/req_letter/<?php echo $rletter->letter_id ?>" class="a-name"><button class="button-main">Review</button></a>
+                                                <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4/<?php echo $rletter->from_ug_id ?>" class="a-name"><button class="button-main">Create</button></a>
+                                                
                                             </div>
-                                        </div>                                                                                                                                                                                                                  
+                                        </div>
                                     </td>
                                 </tr>
                         </tbody>
-                        <?php endforeach; ?>
+                    <?php endforeach; ?>
 
                     </table>
 
@@ -103,8 +98,8 @@
                         <div class="card-green">
                             <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="pro pic" class="card-profile">
                             <div>
-                                <p class="p-regular" style="margin-bottom: -10px;">Zereneuser <?php echo $rletter->ug_id ?></p>
-                                <p class="p-regular" style="color:var(--zerene-grey) ;"><?php echo $rletter->title ?></p>
+                                <p class="p-regular" style="margin-bottom: -10px;">Zereneuser <?php echo $rletter->from_ug_id ?></p>
+                                <p class="p-regular" style="color:var(--zerene-grey) ;"><?php echo $rletter->subject ?></p>
                             </div>
                             <div class="btn-container">
                                 <button class="button-main">view</button>
