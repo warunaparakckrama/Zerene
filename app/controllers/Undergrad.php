@@ -6,6 +6,7 @@ class Undergrad extends Controller
     private $userModel;
     private $adminModel;
     private $ugModel;
+    private $pcModel;
     private $timeslotModel;
 
     public function __construct()
@@ -17,6 +18,7 @@ class Undergrad extends Controller
         $this->adminModel = $this->model('Administrator');
         $this->ugModel = $this->model('Undergraduate');
         $this->timeslotModel = $this->model('Timeslot');
+        $this->pcModel = $this->model('PCounsellor');
     }
 
     //user view controllers
@@ -89,12 +91,27 @@ class Undergrad extends Controller
     }
 
     public function timeslots()
-    {
-        $timeslot = $this->ugModel->getTimeslotsForUndergrad();
+    {   
+        $id = $_SESSION['user_id'];
+        $undergrad = $this->adminModel->getUgById($id);
+        $counsellor = $this->adminModel->getCounselors();
+        $doctor = $this->adminModel->getDoctors();
+        $direct = $this->pcModel->getUgDirectsfromUg($id);
+        $data = [
+            'counsellor' => $counsellor,
+            'undergrad' => $undergrad,
+            'doctor' => $doctor,
+            'direct' => $direct
+        ];
+        $this->view('undergrad/timeslots', $data);
+    }
+
+    public function timeslots_view($id){
+        $timeslot = $this->pcModel->getTimeslots($id);
         $data = [
             'timeslot' => $timeslot
         ];
-        $this->view('undergrad/timeslots', $data);
+        $this->view('undergrad/timeslots_view', $data);
     }
 
     public function chats()

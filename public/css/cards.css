@@ -19,6 +19,20 @@
     margin-bottom: 10px;
 }
 
+.card-white-scroll-timeslot{
+    display: grid;
+    grid-template-columns: 15% 85%;
+    gap: 10px;
+    background-color: var(--zerene-white);
+    border-radius: var(--card-border-radius);
+    border: 2px var(--zerene-green);
+    border-style: solid;
+    padding: var(--card-padding-15);
+    align-items: top;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
 .card-green-scroll{
     background-color: var(--zerene-white);
     border-radius: var(--card-border-radius);
@@ -186,4 +200,24 @@
     align-items: top;
     overflow-y: auto;
     margin-bottom: 10px;
+}
+
+.card-green-timeslot{
+    display: grid;
+    background-color: var(--zerene-light);
+    border: 1px var(--zerene-green);
+    border-radius: var(--border-radius-8);
+    padding: 10px;
+    align-items: center;
+    height: fit-content;
+}
+
+.card-green-scroll-timeslot{
+    background-color: var(--zerene-light);
+    border-radius: var(--border-radius-8);
+    border: 2px var(--zerene-green);
+    padding: var(--card-padding-15);
+    align-items: center;
+    overflow-x: auto;
+    height: fit-content;
 }

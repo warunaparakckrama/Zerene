@@ -1,5 +1,9 @@
-<?php 
+<?php
     $currentPage = 'timeslots';
+    $counsellor = $data['counsellor'];
+    $undergrad = $data['undergrad']; 
+    $doctor = $data['doctor'];
+    $direct = $data['direct'];
 ?>
 
 <head>
@@ -24,52 +28,60 @@
             </div>
 
             <div>
-                <p class="p-regular-green">Available Timeslots</p>
-                <div class="card-white-scroll" style="height: 500px;">
-                    <?php if (isset($data['timeslots']) && !empty($data['timeslots'])) : ?>
-                        <?php
-                        // Grouping timeslots by date
-                        $groupedTimeslots = [];
-                        foreach ($data['timeslots'] as $timeslot) {
-                            $date = date('l', strtotime($timeslot['slot_date']));
-                            $formattedDate = date('Y-m-d', strtotime($timeslot['slot_date']));
-                            $start_time = date('h:ia', strtotime($timeslot['slot_start']));
-                            $end_time = date('h:ia', strtotime($timeslot['slot_finish']));
-    
-                            // ... Rest of your existing code ...
-                            $formattedTimeRange = "$start_time - $end_time";
-                            $groupedTimeslots[$formattedDate][$date][] = [
-                                'timeRange' => $formattedTimeRange,
-                                'faculty' => isset($timeslot['faculty']) ? $timeslot['faculty'] : 'Unknown',
-                                'creator' => isset($timeslot['counselor_name']) ? $timeslot['counselor_name'] : 'Unknown',
-                                'id' => isset($timeslot['id']) ? $timeslot['id'] : null,
-                            ];
-                        }
-    
-                        // Displaying grouped timeslots
-                        foreach ($groupedTimeslots as $formattedDate => $days) :
-                        ?>
-                            <div class='card-green-2'>
-                                <?php foreach ($days as $day => $timeRanges) : ?>
-                                    <div>
-                                        <p class='p-regular-grey' style='font-size: 20px;'><?= $day ?></p>
-                                        <p class='p-regular-grey' style='font-size: 15px;'><?= $formattedDate ?></p>
-                                    </div>
-                                    <div class='btn-container-2'>
-                                        <?php foreach ($timeRanges as $timeSlot) :
-                                            $timeslotId = isset($timeSlot['id']) ? $timeSlot['id'] : '';
-                                        ?>
-                                            <button class='button-third' data-timeslot-id='<?= $timeslotId ?>'>
-                                                <?= "{$timeSlot['timeRange']} | Faculty: {$timeSlot['faculty']} | Creator: {$timeSlot['creator']}" ?>
-                                            </button>
-                                        <?php endforeach; ?>
-                                    </div>
-                                <?php endforeach; ?>
+                <p class="p-regular-green">Academic Counsellors</p>
+                <div class="card-white-scroll" style="height: 215px;">
+                    <?php foreach ($data['counsellor'] as $counsellor) : ?>
+                        <?php if ($counsellor->coun_type === 'Academic' && $undergrad->faculty === $counsellor->faculty) : ?>
+                        <div class="card-green">
+                            <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
+                            <div>
+                                <a href="<?php echo URLROOT;?>Undergrad/timeslots_view/<?php echo $counsellor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
+                                <p class="p-regular-grey" style="font-size: 15px;"><?php echo$counsellor->university. ' | '.$counsellor->faculty;?></p>
                             </div>
+                            <div class="btn-container">
+                                <a href="<?php echo URLROOT;?>Undergrad/timeslots_view/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Timeslots</button></a>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+
+                <p class="p-regular-green">Professional Counsellors</p>
+                <div class="card-white-scroll" style="height: 215px;">
+                    <?php foreach ($data['counsellor'] as $counsellor) : ?>
+                        <?php if ($counsellor->coun_type === 'Professional' && $undergrad->university === $counsellor->university) : ?>
+                        <div class="card-green">
+                            <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
+                            <div>
+                                <a href="<?php echo URLROOT;?>Undergrad/timeslots_view/<?php echo $counsellor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
+                                <p class="p-regular-grey" style="font-size: 15px;"><?php echo $counsellor->university.' | '.$counsellor->faculty;?></p>
+                            </div>
+                            <div class="btn-container">
+                                <a href="<?php echo URLROOT;?>Undergrad/timeslots_view/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Timeslots</button></a>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+
+                <p class="p-regular-green">Psychiatrists</p>
+                <div class="card-white-scroll" style="height: 215px;">
+                    <?php foreach ($data['direct'] as $direct) : ?>
+                        <?php foreach($data['doctor'] as $doctor) : ?>
+                            <?php if ($direct->to_user_id == $doctor->user_id) : ?>
+                                <div class="card-green">
+                                    <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
+                                    <div>
+                                        <a href="<?php echo URLROOT;?>Undergrad/timeslots_view/<?php echo $doctor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $doctor->first_name.' '.$doctor->last_name;?></p></a>
+                                        <p class="p-regular-grey" style="font-size: 15px;">University in charge: <?php echo $doctor->uni_in_charge?></p>
+                                    </div>
+                                    <div class="btn-container">
+                                        <a href="<?php echo URLROOT;?>Undergrad/timeslots_view/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Timeslots</button></a>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         <?php endforeach; ?>
-                    <?php else : ?>
-                        <p>No timeslots created yet.</p>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
 

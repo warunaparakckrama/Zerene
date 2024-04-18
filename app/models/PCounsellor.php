@@ -125,4 +125,11 @@ class PCounsellor
         
         return (bool) $this->db->single();
     }
+
+    public function getUgDirectsfromUg($id){
+        $this->db->query('SELECT * FROM ug_direct WHERE ug_user_id = :id');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
 }
