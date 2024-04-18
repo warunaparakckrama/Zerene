@@ -48,7 +48,7 @@
                 <div class="card-white-scroll"  style="height: 300px;">
                     <?php foreach($data['request'] as $request) : ?>
                         <?php foreach ($data['undergrad'] as $undergrad) : ?>
-                            <?php if ($undergrad->faculty !== $counsellor->faculty && $undergrad->ug_id === $request->ug_id) : ?>
+                            <?php if ($undergrad->faculty !== $counsellor->faculty && $undergrad->ug_id === $request->from_user_id) : ?>
                                 <div class="card-green">
                                     <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
                                     <div>
