@@ -29,7 +29,7 @@
                 <div class="card-white">
                     <p class="p-regular-green">Send a Request Letter</p>
                     <div class="card-green-5">
-                        <form action="<?php echo URLROOT;?>Undergrad/submitRequestLetter/<?php echo $undergrad->ug_id;?>" class="request_letter" enctype="multipart/form-data" method="POST">
+                        <form action="<?php echo URLROOT;?>Undergrad/submitRequestLetter/<?php echo $undergrad->ug_id;?>" class="" enctype="multipart/form-data" method="POST">
                             <div style="font-size: 18px; color: var(--zerene-green)">
                                 <input type="hidden" name="coun_id" value="<?php echo $id;?>">    
 

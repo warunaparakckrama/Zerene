@@ -91,8 +91,20 @@ class Undergraduate
         }
     }
 
+
+    
+
+    public function getResponsesbyId($id)
+    {
+        $this->db->query('SELECT * FROM response WHERE user_id = :user_id ORDER BY attempted_at DESC');
+        $this->db->bind(':user_id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
     public function sendMsgRequest($ug_id, $id){
         $this->db->query('INSERT INTO msg_request (from_user_id, to_user_id, sent_at) VALUES (:ug_id, :id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+
         $this->db->bind(':ug_id', $ug_id);
         $this->db->bind(':id', $id);
         if ($this->db->execute()) {

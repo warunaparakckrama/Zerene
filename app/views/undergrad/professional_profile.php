@@ -39,7 +39,7 @@
                                 <p class="p-regular" style="color: var(--zerene-grey);"><?php echo $counsellor->university. ' | '.$counsellor->faculty;?></p>
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px; margin-bottom: 5px;"><?php echo $counsellor->email;?></p>
                                 <div style="display: flex; flex-direction: row; gap: 10px;">
-                                    <button class="button-main">Message Request</button>
+                                    <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->coun_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
                                     <?php if ($counsellor->coun_type === 'Academic') : ?>
                                         <a href="<?php echo URLROOT;?>Undergrad/send_req_letter/<?php echo $counsellor->coun_id;?>" style="text-decoration: none;"><button class="button-main">Send a Request Letter</button></a>
                                     <?php elseif ($counsellor->coun_type === 'Professional') : ?>
