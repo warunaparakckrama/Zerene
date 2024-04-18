@@ -108,7 +108,7 @@ button.notify:hover{
 .dropbtn {
     background-color:var(--zerene-white);
     color: var(--zerene-green);
-    padding: 8px;
+    padding: 6px;
     font-family: "Poppins", sans-serif;
     font-size: 15px;
     border: 1px solid var(--zerene-green);
