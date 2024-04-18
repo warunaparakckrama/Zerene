@@ -97,9 +97,24 @@ class Procounsellor extends Controller
     }
 
     public function pc_chatroom($user_id){
+        $id = $_SESSION['user_id'];
+        $counsellor = $this->adminModel->getCounsellorById($id);
+        $receiving_user = $this->userModel->findUserDetails($user_id);
+        if ($receiving_user->user_type == 'undergraduate') {
+            $msg_receiver = $this->adminModel->getUgById($user_id);
+        }
+        elseif ($receiving_user->user_type == 'pcounsellor' || $receiving_user->user_type == 'acounsellor') {
+            $msg_receiver = $this->adminModel->getCounsellorById($user_id);
+        }
+        elseif ($receiving_user->user_type == 'doctor') {
+            $msg_receiver = $this->adminModel->getDoctorById($user_id);
+        }
+
         $receiver = $this->userModel->findUserDetails($user_id);
         $data = [
             'user_id' => $user_id,
+            'counsellor' => $counsellor,
+            'msg_receiver' => $msg_receiver,
             'receiver' => $receiver
         ];
         $this->view('procounsellor/pc_chatroom', $data);

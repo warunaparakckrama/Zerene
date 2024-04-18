@@ -20,25 +20,6 @@
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
             </div>
 
-            <!-- chatbox section -->
-            <!-- <div class="subgrid-2"> 
-                <div class="card-white">
-                    
-                    <div class="" style="border: 1px solid black;">
-                        <div class="">
-                            <div class="" id="chat-window"></div>
-                            <div id='typing'></div>
-                            <div id='form' class="">
-                                <input class="" onkeyup="typing()" id="comment-input" type="text" placeholder="enter your message">
-                                <button id="send-button" class="" onclick="send()">Send</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div> -->
-            <!-- chatbox section -->
-
             <div>
                 <?php 
                     $con = new mysqli("localhost", "root", "", "zerene-1");
@@ -49,12 +30,9 @@
 
                     $user = $_SESSION['user_name'];
                     $receiver = $data['receiver'];
+                    $professional = $data['professional'];
                     $counsellor = $data['counsellor'];
                     $receiver_username = $receiver->username;
-
-                    // echo $receiver_username;
-                    // echo "From: " . $from;
-                    // echo "To: " . $to;
 
                     $sql = "SELECT * FROM chat_connection WHERE from_user = '$from' AND to_user = '$to' OR from_user = '$to' AND to_user = '$from'";
                     $result = $con->query($sql);
@@ -82,8 +60,8 @@
                             <img src='".URLROOT."public/img/pro-avatar1.svg' alt='profile' class='profile-picture'>
                             </div>
                             <div>
-                            <p class='p-regular-green' style='font-size: 15px;'>$counsellor->first_name $counsellor->last_name | $counsellor->coun_type Counsellor</p>
-                            <p class='p-regular-grey' style='font-size: 15px;'>last seen just now</p>
+                            <p class='p-regular-green' style='font-size: 15px;'>$professional->first_name $professional->last_name</p>
+                            <p class='p-regular-grey' style='font-size: 15px;'>(Active Status)</p>
                             </div>
                         </div>";
 
@@ -118,7 +96,7 @@
                                                     echo "</div>";
                                                 } else {
                                                     echo "<div class='chat-message-2'>";
-                                                    echo "-".$counsellor->first_name."-";
+                                                    echo "-".$professional->first_name."-";
                                                     echo "<br>";
                                                     echo $row['message'];
                                                     echo " <br><br>";
@@ -175,7 +153,7 @@
             if(typeof data.msg !== 'undefined'){
                 var chatWindow = document.getElementById('chat-window');
                 var newMessage = document.createElement('p');
-                newMessage.innerHTML = data.msg + "<br>(" + data.date + ")";
+                newMessage.innerHTML = "-<?php echo $professional->first_name; ?>-" + "<br>" + data.msg + "<br><br>(" + data.date + ")";
                 newMessage.classList.add('chat-message-2');
                 chatWindow.appendChild(newMessage);
                 document.getElementById('chat-window').appendChild(commentElem);
@@ -216,7 +194,7 @@
             var chatWindow = document.getElementById('chat-window');
             var newMessage = document.createElement('p');
             newMessage.classList.add('chat-message-1');
-            newMessage.innerHTML = "~" +'<?= $sender?>'+ "~" + " <br> " + input.value + "<br><br>" + " (" + '<?= $datesent ?>' + ")";
+            newMessage.innerHTML = "-you-" + "<br> " + input.value + "<br><br>" + " (" + '<?= $datesent ?>' + ")";
             chatWindow.appendChild(newMessage);
             input.value = '';
         }
