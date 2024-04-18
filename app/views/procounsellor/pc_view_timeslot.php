@@ -41,8 +41,7 @@
 
                 <div class="card-white">
                     <p class="p-regular">Edit Timeslot</p>
-                    <div class="card-green-6">
-                        <div>
+                    <div class="card-green-7">
                             <form action="<?php echo URLROOT; ?>Procounsellor/editTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" id="timeslotForm">
                                 <label for="slot_date">Date : </label>
                                 <input type="date" id="slot_date" name="slot_date" class="date" value="<?php echo $data['timeslot']->slot_date; ?>">
@@ -63,12 +62,16 @@
                                 </select>
                                 <span class="error-message"><?php echo $data['slot_type_err']; ?></span><br>
 
-                                <div class="btn-container-2">
-                                    <button class="button-main" type="submit">Update</button>
-                                    <button class="button-danger" type="button" onclick="cancelEdit()">Cancel</button>
+                                <div class="btn-container-4">
+                                    <div class="btn-container-2">
+                                        <button class="button-main" type="submit">Update</button>
+                                        <button class="button-danger" type="button" onclick="cancelEdit()">Cancel Edit</button>
+                                    </div>
+                                    <div>
+                                        <button class="button-main" type="button" onclick="goBack()">Back</button>
+                                    </div>
                                 </div>
                             </form>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -78,6 +81,10 @@
     <script>
         function cancelEdit() {
             document.getElementById('timeslotForm').reset();
+        }
+
+        function goBack() {
+            window.history.back();
         }
     </script>
 </body>
