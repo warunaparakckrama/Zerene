@@ -60,80 +60,96 @@ $timeslot = $data['timeslot'];
                 </div>
 
                 <div class="card-white">
-    <p class="p-regular">Created Timeslots</p>
-    <?php if (isset($data['timeslot']) && !empty($data['timeslot'])) : ?>
-        <?php
-        // Grouping timeslots by date and separating them into two arrays: pastTimeslots and futureTimeslots
-        $pastTimeslots = [];
-        $futureTimeslots = [];
-        $today = date('Y-m-d');
-        foreach ($data['timeslot'] as $timeslot) {
-            $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
-            $dayName = date('l', strtotime($timeslot->slot_date));
-            if ($formattedDate < $today) {
-                $pastTimeslots[$formattedDate]['day'] = $dayName;
-                $pastTimeslots[$formattedDate]['timeslots'][] = $timeslot;
-            } else {
-                $futureTimeslots[$formattedDate]['day'] = $dayName;
-                $futureTimeslots[$formattedDate]['timeslots'][] = $timeslot;
-            }
-        }
+                    <p class="p-regular">Created Timeslots</p>
+                    <?php if (isset($data['timeslot']) && !empty($data['timeslot'])) : ?>
+                        <?php
+                        // Grouping timeslots by date and separating them into two arrays: pastTimeslots and futureTimeslots
+                        $pastTimeslots = [];
+                        $futureTimeslots = [];
+                        $today = date('Y-m-d');
+                        foreach ($data['timeslot'] as $timeslot) {
+                            $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
+                            $dayName = date('l', strtotime($timeslot->slot_date));
+                            if ($formattedDate < $today) {
+                                $pastTimeslots[$formattedDate]['day'] = $dayName;
+                                $pastTimeslots[$formattedDate]['timeslots'][] = $timeslot;
+                            } else {
+                                $futureTimeslots[$formattedDate]['day'] = $dayName;
+                                $futureTimeslots[$formattedDate]['timeslots'][] = $timeslot;
+                            }
+                        }
 
-        // Displaying future timeslots
-        if (!empty($futureTimeslots)) {
-            echo "<div class='card-green-scroll' style='height: 300px'>";
-            echo "<p class='p-regular-green' style='font-size: 20px;'>Upcoming Timeslots</p>";
-            foreach ($futureTimeslots as $formattedDate => $data) {
-                $dayName = $data['day'];
-                echo "<div class='card-green-2'>";
-                echo "<div>";
-                echo "<p class='p-regular-grey' style='font-size: 20px;'>$dayName</p>";
-                echo "<p class='p-regular-grey' style='font-size: 18px;'>$formattedDate</p>";
-                echo "</div>";
-                echo "<div class='btn-container-2'>";
-                foreach ($data['timeslots'] as $timeslot) {
-                    $start_time = date('h:ia', strtotime($timeslot->slot_start));
-                    $end_time = date('h:ia', strtotime($timeslot->slot_finish));
-                    $formattedTimeRange = "$start_time - $end_time";
-                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
-                }
-                echo "</div>";
-                echo "</div>";
-            }
-            echo "</div>";
-        }
+                        // Sort future timeslots by date in ascending order
+                        ksort($futureTimeslots);
 
-        // Displaying past timeslots
-        if (!empty($pastTimeslots)) {
-            echo "<div class='card-green-scroll' style='height: 300px'>";
-            echo "<p class='p-regular-green' style='font-size: 20px;'>Old Timeslots</p>";
-            foreach ($pastTimeslots as $formattedDate => $data) {
-                $dayName = $data['day'];
-                echo "<div class='card-green-2'>";
-                echo "<div>";
-                echo "<p class='p-regular-grey' style='font-size: 20px;'>$dayName</p>";
-                echo "<p class='p-regular-grey' style='font-size: 18px;'>$formattedDate</p>";
-                echo "</div>";
-                echo "<div class='btn-container-2'>";
-                foreach ($data['timeslots'] as $timeslot) {
-                    $start_time = date('h:ia', strtotime($timeslot->slot_start));
-                    $end_time = date('h:ia', strtotime($timeslot->slot_finish));
-                    $formattedTimeRange = "$start_time - $end_time";
-                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
-                }
-                echo "</div>";
-                echo "</div>";
-            }
-            echo "</div>";
-        }
+                        // Sort past timeslots by date in descending order
+                        krsort($pastTimeslots);
 
-        
-        ?>
+                        // Function to sort timeslots by start time
+                        function sortTimeslotsByStartTime($a, $b)
+                        {
+                            return strtotime($a->slot_start) - strtotime($b->slot_start);
+                        }
 
-    <?php else : ?>
-        <p>No timeslots created yet.</p>
-    <?php endif; ?>
-</div>
+                        // Displaying future timeslots
+                        if (!empty($futureTimeslots)) {
+                            echo "<div class='card-green-scroll' style='height: 300px'>";
+                            echo "<p class='p-regular-green' style='font-size: 20px;'>Upcoming Timeslots</p>";
+                            foreach ($futureTimeslots as $formattedDate => $data) {
+                                $dayName = $data['day'];
+                                echo "<div class='card-green-2'>";
+                                echo "<div>";
+                                echo "<p class='p-regular-grey' style='font-size: 20px;'>$dayName</p>";
+                                echo "<p class='p-regular-grey' style='font-size: 18px;'>$formattedDate</p>";
+                                echo "</div>";
+                                echo "<div class='btn-container-2'>";
+                                // Sort timeslots by start time
+                                usort($data['timeslots'], 'sortTimeslotsByStartTime');
+                                foreach ($data['timeslots'] as $timeslot) {
+                                    $start_time = date('h:ia', strtotime($timeslot->slot_start));
+                                    $end_time = date('h:ia', strtotime($timeslot->slot_finish));
+                                    $formattedTimeRange = "$start_time - $end_time";
+                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                }
+                                echo "</div>";
+                                echo "</div>";
+                            }
+                            echo "</div>";
+                        }
+
+                        // Displaying past timeslots
+                        if (!empty($pastTimeslots)) {
+                            echo "<div class='card-green-scroll' style='height: 300px'>";
+                            echo "<p class='p-regular-green' style='font-size: 20px;'>Old Timeslots</p>";
+                            foreach ($pastTimeslots as $formattedDate => $data) {
+                                $dayName = $data['day'];
+                                echo "<div class='card-green-2'>";
+                                echo "<div>";
+                                echo "<p class='p-regular-grey' style='font-size: 20px;'>$dayName</p>";
+                                echo "<p class='p-regular-grey' style='font-size: 18px;'>$formattedDate</p>";
+                                echo "</div>";
+                                echo "<div class='btn-container-2'>";
+                                // Sort timeslots by start time
+                                usort($data['timeslots'], 'sortTimeslotsByStartTime');
+                                foreach ($data['timeslots'] as $timeslot) {
+                                    $start_time = date('h:ia', strtotime($timeslot->slot_start));
+                                    $end_time = date('h:ia', strtotime($timeslot->slot_finish));
+                                    $formattedTimeRange = "$start_time - $end_time";
+                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                }
+                                echo "</div>";
+                                echo "</div>";
+                            }
+                            echo "</div>";
+                        }
+                        ?>
+
+                    <?php else : ?>
+                        <p>No timeslots created yet.</p>
+                    <?php endif; ?>
+                </div>
+
+
 
 
                 <div class="card-white">

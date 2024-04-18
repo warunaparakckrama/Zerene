@@ -166,7 +166,7 @@
 }
 .card-green-7{
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 100% 0%;
     gap: 0px;
     background-color: var(--zerene-light);
     border-radius: var(--border-radius-8);
