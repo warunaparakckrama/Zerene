@@ -13,6 +13,9 @@ class PCounsellor
         $start = strtotime($data['slot_date'] . ' ' . $data['slot_start']);
         $end = strtotime($data['slot_date'] . ' ' . $data['slot_finish']);
 
+        // Determine the interval based on slot_interval
+        $interval = $data['slot_interval'] == 30 ? 1800 : 3600; // 30 minutes or 1 hour
+
         // Generate timeslots in intervals
         $timeslots = [];
         $current = $start;
@@ -20,26 +23,30 @@ class PCounsellor
             $timeslots[] = [
                 'slot_date' => $data['slot_date'],
                 'slot_start' => date('H:i:s', $current),
-                'slot_finish' => date('H:i:s', $current + 3600), // interval
+                'slot_finish' => date('H:i:s', $current + $interval),
                 'slot_type' => $data['slot_type'],
+                'slot_interval' => $data['slot_interval'], // Store the interval in the timeslot data
                 'created_by' => $data['created_by']
             ];
-            $current += 3600; // Move to next interval
+            $current += $interval; // Move to next interval
         }
 
         // Insert timeslots into the database
         foreach ($timeslots as $slot) {
-            $this->db->query('INSERT INTO timeslot (slot_date, slot_start, slot_finish, slot_type, created_by) VALUES (:slot_date, :slot_start, :slot_finish, :slot_type, :created_by)');
+            $this->db->query('INSERT INTO timeslot (slot_date, slot_start, slot_finish, slot_type, slot_interval, created_by) VALUES (:slot_date, :slot_start, :slot_finish, :slot_type, :slot_interval, :created_by)');
             $this->db->bind(':slot_date', $slot['slot_date']);
             $this->db->bind(':slot_start', $slot['slot_start']);
             $this->db->bind(':slot_finish', $slot['slot_finish']);
             $this->db->bind(':slot_type', $slot['slot_type']);
+            $this->db->bind(':slot_interval', $slot['slot_interval']); // Bind slot_interval
             $this->db->bind(':created_by', $slot['created_by']);
             $this->db->execute();
         }
 
         return true;
     }
+
+
 
 
     public function getTimeslots($id)

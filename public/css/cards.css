@@ -164,3 +164,26 @@
     height: fit-content;
     border: var(--zerene-green);
 }
+.card-green-7{
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 0px;
+    background-color: var(--zerene-light);
+    border-radius: var(--border-radius-8);
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    height: fit-content;
+    border: var(--zerene-green);
+}
+
+.card-green-scroll{
+    background-color: var(--zerene-white);
+    border-radius: var(--card-border-radius);
+    border: 2px var(--zerene-green);
+    border-style: solid;
+    padding: var(--card-padding-15);
+    align-items: top;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
