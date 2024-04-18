@@ -33,22 +33,22 @@
                             <form action="<?php echo URLROOT; ?>Procounsellor/addTimeslots/<?php echo $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
                                 <label for="slot_date">Date : </label>
                                 <input type="date" id="" name="slot_date" class="date" value="">
-                                <span class="error-message"><?php echo $data['slot_date_err']; ?></span><br>
+                                <span class="error-message"><?php echo $data['slot_date_err']; ?></span>
 
                                 <label for="slot_start">Start : </label>
                                 <input type="time" id="" name="slot_start" class="time" value="">
-                                <span class="error-message"><?php echo $data['slot_start_err']; ?></span><br>
+                                <span class="error-message"><?php echo $data['slot_start_err']; ?></span>
 
                                 <label for="slot_finish">Finish : </label>
                                 <input type="time" id="" name="slot_finish" class="time" value="">
-                                <span class="error-message"><?php echo $data['slot_finish_err']; ?></span><br>
+                                <span class="error-message"><?php echo $data['slot_finish_err']; ?></span>
 
                                 <label for="slot_type">Type : </label>
                                 <select name="slot_type" class="type">
                                     <option value="online">Online</option>
                                     <option value="physical">Physical</option>
                                 </select>
-                                <span class="error-message"><?php echo $data['slot_type_err']; ?></span><br>
+                                <span class="error-message"><?php echo $data['slot_type_err']; ?></span>
 
                                 <div class="btn-container-2">
                                     <button class="button-main" type="submit">Create</button>
