@@ -36,7 +36,7 @@
                             <p class="p-light-grey">Year <?php echo $undergrad->study_year;?> Undergraduate | <?php echo $undergrad->faculty;?></p>
                             <p class="p-regular-green" style="margin-bottom: 10px; font-size: 15px;"><?php echo $undergrad->email;?></p>
                             <div style="display: flex; flex-direction: row; gap: 10px;">
-                                <a href="" style="text-decoration: none;"><button class="button-main">Direct to Psychiatrist</button></a>
+                                <a href="<?php echo URLROOT;?>Procounsellor/ugDirects/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">Direct to Psychiatrist</button></a>
                                 <a href="" style="text-decoration: none;"><button class="button-main">Add a note</button></a>
                             </div>
                         </div>

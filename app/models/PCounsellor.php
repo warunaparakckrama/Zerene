@@ -103,4 +103,26 @@ class PCounsellor
         $results = $this->db->resultSet();
         return $results;
     }
+
+    public function addUgDirects($data){
+        $this->db->query('INSERT INTO ug_direct (ug_user_id, from_user_id, to_user_id, directed_at) VALUES (:ug_user_id, :from_user_id, :to_user_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+        $this->db->bind(':ug_user_id', $data['ug_user_id']);
+        $this->db->bind(':from_user_id', $data['coun_user_id']);
+        $this->db->bind(':to_user_id', $data['doc_user_id']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkUgDirects($id, $coun_user_id)
+    {
+        $this->db->query('SELECT * FROM ug_direct WHERE to_user_id = :id AND from_user_id = :coun_user_id');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':coun_user_id', $coun_user_id);
+        
+        return (bool) $this->db->single();
+    }
 }

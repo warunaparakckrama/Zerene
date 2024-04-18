@@ -166,10 +166,13 @@ class Procounsellor extends Controller
     }
 
     public function pc_ug_profile($id)
-    {
+    {   
+        $coun_user_id = $_SESSION['user_id'];
+        $direct = $this->pcModel->checkUgDirects($id, $coun_user_id);
         $undergrad = $this->adminModel->getUgById($id);
         $data = [
             'undergrad' => $undergrad,
+            'direct' => $direct
         ];
         $this->view('procounsellor/pc_ug_profile', $data);
     }
@@ -608,6 +611,30 @@ class Procounsellor extends Controller
             $data['stress'] = $Stress;
 
             return $data;
+        }
+    }
+
+    public function ugDirects($ug_user_id){
+        $coun_user_id = $_SESSION['user_id'];
+        $counsellor = $this->adminModel->getCounsellorById($coun_user_id);
+        $doctor = $this->adminModel->getDoctors();
+
+        foreach ($doctor as $doc) {
+            if ($doc->uni_in_charge === $counsellor->university) {
+                $doc_user_id = $doc->user_id;
+            }
+        }
+
+        $data = [
+            'coun_user_id' => $coun_user_id,
+            'ug_user_id' => $ug_user_id,
+            'doc_user_id' => $doc_user_id
+        ];
+
+        if ($this->pcModel->addUgDirects($data)) {
+            redirect('procounsellor/pc_ug_profile/'.$ug_user_id);
+        } else {
+            die('Something went wrong');
         }
     }
 }
