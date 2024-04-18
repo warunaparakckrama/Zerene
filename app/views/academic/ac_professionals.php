@@ -23,7 +23,7 @@
 
             <div>
                 <p class="p-regular-green">Academic Counsellors</p>
-                <div class="card-white-scroll">
+                <div class="card-white-scroll" style="height: 215px;">
                     <?php foreach ($data['counsellor'] as $counsellor) : ?>
                         <?php if ($counsellor->coun_type === 'Academic' && $counsellor->user_id !== $_SESSION['user_id']) : ?>
                             <div class="card-green">
@@ -41,7 +41,7 @@
                 </div>
 
                 <p class="p-regular-green">Professional Counsellors</p>
-                <div class="card-white-scroll">
+                <div class="card-white-scroll" style="height: 215px;">
                     <?php foreach ($data['counsellor'] as $counsellor) : ?>
                         <?php if ($counsellor->coun_type === 'Professional') : ?>
                             <div class="card-green">
