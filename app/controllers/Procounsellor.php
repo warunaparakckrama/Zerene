@@ -37,8 +37,15 @@ class Procounsellor extends Controller
     }
 
     public function pc_reviewq()
-    {
-        $data = [];
+    {   
+        $undergrad = $this->adminModel->getUndergrads();
+        $questionnaire = $this->ugModel->getQuestionnaireDetails();
+        $response = $this->ugModel->getResponses();
+        $data = [
+            'undergrad' => $undergrad,
+            'questionnaire' => $questionnaire,
+            'response' => $response
+        ];
         $this->view('procounsellor/pc_reviewq', $data);
     }
 
@@ -58,8 +65,16 @@ class Procounsellor extends Controller
     }
 
     public function pc_undergrad()
-    {
-        $data = [];
+    {   
+        $id = $_SESSION['user_id'];
+        $counsellor = $this->adminModel->getCounsellorById($id);
+        $undergrad = $this->adminModel->getUndergrads();
+        $request = $this->pcModel->getMsgRequestfromCounId($counsellor->coun_id);
+        $data = [
+            'undergrad' => $undergrad,
+            'counsellor' => $counsellor,
+            'request' => $request
+        ];
         $this->view('procounsellor/pc_undergrad', $data);
     }
 
@@ -82,9 +97,24 @@ class Procounsellor extends Controller
     }
 
     public function pc_chatroom($user_id){
+        $id = $_SESSION['user_id'];
+        $counsellor = $this->adminModel->getCounsellorById($id);
+        $receiving_user = $this->userModel->findUserDetails($user_id);
+        if ($receiving_user->user_type == 'undergraduate') {
+            $msg_receiver = $this->adminModel->getUgById($user_id);
+        }
+        elseif ($receiving_user->user_type == 'pcounsellor' || $receiving_user->user_type == 'acounsellor') {
+            $msg_receiver = $this->adminModel->getCounsellorById($user_id);
+        }
+        elseif ($receiving_user->user_type == 'doctor') {
+            $msg_receiver = $this->adminModel->getDoctorById($user_id);
+        }
+
         $receiver = $this->userModel->findUserDetails($user_id);
         $data = [
             'user_id' => $user_id,
+            'counsellor' => $counsellor,
+            'msg_receiver' => $msg_receiver,
             'receiver' => $receiver
         ];
         $this->view('procounsellor/pc_chatroom', $data);
@@ -101,16 +131,14 @@ class Procounsellor extends Controller
         $this->view('procounsellor/pc_professionals', $data);
     }
 
-    public function pc_profileupdate()
-    {
+    public function pc_profile()
+    {   
+        $id = $_SESSION['user_id'];
+        $counsellor = $this->adminModel->getCounsellorById($id);
         $data = [
-            'current_password_err' => '',
-            'new_password_err' => '',
-            'confirm_password_err' => '',
-            'current_username_err' => '',
-            'new_username_err' => ''
+            'counsellor' => $counsellor,
         ];
-        $this->view('procounsellor/pc_profileupdate', $data);
+        $this->view('procounsellor/pc_profile', $data);
     }
 
     public function pc_doctors()
@@ -120,9 +148,9 @@ class Procounsellor extends Controller
     }
 
     public function pc_timeslot()
-    {
-        $username = $this->userModel->getUsernameById($_SESSION['user_id']);
-        $timeslot = $this->pcModel->getTimeslots($username);
+    {   
+        $id = $_SESSION['user_id'];
+        $timeslot = $this->pcModel->getTimeslots($id);
 
         $data = [
             'slot_type' => '',
@@ -134,7 +162,7 @@ class Procounsellor extends Controller
         ];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->handleCreateTimeslot($data, $username);
+            $this->handleCreateTimeslot($data);
         }
 
         $this->view('procounsellor/pc_timeslot', $data);
@@ -144,6 +172,27 @@ class Procounsellor extends Controller
     {
         $data = [];
         $this->view('procounsellor/pc_feedback', $data);
+    }
+
+    public function pc_ug_profile($id){
+        $undergrad = $this->adminModel->getUgById($id);
+        $data = [
+            'undergrad' => $undergrad,
+        ];
+        $this->view('procounsellor/pc_ug_profile', $data);
+    }
+
+    public function pc_quiz_review($id){
+        $response = $this->ugModel->getResponseByResponseId($id);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $results = $this->quizResults($id);
+        
+        $data = [
+            'response' => $response,
+            'questionnaire' => $questionnaire,
+            'results' => $results
+        ];
+        $this->view('procounsellor/pc_quiz_review', $data);
     }
 
     //function controllers
@@ -193,41 +242,29 @@ class Procounsellor extends Controller
     }
 
     public function changePwdProcounsellor($user_id)
-    {
+    {   
+        $counsellor = $this->adminModel->getCounsellorById($user_id);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'counsellor' => $counsellor,
                 'current_password' => trim($_POST['current_password']),
                 'new_password' => trim($_POST['new_password']),
                 'confirm_password' => trim($_POST['confirm_password']),
-                'current_password_err' => '',
-                'new_password_err' => '',
-                'confirm_password_err' => ''
+                'password_alert' => '',
             ];
-
-            if (empty($data['current_password'])) {
-                $data['current_password_err'] = 'Please enter current password';
+            
+            if (strlen($data['new_password']) < 8) {
+                $data['password_alert'] = '*Password must be atleast 8 characters';
             }
 
-            if (empty($data['new_password'])) {
-                $data['new_password_err'] = 'Please enter new password';
-            } elseif (strlen($data['new_password']) < 6) {
-                $data['new_password_err'] = 'Password must be atleast 6 characters';
+            elseif($data['new_password'] != $data['confirm_password']) {
+                $data['password_alert'] = '*Passwords do not match';
             }
-
-            if (empty($data['confirm_password'])) {
-                $data['confirm_password_err'] = 'Please re-enter new password';
-            } else {
-                if ($data['new_password'] != $data['confirm_password']) {
-                    $data['confirm_password_err'] = 'passwords do not match';
-                }
-            }
-
-
-
-            if (empty($data['username_err']) && empty($data['email_err']) && empty($data['confirm_password_err'])) {
+            
+            elseif(empty($data['password_alert'])) {
                 // Validated
 
                 // Fetch the hashed password from the database based on the user ID
@@ -235,7 +272,7 @@ class Procounsellor extends Controller
 
                 // Verify if the entered current password matches the hashed password from the database
                 if (!password_verify($data['current_password'], $hashed_password_from_db)) {
-                    $data['current_password_err'] = 'Current password is incorrect';
+                    $data['password_alert'] = '*Current password is incorrect';
                 } else {
                     // Hash the new password
                     $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
@@ -243,88 +280,91 @@ class Procounsellor extends Controller
                     // Update the user's password
                     if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
                         flash('user_message', 'Password updated successfully');
-                        redirect('procounsellor/dashboard');
+                        redirect('procounsellor/pc_profile');
                     } else {
                         die('Something went wrong');
                     }
                 }
-            } else {
-                // Load view with errors
-                $this->view('procounsellor/pc_profileupdate', $data);
             }
-        } else {
-            $data = [
-                'current_password' => '',
-                'new_password' => '',
-                'confirm_password' => '',
-                'current_password_err' => '',
-                'new_password_err' => '',
-                'confirm_password_err' => ''
-            ];
-
-            $this->view('procounsellor/pc_profileupdate', $data);
+            
+            else {
+                // Load view with errors
+                $this->view('procounsellor/pc_profile', $data);
+            }
         }
 
-        $this->view('procounsellor/pc_profileupdate', $data);
+        $this->view('procounsellor/pc_profile', $data);
     }
 
     public function changeUsernameProcounsellor($user_id)
-    {
+    {   
+        $counsellor = $this->adminModel->getCounsellorById($user_id);
+        $current_username = $this->userModel->getUsernameById($user_id);
+        $username = $this->userModel->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'current_username' => trim($_POST['current_username']),
+                'counsellor' => $counsellor,
+                'current_username' => $current_username,
+                'username' => $username,
                 'new_username' => trim($_POST['new_username']),
-                'current_username_err' => '',
-                'new_username_err' => '',
+                'password' => trim($_POST['password']),
+                'username_alert' => ''
             ];
 
-            if (empty($data['current_username'])) {
-                $data['current_username_err'] = 'Please enter current username';
+            if (strlen($data['new_username']) < 8) {
+                $data['username_alert'] = '*Username must be atleast 8 characters';
             }
 
-            if (empty($data['new_username'])) {
-                $data['new_username_err'] = 'Please enter new username';
-            } elseif (strlen($data['new_username']) < 6) {
-                $data['new_username_err'] = 'Username must be atleast 6 characters';
+            elseif($data['new_username'] == $data['current_username']) {
+                $data['username_alert'] = '*New username cannot be same as the current username';
             }
 
-            if (empty($data['current_username_err']) && empty($data['new_username_err'])) {
-                // Validated
-
-                // Fetch the username from the database based on the user ID
-                $current_username = $this->userModel->getUsernameById($user_id);
-
-                // Verify if the entered current username matches the username from the database
-                if ($data['current_username'] != $current_username) {
-                    $data['current_username_err'] = 'Current username is incorrect';
-                } else {
-                    // Update the user's username
-                    if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                        flash('user_message', 'Username updated successfully');
-                        redirect('procounsellor/pc_profileupdate');
-                    } else {
-                        die('Something went wrong');
+            else {
+                // Convert the new_username to lowercase
+                $newUsernameLower = strtolower($data['new_username']);
+            
+                foreach ($data['username'] as $username) {
+                    // Convert each username in the array to lowercase
+                    $existingUsernameLower = strtolower($username->username);
+                    
+                    // Compare the lowercase versions of the usernames
+                    if ($newUsernameLower === $existingUsernameLower) {
+                        // If there is a match, set the alert message
+                        $data['username_alert'] = '*Username already exists/ is a variation of current username';
+                        break; // Exit the loop as soon as a match is found
                     }
                 }
-            } else {
-                // Load view with errors
-                $this->view('procounsellor/pc_profileupdate', $data);
             }
-        } else {
-            $data = [
-                'current_username' => '',
-                'new_username' => '',
-                'current_username_err' => '',
-                'new_username_err' => ''
-            ];
 
-            $this->view('procounsellor/pc_profileupdate', $data);
+            // Fetch the hashed password from the database based on the user ID
+            $hashed_password_from_db = $this->userModel->getPasswordById($user_id);
+
+            // Verify if the entered current password matches the hashed password from the database
+            if (!password_verify($data['password'], $hashed_password_from_db)) {
+                $data['username_alert'] = '*Incorrect Password';
+            }
+
+            if (empty($data['username_alert'])) {
+                // Update the username
+                if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
+                    flash('user_message', 'Username updated successfully');
+                    redirect('procounsellor/pc_profile'); 
+                } else {
+                    die('Something went wrong');
+                }    
+            }
+            
+            else {
+                // Load view with errors
+                $this->view('procounsellor/pc_profile', $data);
+            }
+            
         }
 
-        $this->view('procounsellor/pc_profileupdate', $data);
+        $this->view('procounsellor/pc_profile', $data);
     }
 
     public function createQuestionnaire($user_id)
@@ -502,10 +542,9 @@ class Procounsellor extends Controller
         }
     }
 
-    private function handleCreateTimeslot(&$data, $user_id)
+    private function handleCreateTimeslot(&$data)
     {
-        $current_username = $this->userModel->getUsernameById($user_id);
-        $data['created_by'] = $current_username;
+        $data['created_by'] = $_SESSION['user_id'];
 
         if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
             if ($this->pcModel->createTimeslots($data)) {
@@ -545,5 +584,71 @@ class Procounsellor extends Controller
         } else {
             die('Timeslot not found');
         }
+    }
+
+    public function quizResults($id){
+        $response = $this->ugModel->getResponseByResponseId($id);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+
+        if ($questionnaire->questionnaire_name === 'DASS-21') {
+            $Depression = '';
+            $Anxiety = '';
+            $Stress = '';
+            $data = [
+                'depression' => $Depression,
+                'anxiety' => $Anxiety,
+                'stress' => $Stress,
+            ];
+            $i =1;
+            $mark = 0;
+            for ($i=1; $i <=21 ; $i++) { 
+                $mark = $response->{'q'.$i.'_response'}*2 + $mark;
+            }
+            
+            //Depression
+            if ($mark >= 28) {
+                $Depression = 'Extremely Severe';
+            } elseif ($mark >= 21) {
+                $Depression = 'Severe';
+            } elseif ($mark >= 14) {
+                $Depression = 'Moderate';
+            } elseif ($mark >= 10) {
+                $Depression = 'Mild';
+            } else {
+                $Depression = 'Normal';
+            }
+            $data['depression'] = $Depression;
+            
+            //Anxiety
+            if ($mark >= 20) {
+                $Anxiety = 'Extremely Severe';
+            } elseif ($mark >= 15) {
+                $Anxiety = 'Severe';
+            } elseif ($mark >= 10) {
+                $Anxiety = 'Moderate';
+            } elseif ($mark >= 8) {
+                $Anxiety = 'Mild';
+            } else {
+                $Anxiety = 'Normal';
+            }
+            $data['anxiety'] = $Anxiety;
+
+            //Stress
+            if ($mark >= 34) {
+                $Stress = 'Extremely Severe';
+            } elseif ($mark >= 26) {
+                $Stress = 'Severe';
+            } elseif ($mark >= 19) {
+                $Stress = 'Moderate';
+            } elseif ($mark >= 15) {
+                $Stress = 'Mild';
+            } else {
+                $Stress = 'Normal';
+            }
+            $data['stress'] = $Stress;
+
+            return $data;
+        }
+
     }
 }

@@ -21,24 +21,6 @@
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
             </div>
 
-            <!-- chatbox section  - previous-->
-            <!-- <div class="subgrid-2"> 
-                <div class="card-white">
-                    
-                    <div class="" style="border: 1px solid black;">
-                        <div class="">
-                            <div class="" id="chat-window"></div>
-                            <div id='typing'></div>
-                            <div id='form' class="">
-                                <input class="" onkeyup="typing()" id="comment-input" type="text" placeholder="enter your message">
-                                <button id="send-button" class="" onclick="send()">Send</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div> -->
-            <!-- chatbox section  - previous-->
             <div>
                 <?php 
 
@@ -49,12 +31,18 @@
                     $roomid = 0;
 
                     $user = $_SESSION['user_name'];
+                    $counsellor = $data['counsellor'];
+
+                    $msg_receiver = $data['msg_receiver'];
+                    if (isset($msg_receiver->first_name) && isset($msg_receiver->last_name)) {
+                        $msg_receiver_name = $msg_receiver->first_name . ' ' . $msg_receiver->last_name;
+                    }
+                    else {
+                        $msg_receiver_name = $msg_receiver->username;
+                    }
+
                     $receiver = $data['receiver'];
                     $receiver_username = $receiver->username;
-
-                    // echo $receiver_username;
-                    // echo "From: " . $from;
-                    // echo "To: " . $to;
                     
                     $sql = "SELECT * FROM chat_connection WHERE from_user = '$from' AND to_user = '$to' OR from_user = '$to' AND to_user = '$from'";
                     $result = $con->query($sql);
@@ -72,8 +60,6 @@
                         //     echo "Chat creation failed";
                         // }
                     }
-
-                    // echo $roomid;
                     $previousDate = '';
 
                     echo
@@ -82,8 +68,8 @@
                             <img src='".URLROOT."public/img/pro-avatar1.svg' alt='profile' class='profile-picture'>
                             </div>
                             <div>
-                            <p class='p-regular-green' style='font-size: 15px;'>username | user type</p>
-                            <p class='p-regular-grey' style='font-size: 15px;'>last seen just now</p>
+                            <p class='p-regular-green' style='font-size: 15px;'>$msg_receiver_name</p>
+                            <p class='p-regular-grey' style='font-size: 15px;'>(Active Status)</p>
                             </div>
                         </div>";
 
@@ -118,7 +104,7 @@
                                                     echo "</div>";
                                                 } else {
                                                     echo "<div class='chat-message-2'>";
-                                                    echo "-".$row['sent_by']."-";
+                                                    echo "-".$msg_receiver_name."-";
                                                     echo " <br> ";
                                                     echo $row['message'];
                                                     echo " <br><br> ";
@@ -173,17 +159,11 @@
             let data = JSON.parse(e.data);
             console.log(data);
             if(typeof data.msg !== 'undefined'){
-
-                // document.getElementById('typing').innerHTML = '';
-                // let commentElem = document.createElement('div');
-                // commentElem.classList.add('col-11');
-                // commentElem.classList.add('fill-container');
-                // commentElem.innerHTML = "<div class=''><div class=''>" + data.name + "</div><div class=''>" + data.msg + "</div><div class=''>" +data.date + "</div></div>";
                 
                 var chatWindow = document.getElementById('chat-window');
 
                 var newMessage = document.createElement('p');
-                newMessage.innerHTML = data.name + " : " + data.msg + " " + data.date;
+                newMessage.innerHTML = "-<?php echo $msg_receiver_name;?>-"+ "<br>" + data.msg + "<br><br>(" + data.date + ")";
                 newMessage.classList.add('chat-message-2');
                 chatWindow.appendChild(newMessage);
                 document.getElementById('chat-window').appendChild(commentElem);
@@ -225,7 +205,7 @@
             var chatWindow = document.getElementById('chat-window');
             var newMessage = document.createElement('p');
             newMessage.classList.add('chat-message-1');
-            newMessage.innerHTML = "~" +'<?= $sender?>'+ "~" + " <br> " + input.value + "<br><br>" + " (" + '<?= $datesent ?>' + ")";
+            newMessage.innerHTML = "-you-" + " <br> " + input.value + "<br><br>" + " (" + '<?= $datesent ?>' + ")";
             chatWindow.appendChild(newMessage);
             input.value = '';
         }

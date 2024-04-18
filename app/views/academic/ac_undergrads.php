@@ -1,4 +1,8 @@
-<?php $currentPage = 'ac_undergrads'; ?>
+<?php
+$currentPage = 'ac_undergrads';
+$undergrad = $data['undergrad'];
+$counsellor = $data['counsellor'];
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +11,7 @@
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
-    <title><?php echo $_SESSION['user_name']; ?> | Undergraduates</title>
+    <title><?php echo SITENAME; ?> | Undergraduates</title>
 </head>
 
 <body>
@@ -18,55 +22,32 @@
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2">
-                    <p class="p-title" style="font-size: 40px;">Questionnaires</p>
+                    <p class="p-title" style="font-size: 40px;">Undergraduates</p>
                 </div>
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>
-                <div class="card-white">
-                    <p class="p-regular">Your Faculty</p>
-                    <div class="card-green">
-                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="pro pic" class="card-profile">
-                        <div>
-                            <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4" class="a-name">
-                                <p>Zerene_User05</p>
-                            </a>
-                            <p class="p-regular" style="margin-bottom: -10px;"></p>
-                            <p class="p-regular" style="color:var(--zerene-grey) ;">University of Colombo School of Computing</p>
-                        </div>
-                        <div style=" display:flex ; justify-content:center;gap:15px">
-                            <button class="button-main">Past Records</button>
-                            <button class="button-main">Profile</button>
-                        </div>
-                    </div>
-                    <div class="card-green">
-                        <img src="<?php echo IMG; ?>ug-avatar2.svg" alt="pro pic" class="card-profile">
-                        <div>
-                            <p class="p-regular" style="margin-bottom: -10px;"><a href="./acundergraduate2.php" class="a-name">Zerene_User12</a></p>
-                            <p class="p-regular" style="color:var(--zerene-grey) ;">University of Colombo School of Computing</p>
-                        </div>
-                        <div style=" display:flex ; justify-content:center;gap:15px">
-                            <button class="button-main">Past Records</button>
-                            <button class="button-main">Profile</button>
-                        </div>
-                    </div>
-                    <div class="card-green">
-                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="pro pic" class="card-profile">
-                        <div>
-                            <p class="p-regular" style="margin-bottom: -10px;"><a href="./acundergraduate2.php" class="a-name">Zerene_User05</a></p>
-                            <p class="p-regular" style="color:var(--zerene-grey) ;">University of Colombo School of Computing</p>
-                        </div>
-                        <div style=" display:flex ; justify-content:center;gap:15px">
-                            <button class="button-main">Past Records</button>
-                            <button class="button-main">Profile</button>
-                        </div>
-                    </div>
+                <p class="p-regular-green">Your Faculty</p>
+                <div class="card-white-scroll" style="height: 500px;">
+                    <?php foreach ($data['undergrad'] as $undergrad) : ?>
+                        <?php if ($undergrad->faculty === $counsellor->faculty) : ?>
+                            <div class="card-green">
+                                <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
+                                <div>
+                                    <a href="" class="a-name">
+                                        <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username; ?></p>
+                                    </a>
+                                    <p class="p-regular-grey"><?php echo $undergrad->university . ' ' . $undergrad->faculty; ?></p>
+                                </div>
+                                <div class="btn-container">
+                                    <button class="button-main">Profile</button>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
-
             </div>
-
-
         </div>
     </section>
 

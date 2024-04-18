@@ -91,6 +91,9 @@ class Undergraduate
         }
     }
 
+
+    
+
     public function getResponsesbyId($id)
     {
         $this->db->query('SELECT * FROM response WHERE user_id = :user_id ORDER BY attempted_at DESC');
@@ -99,10 +102,24 @@ class Undergraduate
         return $results;
     }
 
-    public function sendMsgRequest($ug_id, $counsellor_id){
-        $this->db->query('INSERT INTO msg_request (ug_id, coun_id, sent_at) VALUES (:ug_id, :coun_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+
+    public function getResponses(){
+        $this->db->query('SELECT * FROM response ORDER BY attempted_at DESC');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getResponseByResponseId($id){
+        $this->db->query('SELECT * FROM response WHERE response_id = :response_id');
+        $this->db->bind(':response_id', $id);
+        $row = $this->db->single();
+        return $row;
+    }
+
+    public function sendMsgRequest($ug_id, $id){
+        $this->db->query('INSERT INTO msg_request (from_user_id, to_user_id, sent_at) VALUES (:ug_id, :id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
         $this->db->bind(':ug_id', $ug_id);
-        $this->db->bind(':coun_id', $counsellor_id);
+        $this->db->bind(':id', $id);
         if ($this->db->execute()) {
             return true;
         } else {
