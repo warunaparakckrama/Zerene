@@ -9,20 +9,20 @@
         public function addQuestionnaire($user_id, $data){
             $this->db->query('INSERT INTO questionnaires(questionnaire_name, questionnaire_type, num_of_questions, num_of_answers, user_id) VALUES (:quiz_name, :quiz_type, :num_questions, :num_answers, :user_id)');
             $this->db->bind(':quiz_name', $data['quiz_name']);
-            if ($data['quiz_type'] === "general") {
-                $this->db->bind(':quiz_type', 'general');
+            if ($data['quiz_type'] === "General") {
+                $this->db->bind(':quiz_type', 'General');
             }
-            if ($data['quiz_type'] === "stress") {
-                $this->db->bind(':quiz_type', 'stress');
+            if ($data['quiz_type'] === "Stress") {
+                $this->db->bind(':quiz_type', 'Stress');
             }
-            if ($data['quiz_type'] === "anxiety") {
-                $this->db->bind(':quiz_type', 'anxiety');
+            if ($data['quiz_type'] === "Anxiety") {
+                $this->db->bind(':quiz_type', 'Anxiety');
             }
-            if ($data['quiz_type'] === "depression") {
-                $this->db->bind(':quiz_type', 'depression');
+            if ($data['quiz_type'] === "Depression") {
+                $this->db->bind(':quiz_type', 'Depression');
             }
-            if ($data['quiz_type'] === "other") {
-                $this->db->bind(':quiz_type', 'other');
+            if ($data['quiz_type'] === "Other") {
+                $this->db->bind(':quiz_type', 'Other');
             }
             $this->db->bind(':num_questions', $data['num_questions']);
             $this->db->bind(':num_answers', $data['num_answers']);

@@ -71,11 +71,15 @@
 .card-profile{
     width: 80px;
     height: 80px;
+    border: 2px solid var(--zerene-green);
+    border-radius: 50%;
 }
 
 .card-profile-2{
     width: 120px;
     height: 120px;
+    border: 2px solid var(--zerene-green);
+    border-radius: 50%;
 }
 
 .btn-container{

@@ -1,4 +1,7 @@
-<?php $currentPage = 'pc_timeslot'; ?>
+<?php 
+    $currentPage = 'pc_timeslot'; 
+    $timeslot = $data['timeslot'];
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -23,9 +26,9 @@
             </div>
 
             <div>
+                <p class="p-regular-green">Create Timeslot</p>
                 <div class="card-white">
-                    <p class="p-regular">Create Timeslot</p>
-                    <div class="card-green-6">
+                    <div class="card-green">
                         <div>
                             <form action="<?php echo URLROOT; ?>Procounsellor/addTimeslots/<?php echo $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
                                 <label for="slot_date">Date : </label>
@@ -63,25 +66,29 @@
                         // Grouping timeslots by date
                         $groupedTimeslots = [];
                         foreach ($data['timeslot'] as $timeslot) {
+                            $slotid = $timeslot->slot_id;
                             $date = date('l', strtotime($timeslot->slot_date));
                             $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
                             $start_time = date('h:ia', strtotime($timeslot->slot_start));
                             $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                             $formattedTimeRange = "$start_time - $end_time";
-                            $groupedTimeslots[$formattedDate][$date][] = $formattedTimeRange;
+                            $groupedTimeslots[$formattedDate][$date][$slotid][] = $formattedTimeRange;
                         }
 
                         // Displaying grouped timeslots
                         foreach ($groupedTimeslots as $formattedDate => $days) {
                             echo "<div class='card-green-2'>";
-                            foreach ($days as $day => $timeRanges) {
+                            foreach ($days as $day => $slots) {
                                 echo "<div>";
                                 echo "<p class='p-regular-grey' style='font-size: 20px;'>$day</p>";
                                 echo "<p class='p-regular-grey' style='font-size: 15px;'>$formattedDate</p>";
                                 echo "</div>";
                                 echo "<div class='btn-container-2'>";
-                                foreach ($timeRanges as $timeRange) {
-                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $timeRange . '</a>';
+                                foreach ($slots as $slotid => $timeRanges){
+
+                                    foreach ($timeRanges as $timeRange) {
+                                        echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $slotid . '" class="button-main no-underline">' . $timeRange . '</a>';
+                                    }
                                 }
                                 echo "</div>";
                             }

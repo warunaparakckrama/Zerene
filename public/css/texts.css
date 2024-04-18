@@ -33,6 +33,13 @@
     width: fit-content;
 }
 
+.p-light-grey{
+    color: var(--zerene-grey);
+    font-weight: 300;
+    width: fit-content;
+
+}
+
 .p-bold{
     font-size: 20px;
     font-weight: bold;
