@@ -20,14 +20,17 @@ class PCounsellor
         $timeslots = [];
         $current = $start;
         while ($current < $end) {
-            $timeslots[] = [
-                'slot_date' => $data['slot_date'],
-                'slot_start' => date('H:i:s', $current),
-                'slot_finish' => date('H:i:s', $current + $interval),
-                'slot_type' => $data['slot_type'],
-                'slot_interval' => $data['slot_interval'], // Store the interval in the timeslot data
-                'created_by' => $data['created_by']
-            ];
+            $slot_end = min($current + $interval, $end); // End time of the slot, but not exceeding the end time entered by the user
+            if ($slot_end - $current >= $interval) { // Check if the slot duration is equal to or greater than the interval
+                $timeslots[] = [
+                    'slot_date' => $data['slot_date'],
+                    'slot_start' => date('H:i:s', $current),
+                    'slot_finish' => date('H:i:s', $slot_end),
+                    'slot_type' => $data['slot_type'],
+                    'slot_interval' => $data['slot_interval'], 
+                    'created_by' => $data['created_by']
+                ];
+            }
             $current += $interval; // Move to next interval
         }
 
@@ -38,16 +41,13 @@ class PCounsellor
             $this->db->bind(':slot_start', $slot['slot_start']);
             $this->db->bind(':slot_finish', $slot['slot_finish']);
             $this->db->bind(':slot_type', $slot['slot_type']);
-            $this->db->bind(':slot_interval', $slot['slot_interval']); // Bind slot_interval
+            $this->db->bind(':slot_interval', $slot['slot_interval']); 
             $this->db->bind(':created_by', $slot['created_by']);
             $this->db->execute();
         }
 
         return true;
     }
-
-
-
 
     public function getTimeslots($id)
     {
@@ -69,7 +69,7 @@ class PCounsellor
     {
         error_log('Deleting timeslot: ' . $timeslotId);
 
-        $this->db->query('DELETE FROM timeslot WHERE slot_id = :timeslotId');
+        $this->db->query('UPDATE timeslot SET is_deleted = 1 WHERE slot_id = :timeslotId');
         $this->db->bind(':timeslotId', $timeslotId);
 
         $result = $this->db->execute();
