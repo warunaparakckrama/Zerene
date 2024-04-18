@@ -1,7 +1,7 @@
 <!-- <!DOCTYPE html> -->
 <!-- <html lang="en"> -->
 <?php $currentPage = 'doc_profile';
-$doctor = $data['doctor'];
+      $doctor = $data['doctor'];
 ?>
 
 <head>
@@ -28,36 +28,31 @@ $doctor = $data['doctor'];
                     <p class="p-regular-grey">User Account</p>
                     <div class="subgrid-4">
 
-                        <div class="rectangle">
+                    <div class="rectangle">
                             <p>General</p>
                             <table>
-                        
                                 <tr>
                                     <td class="p-regular-grey">Username</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $doctor->username;?></td>
+                                    <td class="p-title"><?php echo $doctor->first_name.' '.$doctor->last_name;?></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-regular-grey">E-mail</td>
+                                    <td class="p-regular-grey">Email</td>
                                     <td class="p-regular-grey">:</td>
                                     <td class="p-title"><?php echo $doctor->email;?></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-regular-grey">University</td>
+                                    <td class="p-regular-grey">Assigened University</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $doctor->university;?></td>
+                                    <td class="p-title"><?php echo $doctor-> uni_in_charge;?></td>
                                 </tr>
-                                <tr>
-                                    <td class="p-regular-grey">Faculty</td>
-                                    <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $doctor->faculty;?></td>
-                                </tr>
+                               
                             </table>
                         </div>
 
                         <div class="rectangle">
                             <p>Change Password</p>
-                            <form action="<?php echo URLROOT;?>Undergrad/changePwdUG/<?php echo $undergrad->user_id;?>" method="POST" class="subgrid-1" style="font-size: 15px;">
+                            <form action="<?php echo URLROOT;?>Doctor/changePwdDoc/<?php echo $doctor->user_id;?>" method="POST" class="subgrid-1" style="font-size: 15px;">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
                                 <input type="password" id="current_password" name="current_password" class="" required>
 
@@ -77,7 +72,7 @@ $doctor = $data['doctor'];
 
                         <div class="rectangle">
                             <p>Change Username</p>
-                            <form action="<?php echo URLROOT;?>Undergrad/changeUsernameUG/<?php echo $undergrad->user_id;?>" method="POST" class="subgrid-1" style="font-size: 15px;">
+                            <form action="<?php echo URLROOT;?>Doctor/changeUsernameDoc/<?php echo $doctor->user_id;?>" method="POST" class="subgrid-1" style="font-size: 15px;">
                                 <label for="cusername" class="p-regular-grey">New Username :</label>
                                 <input type="text" name="new_username" style="margin-bottom: 5px;" required>
                                 

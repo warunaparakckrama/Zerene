@@ -14,7 +14,7 @@
                     <img src="<?php echo IMG;?>ug-avatar-1.svg" alt="ug avatar" width="80" height="80">
                 </a>
                 <p class="p-regular" style="color: var(--zerene-light);"><?php echo $_SESSION['user_name'];?></p>
-                <a href="<?php echo URLROOT;?>doctor/doc_profile" id="sb-link9" style="text-decoration: none;"><button class="button-second">Edit</button></a>
+                <a href="<?php echo URLROOT;?>doctor/doc_profile" id="sb-link9" style="text-decoration: none;"><button class="button-second">View Profile</button></a>
             </div>
             <div class="sidebar-container3">
                 <a href="<?php echo URLROOT; ?>doctor/doc_home" class="top <?php echo ($currentPage === 'doc_home') ? 'active' : ''; ?>" id="sb-link1">Home</a>

@@ -76,17 +76,27 @@ class Doctor extends Controller{
        
         $this->view('doctor/doc_timeslots', $data);
     }
-    
-    public function doc_profile($user_id){
-        $doctor = $this->adminModel->getDoctorById($user_id);
+
+    public function doc_profile()
+    {   
+        $id = $_SESSION['user_id'];
+        $doctor = $this->adminModel->getDoctorById($id);
         $data = [
             'doctor' => $doctor
         ];
         $this->view('doctor/doc_profile', $data);
     }
+    
+    public function doc_view_profile($id){
+        $doctor = $this->adminModel->getDoctorById($id);
+        $data = [
+            'doctor' => $doctor
+        ];
+        $this->view('doctor/doc_view_profile', $data);
+    }
     public function changeUsernameDoc($user_id)
     {
-    $doctor = $this->adminModel->getUgById($user_id);
+    $doctor = $this->adminModel->getDoctorById($user_id);
         $current_username = $this->userModel->getUsernameById($user_id);
         $username = $this->userModel->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -139,7 +149,7 @@ class Doctor extends Controller{
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
                     flash('user_message', 'Username updated successfully');
-                    redirect('undergrad/ug_profile'); 
+                    redirect('doctor/doc_profile'); 
                 } else {
                     die('Something went wrong');
                 }    
@@ -157,7 +167,7 @@ class Doctor extends Controller{
 
     public function changePwdDoc($user_id){
 
-        $doctor = $this->adminModel->getUgById($user_id);
+        $doctor = $this->adminModel->getDoctorById($user_id);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
