@@ -21,12 +21,6 @@ class Undergrad extends Controller
 
     //user view controllers
 
-    public function dashboard()
-    {
-        $data = [];
-        $this->view('undergrad/dashboard', $data);
-    }
-
     public function home()
     {
         $data = [];
@@ -56,12 +50,6 @@ class Undergrad extends Controller
             'answer' => $answer
         ];
         $this->view('undergrad/quiz_view', $data);
-    }
-
-    public function professionalcounsellors()
-    {
-        $data = [];
-        $this->view('undergrad/professionalcounsellors', $data);
     }
 
     public function professionals()
@@ -100,25 +88,13 @@ class Undergrad extends Controller
         $this->view('undergrad/send_req_letter', $data);
     }
 
-    public function view_timeslotpc()
+    public function timeslots()
     {
         $timeslot = $this->ugModel->getTimeslotsForUndergrad();
         $data = [
             'timeslot' => $timeslot
         ];
-        $this->view('undergrad/view_timeslotpc', $data);
-    }
-
-    public function doctors()
-    {
-        $data = [];
-        $this->view('undergrad/doctors', $data);
-    }
-
-    public function doctorprofile()
-    {
-        $data = [];
-        $this->view('undergrad/doctorprofile', $data);
+        $this->view('undergrad/timeslots', $data);
     }
 
     public function chats()
@@ -336,7 +312,6 @@ class Undergrad extends Controller
 
         $this->view('undergrad/view_timeslotpc', $data);
     }
-
 
     public function reserveTimeslot($timeslotId)
     {
