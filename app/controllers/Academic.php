@@ -54,10 +54,15 @@ class Academic extends Controller
     }
 
     public function ac_undergrads()
-    {
-        $data['details'] = $this->acModel->getUndergradDetails();
-
-
+    {   
+        $id = $_SESSION['user_id'];
+        $counsellor = $this->adminModel->getCounsellorById($id);
+        $undergrad = $this->adminModel->getUndergrads();
+        $data =[
+            'undergrad' => $undergrad,
+            'counsellor' => $counsellor,
+        ];
+        
         $this->view('academic/ac_undergrads', $data);
     }
 
