@@ -119,10 +119,18 @@ class PCounsellor
 
     public function checkUgDirects($id, $coun_user_id)
     {
-        $this->db->query('SELECT * FROM ug_direct WHERE to_user_id = :id AND from_user_id = :coun_user_id');
+        $this->db->query('SELECT is_clicked FROM ug_direct WHERE ug_user_id = :id AND from_user_id = :coun_user_id');
         $this->db->bind(':id', $id);
         $this->db->bind(':coun_user_id', $coun_user_id);
         
-        return (bool) $this->db->single();
+        $result = $this->db->single();
+    
+        if ($result) {
+            // If there is a result, return the value of is_clicked
+            return $result->is_clicked;
+        } else {
+            // If there is no result, return false
+            return false;
+        }
     }
 }
