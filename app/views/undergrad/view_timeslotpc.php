@@ -26,29 +26,29 @@
             </div>
             <div class="card-white">
                 <p class="p-regular">Timeslots Available</p>
-                <?php if (isset($data['timeslot']) && !empty($data['timeslot'])) : ?>
+                <?php if (isset($data['timeslots']) && !empty($data['timeslots'])) : ?>
                     <?php
                     // Grouping timeslots by date
                     $groupedTimeslots = [];
-                    foreach ($data['timeslot'] as $timeslot) {
-                        $date = date('l', strtotime($timeslot->slot_date));
-                        $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
-                        $start_time = date('h:ia', strtotime($timeslot->slot_start));
-                        $end_time = date('h:ia', strtotime($timeslot->slot_finish));
+                    foreach ($data['timeslots'] as $timeslot) {
+                        $date = date('l', strtotime($timeslot['slot_date']));
+                        $formattedDate = date('Y-m-d', strtotime($timeslot['slot_date']));
+                        $start_time = date('h:ia', strtotime($timeslot['slot_start']));
+                        $end_time = date('h:ia', strtotime($timeslot['slot_finish']));
 
                         // ... Rest of your existing code ...
                         $formattedTimeRange = "$start_time - $end_time";
                         $groupedTimeslots[$formattedDate][$date][] = [
                             'timeRange' => $formattedTimeRange,
-                            'user' => isset($timeslot->created_by) ? $timeslot->created_by : 'Unknown',
-                            'reserved' => isset($timeslot->reserved_by) ? $timeslot->reserved_by : null,
-                            'id' => isset($timeslot->id) ? $timeslot->id : null,
+                            'faculty' => isset($timeslot['faculty']) ? $timeslot['faculty'] : 'Unknown',
+                            'creator' => isset($timeslot['counselor_name']) ? $timeslot['counselor_name'] : 'Unknown',
+                            'id' => isset($timeslot['id']) ? $timeslot['id'] : null,
                         ];
                     }
 
                     // Displaying grouped timeslots
                     foreach ($groupedTimeslots as $formattedDate => $days) :
-                ?>
+                    ?>
                         <div class='card-green-2'>
                             <?php foreach ($days as $day => $timeRanges) : ?>
                                 <div>
@@ -57,30 +57,22 @@
                                 </div>
                                 <div class='btn-container-2'>
                                     <?php foreach ($timeRanges as $timeSlot) :
-                                        $isReserved = !empty($timeSlot['reserved']);
-                                        $reserveButtonText = $isReserved ? 'Cancel Reservation' : 'Reserve';
                                         $timeslotId = isset($timeSlot['id']) ? $timeSlot['id'] : '';
                                     ?>
-                                        <button class='button-third' data-timeslot-id='<?= $timeslotId ?>' data-reserved='<?= $isReserved ?>'>
-                                            <?= "{$timeSlot['timeRange']}   |   {$timeSlot['user']}" ?>
+                                        <button class='button-third' data-timeslot-id='<?= $timeslotId ?>'>
+                                            <?= "{$timeSlot['timeRange']} | Faculty: {$timeSlot['faculty']} | Creator: {$timeSlot['creator']}" ?>
                                         </button>
-                                        <form  action='<?= URLROOT . "/undergrad/reserveTimeslot/{$timeslotId}" ?>' method='post'>
-                                            <?php if ($isReserved) : ?>
-                                                <p>Reserved by: <?= $timeSlot['user'] ?></p>
-                                                <button type='submit' class='button-main' name='cancelReservation' value='1'>Cancel Reservation</button>
-                                            <?php else : ?>
-                                                <button type='submit' class='button-main' name='reserveTimeslot' value='1'>Reserve</button>
-                                            <?php endif; ?>
-                                        </form>
                                     <?php endforeach; ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                 <?php else : ?>
                     <p>No timeslots created yet.</p>
                 <?php endif; ?>
             </div>
+
+
         </div>
     </section>
 </body>
