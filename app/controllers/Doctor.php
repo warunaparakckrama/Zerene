@@ -8,6 +8,7 @@ class Doctor extends Controller
     private $acModel;
     private $docModel;
     private $ugModel;
+    private $pcModel;
 
     public function __construct()
     {
@@ -19,6 +20,7 @@ class Doctor extends Controller
         $this->acModel = $this->model('ACounsellor');
         $this->docModel = $this->model('psychiatrist');
         $this->ugModel = $this->model('Undergraduate');
+        $this->pcModel = $this->model('PCounsellor');
     }
 
     public function dashboard()
@@ -35,15 +37,35 @@ class Doctor extends Controller
 
     public function doc_questionnaires()
     {   
+        $id = $_SESSION['user_id'];
+        $doctor = $this->adminModel->getDoctorById($id);
         $undergrad = $this->adminModel->getUndergrads();
         $questionnaire = $this->ugModel->getQuestionnaireDetails();
         $response = $this->ugModel->getResponses();
+        $direct = $this->pcModel->getUgDirectsforDoctor($id);
         $data = [
+            'doctor' => $doctor,
             'undergrad' => $undergrad,
             'questionnaire' => $questionnaire,
-            'response' => $response
+            'response' => $response,
+            'direct' => $direct
         ];
         $this->view('doctor/doc_questionnaires', $data);
+    }
+
+    public function doc_quiz_review($id)
+    {   
+        $response = $this->ugModel->getResponseByResponseId($id);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        require_once APPROOT.'/controllers/Procounsellor.php';
+        $PCController = new Procounsellor();
+        $results = $PCController->quizResults($id);
+        $data = [
+            'response' => $response,
+            'questionnaire' => $questionnaire,
+            'results' => $results
+        ];
+        $this->view('doctor/doc_quiz_review', $data);
     }
 
     public function doc_professionals()
@@ -120,9 +142,10 @@ class Doctor extends Controller
         ];
         $this->view('doctor/doc_view_profile', $data);
     }
+
     public function changeUsernameDoc($user_id)
     {
-    $doctor = $this->adminModel->getDoctorById($user_id);
+        $doctor = $this->adminModel->getDoctorById($user_id);
         $current_username = $this->userModel->getUsernameById($user_id);
         $username = $this->userModel->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

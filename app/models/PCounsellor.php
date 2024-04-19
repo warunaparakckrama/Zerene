@@ -133,4 +133,11 @@ class PCounsellor
             return false;
         }
     }
+
+    public function getUgDirectsforDoctor($id){
+        $this->db->query('SELECT * FROM ug_direct WHERE to_user_id = :id');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
 }
