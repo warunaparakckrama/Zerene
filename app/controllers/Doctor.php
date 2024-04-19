@@ -37,10 +37,10 @@ class Doctor extends Controller
         $this->view('doctor/doc_questionnaires', $data);
     }
 
-    public function doc_doctors()
+    public function doc_professionals()
     {
         $data = [];
-        $this->view('doctor/doc_doctors', $data);
+        $this->view('doctor/doc_professionals', $data);
     }
 
     public function doc_chats()
@@ -49,11 +49,7 @@ class Doctor extends Controller
         $this->view('doctor/doc_chats', $data);
     }
 
-    public function doc_counselors()
-    {
-        $data = [];
-        $this->view('doctor/doc_counselors', $data);
-    }
+   
 
     public function doc_undergrad()
     {   
