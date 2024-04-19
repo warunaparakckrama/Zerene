@@ -123,10 +123,12 @@ class Undergrad extends Controller
         $user_id = $_SESSION['user_id'];
         $request = $this->ugModel->getMsgRequest();
         $counsellor = $this->adminModel->getCounselors();
+        $doctor = $this->adminModel->getDoctors();
         $data = [
             'user_id' => $user_id,
             'request' => $request,
-            'counsellor' => $counsellor
+            'counsellor' => $counsellor,
+            'doctor' => $doctor
         ];
         $this->view('undergrad/chats', $data);
     }

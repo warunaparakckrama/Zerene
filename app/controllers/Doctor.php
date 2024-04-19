@@ -9,6 +9,7 @@ class Doctor extends Controller
     private $docModel;
     private $ugModel;
     private $pcModel;
+    private $chatModel;
 
     public function __construct()
     {
@@ -21,6 +22,7 @@ class Doctor extends Controller
         $this->docModel = $this->model('psychiatrist');
         $this->ugModel = $this->model('Undergraduate');
         $this->pcModel = $this->model('PCounsellor');
+        $this->chatModel = $this->model('ChatModel');
     }
 
     public function dashboard()
@@ -80,9 +82,46 @@ class Doctor extends Controller
     }
 
     public function doc_chats()
-    {
-        $data = [];
+    {   
+        $id = $_SESSION['user_id'];
+        $request = $this->ugModel->getMsgRequest();
+        $doctor = $this->adminModel->getDoctorById($id);
+        $all_counsellors = $this->adminModel->getCounselors();
+        $all_doctors = $this->adminModel->getDoctors();
+        $undergrad = $this->adminModel->getUndergrads();
+        $connection = $this->chatModel->getChatConnection();
+        $data = [
+            'request' => $request,
+            'doctor' => $doctor,
+            'all_counsellors' => $all_counsellors,
+            'all_doctors' => $all_doctors,
+            'undergrad' => $undergrad,
+            'connection' => $connection
+        ];
         $this->view('doctor/doc_chats', $data);
+    }
+
+    public function doc_chatroom($user_id)
+    {
+        $id = $_SESSION['user_id'];
+        $doctor = $this->adminModel->getDoctorById($id);
+        $receiving_user = $this->userModel->findUserDetails($user_id);
+        if ($receiving_user->user_type == 'undergraduate') {
+            $msg_receiver = $this->adminModel->getUgById($user_id);
+        } elseif ($receiving_user->user_type == 'pcounsellor') {
+            $msg_receiver = $this->adminModel->getCounsellorById($user_id);
+        } elseif ($receiving_user->user_type == 'doctor') {
+            $msg_receiver = $this->adminModel->getDoctorById($user_id);
+        }
+
+        $receiver = $this->userModel->findUserDetails($user_id);
+        $data = [
+            'user_id' => $user_id,
+            'doctor' => $doctor,
+            'msg_receiver' => $msg_receiver,
+            'receiver' => $receiver
+        ];
+        $this->view('doctor/doc_chatroom', $data);
     }
 
    
