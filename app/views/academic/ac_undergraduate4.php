@@ -25,7 +25,7 @@
                 <div class="card-green">
                     <img src="<?php echo IMG;?>pro-avatar1.svg" alt="pro pic" class="card-profile">
                     <div>
-                        <p class="p-regular" style="margin-bottom:0px ;">Zerene_User08</p>
+                        <p class="p-regular" style="margin-bottom:0px ;"><?php echo $data['ug_name'] ?></p>
                         <p class="p-regular" style="color:var(--zerene-grey) ;">University of Colombo School of Computing</p>
                         <p class="p-regular" style="color:var(--zerene-grey) ;">3 notes</p>
                     </div>
@@ -33,9 +33,11 @@
                 </div>
                 
                     <div>
-                        <form action="/action_page.php">
-                        <textarea id="w3review" name="w3review" rows="20" cols="140" placeholder="Add your text here" class="card-green"></textarea>
-                        
+                        <form  method="POST" action="<?php echo URLROOT; ?>academic/ac_undergraduate4/<?php echo $data['ug_id']?>">
+                        <input type="text" value="<?php echo $data['subject']?>" name="subject" placeholder="Subject" class="card-green">
+                        <p class="p-error"><?php echo isset($data['subject_err']) ? $data['subject_err'] : ''; ?></p>
+                        <textarea id="w3review" name="body" rows="20" cols="140" placeholder="Add your text here" class="card-green"><?php echo $data['body']?></textarea>
+                        <p class="p-error"><?php echo isset($data['body_err']) ? $data['body_err'] : ''; ?></p>
                         <div>
                             <input type="submit" value="Submit" class="button-main" >
 

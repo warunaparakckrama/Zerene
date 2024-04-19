@@ -13,7 +13,7 @@
     <style type="text/css">
         .bodyBody {
             margin: 10px;
-            font-size: 1.50em;
+            font-size: 1.2em;
         }
 
         .divHeader {
@@ -66,31 +66,29 @@
                     <div class="bodyBody">
                         <div class="divReturnAddress">
 
-                            <p class="p-regular ">Zerene_User07 </p>
+                            <p class="p-regular "><?php echo $data['letter details']->username?></p>
                             <p class="p-regular">UCSC</p>
 
                             <!-- date below -->
                             <p class="p-regular">
                                 01 December, 2012
                             </p><br>
-                            
+
                             <p>
-                            <?php echo $_SESSION['user_name'];?> ,
+                                <?php echo $_SESSION['user_name']; ?> ,
                             </p>
 
                         </div>
-                            
+
                         <div class="divSubject">
                             <p>
-                                Betreff: Vertretung waehrend Reise
+                                Subject for testing
                             </p>
                         </div>
 
                         <div class="divContents">
                             <p>
-                                Ich fliege nach Brasilien am 29. Dezember 2012 f&uuml;r 6 Wochen.
-                                Meine Nichte kann mich vertreten. Sie arbeitet sehr gesissenhaft.
-                                Sie heisst Yasmin. 
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo deleniti sapiente ab voluptatem ipsa in delectus dicta, mo
                             </p>
                         </div>
                     </div><br><br>
@@ -98,5 +96,5 @@
 
                     <div class="btn-container">
                         <button class="button-main">download</button>
-                        <button class="button-main"> <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4" class="a-name"> create </a></button>
+                        <button class="button-main"> <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4/<?php echo $data['letter details']->from_ug_id ?>" class="a-name"> create </a></button>
                     </div>
