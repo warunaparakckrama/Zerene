@@ -18,7 +18,7 @@ class Doctor extends Controller
         $this->adminModel = $this->model('Administrator');
         $this->acModel = $this->model('ACounsellor');
         $this->docModel = $this->model('psychiatrist');
-        $this->ugModel = $this->model('Undergrad');
+        $this->ugModel = $this->model('Undergraduate');
     }
 
     public function dashboard()
