@@ -34,10 +34,10 @@
                             <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
                             <div>
                                 <a href="<?php echo URLROOT;?>Procounsellor/pc_ug_profile/<?php echo $undergrad->user_id;?>"class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
-                                <p class="p-regular-grey"><?php echo $undergrad->university.' '.$undergrad->faculty;?></p>
+                                <p class="p-regular-grey" style="font-size: 15px;"><?php echo $undergrad->university.' '.$undergrad->faculty;?></p>
                             </div>
                             <div class="btn-container">
-                                <button class="button-main">Profile</button>
+                                <a href="<?php echo URLROOT;?>Procounsellor/pc_ug_profile/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
                             </div>
                         </div>
                         <?php endif; ?>
@@ -56,7 +56,7 @@
                                         <p class="p-regular-grey" style="font-size: 15px;"><?php echo $undergrad->university.' '.$undergrad->faculty;?></p>
                                     </div>
                                     <div class="btn-container">
-                                        <button class="button-main">Profile</button>
+                                        <a href="<?php echo URLROOT;?>Procounsellor/pc_ug_profile/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">Profile</button></a>
                                     </div>
                                 </div>
                             <?php endif; ?>
