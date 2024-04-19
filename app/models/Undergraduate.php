@@ -153,4 +153,11 @@ class Undergraduate
             return false;
         }
     }
+
+    public function getMsgRequestfromId($id){
+        $this->db->query('SELECT * FROM msg_request WHERE from_user_id = :id and is_deleted = FALSE');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
 }

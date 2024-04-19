@@ -60,10 +60,14 @@ class Undergrad extends Controller
         $undergrad = $this->adminModel->getUgById($id);
         $counsellor = $this->adminModel->getCounselors();
         $doctor = $this->adminModel->getDoctors();
+        $direct = $this->pcModel->getUgDirectsfromUg($id);
+        $request = $this->ugModel->getMsgRequestfromId($id);
         $data = [
             'counsellor' => $counsellor,
             'undergrad' => $undergrad,
-            'doctor' => $doctor
+            'doctor' => $doctor,
+            'direct' => $direct,
+            'request' => $request,
         ];
         $this->view('undergrad/professionals', $data);
     }
