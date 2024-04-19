@@ -1,64 +1,60 @@
+<?php
+    $currentPage = 'doc_questionnaires';
+    $doctor = $data['doctor'];
+    $undergrad = $data['undergrad'];
+    $questionnaire = $data['questionnaire'];
+    $response = $data['response'];
+    $direct = $data['direct'];
+?>
 
-<?php $currentPage = 'doc_questionnaires'; ?>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
-        <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
-        <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
-    </head>
-    <body>
-        <section class='sec-1'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
+    <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
+    <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <title><?php echo SITENAME;?> | Questionnaires</title>
+</head>
+
+<body>
+    <section class='sec-1'>
         <div>
-        <?php require APPROOT . '/views/inc/sidebar-doc.php'; ?>
+            <?php require APPROOT . '/views/inc/sidebar-doc.php'; ?>
         </div>
-            <div class="grid-1">
+        <div class="grid-1">
 
-                <div class="subgrid-1">
-                    <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Questionnaires</p></div>
-                    <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
-                </div>
+            <div class="subgrid-1">
+                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Questionnaires</p> </div>
+                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
+            </div>
 
-                <div class="card-white">
-                    <p class="p-regular">Recently Submitted</p>
-                    
-                    <div class="card-green">
-                        <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-proflie">
-                        <div>
-                            <p class="p-regular" style=" margin-bottom: -10px;">ZereneUser_07</p>
-                            <p class="p-regular" style="color: var(--zerene-grey);">University of Colombo School of Computing</p>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">DASS-21 | Yesterday at 5.01pm</p>
-                        </div>
-                        <div class="btn-container">
-                            <button class="button-main">Review</button>
-                        </div>
-                    </div>
-
-                    <div class="card-green">
-                        <img src="<?php echo IMG;?>pro-avatar2.svg" alt="profile pic" class="card-proflie">
-                        <div>
-                            <p class="p-regular" style=" margin-bottom: -10px;">ZereneUser_01</p>
-                            <p class="p-regular" style="color: var(--zerene-grey);">University of Colombo School of Computing</p>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">PHQ 9 | Saturday at 11.23am</p>
-                        </div>
-                        <div class="btn-container">
-                            <button class="button-main">Review</button>
-                        </div>
-                    </div>
-
-                    <div class="card-green">
-                        <img src="<?php echo IMG;?>pro-avatar2.svg" alt="profile pic" class="card-proflie">
-                        <div>
-                            <p class="p-regular" style=" margin-bottom: -10px;">ZereneUser_02</p>
-                            <p class="p-regular" style="color: var(--zerene-grey);">Faculty of Arts | UOC</p>
-                            <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">GAD 7 | 08.09.2023 at 9.05pm</p>
-                        </div>
-                        <div class="btn-container">
-                            <button class="button-main">Review</button>
-                        </div>
-                    </div>
-
+            <div>
+                <p class="p-regular-green">Recently Submitted</p>
+                <div class="card-white-scroll" style="height: 500px;">
+                    <?php foreach($data['direct'] as $direct) :?>
+                        <?php foreach($data['response'] as $response) :?>
+                            <?php foreach($data['undergrad'] as $undergrad) :?>
+                                <?php foreach($data['questionnaire'] as $questionnaire) :?>
+                                    <?php if($direct->ug_user_id == $response->user_id && $response->user_id == $undergrad->user_id && $response->questionnaire_id == $questionnaire->questionnaire_id) :?>
+                                        <div class="card-green">
+                                            <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
+                                            <div>
+                                                <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p>
+                                                <p class="p-regular-grey" style="font-size: 15px;"><?php echo $undergrad->university.' '.$undergrad->faculty;?></p>
+                                                <?php $dateTime = new DateTime($response->attempted_at); $formattedDateTime = $dateTime->format('jS M, y \a\t h:iA');?>
+                                                <p class="p-regular-green" style="font-size: 15px;"><?php echo $questionnaire->questionnaire_name.' | '.$formattedDateTime;?></p>
+                                            </div>
+                                            <div class="btn-container">
+                                                <a href="<?php echo URLROOT;?>Doctor/doc_quiz_review/<?php echo $response->response_id;?>" style="text-decoration: none;"><button class="button-main">Review</button></a>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
-        </section>
-    </body>
+        </div>
+    </section>
+</body>
