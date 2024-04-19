@@ -41,7 +41,8 @@ $counsellor = $data['counsellor'];
                                     <p class="p-regular-grey"><?php echo $undergrad->university . ' ' . $undergrad->faculty; ?></p>
                                 </div>
                                 <div class="btn-container">
-                                    <button class="button-main">Profile</button>
+                                <a href="<?php echo URLROOT;?>academic/ac_undergraduate_profile/<?php echo $undergrad->user_id;?>" style="text-decoration: none;">
+                                <button class="button-main">Profile</button></a>
                                 </div>
                             </div>
                         <?php endif; ?>

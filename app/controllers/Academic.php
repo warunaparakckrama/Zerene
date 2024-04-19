@@ -227,6 +227,19 @@ class Academic extends Controller
 
         $this->view('academic/req_letter', $data);
     }
+    public function ac_undergraduate_profile($id)
+    {
+        $undergraduate = $this->adminModel->getUgById($id);
+        $data = [
+            'undergraduate' => $undergraduate,
+            'id' => $id
+        ];
+        $this->view('academic/ac_undergraduate_profile', $data);
+    }
+
+
+
+
 
     //function controllers
 
