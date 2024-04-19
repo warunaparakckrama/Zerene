@@ -7,6 +7,7 @@ class Doctor extends Controller
     private $adminModel;
     private $acModel;
     private $docModel;
+    private $ugModel;
 
     public function __construct()
     {
@@ -17,6 +18,7 @@ class Doctor extends Controller
         $this->adminModel = $this->model('Administrator');
         $this->acModel = $this->model('ACounsellor');
         $this->docModel = $this->model('psychiatrist');
+        $this->ugModel = $this->model('Undergrad');
     }
 
     public function dashboard()
@@ -32,8 +34,15 @@ class Doctor extends Controller
     }
 
     public function doc_questionnaires()
-    {
-        $data = [];
+    {   
+        $undergrad = $this->adminModel->getUndergrads();
+        $questionnaire = $this->ugModel->getQuestionnaireDetails();
+        $response = $this->ugModel->getResponses();
+        $data = [
+            'undergrad' => $undergrad,
+            'questionnaire' => $questionnaire,
+            'response' => $response
+        ];
         $this->view('doctor/doc_questionnaires', $data);
     }
 
