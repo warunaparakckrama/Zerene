@@ -48,7 +48,12 @@ class Doctor extends Controller
 
     public function doc_professionals()
     {
-        $data = [];
+        $counsellor = $this->adminModel->getCounselors();
+        $doctor = $this->adminModel->getDoctors();
+        $data = [
+            'counsellor' => $counsellor,
+            'doctor' => $doctor
+        ];
         $this->view('doctor/doc_professionals', $data);
     }
 
