@@ -291,27 +291,108 @@ class Doctor extends Controller
     public function addTimeslotsDoc($user_id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
             $data = [
                 'slot_date' => trim($_POST['slot_date']),
                 'slot_start' => trim($_POST['slot_start']),
                 'slot_finish' => trim($_POST['slot_finish']),
+                'slot_interval' => trim($_POST['slot_interval']),
                 'slot_type' => trim($_POST['slot_type']),
-                'slot_status' => trim($_POST['slot_status']),
-                'created_by' => trim($_POST['created_by']),
+                'slot_status' => '', // Add this line
+                'created_by' => '', // Add this line
+                'slot_date_err' => '',
+                'slot_start_err' => '',
+                'slot_finish_err' => '',
+                'slot_interval_err' => '',
+                'slot_type_err' => '',
             ];
-            $current_username = $this->userModel->getUsernameById($user_id);
-            $data['created_by'] = $current_username;
 
-            if ($this->acModel->createTimeslots($data)) {
-                redirect('doctor/doc_timeslots');
-                # code...
+            $data['created_by'] = $_SESSION['user_id'];
+
+            if ($this->docModel->createTimeslotsDoc($data)) {
+                redirect('doctor/doc_timeslot');
+            } else {
+                die('Something went wrong');
+            }
+
+            $username = $this->userModel->getUsernameById($user_id);
+            $data['timeslot'] = $this->docModel->getTimeslotsDoc($username);
+            $this->view('doctor/doc_timeslot', $data);
+        }
+        $this->view('doctor/doc_timeslot');
+    }
+
+    public function editTimeslotDoc($timeslotId)
+    {
+        $timeslot = $this->docModel->getTimeslotByIdDoc($timeslotId);
+
+        if (!$timeslot) {
+            die('Timeslot not found');
+        }
+
+        $data = [
+            'timeslot' => $timeslot,
+            'slot_date_err' => '',
+            'slot_start_err' => '',
+            'slot_finish_err' => '',
+            'slot_type_err' => ''
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data['timeslot']->slot_date = trim($_POST['slot_date']);
+            $data['timeslot']->slot_start = trim($_POST['slot_start']);
+            $data['timeslot']->slot_finish = trim($_POST['slot_finish']);
+            $data['timeslot']->slot_type = trim($_POST['slot_type']);
+
+            $this->handleEditTimeslotDoc($data);
+        }
+
+        $this->view('doctor/doc_view_timeslot', $data);
+    }
+
+
+    private function handleEditTimeslotDoc(&$data)
+    {
+        if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
+            if ($this->pcModel->updateTimeslot($data['timeslot'])) {
+                redirect('doctor/doc_timeslot');
             } else {
                 die('Something went wrong');
             }
         }
     }
+
+    public function deleteTimeslotDoc($timeslotId)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->docModel->deleteTimeslotDoc($timeslotId)) {
+                redirect('doctor/doc_timeslot');
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
+
+
+    public function doc_view_timeslot($timeslotId)
+    {
+        $timeslot = $this->docModel->getTimeslotByIdDoc($timeslotId);
+
+        if ($timeslot) {
+            $data = [
+                'timeslot' => $timeslot,
+                'slot_date_err' => '',
+                'slot_start_err' => '',
+                'slot_finish_err' => '',
+                'slot_type_err' => ''
+            ];
+
+            $this->view('doctor/doc_view_timeslot', $data);
+        } else {
+            die('Timeslot not found');
+        }
+    }
+
+
 
     public function addMedicine($user_id)
     {
