@@ -140,16 +140,32 @@ class Doctor extends Controller
         $this->view('doctor/doc_undergrad', $data);
     }
 
-    public function prescription()
-    {
-        $username = $this->userModel->getUsernameById($_SESSION['user_id']);
-        $prescription = $this->docModel->getPrescription($username);
+    public function doc_prescription()
+    {   
+        $id = $_SESSION['user_id'];
+        $direct = $this->docModel->getDirectedUndergrads($id);
+        $undergrad = $this->adminModel->getUndergrads();
+        $counsellor = $this->adminModel->getCounselors();
         $data = [
-            'gender' => '',
-            'prescription' => $prescription,
+            'direct' => $direct,
+            'undergrad' => $undergrad,
+            'counsellor' => $counsellor
+        ];
+        $this->view('doctor/doc_prescription', $data);
+    }
+
+    public function doc_create_prescription($ug_user_id)
+    {   
+        $id = $_SESSION['user_id'];
+        $doctor = $this->adminModel->getDoctorById($id);
+        $undergrad = $this->adminModel->getUgById($ug_user_id);
+        $data = [
+            'doctor' => $doctor,
+            'undergrad' => $undergrad,
+            
         ];
 
-        $this->view('doctor/prescription', $data);
+        $this->view('doctor/doc_create_prescription', $data);
     }
 
     public function doc_timeslots()
@@ -304,15 +320,18 @@ class Doctor extends Controller
     {
 
         $session_id = $_SESSION['user_id'];
-        $prescription = $this->docModel->getPrescription($session_id);
-        $data = ['prescription' => $prescription];
+        // $prescription = $this->docModel->getPrescription($session_id);
+        $data = [];
         $this->view('doctor/doc_template', $data);
     }
 
-    public function doc_undergrad2()
-    {
-        $data = [];
-        $this->view('doctor/doc_undergrad2', $data);
+    public function doc_ug_profile($id)
+    {   
+        $undergrad = $this->adminModel->getUgById($id);
+        $data = [
+            'undergrad' => $undergrad
+        ];
+        $this->view('doctor/doc_ug_profile', $data);
     }
 
     public function doc_undergrad3()
@@ -352,61 +371,46 @@ class Doctor extends Controller
         }
     }
 
-    public function addMedicine($user_id)
+    public function addPrescription($doc_user_id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-
-
             $data = [
-                'pres_date' => trim($_POST['pres_date']),
                 'ug_name' => trim($_POST['ug_name']),
                 'age' => trim($_POST['age']),
                 'gender' => trim($_POST['gender']),
-                'diagnosis_with' => trim($_POST['diagnosis_with']),
-                'created_by' => trim($_POST['created_by']),
+                'diagnosed_with' => trim($_POST['diagnosed_with']),
+                'diagnosed_by' => trim($_POST['diagnosed_by']),
+                'doc_user_id' => $doc_user_id,
             ];
 
-            $current_username = $this->userModel->getUsernameById($user_id);
-            $data['created_by'] = $current_username;
-
-            if ($this->docModel->createPrescription($data)) {
-                redirect('doctor/doc_template');
-                # code...
-            } else {
-                die('Something went wrong');
-            }
-
-
             //insert data into 'medicine' table
-
             $drug = $_POST['drug'];
             $unit = $_POST['unit'];
             $dosage = $_POST['dosage'];
-            var_dump($drug, $unit, $dosage);
-
+            $unitType = $_POST['unit_type']; // Added
+            $dosageType = $_POST['dosage_type']; // Added
             $numRecords = count($drug);
+
+            // Initialize an empty array to store medicine data
+            $medicine_data = [];
+
             for ($i = 0; $i < $numRecords; $i++) {
-
-                $data = [
-
-                    'drug' => $_POST['drug'][$i],
-                    'unit' => $_POST['unit'][$i],
-                    'dosage' => $_POST['dosage'][$i],
-
+                $medicine_data[] = [
+                    'drug' => $drug[$i],
+                    'unit' => $unit[$i],
+                    'dosage' => $dosage[$i],
+                    'unit_type' => $unitType[$i], // Added
+                    'dosage_type' => $dosageType[$i], // Added
                 ];
 
-                $current_username = $this->userModel->getUsernameById($user_id);
-                $data['created_by'] = $current_username;
+            }
 
-                if ($this->docModel->addMedicineToTable($data)) {
-
-                    redirect('doctor/doc_template');
-                    # code...
-                } else {
-                    die('Something went wrong');
-                }
+            if ($this->docModel->createPrescription($data, $medicine_data)) {
+                redirect('doctor/doc_template');
+            } else {
+                die('Something went wrong');
             }
         }
     }
