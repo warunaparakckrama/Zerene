@@ -1,5 +1,11 @@
 <?php
 
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+use Ratchet\App;
+
 class Admin extends Controller{
     private $userModel;
     private $adminModel;
@@ -83,6 +89,7 @@ class Admin extends Controller{
                 $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
 
                 if($this->userModel->reg_admin($data)){
+                    $this->sendEmailAdmin($data);
                     // flash('register_success','You are registered and can login');
                     redirect('admin/ad_reg_admin');
                 }else{
@@ -814,6 +821,57 @@ class Admin extends Controller{
             redirect('admin/support');
         } else {
             die('Something went wrong');
+        }
+    }
+
+    public function sendEmailAdmin($data)
+    {
+        require APPROOT . '/libraries/phpmailer/vendor/autoload.php';
+
+        try {
+            // Create a new PHPMailer instance
+            $mail = new PHPMailer(true);
+
+            // Set mail configuration (replace with your actual details)
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username   = 'zerenecounselor@gmail.com';    //SMTP username
+            $mail->Password   = 'qcpq cxzz vmiq pkua';  //SMTP password
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            //Recipients
+            $mail->setFrom('zerenecounselor@gmail.com', 'Zerene Administrator');
+            $mail->addAddress($data['email'], 'NewAdmin');  //Add a recipient , name is optional
+            // $mail->addCC('cc@example.com');
+            // $mail->addBCC('bcc@example.com');
+
+            //Attachments
+            // $mail->addAttachment('/var/tmp/file.tar.gz');    //Add attachments
+            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');   //Optional name
+
+            //Content
+            $mail->isHTML(true);    //Set email format to HTML
+            // $mail->Subject = $data['subject'];
+            $filePath = __DIR__ . '/../views/admin/ad_email_signup.php';
+            $date = date('Y-m-d');
+            $emailContent = file_get_contents($filePath);
+
+            // $emailContent = str_replace('{subject_here}', $data['subject'], $emailContent);
+            $emailContent = str_replace('{username_here}', $data['body'], $emailContent);
+            $emailContent = str_replace('{password_here}', $data['body'], $emailContent);
+            // $emailContent = str_replace('{sender_fname}', $data['coun_fname'], $emailContent);
+            // $emailContent = str_replace('{sender_lname}', $data['coun_lname'], $emailContent);
+            // $emailContent = str_replace('{sender_email}', $data['coun_email'], $emailContent);
+            $emailContent = str_replace('{date}', $date, $emailContent);
+            $mail->Body    = $emailContent;
+            // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            $mail->send();
+        } catch (Exception $e) {
+            // Handle exceptions
+            echo 'Error: ' . $mail->ErrorInfo;
         }
     }
 }
