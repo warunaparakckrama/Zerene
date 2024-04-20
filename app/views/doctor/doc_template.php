@@ -1,5 +1,4 @@
-<?php $currentPage = 'prescription';
-$prescription = $data['prescription']; ?>
+<?php $currentPage = 'doc_prescription'; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +30,7 @@ $prescription = $data['prescription']; ?>
     
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Poppins", sans-serif;
             margin: 0;
             padding: 0;
         }
@@ -81,21 +80,20 @@ $prescription = $data['prescription']; ?>
     <div class= prescription-container>
     <table class="prescription-table">
     <tbody>
-    <?php foreach ($data['prescription'] as $prescription) : ?>
             <tr>
                 <th class="col1">name of the patiant</th>
-                <td class="col1 merged-cells" colspan="3"><?php echo $prescription->ug_name; ?></td>
+                <td class="col1 merged-cells" colspan="3"></td>
                
             </tr>
             <tr>
                 <th class="col1">age</th>
-                <td class="col2"><?php echo $prescription->age; ?></td>
+                <td class="col2"></td>
                 <th class="col3">gender</th>
-                <td class="col4"><?php echo $prescription->gender; ?></td>
+                <td class="col4"></td>
             </tr>
              <tr>
                 <th class="col1">diagnosis with</th>
-                <td class="col2 merged-cells" colspan="3"><?php echo $prescription->diagnosis_with; ?></td>
+                <td class="col2 merged-cells" colspan="3"></td>
                 
             </tr>
             <tr>
@@ -107,31 +105,30 @@ $prescription = $data['prescription']; ?>
             <tr>
                 <td class="col1"></td>
                 <td class="col2"></td>
-                <td class="col3 merged-cells" colspan="2""></td>
+                <td class="col3 merged-cells" colspan="2"></td>
             </tr>
             <tr >
                 <td class="col1"></td>
                 <td class="col2"></td>
-                <td class="col3 merged-cells" colspan="2""></td>
+                <td class="col3 merged-cells" colspan="2"></td>
             </tr>
             <tr>
                 <td class="col1"></td>
                 <td class="col2"></td>
-                <td class="col3 merged-cells" colspan="2""></td>
+                <td class="col3 merged-cells" colspan="2"></td>
             </tr>
             </div>
 
            
             <tr>
                 <th class="col1">date</th>
-                <td class="col2"><?php echo $prescription['date']; ?></td>
+                <td class="col2"></td>
                 <th class="col3">psychiatrist</th>
-                <td class="col4"><?php echo $prescription['psychiatrist']; ?></td>
+                <td class="col4"></td>
             </tr>
 
         </div>
         </tbody>
-        <?php endforeach; ?>
     </table>
 
         </style>

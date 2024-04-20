@@ -35,12 +35,12 @@
                                         <div class="card-green">
                                             <img src="<?php echo IMG;?>ug-avatar1.svg" alt="profile pic" class="card-profile">
                                             <div>
-                                                <a href="" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
+                                                <a href="<?php echo URLROOT;?>doctor/doc_ug_profile/<?php echo $undergrad->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
                                                 <p class="p-regular-grey" style="font-size: 15px;"><?php echo $undergrad->university.' '.$undergrad->faculty;?></p>
                                                 <p class="p-regular-green" style="font-size: 15px;">Directed by:<?php echo ' '.$counsellor->first_name.' '.$counsellor->last_name;?></p>
                                             </div>
                                             <div class="btn-container">
-                                                <a href="<?php echo URLROOT;?>doctor/doc_undergrad3" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
+                                                <a href="<?php echo URLROOT;?>doctor/doc_ug_profile/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
                                             </div>
                                         </div>
                                     <?php endif; ?>
