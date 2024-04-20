@@ -26,8 +26,9 @@ class Admin extends Controller{
         $this->view('admin/ad_home', $data);
     }
 
-    public function ad_reg_admin(){
-        //check for POST
+    public function ad_reg_admin()
+    {   
+        $usernames = $this->userModel->getUsernames();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             //sanitize data
             $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
@@ -37,43 +38,46 @@ class Admin extends Controller{
                 'email'=>trim($_POST['email']),
                 'password'=>trim($_POST['password']),
                 'confirm_password'=>trim($_POST['confirm_password']),
-                'username_err'=>'',
-                'email_err'=>'',
-                'password_err'=>'',
-                'confirm_password_err'=>'',
+                'signup_alert'=>'',
+                'usernames' => $usernames,
             ];
 
-            if(empty($data['username'])){
-                $data['username_err']='Please enter username';      
-            }else {
-                if($this->userModel->findUserByUsername($data['username'])){
-                    $data['username_err']='Username is already taken'; 
+            if (strlen($data['username']) < 8) {
+                $data['signup_alert'] = '*Username must be atleast 8 characters';
+            }
+
+            else{
+                // Convert the new_username to lowercase
+                $newUsernameLower = strtolower($data['username']);
+
+                foreach ($data['usernames'] as $usernames) {
+                    // Convert each username in the array to lowercase
+                    $existingUsernameLower = strtolower($usernames->username);
+
+                    // Compare the lowercase versions of the usernames
+                    if ($newUsernameLower === $existingUsernameLower) {
+                        // If there is a match, set the alert message
+                        $data['signup_alert'] = '*Username has already taken';
+                        break; // Exit the loop as soon as a match is found
+                    }
                 }
             }
-
-            if(empty($data['email'])){
-                $data['email_err']='Please enter email';      
-            }else{
-                if($this->userModel->findUserByEmail($data['email'])){
-                    $data['email_err']='Email is already taken'; 
-                }
+             
+            if($this->userModel->findUserByEmail($data['email'])){
+                $data['signup_alert']='*Email is already taken'; 
+            }
+            
+            elseif(strlen($data['password'])<8){
+                $data['signup_alert']='*Password must be atleast 8 characters'; 
             }
 
-            if(empty($data['password'])){
-                $data['password_err']='Please enter password';      
-            }elseif(strlen($data['password'])<6){
-                $data['password_err']='Password must be atleast 6 characters'; 
-            }
-
-             if(empty($data['confirm_password'])){
-                $data['confirm_password_err']='Please confirm password';      
-            }else{
+            else{
                 if($data['password']!=$data['confirm_password']){
-                    $data['confirm_password_err']='passwords do not match';
+                    $data['signup_alert']='*Passwords do not match';
                 }
             }
 
-            if(empty($data['username_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
+            if(empty($data['signup_alert'])){
 
                 //hash password
                 $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
@@ -94,10 +98,7 @@ class Admin extends Controller{
                 'email'=>'',
                 'password'=>'',
                 'confirm_password'=>'',
-                'username_err'=>'',
-                'email_err'=>'',
-                'password_err'=>'',
-                'confirm_password_err'=>''
+                'signup_alert' =>'',
             ];
 
             $this->view('admin/ad_reg_admin', $data);
@@ -389,12 +390,9 @@ class Admin extends Controller{
     }
   
     public function ad_profile(){
+        $admin = $this->adminModel->getAdminfromId($_SESSION['user_id']);
         $data = [
-            'current_password_err' => '',
-            'new_password_err' => '',
-            'confirm_password_err' => '',
-            'current_username_err' => '',
-            'new_username_err' => ''
+            'admin' => $admin
         ];
         $this->view('admin/ad_profile', $data);
     }
@@ -463,62 +461,68 @@ class Admin extends Controller{
 
     //function controllers
 
-    public function changeUsernameAdmin($user_id){
+    public function changeUsernameAdmin($user_id)
+    {   
+        $admin = $this->adminModel->getAdminfromId($user_id);
+        $current_username = $this->userModel->getUsernameById($user_id);
+        $username = $this->userModel->getUsernames();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'current_username' => trim($_POST['current_username']),
+                'admin' => $admin,
+                'current_username' => $current_username,
+                'username' => $username,
                 'new_username' => trim($_POST['new_username']),
-                'current_username_err'=>'',
-                'new_username_err'=>''
+                'password' => trim($_POST['password']),
+                'username_alert' => ''
             ];
         
-            if(empty($data['current_username'])){
-                $data['current_username_err']='Please enter current username';  
-            }
-            if(empty($data['new_username'])){
-                $data['new_username_err']='Please enter new username';  
-            }
+            if (strlen($data['new_username']) < 8) {
+                $data['username_alert'] = '*Username must be atleast 8 characters';
+            }elseif ($data['new_username'] == $data['current_username']) {
+                $data['username_alert'] = '*New username cannot be same as the current username';
+            } else {
+                // Convert the new_username to lowercase
+                $newUsernameLower = strtolower($data['new_username']);
 
-            if(empty($data['current_username_err']) && empty($data['new_username_err'])){
-                // Validated
-    
-                // Fetch the current username from db
-                $current_username = $this->userModel->getUsernameById($user_id);
-    
-                // Verify if the entered current password matches the hashed password from the database
-                if (($data['current_username'] != $current_username)) {
-                    $data['current_username_err'] = 'Current username is incorrect';
-                } else {
+                foreach ($data['username'] as $username) {
+                    // Convert each username in the array to lowercase
+                    $existingUsernameLower = strtolower($username->username);
 
-                    // Update the username
-                    if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                    flash('user_message', 'Username updated successfully');
-                    redirect('admin/ad_profile');
-                    } else {
-                    die('Something went wrong');
+                    // Compare the lowercase versions of the usernames
+                    if ($newUsernameLower === $existingUsernameLower) {
+                        // If there is a match, set the alert message
+                        $data['username_alert'] = '*Username already exists/ is a variation of current username';
+                        break; // Exit the loop as soon as a match is found
                     }
                 }
+            }
 
+            // Fetch the hashed password from the database based on the user ID
+            $hashed_password_from_db = $this->userModel->getPasswordById($user_id);
+
+            // Verify if the entered current password matches the hashed password from the database
+            if (!password_verify($data['password'], $hashed_password_from_db)) {
+                $data['username_alert'] = '*Incorrect Password';
+            }
+
+            if (empty($data['username_alert'])) {
+                // Update the username
+                if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
+                    flash('user_message', 'Username updated successfully');
+                    redirect('admin/ad_profile');
+                } else {
+                    die('Something went wrong');
+                }
             } else {
                 // Load view with errors
                 $this->view('admin/ad_profile', $data);
             }
+
         } 
         
-        else {
-            $data = [
-            'current_username' => '',
-            'new_username' => '',
-            'current_username_err'=>'',
-            'new_username_err'=>''
-          ];
-    
-          $this->view('admin/ad_profile', $data);
-        }
-
         $this->view('admin/ad_profile', $data);
     }
 
@@ -581,81 +585,55 @@ class Admin extends Controller{
         $this->view('admin/ad_edit_user/' . $user_id, $data);
     }
 
-    public function changePwdAdmin($user_id){
+    public function changePwdAdmin($user_id)
+    {   
+        $admin = $this->adminModel->getAdminfromId($user_id);
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST array
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
   
-        $data = [
-          'current_password' => trim($_POST['current_password']),
-          'new_password' => trim($_POST['new_password']),
-          'confirm_password' => trim($_POST['confirm_password']),
-          'current_password_err'=>'',
-          'new_password_err'=>'',
-          'confirm_password_err'=>''
-        ];
+            $data = [
+                'admin' => $admin,
+                'current_password' => trim($_POST['current_password']),
+                'new_password' => trim($_POST['new_password']),
+                'confirm_password' => trim($_POST['confirm_password']),
+                'password_alert' => '',
+            ];
 
-        if(empty($data['current_password'])){
-            $data['current_password_err']='Please enter current password';      
-        }
-
-        if(empty($data['new_password'])){
-            $data['new_password_err']='Please enter new password';      
-        }elseif(strlen($data['new_password'])<6){
-            $data['new_password_err']='Password must be atleast 6 characters'; 
-        }
-
-        if(empty($data['confirm_password'])){
-            $data['confirm_password_err']='Please re-enter new password';      
-        }else{
-            if($data['new_password']!=$data['confirm_password']){
-                $data['confirm_password_err']='passwords do not match';
-            }
-        }
-
-        
-
-        if(empty($data['current_password_err']) && empty($data['new_password_err'])&& empty($data['confirm_password_err'])){
-            // Validated
-
-            // Fetch the hashed password from the database based on the user ID
-            $hashed_password_from_db = $this->userModel->getPasswordById($user_id);
-
-            // Verify if the entered current password matches the hashed password from the database
-            if (!password_verify($data['current_password'], $hashed_password_from_db)) {
-                $data['current_password_err'] = 'Current password is incorrect';
+            if (strlen($data['new_password']) < 8) {
+                $data['password_alert'] = '*Password must be atleast 8 characters';
             } else {
-                // Hash the new password
-                $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
-
-                // Update the user's password
-                if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
-                flash('user_message', 'Password updated successfully');
-                redirect('admin/ad_profile');
-                } else {
-                die('Something went wrong');
+                if ($data['new_password'] != $data['confirm_password']) {
+                    $data['password_alert'] = '*passwords do not match';
                 }
             }
 
-          } else {
-            // Load view with errors
-            $this->view('admin/ad_profile', $data);
-          }
-        
+            if (empty($data['password_alert'])) {
+                // Validated
+
+                // Fetch the hashed password from the database based on the user ID
+                $hashed_password_from_db = $this->userModel->getPasswordById($user_id);
+
+                // Verify if the entered current password matches the hashed password from the database
+                if (!password_verify($data['current_password'], $hashed_password_from_db)) {
+                    $data['password_alert'] = '*Current password is incorrect';
+                } else {
+                    // Hash the new password
+                    $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
+
+                    // Update the user's password
+                    if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
+                        flash('user_message', 'Password updated successfully');
+                        redirect('admin/ad_profile');
+                    } else {
+                        die('Something went wrong');
+                    }
+                }
+            } else {
+                // Load view with errors
+                $this->view('admin/ad_profile', $data);
+            }
         }   
-    
-        else {
-            $data = [
-            'current_password' => '',
-            'new_password' => '',
-            'confirm_password' => '',
-            'current_password_err'=>'',
-            'new_password_err'=>'',
-            'confirm_password_err'=>''
-          ];
-    
-          $this->view('admin/ad_profile', $data);
-        }
 
         $this->view('admin/ad_profile', $data);
 
