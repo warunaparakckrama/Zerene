@@ -26,7 +26,7 @@
                 <p class="p-regular-green">Professional Counsellors</p>
                 <div class="card-white-scroll" style="height: 215px;">
                     <?php foreach ($data['counsellor'] as $counsellor) : ?>
-                        <?php if ($counsellor->coun_type === 'Professional' && $counsellor->user_id !== $_SESSION['user_id']) : ?>
+                        <?php if ($counsellor->coun_type === 'Professional') : ?>
                             <div class="card-green">
                                 <img src="<?php echo IMG; ?>pro-avatar1.svg" alt="pro pic" class="card-profile">
                                 <div>
@@ -41,27 +41,10 @@
                     <?php endforeach; ?>
                 </div>
 
-                <p class="p-regular-green">Academic Counsellors</p>
-                <div class="card-white-scroll" style="height: 215px;">
-                    <?php foreach ($data['counsellor'] as $counsellor) : ?>
-                        <?php if ($counsellor->coun_type === 'Academic') : ?>
-                            <div class="card-green">
-                                <img src="<?php echo IMG; ?>pro-avatar1.svg" alt="pro pic" class="card-profile">
-                                <div>
-                                    <a href="" class="a-name"><p class="p-regular-green" style="margin-bottom: -5px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
-                                    <p class="p-regular" style="color:var(--zerene-grey); font-size: 15px"><?php echo $counsellor->university.' '.$counsellor->faculty;?></p>
-                                </div>
-                                <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">message</button></a>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-
                 <p class="p-regular-green">Psychiatrists</p>
                 <div class="card-white-scroll" style="height: 215px;">
                     <?php foreach ($data['doctor'] as $doctor) : ?>
+                        <?php if($doctor->user_id !== $_SESSION['user_id']) : ?>
                             <div class="card-green">
                                 <img src="<?php echo IMG; ?>pro-avatar1.svg" alt="pro pic" class="card-profile">
                                 <div>
@@ -73,6 +56,9 @@
                                 <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">message</button></a>
                                 </div>
                             </div>
+                        <?php else : ?>
+                            <p class="p-regular-green" style="font-size: 15px;">Psychiatrsits will be shown here.</p>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
 

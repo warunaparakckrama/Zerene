@@ -1,9 +1,10 @@
-<?php $currentPage = 'professionals'; ?>
-
-<?php 
+<?php
+    $currentPage = 'professionals'; 
     $counsellor = $data['counsellor'];
     $undergrad = $data['undergrad']; 
     $doctor = $data['doctor'];
+    $direct = $data['direct'];
+    $request = $data['request'];
 ?>
 
 <head>
@@ -35,10 +36,26 @@
                             <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
                             <div>
                                 <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $counsellor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
-                                <p class="p-regular" style="color: var(--zerene-grey); font-size: 18px;"><?php echo$counsellor->university. ' | '.$counsellor->faculty;?></p>
+                                <p class="p-regular-grey" style="font-size: 15px;"><?php echo$counsellor->university. ' | '.$counsellor->faculty;?></p>
                             </div>
                             <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                <?php $requestFound = false; ?>
+                                <?php foreach($data['request'] as $request) : ?>
+                                    <?php if($request->to_user_id == $counsellor->user_id ) :?>
+                                        <?php $requestFound = true; ?>
+                                        <?php if($request->is_clicked == 1) : ?>
+                                            <button class="button-second" disabled>Request Sent</button>
+                                            <?php else : ?>
+                                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+
+                                <!-- If no message request is found, display the "Message Request" button -->
+                                <?php if(!$requestFound) : ?>
+                                    <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                <?php endif; ?>
+
                                 <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
                             </div>
                         </div>
@@ -54,10 +71,26 @@
                             <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
                             <div>
                                 <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $counsellor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
-                                <p class="p-regular" style="color: var(--zerene-grey);  font-size: 18px;"><?php echo $counsellor->university.' | '.$counsellor->faculty;?></p>
+                                <p class="p-regular-grey" style="font-size: 15px;"><?php echo $counsellor->university.' | '.$counsellor->faculty;?></p>
                             </div>
                             <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                <?php $requestFound = false; ?>
+                                <?php foreach($data['request'] as $request) : ?>
+                                    <?php if($request->to_user_id == $counsellor->user_id ) :?>
+                                        <?php $requestFound = true; ?>
+                                        <?php if($request->is_clicked == 1) : ?>
+                                            <button class="button-second" disabled>Request Sent</button>
+                                            <?php else : ?>
+                                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+
+                                <!-- If no message request is found, display the "Message Request" button -->
+                                <?php if(!$requestFound) : ?>
+                                    <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                <?php endif; ?>
+
                                 <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
                             </div>
                         </div>
@@ -72,11 +105,36 @@
                         <div class="card-green">
                             <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
                             <div>
-                                <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $doctor->user_id;?>" class="a-name"><p class="p-regular" style=" margin-bottom: -10px;"><?php echo $doctor->first_name.' '.$doctor->last_name;?></p></a>
-                                <p class="p-regular" style="color: var(--zerene-grey);"><?php echo$doctor->hospital;?></p>
-                                <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">Assigned University: <?php echo $doctor->uni_in_charge;?></p>
+                                <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $doctor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $doctor->first_name.' '.$doctor->last_name;?></p></a>
+                                <p class="p-regular-grey" style="font-size: 15px;"><?php echo$doctor->hospital;?></p>
+                                <p class="p-regular-green" style="font-size: 15px;">Assigned University: <?php echo $doctor->uni_in_charge;?></p>
                             </div>
                             <div class="btn-container">
+                                <?php $messageRequestButton = false; $requestSentButton = false; ?> 
+                                <!-- Check the direct array -->                  
+                                <?php foreach($data['direct'] as $direct) : ?>
+                                    <?php if($direct->ug_user_id == $undergrad->user_id && $direct->to_user_id == $doctor->user_id) :?>
+                                        <?php $messageRequestButton = true; ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+
+                                <!-- Check the request array -->
+                                <?php foreach ($data['request'] as $request) : ?>
+                                    <?php if ($request->to_user_id == $doctor->user_id) : ?>
+                                        <?php $requestSentButton = true; ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+
+                                <!-- Display the appropriate button -->
+                                <?php if ($requestSentButton) : ?>
+                                    <button class="button-second" disabled>Request Sent</button>
+                                <?php elseif ($messageRequestButton) : ?>
+                                    <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $doctor->user_id;?>" style="text-decoration: none;">
+                                        <button class="button-main">Message Request</button>
+                                    </a>
+                                <?php endif; ?>
+
+                                 <!-- Always display the "View Profile" button -->
                                 <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
                             </div>
                         </div>
@@ -89,4 +147,3 @@
         </div>
     </section>
 </body>
-<!-- </html> -->
