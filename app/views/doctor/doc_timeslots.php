@@ -109,7 +109,7 @@ $timeslot = $data['timeslot'];
                                     $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                     $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                     $formattedTimeRange = "$start_time - $end_time";
-                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    echo '<a href="' . URLROOT . 'doctor/doctor_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
                                 }
                                 echo "</div>";
                                 echo "</div>";
@@ -135,7 +135,7 @@ $timeslot = $data['timeslot'];
                                     $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                     $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                     $formattedTimeRange = "$start_time - $end_time";
-                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    echo '<a href="' . URLROOT . 'doctor/doc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
                                 }
                                 echo "</div>";
                                 echo "</div>";

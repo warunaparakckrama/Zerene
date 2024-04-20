@@ -154,15 +154,16 @@ class Doctor extends Controller
 
     public function doc_timeslots()
     {
-        $username = $this->userModel->getUsernameById($_SESSION['user_id']);
-        $timeslot = $this->acModel->getTimeslots($username);
+        $id = $_SESSION['user_id'];
+        $timeslot = $this->docModel->getTimeslotsdoc($id);
+
         $data = [
-            'slot_type' => '',
             'timeslot' => $timeslot,
         ];
 
         $this->view('doctor/doc_timeslots', $data);
     }
+
 
     public function doc_profile()
     {   
@@ -392,7 +393,7 @@ class Doctor extends Controller
     private function handleEditTimeslotDoc(&$data)
     {
         if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
-            if ($this->pcModel->updateTimeslot($data['timeslot'])) {
+            if ($this->docModel->updateTimeslotDoc($data['timeslot'])) {
                 redirect('doctor/doc_timeslot');
             } else {
                 die('Something went wrong');
