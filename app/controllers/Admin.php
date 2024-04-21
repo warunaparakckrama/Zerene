@@ -319,13 +319,15 @@ class Admin extends Controller
 
     public function ad_edit_user($user_id)
     {
-
         //get user data
         $user = $this->userModel->findUserDetails($user_id);
 
         $data = [
             'user' => $user,
+            'password_alert' => '',
+            'username_alert' => ''
         ];
+
         $this->view('admin/ad_edit_user', $data);
     }
 
@@ -564,7 +566,7 @@ class Admin extends Controller
     }
 
     public function changePwdUser($user_id)
-    {
+    {   
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
