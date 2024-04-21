@@ -93,7 +93,7 @@
         }
 
         public function getAdminfromId($id){
-            $this->db->query('SELECT * FROM admin WHERE user_id = :user_id');
+            $this->db->query('SELECT * FROM admin WHERE user_id = :user_id AND is_deleted = FALSE');
             $this->db->bind(':user_id', $id);
             $row = $this->db->single();
             

@@ -456,60 +456,78 @@ class Admin extends Controller
     }
 
     public function changeUsernameUser($user_id)
-    {
+    {   
+        $id = $_SESSION['user_id'];
+        $admin = $this->adminModel->getAdminfromId($id);
+        $user = $this->userModel->findUserDetails($user_id);
+        $usernames = $this->userModel->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'current_username' => trim($_POST['current_username']),
                 'new_username' => trim($_POST['new_username']),
-                'current_username_err' => '',
-                'new_username_err' => ''
+                'admin_password' => trim($_POST['admin_password']),
+                'username_alert' => '',
+                'admin' => $admin,
+                'user' => $user,
+                'usernames' => $usernames
             ];
 
-            if (empty($data['current_username'])) {
-                $data['current_username_err'] = 'Please enter current username';
-            }
-            if (empty($data['new_username'])) {
-                $data['new_username_err'] = 'Please enter new username';
-            }
+            if (strlen($data['new_username']) < 8) {
+                $data['username_alert'] = '*Username must be atleast 8 characters';
+                $this->view('admin/ad_edit_user', $data);
+            } else {
+                // Convert the new_username to lowercase
+                $newUsernameLower = strtolower($data['new_username']);
 
-            if (empty($data['current_username_err']) && empty($data['new_username_err'])) {
-                // Validated
+                foreach ($data['usernames'] as $usernames) {
+                    // Convert each username in the array to lowercase
+                    $existingUsernameLower = strtolower($usernames->username);
 
-                // Fetch the current username from db
-                $current_username = $this->userModel->getUsernameById($user_id);
-
-                //
-                if (($data['current_username'] != $current_username)) {
-                    $data['current_username_err'] = 'Current username is incorrect';
-                } else {
-
-                    // Update the username
-                    if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                        // flash('user_message', 'Username updated successfully');
-                        redirect('admin/ad_edit_user/' . $user_id);
-                    } else {
-                        die('Something went wrong');
+                    // Compare the lowercase versions of the usernames
+                    if ($newUsernameLower === $existingUsernameLower) {
+                        // If there is a match, set the alert message
+                        $data['username_alert'] = '*Username already exists/ is a variation of current username';
+                        $this->view('admin/ad_edit_user', $data);
+                        break; // Exit the loop as soon as a match is found
                     }
                 }
+            }
+
+            // Fetch the hashed password from the database based on the user ID
+            $hashed_password_from_db = $this->userModel->getPasswordById($id);
+
+            // Verify if the entered admin password matches the hashed password from the database
+            if (!password_verify($data['admin_password'], $hashed_password_from_db)) {
+                $data['username_alert'] = '*Incorrect Password';
+                $this->view('admin/ad_edit_user', $data);
+            }
+
+            if (empty($data['username_alert'])) {
+                // Update the username
+                if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
+                    flash('user_message', 'Username updated successfully');
+                    redirect('admin/ad_edit_user/' . $user_id);
+                } else {
+                    die('Something went wrong');
+                } 
             } else {
                 // Load view with errors
-                $this->view('admin/ad_edit_user/' . $user_id, $data);
+                $this->view('admin/ad_edit_user/' . $user_id);
             }
         } else {
             $data = [
-                'current_username' => '',
                 'new_username' => '',
-                'current_username_err' => '',
-                'new_username_err' => ''
+                'admin_password' => '',
+                'username_alert' => '',
+                'admin' => $admin,
+                'user' => $user,
             ];
 
-            $this->view('admin/ad_edit_user/' . $user_id, $data);
         }
 
-        $this->view('admin/ad_edit_user/' . $user_id, $data);
+        $this->view('admin/ad_edit_user', $data);
     }
 
     public function changePwdAdmin($user_id)
@@ -567,61 +585,71 @@ class Admin extends Controller
 
     public function changePwdUser($user_id)
     {   
+        $id = $_SESSION['user_id'];
+        $admin = $this->adminModel->getAdminfromId($id);
+        $user = $this->userModel->findUserDetails($user_id);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'admin_password' => trim($_POST['admin_password']),
                 'new_password' => trim($_POST['new_password']),
                 'confirm_password' => trim($_POST['confirm_password']),
-                'new_password_err' => '',
-                'confirm_password_err' => ''
+                'password_alert' => '',
+                'admin' => $admin,
+                'user' => $user
             ];
 
-            if (empty($data['new_password'])) {
-                $data['new_password_err'] = 'Please enter new password';
-            } elseif (strlen($data['new_password']) < 6) {
-                $data['new_password_err'] = 'Password must be atleast 6 characters';
-            }
-
-            if (empty($data['confirm_password'])) {
-                $data['confirm_password_err'] = 'Please re-enter new password';
+            if (strlen($data['new_password']) < 8) {
+                $data['password_alert'] = '*Password must be atleast 8 characters';
+                $this->view('admin/ad_edit_user', $data);
             } else {
                 if ($data['new_password'] != $data['confirm_password']) {
-                    $data['confirm_password_err'] = 'passwords do not match';
+                    $data['password_alert'] = '*passwords do not match';
+                    $this->view('admin/ad_edit_user', $data);
                 }
             }
 
+            if (empty($data['password_alert'])) {
+                // Validated
 
+                // Fetch the hashed password from the database based on the user ID
+                $hashed_password_from_db = $this->userModel->getPasswordById($id);
 
-            if (empty($data['new_password_err']) && empty($data['confirm_password_err'])) {
-
-                // Hash the new password
-                $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
-
-                // Update the user's password
-                if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
-                    // flash('user_message', 'Password updated successfully');
-                    redirect('admin/ad_edit_user/' . $user_id);
+                // Verify if the entered current password matches the hashed password from the database
+                if (!password_verify($data['admin_password'], $hashed_password_from_db)) {
+                    $data['password_alert'] = '*Current password is incorrect';
                 } else {
-                    die('Something went wrong');
+                    // Hash the new password
+                    $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
+
+                    // Update the user's password
+                    if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
+                        flash('user_message', 'Password updated successfully');
+                        redirect('admin/ad_edit_user/' . $user_id);
+                        return; // Ensure no further code execution after redirect
+                    } else {
+                        die('Something went wrong');
+                    }
                 }
             } else {
                 // Load view with errors
-                $this->view('admin/ad_edit_user/' . $user_id, $data);
+                $this->view('admin/ad_edit_user/' . $user_id);
             }
         } else {
             $data = [
+                'admin_password' => '',
                 'new_password' => '',
                 'confirm_password' => '',
-                'new_password_err' => '',
-                'confirm_password_err' => ''
+                'password_alert' => '',
+                'admin' => $admin,
+                'user' => $user
             ];
 
-            $this->view('admin/ad_edit_user/' . $user_id, $data);
         }
 
-        $this->view('admin/ad_edit_user/' . $user_id, $data);
+        $this->view('admin/ad_edit_user', $data);
     }
 
     public function submitNotifications($user_id)

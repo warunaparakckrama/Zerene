@@ -73,7 +73,7 @@
                             <p>Change Username</p>
                             <form action="<?php echo URLROOT; ?>Admin/changeUsernameUser/<?php echo $user->user_id; ?>" method="POST" class="subgrid-1" style="font-size: 15px;">
                                 <label for="nusername" class="p-regular-grey">New Username :</label>
-                                <input type="text" id="new_username" name="new_username" required>
+                                <input type="text" name="new_username" required>
 
                                 <label for="" class="p-regular-grey">Your Password :</label>
                                 <input type="password" name="admin_password" required>
@@ -82,6 +82,7 @@
                                     <button class="button-main" type="submit">Change</button>
                                     <button class="button-danger" type="reset">Cancel</button>
                                 </div>
+                                <p class="p-error"><?php echo isset($data['username_alert']) ? $data['username_alert'] : ''; ?></p>
                             </form>
                         </div>
 
