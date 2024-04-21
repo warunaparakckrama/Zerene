@@ -41,7 +41,7 @@
                                             <p class="p-regular-green" style="font-size: 15px;"><?php echo $questionnaire->questionnaire_name.' | '.$formattedDateTime;?></p>
                                         </div>
                                         <div class="btn-container">
-                                            <a href="<?php echo URLROOT;?>Procounsellor/pc_quiz_review/<?php echo $response->response_id;?>" style="text-decoration: none;"><button class="button-main">Review</button></a>
+                                            <a href="<?php echo URLROOT;?>Procounsellor/pc_quiz_review/<?php echo $response->response_id;?>" style="text-decoration: none;"><button class="button-main">Review Questionnaire</button></a>
                                         </div>
                                     </div>
                                 <?php endif; ?>

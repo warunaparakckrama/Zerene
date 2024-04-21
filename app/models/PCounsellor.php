@@ -13,34 +13,41 @@ class PCounsellor
         $start = strtotime($data['slot_date'] . ' ' . $data['slot_start']);
         $end = strtotime($data['slot_date'] . ' ' . $data['slot_finish']);
 
+        // Determine the interval based on slot_interval
+        $interval = $data['slot_interval'] == 30 ? 1800 : 3600; // 30 minutes or 1 hour
+
         // Generate timeslots in intervals
         $timeslots = [];
         $current = $start;
         while ($current < $end) {
-            $timeslots[] = [
-                'slot_date' => $data['slot_date'],
-                'slot_start' => date('H:i:s', $current),
-                'slot_finish' => date('H:i:s', $current + 3600), // interval
-                'slot_type' => $data['slot_type'],
-                'created_by' => $data['created_by']
-            ];
-            $current += 3600; // Move to next interval
+            $slot_end = min($current + $interval, $end); // End time of the slot, but not exceeding the end time entered by the user
+            if ($slot_end - $current >= $interval) { // Check if the slot duration is equal to or greater than the interval
+                $timeslots[] = [
+                    'slot_date' => $data['slot_date'],
+                    'slot_start' => date('H:i:s', $current),
+                    'slot_finish' => date('H:i:s', $slot_end),
+                    'slot_type' => $data['slot_type'],
+                    'slot_interval' => $data['slot_interval'], 
+                    'created_by' => $data['created_by']
+                ];
+            }
+            $current += $interval; // Move to next interval
         }
 
         // Insert timeslots into the database
         foreach ($timeslots as $slot) {
-            $this->db->query('INSERT INTO timeslot (slot_date, slot_start, slot_finish, slot_type, created_by) VALUES (:slot_date, :slot_start, :slot_finish, :slot_type, :created_by)');
+            $this->db->query('INSERT INTO timeslot (slot_date, slot_start, slot_finish, slot_type, slot_interval, created_by) VALUES (:slot_date, :slot_start, :slot_finish, :slot_type, :slot_interval, :created_by)');
             $this->db->bind(':slot_date', $slot['slot_date']);
             $this->db->bind(':slot_start', $slot['slot_start']);
             $this->db->bind(':slot_finish', $slot['slot_finish']);
             $this->db->bind(':slot_type', $slot['slot_type']);
+            $this->db->bind(':slot_interval', $slot['slot_interval']); 
             $this->db->bind(':created_by', $slot['created_by']);
             $this->db->execute();
         }
 
         return true;
     }
-
 
     public function getTimeslots($id)
     {
@@ -62,7 +69,7 @@ class PCounsellor
     {
         error_log('Deleting timeslot: ' . $timeslotId);
 
-        $this->db->query('DELETE FROM timeslot WHERE slot_id = :timeslotId');
+        $this->db->query('UPDATE timeslot SET is_deleted = 1 WHERE slot_id = :timeslotId');
         $this->db->bind(':timeslotId', $timeslotId);
 
         $result = $this->db->execute();
@@ -95,5 +102,35 @@ class PCounsellor
         $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
         return $results;
+    }
+
+    public function addUgDirects($data){
+        $this->db->query('INSERT INTO ug_direct (ug_user_id, from_user_id, to_user_id, directed_at) VALUES (:ug_user_id, :from_user_id, :to_user_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+        $this->db->bind(':ug_user_id', $data['ug_user_id']);
+        $this->db->bind(':from_user_id', $data['coun_user_id']);
+        $this->db->bind(':to_user_id', $data['doc_user_id']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkUgDirects($id, $coun_user_id)
+    {
+        $this->db->query('SELECT is_clicked FROM ug_direct WHERE ug_user_id = :id AND from_user_id = :coun_user_id');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':coun_user_id', $coun_user_id);
+        
+        $result = $this->db->single();
+    
+        if ($result) {
+            // If there is a result, return the value of is_clicked
+            return $result->is_clicked;
+        } else {
+            // If there is no result, return false
+            return false;
+        }
     }
 }

@@ -134,3 +134,9 @@ button.notify:hover{
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.btn-container-4{
+    display: grid;
+    grid-template-columns: 94% 6%;
+    gap: 0px;
+}

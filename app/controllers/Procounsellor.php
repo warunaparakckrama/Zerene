@@ -37,7 +37,7 @@ class Procounsellor extends Controller
     }
 
     public function pc_reviewq()
-    {   
+    {
         $undergrad = $this->adminModel->getUndergrads();
         $questionnaire = $this->ugModel->getQuestionnaireDetails();
         $response = $this->ugModel->getResponses();
@@ -65,7 +65,7 @@ class Procounsellor extends Controller
     }
 
     public function pc_undergrad()
-    {   
+    {
         $id = $_SESSION['user_id'];
         $counsellor = $this->adminModel->getCounsellorById($id);
         $undergrad = $this->adminModel->getUndergrads();
@@ -79,11 +79,11 @@ class Procounsellor extends Controller
     }
 
     public function pc_chats()
-    {   
+    {
         $id = $_SESSION['user_id'];
         $request = $this->ugModel->getMsgRequest();
         $counsellor = $this->adminModel->getCounsellorById($id);
-        $all_counsellors= $this->adminModel->getCounselors();
+        $all_counsellors = $this->adminModel->getCounselors();
         $undergrad = $this->adminModel->getUndergrads();
         $connection = $this->chatModel->getChatConnection();
         $data = [
@@ -96,17 +96,16 @@ class Procounsellor extends Controller
         $this->view('procounsellor/pc_chats', $data);
     }
 
-    public function pc_chatroom($user_id){
+    public function pc_chatroom($user_id)
+    {
         $id = $_SESSION['user_id'];
         $counsellor = $this->adminModel->getCounsellorById($id);
         $receiving_user = $this->userModel->findUserDetails($user_id);
         if ($receiving_user->user_type == 'undergraduate') {
             $msg_receiver = $this->adminModel->getUgById($user_id);
-        }
-        elseif ($receiving_user->user_type == 'pcounsellor' || $receiving_user->user_type == 'acounsellor') {
+        } elseif ($receiving_user->user_type == 'pcounsellor' || $receiving_user->user_type == 'acounsellor') {
             $msg_receiver = $this->adminModel->getCounsellorById($user_id);
-        }
-        elseif ($receiving_user->user_type == 'doctor') {
+        } elseif ($receiving_user->user_type == 'doctor') {
             $msg_receiver = $this->adminModel->getDoctorById($user_id);
         }
 
@@ -121,7 +120,7 @@ class Procounsellor extends Controller
     }
 
     public function pc_professionals()
-    {   
+    {
         $counsellor = $this->adminModel->getCounselors();
         $doctor = $this->adminModel->getDoctors();
         $data = [
@@ -132,7 +131,7 @@ class Procounsellor extends Controller
     }
 
     public function pc_profile()
-    {   
+    {
         $id = $_SESSION['user_id'];
         $counsellor = $this->adminModel->getCounsellorById($id);
         $data = [
@@ -148,25 +147,17 @@ class Procounsellor extends Controller
     }
 
     public function pc_timeslot()
-    {   
+    {
         $id = $_SESSION['user_id'];
         $timeslot = $this->pcModel->getTimeslots($id);
 
         $data = [
-            'slot_type' => '',
             'timeslot' => $timeslot,
-            'slot_date_err' => '',
-            'slot_start_err' => '',
-            'slot_finish_err' => '',
-            'slot_type_err' => '',
         ];
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->handleCreateTimeslot($data);
-        }
 
         $this->view('procounsellor/pc_timeslot', $data);
     }
+
 
     public function pc_feedback()
     {
@@ -174,19 +165,24 @@ class Procounsellor extends Controller
         $this->view('procounsellor/pc_feedback', $data);
     }
 
-    public function pc_ug_profile($id){
+    public function pc_ug_profile($id)
+    {   
+        $coun_user_id = $_SESSION['user_id'];
+        $direct = $this->pcModel->checkUgDirects($id, $coun_user_id);
         $undergrad = $this->adminModel->getUgById($id);
         $data = [
             'undergrad' => $undergrad,
+            'direct' => $direct
         ];
         $this->view('procounsellor/pc_ug_profile', $data);
     }
 
-    public function pc_quiz_review($id){
+    public function pc_quiz_review($id)
+    {
         $response = $this->ugModel->getResponseByResponseId($id);
         $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
         $results = $this->quizResults($id);
-        
+
         $data = [
             'response' => $response,
             'questionnaire' => $questionnaire,
@@ -242,7 +238,7 @@ class Procounsellor extends Controller
     }
 
     public function changePwdProcounsellor($user_id)
-    {   
+    {
         $counsellor = $this->adminModel->getCounsellorById($user_id);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
@@ -255,16 +251,12 @@ class Procounsellor extends Controller
                 'confirm_password' => trim($_POST['confirm_password']),
                 'password_alert' => '',
             ];
-            
+
             if (strlen($data['new_password']) < 8) {
                 $data['password_alert'] = '*Password must be atleast 8 characters';
-            }
-
-            elseif($data['new_password'] != $data['confirm_password']) {
+            } elseif ($data['new_password'] != $data['confirm_password']) {
                 $data['password_alert'] = '*Passwords do not match';
-            }
-            
-            elseif(empty($data['password_alert'])) {
+            } elseif (empty($data['password_alert'])) {
                 // Validated
 
                 // Fetch the hashed password from the database based on the user ID
@@ -285,9 +277,7 @@ class Procounsellor extends Controller
                         die('Something went wrong');
                     }
                 }
-            }
-            
-            else {
+            } else {
                 // Load view with errors
                 $this->view('procounsellor/pc_profile', $data);
             }
@@ -297,7 +287,7 @@ class Procounsellor extends Controller
     }
 
     public function changeUsernameProcounsellor($user_id)
-    {   
+    {
         $counsellor = $this->adminModel->getCounsellorById($user_id);
         $current_username = $this->userModel->getUsernameById($user_id);
         $username = $this->userModel->getUsernames();
@@ -316,20 +306,16 @@ class Procounsellor extends Controller
 
             if (strlen($data['new_username']) < 8) {
                 $data['username_alert'] = '*Username must be atleast 8 characters';
-            }
-
-            elseif($data['new_username'] == $data['current_username']) {
+            } elseif ($data['new_username'] == $data['current_username']) {
                 $data['username_alert'] = '*New username cannot be same as the current username';
-            }
-
-            else {
+            } else {
                 // Convert the new_username to lowercase
                 $newUsernameLower = strtolower($data['new_username']);
-            
+
                 foreach ($data['username'] as $username) {
                     // Convert each username in the array to lowercase
                     $existingUsernameLower = strtolower($username->username);
-                    
+
                     // Compare the lowercase versions of the usernames
                     if ($newUsernameLower === $existingUsernameLower) {
                         // If there is a match, set the alert message
@@ -351,17 +337,14 @@ class Procounsellor extends Controller
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
                     flash('user_message', 'Username updated successfully');
-                    redirect('procounsellor/pc_profile'); 
+                    redirect('procounsellor/pc_profile');
                 } else {
                     die('Something went wrong');
-                }    
-            }
-            
-            else {
+                }
+            } else {
                 // Load view with errors
                 $this->view('procounsellor/pc_profile', $data);
             }
-            
         }
 
         $this->view('procounsellor/pc_profile', $data);
@@ -468,35 +451,27 @@ class Procounsellor extends Controller
                 'slot_date' => trim($_POST['slot_date']),
                 'slot_start' => trim($_POST['slot_start']),
                 'slot_finish' => trim($_POST['slot_finish']),
+                'slot_interval' => trim($_POST['slot_interval']),
                 'slot_type' => trim($_POST['slot_type']),
                 'slot_status' => '', // Add this line
                 'created_by' => '', // Add this line
                 'slot_date_err' => '',
                 'slot_start_err' => '',
                 'slot_finish_err' => '',
+                'slot_interval_err' => '',
                 'slot_type_err' => '',
             ];
 
-            if (empty($data['slot_date'])) {
-                $data['slot_date_err'] = 'Please select a date.';
-            }
+            $data['created_by'] = $_SESSION['user_id'];
 
-            if (empty($data['slot_start'])) {
-                $data['slot_start_err'] = 'Please select a start time.';
+            if ($this->pcModel->createTimeslots($data)) {
+                redirect('procounsellor/pc_timeslot');
+            } else {
+                die('Something went wrong');
             }
-
-            if (empty($data['slot_finish'])) {
-                $data['slot_finish_err'] = 'Please select a finish time.';
-            }
-
-            if (empty($data['slot_type'])) {
-                $data['slot_type_err'] = 'Please select a slot type.';
-            }
-            $this->handleCreateTimeslot($data, $user_id);
 
             $username = $this->userModel->getUsernameById($user_id);
             $data['timeslot'] = $this->pcModel->getTimeslots($username);
-
             $this->view('procounsellor/pc_timeslot', $data);
         }
         $this->view('procounsellor/pc_timeslot');
@@ -542,19 +517,6 @@ class Procounsellor extends Controller
         }
     }
 
-    private function handleCreateTimeslot(&$data)
-    {
-        $data['created_by'] = $_SESSION['user_id'];
-
-        if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
-            if ($this->pcModel->createTimeslots($data)) {
-                redirect('procounsellor/pc_timeslot');
-            } else {
-                die('Something went wrong');
-            }
-        }
-    }
-
     public function deleteTimeslot($timeslotId)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -573,8 +535,8 @@ class Procounsellor extends Controller
 
         if ($timeslot) {
             $data = [
-                'timeslot' => $timeslot, 
-                'slot_date_err' => '', 
+                'timeslot' => $timeslot,
+                'slot_date_err' => '',
                 'slot_start_err' => '',
                 'slot_finish_err' => '',
                 'slot_type_err' => ''
@@ -586,7 +548,8 @@ class Procounsellor extends Controller
         }
     }
 
-    public function quizResults($id){
+    public function quizResults($id)
+    {
         $response = $this->ugModel->getResponseByResponseId($id);
         $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
 
@@ -599,12 +562,12 @@ class Procounsellor extends Controller
                 'anxiety' => $Anxiety,
                 'stress' => $Stress,
             ];
-            $i =1;
+            $i = 1;
             $mark = 0;
-            for ($i=1; $i <=21 ; $i++) { 
-                $mark = $response->{'q'.$i.'_response'}*2 + $mark;
+            for ($i = 1; $i <= 21; $i++) {
+                $mark = $response->{'q' . $i . '_response'} * 2 + $mark;
             }
-            
+
             //Depression
             if ($mark >= 28) {
                 $Depression = 'Extremely Severe';
@@ -618,7 +581,7 @@ class Procounsellor extends Controller
                 $Depression = 'Normal';
             }
             $data['depression'] = $Depression;
-            
+
             //Anxiety
             if ($mark >= 20) {
                 $Anxiety = 'Extremely Severe';
@@ -649,6 +612,29 @@ class Procounsellor extends Controller
 
             return $data;
         }
+    }
 
+    public function ugDirects($ug_user_id){
+        $coun_user_id = $_SESSION['user_id'];
+        $counsellor = $this->adminModel->getCounsellorById($coun_user_id);
+        $doctor = $this->adminModel->getDoctors();
+
+        foreach ($doctor as $doc) {
+            if ($doc->uni_in_charge === $counsellor->university) {
+                $doc_user_id = $doc->user_id;
+            }
+        }
+
+        $data = [
+            'coun_user_id' => $coun_user_id,
+            'ug_user_id' => $ug_user_id,
+            'doc_user_id' => $doc_user_id
+        ];
+
+        if ($this->pcModel->addUgDirects($data)) {
+            redirect('procounsellor/pc_ug_profile/'.$ug_user_id);
+        } else {
+            die('Something went wrong');
+        }
     }
 }
