@@ -34,7 +34,7 @@
                 
                     <div>
                         <form  method="POST" action="<?php echo URLROOT; ?>academic/ac_undergraduate4/<?php echo $data['ug_id']?>">
-                        <input type="text" value="<?php echo $data['subject']?>" name="subject" placeholder="Subject" class="card-green">
+                        <input type="text" value="<?php echo $data['subject']?>" name="subject" placeholder="Subject" class="card-green" style="width: 80%;">
                         <p class="p-error"><?php echo isset($data['subject_err']) ? $data['subject_err'] : ''; ?></p>
                         <textarea id="w3review" name="body" rows="20" cols="140" placeholder="Add your text here" class="card-green"><?php echo $data['body']?></textarea>
                         <p class="p-error"><?php echo isset($data['body_err']) ? $data['body_err'] : ''; ?></p>
