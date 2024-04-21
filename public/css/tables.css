@@ -1,3 +1,10 @@
+.table-container {
+    width: 100%;
+    height: 200px; /* Adjust height as needed */
+    overflow-y: auto;
+    position: relative; /* Necessary for absolute positioning of table head */
+}
+
 .table-1{
     width: 100%;
     border-collapse: collapse;
@@ -12,4 +19,17 @@
 
 .table-1 th{
     background-color: var(--zerene-light);
+    position: sticky; /* Keeps the table head fixed */
+    top: 0; /* Position at the top of the container */
+    z-index: 1; /* Ensures it appears above other content */
+}
+
+.card-white-table{
+    background-color: var(--zerene-white);
+    border-radius: var(--card-border-radius);
+    border: 2px solid var(--zerene-green);
+    padding: var(--card-padding-15);
+    align-items: top;
+    height: fit-content;
+    margin-bottom: 10px;
 }
