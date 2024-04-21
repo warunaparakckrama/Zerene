@@ -23,7 +23,7 @@
             <a href="#" class="top dd-btn <?php echo ($currentPage === 'ad_registrations') ? 'active' : '';?>">Registrations</a>
             <div class="dropdown-container">
                 <a href="<?php echo URLROOT; ?>admin/ad_reg_admin" class="dd-content">Administrators</a>
-                <a href="<?php echo URLROOT; ?>admin/ad_reg_counselor" class="dd-content">Counsellors</a>
+                <a href="<?php echo URLROOT; ?>admin/ad_reg_counsellor" class="dd-content">Counsellors</a>
                 <a href="<?php echo URLROOT; ?>admin/ad_reg_doctor" class="dd-content">Psychiatrists</a>
             </div>
             <a href="<?php echo URLROOT; ?>admin/verifications" class="top <?php echo ($currentPage === 'verifications') ? 'active' : ''; ?>" id="sb-link5">Verifications</a>
