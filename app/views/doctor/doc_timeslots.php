@@ -29,7 +29,7 @@ $timeslot = $data['timeslot'];
                 <p class="p-regular-green">Create Timeslot</p>
                 <div class="card-white">
                     <div class="card-green-7">
-                        <form action="<?php echo URLROOT; ?>doctor/addTimeslotsDoc/<?php echo $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
+                        <form action="<?php echo URLROOT; ?>Doctor/addTimeslotsDoc/<?php echo $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
                             <label for="slot_date">Date : </label>
                             <input type="date" id="" name="slot_date" class="date" value="" required>
 

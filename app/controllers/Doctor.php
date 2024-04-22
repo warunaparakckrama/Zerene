@@ -317,12 +317,15 @@ class Doctor extends Controller
         $this->view('undergrad/ug_profile', $data);
     }
 
-    public function doc_template()
+    public function doc_template($id)
     {
-
+        $prescription = $this->docModel->getPrescriptionById($id);
         $session_id = $_SESSION['user_id'];
         // $prescription = $this->docModel->getPrescription($session_id);
-        $data = [];
+        $data = [
+            'prescription'=> $prescription
+
+        ];
         $this->view('doctor/doc_template', $data);
     }
 
@@ -368,7 +371,7 @@ class Doctor extends Controller
             $data['created_by'] = $_SESSION['user_id'];
 
             if ($this->docModel->createTimeslotsDoc($data)) {
-                redirect('doctor/doc_timeslot');
+                redirect('doctor/doc_timeslots');
             } else {
                 die('Something went wrong');
             }
@@ -377,7 +380,7 @@ class Doctor extends Controller
             $data['timeslot'] = $this->docModel->getTimeslotsDoc($username);
             $this->view('doctor/doc_timeslot', $data);
         }
-        $this->view('doctor/doc_timeslot');
+        $this->view('doctor/doc_timeslots');
     }
 
     public function editTimeslotDoc($timeslotId)
@@ -488,11 +491,19 @@ class Doctor extends Controller
             }
 
             if ($this->docModel->createPrescription($data, $medicine_data)) {
-                redirect('doctor/doc_template');
+                $pres_id = $this->docModel->getLastCreatedPrescription();
+                redirect('doctor/doc_template/' . $pres_id);
             } else {
                 die('Something went wrong');
             }
         }
+    }
+
+    public function createTemplate()
+    {
+        $session_id = $_SESSION['user_id'];
+        $data = $this->docModel->getprescription($session_id);
+        $this->view('doctor/doc_template', $data);
     }
 
     public function doc_feedback()
@@ -500,6 +511,10 @@ class Doctor extends Controller
         $data = [];
         $this->view('doctor/doc_feedback', $data);
     }
+
+
+
+
 
     public function sentFeedback($user_id)
     {

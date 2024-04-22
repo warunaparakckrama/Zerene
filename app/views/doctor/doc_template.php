@@ -1,4 +1,7 @@
-<?php $currentPage = 'doc_prescription'; ?>
+<?php 
+    $currentPage = 'doc_prescription';
+    $prescription = $data['prescription'] ;
+?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,24 +84,24 @@
     <table class="prescription-table">
     <tbody>
             <tr>
-                <th class="col1">name of the patiant</th>
-                <td class="col1 merged-cells" colspan="3"></td>
+                <th class="col1">Patient's Name</th>
+                <td class="col1 merged-cells" colspan="3"><?php echo $prescription->ug_name;?></td>
                
             </tr>
             <tr>
-                <th class="col1">age</th>
+                <th class="col1">Patient's age</th>
                 <td class="col2"></td>
-                <th class="col3">gender</th>
+                <th class="col3">Patient's gender</th>
                 <td class="col4"></td>
             </tr>
              <tr>
-                <th class="col1">diagnosis with</th>
-                <td class="col2 merged-cells" colspan="3"></td>
+             <th class="col1">Diagnosed with</th>
+             <td class="col1 merged-cells" colspan="3">diagnosed_with</td>
                 
             </tr>
             <tr>
-                <th class="col">drug</th>
-                <th class="col2">Unit(tablets or syrup)</th>
+                <th class="col">Drug name</th>
+                <th class="col2">quantity(tablets or syrup)</th>
                 <th class="col3 merged-cells" colspan="2">dosage(per day)</th>
             </tr>
             <div>
@@ -122,9 +125,9 @@
            
             <tr>
                 <th class="col1">date</th>
-                <td class="col2"></td>
-                <th class="col3">psychiatrist</th>
-                <td class="col4"></td>
+                <td class="col2"><?php echo $doctor->date;?></td>
+                <th class="col3">Diagnosed by</th>
+                <td class="col4"><?php echo $doctor->diagnosed_by;?></td>
             </tr>
 
         </div>

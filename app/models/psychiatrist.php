@@ -108,6 +108,7 @@ class psychiatrist
         $this->db->bind(':doc_user_id', $data['doc_user_id']);
 
         $prescription = $this->db->execute();
+        
 
         if ($prescription) {
             $prescription_id = $this->db->lastInsertedId();
@@ -140,6 +141,18 @@ class psychiatrist
         $this->db->bind(':username', $username);
         $results = $this->db->resultset();
         return $results;
+    }
+
+    public function getLastCreatedPrescription(){
+        $this->db->query('SELECT LAST_INSERT_ID() AS last_id FROM prescription');
+        $result =$this->db->single();
+        return $result ? $result->last_id : null;
+    }
+
+    public function getPrescriptionById($id){
+        $this->db->query('SELECT * FROM prescription WHERE is_deleted = FALSE AND pres_id = :pres_id');
+        $this->db->bind(':pres_id', $id);
+        return $this->db->single();
     }
 
     public function getDirectedUndergrads($id){

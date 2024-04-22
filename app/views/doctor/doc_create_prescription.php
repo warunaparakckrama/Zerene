@@ -27,7 +27,7 @@
 
             <div>
                 <p class="p-regular-green">Create Prescription</p>
-                <form class="" action="<?php echo URLROOT; ?>Doctor/addPrescription/<?php echo $user_id = $_SESSION['user_id']; ?>" method="POST">
+                <form class="" action="<?php echo URLROOT; ?>Doctor/addPrescription/<?php echo $_SESSION['user_id']; ?>" method="POST">
                     <div class="card-white" style="font-size: 15px;">
                         <div id="input-container" class="card-green-2">
                             <label for="ug_name">Patient's Name:</label>
