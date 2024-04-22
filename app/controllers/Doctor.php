@@ -124,8 +124,6 @@ class Doctor extends Controller
         $this->view('doctor/doc_chatroom', $data);
     }
 
-   
-
     public function doc_undergrad()
     {   
         $id = $_SESSION['user_id'];
@@ -179,7 +177,6 @@ class Doctor extends Controller
 
         $this->view('doctor/doc_timeslots', $data);
     }
-
 
     public function doc_profile()
     {   
@@ -319,12 +316,8 @@ class Doctor extends Controller
 
     public function doc_template($id)
     {
-        $prescription = $this->docModel->getPrescriptionById($id);
-        $session_id = $_SESSION['user_id'];
         // $prescription = $this->docModel->getPrescription($session_id);
         $data = [
-            'prescription'=> $prescription
-
         ];
         $this->view('doctor/doc_template', $data);
     }
@@ -490,9 +483,9 @@ class Doctor extends Controller
 
             }
 
-            if ($this->docModel->createPrescription($data, $medicine_data)) {
-                $pres_id = $this->docModel->getLastCreatedPrescription();
-                redirect('doctor/doc_template/' . $pres_id);
+            if ($last_id = $this->docModel->createPrescription($data, $medicine_data)) {
+                
+                redirect('doctor/doc_template/'. $last_id);
             } else {
                 die('Something went wrong');
             }

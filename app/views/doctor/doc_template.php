@@ -1,6 +1,5 @@
 <?php 
     $currentPage = 'doc_prescription';
-    $prescription = $data['prescription'] ;
 ?>
     <head>
         <meta charset="UTF-8">
@@ -8,11 +7,8 @@
         <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
         <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
-
-    
-   
-
     </head>
+
     <body>
         <section class="sec-1">
             <div>
@@ -85,7 +81,7 @@
     <tbody>
             <tr>
                 <th class="col1">Patient's Name</th>
-                <td class="col1 merged-cells" colspan="3"><?php echo $prescription->ug_name;?></td>
+                <td class="col1 merged-cells" colspan="3"></td>
                
             </tr>
             <tr>
