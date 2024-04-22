@@ -90,7 +90,7 @@ class Undergrad extends Controller
         $id = $_SESSION['user_id'];
         $undergrad = $this->adminModel->getUgById($id);
         $counsellor = $this->adminModel->getCounselors();
-        $request_letter = $this->ugModel->getRequestLettersfromId($undergrad->ug_id);
+        $request_letter = $this->ugModel->getRequestLettersfromId($id);
         $data = [
             'counsellor' => $counsellor,
             'undergrad' => $undergrad,
@@ -100,8 +100,8 @@ class Undergrad extends Controller
     }
 
     public function view_request_letter($id){
-        $request_letter = $this->ugModel->getRequestLettersfromId($id);
-        $counsellor = $this->adminModel->getCounselors();
+        $request_letter = $this->ugModel->getRequestLettersfromLetterId($id);
+        $counsellor = $this->adminModel->getCounsellorById($request_letter->to_coun_user_id);
         $data = [
             'request_letter' => $request_letter,
             'counsellor' => $counsellor,

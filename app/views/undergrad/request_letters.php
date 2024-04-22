@@ -48,7 +48,7 @@
                 <div class="card-white-scroll" style="height: 215px;">
                     <?php foreach($data['request_letter'] as $request_letter) : ?>
                         <?php foreach($data['counsellor'] as $counsellor) : ?>
-                            <?php if ($request_letter->to_coun_id == $counsellor->coun_id) : ?>
+                            <?php if ($request_letter->to_coun_user_id == $counsellor->user_id) : ?>
                                 <div class="card-green">
                                     <img src="<?php echo IMG;?>note1.svg" alt="">
                                     <div>

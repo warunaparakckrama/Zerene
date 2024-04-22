@@ -1,7 +1,8 @@
 <?php
 $currentPage = 'request_letters';
 $request_letter = $data['request_letter'];
-$id = $data['id'];
+$counsellor = $data['counsellor'];
+
 ?>
 
 <head>
@@ -31,16 +32,12 @@ $id = $data['id'];
                 <div class="card-white">
                     <p class="p-regular-green">Content</p>
                     <div class="card-green-5">
-                        <?php foreach ($data['request_letter'] as $request_letter) : ?>
-                            <?php if ($request_letter->letter_id == $id) : ?>
-                                <div style="font-size: 15px;">
-                                    <p class="p-regular-green"><b>Subject: </b><?php echo $request_letter->subject; ?></p>
-                                    <p class="p-regular-green"><b>Content: </b><?php echo $request_letter->content; ?></p>
-                                    <p class="p-regular-green">
-                                    <p class="p-regular-green"><b>Documents: </b><a href="<?php echo $request_letter->document_path;?>" download="attachment">Download</a></p>
-                                </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                        <div style="font-size: 15px;">
+                            <p class="p-regular-green"><b>To Whom: </b><?php echo $counsellor->first_name.' '.$counsellor->last_name; ?></p>
+                            <p class="p-regular-green"><b>Subject: </b><?php echo $request_letter->subject; ?></p><br>
+                            <p class="p-regular-green"><b>Content: </b><?php echo $request_letter->content; ?></p><br>
+                            <p class="p-regular-green"><b>Documents: </b><a href="<?php echo $request_letter->document_path; ?>" download="attachment">Download</a></p>
+                        </div>
                     </div>
                 </div>
             </div>

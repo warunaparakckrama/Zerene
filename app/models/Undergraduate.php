@@ -158,9 +158,16 @@ class Undergraduate
     }
 
     public function getRequestLettersfromId($id){
-        $this->db->query('SELECT * FROM request_letter WHERE letter_id = :id');
+        $this->db->query('SELECT * FROM request_letter WHERE from_ug_user_id = :id');
         $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
         return $results;
+    }
+
+    public function getRequestLettersfromLetterId($id){
+        $this->db->query('SELECT * FROM request_letter WHERE letter_id = :id');
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        return $row;
     }
 }
