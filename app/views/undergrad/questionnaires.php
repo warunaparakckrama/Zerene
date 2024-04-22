@@ -28,13 +28,13 @@
                     <div class="card-white-scroll" style="height: 215px;">
                         <?php foreach ($data['questionnaire'] as $questionnaire) : ?>
                             <div class="card-green">
-                                <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
+                                <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="">
                                 <div>
                                     <a href="<?php echo URLROOT;?>undergrad/quiz_view/<?php echo $questionnaire->questionnaire_id?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $questionnaire->questionnaire_name?></p></a>
-                                    <p class="p-regular-grey" style="font-size: 18px;">Questionnaire suits for <?php echo $questionnaire->questionnaire_type?> conditions</p>
+                                    <p class="p-regular-grey" style="font-size: 15px;">Questionnaire suits for <b><?php echo $questionnaire->questionnaire_type?> conditions</b></p>
                                 </div>
                                 <div class="btn-container">
-                                    <a href="<?php echo URLROOT;?>undergrad/quiz_view/<?php echo $questionnaire->questionnaire_id?>" style="text-decoration: none;"><button class="button-main">Start</button></a>
+                                    <a href="<?php echo URLROOT;?>undergrad/quiz_view/<?php echo $questionnaire->questionnaire_id?>" style="text-decoration: none;"><button class="button-main">Start Questionnaire</button></a>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -45,18 +45,14 @@
                         <?php foreach ($data['response'] as $response) : ?>
                             <?php if ($response->questionnaire_id === $questionnaire->questionnaire_id) : ?>
                                 <div class="card-green">
-                                    <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="card-profile">
+                                    <img src="<?php echo IMG;?>quiz.svg" alt="quiz" class="">
                                     <div>
                                         <a href="" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $questionnaire->questionnaire_name;?></p></a>
                                         <?php
-                                            // Format the date and time
                                             $dateTime = new DateTime($response->attempted_at);
                                             $formattedDateTime = $dateTime->format('jS M, y \a\t h:iA');
                                         ?>
-                                        <p class="p-regular-grey" style="font-size: 18px;"><?php echo $formattedDateTime;?></p>
-                                    </div>
-                                    <div class="btn-container">
-                                        <button class="button-main">View</button>
+                                        <p class="p-regular-grey" style="font-size: 15px;"><?php echo $formattedDateTime;?></p>
                                     </div>
                                 </div>
                             <?php endif; ?>

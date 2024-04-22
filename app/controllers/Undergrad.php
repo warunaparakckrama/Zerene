@@ -73,12 +73,14 @@ class Undergrad extends Controller
     }
 
     public function professional_profile($id)
-    {
+    {   
         $counsellor = $this->adminModel->getcounsellorById($id);
         $doctor = $this->adminModel->getDoctorById($id);
+        $request = $this->ugModel->getMsgRequestfromId($_SESSION['user_id']);
         $data = [
             'counsellor' => $counsellor,
             'doctor' => $doctor,
+            'request' => $request,
             'id' => $id
         ];
         $this->view('undergrad/professional_profile', $data);
