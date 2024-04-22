@@ -28,7 +28,7 @@
             </div>
             <!-- <a href="<?php echo URLROOT; ?>admin/verifications" class="top <?php echo ($currentPage === 'verifications') ? 'active' : ''; ?>" id="sb-link5">Verifications</a> -->
             <a href="<?php echo URLROOT; ?>admin/ad_users" class="top <?php echo ($currentPage === 'ad_users') ? 'active' : ''; ?>" id="sb-link6">Users</a>
-            <a href="<?php echo URLROOT; ?>admin/notifications" class="top <?php echo ($currentPage === 'notifications') ? 'active' : ''; ?>" id="sb-link7">Notifications</a>
+            <a href="<?php echo URLROOT; ?>admin/ad_notifications" class="top <?php echo ($currentPage === 'ad_notifications') ? 'active' : ''; ?>" id="sb-link7">Notifications</a>
             <a href="<?php echo URLROOT; ?>admin/newsletters" class="top <?php echo ($currentPage === 'newsletters') ? 'active' : ''; ?>" id="sb-link8">Newsletters</a>
             <a href="<?php echo URLROOT; ?>admin/support" class="top <?php echo ($currentPage === 'support') ? 'active' : ''; ?>" id="sb-link9">Support</a>
         </div>

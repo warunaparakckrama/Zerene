@@ -159,7 +159,7 @@ class Admin extends Controller
             } elseif ($data['password'] != $data['confirm_password']) {
                 $data['signup_alert'] = '*Passwords do not match';
             }
-            
+
 
             //make sure errors are empty
             if (empty($data['signup_alert'])) {
@@ -175,10 +175,7 @@ class Admin extends Controller
             } else {
                 $this->view('admin/ad_reg_counsellor', $data);
             }
-
-        } 
-        
-        else {
+        } else {
             //load form
             $data = [
                 'coun_type' => '',
@@ -203,7 +200,7 @@ class Admin extends Controller
     }
 
     public function ad_reg_doctor()
-    {   
+    {
         $usernames = $this->userModel->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -244,7 +241,7 @@ class Admin extends Controller
                         break; // Exit the loop as soon as a match is found
                     }
                 }
-            } 
+            }
 
             if (strlen($data['password']) < 8) {
                 $data['signup_alert'] = '*Password must be atleast 8 characters';
@@ -343,14 +340,14 @@ class Admin extends Controller
         $this->view('admin/newsletter_view', $data);
     }
 
-    public function notifications()
+    public function ad_notifications()
     {
         $notifications = $this->adminModel->getNotifications();
         $data = [
             'user_type' => '',
             'notifications' => $notifications
         ];
-        $this->view('admin/notifications', $data);
+        $this->view('admin/ad_notifications', $data);
     }
 
     public function notifications_view($notification_id)
@@ -456,7 +453,7 @@ class Admin extends Controller
     }
 
     public function changeUsernameUser($user_id)
-    {   
+    {
         $id = $_SESSION['user_id'];
         $admin = $this->adminModel->getAdminfromId($id);
         $user = $this->userModel->findUserDetails($user_id);
@@ -511,7 +508,7 @@ class Admin extends Controller
                     redirect('admin/ad_edit_user/' . $user_id);
                 } else {
                     die('Something went wrong');
-                } 
+                }
             } else {
                 // Load view with errors
                 $this->view('admin/ad_edit_user/' . $user_id);
@@ -524,7 +521,6 @@ class Admin extends Controller
                 'admin' => $admin,
                 'user' => $user,
             ];
-
         }
 
         $this->view('admin/ad_edit_user', $data);
@@ -584,7 +580,7 @@ class Admin extends Controller
     }
 
     public function changePwdUser($user_id)
-    {   
+    {
         $id = $_SESSION['user_id'];
         $admin = $this->adminModel->getAdminfromId($id);
         $user = $this->userModel->findUserDetails($user_id);
@@ -646,7 +642,6 @@ class Admin extends Controller
                 'admin' => $admin,
                 'user' => $user
             ];
-
         }
 
         $this->view('admin/ad_edit_user', $data);
@@ -663,35 +658,21 @@ class Admin extends Controller
                 'subject' => trim($_POST['subject']),
                 'user_type' => trim($_POST['user_type']),
                 'content' => trim($_POST['content']),
-                'subject_err' => '',
-                'content_err' => '',
             ];
 
-            if (empty($data['subject'])) {
-                $data['subject_err'] = 'Please enter the subject';
-            }
-            if (empty($data['content'])) {
-                $data['content_err'] = 'Please enter the content';
-            }
+            // Fetch the current username from db
+            $current_username = $this->userModel->getUsernameById($user_id);
+            $data['author'] = $current_username;
 
-            if (empty($data['subject_err']) && empty($data['content_err'])) {
-                // Validated
-
-                // Fetch the current username from db
-                $current_username = $this->userModel->getUsernameById($user_id);
-                $data['author'] = $current_username;
-
-                // post notifications
-                if ($this->adminModel->addNotifications($data)) {
-                    redirect('admin/notifications');
-                } else {
-                    die('Something went wrong');
-                }
+            // post notifications
+            if ($this->adminModel->addNotifications($data)) {
+                redirect('admin/ad_notifications');
             } else {
-                // Load view with errors
-                $this->view('admin/notifications', $data);
+                die('Something went wrong');
             }
         }
+
+        $this->view('admin/ad_notifications', $data);
     }
 
     public function editNotifications($notification_id)
@@ -706,42 +687,24 @@ class Admin extends Controller
                 'subject' => trim($_POST['subject']),
                 'user_type' => trim($_POST['user_type']),
                 'content' => trim($_POST['content']),
-                'subject_err' => '',
-                'content_err' => '',
             ];
 
-            if (empty($data['subject'])) {
-                $data['subject_err'] = 'Please enter the subject';
-            }
-            if (empty($data['content'])) {
-                $data['content_err'] = 'Please enter the content';
-            }
-
-            if (empty($data['subject_err']) && empty($data['content_err'])) {
-                // Validated
-
-                // Fetch the current username from db
-                // $current_username = $this->userModel->getUsernameById($user_id);
-                // $data['author'] = $current_username;
-
-                // post notifications
-                if ($this->adminModel->updateNotifications($data)) {
-                    redirect('admin/notifications_view/' . $notification_id);
-                } else {
-                    die('Something went wrong');
-                }
+            // post notifications
+            if ($this->adminModel->updateNotifications($data)) {
+                redirect('admin/notifications_view/' . $notification_id);
             } else {
-                // Load view with errors
-                $this->view('admin/notifications', $data);
+                die('Something went wrong');
             }
         }
+        
+        $this->view('admin/notifications_view', $data);
     }
 
     public function deleteNotifications($notify_id)
     {
         if ($this->adminModel->deleteNotify($notify_id)) {
             //   flash('post_message', 'user Removed');
-            redirect('admin/notifications');
+            redirect('admin/ad_notifications');
         } else {
             die('Something went wrong');
         }
