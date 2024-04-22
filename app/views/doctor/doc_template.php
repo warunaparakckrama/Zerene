@@ -1,4 +1,5 @@
-<?php $currentPage = 'prescription'; ?>
+<?php $currentPage = 'prescription';
+$prescription = $data['prescription']; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,27 +80,22 @@
 <body>
     <div class= prescription-container>
     <table class="prescription-table">
-        <thead>
+    <tbody>
+    <?php foreach ($data['prescription'] as $prescription) : ?>
             <tr>
                 <th class="col1">name of the patiant</th>
-                <td class="col1 merged-cells" colspan="3"></td>
+                <td class="col1 merged-cells" colspan="3"><?php echo $prescription->ug_name; ?></td>
                
             </tr>
-        </thead>
-        <tbody>
-            
             <tr>
-                <th class="col1">patiant ID</th>
-                <td class="col2"></td>
-                <th class="col3">age</th>
-                <td class="col4"></td>
+                <th class="col1">age</th>
+                <td class="col2"><?php echo $prescription->age; ?></td>
+                <th class="col3">gender</th>
+                <td class="col4"><?php echo $prescription->gender; ?></td>
             </tr>
-
-           
-
-            <tr>
+             <tr>
                 <th class="col1">diagnosis with</th>
-                <td class="col2 merged-cells" colspan="3"></td>
+                <td class="col2 merged-cells" colspan="3"><?php echo $prescription->diagnosis_with; ?></td>
                 
             </tr>
             <tr>
@@ -125,36 +121,20 @@
             </tr>
             </div>
 
-            <tr>
-                <th class="col1">Things to be done</th>
-                <td class="col2 merged-cells" colspan="3"></td>
-            </tr>
+           
             <tr>
                 <th class="col1">date</th>
-                <td class="col2"></td>
-                <th class="col3">signature</th>
-                <td class="col4"></td>
+                <td class="col2"><?php echo $prescription['date']; ?></td>
+                <th class="col3">psychiatrist</th>
+                <td class="col4"><?php echo $prescription['psychiatrist']; ?></td>
             </tr>
 
         </div>
         </tbody>
+        <?php endforeach; ?>
     </table>
-</body>
+
         </style>
 
-                      
-
-                           
-
-
-
-
-                        
-                        
-
-
-                    
-
-            
-        </section>
+</section>
     </body>

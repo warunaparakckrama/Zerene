@@ -11,19 +11,15 @@
             </div>
             <div class="sidebar-container2">
                 <a href="">
-                    <img src="<?php echo IMG;?>ug-avatar-1.svg" alt="ug avatar" width="80" height="80">
+                    <img src="<?php echo IMG;?>doc-avatar2.svg" alt="ug avatar" width="80" height="80">
                 </a>
                 <p class="p-regular" style="color: var(--zerene-light);"><?php echo $_SESSION['user_name'];?></p>
-                <a href="<?php echo URLROOT;?>doctor/doc_profile" id="sb-link9" style="text-decoration: none;"><button class="button-second">Edit</button></a>
+                <a href="<?php echo URLROOT;?>doctor/doc_profile" id="sb-link9" style="text-decoration: none;"><button class="button-second">View Profile</button></a>
             </div>
             <div class="sidebar-container3">
                 <a href="<?php echo URLROOT; ?>doctor/doc_home" class="top <?php echo ($currentPage === 'doc_home') ? 'active' : ''; ?>" id="sb-link1">Home</a>
                 <a href="<?php echo URLROOT; ?>doctor/doc_questionnaires" class="top <?php echo ($currentPage === 'doc_questionnaires') ? 'active' : ''; ?>" id="sb-link2">Questionnaires</a>
-                <a  href="#" class="top dd-btn">Professionals</a>
-                    <div class="dropdown-container">
-                        <a href="<?php echo URLROOT; ?>doctor/doc_counselors" class="dd-content <?php echo ($currentPage === 'doc_counselors') ? 'active' : ''; ?>" id="sb-link3">Counsellors</a>
-                        <a href="<?php echo URLROOT; ?>doctor/doc_doctors" class="dd-content <?php echo ($currentPage === 'doc_doctor') ? 'active' : ''; ?>" id="sb-link4">Psychiatrists</a>
-                    </div>
+                <a href="<?php echo URLROOT; ?>doctor/doc_professionals" class="top <?php echo ($currentPage === 'doc_professionals') ? 'active' : ''; ?>" id="sb-link3">Professionals</a>
                 <a href="<?php echo URLROOT; ?>doctor/doc_undergrad" class="top <?php echo ($currentPage === 'doc_undergrad') ? 'active' : ''; ?>" id="sb-link5">Undergraduates</a>
                 <a href="<?php echo URLROOT; ?>doctor/doc_chats" class="top <?php echo ($currentPage === 'doc_chats') ? 'active' : ''; ?>" id="sb-link6">Chats</a>
                 <a href="<?php echo URLROOT; ?>doctor/prescription" class="top <?php echo ($currentPage === 'prescription') ? 'active' : ''; ?>" id="sb-link7">Prescriptions</a>

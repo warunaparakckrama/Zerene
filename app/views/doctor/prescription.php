@@ -95,6 +95,19 @@
                             </div>
                             </div>
                         </div>
+                        <div class="card-white">
+                            <p class="p-regular"></p>
+                            <div class=card-green-2>
+                            
+                                    <label for="pres_date">Date :</label>
+                                    <input type="date" id="pres_date" name="pres_date" class="">
+
+                                    <label for="created_by">Psychiatrist :</label>
+                                    <input type="text" id="created_by" name="created_by" class="">  
+                                    
+                            </div>
+                           
+                        </div>
 
 
 
@@ -102,9 +115,9 @@
                         <div class="card-white">
                             <p class="p-regular">Add medicine</p>
 
-                            <!-- Container for dynamic rows -->
+                            
                             <div id="medicine-container">
-                                <!-- Initial medicine input fields (template row) -->
+                                
                                 <div id="medicine-row" class="card-green-2">
                                     <label for="drug">Drug:</label>
                                     <input type="text" name="drug[]" class="medicine-input">
@@ -130,19 +143,7 @@
                             
                         </div>
 
-                        <div class="card-white">
-                            <p class="p-regular"></p>
-                            <div class=card-green-2>
-                            
-                                    <label for="pres_date">Date :</label>
-                                    <input type="date" id="pres_date" name="pres_date" class="">
-
-                                    <label for="created_by">Psychiatrist :</label>
-                                    <input type="text" id="created_by" name="created_by" class="">  
-                                    
-                            </div>
-                           
-                        </div>
+                       
                         <button class="button-main" type="submit">submit</button>  
     </form>
             </section>

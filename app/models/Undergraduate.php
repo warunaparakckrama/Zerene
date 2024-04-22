@@ -15,6 +15,13 @@ class Undergraduate
         return $results;
     }
 
+    public function getFacultyUser($userID)
+    {
+        $this->db->query('SELECT counsellor.faculty, counsellor.first_name, counsellor.last_name FROM counsellor INNER JOIN users ON counsellor.user_id = users.user_id WHERE users.user_id = :userID');
+        $this->db->bind(':userID',$userID);
+        return $this->db->single();
+    }
+
     public function getQuestionnaireDetails()
     {
         $this->db->query('SELECT * FROM questionnaires');
@@ -145,5 +152,12 @@ class Undergraduate
         } else {
             return false;
         }
+    }
+
+    public function getMsgRequestfromId($id){
+        $this->db->query('SELECT * FROM msg_request WHERE from_user_id = :id and is_deleted = FALSE');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        return $results;
     }
 }

@@ -1,246 +1,336 @@
 <?php
 
-class Doctor extends Controller{
+class Doctor extends Controller
+{
 
     private $userModel;
     private $adminModel;
     private $acModel;
     private $docModel;
+    private $ugModel;
+    private $pcModel;
+    private $chatModel;
 
     public function __construct()
     {
         if (!isset($_SESSION['user_id'])) {
             redirect('users/login');
         }
-        $this->userModel=$this->model('User'); 
-        $this->adminModel = $this->model('Administrator');  
-        $this->acModel=$this->model('ACounsellor');
-        $this->docModel=$this->model('psychiatrist');
-        
-    
-    }  
+        $this->userModel = $this->model('User');
+        $this->adminModel = $this->model('Administrator');
+        $this->acModel = $this->model('ACounsellor');
+        $this->docModel = $this->model('psychiatrist');
+        $this->ugModel = $this->model('Undergraduate');
+        $this->pcModel = $this->model('PCounsellor');
+        $this->chatModel = $this->model('ChatModel');
+    }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         $data = [];
         $this->view('doctor/dashboard', $data);
     }
 
-    public function doc_home(){
+    public function doc_home()
+    {
         $data = [];
         $this->view('doctor/doc_home', $data);
     }
 
-    public function doc_questionnaires(){
-        $data = [];
+    public function doc_questionnaires()
+    {   
+        $id = $_SESSION['user_id'];
+        $doctor = $this->adminModel->getDoctorById($id);
+        $undergrad = $this->adminModel->getUndergrads();
+        $questionnaire = $this->ugModel->getQuestionnaireDetails();
+        $response = $this->ugModel->getResponses();
+        $direct = $this->pcModel->getUgDirectsforDoctor($id);
+        $data = [
+            'doctor' => $doctor,
+            'undergrad' => $undergrad,
+            'questionnaire' => $questionnaire,
+            'response' => $response,
+            'direct' => $direct
+        ];
         $this->view('doctor/doc_questionnaires', $data);
     }
 
-    public function doc_doctors(){
-        $data = [];
-        $this->view('doctor/doc_doctors', $data);
+    public function doc_quiz_review($id)
+    {   
+        $response = $this->ugModel->getResponseByResponseId($id);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        require_once APPROOT.'/controllers/Procounsellor.php';
+        $PCController = new Procounsellor();
+        $results = $PCController->quizResults($id);
+        $data = [
+            'response' => $response,
+            'questionnaire' => $questionnaire,
+            'results' => $results
+        ];
+        $this->view('doctor/doc_quiz_review', $data);
     }
 
-    public function doc_chats(){
-        $data = [];
+    public function doc_professionals()
+    {
+        $counsellor = $this->adminModel->getCounselors();
+        $doctor = $this->adminModel->getDoctors();
+        $data = [
+            'counsellor' => $counsellor,
+            'doctor' => $doctor
+        ];
+        $this->view('doctor/doc_professionals', $data);
+    }
+
+    public function doc_chats()
+    {   
+        $id = $_SESSION['user_id'];
+        $request = $this->ugModel->getMsgRequest();
+        $doctor = $this->adminModel->getDoctorById($id);
+        $all_counsellors = $this->adminModel->getCounselors();
+        $all_doctors = $this->adminModel->getDoctors();
+        $undergrad = $this->adminModel->getUndergrads();
+        $connection = $this->chatModel->getChatConnection();
+        $data = [
+            'request' => $request,
+            'doctor' => $doctor,
+            'all_counsellors' => $all_counsellors,
+            'all_doctors' => $all_doctors,
+            'undergrad' => $undergrad,
+            'connection' => $connection
+        ];
         $this->view('doctor/doc_chats', $data);
     }
 
-    public function doc_counselors(){
-        $data = [];
-        $this->view('doctor/doc_counselors', $data);
+    public function doc_chatroom($user_id)
+    {
+        $id = $_SESSION['user_id'];
+        $doctor = $this->adminModel->getDoctorById($id);
+        $receiving_user = $this->userModel->findUserDetails($user_id);
+        if ($receiving_user->user_type == 'undergraduate') {
+            $msg_receiver = $this->adminModel->getUgById($user_id);
+        } elseif ($receiving_user->user_type == 'pcounsellor') {
+            $msg_receiver = $this->adminModel->getCounsellorById($user_id);
+        } elseif ($receiving_user->user_type == 'doctor') {
+            $msg_receiver = $this->adminModel->getDoctorById($user_id);
+        }
+
+        $receiver = $this->userModel->findUserDetails($user_id);
+        $data = [
+            'user_id' => $user_id,
+            'doctor' => $doctor,
+            'msg_receiver' => $msg_receiver,
+            'receiver' => $receiver
+        ];
+        $this->view('doctor/doc_chatroom', $data);
     }
 
-    public function doc_undergrad(){
-        $data = [];
+   
+
+    public function doc_undergrad()
+    {   
+        $id = $_SESSION['user_id'];
+        $direct = $this->docModel->getDirectedUndergrads($id);
+        $undergrad = $this->adminModel->getUndergrads();
+        $counsellor = $this->adminModel->getCounselors();
+        $data = [
+            'direct' => $direct,
+            'undergrad' => $undergrad,
+            'counsellor' => $counsellor
+        ];
         $this->view('doctor/doc_undergrad', $data);
     }
 
-    public function prescription(){
+    public function prescription()
+    {
         $username = $this->userModel->getUsernameById($_SESSION['user_id']);
         $prescription = $this->docModel->getPrescription($username);
         $data = [
             'gender' => '',
             'prescription' => $prescription,
         ];
-       
+
         $this->view('doctor/prescription', $data);
-    } 
-    
-    public function doc_timeslots(){
+    }
+
+    public function doc_timeslots()
+    {
         $username = $this->userModel->getUsernameById($_SESSION['user_id']);
         $timeslot = $this->acModel->getTimeslots($username);
         $data = [
             'slot_type' => '',
             'timeslot' => $timeslot,
         ];
-       
+
         $this->view('doctor/doc_timeslots', $data);
     }
-    
-    public function doc_profile(){
-        $data = [];
+
+    public function doc_profile()
+    {   
+        $id = $_SESSION['user_id'];
+        $doctor = $this->adminModel->getDoctorById($id);
+        $data = [
+            'doctor' => $doctor
+        ];
         $this->view('doctor/doc_profile', $data);
     }
-    public function changeUsernameDoc($user_id){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+    public function doc_view_profile($id){
+        $doctor = $this->adminModel->getDoctorById($id);
+        $data = [
+            'doctor' => $doctor
+        ];
+        $this->view('doctor/doc_view_profile', $data);
+    }
+
+    public function changeUsernameDoc($user_id)
+    {
+        $doctor = $this->adminModel->getDoctorById($user_id);
+        $current_username = $this->userModel->getUsernameById($user_id);
+        $username = $this->userModel->getUsernames();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'current_username' => trim($_POST['current_username']),
+                'doctor' => $doctor,
+                'current_username' => $current_username,
+                'username' => $username,
                 'new_username' => trim($_POST['new_username']),
-                'current_username_err'=>'',
-                'new_username_err'=>''
+                'password' => trim($_POST['password']),
+                'username_alert' => ''
             ];
-        
-            if(empty($data['current_username'])){
-                $data['current_username_err']='Please enter current username';  
-            }
-            if(empty($data['new_username'])){
-                $data['new_username_err']='Please enter new username';  
-            }
 
-            if(empty($data['current_username_err']) && empty($data['new_username_err'])){
-                // Validated
-    
-                // Fetch the current username from db
-                $current_username = $this->userModel->getUsernameById($user_id);
-    
-                // Verify if the entered current password matches the hashed password from the database
-                if (($data['current_username'] != $current_username)) {
-                    $data['current_username_err'] = 'Current username is incorrect';
-                } else {
+            if (strlen($data['new_username']) < 8) {
+                $data['username_alert'] = '*Username must be atleast 8 characters';
+            } elseif ($data['new_username'] == $data['current_username']) {
+                $data['username_alert'] = '*New username cannot be same as the current username';
+            } else {
+                // Convert the new_username to lowercase
+                $newUsernameLower = strtolower($data['new_username']);
 
-                    // Update the username
-                    if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                    flash('user_message', 'Username updated successfully');
-                    redirect('doctor/doc_profile');
-                    } else {
-                    die('Something went wrong');
+                foreach ($data['username'] as $username) {
+                    // Convert each username in the array to lowercase
+                    $existingUsernameLower = strtolower($username->username);
+
+                    // Compare the lowercase versions of the usernames
+                    if ($newUsernameLower === $existingUsernameLower) {
+                        // If there is a match, set the alert message
+                        $data['username_alert'] = '*Username already exists/ is a variation of current username';
+                        break; // Exit the loop as soon as a match is found
                     }
                 }
-
-            } else {
-                // Load view with errors
-                $this->view('doctor/doc_profile', $data);
             }
-        } 
-        
-        else {
-            $data = [
-            'current_username' => '',
-            'new_username' => '',
-            'current_username_err'=>'',
-            'new_username_err'=>''
-          ];
-    
-          $this->view('doctor/doc_profile', $data);
-        }
-
-        $this->view('doctor/doc_profile', $data);
-    }
-
-    public function changePwdDoc($user_id){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            // Sanitize POST array
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-  
-        $data = [
-          'current_password' => trim($_POST['current_password']),
-          'new_password' => trim($_POST['new_password']),
-          'confirm_password' => trim($_POST['confirm_password']),
-          'current_password_err'=>'',
-          'new_password_err'=>'',
-          'confirm_password_err'=>''
-        ];
-
-        if(empty($data['current_password'])){
-            $data['current_password_err']='Please enter current password';      
-        }
-
-        if(empty($data['new_password'])){
-            $data['new_password_err']='Please enter new password';      
-        }elseif(strlen($data['new_password'])<6){
-            $data['new_password_err']='Password must be atleast 6 characters'; 
-        }
-
-        if(empty($data['confirm_password'])){
-            $data['confirm_password_err']='Please re-enter new password';      
-        }else{
-            if($data['new_password']!=$data['confirm_password']){
-                $data['confirm_password_err']='passwords do not match';
-            }
-        }
-
-        
-
-        if(empty($data['username_err']) && empty($data['email_err'])&& empty($data['confirm_password_err'])){
-            // Validated
 
             // Fetch the hashed password from the database based on the user ID
             $hashed_password_from_db = $this->userModel->getPasswordById($user_id);
 
             // Verify if the entered current password matches the hashed password from the database
-            if (!password_verify($data['current_password'], $hashed_password_from_db)) {
-                $data['current_password_err'] = 'Current password is incorrect';
-            } else {
-                // Hash the new password
-                $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
-
-                // Update the user's password
-                if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
-                flash('user_message', 'Password updated successfully');
-                redirect('doctor/doc_profile');
-                } else {
-                die('Something went wrong');
-                }
+            if (!password_verify($data['password'], $hashed_password_from_db)) {
+                $data['username_alert'] = '*Incorrect Password';
             }
 
-          } else {
-            // Load view with errors
-            $this->view('doctor/doc_profile', $data);
-          }
-        
-        }   
-    
-        else {
-            $data = [
-            'current_password' => '',
-            'new_password' => '',
-            'confirm_password' => '',
-            'current_password_err'=>'',
-            'new_password_err'=>'',
-            'confirm_password_err'=>''
-          ];
-    
-          $this->view('doctor/doc_profile', $data);
+            if (empty($data['username_alert'])) {
+                // Update the username
+                if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
+                    flash('user_message', 'Username updated successfully');
+                    redirect('doctor/doc_profile'); 
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+                $this->view('doctor/doc_profile', $data);
+            }
         }
 
         $this->view('doctor/doc_profile', $data);
-
     }
 
-    public function doc_template(){
-        $data = [];
+    public function changePwdDoc($user_id)
+    {
+
+        $doctor = $this->adminModel->getDoctorById($user_id);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Sanitize POST array
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'doctor' => $doctor,
+                'current_password' => trim($_POST['current_password']),
+                'new_password' => trim($_POST['new_password']),
+                'confirm_password' => trim($_POST['confirm_password']),
+                'password_alert' => '',
+            ];
+
+            if (strlen($data['new_password']) < 8) {
+                $data['alert'] = '*Password must be atleast 8 characters';
+            } else {
+                if ($data['new_password'] != $data['confirm_password']) {
+                    $data['alert'] = '*passwords do not match';
+                }
+            }
+
+            if (empty($data['password_alert'])) {
+                // Validated
+
+                // Fetch the hashed password from the database based on the user ID
+                $hashed_password_from_db = $this->userModel->getPasswordById($user_id);
+
+                // Verify if the entered current password matches the hashed password from the database
+                if (!password_verify($data['current_password'], $hashed_password_from_db)) {
+                    $data['password_alert'] = '*Current password is incorrect';
+                } else {
+                    // Hash the new password
+                    $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
+
+                    // Update the user's password
+                    if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
+                        flash('user_message', 'Password updated successfully');
+                        redirect('doctor/doc_profile');
+                    } else {
+                        die('Something went wrong');
+                    }
+                }
+            } else {
+                // Load view with errors
+                $this->view('doctor/doc_profile', $data);
+            }
+        }
+
+        $this->view('undergrad/ug_profile', $data);
+    }
+
+    public function doc_template()
+    {
+
+        $session_id = $_SESSION['user_id'];
+        $prescription = $this->docModel->getPrescription($session_id);
+        $data = ['prescription' => $prescription];
         $this->view('doctor/doc_template', $data);
-    }  
-   
-    public function doc_undergrad2(){
+    }
+
+    public function doc_undergrad2()
+    {
         $data = [];
         $this->view('doctor/doc_undergrad2', $data);
-    }  
-    public function doc_undergrad3(){
+    }
+
+    public function doc_undergrad3()
+    {
         $data = [];
         $this->view('doctor/doc_undergrad3', $data);
-    }  
-    public function doc_undergrad4(){
+    }
+
+    public function doc_undergrad4()
+    {
         $data = [];
         $this->view('doctor/doc_undergrad4', $data);
-    } 
-    
-    public function addTimeslotsDoc($user_id){
-        if ($_SERVER['REQUEST_METHOD']=='POST'){
-            $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+    }
+
+    public function addTimeslotsDoc($user_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
                 'slot_date' => trim($_POST['slot_date']),
@@ -250,62 +340,75 @@ class Doctor extends Controller{
                 'slot_status' => trim($_POST['slot_status']),
                 'created_by' => trim($_POST['created_by']),
             ];
-           $current_username = $this->userModel->getUsernameById($user_id);
-           $data['created_by'] = $current_username;
+            $current_username = $this->userModel->getUsernameById($user_id);
+            $data['created_by'] = $current_username;
 
-           if ($this->acModel->createTimeslots($data)) {
-            redirect('doctor/doc_timeslots');
-            # code...
-           }else{
-            die('Something went wrong');
-           }
-
-
+            if ($this->acModel->createTimeslots($data)) {
+                redirect('doctor/doc_timeslots');
+                # code...
+            } else {
+                die('Something went wrong');
+            }
         }
     }
 
+    public function addMedicine($user_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-    public function addMedicine($user_id){
-        if ($_SERVER['REQUEST_METHOD']=='POST'){
-            $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
 
-            $drugs = $_POST['drug'];
-            $units = $_POST['unit'];
-            $dosages = $_POST['dosage'];
-    
-            // Assuming all arrays have the same length
-            $numRecords = count($drugs);
-    
-            for ($i = 0; $i < $numRecords; $i++) {
 
             $data = [
-                'pres_id' => trim($_POST['pres_id']),
                 'pres_date' => trim($_POST['pres_date']),
                 'ug_name' => trim($_POST['ug_name']),
                 'age' => trim($_POST['age']),
                 'gender' => trim($_POST['gender']),
                 'diagnosis_with' => trim($_POST['diagnosis_with']),
-                'drug' => $_POST['drug'][$i],
-                'unit' => $_POST['unit'][$i],
-                'dosage' => $_POST['dosage'][$i],
                 'created_by' => trim($_POST['created_by']),
             ];
 
             $current_username = $this->userModel->getUsernameById($user_id);
             $data['created_by'] = $current_username;
- 
+
             if ($this->docModel->createPrescription($data)) {
-             redirect('doctor/doc_template');
-             # code...
-            }else{
-             die('Something went wrong');
-            }
- 
+                redirect('doctor/doc_template');
+                # code...
+            } else {
+                die('Something went wrong');
             }
 
-        
-    }
 
+            //insert data into 'medicine' table
+
+            $drug = $_POST['drug'];
+            $unit = $_POST['unit'];
+            $dosage = $_POST['dosage'];
+            var_dump($drug, $unit, $dosage);
+
+            $numRecords = count($drug);
+            for ($i = 0; $i < $numRecords; $i++) {
+
+                $data = [
+
+                    'drug' => $_POST['drug'][$i],
+                    'unit' => $_POST['unit'][$i],
+                    'dosage' => $_POST['dosage'][$i],
+
+                ];
+
+                $current_username = $this->userModel->getUsernameById($user_id);
+                $data['created_by'] = $current_username;
+
+                if ($this->docModel->addMedicineToTable($data)) {
+
+                    redirect('doctor/doc_template');
+                    # code...
+                } else {
+                    die('Something went wrong');
+                }
+            }
+        }
     }
 
     public function doc_feedback()
@@ -314,8 +417,9 @@ class Doctor extends Controller{
         $this->view('doctor/doc_feedback', $data);
     }
 
-    public function sentFeedback($user_id){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function sentFeedback($user_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -328,17 +432,17 @@ class Doctor extends Controller{
                 'title_err' => '',
                 'content_err' => '',
             ];
-        
-            if(empty($data['title'])){
-                $data['title_err']='Please enter the title';  
+
+            if (empty($data['title'])) {
+                $data['title_err'] = 'Please enter the title';
             }
-            if(empty($data['content'])){
-                $data['content_err']='Please enter the content';  
+            if (empty($data['content'])) {
+                $data['content_err'] = 'Please enter the content';
             }
 
-            if(empty($data['title_err']) && empty($data['content_err'])){
+            if (empty($data['title_err']) && empty($data['content_err'])) {
                 // Validated
-    
+
                 // Fetch the current username from db
                 $username = $this->userModel->getUsernameById($user_id);
                 $email = $this->userModel->getEmailById($user_id);
@@ -348,17 +452,13 @@ class Doctor extends Controller{
                 // post notifications
                 if ($this->userModel->addFeedback($data)) {
                     redirect('undergrad/feedback');
-                    } else {
+                } else {
                     die('Something went wrong');
-                    }
-
+                }
             } else {
                 // Load view with errors
                 $this->view('academic/ac_feedback', $data);
             }
         }
     }
-
-    
-
 }

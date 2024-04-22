@@ -2,6 +2,7 @@
     $currentPage = 'chats';
     $request = $data['request'];
     $counsellor = $data['counsellor'];
+    $doctor = $data['doctor'];
     $user_id = $data['user_id']; 
 ?>
 
@@ -28,22 +29,39 @@
             <div>
                 <p class="p-regular-green">Recents</p>
                 <div class="card-white-scroll" style="height: 500px;">
+
                     <?php foreach ($data['request'] as $request) : ?>
-                        <?php foreach ($data['counsellor'] as $counsellor) : ?> 
-                            <?php if ($request->from_user_id === $user_id && $request->to_user_id === $counsellor->user_id) : ?>
+
+                        <?php foreach ($data['counsellor'] as $counsellor) : ?>
+                            <?php if ($request->from_user_id === $user_id && $request->to_user_id === $counsellor->user_id ) : ?>
                                 <div class="card-green">
                                     <img src="<?php echo IMG;?>pro-avatar1.svg" alt="quiz" class="card-profile2">
                                     <div>
                                         <a href="<?php echo URLROOT;?>undergrad/chatroom/<?php echo $counsellor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name. ' ' .$counsellor->last_name;?></p></a>
-                                        <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $counsellor->coun_type;?> Counsellor | <?php echo $counsellor->university;?></p>
+                                        <p class="p-regular-grey" style="font-size: 15px;"><?php echo $counsellor->coun_type;?> Counsellor | <?php echo $counsellor->university;?></p>
                                     </div>
-                                    <div class="text-container">
-                                        <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;">text</p>
+                                    <div class="btn-container">
+                                        <a href="<?php echo URLROOT;?>undergrad/chatroom/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Chat</button></a>
                                     </div>
-
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; ?>
+
+                        <?php foreach ($data['doctor'] as $doctor) : ?>
+                            <?php if ($request->from_user_id === $user_id && $request->to_user_id === $doctor->user_id ) : ?>
+                                <div class="card-green">
+                                    <img src="<?php echo IMG;?>pro-avatar1.svg" alt="quiz" class="card-profile2">
+                                    <div>
+                                        <a href="<?php echo URLROOT;?>undergrad/chatroom/<?php echo $doctor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $doctor->first_name. ' ' .$doctor->last_name;?></p></a>
+                                        <p class="p-regular-grey" style="font-size: 15px;">Psychiatrist | <?php echo $doctor->hospital;?></p>
+                                    </div>
+                                    <div class="btn-container">
+                                        <a href="<?php echo URLROOT;?>undergrad/chatroom/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Chat</button></a>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                        
                     <?php endforeach; ?>
                 </div>
             </div>
