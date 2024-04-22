@@ -86,6 +86,19 @@ class Undergrad extends Controller
         $this->view('undergrad/professional_profile', $data);
     }
 
+    public function request_letters(){
+        $id = $_SESSION['user_id'];
+        $undergrad = $this->adminModel->getUgById($id);
+        $counsellor = $this->adminModel->getCounselors();
+        $request_letter = $this->ugModel->getRequestLettersfromId($undergrad->ug_id);
+        $data = [
+            'counsellor' => $counsellor,
+            'undergrad' => $undergrad,
+            'request_letter' => $request_letter
+        ];
+        $this->view('undergrad/request_letters', $data);
+    }
+
     public function send_req_letter($id)
     {
         $undergrad = $this->adminModel->getUgById($_SESSION['user_id']);
