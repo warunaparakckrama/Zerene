@@ -111,7 +111,7 @@ class Undergrad extends Controller
     }
 
     public function send_req_letter($id)
-    {
+    {   
         $undergrad = $this->adminModel->getUgById($_SESSION['user_id']);
         $data = [
             'id' => $id,
@@ -442,7 +442,7 @@ class Undergrad extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
                 'from' => $id,
-                'coun_id' => trim($_POST['coun_id']),
+                'coun_user_id' => trim($_POST['coun_user_id']),
                 'subject' => trim($_POST['subject']),
                 'content' => trim($_POST['content']),
                 'document_path' => null
@@ -473,7 +473,7 @@ class Undergrad extends Controller
                 }
             }
 
-            $coun_id = $data['coun_id'];
+            $coun_id = $data['coun_user_id'];
 
             if ($this->ugModel->addRequestLetter($data)) {
                 redirect('undergrad/send_req_letter/' . $coun_id);
