@@ -360,7 +360,7 @@ class Admin extends Controller
         $this->view('admin/notifications_view', $data);
     }
 
-    public function support()
+    public function ad_support()
     {
         $feedback = $this->adminModel->getFeedback();
         $complaint = $this->adminModel->getComplaint();
@@ -368,7 +368,7 @@ class Admin extends Controller
             'feedback' => $feedback,
             'complaint' => $complaint
         ];
-        $this->view('admin/support', $data);
+        $this->view('admin/ad_support', $data);
     }
 
     public function support_view($feedback_id)
@@ -714,7 +714,7 @@ class Admin extends Controller
     {
         if ($this->adminModel->deleteFeedback($feedback_id)) {
             //   flash('post_message', 'user Removed');
-            redirect('admin/support');
+            redirect('admin/ad_support');
         } else {
             die('Something went wrong');
         }
@@ -724,7 +724,7 @@ class Admin extends Controller
     {
         if ($this->adminModel->solveFeedback($feedback_id)) {
             //   flash('post_message', 'user Removed');
-            redirect('admin/support');
+            redirect('admin/ad_support');
         } else {
             die('Something went wrong');
         }
