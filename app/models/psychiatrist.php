@@ -108,10 +108,11 @@ class psychiatrist
         $this->db->bind(':doc_user_id', $data['doc_user_id']);
 
         $prescription = $this->db->execute();
+        $last_id = '';
         
-
         if ($prescription) {
             $prescription_id = $this->db->lastInsertedId();
+            $last_id = $this->getLastCreatedPrescriptionId($prescription_id);
 
             foreach ($medicine_data as $medicine) {
 
@@ -129,7 +130,7 @@ class psychiatrist
                     echo 'medicine insert failed'; // Return false if any medicine insertion fails
                 }
             }
-            return true; // Return true if all medicine insertions were successful
+            return $last_id; // Return last inserted id from prescription table
         }
         return false; // Return false if prescription insertion fails
     }
@@ -143,12 +144,6 @@ class psychiatrist
         return $results;
     }
 
-    public function getLastCreatedPrescription(){
-        $this->db->query('SELECT LAST_INSERT_ID() AS last_id FROM prescription');
-        $result =$this->db->single();
-        return $result ? $result->last_id : null;
-    }
-
     public function getPrescriptionById($id){
         $this->db->query('SELECT * FROM prescription WHERE is_deleted = FALSE AND pres_id = :pres_id');
         $this->db->bind(':pres_id', $id);
@@ -160,5 +155,11 @@ class psychiatrist
         $this->db->bind(':id', $id);
         $results = $this->db->resultset();
         return $results;
+    }
+
+    public function getLastCreatedPrescriptionId(){
+        $this->db->query('SELECT LAST_INSERT_ID() AS last_id');
+        $result = $this->db->single();
+        return $result ? $result->last_id : null;
     }
 }
