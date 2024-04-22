@@ -24,8 +24,8 @@
 
 
             <div>
-                <div class="card-white">
-                    <p class="p-regular">Recently recieved Documents</p>
+                <p class="p-regular-green">Recently recieved Documents</p>
+                <div class="card-white-scroll" style="height: 215px;">
                     <br>
                     <!-- <div class="card-green">
                         <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="pro pic" class="card-profile">
@@ -91,20 +91,22 @@
                 <br>
                 <!-- //created letters -->
                 <div>
-                    <div class="card-white">
-
-
-                        <p class="p-regular">created letters</p>
+                <p class="p-regular-green">Created Letters </p>
+                    <div class="card-white-scroll" style="height: 215px;">
+                        
+                        <?php foreach ($data['op details'] as $opDetail) : ?>
+                       
                         <div class="card-green">
                             <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="pro pic" class="card-profile">
                             <div>
-                                <p class="p-regular" style="margin-bottom: -10px;">Zereneuser <?php echo $rletter->from_ug_id ?></p>
-                                <p class="p-regular" style="color:var(--zerene-grey) ;"><?php echo $rletter->subject ?></p>
+                                <p class="p-regular" style="margin-bottom: -10px;">Zereneuser <?php echo $opDetail->ug_id ?></p>
+                                <p class="p-regular" style="color:var(--zerene-grey) ;"><?php echo $opDetail->date ?></p>
                             </div>
                             <div class="btn-container">
-                                <button class="button-main">view</button>
+                            <a href="<?php echo URLROOT; ?>academic/ac_opletter_view/<?php echo $opDetail->letter_id ?>" class="a-name"><button class="button-main">view</button></a>
                             </div>
                         </div>
+                        <?php endforeach; ?>
 
                     </div>
                 </div>

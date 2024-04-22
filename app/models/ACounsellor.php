@@ -99,5 +99,18 @@
             $results = $this->db->single();
             return $results;
         }
+
+        public function getOpLetter($coun_id){
+            $this->db->query('SELECT * FROM opinion_letter WHERE coun_id = :ug_id');
+            $this->db->bind(':ug_id', $coun_id);
+            $results = $this->db->resultSet();
+            return $results;
+        }
+        public function getOpLetterbyid($coun_id){
+            $this->db->query('SELECT * FROM opinion_letter WHERE letter_id = :ug_id');
+            $this->db->bind(':ug_id', $coun_id);
+            $results = $this->db->single();
+            return $results;
+        }
     }
 ?>
