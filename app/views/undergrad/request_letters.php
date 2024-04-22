@@ -5,8 +5,6 @@
     $request_letter = $data['request_letter']
 ?>
 
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +57,7 @@
                                     </div>
 
                                     <div class="btn-container">
-                                        <a href="" style="text-decoration: none;"><button class="button-main">View Letter</button></a>
+                                        <a href="<?php echo URLROOT;?>undergrad/view_request_letter/<?php echo $request_letter->letter_id;?>" style="text-decoration: none;"><button class="button-main">View Letter</button></a>
                                     </div>
                                 </div>
                             <?php endif; ?>

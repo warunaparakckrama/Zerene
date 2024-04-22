@@ -99,6 +99,17 @@ class Undergrad extends Controller
         $this->view('undergrad/request_letters', $data);
     }
 
+    public function view_request_letter($id){
+        $request_letter = $this->ugModel->getRequestLettersfromId($id);
+        $counsellor = $this->adminModel->getCounselors();
+        $data = [
+            'request_letter' => $request_letter,
+            'counsellor' => $counsellor,
+            'id' => $id
+        ];
+        $this->view('undergrad/view_request_letter', $data);
+    }
+
     public function send_req_letter($id)
     {
         $undergrad = $this->adminModel->getUgById($_SESSION['user_id']);
