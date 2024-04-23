@@ -36,20 +36,20 @@
             return $results;
         }
 
-        public function getOpRequest($coun_id) {
-            $this->db->query('SELECT * FROM request_letter WHERE to_coun_id = :coun_id');
-            $this->db->bind(':coun_id', $coun_id);
+        public function getRequestLetterforCounsellor($id) {
+            $this->db->query('SELECT * FROM request_letter WHERE to_coun_user_id = :coun_id');
+            $this->db->bind(':coun_id', $id);
             $results = $this->db->resultSet();
             return $results;
         }
 
-        public function insertOpLetterDetails($data){
-            $this->db->query('INSERT INTO opinion_letter (letter_subject, letter_body, ug_id, coun_id) VALUES (:letter_subject, :letter_body, :ug_id, :coun_id)');
+        public function insertOpLetter($data){
+            $this->db->query('INSERT INTO opinion_letter (letter_subject, letter_body, coun_user_id, ug_user_id, date) VALUES (:letter_subject, :letter_body, :coun_user_id, :ug_user_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
             $this->db->bind(':letter_subject', $data['subject']);
-            $this->db->bind(':letter_body', $data['body']);
-            $this->db->bind(':ug_id', $data['ug_id']);
-            $this->db->bind(':coun_id', $_SESSION['user_id']);
-    
+            $this->db->bind(':letter_body', $data['content']);
+            $this->db->bind(':coun_user_id', $data['coun_user_id']);
+            $this->db->bind(':ug_user_id', $data['ug_user_id']);
+            
             if ($this->db->execute()) {
                 return true;
             }
@@ -94,18 +94,19 @@
         }
 
         public function get_req_letter($letter_id){
-            $this->db->query('SELECT * FROM request_letter JOIN undergraduate ON request_letter.from_ug_id = undergraduate.ug_id WHERE request_letter.letter_id = :letter_id');
+            $this->db->query('SELECT * FROM request_letter WHERE letter_id = :letter_id');
             $this->db->bind(':letter_id', $letter_id);
             $results = $this->db->single();
             return $results;
         }
 
-        public function getOpLetter($coun_id){
-            $this->db->query('SELECT * FROM opinion_letter WHERE coun_id = :ug_id');
-            $this->db->bind(':ug_id', $coun_id);
+        public function getOpLetter($id){
+            $this->db->query('SELECT * FROM opinion_letter WHERE coun_user_id = :id');
+            $this->db->bind(':id', $id);
             $results = $this->db->resultSet();
             return $results;
         }
+
         public function getOpLetterbyid($coun_id){
             $this->db->query('SELECT * FROM opinion_letter WHERE letter_id = :ug_id');
             $this->db->bind(':ug_id', $coun_id);
