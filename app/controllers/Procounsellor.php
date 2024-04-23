@@ -565,19 +565,29 @@ class Procounsellor extends Controller
                 'stress' => $Stress,
             ];
             $i = 1;
-            $mark = 0;
-            for ($i = 1; $i <= 21; $i++) {
-                $mark = $response->{'q' . $i . '_response'} * 2 + $mark;
+            $mark1 = 0;
+            $mark2 = 0;
+            $mark3 = 0;
+            for ($i = 1; $i <= 7; $i++) {
+                $mark1 = $response->{'q' . $i . '_response'} * 2 + $mark1;
+            }
+            
+            for ($i = 8; $i <= 14; $i++) {
+                $mark2 = $response->{'q' . $i . '_response'} * 2 + $mark2;
+            }
+
+            for ($i = 15; $i <= 21; $i++) {
+                $mark3 = $response->{'q' . $i . '_response'} * 2 + $mark3;
             }
 
             //Depression
-            if ($mark >= 28) {
+            if ($mark1 >= 28) {
                 $Depression = 'Extremely Severe';
-            } elseif ($mark >= 21) {
+            } elseif ($mark1 >= 21) {
                 $Depression = 'Severe';
-            } elseif ($mark >= 14) {
+            } elseif ($mark1 >= 14) {
                 $Depression = 'Moderate';
-            } elseif ($mark >= 10) {
+            } elseif ($mark1 >= 10) {
                 $Depression = 'Mild';
             } else {
                 $Depression = 'Normal';
@@ -585,13 +595,13 @@ class Procounsellor extends Controller
             $data['depression'] = $Depression;
 
             //Anxiety
-            if ($mark >= 20) {
+            if ($mark2 >= 20) {
                 $Anxiety = 'Extremely Severe';
-            } elseif ($mark >= 15) {
+            } elseif ($mark2 >= 15) {
                 $Anxiety = 'Severe';
-            } elseif ($mark >= 10) {
+            } elseif ($mark2 >= 10) {
                 $Anxiety = 'Moderate';
-            } elseif ($mark >= 8) {
+            } elseif ($mark2 >= 8) {
                 $Anxiety = 'Mild';
             } else {
                 $Anxiety = 'Normal';
@@ -599,13 +609,13 @@ class Procounsellor extends Controller
             $data['anxiety'] = $Anxiety;
 
             //Stress
-            if ($mark >= 34) {
+            if ($mark3 >= 34) {
                 $Stress = 'Extremely Severe';
-            } elseif ($mark >= 26) {
+            } elseif ($mark3 >= 26) {
                 $Stress = 'Severe';
-            } elseif ($mark >= 19) {
+            } elseif ($mark3 >= 19) {
                 $Stress = 'Moderate';
-            } elseif ($mark >= 15) {
+            } elseif ($mark3 >= 15) {
                 $Stress = 'Mild';
             } else {
                 $Stress = 'Normal';

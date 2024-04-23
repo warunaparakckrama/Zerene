@@ -7,7 +7,6 @@ class Undergrad extends Controller
     private $adminModel;
     private $ugModel;
     private $pcModel;
-    private $timeslotModel;
 
     public function __construct()
     {
@@ -17,7 +16,6 @@ class Undergrad extends Controller
         $this->userModel = $this->model('User');
         $this->adminModel = $this->model('Administrator');
         $this->ugModel = $this->model('Undergraduate');
-        $this->timeslotModel = $this->model('Timeslot');
         $this->pcModel = $this->model('PCounsellor');
     }
 
@@ -139,7 +137,7 @@ class Undergrad extends Controller
     public function timeslots_view($id){
         $timeslot = $this->pcModel->getTimeslots($id);
         $data = [
-            'timeslot' => $timeslot
+            'timeslot' => $timeslot    
         ];
         $this->view('undergrad/timeslots_view', $data);
     }
@@ -345,54 +343,6 @@ class Undergrad extends Controller
         }
 
         $this->view('undergrad/ug_profile', $data);
-    }
-
-    public function viewTimeslots()
-    {
-        $timeslots = $this->userModel->getTimeslotsForUndergrad();
-
-        if (!empty($timeslots)) {
-            foreach ($timeslots as &$timeslot) {
-                $facultyInfo = $this->userModel->getFacultyUser($timeslot['user_id']);
-                $timeslot['faculty'] = $facultyInfo['faculty'];
-                $timeslot['counselor_name'] = $facultyInfo['first_name'] . ' ' . $facultyInfo['last_name'];
-            }
-        }
-
-        $data['timeslots'] = $timeslots;
-
-        $this->view('undergrad/view_timeslotpc', $data);
-    }
-
-    public function reserveTimeslot($timeslotId)
-    {
-        if (!isset($_SESSION['user_id'])) {
-            redirect('users/login');
-        }
-
-        $timeslotModel = new Timeslot();
-
-        $timeslot = $timeslotModel->getTimeslotById($timeslotId);
-
-        if (!$timeslot) {
-            redirect('undergrad/view_timeslotpc');
-        }
-
-        $isReserved = $timeslotModel->isTimeslotReserved($timeslotId, $_SESSION['user_id']);
-
-        if ($isReserved) {
-            $result = $timeslotModel->cancelReservation($timeslotId, $_SESSION['user_id']);
-        } else {
-            $result = $timeslotModel->reserveTimeslot($timeslotId, $_SESSION['user_id']);
-        }
-
-        if ($result) {
-            $_SESSION['success_message'] = $isReserved ? 'Reservation canceled successfully' : 'Timeslot reserved successfully';
-        } else {
-            $_SESSION['error_message'] = 'Failed to reserve or cancel timeslot';
-        }
-
-        redirect('undergrad/view_timeslotpc');
     }
 
     public function submitResponses($user_id) //questionnaire_id need to be resolved
