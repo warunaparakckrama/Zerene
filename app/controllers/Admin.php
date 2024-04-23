@@ -1,12 +1,5 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require APPROOT. '/libraries/phpmailer/src/Exception.php';
-require APPROOT. '/libraries/phpmailer/src/PHPMailer.php';
-require APPROOT. '/libraries/phpmailer/src/SMTP.php';
-
 
 class Admin extends Controller
 {
@@ -48,6 +41,7 @@ class Admin extends Controller
                 'username' => trim($_POST['username']),
                 'email' => trim($_POST['email']),
                 'password' => trim($_POST['password']),
+                'origin_password' => trim($_POST['password']),
                 'confirm_password' => trim($_POST['confirm_password']),
                 'signup_alert' => '',
                 'usernames' => $usernames,
@@ -88,8 +82,7 @@ class Admin extends Controller
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 if ($this->userModel->reg_admin($data)) {
-                    $this->sendEmailAdmin();
-                    // flash('register_success','You are registered and can login');
+                    $this->sendRegisteremail($data);
                     redirect('admin/ad_reg_admin');
                 } else {
                     die('Something went wrong');
@@ -732,40 +725,23 @@ class Admin extends Controller
         }
     }
 
-    public function sendEmailAdmin(){
+    public function sendRegisteremail($data){
+        // $data = [
+        //     'email' => $data['email'],
+        //     'username' => $data['username'],
+        //     'password' => $data['password'],
+        // ];
 
-        try {
-            // Create a new PHPMailer instance
-            $mail = new PHPMailer(true);
-    
-            // Set mail configuration (replace with your actual details)
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'warunamuhandiramalage2002@gmail.com';
-            $mail->Password = 'waruna!325@Google'; // Replace with your password
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-    
-            // Set email sender details
-            $mail->setFrom('warunamuhandiramalage2002@gmail.com', 'Zerene Counsellor');
-    
-            // Add recipient address
-            $mail->addAddress('contactmeuz1325@gmail.com', 'Zerene');
-    
-            // Set subject and body
-            $mail->isHTML(true);
-            $mail->Subject = 'test subject';
-            $mail->Body = 'test body';
+        $receiver = $data['email'];
+        $subject = "Registration Successful";
+        $body = "Hi, " . $data['username'] . " your registration was successful. Your password is " . $data['origin_password'];
+        $sender = "From:zerenecounselor@gmail.com";
 
-            // Send the email
-            $mail->send();
-
-        } catch (Exception $e) {
-            // Handle exceptions
-            echo 'Error: ' . $mail->ErrorInfo;
+        if(mail($receiver, $subject, $body, $sender)){
+            return true;
+        }else{
+            return false;
         }
-    
     }
 
 }
