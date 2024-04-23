@@ -1,9 +1,9 @@
-<?php
-$currentPage = 'chats';
-$request = $data['request'];
-$counsellor = $data['counsellor'];
-$doctor = $data['doctor'];
-$user_id = $data['user_id'];
+<?php 
+    $currentPage = 'chats';
+    $request = $data['request'];
+    $counsellor = $data['counsellor'];
+    $doctor = $data['doctor'];
+    $user_id = $data['user_id'];
 ?>
 
 <head>
@@ -33,8 +33,9 @@ $user_id = $data['user_id'];
                 <p class="p-regular-green">Recents</p>
                 <div class="card-white-scroll" style="height: 500px;">
                     <?php foreach ($data['request'] as $request) : ?>
+                  
                         <?php foreach ($data['counsellor'] as $counsellor) : ?>
-                            <?php if ($request->from_user_id === $user_id && $request->to_user_id === $counsellor->user_id) : ?>
+                            <?php if ($request->from_user_id === $user_id && $request->to_user_id === $counsellor->user_id ) : ?>
                                 <div class="card-green">
                                     <img src="<?php echo IMG; ?>pro-avatar1.svg" alt="quiz" class="card-profile2">
                                     <div>
@@ -66,6 +67,7 @@ $user_id = $data['user_id'];
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; ?>
+                        
                     <?php endforeach; ?>
                 </div>
             </div>
