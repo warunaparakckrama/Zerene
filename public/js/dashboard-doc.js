@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const sblink1 = document.getElementById("sb-link1");
     const sblink2 = document.getElementById("sb-link2");
     const sblink3 = document.getElementById("sb-link3");
-    const sblink4 = document.getElementById("sb-link4");
+    
     const sblink5 = document.getElementById("sb-link5");
     const sblink6 = document.getElementById("sb-link6");
     const sblink7 = document.getElementById("sb-link7");
@@ -44,13 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sblink3.addEventListener("click", function (e) {
         e.preventDefault();
-        loadView("doc_counselors"); // Load Pcounsellor.php
+        loadView("doc_professionals"); // Load Professionals.php
     });
 
-    sblink4.addEventListener("click", function (e) {
-        e.preventDefault();
-        loadView("doc_doctors"); // Load d_doctor.php
-    });
+   
 
     sblink5.addEventListener("click", function (e) {
         e.preventDefault();

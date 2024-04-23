@@ -15,6 +15,13 @@ class Undergraduate
         return $results;
     }
 
+    public function getFacultyUser($userID)
+    {
+        $this->db->query('SELECT counsellor.faculty, counsellor.first_name, counsellor.last_name FROM counsellor INNER JOIN users ON counsellor.user_id = users.user_id WHERE users.user_id = :userID');
+        $this->db->bind(':userID',$userID);
+        return $this->db->single();
+    }
+
     public function getQuestionnaireDetails()
     {
         $this->db->query('SELECT * FROM questionnaires');
@@ -91,9 +98,6 @@ class Undergraduate
         }
     }
 
-
-    
-
     public function getResponsesbyId($id)
     {
         $this->db->query('SELECT * FROM response WHERE user_id = :user_id ORDER BY attempted_at DESC');
@@ -101,7 +105,6 @@ class Undergraduate
         $results = $this->db->resultSet();
         return $results;
     }
-
 
     public function getResponses(){
         $this->db->query('SELECT * FROM response ORDER BY attempted_at DESC');
@@ -134,9 +137,9 @@ class Undergraduate
     }
 
     public function addRequestLetter($data){
-        $this->db->query('INSERT INTO request_letter (from_ug_id, to_coun_id, subject, content, document_path, sent_at) VALUES (:from, :to, :subject, :content, :document_path, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+        $this->db->query('INSERT INTO request_letter (from_ug_user_id, to_coun_User_id, subject, content, document_path, sent_at) VALUES (:from, :to, :subject, :content, :document_path, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
         $this->db->bind(':from', $data['from']);
-        $this->db->bind(':to', $data['coun_id']);
+        $this->db->bind(':to', $data['coun_user_id']);
         $this->db->bind(':subject', $data['subject']);
         $this->db->bind(':content', $data['content']);
         $this->db->bind(':document_path', $data['document_path']);
@@ -145,5 +148,26 @@ class Undergraduate
         } else {
             return false;
         }
+    }
+
+    public function getMsgRequestfromId($id){
+        $this->db->query('SELECT * FROM msg_request WHERE from_user_id = :id and is_deleted = FALSE');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getRequestLettersfromId($id){
+        $this->db->query('SELECT * FROM request_letter WHERE from_ug_user_id = :id');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getRequestLettersfromLetterId($id){
+        $this->db->query('SELECT * FROM request_letter WHERE letter_id = :id');
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        return $row;
     }
 }

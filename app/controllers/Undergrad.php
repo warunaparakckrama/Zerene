@@ -6,6 +6,7 @@ class Undergrad extends Controller
     private $userModel;
     private $adminModel;
     private $ugModel;
+    private $pcModel;
     private $timeslotModel;
 
     public function __construct()
@@ -17,15 +18,10 @@ class Undergrad extends Controller
         $this->adminModel = $this->model('Administrator');
         $this->ugModel = $this->model('Undergraduate');
         $this->timeslotModel = $this->model('Timeslot');
+        $this->pcModel = $this->model('PCounsellor');
     }
 
     //user view controllers
-
-    public function dashboard()
-    {
-        $data = [];
-        $this->view('undergrad/dashboard', $data);
-    }
 
     public function home()
     {
@@ -34,7 +30,7 @@ class Undergrad extends Controller
     }
 
     public function questionnaires()
-    {   
+    {
         $id = $_SESSION['user_id'];
         $response = $this->ugModel->getResponsesById($id);
         $questionnaire = $this->ugModel->getQuestionnaireDetails();
@@ -46,7 +42,7 @@ class Undergrad extends Controller
     }
 
     public function quiz_view($questionnaire_id)
-    {   
+    {
         $questionnaire = $this->ugModel->getQuestionnairesfromId($questionnaire_id);
         $question = $this->ugModel->getQuestionsfromQuestionnaireId($questionnaire_id);
         $answer = $this->ugModel->getAnswersfromQuestionnaireId($questionnaire_id);
@@ -58,39 +54,64 @@ class Undergrad extends Controller
         $this->view('undergrad/quiz_view', $data);
     }
 
-    public function professionalcounsellors()
-    {
-        $data = [];
-        $this->view('undergrad/professionalcounsellors', $data);
-    }
-
     public function professionals()
-    {   
+    {
         $id = $_SESSION['user_id'];
-        $undergrad= $this->adminModel->getUgById($id);
+        $undergrad = $this->adminModel->getUgById($id);
         $counsellor = $this->adminModel->getCounselors();
         $doctor = $this->adminModel->getDoctors();
+        $direct = $this->pcModel->getUgDirectsfromUg($id);
+        $request = $this->ugModel->getMsgRequestfromId($id);
         $data = [
             'counsellor' => $counsellor,
             'undergrad' => $undergrad,
-            'doctor' => $doctor
+            'doctor' => $doctor,
+            'direct' => $direct,
+            'request' => $request,
         ];
         $this->view('undergrad/professionals', $data);
     }
 
     public function professional_profile($id)
-    {
+    {   
         $counsellor = $this->adminModel->getcounsellorById($id);
         $doctor = $this->adminModel->getDoctorById($id);
+        $request = $this->ugModel->getMsgRequestfromId($_SESSION['user_id']);
         $data = [
             'counsellor' => $counsellor,
             'doctor' => $doctor,
+            'request' => $request,
             'id' => $id
         ];
         $this->view('undergrad/professional_profile', $data);
     }
 
-    public function send_req_letter($id){
+    public function request_letters(){
+        $id = $_SESSION['user_id'];
+        $undergrad = $this->adminModel->getUgById($id);
+        $counsellor = $this->adminModel->getCounselors();
+        $request_letter = $this->ugModel->getRequestLettersfromId($id);
+        $data = [
+            'counsellor' => $counsellor,
+            'undergrad' => $undergrad,
+            'request_letter' => $request_letter
+        ];
+        $this->view('undergrad/request_letters', $data);
+    }
+
+    public function view_request_letter($id){
+        $request_letter = $this->ugModel->getRequestLettersfromLetterId($id);
+        $counsellor = $this->adminModel->getCounsellorById($request_letter->to_coun_user_id);
+        $data = [
+            'request_letter' => $request_letter,
+            'counsellor' => $counsellor,
+            'id' => $id
+        ];
+        $this->view('undergrad/view_request_letter', $data);
+    }
+
+    public function send_req_letter($id)
+    {   
         $undergrad = $this->adminModel->getUgById($_SESSION['user_id']);
         $data = [
             'id' => $id,
@@ -99,26 +120,28 @@ class Undergrad extends Controller
         $this->view('undergrad/send_req_letter', $data);
     }
 
-    public function view_timeslotpc()
-    {
-        $timeslot = $this->ugModel->getTimeslotsForUndergrad();
+    public function timeslots()
+    {   
+        $id = $_SESSION['user_id'];
+        $undergrad = $this->adminModel->getUgById($id);
+        $counsellor = $this->adminModel->getCounselors();
+        $doctor = $this->adminModel->getDoctors();
+        $direct = $this->pcModel->getUgDirectsfromUg($id);
+        $data = [
+            'counsellor' => $counsellor,
+            'undergrad' => $undergrad,
+            'doctor' => $doctor,
+            'direct' => $direct
+        ];
+        $this->view('undergrad/timeslots', $data);
+    }
+
+    public function timeslots_view($id){
+        $timeslot = $this->pcModel->getTimeslots($id);
         $data = [
             'timeslot' => $timeslot
         ];
-        $this->view('undergrad/view_timeslotpc', $data);
-
-    }
-
-    public function doctors()
-    {
-        $data = [];
-        $this->view('undergrad/doctors', $data);
-    }
-
-    public function doctorprofile()
-    {
-        $data = [];
-        $this->view('undergrad/doctorprofile', $data);
+        $this->view('undergrad/timeslots_view', $data);
     }
 
     public function chats()
@@ -141,7 +164,7 @@ class Undergrad extends Controller
     }
 
     public function ug_profile()
-    {   
+    {
         $id = $_SESSION['user_id'];
         $undergrad = $this->adminModel->getUgById($id);
         $data = [
@@ -151,7 +174,7 @@ class Undergrad extends Controller
     }
 
     public function quiz_review($quiz_id)
-    {   
+    {
         $undergrad = $this->adminModel->getUgById($_SESSION['user_id']);
         $questionnaire = $this->ugModel->getQuestionnairesfromId($quiz_id);
         $counsellor = $this->adminModel->getCounselors();
@@ -178,8 +201,7 @@ class Undergrad extends Controller
 
         if ($receiver->user_type === 'acounsellor' || $receiver->user_type === 'pcounsellor') {
             $professional = $this->adminModel->getCounsellorById($user_id);
-        }
-        elseif ($receiver->user_type === 'doctor') {
+        } elseif ($receiver->user_type === 'doctor') {
             $professional = $this->adminModel->getDoctorById($user_id);
         }
 
@@ -193,7 +215,8 @@ class Undergrad extends Controller
         $this->view('undergrad/chatroom', $data);
     }
 
-    public function ug_view_profile($id){
+    public function ug_view_profile($id)
+    {
         $undergrad = $this->adminModel->getUgById($id);
         $data = [
             'undergrad' => $undergrad
@@ -204,7 +227,7 @@ class Undergrad extends Controller
     //function controllers
 
     public function changeUsernameUG($user_id)
-    {   
+    {
         $undergrad = $this->adminModel->getUgById($user_id);
         $current_username = $this->userModel->getUsernameById($user_id);
         $username = $this->userModel->getUsernames();
@@ -223,20 +246,16 @@ class Undergrad extends Controller
 
             if (strlen($data['new_username']) < 8) {
                 $data['username_alert'] = '*Username must be atleast 8 characters';
-            }
-
-            elseif($data['new_username'] == $data['current_username']) {
+            } elseif ($data['new_username'] == $data['current_username']) {
                 $data['username_alert'] = '*New username cannot be same as the current username';
-            }
-
-            else {
+            } else {
                 // Convert the new_username to lowercase
                 $newUsernameLower = strtolower($data['new_username']);
-            
+
                 foreach ($data['username'] as $username) {
                     // Convert each username in the array to lowercase
                     $existingUsernameLower = strtolower($username->username);
-                    
+
                     // Compare the lowercase versions of the usernames
                     if ($newUsernameLower === $existingUsernameLower) {
                         // If there is a match, set the alert message
@@ -245,7 +264,7 @@ class Undergrad extends Controller
                     }
                 }
             }
-            
+
             // Fetch the hashed password from the database based on the user ID
             $hashed_password_from_db = $this->userModel->getPasswordById($user_id);
 
@@ -258,24 +277,21 @@ class Undergrad extends Controller
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
                     flash('user_message', 'Username updated successfully');
-                    redirect('undergrad/ug_profile'); 
+                    redirect('undergrad/ug_profile');
                 } else {
                     die('Something went wrong');
-                }    
-            } 
-
-            else {
+                }
+            } else {
                 // Load view with errors
                 $this->view('undergrad/ug_profile', $data);
             }
+        }
 
-        } 
-        
         $this->view('undergrad/ug_profile', $data);
     }
 
     public function changePwdUG($user_id)
-    {   
+    {
         $undergrad = $this->adminModel->getUgById($user_id);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
@@ -290,12 +306,10 @@ class Undergrad extends Controller
             ];
 
             if (strlen($data['new_password']) < 8) {
-                $data['alert'] = '*Password must be atleast 8 characters';
-            }
-
-            else {
+                $data['password_alert'] = '*Password must be atleast 8 characters';
+            } else {
                 if ($data['new_password'] != $data['confirm_password']) {
-                    $data['alert'] = '*passwords do not match';
+                    $data['password_alert'] = '*passwords do not match';
                 }
             }
 
@@ -331,14 +345,19 @@ class Undergrad extends Controller
 
     public function viewTimeslots()
     {
-        $data['timeslots'] = $this->userModel->getTimeslotsForUndergrad();
+        $timeslots = $this->userModel->getTimeslotsForUndergrad();
 
-        if (isset($data['timeslots']) && is_array($data['timeslots'])) {
-            $this->view('undergrad/view_timeslotpc', $data);
-        } else {
-            $defaultData = ['timeslots' => []];
-            $this->view('undergrad/view_timeslotpc', $defaultData);
+        if (!empty($timeslots)) {
+            foreach ($timeslots as &$timeslot) {
+                $facultyInfo = $this->userModel->getFacultyUser($timeslot['user_id']);
+                $timeslot['faculty'] = $facultyInfo['faculty'];
+                $timeslot['counselor_name'] = $facultyInfo['first_name'] . ' ' . $facultyInfo['last_name'];
+            }
         }
+
+        $data['timeslots'] = $timeslots;
+
+        $this->view('undergrad/view_timeslotpc', $data);
     }
 
     public function reserveTimeslot($timeslotId)
@@ -375,7 +394,7 @@ class Undergrad extends Controller
     public function submitResponses($user_id) //questionnaire_id need to be resolved
     {
         $questionnaire_id = trim($_POST['questionnaire_id']);
-        if ($_SERVER['REQUEST_METHOD']=='POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
@@ -398,17 +417,17 @@ class Undergrad extends Controller
             // Validate and store responses
             if ($this->ugModel->storeResponses($data)) {
                 flash('user_message', 'Responses stored successfully');
-                redirect('undergrad/quiz_review/'. $questionnaire_id); // Adjust the redirect URL accordingly
+                redirect('undergrad/quiz_review/' . $questionnaire_id); // Adjust the redirect URL accordingly
             } else {
                 die('Something went wrong');
             }
-        }
-        else {
+        } else {
             redirect('undergrad/quiz_view/' . $questionnaire_id);
-        } 
+        }
     }
 
-    public function MsgRequest($id){
+    public function MsgRequest($id)
+    {
         $ug_id = $_SESSION['user_id'];
         if ($this->ugModel->sendMsgRequest($ug_id, $id)) {
             redirect('undergrad/professionals');
@@ -417,12 +436,13 @@ class Undergrad extends Controller
         }
     }
 
-    public function submitRequestLetter($id){
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    public function submitRequestLetter($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
                 'from' => $id,
-                'coun_id' => trim($_POST['coun_id']),
+                'coun_user_id' => trim($_POST['coun_user_id']),
                 'subject' => trim($_POST['subject']),
                 'content' => trim($_POST['content']),
                 'document_path' => null
@@ -437,8 +457,8 @@ class Undergrad extends Controller
 
                 if ($document['type'] === $allowedMimeType && $document['size'] <= $maxFileSize) {
                     $fileName = time() . '_' . basename($document['name']);
-                    $filePath = UPLOAD . 'documents/'.$fileName;
-                    
+                    $filePath = UPLOAD . 'documents/' . $fileName;
+
                     // Move the uploaded file to the upload directory
                     if (move_uploaded_file($document['tmp_name'], $filePath)) {
                         // File uploaded successfully, set document_path
@@ -447,22 +467,34 @@ class Undergrad extends Controller
                         // Handle file upload error
                         $data['upload_error'] = 'File upload failed';
                     }
-                }   else {
+                } else {
                     // Handle file size exceeding maximum limit
                     $data['upload_error'] = 'File size exceeds the allowed limit';
                 }
             }
 
-            $coun_id = $data['coun_id'];
+            $coun_id = $data['coun_user_id'];
 
             if ($this->ugModel->addRequestLetter($data)) {
-                redirect('undergrad/send_req_letter/'.$coun_id);
-            } 
-            else {
+                redirect('undergrad/send_req_letter/' . $coun_id);
+            } else {
                 die('something went wrong');
-            }    
+            }
         }
     }
 
+    public function UGProfilePic($id)
+    {
+        $undergrad = $this->adminModel->getUgById($id);
 
+        if ($undergrad->gender === 'Male') {
+            $Url = UGMALE;
+        } elseif ($undergrad->gender === 'Female') {
+            $Url = UGFEMALE;
+        } else {
+            $Url = UGNS;
+        }
+
+        return $Url;
+    }
 }
