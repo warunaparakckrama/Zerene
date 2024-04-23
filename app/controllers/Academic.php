@@ -223,6 +223,14 @@ class Academic extends Controller
         ];
         $this->view('academic/ac_req_letter_view', $data);
     }
+    public function ac_opletter_view($id)
+    {
+        $letter = $this->acModel->getOpLetterbyid($id);
+        $data = [
+            'letter' => $letter,
+        ];
+        $this->view('academic/ac_opletter_view', $data);
+    }
 
     
     //function controllers

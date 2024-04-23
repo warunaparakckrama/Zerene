@@ -69,7 +69,7 @@ $undergrad = $data['undergrad'];
                                         </div>
 
                                         <div class="btn-container">
-                                            <a href="" style="text-decoration: none;"><button class="button-main">View Request letter</button></a>
+                                            <a href="<?php echo URLROOT; ?>academic/ac_opletter_view/<?php echo $letter->letter_id ;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
                                         </div>
                                     </div>
                                 <?php endif; ?>
