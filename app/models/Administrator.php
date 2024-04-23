@@ -6,6 +6,12 @@
             $this->db = new database;
         }
 
+        public function getProfessionals(){
+            $this->db->query('SELECT * FROM users WHERE user_type = "acounsellor" OR "pcounsellor" OR "doctor" AND is_deleted = FALSE');
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
         public function getCounselors(){
             // $this->db->query('SELECT * FROM counsellor');
             $this->db->query('SELECT * FROM counsellor WHERE is_deleted = FALSE');

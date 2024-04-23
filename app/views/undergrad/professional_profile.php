@@ -2,6 +2,7 @@
 <?php 
     $counsellor = $data['counsellor'];
     $doctor = $data['doctor'];
+    $request = $data['request'];
     $id = $data['id'];
 ?>
 
@@ -39,9 +40,22 @@
                                 <p class="p-regular" style="color: var(--zerene-grey);"><?php echo $counsellor->university. ' | '.$counsellor->faculty;?></p>
                                 <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px; margin-bottom: 5px;"><?php echo $counsellor->email;?></p>
                                 <div style="display: flex; flex-direction: row; gap: 10px;">
-                                    <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->coun_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                    <?php if (empty($data['request']) || !in_array($counsellor->user_id, array_column($data['request'], 'to_user_id'))) : ?>
+                                        <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                        <?php else : ?>
+                                        <?php foreach($data['request'] as $request) :?>
+                                            <?php if ($request->to_user_id == $counsellor->user_id) : ?>
+                                                <?php if($request->is_clicked == 1) : ?>
+                                                    <button class="button-second">Request Sent</button>
+                                                <?php else : ?>
+                                                    <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+
                                     <?php if ($counsellor->coun_type === 'Academic') : ?>
-                                        <a href="<?php echo URLROOT;?>Undergrad/send_req_letter/<?php echo $counsellor->coun_id;?>" style="text-decoration: none;"><button class="button-main">Send a Request Letter</button></a>
+                                        <a href="<?php echo URLROOT;?>Undergrad/send_req_letter/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Send a Request Letter</button></a>
                                     <?php elseif ($counsellor->coun_type === 'Professional') : ?>
                                         <button class="button-main">option</button>
                                     <?php endif; ?>

@@ -73,19 +73,45 @@ class Undergrad extends Controller
     }
 
     public function professional_profile($id)
-    {
+    {   
         $counsellor = $this->adminModel->getcounsellorById($id);
         $doctor = $this->adminModel->getDoctorById($id);
+        $request = $this->ugModel->getMsgRequestfromId($_SESSION['user_id']);
         $data = [
             'counsellor' => $counsellor,
             'doctor' => $doctor,
+            'request' => $request,
             'id' => $id
         ];
         $this->view('undergrad/professional_profile', $data);
     }
 
+    public function request_letters(){
+        $id = $_SESSION['user_id'];
+        $undergrad = $this->adminModel->getUgById($id);
+        $counsellor = $this->adminModel->getCounselors();
+        $request_letter = $this->ugModel->getRequestLettersfromId($id);
+        $data = [
+            'counsellor' => $counsellor,
+            'undergrad' => $undergrad,
+            'request_letter' => $request_letter
+        ];
+        $this->view('undergrad/request_letters', $data);
+    }
+
+    public function view_request_letter($id){
+        $request_letter = $this->ugModel->getRequestLettersfromLetterId($id);
+        $counsellor = $this->adminModel->getCounsellorById($request_letter->to_coun_user_id);
+        $data = [
+            'request_letter' => $request_letter,
+            'counsellor' => $counsellor,
+            'id' => $id
+        ];
+        $this->view('undergrad/view_request_letter', $data);
+    }
+
     public function send_req_letter($id)
-    {
+    {   
         $undergrad = $this->adminModel->getUgById($_SESSION['user_id']);
         $data = [
             'id' => $id,
@@ -122,11 +148,13 @@ class Undergrad extends Controller
     {
         $user_id = $_SESSION['user_id'];
         $request = $this->ugModel->getMsgRequest();
+        $professional = $this->adminModel->getProfessionals();
         $counsellor = $this->adminModel->getCounselors();
         $doctor = $this->adminModel->getDoctors();
         $data = [
             'user_id' => $user_id,
             'request' => $request,
+            'professional' => $professional,
             'counsellor' => $counsellor,
             'doctor' => $doctor
         ];
@@ -418,7 +446,7 @@ class Undergrad extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
                 'from' => $id,
-                'coun_id' => trim($_POST['coun_id']),
+                'coun_user_id' => trim($_POST['coun_user_id']),
                 'subject' => trim($_POST['subject']),
                 'content' => trim($_POST['content']),
                 'document_path' => null
@@ -449,7 +477,7 @@ class Undergrad extends Controller
                 }
             }
 
-            $coun_id = $data['coun_id'];
+            $coun_id = $data['coun_user_id'];
 
             if ($this->ugModel->addRequestLetter($data)) {
                 redirect('undergrad/send_req_letter/' . $coun_id);
