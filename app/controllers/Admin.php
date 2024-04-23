@@ -2,11 +2,11 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
 
-require __DIR__ . '/../libraries/phpmailer/src/Exception.php';
-require __DIR__ . '/../libraries/phpmailer/src/PHPMailer.php';
-require __DIR__ . '/../libraries/phpmailer/src/SMTP.php';
+require APPROOT. '/libraries/phpmailer/src/Exception.php';
+require APPROOT. '/libraries/phpmailer/src/PHPMailer.php';
+require APPROOT. '/libraries/phpmailer/src/SMTP.php';
+
 
 class Admin extends Controller
 {
@@ -88,6 +88,7 @@ class Admin extends Controller
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 if ($this->userModel->reg_admin($data)) {
+                    $this->sendEmailAdmin();
                     // flash('register_success','You are registered and can login');
                     redirect('admin/ad_reg_admin');
                 } else {
@@ -729,6 +730,42 @@ class Admin extends Controller
         } else {
             die('Something went wrong');
         }
+    }
+
+    public function sendEmailAdmin(){
+
+        try {
+            // Create a new PHPMailer instance
+            $mail = new PHPMailer(true);
+    
+            // Set mail configuration (replace with your actual details)
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'warunamuhandiramalage2002@gmail.com';
+            $mail->Password = 'waruna!325@Google'; // Replace with your password
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+    
+            // Set email sender details
+            $mail->setFrom('warunamuhandiramalage2002@gmail.com', 'Zerene Counsellor');
+    
+            // Add recipient address
+            $mail->addAddress('contactmeuz1325@gmail.com', 'Zerene');
+    
+            // Set subject and body
+            $mail->isHTML(true);
+            $mail->Subject = 'test subject';
+            $mail->Body = 'test body';
+
+            // Send the email
+            $mail->send();
+
+        } catch (Exception $e) {
+            // Handle exceptions
+            echo 'Error: ' . $mail->ErrorInfo;
+        }
+    
     }
 
 }
