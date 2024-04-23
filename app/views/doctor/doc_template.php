@@ -1,5 +1,7 @@
 <?php 
     $currentPage = 'doc_prescription';
+    $medicine = $data['medicine'];
+    
 ?>
     <head>
         <meta charset="UTF-8">
@@ -81,18 +83,18 @@
     <tbody>
             <tr>
                 <th class="col1">Patient's Name</th>
-                <td class="col1 merged-cells" colspan="3"></td>
+                <td class="col1 merged-cells" colspan="3"><?php echo $doctor->ug_name;?></td>
                
             </tr>
             <tr>
                 <th class="col1">Patient's age</th>
-                <td class="col2"></td>
+                <td class="col2"><?php echo $doctor->age;?></td>
                 <th class="col3">Patient's gender</th>
-                <td class="col4"></td>
+                <td class="col4"><?php echo $doctor->gender;?></td>
             </tr>
              <tr>
              <th class="col1">Diagnosed with</th>
-             <td class="col1 merged-cells" colspan="3">diagnosed_with</td>
+             <td class="col1 merged-cells" colspan="3"><?php echo $doctor->diagnosed_with;?></td>
                 
             </tr>
             <tr>

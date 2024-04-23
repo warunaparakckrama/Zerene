@@ -316,8 +316,16 @@ class Doctor extends Controller
 
     public function doc_template($id)
     {
-        // $prescription = $this->docModel->getPrescription($session_id);
+        $prescription = $this->docModel->getPrescriptionById($id);
+        $medicine = $this->docModel->getMedicine($id);
+        $doctor = $this->adminModel->getDoctorById($id);
+        
         $data = [
+            'prescription' => $prescription,
+            'medicine' => $medicine,
+            'doctor' => $doctor,
+            
+
         ];
         $this->view('doctor/doc_template', $data);
     }
@@ -401,7 +409,7 @@ class Doctor extends Controller
             $this->handleEditTimeslotDoc($data);
         }
 
-        $this->view('doctor/doc_view_timeslot', $data);
+        $this->view('doctor/doctor_view_timeslot', $data);
     }
 
 
@@ -409,7 +417,7 @@ class Doctor extends Controller
     {
         if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
             if ($this->docModel->updateTimeslotDoc($data['timeslot'])) {
-                redirect('doctor/doc_timeslot');
+                redirect('doctor/doc_timeslots');
             } else {
                 die('Something went wrong');
             }
@@ -420,7 +428,7 @@ class Doctor extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->docModel->deleteTimeslotDoc($timeslotId)) {
-                redirect('doctor/doc_timeslot');
+                redirect('doctor/doc_timeslots');
             } else {
                 die('Something went wrong');
             }
@@ -428,7 +436,7 @@ class Doctor extends Controller
     }
 
 
-    public function doc_view_timeslot($timeslotId)
+    public function doctor_view_timeslot($timeslotId)
     {
         $timeslot = $this->docModel->getTimeslotByIdDoc($timeslotId);
 
@@ -441,7 +449,7 @@ class Doctor extends Controller
                 'slot_type_err' => ''
             ];
 
-            $this->view('doctor/doc_view_timeslot', $data);
+            $this->view('doctor/doctor_view_timeslot', $data);
         } else {
             die('Timeslot not found');
         }

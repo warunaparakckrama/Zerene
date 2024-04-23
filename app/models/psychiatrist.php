@@ -157,9 +157,17 @@ class psychiatrist
         return $results;
     }
 
+// to get the last created prescription
     public function getLastCreatedPrescriptionId(){
         $this->db->query('SELECT LAST_INSERT_ID() AS last_id');
         $result = $this->db->single();
         return $result ? $result->last_id : null;
+    }
+
+    public function getMedicine($id){
+        $this->db->query('SELECT * FROM medicine WHERE pres_id = :pres_id');
+        $this->db->bind(':pres_id', $id);
+        $results = $this->db->resultset();
+        return $results;
     }
 }
