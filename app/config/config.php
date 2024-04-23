@@ -19,7 +19,7 @@ define('IMG', 'http://localhost/Zerene/public/img/');
 //js root
 define('JS', 'http://localhost/Zerene/public/js/');
 //upload root
-define('UPLOAD', 'C:/xampp/htdocs/Zerene/public/uploads/');
+define('UPLOAD', 'C:/xampp/htdocs/zereneuploads/');
 //undergrad profile pictures
 define('UGMALE', 'http://localhost/Zerene/public/img/ug-avatar1.svg');
 define('UGFEMALE', 'http://localhost/Zerene/public/img/ug-avatar2.svg');

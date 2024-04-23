@@ -74,7 +74,8 @@
                                             $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                             $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                             $formattedTimeRange = "$start_time - $end_time";
-                                            echo "<a href='' style='text-decoration: none;'><button class='button-timeslot'>$formattedTimeRange</button></a>";
+                                            $slot_type = ucfirst($timeslot->slot_type);
+                                            echo "<a href='' style='text-decoration: none;'><button class='button-timeslot'>$formattedTimeRange<br>$slot_type</button></a>";
                                         }
                                     echo "</div>";
                                 echo "</div>";

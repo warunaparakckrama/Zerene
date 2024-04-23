@@ -36,7 +36,8 @@ $counsellor = $data['counsellor'];
                             <p class="p-regular-green"><b>To Whom: </b><?php echo $counsellor->first_name.' '.$counsellor->last_name; ?></p>
                             <p class="p-regular-green"><b>Subject: </b><?php echo $request_letter->subject; ?></p><br>
                             <p class="p-regular-green"><b>Content: </b><?php echo $request_letter->content; ?></p><br>
-                            <p class="p-regular-green"><b>Documents: </b><a href="<?php echo $request_letter->document_path; ?>" download="attachment">Download</a></p>
+                            <?php $filename = basename($request_letter->document_path);?>
+                            <p class="p-regular-green"><b>Documents: </b><a href="http://localhost/zereneuploads/documents/<?php echo $filename;?> " download="attachment">Download</a></p>
                         </div>
                     </div>
                 </div>
