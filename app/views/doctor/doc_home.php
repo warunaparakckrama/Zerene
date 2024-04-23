@@ -25,8 +25,8 @@
                         <p class="p-regular">Hope you’re having a good day...</p>
                         <p class="p-regular">Let's Give a helping hand, Shall we?</p>
                         <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
-                            <button class="button-main" style="margin-left: 0px">Undergraduates</button>
-                            <button class="button-main">Timeslots</button>
+                        <a href="<?php echo URLROOT . "doctor/doc_undergrad/" ;?>" style="text-decoration: none;"> <button class="button-main" style="margin-left: 0px">Undergraduates</button>
+                        <a href="<?php echo URLROOT . "doctor/doc_timeslots/" ;?>" style="text-decoration: none;"> <button class="button-main">Timeslots</button>
                         </div>
                     </div>
                     <div class="subgrid-2" style="justify-content: center;">

@@ -56,8 +56,6 @@
                                 <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">message</button></a>
                                 </div>
                             </div>
-                        <?php else : ?>
-                            <p class="p-regular-green" style="font-size: 15px;">Psychiatrsits will be shown here.</p>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
