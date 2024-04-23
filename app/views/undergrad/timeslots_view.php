@@ -55,7 +55,7 @@
             <div>
                 <?php if (!empty($futureTimeslots)) {
                     echo "<p class='p-regular-green'>Upcoming Timeslots</p>";
-                    echo "<div class='card-white-scroll-timeslot' style='height: 500px;'>";
+                    echo "<div class='card-white-scroll-timeslot'>";
                         foreach ($futureTimeslots as $formattedDate => $data) {
                             $dayName = $data['day'];
                             echo "<div>";
