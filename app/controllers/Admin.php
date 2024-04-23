@@ -2,7 +2,10 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
+
+require APPROOT. '/libraries/phpmailer/src/Exception.php';
+require APPROOT. '/libraries/phpmailer/src/PHPMailer.php';
+require APPROOT. '/libraries/phpmailer/src/SMTP.php';
 
 
 class Admin extends Controller
@@ -730,7 +733,6 @@ class Admin extends Controller
     }
 
     public function sendEmailAdmin(){
-        require __DIR__ . '/../libraries/phpmailer/vendor/autoload.php';
 
         try {
             // Create a new PHPMailer instance
@@ -746,7 +748,7 @@ class Admin extends Controller
             $mail->Port = 587;
     
             // Set email sender details
-            $mail->setFrom('zerenecounselor@gmail.com', 'Zerene Counsellor');
+            $mail->setFrom('warunamuhandiramalage2002@gmail.com', 'Zerene Counsellor');
     
             // Add recipient address
             $mail->addAddress('contactmeuz1325@gmail.com', 'Zerene');
