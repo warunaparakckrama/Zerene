@@ -166,7 +166,7 @@ class Procounsellor extends Controller
     }
 
     public function pc_ug_profile($id)
-    {   
+    {
         $coun_user_id = $_SESSION['user_id'];
         $direct = $this->pcModel->checkUgDirects($id, $coun_user_id);
         $undergrad = $this->adminModel->getUgById($id);
@@ -362,69 +362,62 @@ class Procounsellor extends Controller
                 'quiz_type' => trim($_POST['quiz_type']),
                 'num_questions' => trim($_POST['num_questions']),
                 'num_answers' => trim($_POST['num_answers']),
-                'quiz_name_err' => '',
-                'quiz_type_err' => '',
-                'num_questions_err' => '',
-                'num_answers_err' => '',
+                'num_ranges' => trim($_POST['num_ranges']),
+                'm_factor' => trim($_POST['m_factor']),
             ];
+            
+            // Validated
 
-            if (empty($data['quiz_name'])) {
-                $data['quiz_name_err'] = 'Please enter questionnaire name';
-            }
+            // Create the questionnaire
+            if ($this->counsellorModel->addQuestionnaire($user_id, $data)) {
+                $questionnaire_id = $this->counsellorModel->getLastInsertedQuizId(); // Adjust this based on your actual method to get the last inserted quiz ID
+                // Loop through each question and insert into the database
+                for ($i = 1; $i <= $data['num_questions']; $i++) {
+                    $questionKey = 'question' . $i;
 
-            if (empty($data['quiz_type'])) {
-                $data['quiz_type_err'] = 'Please select questionnaire type';
-            }
+                    if (!empty($_POST[$questionKey])) {
+                        $questionText = trim($_POST[$questionKey]);
 
-            if (empty($data['num_questions'])) {
-                $data['num_questions_err'] = 'Please enter number of questions';
-            }
-
-            if (empty($data['num_answers'])) {
-                $data['num_answers_err'] = 'Please enter number of answers';
-            }
-
-
-            if (empty($data['quiz_name_err']) && empty($data['quiz_type_err']) && empty($data['num_questions_err']) && empty($data['num_answers_err'])) {
-                // Validated
-
-                // Create the questionnaire
-                if ($this->counsellorModel->addQuestionnaire($user_id, $data)) {
-                    $questionnaire_id = $this->counsellorModel->getLastInsertedQuizId(); // Adjust this based on your actual method to get the last inserted quiz ID
-                    // Loop through each question and insert into the database
-                    for ($i = 1; $i <= $data['num_questions']; $i++) {
-                        $questionKey = 'question' . $i;
-
-                        if (!empty($_POST[$questionKey])) {
-                            $questionText = trim($_POST[$questionKey]);
-
-                            // Insert the question into the database
-                            $this->counsellorModel->addQuestion($questionnaire_id, $questionText);
-                        }
+                        // Insert the question into the database
+                        $this->counsellorModel->addQuestion($questionnaire_id, $questionText);
                     }
-
-                    // Capture and insert answers for each question
-                    $j = $data['num_answers'];
-                    for ($i = 1; $i <= $j; $i++) {
-
-                        $answerKey = 'answer' . $i;
-
-                        if (!empty($_POST[$answerKey])) {
-                            $answerText = trim($_POST[$answerKey]);
-
-                            // Insert the answer into the database
-                            $this->counsellorModel->addAnswer($questionnaire_id, $i, $answerText);
-                        }
-                    }
-
-                    flash('user_message', 'Questionnaire created successfully');
-                    redirect('procounsellor/pc_createq');
-                } else {
-                    die('Something went wrong');
                 }
+
+                // Capture and insert answers for each question
+                $j = $data['num_answers'];
+                for ($i = 1; $i <= $j; $i++) {
+
+                    $answerKey = 'answer' . $i;
+
+                    if (!empty($_POST[$answerKey])) {
+                        $answerText = trim($_POST[$answerKey]);
+
+                        // Insert the answer into the database
+                        $this->counsellorModel->addAnswer($questionnaire_id, $i, $answerText);
+                    }
+                }
+
+                // Capture and insert ranges for the marking scheme
+                $numRanges = $data['num_ranges'];
+                $m_factor = $data['m_factor'];
+                for ($i = 1; $i <= $numRanges; $i++) {
+                    $minRangeKey = 'min_range' . $i;
+                    $maxRangeKey = 'max_range' . $i;
+                    $rangeNameKey = 'range_name' . $i;
+
+                    if (!empty($_POST[$minRangeKey]) && !empty($_POST[$maxRangeKey]) && !empty($_POST[$rangeNameKey])) {
+                        $minRange = trim($_POST[$minRangeKey]);
+                        $maxRange = trim($_POST[$maxRangeKey]);
+                        $rangeName = trim($_POST[$rangeNameKey]);
+
+                        // Insert the range into the database
+                        $this->counsellorModel->addRange($questionnaire_id, $minRange, $maxRange, $rangeName, $m_factor);
+                    }
+                }
+
+                redirect('procounsellor/pc_createq');
             } else {
-                // Load view with errors
-                $this->view('procounsellor/pc_createq', $data);
+                die('Something went wrong');
             }
         } else {
             $data = [
@@ -432,13 +425,8 @@ class Procounsellor extends Controller
                 'quiz_type' => '',
                 'num_questions' => '',
                 'num_answers' => '',
-                'quiz_name_err' => '',
-                'quiz_type_err' => '',
-                'num_questions_err' => '',
-                'num_answers_err' => ''
+                'num_ranges' => '',
             ];
-
-            $this->view('procounsellor/pc_createq', $data);
         }
 
         $this->view('procounsellor/pc_createq', $data);
@@ -569,7 +557,7 @@ class Procounsellor extends Controller
             for ($i = 1; $i <= 7; $i++) {
                 $mark1 = $response->{'q' . $i . '_response'} * 2 + $mark1;
             }
-            
+
             for ($i = 8; $i <= 14; $i++) {
                 $mark2 = $response->{'q' . $i . '_response'} * 2 + $mark2;
             }
@@ -624,7 +612,8 @@ class Procounsellor extends Controller
         }
     }
 
-    public function ugDirects($ug_user_id){
+    public function ugDirects($ug_user_id)
+    {
         $coun_user_id = $_SESSION['user_id'];
         $counsellor = $this->adminModel->getCounsellorById($coun_user_id);
         $doctor = $this->adminModel->getDoctors();
@@ -642,7 +631,7 @@ class Procounsellor extends Controller
         ];
 
         if ($this->pcModel->addUgDirects($data)) {
-            redirect('procounsellor/pc_ug_profile/'.$ug_user_id);
+            redirect('procounsellor/pc_ug_profile/' . $ug_user_id);
         } else {
             die('Something went wrong');
         }
