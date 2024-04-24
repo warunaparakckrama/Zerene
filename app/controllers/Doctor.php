@@ -124,8 +124,6 @@ class Doctor extends Controller
         $this->view('doctor/doc_chatroom', $data);
     }
 
-   
-
     public function doc_undergrad()
     {   
         $id = $_SESSION['user_id'];
@@ -140,24 +138,40 @@ class Doctor extends Controller
         $this->view('doctor/doc_undergrad', $data);
     }
 
-    public function prescription()
-    {
-        $username = $this->userModel->getUsernameById($_SESSION['user_id']);
-        $prescription = $this->docModel->getPrescription($username);
+    public function doc_prescription()
+    {   
+        $id = $_SESSION['user_id'];
+        $direct = $this->docModel->getDirectedUndergrads($id);
+        $undergrad = $this->adminModel->getUndergrads();
+        $counsellor = $this->adminModel->getCounselors();
         $data = [
-            'gender' => '',
-            'prescription' => $prescription,
+            'direct' => $direct,
+            'undergrad' => $undergrad,
+            'counsellor' => $counsellor
+        ];
+        $this->view('doctor/doc_prescription', $data);
+    }
+
+    public function doc_create_prescription($ug_user_id)
+    {   
+        $id = $_SESSION['user_id'];
+        $doctor = $this->adminModel->getDoctorById($id);
+        $undergrad = $this->adminModel->getUgById($ug_user_id);
+        $data = [
+            'doctor' => $doctor,
+            'undergrad' => $undergrad,
+            
         ];
 
-        $this->view('doctor/prescription', $data);
+        $this->view('doctor/doc_create_prescription', $data);
     }
 
     public function doc_timeslots()
     {
-        $username = $this->userModel->getUsernameById($_SESSION['user_id']);
-        $timeslot = $this->acModel->getTimeslots($username);
+        $id = $_SESSION['user_id'];
+        $timeslot = $this->docModel->getTimeslotsdoc($id);
+
         $data = [
-            'slot_type' => '',
             'timeslot' => $timeslot,
         ];
 
@@ -300,19 +314,29 @@ class Doctor extends Controller
         $this->view('undergrad/ug_profile', $data);
     }
 
-    public function doc_template()
+    public function doc_template($id)
     {
+        $prescription = $this->docModel->getPrescriptionById($id);
+        $medicine = $this->docModel->getMedicine($id);
+        $doctor = $this->adminModel->getDoctorById($id);
+        
+        $data = [
+            'prescription' => $prescription,
+            'medicine' => $medicine,
+            'doctor' => $doctor,
+            
 
-        $session_id = $_SESSION['user_id'];
-        $prescription = $this->docModel->getPrescription($session_id);
-        $data = ['prescription' => $prescription];
+        ];
         $this->view('doctor/doc_template', $data);
     }
 
-    public function doc_undergrad2()
-    {
-        $data = [];
-        $this->view('doctor/doc_undergrad2', $data);
+    public function doc_ug_profile($id)
+    {   
+        $undergrad = $this->adminModel->getUgById($id);
+        $data = [
+            'undergrad' => $undergrad
+        ];
+        $this->view('doctor/doc_ug_profile', $data);
     }
 
     public function doc_undergrad3()
@@ -330,85 +354,157 @@ class Doctor extends Controller
     public function addTimeslotsDoc($user_id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
             $data = [
                 'slot_date' => trim($_POST['slot_date']),
                 'slot_start' => trim($_POST['slot_start']),
                 'slot_finish' => trim($_POST['slot_finish']),
+                'slot_interval' => trim($_POST['slot_interval']),
                 'slot_type' => trim($_POST['slot_type']),
-                'slot_status' => trim($_POST['slot_status']),
-                'created_by' => trim($_POST['created_by']),
+                'slot_status' => '', // Add this line
+                'created_by' => '', // Add this line
+                'slot_date_err' => '',
+                'slot_start_err' => '',
+                'slot_finish_err' => '',
+                'slot_interval_err' => '',
+                'slot_type_err' => '',
             ];
-            $current_username = $this->userModel->getUsernameById($user_id);
-            $data['created_by'] = $current_username;
 
-            if ($this->acModel->createTimeslots($data)) {
+            $data['created_by'] = $_SESSION['user_id'];
+
+            if ($this->docModel->createTimeslotsDoc($data)) {
                 redirect('doctor/doc_timeslots');
-                # code...
+            } else {
+                die('Something went wrong');
+            }
+
+            $username = $this->userModel->getUsernameById($user_id);
+            $data['timeslot'] = $this->docModel->getTimeslotsDoc($username);
+            $this->view('doctor/doc_timeslot', $data);
+        }
+        $this->view('doctor/doc_timeslots');
+    }
+
+    public function editTimeslotDoc($timeslotId)
+    {
+        $timeslot = $this->docModel->getTimeslotByIdDoc($timeslotId);
+
+        if (!$timeslot) {
+            die('Timeslot not found');
+        }
+
+        $data = [
+            'timeslot' => $timeslot,
+            'slot_date_err' => '',
+            'slot_start_err' => '',
+            'slot_finish_err' => '',
+            'slot_type_err' => ''
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data['timeslot']->slot_date = trim($_POST['slot_date']);
+            $data['timeslot']->slot_start = trim($_POST['slot_start']);
+            $data['timeslot']->slot_finish = trim($_POST['slot_finish']);
+            $data['timeslot']->slot_type = trim($_POST['slot_type']);
+
+            $this->handleEditTimeslotDoc($data);
+        }
+
+        $this->view('doctor/doctor_view_timeslot', $data);
+    }
+
+
+    private function handleEditTimeslotDoc(&$data)
+    {
+        if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
+            if ($this->docModel->updateTimeslotDoc($data['timeslot'])) {
+                redirect('doctor/doc_timeslots');
             } else {
                 die('Something went wrong');
             }
         }
     }
 
-    public function addMedicine($user_id)
+    public function deleteTimeslotDoc($timeslotId)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->docModel->deleteTimeslotDoc($timeslotId)) {
+                redirect('doctor/doc_timeslots');
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
+
+
+    public function doctor_view_timeslot($timeslotId)
+    {
+        $timeslot = $this->docModel->getTimeslotByIdDoc($timeslotId);
+
+        if ($timeslot) {
+            $data = [
+                'timeslot' => $timeslot,
+                'slot_date_err' => '',
+                'slot_start_err' => '',
+                'slot_finish_err' => '',
+                'slot_type_err' => ''
+            ];
+
+            $this->view('doctor/doctor_view_timeslot', $data);
+        } else {
+            die('Timeslot not found');
+        }
+    }
+
+    public function addPrescription($doc_user_id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-
-
             $data = [
-                'pres_date' => trim($_POST['pres_date']),
                 'ug_name' => trim($_POST['ug_name']),
                 'age' => trim($_POST['age']),
                 'gender' => trim($_POST['gender']),
-                'diagnosis_with' => trim($_POST['diagnosis_with']),
-                'created_by' => trim($_POST['created_by']),
+                'diagnosed_with' => trim($_POST['diagnosed_with']),
+                'diagnosed_by' => trim($_POST['diagnosed_by']),
+                'doc_user_id' => $doc_user_id,
             ];
 
-            $current_username = $this->userModel->getUsernameById($user_id);
-            $data['created_by'] = $current_username;
-
-            if ($this->docModel->createPrescription($data)) {
-                redirect('doctor/doc_template');
-                # code...
-            } else {
-                die('Something went wrong');
-            }
-
-
             //insert data into 'medicine' table
-
             $drug = $_POST['drug'];
             $unit = $_POST['unit'];
             $dosage = $_POST['dosage'];
-            var_dump($drug, $unit, $dosage);
-
+            $unitType = $_POST['unit_type']; // Added
+            $dosageType = $_POST['dosage_type']; // Added
             $numRecords = count($drug);
+
+            // Initialize an empty array to store medicine data
+            $medicine_data = [];
+
             for ($i = 0; $i < $numRecords; $i++) {
-
-                $data = [
-
-                    'drug' => $_POST['drug'][$i],
-                    'unit' => $_POST['unit'][$i],
-                    'dosage' => $_POST['dosage'][$i],
-
+                $medicine_data[] = [
+                    'drug' => $drug[$i],
+                    'unit' => $unit[$i],
+                    'dosage' => $dosage[$i],
+                    'unit_type' => $unitType[$i], // Added
+                    'dosage_type' => $dosageType[$i], // Added
                 ];
 
-                $current_username = $this->userModel->getUsernameById($user_id);
-                $data['created_by'] = $current_username;
+            }
 
-                if ($this->docModel->addMedicineToTable($data)) {
-
-                    redirect('doctor/doc_template');
-                    # code...
-                } else {
-                    die('Something went wrong');
-                }
+            if ($last_id = $this->docModel->createPrescription($data, $medicine_data)) {
+                
+                redirect('doctor/doc_template/'. $last_id);
+            } else {
+                die('Something went wrong');
             }
         }
+    }
+
+    public function createTemplate()
+    {
+        $session_id = $_SESSION['user_id'];
+        $data = $this->docModel->getprescription($session_id);
+        $this->view('doctor/doc_template', $data);
     }
 
     public function doc_feedback()
@@ -416,6 +512,10 @@ class Doctor extends Controller
         $data = [];
         $this->view('doctor/doc_feedback', $data);
     }
+
+
+
+
 
     public function sentFeedback($user_id)
     {

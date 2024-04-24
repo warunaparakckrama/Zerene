@@ -61,14 +61,14 @@
                     echo "<div class='card-white-scroll-timeslot'>";
                         foreach ($futureTimeslots as $formattedDate => $data) {
                             $dayName = $data['day'];
-                            echo "<div>";
+                            // echo "<div>";
                                 echo "<div class='card-green-timeslot'>";
                                     echo "<p class='p-regular-green' style='font-size: 15px;'>$dayName</p>";
                                     echo "<p class='p-regular-grey' style='font-size: 15px;'>$formattedDate</p>";
                                 echo "</div>";
-                            echo "</div>";
+                            // echo "</div>";
                             
-                            echo "<div>";
+                            // echo "<div>";
                                 echo "<div class='card-green-scroll-timeslot'>";
                                     echo "<div class='btn-container-2'>";
                                         // Sort timeslots by start time
@@ -86,7 +86,7 @@
                                         }
                                     echo "</div>";
                                 echo "</div>";
-                            echo "</div>";
+                            // echo "</div>";
                         }
                     echo "</div>";
                     } else {

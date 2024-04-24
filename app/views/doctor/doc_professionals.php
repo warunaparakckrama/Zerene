@@ -34,7 +34,7 @@
                                     <p class="p-regular" style="color:var(--zerene-grey); font-size: 15px"><?php echo $counsellor->university.' '.$counsellor->faculty;?></p>
                                 </div>
                                 <div class="btn-container">
-                                    <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">message</button></a>
+                                    <a href="<?php echo URLROOT;?>doctor/doc_chatroom/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">message</button></a>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -53,11 +53,9 @@
                                     <p class="p-regular" style="color:var(--zerene-grey); font-size: 15px">(University in Charge: <?php echo $doctor->uni_in_charge;?>)</p>
                                 </div>
                                 <div class="btn-container">
-                                <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">message</button></a>
+                                <a href="<?php echo URLROOT;?>doctor/doc_chatroom/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">message</button></a>
                                 </div>
                             </div>
-                        <?php else : ?>
-                            <p class="p-regular-green" style="font-size: 15px;">Psychiatrsits will be shown here.</p>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>

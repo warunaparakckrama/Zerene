@@ -7,7 +7,6 @@ class Undergrad extends Controller
     private $adminModel;
     private $ugModel;
     private $pcModel;
-    private $timeslotModel;
 
     public function __construct()
     {
@@ -17,7 +16,6 @@ class Undergrad extends Controller
         $this->userModel = $this->model('User');
         $this->adminModel = $this->model('Administrator');
         $this->ugModel = $this->model('Undergraduate');
-        $this->timeslotModel = $this->model('Timeslot');
         $this->pcModel = $this->model('PCounsellor');
     }
 
