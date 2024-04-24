@@ -147,4 +147,11 @@ class PCounsellor
         $results = $this->db->resultSet();
         return $results;
     }
+
+    public function getRangesfromQuizId($questionnaire_id){
+        $this->db->query('SELECT * FROM quiz_range WHERE questionnaire_id = :questionnaire_id');
+        $this->db->bind(':questionnaire_id', $questionnaire_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
 }

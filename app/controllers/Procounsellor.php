@@ -181,12 +181,14 @@ class Procounsellor extends Controller
     {
         $response = $this->ugModel->getResponseByResponseId($id);
         $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $range = $this->pcModel->getRangesfromQuizId($response->questionnaire_id);
         $results = $this->quizResults($id);
 
         $data = [
             'response' => $response,
             'questionnaire' => $questionnaire,
-            'results' => $results
+            'results' => $results,
+            'range' => $range
         ];
         $this->view('procounsellor/pc_quiz_review', $data);
     }
@@ -540,6 +542,7 @@ class Procounsellor extends Controller
     {
         $response = $this->ugModel->getResponseByResponseId($id);
         $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $range = $this->pcModel->getRangesfromQuizId($response->questionnaire_id);
 
         if ($questionnaire->questionnaire_name === 'DASS-21') {
             $Depression = '';
@@ -549,6 +552,9 @@ class Procounsellor extends Controller
                 'depression' => $Depression,
                 'anxiety' => $Anxiety,
                 'stress' => $Stress,
+                'mark1' => 0,
+                'mark2' => 0,
+                'mark3' => 0
             ];
             $i = 1;
             $mark1 = 0;
@@ -565,6 +571,9 @@ class Procounsellor extends Controller
             for ($i = 15; $i <= 21; $i++) {
                 $mark3 = $response->{'q' . $i . '_response'} * 2 + $mark3;
             }
+            $data['mark1'] = $mark1;
+            $data['mark2'] = $mark2;
+            $data['mark3'] = $mark3;
 
             //Depression
             if ($mark1 >= 28) {
@@ -609,6 +618,35 @@ class Procounsellor extends Controller
             $data['stress'] = $Stress;
 
             return $data;
+        }
+
+        else {
+            $i = 1;
+            $mark = 0;
+            $final_mark = '';
+            $result = '';
+            $data = [
+                'final_mark' => $final_mark,
+                'result' => $result,
+            ];
+
+            $num_of_quiz = $questionnaire->num_of_questions;
+            for ($i = 1; $i <= $num_of_quiz; $i++) {
+                $mark = $response->{'q' . $i . '_response'} + $mark;
+            }
+
+            foreach ($range as $range) {
+                if ($mark >= $range->min_value && $mark <= $range->max_value) {
+                    $final_mark = $mark*$range->multiply_by;
+                    $result = $range->range_name;
+                    $data['final_mark'] = $final_mark;
+                    $data['result'] = $result;
+                    break;
+                }
+            }
+
+            return $data;
+
         }
     }
 
