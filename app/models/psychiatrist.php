@@ -116,10 +116,11 @@ class psychiatrist
 
             foreach ($medicine_data as $medicine) {
 
-                $this->db->query('INSERT INTO medicine (pres_id, drug_name, unit, unit_type, dosage, dosage_type) VALUES (:pres_id, :drug_name, :unit, :unit_type, :dosage, :dosage_type)');
+                $this->db->query('INSERT INTO medicine (pres_id, drug_name, unit, instructions, unit_type, dosage, dosage_type) VALUES (:pres_id, :drug_name, :unit, :instructions, :unit_type, :dosage, :dosage_type)');
                 $this->db->bind(':pres_id', $prescription_id);
                 $this->db->bind(':drug_name', $medicine['drug']);
                 $this->db->bind(':unit', $medicine['unit']);
+                $this->db->bind(':instructions', $medicine['instructions']);
                 $this->db->bind(':unit_type', $medicine['unit_type']);
                 $this->db->bind(':dosage', $medicine['dosage']);
                 $this->db->bind(':dosage_type', $medicine['dosage_type']);  

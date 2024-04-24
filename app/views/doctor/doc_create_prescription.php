@@ -78,6 +78,10 @@
                                         <option value="Tablespoons">Tablespoons</option>
                                     </select>
                                 </div>
+                                <label for="Instructions">Instructions:</label>
+                                <input type="text" name="instructions[]" style="width: 50%;" required>
+
+
 
                                 <button class="button-danger" type="button" onclick="removeMedicineRow(this)">Remove</button>
                             </div>

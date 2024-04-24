@@ -30,7 +30,7 @@ $direct = $data['direct'];
 
             <div>
                 <p class="p-regular-green">Directed Undergraduates</p>
-                <div class="card-white-scroll" style="height: 500px;">
+                <div class="card-white-scroll" style="height: 300px;">
                     <?php foreach ($data['direct'] as $direct) : ?>
                         <?php foreach ($data['undergrad'] as $undergrad) : ?>
                             <?php foreach ($data['counsellor'] as $counsellor) : ?>
@@ -53,6 +53,10 @@ $direct = $data['direct'];
                         <?php endforeach; ?>
                     <?php endforeach; ?>
                 </div>
+                <p class="p-regular-green">Created prescriptions</p>
+                <div class="card-white-scroll" style="height: 300px;"><div>
+            </div>
+
             </div>
         </div>
     </section>

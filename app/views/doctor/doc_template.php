@@ -1,5 +1,7 @@
 <?php 
     $currentPage = 'doc_prescription';
+    $prescription = $data['prescription'];
+    $doctor = $data['doctor'];
     $medicine = $data['medicine'];
     
 ?>
@@ -83,18 +85,18 @@
     <tbody>
             <tr>
                 <th class="col1">Patient's Name</th>
-                <td class="col1 merged-cells" colspan="3"><?php echo $doctor->ug_name;?></td>
+                <td class="col1 merged-cells" colspan="3"><?php echo $prescription->ug_name;?></td>
                
             </tr>
             <tr>
                 <th class="col1">Patient's age</th>
-                <td class="col2"><?php echo $doctor->age;?></td>
+                <td class="col2"><?php echo $prescription->age;?></td>
                 <th class="col3">Patient's gender</th>
-                <td class="col4"><?php echo $doctor->gender;?></td>
+                <td class="col4"><?php echo $prescription->gender;?></td>
             </tr>
              <tr>
              <th class="col1">Diagnosed with</th>
-             <td class="col1 merged-cells" colspan="3"><?php echo $doctor->diagnosed_with;?></td>
+             <td class="col1 merged-cells" colspan="3"><?php echo $prescription->diagnosed_with;?></td>
                 
             </tr>
             <tr>
@@ -123,9 +125,9 @@
            
             <tr>
                 <th class="col1">date</th>
-                <td class="col2"><?php echo $doctor->date;?></td>
+                <td class="col2"><?php echo $prescription->date;?></td>
                 <th class="col3">Diagnosed by</th>
-                <td class="col4"><?php echo $doctor->diagnosed_by;?></td>
+                <td class="col4"><?php echo $prescription->diagnosed_by;?></td>
             </tr>
 
         </div>

@@ -473,6 +473,7 @@ class Doctor extends Controller
             $drug = $_POST['drug'];
             $unit = $_POST['unit'];
             $dosage = $_POST['dosage'];
+            $instructions = $_POST['instructions'];
             $unitType = $_POST['unit_type']; // Added
             $dosageType = $_POST['dosage_type']; // Added
             $numRecords = count($drug);
@@ -485,6 +486,7 @@ class Doctor extends Controller
                     'drug' => $drug[$i],
                     'unit' => $unit[$i],
                     'dosage' => $dosage[$i],
+                    'instructions' => $instructions[$i],
                     'unit_type' => $unitType[$i], // Added
                     'dosage_type' => $dosageType[$i], // Added
                 ];
