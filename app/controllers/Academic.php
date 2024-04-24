@@ -57,15 +57,15 @@ class Academic extends Controller
     }
 
     public function ac_undergrads()
-    {   
+    {
         $id = $_SESSION['user_id'];
         $counsellor = $this->adminModel->getCounsellorById($id);
         $undergrad = $this->adminModel->getUndergrads();
-        $data =[
+        $data = [
             'undergrad' => $undergrad,
             'counsellor' => $counsellor,
         ];
-        
+
         $this->view('academic/ac_undergrads', $data);
     }
 
@@ -88,17 +88,16 @@ class Academic extends Controller
     }
 
     public function ac_chatroom($user_id)
-    {   
+    {
         $id = $_SESSION['user_id'];
         $counsellor = $this->adminModel->getCounsellorById($id);
         $receiving_user = $this->userModel->findUserDetails($user_id);
         if ($receiving_user->user_type == 'undergraduate') {
             $msg_receiver = $this->adminModel->getUgById($user_id);
-        }
-        elseif ($receiving_user->user_type == 'pcounsellor' || $receiving_user->user_type == 'acounsellor') {
+        } elseif ($receiving_user->user_type == 'pcounsellor' || $receiving_user->user_type == 'acounsellor') {
             $msg_receiver = $this->adminModel->getCounsellorById($user_id);
         }
-        
+
         $receiver = $this->userModel->findUserDetails($user_id);
         $data = [
             'user_id' => $user_id,
@@ -144,9 +143,10 @@ class Academic extends Controller
     }
 
     public function ac_create_op_letter($id)
-    {   
+    {
         $ug_user_id = $id;
         $counsellor = $this->adminModel->getCounsellorById($_SESSION['user_id']);
+        $request= $this->acModel->getReqLetterbyugid($id);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -162,7 +162,7 @@ class Academic extends Controller
             ];
 
             if ($this->acModel->insertOpLetter($data)) {
-                // $this->sendEmail($data);
+                $this->sendEmail1($data,$request);
                 redirect('academic/ac_opletters');
             } else {
                 die('Something went wrong');
@@ -170,7 +170,6 @@ class Academic extends Controller
 
             // Load view with errors
             $this->view('academic/ac_create_op_letter', $data);
-            
         } else {
 
             $data = [
@@ -198,9 +197,9 @@ class Academic extends Controller
 
     public function req_letter($letter_id)
     {
-        $data ['letter details']= $this->acModel->get_req_letter($letter_id);
+        $data['letter details'] = $this->acModel->get_req_letter($letter_id);
         // die(var_dump($data));
-        
+
 
         $this->view('academic/req_letter', $data);
     }
@@ -226,13 +225,14 @@ class Academic extends Controller
     public function ac_opletter_view($id)
     {
         $letter = $this->acModel->getOpLetterbyid($id);
+        
         $data = [
             'letter' => $letter,
         ];
         $this->view('academic/ac_opletter_view', $data);
     }
 
-    
+
     //function controllers
 
     public function changePwdAcademic($user_id)
@@ -431,57 +431,36 @@ class Academic extends Controller
         }
     }
 
-    // public function sendEmail($data)
-    // {
+    public function sendEmail1($data,$request)
+    {
+        $receiver = "111ashanpraboda@gmail.com";
+        $sender = "From: zerenecounselor@gmail.com";
+        $subject = $data['subject'];
+        $filePath = __DIR__ . '/../views/academic/emails.php';
+        $date = date('Y-m-d');
+        
+        $emailContent = file_get_contents($filePath);
+        $emailContent = str_replace('{subject_here}', $data['subject'], $emailContent);
+        $emailContent = str_replace('{body_here}', $data['content'], $emailContent);
+        $emailContent = str_replace('{sender_fname}', $data['coun_fname'], $emailContent);
+        $emailContent = str_replace('{sender_lname}', $data['coun_lname'], $emailContent);
+        $emailContent = str_replace('{sender_email}', $data['coun_email'], $emailContent);
+        $emailContent = str_replace('{date}', $date, $emailContent);
+        $emailContent = str_replace('{$filepath}', $request->document_path, $emailContent);
 
-    //     require __DIR__ . '/../libraries/phpmailer/vendor/autoload.php';
+        // Set the Content-Type header to indicate that the email content is HTML
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= $sender;
 
+        $body = $emailContent;
 
-    //     try {
-    //         // Create a new PHPMailer instance
-    //         $mail = new PHPMailer(true);
-
-    //         // Set mail configuration (replace with your actual details)
-    //         $mail->isSMTP();
-    //         $mail->Host = 'smtp.gmail.com';
-    //         $mail->SMTPAuth = true;
-    //         $mail->Username   = 'zerenecounselor@gmail.com';                     //SMTP username
-    //         $mail->Password   = 'qcpq cxzz vmiq pkua';                               //SMTP password
-    //         $mail->SMTPSecure = 'tls';
-    //         $mail->Port = 587;
-
-    //         //Recipients
-    //         $mail->setFrom('zerenecounselor@gmail.com', 'Zerene Counsellor');
-    //         $mail->addAddress('111ashanpraboda@gmail.com', 'IUD');     //Add a recipient , name is optional
-    //         // $mail->addCC('cc@example.com');
-    //         // $mail->addBCC('bcc@example.com');
-
-    //         //Attachments
-    //         // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-    //         // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-    //         //Content
-    //         $mail->isHTML(true);                                  //Set email format to HTML
-    //         $mail->Subject = $data['subject'];
-    //         $filePath = __DIR__ . '/../views/academic/emails.php';
-    //         $date = date('Y-m-d');
-    //         $emailContent = file_get_contents($filePath);
-
-    //         $emailContent = str_replace('{subject_here}', $data['subject'], $emailContent);
-    //         $emailContent = str_replace('{body_here}', $data['body'], $emailContent);
-    //         $emailContent = str_replace('{sender_fname}', $data['coun_fname'], $emailContent);
-    //         $emailContent = str_replace('{sender_lname}', $data['coun_lname'], $emailContent);
-    //         $emailContent = str_replace('{sender_email}', $data['coun_email'], $emailContent);
-    //         $emailContent = str_replace('{date}', $date, $emailContent);
-    //         $mail->Body    = $emailContent;
-    //         // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-    //         $mail->send();
-    //     } catch (Exception $e) {
-    //         // Handle exceptions
-    //         echo 'Error: ' . $mail->ErrorInfo;
-    //     }
-    // }
+        if (mail($receiver, $subject, $body, $headers)) {
+            echo "Email sent successfully to $receiver";
+        } else {
+            echo "Sorry, failed while sending mail!";
+        }
+    }
 
     public function getOpDetails()
     {

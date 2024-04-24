@@ -113,5 +113,12 @@
             $results = $this->db->single();
             return $results;
         }
+
+        public function getReqLetterbyugid($ug_id){
+            $this->db->query('SELECT * FROM request_letter WHERE from_ug_user_id = :ug_id');
+            $this->db->bind(':ug_id', $ug_id);
+            $results = $this->db->single();
+            return $results;
+        }
     }
 ?>
