@@ -42,7 +42,7 @@
                         <form action="<?php echo URLROOT; ?>Procounsellor/createQuestionnaire/<?php echo $_SESSION['user_id']; ?>" method="POST">
                             <div style="font-size: 15px;">
                                 <label for="quizName">Questionnaire Name:</label>
-                                <input type="text" id="quizName" name="quiz_name" required><br>
+                                <input type="text" id="quizName" name="quiz_name" class="password-box" required><br>
                                 <p class="p-error"><?php echo $data['quiz_name_err']; ?></p><br>
 
                                 <label for="quiz_type">Questionnaire Type:</label>
@@ -56,27 +56,27 @@
                                 <p class="p-error"><?php echo $data['quiz_type_err']; ?></p><br>
 
                                 <label for="num_questions">Number of Questions: (max: 21)</label>
-                                <input type="number" id="numQuestions" name="num_questions" min="1" max="21" required oninput="generateQuestionFields()"><br>
+                                <input type="number" id="numQuestions" name="num_questions" min="1" max="21" required oninput="generateQuestionFields()" class="password-box"><br>
 
                                 <div id="questionField" style="padding-bottom: 10px;"></div><br>
 
                                 <label for="num_answers">Number of Answers: (min: 4 | max: 5)</label>
-                                <input type="number" id="numAnswers" name="num_answers" min="1" max="5" required oninput="generateAnswerFields()"><br>
+                                <input type="number" id="numAnswers" name="num_answers" min="1" max="5" required oninput="generateAnswerFields()" class="password-box"><br>
 
                                 <div id="answerField"></div><br>
 
                                 <p class="p-regular-green">Marking Scheme</p>
                                 <label for="num_ranges">Number of Ranges: (max: 5)</label>
-                                <input type="number" id="numRanges" name="num_ranges" min="1" max="5" required oninput="generateRangeFields()"><br>
+                                <input type="number" id="numRanges" name="num_ranges" min="1" max="5" required oninput="generateRangeFields()" class="password-box"><br>
 
                                 <div id="rangeField"></div><br>
 
                                 <label for="">Multiplication Factor(If none, Select 1)</label>
-                                <input type="number" id="mFactor" name="m_factor" min="1" required><br><br>
+                                <input type="number" id="mFactor" name="m_factor" min="1" required class="password-box"><br><br>
 
                                 <div class="btn-container-2">
                                     <a href="" style="text-decoration: none;"><button class="button-main" type="submit" onclick="">Submit</button></a>
-                                    <a href="" style="text-decoration: none;"><button class="button-danger" type="reset">Cancel</button></a>
+                                    <a href="" style="text-decoration: none;"><button class="button-danger" type="reset" onclick="window.location.reload();">Cancel</button></a>
                                 </div>
                             </div>
                         </form>
