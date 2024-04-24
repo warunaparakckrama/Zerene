@@ -2,6 +2,7 @@
     $currentPage = 'doc_prescription';
     $undergrad = $data['undergrad'];
     $doctor = $data['doctor'];
+    $ug_user_id = $data['ug_user_id'];
 ?>
 
 <head>
@@ -30,6 +31,8 @@
                 <form class="" action="<?php echo URLROOT; ?>Doctor/addPrescription/<?php echo $_SESSION['user_id']; ?>" method="POST">
                     <div class="card-white" style="font-size: 15px;">
                         <div id="input-container" class="card-green-2">
+                            <input type="hidden" name="ug_user_id" value="<?php echo $ug_user_id;?>">
+
                             <label for="ug_name">Patient's Name:</label>
                             <input type="text" name="ug_name" style="width: 50%;" required>
 

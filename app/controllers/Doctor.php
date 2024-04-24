@@ -160,6 +160,7 @@ class Doctor extends Controller
         $data = [
             'doctor' => $doctor,
             'undergrad' => $undergrad,
+            'ug_user_id' => $ug_user_id,
             
         ];
 
@@ -456,11 +457,13 @@ class Doctor extends Controller
     }
 
     public function addPrescription($doc_user_id)
-    {
+    {   
+        $ug_user_id = $_SESSION['user_id'];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'ug_user_id' => trim($_POST['ug_user_id']),
                 'ug_name' => trim($_POST['ug_name']),
                 'age' => trim($_POST['age']),
                 'gender' => trim($_POST['gender']),

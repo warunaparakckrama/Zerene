@@ -98,7 +98,8 @@ class psychiatrist
 
     public function createPrescription($data, $medicine_data)
     {
-        $this->db->query('INSERT INTO prescription (ug_name, age, gender, diagnosed_with, diagnosed_by, date, doc_user_id) VALUES (:ug_name, :age, :gender, :diagnosed_with, :diagnosed_by, :date, :doc_user_id)');
+        $this->db->query('INSERT INTO prescription (ug_user_id, ug_name, age, gender, diagnosed_with, diagnosed_by, date, doc_user_id) VALUES (:ug_user_id, :ug_name, :age, :gender, :diagnosed_with, :diagnosed_by, :date, :doc_user_id)');
+        $this->db->bind(':ug_user_id', $data['ug_user_id']);
         $this->db->bind(':ug_name', $data['ug_name']);
         $this->db->bind(':age', $data['age']);
         $this->db->bind(':gender', $data['gender']);
