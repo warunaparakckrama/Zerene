@@ -138,8 +138,11 @@ class Undergrad extends Controller
 
     public function timeslots_view($id){
         $timeslot = $this->pcModel->getTimeslots($id);
+        $reserve = $this->ugModel->getReserveDetails($_SESSION['user_id']);
         $data = [
-            'timeslot' => $timeslot
+            'timeslot' => $timeslot,
+            'coun_user_id' => $id,
+            'reserve' => $reserve
         ];
         $this->view('undergrad/timeslots_view', $data);
     }
@@ -364,35 +367,23 @@ class Undergrad extends Controller
         $this->view('undergrad/view_timeslotpc', $data);
     }
 
-    public function reserveTimeslot($timeslotId)
+    public function reserveTimeslot($slot_id)
+    {   
+        $user_id = $_SESSION['user_id'];
+
+        $data['timeslot_id'] = $slot_id;
+        $data['ug_user_id'] = $user_id;
+        $timeslot = $this->ugModel->getTimeslotDetails($slot_id);
+       if ($this->ugModel->addTimeslotReserve($data)) {
+            redirect('undergrad/timeslots_view/'. $timeslot->created_by);
+       } else{
+              die('Something went wrong');
+       }
+    }
+
+    public function cancelTimeslot($slot_id)
     {
-        if (!isset($_SESSION['user_id'])) {
-            redirect('users/login');
-        }
-
-        $timeslotModel = new Timeslot();
-
-        $timeslot = $timeslotModel->getTimeslotById($timeslotId);
-
-        if (!$timeslot) {
-            redirect('undergrad/view_timeslotpc');
-        }
-
-        $isReserved = $timeslotModel->isTimeslotReserved($timeslotId, $_SESSION['user_id']);
-
-        if ($isReserved) {
-            $result = $timeslotModel->cancelReservation($timeslotId, $_SESSION['user_id']);
-        } else {
-            $result = $timeslotModel->reserveTimeslot($timeslotId, $_SESSION['user_id']);
-        }
-
-        if ($result) {
-            $_SESSION['success_message'] = $isReserved ? 'Reservation canceled successfully' : 'Timeslot reserved successfully';
-        } else {
-            $_SESSION['error_message'] = 'Failed to reserve or cancel timeslot';
-        }
-
-        redirect('undergrad/view_timeslotpc');
+        
     }
 
     public function submitResponses($user_id) //questionnaire_id need to be resolved
