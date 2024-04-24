@@ -28,7 +28,7 @@
     border: 2px var(--zerene-green);
     border-style: solid;
     padding: var(--card-padding-15);
-    align-items: top;
+    align-items: center;
     overflow-y: auto;
     margin-bottom: 10px;
 }

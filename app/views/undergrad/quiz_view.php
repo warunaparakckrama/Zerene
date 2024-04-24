@@ -43,7 +43,7 @@
                                 <div>
                                     <?php foreach ($data['question'] as $i => $question) : ?>
                                         <div style="margin-bottom: 10px;">
-                                            <p class="p-regular-green" style="font-size: 17px; font-weight:500;"><?php echo ($i + 1).'. '. $question->question_text ?></p>
+                                            <p class="p-regular-green" style="font-size: 17px; font-weight:500; margin-top: 10px;"><?php echo ($i + 1).'. '. $question->question_text ?></p>
                                             <label class="radio">
                                                 <input type="radio" name="<?php echo 'q' . ($i + 1) . '_response' ?>" value="0" required>
                                                 <p class="p-regular-green" style="font-size: 15px;"><?php echo $answer->answer_1 ?></p>

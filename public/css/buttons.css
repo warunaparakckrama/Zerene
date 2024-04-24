@@ -164,3 +164,27 @@ button.notify:hover{
     color: var(--zerene-green);
     /* border: none; */
 }
+
+.button-second-timeslot{
+    display: flex;
+    cursor: pointer;
+    color: var(--zerene-green);
+    background-color: var(--zerene-white);
+    border: 1px solid var(--zerene-green);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    height: fit-content;
+    width: fit-content;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.button-second-timeslot:hover{
+    background-color: var(--zerene-white);
+    color: var(--zerene-danger);
+    border: 1px solid var(--zerene-danger);
+}

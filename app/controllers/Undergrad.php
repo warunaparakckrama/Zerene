@@ -136,8 +136,11 @@ class Undergrad extends Controller
 
     public function timeslots_view($id){
         $timeslot = $this->pcModel->getTimeslots($id);
+        $reserve = $this->ugModel->getReserveDetails($_SESSION['user_id']);
         $data = [
-            'timeslot' => $timeslot    
+            'timeslot' => $timeslot,
+            'coun_user_id' => $id,
+            'reserve' => $reserve
         ];
         $this->view('undergrad/timeslots_view', $data);
     }
@@ -343,6 +346,42 @@ class Undergrad extends Controller
         }
 
         $this->view('undergrad/ug_profile', $data);
+    }
+
+    public function viewTimeslots()
+    {
+        $timeslots = $this->userModel->getTimeslotsForUndergrad();
+
+        if (!empty($timeslots)) {
+            foreach ($timeslots as &$timeslot) {
+                $facultyInfo = $this->userModel->getFacultyUser($timeslot['user_id']);
+                $timeslot['faculty'] = $facultyInfo['faculty'];
+                $timeslot['counselor_name'] = $facultyInfo['first_name'] . ' ' . $facultyInfo['last_name'];
+            }
+        }
+
+        $data['timeslots'] = $timeslots;
+
+        $this->view('undergrad/view_timeslotpc', $data);
+    }
+
+    public function reserveTimeslot($slot_id)
+    {   
+        $user_id = $_SESSION['user_id'];
+
+        $data['timeslot_id'] = $slot_id;
+        $data['ug_user_id'] = $user_id;
+        $timeslot = $this->ugModel->getTimeslotDetails($slot_id);
+       if ($this->ugModel->addTimeslotReserve($data)) {
+            redirect('undergrad/timeslots_view/'. $timeslot->created_by);
+       } else{
+              die('Something went wrong');
+       }
+    }
+
+    public function cancelTimeslot($slot_id)
+    {
+        
     }
 
     public function submitResponses($user_id) //questionnaire_id need to be resolved
