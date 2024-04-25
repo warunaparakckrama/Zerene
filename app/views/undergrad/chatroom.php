@@ -35,7 +35,7 @@
                     $receiver_username = $receiver->username;
 
                     // Decryption function
-                    $key = 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO';
+                    $key = ENCKEY;
                     function decryptMessage($encrypted, $key)
                     {
                         $cipher = "aes-256-cbc";

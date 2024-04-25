@@ -36,7 +36,7 @@
                     $msg_receiver = $data['msg_receiver'];
 
                     // Decryption function
-                    $key = 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO';
+                    $key = ENCKEY;
                     function decryptMessage($encrypted, $key)
                     {
                         $cipher = "aes-256-cbc";

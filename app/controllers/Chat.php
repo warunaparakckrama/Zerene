@@ -43,7 +43,7 @@ class Chat extends Controller
         $received_by = $_POST['receiver'];
         $message = $_POST['message'];
 
-        $key = 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO';
+        $key = ENCKEY;
         $encryptedMessage = $this->encryptMessage($message, $key);
 
         $this->chatModel->storeMessage($roomid, $sent_by, $received_by, $encryptedMessage);
