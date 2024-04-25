@@ -127,22 +127,22 @@
             $this->db->query('INSERT INTO notifications (author, subject, user_type, content, created_at) VALUES (:author, :subject, :user_type, :content, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
             $this->db->bind(':author', $data['author']);
             $this->db->bind(':subject', $data['subject']);
-            if ($data['user_type'] === "all users") {
+            if ($data['user_type'] == "all users") {
                 $this->db->bind(':user_type', 'all users');
             }
-            elseif ($data['user_type'] === 'admin') {
+            elseif ($data['user_type'] == 'admin') {
                 $this->db->bind(':user_type', 'admin');
             }
-            elseif ($data['user_type'] === "undergrad") {
-                $this->db->bind(':user_type', 'undergrad');
+            elseif ($data['user_type'] == "undergraduate") {
+                $this->db->bind(':user_type', 'undergraduate');
             }
-            elseif ($data['user_type'] === "academic") {
-                $this->db->bind(':user_type', 'academic');
+            elseif ($data['user_type'] == "acounsellor") {
+                $this->db->bind(':user_type', 'acounsellor');
             }
-            elseif ($data['user_type'] === "professional") {
-                $this->db->bind(':user_type', 'professional');
+            elseif ($data['user_type'] == "pcounsellor") {
+                $this->db->bind(':user_type', 'pcounsellor');
             }
-            elseif ($data['user_type'] === "doctor") {
+            elseif ($data['user_type'] == "doctor") {
                 $this->db->bind(':user_type', 'doctor');
             }
             $this->db->bind(':content', $data['content']);
@@ -169,14 +169,14 @@
             elseif ($data['user_type'] === 'admin') {
                 $this->db->bind(':user_type', 'admin');
             }
-            elseif ($data['user_type'] === "undergrad") {
-                $this->db->bind(':user_type', 'undergrad');
+            elseif ($data['user_type'] === "undergraduate") {
+                $this->db->bind(':user_type', 'undergraduate');
             }
-            elseif ($data['user_type'] === "academic") {
-                $this->db->bind(':user_type', 'academic');
+            elseif ($data['user_type'] === "acounsellor") {
+                $this->db->bind(':user_type', 'acounsellor');
             }
-            elseif ($data['user_type'] === "professional") {
-                $this->db->bind(':user_type', 'professional');
+            elseif ($data['user_type'] === "pcounsellor") {
+                $this->db->bind(':user_type', 'pcounsellor');
             }
             elseif ($data['user_type'] === "doctor") {
                 $this->db->bind(':user_type', 'doctor');
@@ -269,6 +269,19 @@
                 $this->db->rollBack();
                 return false;
             }
+        }
+
+        public function getEmailsbyUserType($user_type){
+            $this->db->query('SELECT email FROM users WHERE user_type = :user_type AND is_deleted = FALSE');
+            $this->db->bind(':user_type', $user_type);
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
+        public function getEmails(){
+            $this->db->query('SELECT email FROM users WHERE is_deleted = FALSE');
+            $results = $this->db->resultSet();
+            return $results;
         }
     }   
 

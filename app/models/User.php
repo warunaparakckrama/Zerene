@@ -283,7 +283,7 @@
         }
 
         public function getUsernameById($user_id){
-            $sql = "SELECT username FROM users WHERE user_id = :user_id";
+            $sql = "SELECT username FROM users WHERE user_id = :user_id AND is_deleted = FALSE";
             $this->db->query($sql);
             $this->db->bind(':user_id', $user_id);
 

@@ -462,6 +462,7 @@ class Admin extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'email' => trim($_POST['user_email']),
                 'new_username' => trim($_POST['new_username']),
                 'admin_password' => trim($_POST['admin_password']),
                 'username_alert' => '',
@@ -503,7 +504,7 @@ class Admin extends Controller
             if (empty($data['username_alert'])) {
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                    flash('user_message', 'Username updated successfully');
+                    $this->sendUserCredentialsemail($data);
                     redirect('admin/ad_edit_user/' . $user_id);
                 } else {
                     die('Something went wrong');
@@ -588,8 +589,10 @@ class Admin extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'email' => trim($_POST['user_email']),
                 'admin_password' => trim($_POST['admin_password']),
                 'new_password' => trim($_POST['new_password']),
+                'origin_password' => trim($_POST['new_password']), // Added this line to store the original password before hashing
                 'confirm_password' => trim($_POST['confirm_password']),
                 'password_alert' => '',
                 'admin' => $admin,
@@ -621,7 +624,7 @@ class Admin extends Controller
 
                     // Update the user's password
                     if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
-                        flash('user_message', 'Password updated successfully');
+                        $this->sendUserCredentialsemail($data);
                         redirect('admin/ad_edit_user/' . $user_id);
                         return; // Ensure no further code execution after redirect
                     } else {
@@ -653,10 +656,22 @@ class Admin extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'author' => trim($_POST['author']),
+                'author' => '',
                 'subject' => trim($_POST['subject']),
                 'user_type' => trim($_POST['user_type']),
                 'content' => trim($_POST['content']),
+            ];
+
+            if ($data['user_type'] == 'all users') {
+                $emails = $this->adminModel->getEmails();
+            } else {
+                $emails = $this->adminModel->getEmailsbyUsertype($data['user_type']);
+            }
+
+            $emaildata = [
+                'subject' => $data['subject'],
+                'emails' => $emails,
+                'content' => $data['content'],
             ];
 
             // Fetch the current username from db
@@ -665,6 +680,7 @@ class Admin extends Controller
 
             // post notifications
             if ($this->adminModel->addNotifications($data)) {
+                $this->sendSystemNotificationemail($emaildata);
                 redirect('admin/ad_notifications');
             } else {
                 die('Something went wrong');
@@ -729,9 +745,10 @@ class Admin extends Controller
         }
     }
 
-    public function sendRegisteremail($data){
-        
-        
+    public function sendRegisteremail($data)
+    {
+
+
 
         $receiver = $data['email'];
         $subject = "Registration Successful!";
@@ -753,11 +770,75 @@ class Admin extends Controller
 
         $body = $emailContent;
 
-        if(mail($receiver, $subject, $body, $headers)){
+        if (mail($receiver, $subject, $body, $headers)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
+    public function sendUserCredentialsemail($data)
+    {
+        $receiver = $data['email'];
+        $subject = "Account Update Successful!";
+        $username = isset($data['new_username']) ? $data['new_username'] : '<i>not changed</i>';
+        $password = isset($data['origin_password']) ? $data['origin_password'] : '<i>not changed</i>';
+        $sender = "From: zerenecounselor@gmail.com";
+
+        $filePath = __DIR__ . '/../views/admin/ad_email_change_credentials.php';
+        $date = date('Y-m-d');
+        $emailContent = file_get_contents($filePath);
+
+        $emailContent = str_replace('{username_here}', $username, $emailContent);
+        $emailContent = str_replace('{password_here}', $password, $emailContent);
+        $emailContent = str_replace('{date}', $date, $emailContent);
+
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= $sender;
+
+        $body = $emailContent;
+
+        if (mail($receiver, $subject, $body, $headers)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function sendSystemNotificationemail($data)
+    {
+        $receiver = $data['emails'];
+
+        $receiverEmails = array_map(function ($receiver) {
+            return $receiver->email;
+        }, $receiver);
+
+        $subject = $data['subject'];
+        $content = $data['content'];
+        $sender = "From: zerenecounselor@gmail.com";
+
+        $filePath = __DIR__ . '/../views/admin/ad_email_sys_notification.php';
+        $date = date('Y-m-d');
+        $emailContent = file_get_contents($filePath);
+
+        $emailContent = str_replace('{subject_here}', $subject, $emailContent);
+        $emailContent = str_replace('{content_here}', $content, $emailContent);
+        $emailContent = str_replace('{date}', $date, $emailContent);
+
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= $sender;
+
+        $body = $emailContent;
+
+        // Implode the extracted email addresses
+        $receiver = implode(', ', $receiverEmails);
+
+        if (mail($receiver, $subject, $body, $headers)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
