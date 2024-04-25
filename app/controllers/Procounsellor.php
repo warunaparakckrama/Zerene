@@ -64,11 +64,11 @@ class Procounsellor extends Controller
         $this->view('procounsellor/pc_createq', $data);
     }
 
-    public function pc_createNotes()
+    public function pc_createNotes($id)
     {
-        $undergrad = $this->adminModel->getUndergrads();
+        $undergrad = $this->adminModel->getUgById($id);
         $coun_user_id = $_SESSION['user_id'];
-        $note = $this->pcModel->getNotesFromID($undergrad->user_id, $coun_user_id);
+        $note = $this->pcModel->getNotesFromID($id, $coun_user_id);
         $data = [
             'undergrad' => $undergrad,
             'note' => $note,
@@ -464,11 +464,11 @@ class Procounsellor extends Controller
             ];
 
             if ($this->pcModel->addNotes($data)) {
-                redirect('procounsellor/pc_createNotes'); 
+                redirect('procounsellor/pc_ug_profile/'. $id); 
             } else {
                 die('Something went wrong');
             }
-            $this->view('procounsellor/pc_createNotes');
+            $this->view('procounsellor/pc_createNotes/'. $id);
         }
 
         $data['note'] = $this->pcModel->getNotesFromID($id, $coun_user_id);
