@@ -35,6 +35,7 @@
                                     <td class="p-regular-grey">:</td>
                                     <td class="p-title"><?php echo $_SESSION['user_name']; ?></td>
                                 </tr>
+                                
                                 <tr>
                                     <td class="p-regular-grey">E-mail</td>
                                     <td class="p-regular-grey">:</td>

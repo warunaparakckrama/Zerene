@@ -1,5 +1,5 @@
 <?php
-    $currentPage = 'ac_opletters'; 
+    $currentPage = 'ac_opletters_view'; 
     $letter = $data['letter'];
 ?>
 
@@ -27,15 +27,13 @@
                 <p class="p-regular-green">Letter View</p>
                 <div class="card-green-5">
                     <div style="font-size: 15px;">
-                        <p class="p-regular-green"><b>Subject: </b><?php echo $letter->subject;?></p>
-                        <p class="p-regular-green"><b>Content: </b><?php echo $letter->content;?></p><br>
-                        <a href="<?php echo $letter->document_path;?>" download><p>Document</p></a>
-                        <?php $dateTime = new DateTime($letter->sent_at); $formattedDateTime = $dateTime->format('jS M, y \|\ h:iA');?>
+                        <p class="p-regular-green"><b>Subject: </b><?php echo $letter->letter_subject;?></p><br>
+                        <p class="p-regular-green"><b>Content: </b><?php echo $letter->letter_body;?></p><br>
+                        <!-- <a href="<?php echo $letter->document_path;?>" download><p>Document</p></a> -->
+                        <?php $dateTime = new DateTime($letter->date); $formattedDateTime = $dateTime->format('jS M, y \|\ h:iA');?>
                         <p class="p-regular-green"><b>Sent At: </b><?php echo $formattedDateTime;?></p>
                     </div>
-                    <div class="btn-container">
-                       <a href="<?php echo URLROOT;?>academic/ac_create_op_letter/<?php echo $letter->letter_id;?>" style="text-decoration: none;"><button class="button-main">Create Opinion Letter</button></a>
-                    </div>
+                    
                 </div>
             </div>
         </div>

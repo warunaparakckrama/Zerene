@@ -1,6 +1,6 @@
 <?php
     $currentPage = 'ac_opletters';
-    $ug_user_id = $data['ug_user_id'];
+    $req_letter_id = $data['req_letter_id'];
 ?>
 
 <head>
@@ -27,7 +27,7 @@
                 <div class="card-white">
                     <p class="p-regular-green">Create Opinion Letter</p>
                     <div class="card-green-5">
-                        <form action="<?php echo URLROOT;?>academic/ac_create_op_letter/<?php echo $ug_user_id;?>" method="POST">
+                        <form action="<?php echo URLROOT;?>academic/ac_create_op_letter/<?php echo $req_letter_id;?>" method="POST">
                             <div style="font-size: 15px;">
                                 <label for="subject">Subject: </label>
                                 <input type="text" name="subject" style="font-size: 15px; width: 50%;" required><br><br>

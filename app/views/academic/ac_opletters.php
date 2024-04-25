@@ -1,8 +1,10 @@
 <?php
 $currentPage = 'ac_opletters';
-$request = $data['request'];
+$yetToCompleteRequests = $data['yetToCompleteRequests'];
 $letter = $data['letter'];
 $undergrad = $data['undergrad'];
+$request = $data['request'];
+$completedRequests = $data['completedRequests'];
 ?>
 
 <head>
@@ -29,22 +31,22 @@ $undergrad = $data['undergrad'];
 
 
             <div>
-                <p class="p-regular-green">Recieved Request Letters</p>
+                <p class="p-regular-green">Pending Request Letters</p>
                 <div class="card-white-scroll" style="height: 215px;">
-                    <?php foreach ($data['request'] as $request) : ?>
+                    <?php foreach ($data['yetToCompleteRequests'] as $yetToCompleteRequests) : ?>
                         <?php foreach ($data['undergrad'] as $undergrad) : ?>
-                            <?php if ($request->from_ug_user_id === $undergrad->user_id) : ?>
+                            <?php if ($yetToCompleteRequests->from_ug_user_id === $undergrad->user_id) : ?>
                                 <div class="card-green">
                                     <img src="<?php echo IMG; ?>note1.svg" alt="">
                                     <div>
                                         <p class="p-regular-green" style="margin-bottom: -10px;"><?php echo $undergrad->username; ?></p>
-                                        <p class="p-regular-grey" style="font-size: 15px;"><?php echo $request->subject; ?></p>
-                                        <?php $date = date("jS M, Y - \a\\t g.ia", strtotime($request->sent_at)); ?>
+                                        <p class="p-regular-grey" style="font-size: 15px;"><?php echo $yetToCompleteRequests->subject; ?></p>
+                                        <?php $date = date("jS M, Y - \a\\t g.ia", strtotime($yetToCompleteRequests->sent_at)); ?>
                                         <p class="p-regular-green" style="font-size: 15px;"><?php echo $date; ?></p>
                                     </div>
 
                                     <div class="btn-container">
-                                        <a href="<?php echo URLROOT; ?>academic/ac_req_letter_view/<?php echo $request->letter_id; ?>" style="text-decoration: none;"><button class="button-main">View Request letter</button></a>
+                                        <a href="<?php echo URLROOT; ?>academic/ac_req_letter_view/<?php echo $yetToCompleteRequests->letter_id; ?>" style="text-decoration: none;"><button class="button-main">View Request letter</button></a>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -56,9 +58,11 @@ $undergrad = $data['undergrad'];
                 <div>
                     <p class="p-regular-green">Created Opinion Letters </p>
                     <div class="card-white-scroll" style="height: 215px;">
-                        <?php foreach ($data['letter'] as $letter) : ?>
-                            <?php foreach ($data['undergrad'] as $undergrad) : ?>
-                                <?php if ($letter->ug_user_id == $undergrad->user_id) : ?>
+                    <?php foreach ($data['letter'] as $letter) : ?>
+                        <?php foreach ($data['undergrad'] as $undergrad) : ?>
+                            <?php foreach ($data['request'] as $request) : ?>
+                                
+                                <?php if ($letter->req_letter_id == $request->letter_id && $request->from_ug_user_id == $undergrad->user_id ) : ?>
                                     <div class="card-green">
                                         <img src="<?php echo IMG; ?>note1.svg" alt="">
                                         <div>
@@ -69,14 +73,22 @@ $undergrad = $data['undergrad'];
                                         </div>
 
                                         <div class="btn-container">
-                                            <a href="" style="text-decoration: none;"><button class="button-main">View Request letter</button></a>
+                                            <a href="<?php echo URLROOT; ?>academic/ac_opletter_view/<?php echo $letter->letter_id ;?>" style="text-decoration: none;"><button class="button-main">Opinion Letter</button></a>
+                                            <a href="<?php echo URLROOT; ?>academic/ac_req_view_op/<?php echo $letter->req_letter_id ;?>" style="text-decoration: none;"><button class="button-main">Request Letter</button></a>
                                         </div>
                                     </div>
                                 <?php endif; ?>
+
                             <?php endforeach; ?>
-                        <?php endforeach; ?>
+
+                            <?php endforeach; ?>
+
+                        
+                    <?php endforeach; ?>
+
                     </div>
                 </div>
+                
             </div>
 
 

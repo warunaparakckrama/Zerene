@@ -16,7 +16,7 @@
 <body>
     <section class="sec-1">
         <div>
-            <?php require APPROOT . '/views/inc/sidebar-ug.php'; ?>
+            <?php require APPROOT . '/views/inc/sidebar-ac.php'; ?>
         </div>
 
         <div class="grid-1">
