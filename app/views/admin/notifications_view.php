@@ -54,10 +54,10 @@
                                 <select name="user_type" class="option">
                                     <option value="all users" <?php echo ($data['user_type'] === 'all users') ? 'selected' : ''; ?>>All Users</option>
                                     <option value="admin" <?php echo ($data['user_type'] === 'admin') ? 'selected' : ''; ?>>Administrators</option>
-                                    <option value="undergrad" <?php echo ($data['user_type'] === 'undergrad') ? 'selected' : ''; ?>>Undergraduates</option>
-                                    <option value="academic" <?php echo ($data['user_type'] === 'academic') ? 'selected' : ''; ?>>Counsellors (Academic)</option>
-                                    <option value="professional" <?php echo ($data['user_type'] === 'professional') ? 'selected' : ''; ?>>Counsellors (Professional)</option>
-                                    <option value="doctors" <?php echo ($data['user_type'] === 'doctor') ? 'selected' : ''; ?>>Psychiatrists</option>
+                                    <option value="undergraduate" <?php echo ($data['user_type'] === 'undergraduate') ? 'selected' : ''; ?>>Undergraduates</option>
+                                    <option value="acounsellor" <?php echo ($data['user_type'] === 'acounsellor') ? 'selected' : ''; ?>>Counsellors (Academic)</option>
+                                    <option value="pcounsellor" <?php echo ($data['user_type'] === 'pcounsellor') ? 'selected' : ''; ?>>Counsellors (Professional)</option>
+                                    <option value="doctor" <?php echo ($data['user_type'] === 'doctor') ? 'selected' : ''; ?>>Psychiatrists</option>
                                 </select><br>
 
                                 <label for="content">Content: </label>

@@ -159,30 +159,31 @@
         }
 
         public function updateNotifications($data){
-            $this->db->query('UPDATE notifications SET subject = :subject, user_type = :user_type, content = :content WHERE notification_id = :notification_id');
+            $this->db->query('UPDATE notifications SET author= :author, subject = :subject, user_type = :user_type, content = :content, created_at=:created_at WHERE notification_id = :notification_id');
             // Bind values
             $this->db->bind(':notification_id', $data['notification_id']);
+            $this->db->bind(':author', $data['author']);
             $this->db->bind(':subject', $data['subject']);
-            if ($data['user_type'] === "all users") {
+            if ($data['user_type'] == "all users") {
                 $this->db->bind(':user_type', 'all users');
             }
-            elseif ($data['user_type'] === 'admin') {
+            elseif ($data['user_type'] == 'admin') {
                 $this->db->bind(':user_type', 'admin');
             }
-            elseif ($data['user_type'] === "undergraduate") {
+            elseif ($data['user_type'] == "undergraduate") {
                 $this->db->bind(':user_type', 'undergraduate');
             }
-            elseif ($data['user_type'] === "acounsellor") {
+            elseif ($data['user_type'] == "acounsellor") {
                 $this->db->bind(':user_type', 'acounsellor');
             }
-            elseif ($data['user_type'] === "pcounsellor") {
+            elseif ($data['user_type'] == "pcounsellor") {
                 $this->db->bind(':user_type', 'pcounsellor');
             }
-            elseif ($data['user_type'] === "doctor") {
+            elseif ($data['user_type'] == "doctor") {
                 $this->db->bind(':user_type', 'doctor');
             }
             $this->db->bind(':content', $data['content']);
-            $this->db->execute();
+            $this->db->bind(':created_at', date('Y-m-d H:i:s'));
 
             // Execute
             if($this->db->execute())

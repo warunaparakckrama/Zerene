@@ -698,14 +698,28 @@ class Admin extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'author' => $this->userModel->getUsernameById($_SESSION['user_id']),
                 'notification_id' => $notification_id,
                 'subject' => trim($_POST['subject']),
                 'user_type' => trim($_POST['user_type']),
                 'content' => trim($_POST['content']),
             ];
 
+            if ($data['user_type'] == 'all users') {
+                $emails = $this->adminModel->getEmails();
+            } else {
+                $emails = $this->adminModel->getEmailsbyUsertype($data['user_type']);
+            }
+
+            $emaildata = [
+                'subject' => $data['subject'],
+                'emails' => $emails,
+                'content' => $data['content'],
+            ];
+
             // post notifications
             if ($this->adminModel->updateNotifications($data)) {
+                $this->sendSystemNotificationemail($emaildata);
                 redirect('admin/notifications_view/' . $notification_id);
             } else {
                 die('Something went wrong');
