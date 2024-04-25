@@ -573,5 +573,17 @@
                 return false; // No matching row found or no changes made
             }
         }
+
+        public function checkVerifyStatus($user_id){
+            $this->db->query('SELECT is_verified FROM users where user_id=:user_id');
+            $this->db->bind(':user_id', $user_id);
+            $result = $this->db->single();
+            
+            if ($result && $result->is_verified == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         
     }
