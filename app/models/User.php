@@ -47,7 +47,7 @@
                     $this->db->bind(':user_id', $user_id);
                     $this->db->bind(':ug_id', $ug_id);
                     $this->db->execute();
-                    return true; // Both inserts successful
+                    return $user_id; // Both inserts successful
                 } else {
                     return false;
                 }
@@ -533,4 +533,18 @@
                 return false;
             }
         }
+
+        public function addVerifyCode($data){
+            $this->db->query('UPDATE users SET verify_code = :verify_code WHERE user_id = :user_id AND is_deleted = FALSE');
+            $this->db->bind(':user_id', $data['user_id']);
+            $this->db->bind(':verify_code', $data['verify_code']);
+            $this->db->execute();
+            
+            if ($this->db->rowCount() > 0) {
+                return true; // Update successful
+            } else {
+                return false; // No matching row found or no changes made
+            }
+        }
+        
     }

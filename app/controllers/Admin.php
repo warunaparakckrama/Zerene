@@ -762,8 +762,6 @@ class Admin extends Controller
     public function sendRegisteremail($data)
     {
 
-
-
         $receiver = $data['email'];
         $subject = "Registration Successful!";
         $username = $data['username'];

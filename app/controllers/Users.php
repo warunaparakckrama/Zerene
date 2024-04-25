@@ -84,13 +84,20 @@ class Users extends Controller{
 
                 //hash password
                 $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
+                //register user
+                $user_id =$this->userModel->register($data);
 
-                //regsiter user
-                if($this->userModel->register($data)){
-                    flash('register_success','You are registered and can login');
-                    redirect('users/login');
-                }else{
-                    die('Something went wrong');
+                $emaildata = [
+                    'username' => trim($_POST['username']),
+                    'email' => trim($_POST['email']),
+                    'user_id' => $user_id
+                ];
+                
+                if (!empty($emaildata['username']) && !empty($emaildata['email'])) {
+                    $this->sendVerifyEmail($emaildata);
+                    redirect('users/email_verify');
+                } else {
+                    die('Username or email is missing');
                 }
 
             }else{
@@ -171,6 +178,11 @@ class Users extends Controller{
             ];
             $this->view('users/login',$data);
         }
+    }
+
+    public function email_verify(){
+        $data = [];
+        $this->view('users/email_verify', $data);
     }
 
     public function createUserSession($user){
@@ -285,5 +297,42 @@ class Users extends Controller{
                 $this->view('undergrad/feedback', $data);
             }
         }
+    }
+
+    public function sendVerifyEmail($data){
+        $receiver = $data['email'];
+        $subject = "Email Verification";
+        $username = $data['username'];
+        $user_id = $data['user_id'];
+        $code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+        $sender = "From: zerenecounselor@gmail.com";
+
+        $modeldata = [
+            'user_id' => $user_id,
+            'verify_code' => $code
+        ];
+
+        $this->userModel->addVerifyCode($modeldata);
+
+        $filePath = __DIR__ . '/../views/admin/ad_email_verify.php';
+        $date = date('Y-m-d');
+        $emailContent = file_get_contents($filePath);
+
+        $emailContent = str_replace('{username_here}', $username, $emailContent);
+        $emailContent = str_replace('{code_here}', $code, $emailContent);
+        $emailContent = str_replace('{date}', $date, $emailContent);
+
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= $sender;
+
+        $body = $emailContent;
+
+        if (mail($receiver, $subject, $body, $headers)) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
