@@ -120,6 +120,7 @@ class Admin extends Controller
                 'email' => trim($_POST['email']),
                 'username' => trim($_POST['username']),
                 'password' => trim($_POST['password']),
+                'origin_password' => trim($_POST['password']),
                 'confirm_password' => trim($_POST['confirm_password']),
                 'signup_alert' => '',
                 'usernames' => $usernames,
@@ -163,6 +164,7 @@ class Admin extends Controller
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 if ($this->userModel->reg_counselor($data)) {
+                    $this->sendRegisteremail($data);
                     redirect('admin/ad_reg_counsellor');
                 } else {
                     die('Something went wrong');
@@ -210,6 +212,7 @@ class Admin extends Controller
                 'contact_num' => trim($_POST['contact_num']),
                 'username' => trim($_POST['username']),
                 'password' => trim($_POST['password']),
+                'origin_password' => trim($_POST['password']),
                 'confirm_password' => trim($_POST['confirm_password']),
                 'signup_alert' => '',
                 'usernames' => $usernames,
@@ -254,6 +257,7 @@ class Admin extends Controller
 
                 //regsiter user
                 if ($this->userModel->reg_doctor($data)) {
+                    $this->sendRegisteremail($data);
                     redirect('admin/ad_reg_doctor');
                 } else {
                     die('Something went wrong');
@@ -726,18 +730,30 @@ class Admin extends Controller
     }
 
     public function sendRegisteremail($data){
-        // $data = [
-        //     'email' => $data['email'],
-        //     'username' => $data['username'],
-        //     'password' => $data['password'],
-        // ];
+        
+        
 
         $receiver = $data['email'];
-        $subject = "Registration Successful";
-        $body = "Hi, " . $data['username'] . " your registration was successful. Your password is " . $data['origin_password'];
-        $sender = "From:zerenecounselor@gmail.com";
+        $subject = "Registration Successful!";
+        $username = $data['username'];
+        $password = $data['origin_password'];
+        $sender = "From: zerenecounselor@gmail.com";
 
-        if(mail($receiver, $subject, $body, $sender)){
+        $filePath = __DIR__ . '/../views/admin/ad_email_signup.php';
+        $date = date('Y-m-d');
+        $emailContent = file_get_contents($filePath);
+
+        $emailContent = str_replace('{username_here}', $username, $emailContent);
+        $emailContent = str_replace('{password_here}', $password, $emailContent);
+        $emailContent = str_replace('{date}', $date, $emailContent);
+
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= $sender;
+
+        $body = $emailContent;
+
+        if(mail($receiver, $subject, $body, $headers)){
             return true;
         }else{
             return false;
