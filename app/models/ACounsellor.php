@@ -188,4 +188,5 @@ class ACounsellor
         $this->db->bind(':id', $requestLetterId);
         $this->db->execute();
     }
+
 }
