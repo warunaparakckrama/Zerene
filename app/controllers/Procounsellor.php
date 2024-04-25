@@ -517,7 +517,7 @@ class Procounsellor extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->pcModel->deleteNote($noteID)) {
-                redirect('procounsellor/pc_ug_profile/' . $noteID);
+                redirect('procounsellor/pc_ug_profile/'. $id);
             } else {
                 die('Something went wrong');
             }

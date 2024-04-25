@@ -170,7 +170,8 @@ class PCounsellor
 
     public function getNotes($id, $coun_user_id)
     {
-        $this->db->query('SELECT * FROM notes WHERE of_user_id = :id AND by_user_id = :coun_user_id');
+        
+        $this->db->query('SELECT * FROM notes WHERE of_user_id = :id AND by_user_id = :coun_user_id AND is_deleted = 0');
         $this->db->bind(':id', $id);
         $this->db->bind(':coun_user_id', $coun_user_id);
         $results = $this->db->resultSet();

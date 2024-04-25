@@ -29,9 +29,9 @@ $note = $data['note'];
                     <p class="p-regular">Note Details</p>
                     <div class="card-green-7">
                         <div>
-                            <p>Note No.: <?php echo $data['note']->note_id; ?></p>
-                            <p>Heading: <?php echo $data['note']->heading; ?></p>
-                            <p>Content: <?php echo $data['note']->content; ?></p>
+                            <p class="p-regular-green">Note No. :</p><p> <?php echo $data['note']->note_id; ?></p><br>
+                            <p class="p-regular-green">Heading :</p><p> <?php echo $data['note']->heading; ?></p><br>
+                            <p class="p-regular-green">Content : </p> <p> <?php echo $data['note']->content; ?></p><br>
                             <div class="btn-container-2">
                                 <form action="<?php echo URLROOT; ?>procounsellor/deleteNote/<?php echo $data['note']->note_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete the note?')">
                                     <button type="submit" class="button-danger no-underline">Delete</button>
