@@ -514,10 +514,12 @@ class Procounsellor extends Controller
     }
 
     public function deleteNote($noteID)
-    {
+    {   
+        $note = $this->pcModel->getNotesFromID($noteID);
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->pcModel->deleteNote($noteID)) {
-                redirect('procounsellor/pc_ug_profile/'. $id);
+                redirect('procounsellor/pc_ug_profile/'. $note->of_user_id);
             } else {
                 die('Something went wrong');
             }

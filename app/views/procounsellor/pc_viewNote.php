@@ -33,7 +33,7 @@ $note = $data['note'];
                             <p class="p-regular-green">Heading :</p><p> <?php echo $data['note']->heading; ?></p><br>
                             <p class="p-regular-green">Content : </p> <p> <?php echo $data['note']->content; ?></p><br>
                             <div class="btn-container-2">
-                                <form action="<?php echo URLROOT; ?>procounsellor/deleteNote/<?php echo $data['note']->note_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete the note?')">
+                                <form action="<?php echo URLROOT; ?>Procounsellor/deleteNote/<?php echo $data['note']->note_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete the note?')">
                                     <button type="submit" class="button-danger no-underline">Delete</button>
                                 </form>
                             </div>
