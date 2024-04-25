@@ -24,6 +24,7 @@ class Academic extends Controller
         $this->chatModel = $this->model('ChatModel');
     }
 
+
     //page view controllers
 
     public function dashboard()
@@ -42,14 +43,38 @@ class Academic extends Controller
     {
         $id = $_SESSION['user_id'];
 
-        // Get data from the model
-        $request = $this->acModel->getRequestLetterforCounsellor($id);
+        // Get completed request letters
+        $completedRequests = $this->acModel->getCompletedRequestLetters($id);
+
+        // Get yet to complete request letters
+        $yetToCompleteRequests = $this->acModel->getYetToCompleteRequestLetters($id);
+
+        // Get opinion letters
         $letter = $this->acModel->getOpLetter($id);
+
+        // Get undergrad data
         $undergrad = $this->adminModel->getUndergrads();
+
+        $request = $this->acModel->getRequestLetterforCounsellor($id);
+
+    // Pass the data to the view
+    // Sort yet to complete requests by date in descending order
+    usort($yetToCompleteRequests, function($a, $b) {
+        return strtotime($b->sent_at) - strtotime($a->sent_at);
+    });
+
+    // Sort opinion letters by date in descending order
+    usort($letter, function($a, $b) {
+        return strtotime($b->date) - strtotime($a->date);
+    });
+    
+
         $data = [
-            'request' => $request,
+            'completedRequests' => $completedRequests,
+            'yetToCompleteRequests' => $yetToCompleteRequests,
             'letter' => $letter,
-            'undergrad' => $undergrad
+            'undergrad' => $undergrad,
+            'request' => $request
         ];
 
         // Load the view and pass the data to it
@@ -144,9 +169,10 @@ class Academic extends Controller
 
     public function ac_create_op_letter($id)
     {
-        $ug_user_id = $id;
+        $req_letter_id = $id;
         $counsellor = $this->adminModel->getCounsellorById($_SESSION['user_id']);
-        $request= $this->acModel->getReqLetterbyugid($id);
+        $request = $this->acModel->getReqLetterbyletterid($id);
+
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -154,7 +180,7 @@ class Academic extends Controller
             $data = [
                 'subject' => trim($_POST['subject']),
                 'content' => trim($_POST['content']),
-                'ug_user_id' => $ug_user_id,
+                'req_letter_id' => $req_letter_id,
                 'coun_user_id' => $_SESSION['user_id'],
                 'coun_fname' => $counsellor->first_name,
                 'coun_lname' => $counsellor->last_name,
@@ -162,8 +188,10 @@ class Academic extends Controller
             ];
 
             if ($this->acModel->insertOpLetter($data)) {
-                $this->sendEmail1($data,$request);
+                $this->sendEmail1($data, $request);
+                $this->acModel->updateRequestLetterStatus($req_letter_id,'completed');
                 redirect('academic/ac_opletters');
+
             } else {
                 die('Something went wrong');
             }
@@ -175,7 +203,7 @@ class Academic extends Controller
             $data = [
                 'subject' => '',
                 'content' => '',
-                'ug_user_id' => $ug_user_id,
+                'req_letter_id' => $req_letter_id,
                 'coun_user_id' => $_SESSION['user_id'],
 
             ];
@@ -222,10 +250,21 @@ class Academic extends Controller
         ];
         $this->view('academic/ac_req_letter_view', $data);
     }
+
+    public function ac_req_view_op($id)
+    {
+        $letter = $this->acModel->get_req_letter($id);
+
+        $data = [
+            'letter' => $letter,
+        ];
+        $this->view('academic/ac_req_view_op', $data);
+    }
+
     public function ac_opletter_view($id)
     {
         $letter = $this->acModel->getOpLetterbyid($id);
-        
+
         $data = [
             'letter' => $letter,
         ];
@@ -431,14 +470,14 @@ class Academic extends Controller
         }
     }
 
-    public function sendEmail1($data,$request)
+    public function sendEmail1($data, $request)
     {
         $receiver = "111ashanpraboda@gmail.com";
         $sender = "From: zerenecounselor@gmail.com";
         $subject = $data['subject'];
         $filePath = __DIR__ . '/../views/academic/emails.php';
         $date = date('Y-m-d');
-        
+
         $emailContent = file_get_contents($filePath);
         $emailContent = str_replace('{subject_here}', $data['subject'], $emailContent);
         $emailContent = str_replace('{body_here}', $data['content'], $emailContent);

@@ -1,5 +1,5 @@
 <?php
-    $currentPage = 'ac_opletters'; 
+    $currentPage = 'ac_req_view_op'; 
     $letter = $data['letter'];
 ?>
 
@@ -19,7 +19,7 @@
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Opinion Letters</p></div>
+                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Request Letter</p></div>
                 <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
@@ -33,9 +33,7 @@
                         <?php $dateTime = new DateTime($letter->sent_at); $formattedDateTime = $dateTime->format('jS M, y \|\ h:iA');?>
                         <p class="p-regular-green"><b>Sent At: </b><?php echo $formattedDateTime;?></p>
                     </div>
-                    <div class="btn-container">
-                       <a href="<?php echo URLROOT;?>academic/ac_create_op_letter/<?php echo $letter->letter_id;?>" style="text-decoration: none;"><button class="button-main">Create Opinion Letter</button></a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
