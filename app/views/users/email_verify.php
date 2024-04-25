@@ -21,12 +21,16 @@
             <p class="p-regular-green" style="margin-bottom: 10px;">Email Verification</p>
             <p class="p-regular-grey" style="font-size: 15px;">We have sent you a verification code to <b>email</b>.</p>
             <p class="p-regular-grey" style="font-size: 15px;"> Please enter the 6-digit code to verify your email</p><br>
-            <form action="">
+
+            <form action="<?php echo URLROOT;?>Users/verifyEmailcode/<?php echo $data['user_id'];?>" method="POST">
                 <div class="log-subgrid-1" style="margin-bottom: 10px;">
                     <label for="" style="font-size: 15px; color: var(--zerene-green)">Verification code</label>
                     <input type="text" name="verify_code" class="form-signup" required>
+
+                    <p class="p-error" style="font-size: 15px;"><?php echo isset($data['verify_alert']) ? $data['verify_alert'] : ''; ?></p>
                 </div>
-                <div class="log-subgrid-1" style="align-items:center; justify-content: center;">
+                <div class="log-su
+                bgrid-1" style="align-items:center; justify-content: center;">
                     <button class="button-main" type="submit">Verify</button>
                 </div>
             </form>

@@ -546,5 +546,32 @@
                 return false; // No matching row found or no changes made
             }
         }
+
+        public function getVerifyCode($user_id){ 
+            $this->db->query('SELECT verify_code FROM users WHERE user_id = :user_id AND is_deleted = FALSE');
+            $this->db->bind(':user_id', $user_id);
+            try {
+                $this->db->execute();
+                $result = $this->db->single();
+    
+                // Return verify code from the database
+                return $result->verify_code;
+            } catch (PDOException $e) {
+                // Handle the error or return an indication of failure
+                return false;
+            }
+        }
+
+        public function setVerifyStatus($user_id){
+            $this->db->query('UPDATE users SET is_verified= TRUE WHERE user_id=:user_id AND is_deleted=FALSE');
+            $this->db->bind('user_id', $user_id);
+            $this->db->execute();
+
+            if ($this->db->rowCount() > 0) {
+                return true; // Update successful
+            } else {
+                return false; // No matching row found or no changes made
+            }
+        }
         
     }

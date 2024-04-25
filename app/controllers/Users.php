@@ -1,191 +1,190 @@
 <?php
 
-class Users extends Controller{
+class Users extends Controller
+{
     private $userModel;
 
     public function __construct()
     {
-        $this->userModel=$this->model('User'); 
+        $this->userModel = $this->model('User');
     }
 
     //function controllers
 
-    public function signup(){
+    public function signup()
+    {
         //check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //process form
 
             //sanitize data
-            $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             //inti data
-            $data=[
-                'age'=>trim($_POST['age']),
-                'gender'=>trim($_POST['gender']),
-                'email'=>trim($_POST['email']),
-                'university'=>trim($_POST['university']),
-                'faculty'=>trim($_POST['faculty']),
-                'year'=>trim($_POST['year']),
-                'username'=>trim($_POST['username']),
-                'password'=>trim($_POST['password']),
-                'confirm_password'=>trim($_POST['confirm_password']),
-                'signup_alert'=>'',
+            $data = [
+                'age' => trim($_POST['age']),
+                'gender' => trim($_POST['gender']),
+                'email' => trim($_POST['email']),
+                'university' => trim($_POST['university']),
+                'faculty' => trim($_POST['faculty']),
+                'year' => trim($_POST['year']),
+                'username' => trim($_POST['username']),
+                'password' => trim($_POST['password']),
+                'confirm_password' => trim($_POST['confirm_password']),
+                'signup_alert' => '',
             ];
 
             // Check if the age is within the specified range
             if ($data['age'] < 18 || $data['age'] > 25) {
                 $data['signup_alert'] = 'Age must be between 18 and 25';
-            }
-
-            elseif(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
                 $data['signup_alert'] = 'Invalid email format';
-            } 
-            
-            else {
-                    // Extract domain from the email address
-                    $emailParts = explode('@', $data['email']);
-                    $domain = isset($emailParts[1]) ? $emailParts[1] : '';
-            
-                    // Define allowed domain names
-                    $allowedDomains = [
-                        'stu.ucsc.cmb.ac.lk',
-                        'fos.uoc.cmb.ac.lk',
-                        'foa.uoc.cmb.ac.lk'
-                        // Add more allowed domains if needed
-                    ];
-            
-                    // Check if the extracted domain is in the allowed list
-                    if (!in_array($domain, $allowedDomains)) {
-                        $data['signup_alert'] = 'Email domain is not allowed';
-                    } else {
-                        // Check if the email is already taken
-                        if ($this->userModel->findUserByEmail($data['email'])) {
-                            $data['signup_alert'] = 'Email is already taken';
-                        }
+            } else {
+                // Extract domain from the email address
+                $emailParts = explode('@', $data['email']);
+                $domain = isset($emailParts[1]) ? $emailParts[1] : '';
+
+                // Define allowed domain names
+                $allowedDomains = [
+                    'stu.ucsc.cmb.ac.lk',
+                    'fos.uoc.cmb.ac.lk',
+                    'foa.uoc.cmb.ac.lk'
+                    // Add more allowed domains if needed
+                ];
+
+                // Check if the extracted domain is in the allowed list
+                if (!in_array($domain, $allowedDomains)) {
+                    $data['signup_alert'] = 'Email domain is not allowed';
+                } else {
+                    // Check if the email is already taken
+                    if ($this->userModel->findUserByEmail($data['email'])) {
+                        $data['signup_alert'] = 'Email is already taken';
                     }
                 }
-            
-
-            if($this->userModel->findUserByUsername($data['username'])){
-                $data['signup_alert']='Username is already taken'; 
-            }
-            
-            elseif(strlen($data['password'])<8){
-                $data['signup_alert']='Password must be atleast 8 characters'; 
             }
 
-            elseif($data['password']!=$data['confirm_password']){
-                $data['signup_alert']='passwords do not match';
+
+            if ($this->userModel->findUserByUsername($data['username'])) {
+                $data['signup_alert'] = 'Username is already taken';
+            } elseif (strlen($data['password']) < 8) {
+                $data['signup_alert'] = 'Password must be atleast 8 characters';
+            } elseif ($data['password'] != $data['confirm_password']) {
+                $data['signup_alert'] = 'passwords do not match';
             }
-            
+
             //make sure errors are empty
-            if(empty($data['signup_alert'])){
+            if (empty($data['signup_alert'])) {
                 //validate
 
                 //hash password
-                $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                 //register user
-                $user_id =$this->userModel->register($data);
+                $user_id = $this->userModel->register($data);
 
                 $emaildata = [
                     'username' => trim($_POST['username']),
                     'email' => trim($_POST['email']),
                     'user_id' => $user_id
                 ];
-                
+
                 if (!empty($emaildata['username']) && !empty($emaildata['email'])) {
                     $this->sendVerifyEmail($emaildata);
-                    redirect('users/email_verify');
+                    redirect('users/email_verify/' . $user_id);
                 } else {
                     die('Username or email is missing');
                 }
-
-            }else{
-                $this->view('users/signup',$data);
+            } else {
+                $this->view('users/signup', $data);
             }
-
         } else {
             //load form
-            $data=[
-                'age'=>'',
-                'gender'=>'',
-                'email'=>'',
-                'university'=>'',
-                'faculty'=>'',
-                'year'=>'',
-                'username'=>'',
-                'password'=>'',
-                'confirm_password'=>'',
+            $data = [
+                'age' => '',
+                'gender' => '',
+                'email' => '',
+                'university' => '',
+                'faculty' => '',
+                'year' => '',
+                'username' => '',
+                'password' => '',
+                'confirm_password' => '',
             ];
             $this->view('users/signup', $data);
         }
-    } 
-    
-    public function login(){
-        if($_SERVER['REQUEST_METHOD']=='POST'){
+    }
+
+    public function login()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //process form
-            $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             //init data
-            $data=[
-                
-                'username'=>trim($_POST['username']),
-                'password'=>trim($_POST['password']),
-                'username_err'=>'',
-                'password_err'=>'',
+            $data = [
+
+                'username' => trim($_POST['username']),
+                'password' => trim($_POST['password']),
+                'username_err' => '',
+                'password_err' => '',
 
             ];
-             //validate email
-             if(empty($data['username'])){
-                $data['username_err']='Please enter username';      
+            //validate email
+            if (empty($data['username'])) {
+                $data['username_err'] = 'Please enter username';
             }
-             //validate password
-            if(empty($data['password'])){
-                $data['password_err']='Please enter password';      
+            //validate password
+            if (empty($data['password'])) {
+                $data['password_err'] = 'Please enter password';
             }
 
             //check for username
-            if($this->userModel->findUserByUsername($data['username'])){
+            if ($this->userModel->findUserByUsername($data['username'])) {
                 //user found
-            }else{
-                $data['username_err']='No user found';
+            } else {
+                $data['username_err'] = 'No user found';
             }
-            
+
             //make sure errors are empty
-            if(empty($data['username_err']) && empty($data['password_err'])){
+            if (empty($data['username_err']) && empty($data['password_err'])) {
                 //validate
                 //chek and set logged in user
-                $loggedInUser=$this->userModel->login($data['username'],$data['password']);
+                $loggedInUser = $this->userModel->login($data['username'], $data['password']);
 
-                if($loggedInUser){
+                if ($loggedInUser) {
                     //create session
                     // die('SUCCESS');
                     $this->createUserSession($loggedInUser);
-                }else{
-                    $data['password_err']='Password incorrect';
-                    $this->view('users/login',$data);
+                } else {
+                    $data['password_err'] = 'Password incorrect';
+                    $this->view('users/login', $data);
                 }
-            }else{
-                $this->view('users/login',$data);
+            } else {
+                $this->view('users/login', $data);
             }
-        }else{
+        } else {
             //init data
-            $data=[
-                'username'=>'',
-                'password'=>'',
-                'username_err'=>'',
-                'password_err'=>'',
+            $data = [
+                'username' => '',
+                'password' => '',
+                'username_err' => '',
+                'password_err' => '',
 
             ];
-            $this->view('users/login',$data);
+            $this->view('users/login', $data);
         }
     }
 
-    public function email_verify(){
-        $data = [];
+    public function email_verify($user_id)
+    {
+        $data = [
+            'user_id' => $user_id,
+            'verify_alert' => ''
+        ];
+
         $this->view('users/email_verify', $data);
     }
 
-    public function createUserSession($user){
+    public function createUserSession($user)
+    {
         $_SESSION['user_id'] = $user->user_id;
         $_SESSION['user_name'] = $user->username;
         $_SESSION['user_email'] = $user->email;
@@ -199,12 +198,13 @@ class Users extends Controller{
             redirect('procounsellor/pc_home');
         } elseif ($user->user_type === 'acounsellor') {
             redirect('academic/ac_home');
-        } elseif ($user->user_type === 'doctor'){
+        } elseif ($user->user_type === 'doctor') {
             redirect('doctor/doc_home');
         }
     }
-    
-    public function logout(){
+
+    public function logout()
+    {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_name']);
         unset($_SESSION['user_email']);
@@ -213,7 +213,8 @@ class Users extends Controller{
         redirect('');
     }
 
-    public function isLoggedIn(){
+    public function isLoggedIn()
+    {
         if (isset($_SESSION['user_id'])) {
             return true;
         } else {
@@ -221,41 +222,45 @@ class Users extends Controller{
         }
     }
 
-    public function deleteUG($id){
-        
-  
-        if($this->userModel->deleteUndergrad($id)){
-        //   flash('post_message', 'user Removed');
-          redirect('admin/ad_users');
+    public function deleteUG($id)
+    {
+
+
+        if ($this->userModel->deleteUndergrad($id)) {
+            //   flash('post_message', 'user Removed');
+            redirect('admin/ad_users');
         } else {
-          die('Something went wrong');
+            die('Something went wrong');
         }
     }
 
-    public function deleteCoun($id){
-        
-  
-        if($this->userModel->deleteCounselor($id)){
-        //   flash('post_message', 'user Removed');
-          redirect('admin/ad_users');
+    public function deleteCoun($id)
+    {
+
+
+        if ($this->userModel->deleteCounselor($id)) {
+            //   flash('post_message', 'user Removed');
+            redirect('admin/ad_users');
         } else {
-          die('Something went wrong');
+            die('Something went wrong');
         }
     }
-    
-    public function deleteDoc($id){
-        
-  
-        if($this->userModel->deleteDoctor($id)){
-        //   flash('post_message', 'user Removed');
-          redirect('admin/ad_users');
+
+    public function deleteDoc($id)
+    {
+
+
+        if ($this->userModel->deleteDoctor($id)) {
+            //   flash('post_message', 'user Removed');
+            redirect('admin/ad_users');
         } else {
-          die('Something went wrong');
+            die('Something went wrong');
         }
-    } 
-    
-    public function sentFeedback($user_id){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    }
+
+    public function sentFeedback($user_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -268,17 +273,17 @@ class Users extends Controller{
                 'title_err' => '',
                 'content_err' => '',
             ];
-        
-            if(empty($data['title'])){
-                $data['title_err']='Please enter the title';  
+
+            if (empty($data['title'])) {
+                $data['title_err'] = 'Please enter the title';
             }
-            if(empty($data['content'])){
-                $data['content_err']='Please enter the content';  
+            if (empty($data['content'])) {
+                $data['content_err'] = 'Please enter the content';
             }
 
-            if(empty($data['title_err']) && empty($data['content_err'])){
+            if (empty($data['title_err']) && empty($data['content_err'])) {
                 // Validated
-    
+
                 // Fetch the current username from db
                 $username = $this->userModel->getUsernameById($user_id);
                 $email = $this->userModel->getEmailById($user_id);
@@ -288,10 +293,9 @@ class Users extends Controller{
                 // post notifications
                 if ($this->userModel->addFeedback($data)) {
                     redirect('undergrad/feedback');
-                    } else {
+                } else {
                     die('Something went wrong');
-                    }
-
+                }
             } else {
                 // Load view with errors
                 $this->view('undergrad/feedback', $data);
@@ -299,7 +303,8 @@ class Users extends Controller{
         }
     }
 
-    public function sendVerifyEmail($data){
+    public function sendVerifyEmail($data)
+    {
         $receiver = $data['email'];
         $subject = "Email Verification";
         $username = $data['username'];
@@ -333,6 +338,34 @@ class Users extends Controller{
         } else {
             return false;
         }
+    }
 
+    public function verifyEmailcode($user_id)
+    {
+        $code = $this->userModel->getVerifyCode($user_id);
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //process form
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'user_id' => $user_id,
+                'code' => $code,
+                'verify_code' => trim($_POST['verify_code']),
+                'verify_alert' => ''
+            ];
+
+            // Check if verification code is empty
+            if (empty($data['verify_code'])) {
+                $data['verify_alert'] = 'Please enter a verification code.';
+            } elseif ($data['verify_code'] !== $data['code']) {
+                $data['verify_alert'] = 'Invalid verification code';
+            } else {
+                // Verification code matches, update status and redirect
+                $this->userModel->setVerifyStatus($user_id);
+                redirect('users/login');
+            }
+        }
+
+        $this->view('users/email_verify', $data);
     }
 }
