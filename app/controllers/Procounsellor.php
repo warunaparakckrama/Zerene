@@ -68,13 +68,23 @@ class Procounsellor extends Controller
     {
         $undergrad = $this->adminModel->getUgById($id);
         $coun_user_id = $_SESSION['user_id'];
-        $note = $this->pcModel->getNotesFromID($id, $coun_user_id);
+        $note = $this->pcModel->getNotes($id, $coun_user_id);
         $data = [
             'undergrad' => $undergrad,
             'note' => $note,
         ];
 
         $this->view('procounsellor/pc_createNotes', $data);
+    }
+
+    public function pc_viewNote($noteID)
+    {
+        $note = $this->pcModel->getNotesFromID($noteID);
+        $data = [
+            'note' => $note,
+        ];
+
+        $this->view('procounsellor/pc_viewNote', $data);
     }
 
     public function pc_undergrad()
@@ -183,9 +193,11 @@ class Procounsellor extends Controller
         $coun_user_id = $_SESSION['user_id'];
         $direct = $this->pcModel->checkUgDirects($id, $coun_user_id);
         $undergrad = $this->adminModel->getUgById($id);
+        $note = $this->pcModel->getNotes($id, $coun_user_id);
         $data = [
             'undergrad' => $undergrad,
-            'direct' => $direct
+            'direct' => $direct,
+            'note' => $note
         ];
         $this->view('procounsellor/pc_ug_profile', $data);
     }
@@ -449,8 +461,8 @@ class Procounsellor extends Controller
 
     public function createNotes($id)
     {
-        $coun_user_id=$_SESSION['user_id'];
-        
+        $coun_user_id = $_SESSION['user_id'];
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -464,16 +476,54 @@ class Procounsellor extends Controller
             ];
 
             if ($this->pcModel->addNotes($data)) {
-                redirect('procounsellor/pc_ug_profile/'. $id); 
+                redirect('procounsellor/pc_ug_profile/' . $id);
             } else {
                 die('Something went wrong');
             }
-            $this->view('procounsellor/pc_createNotes/'. $id);
+            $this->view('procounsellor/pc_createNotes/' . $id);
         }
 
-        $data['note'] = $this->pcModel->getNotesFromID($id, $coun_user_id);
+        $data['note'] = $this->pcModel->getNotes($id, $coun_user_id);
         $this->view('procounsellor/pc_createNotes', $data);
     }
+
+    public function editNote($noteID)
+    {
+        $note = $this->pcModel->getNotesFromID($noteID);
+
+        if (!$note) {
+            die('Note not found');
+        }
+
+        $data = [
+            'note' => $note,
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data['note']->heading = trim($_POST['heading']);
+            $data['note']->content = trim($_POST['content']);
+
+            if ($this->pcModel->updateNote($noteID)) {
+                redirect('procounsellor/pc_ug_profile/' . $noteID);
+            } else {
+                die('Something went wrong');
+            }
+        }
+
+        $this->view('procounsellor/pc_viewNote', $data);
+    }
+
+    public function deleteNote($noteID)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->pcModel->deleteNote($noteID)) {
+                redirect('procounsellor/pc_ug_profile/' . $noteID);
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
+
 
     public function addTimeslots($user_id)
     {
