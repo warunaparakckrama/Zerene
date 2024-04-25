@@ -144,10 +144,13 @@ class Doctor extends Controller
         $direct = $this->docModel->getDirectedUndergrads($id);
         $undergrad = $this->adminModel->getUndergrads();
         $counsellor = $this->adminModel->getCounselors();
+        $created = $this->docModel->getCreatedPrescriptionById($id);
+        
         $data = [
             'direct' => $direct,
             'undergrad' => $undergrad,
-            'counsellor' => $counsellor
+            'counsellor' => $counsellor,
+            'created' => $created
         ];
         $this->view('doctor/doc_prescription', $data);
     }

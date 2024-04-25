@@ -172,4 +172,12 @@ class psychiatrist
         $results = $this->db->resultset();
         return $results;
     }
+    
+    public function getCreatedPrescriptionById($id){
+        $this->db->query('SELECT * FROM prescription WHERE doc_user_id = :doc_user_id');
+        $this->db->bind(':doc_user_id', $id);
+        $results = $this->db->resultset();
+        return $results;
+    }
+    
 }

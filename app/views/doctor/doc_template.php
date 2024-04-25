@@ -34,6 +34,7 @@
     <style>
         body {
             font-family: "Poppins", sans-serif;
+            color:#3d8994;
             margin: 0;
             padding: 0;
         }
@@ -53,18 +54,20 @@
         }
 
         .prescription-table th {
-         background-color: #f2f2f2;
-         height: 80px; /* Set header row height */
+         background-color:#E5F3F6;
+         height: 70px;
+          /* Set header row height */
 }
 
         .prescription-table td {
-         height: 80px; /* Set data row height */
+         
+         height: 70px;
+         background-color: #FEFEFE; /* Set data row height */
 }
 
 
-        .prescription-table th {
-            background-color: #f2f2f2;
-        }
+        
+        
 
         .col1, .col3 {
             width: 15%;
@@ -72,7 +75,7 @@
 
 
         .col2, .col4 {
-            width: 35%;
+            width: 30%;
         }
        
         
@@ -83,6 +86,7 @@
     <div class= prescription-container>
     <table class="prescription-table">
     <tbody>
+        <th class "col1 merged-cells" colspan=4 style="background-color:#3d8994; color:#E5F3F6" >Medical prescription</th>
             <tr>
                 <th class="col1">Patient's Name</th>
                 <td class="col1 merged-cells" colspan="3"><?php echo $prescription->ug_name;?></td>
@@ -100,26 +104,21 @@
                 
             </tr>
             <tr>
-                <th class="col">Drug name</th>
+                <th class="col4">Drug name</th>
                 <th class="col2">quantity(tablets or syrup)</th>
                 <th class="col3 merged-cells" colspan="2">dosage(per day)</th>
             </tr>
             <div>
+            <?php foreach ($data['medicine'] as $medicine): ?>
             <tr>
-                <td class="col1"></td>
-                <td class="col2"></td>
-                <td class="col3 merged-cells" colspan="2"></td>
+                <td class="col1"><?php echo $medicine->drug_name;?></td>
+                <td class="col2"><?php echo $medicine->unit;?></td>
+                <td class="col3 merged-cells" colspan="2"><?php echo $medicine->dosage;?></td>
             </tr>
-            <tr >
-                <td class="col1"></td>
-                <td class="col2"></td>
-                <td class="col3 merged-cells" colspan="2"></td>
-            </tr>
-            <tr>
-                <td class="col1"></td>
-                <td class="col2"></td>
-                <td class="col3 merged-cells" colspan="2"></td>
-            </tr>
+            <th class="col1">Instructions</th>
+            <td class="col1 merged-cells" colspan="3"><?php echo $medicine->instructions;?></td>
+            <?php endforeach; ?>
+            
             </div>
 
            
@@ -128,6 +127,10 @@
                 <td class="col2"><?php echo $prescription->date;?></td>
                 <th class="col3">Diagnosed by</th>
                 <td class="col4"><?php echo $prescription->diagnosed_by;?></td>
+            </tr>
+            <tr>
+                <th class="col1">Signature</th>
+                <td clss="col1 merged-cells" colspan="3"></td>
             </tr>
 
         </div>
