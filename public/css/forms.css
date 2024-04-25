@@ -82,10 +82,12 @@
 }
 
 .textarea-1{
-    border: 1px solid var(--zerene-green);
+    border: 1px var(--zerene-green);
     border-radius: 8px;
     font-family: "Poppins", sans-serif;
     width: 100%;
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
 .password-box{

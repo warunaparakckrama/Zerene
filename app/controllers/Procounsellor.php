@@ -64,6 +64,19 @@ class Procounsellor extends Controller
         $this->view('procounsellor/pc_createq', $data);
     }
 
+    public function pc_createNotes()
+    {
+        $undergrad = $this->adminModel->getUndergrads();
+        $coun_user_id = $_SESSION['user_id'];
+        $note = $this->pcModel->getNotesFromID($undergrad->user_id, $coun_user_id);
+        $data = [
+            'undergrad' => $undergrad,
+            'note' => $note,
+        ];
+
+        $this->view('procounsellor/pc_createNotes', $data);
+    }
+
     public function pc_undergrad()
     {
         $id = $_SESSION['user_id'];
@@ -367,7 +380,7 @@ class Procounsellor extends Controller
                 'num_ranges' => trim($_POST['num_ranges']),
                 'm_factor' => trim($_POST['m_factor']),
             ];
-            
+
             // Validated
 
             // Create the questionnaire
@@ -432,6 +445,34 @@ class Procounsellor extends Controller
         }
 
         $this->view('procounsellor/pc_createq', $data);
+    }
+
+    public function createNotes($id)
+    {
+        $coun_user_id=$_SESSION['user_id'];
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'by_user_id' => $coun_user_id,
+                'of_user_id' => $id,
+                'heading' => trim($_POST['heading']),
+                'content' => trim($_POST['content']),
+                'heading_err' => '',
+                'content_err' => '',
+            ];
+
+            if ($this->pcModel->addNotes($data)) {
+                redirect('procounsellor/pc_createNotes'); 
+            } else {
+                die('Something went wrong');
+            }
+            $this->view('procounsellor/pc_createNotes');
+        }
+
+        $data['note'] = $this->pcModel->getNotesFromID($id, $coun_user_id);
+        $this->view('procounsellor/pc_createNotes', $data);
     }
 
     public function addTimeslots($user_id)
@@ -618,9 +659,7 @@ class Procounsellor extends Controller
             $data['stress'] = $Stress;
 
             return $data;
-        }
-
-        else {
+        } else {
             $i = 1;
             $mark = 0;
             $final_mark = '';
@@ -637,7 +676,7 @@ class Procounsellor extends Controller
 
             foreach ($range as $range) {
                 if ($mark >= $range->min_value && $mark <= $range->max_value) {
-                    $final_mark = $mark*$range->multiply_by;
+                    $final_mark = $mark * $range->multiply_by;
                     $result = $range->range_name;
                     $data['final_mark'] = $final_mark;
                     $data['result'] = $result;
@@ -646,7 +685,6 @@ class Procounsellor extends Controller
             }
 
             return $data;
-
         }
     }
 

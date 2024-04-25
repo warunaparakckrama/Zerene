@@ -154,4 +154,26 @@ class PCounsellor
         $results = $this->db->resultSet();
         return $results;
     }
+
+    public function addNotes($data){
+        $this->db->query('INSERT INTO notes (by_user_id, of_user_id, heading, content, created_at) VALUES (:by_user_id, :of_user_id, :heading, :content, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+        $this->db->bind(':by_user_id', $data['by_user_id']);
+        $this->db->bind(':of_user_id', $data['of_user_id']);
+        $this->db->bind(':heading', $data['heading']);
+        $this->db->bind(':content', $data['content']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getNotesFromID($id, $coun_user_id)
+    {
+        $this->db->query('SELECT * FROM notes WHERE of_user_id = :id AND by_user_id = :coun_user_id');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':coun_user_id', $coun_user_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
 }
