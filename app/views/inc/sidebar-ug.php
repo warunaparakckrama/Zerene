@@ -20,7 +20,7 @@
             <a href="<?php echo URLROOT; ?>undergrad/request_letters" class="top <?php echo ($currentPage === 'request_letters') ? 'active' : ''; ?>">Request Letters</a>
             <a href="<?php echo URLROOT; ?>undergrad/timeslots" class="top <?php echo ($currentPage === 'timeslots') ? 'active' : ''; ?>">Timeslots</a>
             <a href="<?php echo URLROOT; ?>undergrad/chats" class="top <?php echo ($currentPage === 'chats') ? 'active' : ''; ?>">Chats</a>
-            <a href="<?php echo URLROOT; ?>undergrad/resources" class="top <?php echo ($currentPage === 'resources') ? 'active' : ''; ?>">Resources</a>
+            <a href="<?php echo URLROOT; ?>undergrad/prescriptions" class="top <?php echo ($currentPage === 'prescriptions') ? 'active' : ''; ?>">Prescriptions</a>
         </div>
         <div class="sidebar-container3">
             <a href="" class="bottom">Help & Info</a>

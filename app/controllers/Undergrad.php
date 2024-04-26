@@ -7,6 +7,7 @@ class Undergrad extends Controller
     private $adminModel;
     private $ugModel;
     private $pcModel;
+    private $docModel;
 
     public function __construct()
     {
@@ -17,6 +18,7 @@ class Undergrad extends Controller
         $this->adminModel = $this->model('Administrator');
         $this->ugModel = $this->model('Undergraduate');
         $this->pcModel = $this->model('PCounsellor');
+        $this->docModel = $this->model('psychiatrist');
     }
 
     //user view controllers
@@ -162,10 +164,35 @@ class Undergrad extends Controller
         $this->view('undergrad/chats', $data);
     }
 
-    public function resources()
+    public function prescriptions()
+    {   $user_id = $_SESSION['user_id'];
+        $prescription = $this->docModel->getPrescriptionforUg($user_id);
+        $doctor = $this->adminModel->getDoctors();
+        $data = [
+            'prescription' => $prescription,
+            'doctor' => $doctor,
+            'user_id' => $user_id
+        ];
+        $this->view('undergrad/prescriptions', $data);
+    }
+
+    public function view_prescripton($id)
     {
-        $data = [];
-        $this->view('undergrad/resources', $data);
+        $prescription = $this->docModel->getPrescriptionById($id);
+        $doctor = $this->adminModel->getDoctorById($prescription->doc_user_id);
+        $data = [
+            'prescription' => $prescription,
+            'doctor' => $doctor,
+            'id' => $id
+        ];
+        $this->view('undergrad/view_prescripton', $data);
+    }
+
+    public function prescription_view($id){
+        $data = [
+            'id' => $id
+        ];
+        $this->view('undergrad/prescription_view', $data);
     }
 
     public function ug_profile()

@@ -150,6 +150,14 @@ class psychiatrist
         return $this->db->single();
     }
 
+    public function getPrescriptionforUg($id){
+        $this->db->query('SELECT * FROM prescription WHERE is_deleted = FALSE AND ug_user_id = :ug_user_id');
+        $this->db->bind(':ug_user_id', $id);
+        $results = $this->db->resultset();
+        return $results;
+
+    }
+
     public function getDirectedUndergrads($id){
         $this->db->query('SELECT * FROM ug_direct WHERE to_user_id = :id');
         $this->db->bind(':id', $id);
