@@ -147,4 +147,69 @@ class PCounsellor
         $results = $this->db->resultSet();
         return $results;
     }
+
+    public function getRangesfromQuizId($questionnaire_id){
+        $this->db->query('SELECT * FROM quiz_range WHERE questionnaire_id = :questionnaire_id');
+        $this->db->bind(':questionnaire_id', $questionnaire_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function addNotes($data){
+        $this->db->query('INSERT INTO notes (by_user_id, of_user_id, heading, content, created_at) VALUES (:by_user_id, :of_user_id, :heading, :content, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+        $this->db->bind(':by_user_id', $data['by_user_id']);
+        $this->db->bind(':of_user_id', $data['of_user_id']);
+        $this->db->bind(':heading', $data['heading']);
+        $this->db->bind(':content', $data['content']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getNotes($id, $coun_user_id)
+    {
+        
+        $this->db->query('SELECT * FROM notes WHERE of_user_id = :id AND by_user_id = :coun_user_id AND is_deleted = 0');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':coun_user_id', $coun_user_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getNotesFromID($id)
+    {
+        $this->db->query('SELECT * FROM notes WHERE note_id = :id');
+        $this->db->bind(':id', $id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function updateNote($note)
+    {
+        $this->db->query('UPDATE notes SET heading = :heading, content = :content WHERE note_id = :note_id');
+        $this->db->bind(':note_id', $note->note_id);
+        $this->db->bind(':heading', $note->heading);
+        $this->db->bind(':content', $note->content);
+        return $this->db->execute();
+    }
+
+    public function deleteNote($noteID)
+    {
+        error_log('Deleting Note: ' . $noteID);
+
+        $this->db->query('UPDATE notes SET is_deleted = 1 WHERE note_id = :noteID');
+        $this->db->bind(':noteID', $noteID);
+
+        $result = $this->db->execute();
+
+        if ($result) {
+            error_log('Note deleted successfully.');
+        } else {
+            error_log('Error deleting Note.');
+        }
+
+        return $result;
+    }
 }

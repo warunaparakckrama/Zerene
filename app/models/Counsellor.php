@@ -81,6 +81,14 @@
             return $this->db->execute();
         }
         
-        
+        public function addRange($questionnaire_id, $minRange, $maxRange, $rangeName, $m_factor){
+            $this->db->query('INSERT INTO quiz_range (min_value, max_value, range_name, multiply_by, questionnaire_id) VALUES (:min_value, :max_value, :range_name, :multiply_by, :questionnaire_id)');
+            $this->db->bind(':min_value', $minRange);
+            $this->db->bind(':max_value', $maxRange);
+            $this->db->bind(':range_name', $rangeName);
+            $this->db->bind(':multiply_by', $m_factor);
+            $this->db->bind(':questionnaire_id', $questionnaire_id);
+            $this->db->execute();
+        }
         
     }
