@@ -113,76 +113,6 @@ class Users extends Controller
         }
     }
 
-    // public function login()
-    // {
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //         //process form
-    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    //         //init data
-    //         $data = [
-
-    //             'username' => trim($_POST['username']),
-    //             'password' => trim($_POST['password']),
-    //             'username_err' => '',
-    //             'password_err' => '',
-
-    //         ];
-    //         //validate email
-    //         if (empty($data['username'])) {
-    //             $data['username_err'] = 'Please enter username';
-    //         }
-    //         //validate password
-    //         if (empty($data['password'])) {
-    //             $data['password_err'] = 'Please enter password';
-    //         }
-
-    //         //check for username
-    //         if ($this->userModel->findUserByUsername($data['username'])) {
-    //             //user found
-    //         } else {
-    //             $data['username_err'] = 'No user found';
-    //         }
-
-    //         //make sure errors are empty
-    //         if (empty($data['username_err']) && empty($data['password_err'])) {
-    //             //validate
-
-    //             //chek and set logged in user
-    //             $loggedInUser = $this->userModel->login($data['username'], $data['password']);
-
-    //             if ($loggedInUser) {
-    //                 //create session
-    //                 // die('SUCCESS');
-    //                 $this->createUserSession($loggedInUser);
-    //                 $user_id = $_SESSION['user_id'];
-    //                 $verify_Status = $this->userModel->checkVerifyStatus($user_id);
-
-    //                 if ($verify_Status == '1') {
-    //                     $this->userRedirect($_SESSION['user_type']);
-    //                 } else {
-    //                     redirect('users/email_verify/'. $user_id);
-    //                 }
-
-    //             } else {
-    //                 $data['password_err'] = 'Password incorrect';
-    //                 $this->view('users/login', $data);
-    //             }
-    //         } else {
-    //             $this->view('users/login', $data);
-    //         }
-    //     } else {
-    //         //init data
-    //         $data = [
-    //             'username' => '',
-    //             'password' => '',
-    //             'username_err' => '',
-    //             'password_err' => '',
-
-    //         ];
-    //         $this->view('users/login', $data);
-    //     }
-    // }
-
     public function login()
     {
         $usernames = $this->userModel->getUsernames();
@@ -267,17 +197,6 @@ class Users extends Controller
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_type'] = $user->user_type;
 
-        // if ($user->user_type === 'undergraduate') {
-        //     redirect('undergrad/home');
-        // } elseif ($user->user_type === 'admin') {
-        //     redirect('admin/ad_home');
-        // } elseif ($user->user_type === 'pcounsellor') {
-        //     redirect('procounsellor/pc_home');
-        // } elseif ($user->user_type === 'acounsellor') {
-        //     redirect('academic/ac_home');
-        // } elseif ($user->user_type === 'doctor') {
-        //     redirect('doctor/doc_home');
-        // }
     }
 
     public function userRedirect($user_type)
@@ -292,6 +211,8 @@ class Users extends Controller
             redirect('academic/ac_home');
         } elseif ($user_type === 'doctor') {
             redirect('doctor/doc_home');
+        } elseif ($user_type === 'pharmacy') {
+            redirect('pharmacy/pharm_home');
         }
     }
 
