@@ -569,4 +569,8 @@ class Doctor extends Controller
             }
         }
     }
+
+    public function downloadPrescription(){
+        require_once APPROOT.'libraries/dompdf/autoload.inc.php';
+    }
 }
