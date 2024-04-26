@@ -1,5 +1,5 @@
 <?php
-$currentPage = 'support';
+$currentPage = 'support_view';
 $feedback = $data['feedback'];
 ?>
 
@@ -30,29 +30,29 @@ $feedback = $data['feedback'];
                 <div class="card-white">
                     <div class="card-green-3" style="font-size: 15px;">
                         <div>
-                            <p class="p-regular-green"><b>Username: </b><?php echo $feedback->username; ?></p>
-                            <p class="p-regular-green"><b>Email: </b><?php echo $feedback->email; ?></p>
-                            <p class="p-regular-green"><b>Title: </b><?php echo $feedback->title; ?></p>
+                            <p class="p-regular-green"><b>Username: </b><?php echo $feedback->username; ?></p><br>
+                            <p class="p-regular-green"><b>Email: </b><?php echo $feedback->email; ?></p><br>
+                            <p class="p-regular-green"><b>Title: </b><?php echo $feedback->title; ?></p><br>
                             <p class="p-regular-green"><b>Status: </b><?php echo $feedback->status; ?></p><br>
-                            <p class="p-regular-green" style="text-align:justify;"><b>Content: </b><?php echo $feedback->content; ?></p><br>
+                            <p class="p-regular-green"><b>Content: </b><?php echo $feedback->content; ?></p><br>
 
-                            <div class="btn-container-2">
-                                <?php if ($feedback->status == 'resolved') : ?>
-                                    <p class="p-regular-green"><b>Comment: </b><?php echo $feedback->comment; ?></p><br>
+                            <?php if ($feedback->status == 'resolved') : ?>
+                                <p class="p-regular-green"><b>Comment: </b><?php echo $feedback->comment; ?></p><br>
+                                <div class="btn-container-2">
                                     <button class="button-second" disabled>Resolved</button>
                                 <?php else : ?>
-                                    <form action="<?php echo URLROOT;?>Admin/resolveFeedback/<?php echo $feedback->feedback_id;?>" method="POST">
-                                        <div class="btn-container">
-                                            <label for="title">Comment: </label>
-                                            <input type="text" name="comment" class="" value="" required>
-
+                                    <form action="<?php echo URLROOT; ?>Admin/resolveFeedback/<?php echo $feedback->feedback_id; ?>" method="POST">
+                                        <label for="title" class="p-regular-green"><b>Comment: </b></label>
+                                        <input type="text" name="comment" class="" value="" required>
+                                        <div class="btn-container-2" style="margin-top: 10px;">
                                             <button class="button-main" type="submit">Resolve</button>
-                                        </div>
                                     </form>
                                 <?php endif; ?>
                                 <a href="<?php echo URLROOT; ?>Admin/delFeedback/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Remove</button></a>
-                            </div>
-
+                                <!-- <div>
+                                    <button class="button-main" type="button" onclick="goBack()">Back</button>
+                                </div> -->
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -79,5 +79,9 @@ $feedback = $data['feedback'];
                 // If the user cancels, do nothing or handle as needed
             }
         }
+
+        // function goBack(){
+        //     window.location.href = 'ad_support.php';
+        // }
     </script>
 </body>
