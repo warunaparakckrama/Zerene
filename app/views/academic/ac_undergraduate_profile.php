@@ -44,23 +44,7 @@
                     </div>
                 </div>
     
-                <div class="card-white">
-                    <p class="p-regular">Time Slots</p>
-                    <div class="card-green-2">
-                        <div>
-                            <p class="p-regular-grey">Wednesday</p>
-                            <p class="p-regular-grey" style="font-size: 15px;">3rd Jan. 2024</p>
-                        </div>
-                        <div class="btn-container-2">
-                            <button class="button-second">1.20-1.50pm</button>
-                            <button class="button-second">2.00-2.30pm</button>
-                            <button class="button-main">2.40-3.10pm</button>
-                            <button class="button-second">3.20-3.50pm</button>
-                            <button class="button-main">4.00-4.30pm</button>
-                            <button class="button-second">4.40-5.00pm</button>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
         </div>
