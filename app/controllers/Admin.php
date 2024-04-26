@@ -292,7 +292,7 @@ class Admin extends Controller
         $usernames = $this->userModel->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            
+
             $data = [
                 'name' => trim($_POST['name']),
                 'address' => trim($_POST['address']),
@@ -349,7 +349,7 @@ class Admin extends Controller
             } else {
                 $this->view('admin/ad_pharmacies', $data);
             }
-        }  else{
+        } else {
             $data = [
                 'name' => '',
                 'address' => '',
@@ -362,7 +362,7 @@ class Admin extends Controller
             ];
             $this->view('admin/ad_pharmacies', $data);
         }
-        
+
         $this->view('admin/ad_pharmacies', $data);
     }
 
@@ -831,10 +831,29 @@ class Admin extends Controller
     public function resolveFeedback($feedback_id)
     {
         if ($this->adminModel->solveFeedback($feedback_id)) {
-            //   flash('post_message', 'user Removed');
             redirect('admin/ad_support');
         } else {
             die('Something went wrong');
+        }
+    }
+
+    public function sendComment()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'comment' => trim($_POST['comment']),
+                'comment_err' => ''
+            ];
+
+            if ($this->userModel->addFeedback($data)) {
+                redirect('admin/support_view');
+            } else {
+                die('Something went wrong');
+            }
+        } else {
+            $this->view('admin/support_view', $data);
         }
     }
 
@@ -932,5 +951,4 @@ class Admin extends Controller
             return false;
         }
     }
-
 }

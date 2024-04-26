@@ -36,14 +36,21 @@ $feedback = $data['feedback'];
                             <p class="p-regular-green"><b>Status: </b><?php echo $feedback->status; ?></p><br>
                             <p class="p-regular-green" style="text-align:justify;"><b>Content: </b><?php echo $feedback->content; ?></p><br>
 
-                            <div class="btn-container-2">
-                                <?php if ($feedback->status == 'resolved') : ?>
-                                    <button class="button-second" disabled>Resolved</button>
+                            <form action="<?php echo URLROOT; ?>Admin/sendComment/<?php echo $_SESSION['user_id']; ?>" method="POST">
+                                <div class="btn-container-2">
+                                    <?php if ($feedback->status == 'resolved') : ?>
+                                        <p class="p-regular-green"><b>Resolved Comment: </b><?php echo $feedback->comment; ?></p><br>
+                                        <button class="button-second" disabled>Resolved</button>
                                     <?php else : ?>
-                                    <a href="<?php echo URLROOT; ?>Admin/resolveFeedback/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-main" onclick="confirmResolve(event)">Resolve</button></a>
-                                <?php endif; ?>
-                                <a href="<?php echo URLROOT; ?>Admin/delFeedback/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Remove</button></a>
-                            </div>
+
+                                        <label for="title">Comment: </label>
+                                        <input type="text" name="title" class="" value=""><br>
+
+                                        <a href="<?php echo URLROOT; ?>Admin/resolveFeedback/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-main" onclick="confirmResolve(event)">Resolve</button></a>
+                                    <?php endif; ?>
+                                    <a href="<?php echo URLROOT; ?>Admin/delFeedback/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Remove</button></a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
