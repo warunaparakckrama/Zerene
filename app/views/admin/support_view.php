@@ -38,12 +38,21 @@ $feedback = $data['feedback'];
 
                             <div class="btn-container-2">
                                 <?php if ($feedback->status == 'resolved') : ?>
+                                    <p class="p-regular-green"><b>Comment: </b><?php echo $feedback->comment; ?></p><br>
                                     <button class="button-second" disabled>Resolved</button>
-                                    <?php else : ?>
-                                    <a href="<?php echo URLROOT; ?>Admin/resolveFeedback/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-main" onclick="confirmResolve(event)">Resolve</button></a>
+                                <?php else : ?>
+                                    <form action="<?php echo URLROOT;?>Admin/resolveFeedback/<?php echo $feedback->feedback_id;?>" method="POST">
+                                        <div class="btn-container">
+                                            <label for="title">Comment: </label>
+                                            <input type="text" name="comment" class="" value="" required>
+
+                                            <button class="button-main" type="submit">Resolve</button>
+                                        </div>
+                                    </form>
                                 <?php endif; ?>
                                 <a href="<?php echo URLROOT; ?>Admin/delFeedback/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Remove</button></a>
                             </div>
+
                         </div>
                     </div>
                 </div>

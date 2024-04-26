@@ -27,7 +27,7 @@
                         <p class="p-regular">Submit Feedback/ Complaints</p>
 
                         <div class="card-green">
-                            <form action="<?php echo URLROOT;?>Users/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST">
+                            <form action="<?php echo URLROOT;?>Procounsellor/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST">
                                 <div style="font-size: 15px;">
 
                                     <label for="type">Type: </label>

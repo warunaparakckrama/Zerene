@@ -34,13 +34,11 @@
                                 <tr>
                                     <td style="padding:0 0 36px 0;">
                                         <h1 style="font-size:24px; margin:0 0 20px 0; font-family:Inter,sans-serif;">
-                                            <center>Welcome Aboard!</center>
+                                            <center>Email Verification</center>
                                         </h1>
-                                        <p style="margin:0 0 12px 0; font-size:16px; line-height:24px;">Dear User,</p><br>
-                                        <p style="margin:0 0 12px 0; font-size:16px; line-height:24px;">Your registration for Zerene&trade; | Undergraduate Mental Healthcare System has been successful!</p><br>
-                                        <p style="margin:0 0 12px 0; font-size:16px; line-height:24px;">Please use below credentials to log in to your <a href="http://localhost/Zerene/users/login">Zerene&trade; Account.</a> Do not share this email with any other party. We highly recommend you to change your user credentials after initial login.</p><br>
-                                        <p style="margin:0 0 12px 0; font-size:16px; line-height:24px;">Username: {username_here}</p>
-                                        <p style="margin:0 0 12px 0; font-size:16px; line-height:24px;">Password: {password_here}</p>
+                                        <p style="margin:0 0 12px 0; font-size:16px; line-height:24px;">Welcome <b>{username_here}</b>,</p><br>
+                                        <p style="margin:0 0 12px 0; font-size:16px; line-height:24px;">Your're almost there to get onboard with Zerene&trade;. Use this verification code to verify your email.</p><br>
+                                        <p style="margin:0 0 12px 0; font-size:16px; line-height:24px;">Verification code: <i>{code_here}</i></p><br>
                                         <p style="margin:0 0 12px 0; font-size:14px; line-height:24px;">{date}</p>
                                     </td>
                                 </tr>
