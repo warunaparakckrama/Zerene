@@ -104,6 +104,24 @@
             }
         }
 
+        public function getPharmacies(){
+            $this->db->query('SELECT * FROM pharmacy WHERE is_deleted = FALSE');
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
+        public function getPharmacyById($id){
+            $this->db->query('SELECT * FROM pharmacy WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $row = $this->db->single();
+            
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
+        }
+
         public function getNotifications(){
             $this->db->query('SELECT * FROM notifications WHERE is_deleted = FALSE');
             $results= $this->db->resultSet();

@@ -400,6 +400,7 @@
                 $this->db->bind(':new_password', $new_password);
                 $this->db->bind(':user_id', $user_id);
                 $this->db->execute();
+
                 
                 return true; // Password update successful
             } else{

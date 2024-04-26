@@ -13,7 +13,7 @@
                 <img src="<?php echo IMG; ?>zerene-admin.svg" alt="ug avatar" width="80" height="80">
             </a>
             <p class="p-regular" style="color: var(--zerene-light);"><?php echo $_SESSION['user_name']; ?></p>
-            <a href="" style="text-decoration: none;"><button class="button-second">View Profile</button></a>
+            <a href="<?php echo URLROOT;?>pharmacy/pharm_profile" style="text-decoration: none;"><button class="button-second">View Profile</button></a>
         </div>
         <div class="sidebar-container-3">
             <a href="<?php echo URLROOT;?>pharmacy/pharm_home" class="top <?php echo ($currentPage === 'pharm_home') ? 'active' : ''; ?>" >Home</a>
