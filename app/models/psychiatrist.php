@@ -179,5 +179,21 @@ class psychiatrist
         $results = $this->db->resultset();
         return $results;
     }
+
+    public function getAllPrescriptionsByUgId($id){
+        $this->db->query('SELECT * FROM prescription WHERE ug_user_id = :ug_user_id');
+        $this->db->bind(':ug_user_id', $id);
+        $results = $this->db->resultset();
+        return $results;
+    }
+
+    public function getPrescriptionsDate($id){
+        $this->db->query('SELECT * FROM prescription WHERE pres_id = :pres_id');
+        $this->db->bind(':pres_id', $id);
+        $results = $this->db->resultset();
+        return $results;
+    }
+
+
     
 }

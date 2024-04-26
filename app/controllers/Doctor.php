@@ -337,8 +337,12 @@ class Doctor extends Controller
     public function doc_ug_profile($id)
     {   
         $undergrad = $this->adminModel->getUgById($id);
+        $UgPress = $this->docModel->getAllPrescriptionsByUgId($id);
+        $prescription = $this->docModel->getPrescriptionById($id);
         $data = [
-            'undergrad' => $undergrad
+            'undergrad' => $undergrad,
+            'UgPress' => $UgPress,
+            'prescription' => $prescription
         ];
         $this->view('doctor/doc_ug_profile', $data);
     }
