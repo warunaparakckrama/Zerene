@@ -830,31 +830,21 @@ class Admin extends Controller
 
     public function resolveFeedback($feedback_id)
     {
-        if ($this->adminModel->solveFeedback($feedback_id)) {
-            redirect('admin/ad_support');
-        } else {
-            die('Something went wrong');
-        }
-    }
-
-    public function sendComment()
-    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'feedback_id' => $feedback_id,
                 'comment' => trim($_POST['comment']),
-                'comment_err' => ''
             ];
 
-            if ($this->userModel->addFeedback($data)) {
-                redirect('admin/support_view');
+            if ($this->adminModel->solveFeedback($data)) {
+                redirect('admin/support_view/' . $feedback_id);
             } else {
                 die('Something went wrong');
             }
-        } else {
-            $this->view('admin/support_view', $data);
         }
+        $this->view('admin/support_view', $data);
     }
 
     public function sendRegisteremail($data)

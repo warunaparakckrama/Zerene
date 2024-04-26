@@ -273,19 +273,16 @@
             }
         }
 
-        public function solveFeedback($feedback_id){
-            $this->db->beginTransaction();
+        public function solveFeedback($data){
+            $this->db->query('UPDATE feedback SET status = "resolved", comment = :comment WHERE feedback_id = :feedback_id');
+            $this->db->bind(':feedback_id', $data['feedback_id']);
+            $this->db->bind(':comment', $data['comment']);
+            $feedbackSolved = $this->db->execute();
 
-            $this->db->query('UPDATE feedback SET status = "resolved" WHERE feedback_id = :feedback_id');
-            $this->db->bind(':feedback_id', $feedback_id);
-            $feedbackDeleted = $this->db->execute();
-
-            // Commit or rollback the transaction based on delete success
-            if ($feedbackDeleted) {
-                $this->db->commit();
+            if ($feedbackSolved) {
                 return true;
-            } else {
-                $this->db->rollBack();
+            }
+            else {
                 return false;
             }
         }
