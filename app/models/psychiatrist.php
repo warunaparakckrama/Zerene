@@ -98,7 +98,8 @@ class psychiatrist
 
     public function createPrescription($data, $medicine_data)
     {
-        $this->db->query('INSERT INTO prescription (ug_name, age, gender, diagnosed_with, diagnosed_by, date, doc_user_id) VALUES (:ug_name, :age, :gender, :diagnosed_with, :diagnosed_by, :date, :doc_user_id)');
+        $this->db->query('INSERT INTO prescription (ug_user_id, ug_name, age, gender, diagnosed_with, diagnosed_by, date, doc_user_id) VALUES (:ug_user_id, :ug_name, :age, :gender, :diagnosed_with, :diagnosed_by, :date, :doc_user_id)');
+        $this->db->bind(':ug_user_id', $data['ug_user_id']);
         $this->db->bind(':ug_name', $data['ug_name']);
         $this->db->bind(':age', $data['age']);
         $this->db->bind(':gender', $data['gender']);
@@ -116,10 +117,11 @@ class psychiatrist
 
             foreach ($medicine_data as $medicine) {
 
-                $this->db->query('INSERT INTO medicine (pres_id, drug_name, unit, unit_type, dosage, dosage_type) VALUES (:pres_id, :drug_name, :unit, :unit_type, :dosage, :dosage_type)');
+                $this->db->query('INSERT INTO medicine (pres_id, drug_name, unit, instructions, unit_type, dosage, dosage_type) VALUES (:pres_id, :drug_name, :unit, :instructions, :unit_type, :dosage, :dosage_type)');
                 $this->db->bind(':pres_id', $prescription_id);
                 $this->db->bind(':drug_name', $medicine['drug']);
                 $this->db->bind(':unit', $medicine['unit']);
+                $this->db->bind(':instructions', $medicine['instructions']);
                 $this->db->bind(':unit_type', $medicine['unit_type']);
                 $this->db->bind(':dosage', $medicine['dosage']);
                 $this->db->bind(':dosage_type', $medicine['dosage_type']);  
@@ -178,4 +180,28 @@ class psychiatrist
         $results = $this->db->resultset();
         return $results;
     }
+    
+    public function getCreatedPrescriptionById($id){
+        $this->db->query('SELECT * FROM prescription WHERE doc_user_id = :doc_user_id');
+        $this->db->bind(':doc_user_id', $id);
+        $results = $this->db->resultset();
+        return $results;
+    }
+
+    public function getAllPrescriptionsByUgId($id){
+        $this->db->query('SELECT * FROM prescription WHERE ug_user_id = :ug_user_id');
+        $this->db->bind(':ug_user_id', $id);
+        $results = $this->db->resultset();
+        return $results;
+    }
+
+    public function getPrescriptionsDate($id){
+        $this->db->query('SELECT * FROM prescription WHERE pres_id = :pres_id');
+        $this->db->bind(':pres_id', $id);
+        $results = $this->db->resultset();
+        return $results;
+    }
+
+
+    
 }

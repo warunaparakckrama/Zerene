@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<html>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -61,8 +61,9 @@
                         </tr>
                         <tr>
                           <td>
-                          <!-- <?php $filename = basename($request_letter->document_path);?> -->
-                            <p class="p-regular-green"><b>Documents: </b><a href="{$filepath}" download="attachment">Download</a></p> 
+                            
+                           
+                          <a href="{document_link}" style="color: #153643;">Attachment</a>
                           </td>
                         </tr>
                       </table>
