@@ -272,7 +272,7 @@ class Procounsellor extends Controller
 
                 // post notifications
                 if ($this->userModel->addFeedback($data)) {
-                    redirect('undergrad/feedback');
+                    redirect('procounsellor/pc_feedback');
                 } else {
                     die('Something went wrong');
                 }
