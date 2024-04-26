@@ -36,7 +36,7 @@
                                 <textarea name="content" rows="10" placeholder="Enter your message here" class="textarea-1" required></textarea><br><br>
 
                                 <div class="btn-container-2">
-                                    <button class="button-main" type="submit">Send Letter</button>
+                                    <button class="button-main" type="submit" >Send Letter</button>
                                     <button class="button-danger" type="reset">Cancel</button>
                                 </div>
                             </div>

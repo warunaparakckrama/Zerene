@@ -25,17 +25,19 @@
             <div>
                 <div class="card-white">
                     <p class="p-regular">Create New Timeslot</p>
-                    <div class="card-green-6">
+                    <div class="card-green-7">
                         <div>
                             <form action="<?php echo URLROOT;?>Academic/addTimeslots/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST" id="timeslotForm" >
                             <label for="slot_date">Date : </label>
                             <input type="date" id="" name="slot_date" class="date" value="" required>
+<div>
 
-                            <label for="slot_start">Start : </label>
-                            <input type="time" id="" name="slot_start" class="time" value="" required>
+    <label for="slot_start">Start : </label>
+    <input type="time" id="" name="slot_start" class="time" value="" required>
 
-                            <label for="slot_finish">Finish : </label>
-                            <input type="time" id="" name="slot_finish" class="time" value="" required>
+    <label for="slot_finish">Finish : </label>
+    <input type="time" id="" name="slot_finish" class="time" value="" required>
+</div>
 
                             <label for="slot_interval">Interval : </label>
                             <select name="slot_interval" class="interval">

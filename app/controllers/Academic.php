@@ -57,17 +57,17 @@ class Academic extends Controller
 
         $request = $this->acModel->getRequestLetterforCounsellor($id);
 
-    // Pass the data to the view
-    // Sort yet to complete requests by date in descending order
-    usort($yetToCompleteRequests, function($a, $b) {
-        return strtotime($b->sent_at) - strtotime($a->sent_at);
-    });
+        // Pass the data to the view
+        // Sort yet to complete requests by date in descending order
+        usort($yetToCompleteRequests, function ($a, $b) {
+            return strtotime($b->sent_at) - strtotime($a->sent_at);
+        });
 
-    // Sort opinion letters by date in descending order
-    usort($letter, function($a, $b) {
-        return strtotime($b->date) - strtotime($a->date);
-    });
-    
+        // Sort opinion letters by date in descending order
+        usort($letter, function ($a, $b) {
+            return strtotime($b->date) - strtotime($a->date);
+        });
+
 
         $data = [
             'completedRequests' => $completedRequests,
@@ -189,9 +189,8 @@ class Academic extends Controller
 
             if ($this->acModel->insertOpLetter($data)) {
                 $this->sendEmail1($data, $request);
-                $this->acModel->updateRequestLetterStatus($req_letter_id,'completed');
+                $this->acModel->updateRequestLetterStatus($req_letter_id, 'completed');
                 redirect('academic/ac_opletters');
-
             } else {
                 die('Something went wrong');
             }
@@ -264,11 +263,11 @@ class Academic extends Controller
     public function ac_opletter_view($id)
     {
         $letter = $this->acModel->getOpLetterbyid($id);
-        
+
         $data = [
             'letter' => $letter,
         ];
-        $requestId =$data['letter']->req_letter_id;
+        $requestId = $data['letter']->req_letter_id;
         $request = $this->acModel->getReqLetterbyletterid($requestId);
         $data['request'] = $request;
         $this->view('academic/ac_opletter_view', $data);
@@ -413,6 +412,7 @@ class Academic extends Controller
                 'slot_start' => trim($_POST['slot_start']),
                 'slot_finish' => trim($_POST['slot_finish']),
                 'slot_type' => trim($_POST['slot_type']),
+                'slot_interval' => trim($_POST['slot_interval']),
                 'slot_status' => trim($_POST['slot_status']),
                 'created_by' => trim($_POST['created_by']),
             ];
@@ -425,7 +425,11 @@ class Academic extends Controller
             } else {
                 die('Something went wrong');
             }
+
+            $data['timeslot'] = $this->acModel->getTimeslots($current_username);
+            $this->view('procounsellor/pc_timeslot', $data);
         }
+        $this->view('academic/ac_timeslots');
     }
 
     public function sentFeedback($user_id)
@@ -478,7 +482,7 @@ class Academic extends Controller
         $receiver = "111ashanpraboda@gmail.com";
         $sender = "From: zerenecounselor@gmail.com";
         $subject = $data['subject'];
-        $filePath = __DIR__ . '/../views/academic/emails.php';
+        $filePath = __DIR__ . '/../views/academic/ac_emails.php';
         $date = date('Y-m-d');
 
         $emailContent = file_get_contents($filePath);
@@ -488,7 +492,7 @@ class Academic extends Controller
         $emailContent = str_replace('{sender_lname}', $data['coun_lname'], $emailContent);
         $emailContent = str_replace('{sender_email}', $data['coun_email'], $emailContent);
         $emailContent = str_replace('{date}', $date, $emailContent);
-        $emailContent = str_replace('{document_link}',$request->document_path, $emailContent);
+        $emailContent = str_replace('{document_link}', $request->document_path, $emailContent);
 
         // Set the Content-Type header to indicate that the email content is HTML
         $headers = "MIME-Version: 1.0" . "\r\n";
@@ -509,6 +513,6 @@ class Academic extends Controller
         $session_id = $_SESSION['user_id'];
         $data['op details'] = $this->acModel->getOpDetails($session_id);
         $this->view('academic/ac_opletters', $data);
-    }
-    
+        }
 }
+
