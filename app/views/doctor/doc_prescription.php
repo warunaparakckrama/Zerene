@@ -78,12 +78,7 @@ $created = $data['created'];
                         
                         
                     <?php endforeach; ?> 
-               
-                <div>
-
+                </div>
             </div>
-
-            </div>
-        </div>
     </section>
 </body>
