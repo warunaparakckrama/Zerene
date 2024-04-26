@@ -20,16 +20,16 @@
                 <form action="<?php echo URLROOT;?>users/login" method="POST">
                     <div class="log-subgrid-1" style="font-size: 18px;">
                         <p class="p-regular-grey">Username<sup>*</sup></p>
-                        <input type="text" name="username" placeholder="username" style="margin-bottom: 10px; " class="input <?php echo (!empty($data['username_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['username']; ?>">
-                        <p class="p-error"><?php echo $data['username_err']; ?></p>
-                        <p class="p-regular">Password<sup>*</sup></p>
-                        <input type="password" id="password" name="password" placeholder="password" class="input <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>">
-                        <p class="p-error"><?php echo $data['password_err']; ?></p>
+                        <input type="text" name="username" placeholder="username" style="margin-bottom: 10px; " class="input" value="<?php echo $data['username']; ?>" required>
+                        
+                        <p class="p-regular-grey">Password<sup>*</sup></p>
+                        <input type="password" id="password" name="password" placeholder="password" class="input" value="<?php echo $data['password']; ?>" required>
+                        
                     </div>
                     <div class="log-subgrid-2">
                         <p class="p-regular" style="font-size: 15px;">Forgot Password?</p>
-                        <p class="p-error" style="font-size: 15px;"><?php echo isset($data['verify_code_alert']) ? $data['verify_code_alert'] : ''; ?></p>
                     </div>
+                    <p class="p-error" style="font-size: 15px;"><?php echo isset($data['login_alert']) ? $data['login_alert'] : ''; ?></p>
                     <div class="log-subgrid-1" style="justify-items: center;">
                         <button class="button-main" type="submit">Log in</button>
                     </div>

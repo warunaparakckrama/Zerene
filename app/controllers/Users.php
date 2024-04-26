@@ -185,6 +185,7 @@ class Users extends Controller
 
     public function login()
     {
+        $usernames = $this->userModel->getUsernames();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Process form
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -193,61 +194,54 @@ class Users extends Controller
             $data = [
                 'username' => trim($_POST['username']),
                 'password' => trim($_POST['password']),
-                'username_err' => '',
-                'password_err' => ''
+                'login_alert' => '',
+                'usernames' => $usernames,
+                'login_alert' => '',
             ];
 
-            // Validate username
-            if (empty($data['username'])) {
-                $data['username_err'] = 'Please enter username';
-            }
 
-            // Validate password
-            if (empty($data['password'])) {
-                $data['password_err'] = 'Please enter password';
-            }
-
-            // Check for username
             if ($this->userModel->findUserByUsername($data['username'])) {
-                // User found
+                $data['login_alert'] = '';
             } else {
-                $data['username_err'] = 'No user found';
+                $data['login_alert'] = 'No user found';
             }
 
-            // Make sure errors are empty
-            if (empty($data['username_err']) && empty($data['password_err'])) {
-                // Validate
+            // Check and set logged-in user
+            $loggedInUser = $this->userModel->login($data['username'], $data['password']);
 
-                // Check and set logged-in user
-                $loggedInUser = $this->userModel->login($data['username'], $data['password']);
+            if ($loggedInUser === 'incorrect_password') {
+                $data['login_alert'] = '*Incorrect password';
+                $this->view('users/login', $data);
+            } elseif ($loggedInUser === 'no_user_found') {
+                $data['login_alert'] = '*No user found';
+                $this->view('users/login', $data);
+            } elseif ($loggedInUser) {
+                // Create session
+                $this->createUserSession($loggedInUser);
+                $user_id = $_SESSION['user_id'];
+                $user_type = $_SESSION['user_type'];
 
-                if ($loggedInUser) {
-                    // Create session
-                    $this->createUserSession($loggedInUser);
-                    $user_id = $_SESSION['user_id'];
+                if ($user_type == 'undergraduate') {
                     $verify_Status = $this->userModel->checkVerifyStatus($user_id);
-
                     if ($verify_Status == '1') {
-                        $this->userRedirect($_SESSION['user_type']);
+                        $this->userRedirect($user_type);
                     } else {
                         redirect('users/email_verify/' . $user_id);
                     }
                 } else {
-                    $data['password_err'] = 'Password incorrect';
-                    // Redisplay form with error messages
-                    $this->view('users/login', $data);
+                    $this->userRedirect($user_type);
                 }
             } else {
-                // Redisplay form with error messages
+               // Redisplay form with error messages
                 $this->view('users/login', $data);
             }
+
         } else {
             // Initialize data
             $data = [
                 'username' => '',
                 'password' => '',
-                'username_err' => '',
-                'password_err' => ''
+                'login_alert' => '',
             ];
             $this->view('users/login', $data);
         }

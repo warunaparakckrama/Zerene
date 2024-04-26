@@ -190,24 +190,26 @@
             }
         }
 
-        public function login($username,$password){
-            $this->db->query('SELECT * FROM users WHERE username=:username AND is_deleted = FALSE');
-            $this->db->bind(':username',$username);
-    
-            $row=$this->db->single();
-    
-            $user_password=$row->password;
-            if(password_verify($password,$user_password)){
-                return $row;
-            }elseif($password === $user_password){
-                return $row;
-            }else{
-                return false;
+        public function login($username, $password) {
+            $this->db->query('SELECT * FROM users WHERE BINARY username = :username AND is_deleted = FALSE');
+            $this->db->bind(':username', $username);
+        
+            $row = $this->db->single();
+        
+            if ($row) {
+                $user_password = $row->password;
+                if (password_verify($password, $user_password)) {
+                    return $row; // Successful login
+                } else {
+                    return 'incorrect_password'; // Incorrect password
+                }
+            } else {
+                return 'no_user_found'; // Username not found
             }
-        }
+        }        
 
         public function findUserByUsername($username){
-            $this->db->query('SELECT * FROM users WHERE username = :username AND is_deleted = FALSE');
+            $this->db->query('SELECT * FROM users WHERE BINARY username = :username AND is_deleted = FALSE');
             // Bind value
             $this->db->bind(':username', $username);
     
@@ -535,7 +537,7 @@
         }
 
         public function addVerifyCode($data){
-            $this->db->query('UPDATE users SET verify_code = :verify_code WHERE user_id = :user_id AND is_deleted = FALSE');
+            $this->db->query('UPDATE undergraduate SET verify_code = :verify_code WHERE user_id = :user_id AND is_deleted = FALSE');
             $this->db->bind(':user_id', $data['user_id']);
             $this->db->bind(':verify_code', $data['verify_code']);
             $this->db->execute();
@@ -548,7 +550,7 @@
         }
 
         public function getVerifyCode($user_id){ 
-            $this->db->query('SELECT verify_code FROM users WHERE user_id = :user_id AND is_deleted = FALSE');
+            $this->db->query('SELECT verify_code FROM undergraduate WHERE user_id = :user_id AND is_deleted = FALSE');
             $this->db->bind(':user_id', $user_id);
             try {
                 $this->db->execute();
@@ -563,7 +565,7 @@
         }
 
         public function setVerifyStatus($user_id){
-            $this->db->query('UPDATE users SET is_verified= TRUE WHERE user_id=:user_id AND is_deleted=FALSE');
+            $this->db->query('UPDATE undergraduate SET is_verified= TRUE WHERE user_id=:user_id AND is_deleted=FALSE');
             $this->db->bind('user_id', $user_id);
             $this->db->execute();
 
@@ -575,7 +577,7 @@
         }
 
         public function checkVerifyStatus($user_id){
-            $this->db->query('SELECT is_verified FROM users where user_id=:user_id');
+            $this->db->query('SELECT is_verified FROM undergraduate where user_id=:user_id');
             $this->db->bind(':user_id', $user_id);
             $result = $this->db->single();
             
