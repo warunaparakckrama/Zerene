@@ -17,6 +17,15 @@
     /* border: 1px solid red; */
 }
 
+.grid-chart{
+    display: grid;
+    grid-template-rows: 10% 90%;
+    height: 100vh;
+    padding-left: 20px;
+    margin-right: 80px;
+    /* border: 1px solid red; */
+}
+
 .grid-2{
     display: grid;
     grid-template-rows: 60% 40%;
@@ -58,6 +67,17 @@
 .subgrid-5{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
+}
+
+.subgrid-6{
+    display: grid;
+    grid-template-rows: 50% 50%;
+}
+
+.subgrid-7{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    
 }
 
 /* dashboard end */
