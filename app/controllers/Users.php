@@ -226,16 +226,16 @@ class Users extends Controller
                     if ($verify_Status == '1') {
                         $this->userRedirect($user_type);
                     } else {
+                        $this->resendVerifyEmail($user_id);
                         redirect('users/email_verify/' . $user_id);
                     }
                 } else {
                     $this->userRedirect($user_type);
                 }
             } else {
-               // Redisplay form with error messages
+                // Redisplay form with error messages
                 $this->view('users/login', $data);
             }
-
         } else {
             // Initialize data
             $data = [
@@ -247,11 +247,13 @@ class Users extends Controller
         }
     }
 
-
     public function email_verify($user_id)
     {
+        $email = $this->userModel->getEmailById($user_id);
+        $masked_email = $this->emailHide($email);
         $data = [
             'user_id' => $user_id,
+            'email' => $masked_email,
             'verify_alert' => ''
         ];
 
@@ -430,9 +432,47 @@ class Users extends Controller
         }
     }
 
+    public function resendVerifyEmail($user_id)
+    {
+
+        $receiver = $this->userModel->getEmailById($user_id);
+        $subject = "Email Verification";
+        $username = $this->userModel->getUsernameById($user_id);
+        $code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+        $sender = "From: zerenecounselor@gmail.com";
+
+        $modeldata = [
+            'user_id' => $user_id,
+            'verify_code' => $code
+        ];
+
+        $this->userModel->addVerifyCode($modeldata);
+
+        $filePath = __DIR__ . '/../views/admin/ad_email_verify.php';
+        $date = date('Y-m-d');
+        $emailContent = file_get_contents($filePath);
+
+        $emailContent = str_replace('{username_here}', $username, $emailContent);
+        $emailContent = str_replace('{code_here}', $code, $emailContent);
+        $emailContent = str_replace('{date}', $date, $emailContent);
+
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= $sender;
+
+        $body = $emailContent;
+
+        if (mail($receiver, $subject, $body, $headers)) {
+            redirect('users/email_verify/' . $user_id);
+        } else {
+            return false;
+        }
+    }
+
     public function verifyEmailcode($user_id)
     {
         $code = $this->userModel->getVerifyCode($user_id);
+        $email = $this->userModel->getEmailById($user_id);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //process form
@@ -440,6 +480,7 @@ class Users extends Controller
             $data = [
                 'user_id' => $user_id,
                 'code' => $code,
+                'email' => $email,
                 'verify_code' => trim($_POST['verify_code']),
                 'verify_alert' => ''
             ];
@@ -457,5 +498,28 @@ class Users extends Controller
         }
 
         $this->view('users/email_verify', $data);
+    }
+
+    public function emailHide($email)
+    {
+        // Get the position of "@" symbol in the email address
+        $at_position = strpos($email, '@');
+
+        // Get the length of the email address
+        $email_length = strlen($email);
+
+        // Extract the username part of the email
+        $username = substr($email, 0, $at_position);
+
+        // Mask characters in the username with asterisks
+        $masked_username = str_repeat('*', strlen($username));
+
+        // Extract the domain part of the email
+        $domain = substr($email, $at_position);
+
+        // Combine masked username and domain
+        $masked_email = $masked_username . $domain;
+
+        return $masked_email;
     }
 }
