@@ -98,9 +98,6 @@ class Undergraduate
         }
     }
 
-
-    
-
     public function getResponsesbyId($id)
     {
         $this->db->query('SELECT * FROM response WHERE user_id = :user_id ORDER BY attempted_at DESC');
@@ -108,7 +105,6 @@ class Undergraduate
         $results = $this->db->resultSet();
         return $results;
     }
-
 
     public function getResponses(){
         $this->db->query('SELECT * FROM response ORDER BY attempted_at DESC');
@@ -141,9 +137,9 @@ class Undergraduate
     }
 
     public function addRequestLetter($data){
-        $this->db->query('INSERT INTO request_letter (from_ug_id, to_coun_id, subject, content, document_path, sent_at) VALUES (:from, :to, :subject, :content, :document_path, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+        $this->db->query('INSERT INTO request_letter (from_ug_user_id, to_coun_User_id, subject, content, document_path, sent_at) VALUES (:from, :to, :subject, :content, :document_path, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
         $this->db->bind(':from', $data['from']);
-        $this->db->bind(':to', $data['coun_id']);
+        $this->db->bind(':to', $data['coun_user_id']);
         $this->db->bind(':subject', $data['subject']);
         $this->db->bind(':content', $data['content']);
         $this->db->bind(':document_path', $data['document_path']);
@@ -160,4 +156,51 @@ class Undergraduate
         $results = $this->db->resultSet();
         return $results;
     }
+
+    public function getRequestLettersfromId($id){
+        $this->db->query('SELECT * FROM request_letter WHERE from_ug_user_id = :id');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getRequestLettersfromLetterId($id){
+        $this->db->query('SELECT * FROM request_letter WHERE letter_id = :id');
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        return $row;
+    }
+
+    public function addTimeslotReserve($data){
+        $this->db->query('INSERT INTO timeslot_reserve (slot_id, ug_user_id, reserved_at) VALUES (:id, :ug_user_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
+        $this->db->bind(':id', $data['timeslot_id']);
+        $this->db->bind(':ug_user_id', $data['ug_user_id']);
+        if ($this->db->execute()) {
+            $this->db->query('UPDATE timeslot SET slot_status = :slot_status WHERE slot_id = :id');
+            $this->db->bind(':id', $data['timeslot_id']);
+            $this->db->bind(':slot_status', 'reserved');
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function getTimeslotDetails($id){
+        $this->db->query('SELECT * FROM timeslot WHERE slot_id = :id');
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        return $row;
+    }
+
+    public function getReserveDetails($id){
+        $this->db->query('SELECT * FROM timeslot_reserve WHERE ug_user_id = :ug_user_id');
+        $this->db->bind(':ug_user_id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
 }

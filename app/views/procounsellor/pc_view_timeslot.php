@@ -31,7 +31,7 @@
                             <p>Finish Time: <?php echo $data['timeslot']->slot_finish; ?></p>
                             <p>Type: <?php echo $data['timeslot']->slot_type; ?></p>
                             <div class="btn-container-2">
-                                <form action="<?php echo URLROOT; ?>Procounsellor/deleteTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this timeslot?')">
+                                <form action="<?php echo URLROOT; ?>Procounsellor/deleteTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete the timeslot?')">
                                     <button type="submit" class="button-danger no-underline">Delete</button>
                                 </form>
                             </div>

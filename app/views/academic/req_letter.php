@@ -67,11 +67,11 @@
                         <div class="divReturnAddress">
 
                             <p class="p-regular "><?php echo $data['letter details']->username?></p>
-                            <p class="p-regular">UCSC</p>
+                            <p class="p-regular"><?php echo $data['letter details']->faculty?></p>
 
                             <!-- date below -->
                             <p class="p-regular">
-                                01 December, 2012
+                            <?php echo $data['letter details']->sent_at?>
                             </p><br>
 
                             <p>
@@ -82,19 +82,19 @@
 
                         <div class="divSubject">
                             <p>
-                                Subject for testing
+                            <?php echo $data['letter details']->subject?>
                             </p>
                         </div>
 
                         <div class="divContents">
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo deleniti sapiente ab voluptatem ipsa in delectus dicta, mo
+                            <?php echo $data['letter details']->content?>
                             </p>
                         </div>
                     </div><br><br>
                     <!-- end of the letter  -->
 
                     <div class="btn-container">
-                        <button class="button-main">download</button>
+                        <!-- <button class="button-main">download</button> -->
                         <button class="button-main"> <a href="<?php echo URLROOT; ?>academic/ac_undergraduate4/<?php echo $data['letter details']->from_ug_id ?>" class="a-name"> create </a></button>
                     </div>

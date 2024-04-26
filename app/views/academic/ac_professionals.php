@@ -30,7 +30,7 @@
                                 <img src="<?php echo IMG; ?>pro-avatar1.svg" alt="pro pic" class="card-profile">
                                 <div>
                                     <a href="<?php echo URLROOT;?>academic/ac_chatroom/<?php echo $counsellor->user_id;?>" class="a-name"><p class="p-regular-green" style="margin-bottom: -5px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
-                                    <p class="p-regular" style="color:var(--zerene-grey); font-size: 15px"><?php echo $counsellor->university.' '.$counsellor->faculty;?></p>
+                                    <p class="p-regular-grey" style="font-size: 15px"><?php echo $counsellor->university.' '.$counsellor->faculty;?></p>
                                 </div>
                                 <div class="btn-container">
                                     <a href="<?php echo URLROOT;?>academic/ac_chatroom/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">message</button></a>

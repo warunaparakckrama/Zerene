@@ -7,7 +7,6 @@ class Undergrad extends Controller
     private $adminModel;
     private $ugModel;
     private $pcModel;
-    private $timeslotModel;
 
     public function __construct()
     {
@@ -17,7 +16,6 @@ class Undergrad extends Controller
         $this->userModel = $this->model('User');
         $this->adminModel = $this->model('Administrator');
         $this->ugModel = $this->model('Undergraduate');
-        $this->timeslotModel = $this->model('Timeslot');
         $this->pcModel = $this->model('PCounsellor');
     }
 
@@ -73,19 +71,45 @@ class Undergrad extends Controller
     }
 
     public function professional_profile($id)
-    {
+    {   
         $counsellor = $this->adminModel->getcounsellorById($id);
         $doctor = $this->adminModel->getDoctorById($id);
+        $request = $this->ugModel->getMsgRequestfromId($_SESSION['user_id']);
         $data = [
             'counsellor' => $counsellor,
             'doctor' => $doctor,
+            'request' => $request,
             'id' => $id
         ];
         $this->view('undergrad/professional_profile', $data);
     }
 
+    public function request_letters(){
+        $id = $_SESSION['user_id'];
+        $undergrad = $this->adminModel->getUgById($id);
+        $counsellor = $this->adminModel->getCounselors();
+        $request_letter = $this->ugModel->getRequestLettersfromId($id);
+        $data = [
+            'counsellor' => $counsellor,
+            'undergrad' => $undergrad,
+            'request_letter' => $request_letter
+        ];
+        $this->view('undergrad/request_letters', $data);
+    }
+
+    public function view_request_letter($id){
+        $request_letter = $this->ugModel->getRequestLettersfromLetterId($id);
+        $counsellor = $this->adminModel->getCounsellorById($request_letter->to_coun_user_id);
+        $data = [
+            'request_letter' => $request_letter,
+            'counsellor' => $counsellor,
+            'id' => $id
+        ];
+        $this->view('undergrad/view_request_letter', $data);
+    }
+
     public function send_req_letter($id)
-    {
+    {   
         $undergrad = $this->adminModel->getUgById($_SESSION['user_id']);
         $data = [
             'id' => $id,
@@ -112,8 +136,11 @@ class Undergrad extends Controller
 
     public function timeslots_view($id){
         $timeslot = $this->pcModel->getTimeslots($id);
+        $reserve = $this->ugModel->getReserveDetails($_SESSION['user_id']);
         $data = [
-            'timeslot' => $timeslot
+            'timeslot' => $timeslot,
+            'coun_user_id' => $id,
+            'reserve' => $reserve
         ];
         $this->view('undergrad/timeslots_view', $data);
     }
@@ -122,11 +149,13 @@ class Undergrad extends Controller
     {
         $user_id = $_SESSION['user_id'];
         $request = $this->ugModel->getMsgRequest();
+        $professional = $this->adminModel->getProfessionals();
         $counsellor = $this->adminModel->getCounselors();
         $doctor = $this->adminModel->getDoctors();
         $data = [
             'user_id' => $user_id,
             'request' => $request,
+            'professional' => $professional,
             'counsellor' => $counsellor,
             'doctor' => $doctor
         ];
@@ -336,35 +365,23 @@ class Undergrad extends Controller
         $this->view('undergrad/view_timeslotpc', $data);
     }
 
-    public function reserveTimeslot($timeslotId)
+    public function reserveTimeslot($slot_id)
+    {   
+        $user_id = $_SESSION['user_id'];
+
+        $data['timeslot_id'] = $slot_id;
+        $data['ug_user_id'] = $user_id;
+        $timeslot = $this->ugModel->getTimeslotDetails($slot_id);
+       if ($this->ugModel->addTimeslotReserve($data)) {
+            redirect('undergrad/timeslots_view/'. $timeslot->created_by);
+       } else{
+              die('Something went wrong');
+       }
+    }
+
+    public function cancelTimeslot($slot_id)
     {
-        if (!isset($_SESSION['user_id'])) {
-            redirect('users/login');
-        }
-
-        $timeslotModel = new Timeslot();
-
-        $timeslot = $timeslotModel->getTimeslotById($timeslotId);
-
-        if (!$timeslot) {
-            redirect('undergrad/view_timeslotpc');
-        }
-
-        $isReserved = $timeslotModel->isTimeslotReserved($timeslotId, $_SESSION['user_id']);
-
-        if ($isReserved) {
-            $result = $timeslotModel->cancelReservation($timeslotId, $_SESSION['user_id']);
-        } else {
-            $result = $timeslotModel->reserveTimeslot($timeslotId, $_SESSION['user_id']);
-        }
-
-        if ($result) {
-            $_SESSION['success_message'] = $isReserved ? 'Reservation canceled successfully' : 'Timeslot reserved successfully';
-        } else {
-            $_SESSION['error_message'] = 'Failed to reserve or cancel timeslot';
-        }
-
-        redirect('undergrad/view_timeslotpc');
+        
     }
 
     public function submitResponses($user_id) //questionnaire_id need to be resolved
@@ -418,7 +435,7 @@ class Undergrad extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
                 'from' => $id,
-                'coun_id' => trim($_POST['coun_id']),
+                'coun_user_id' => trim($_POST['coun_user_id']),
                 'subject' => trim($_POST['subject']),
                 'content' => trim($_POST['content']),
                 'document_path' => null
@@ -449,7 +466,7 @@ class Undergrad extends Controller
                 }
             }
 
-            $coun_id = $data['coun_id'];
+            $coun_id = $data['coun_user_id'];
 
             if ($this->ugModel->addRequestLetter($data)) {
                 redirect('undergrad/send_req_letter/' . $coun_id);

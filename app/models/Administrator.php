@@ -6,6 +6,12 @@
             $this->db = new database;
         }
 
+        public function getProfessionals(){
+            $this->db->query('SELECT * FROM users WHERE user_type = "acounsellor" OR "pcounsellor" OR "doctor" AND is_deleted = FALSE');
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
         public function getCounselors(){
             // $this->db->query('SELECT * FROM counsellor');
             $this->db->query('SELECT * FROM counsellor WHERE is_deleted = FALSE');
@@ -87,9 +93,21 @@
         }
 
         public function getAdmins(){
-            $this->db->query('SELECT * FROM admin');
+            $this->db->query('SELECT * FROM admin WHERE is_deleted = FALSE');
             $results = $this->db->resultSet();
             return $results;
+        }
+
+        public function getAdminfromId($id){
+            $this->db->query('SELECT * FROM admin WHERE user_id = :user_id AND is_deleted = FALSE');
+            $this->db->bind(':user_id', $id);
+            $row = $this->db->single();
+            
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
         }
 
         public function getNotifications(){

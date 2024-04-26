@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<html>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -57,6 +57,13 @@
                             <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
                               
                             </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            
+                           
+                          <a href="{document_link}" style="color: #153643;">Attachment</a>
                           </td>
                         </tr>
                       </table>

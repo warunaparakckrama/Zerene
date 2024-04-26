@@ -224,7 +224,7 @@
         }
 
         public function findUserByEmail($email){
-            $this->db->query('SELECT * from users WHERE email=:email');
+            $this->db->query('SELECT * from users WHERE email=:email and is_deleted = FALSE');
             $this->db->bind(':email',$email);
 
             $row=$this->db->single();

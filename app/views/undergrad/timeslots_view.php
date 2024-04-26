@@ -1,10 +1,13 @@
 <?php 
     $currentPage = 'timeslots';
     $timeslot = $data['timeslot'];
+    $coun_user_id = $data['coun_user_id'];
+    $reserve = $data['reserve'];
 
     // Grouping timeslots by date and separating them into two arrays: pastTimeslots and futureTimeslots
     $pastTimeslots = [];
     $futureTimeslots = [];
+    $timeslot_data = [];
     $today = date('Y-m-d');
     foreach ($data['timeslot'] as $timeslot) {
         $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
@@ -55,17 +58,17 @@
             <div>
                 <?php if (!empty($futureTimeslots)) {
                     echo "<p class='p-regular-green'>Upcoming Timeslots</p>";
-                    echo "<div class='card-white-scroll-timeslot' style='height: 500px;'>";
+                    echo "<div class='card-white-scroll-timeslot'>";
                         foreach ($futureTimeslots as $formattedDate => $data) {
                             $dayName = $data['day'];
-                            echo "<div>";
+                            // echo "<div>";
                                 echo "<div class='card-green-timeslot'>";
                                     echo "<p class='p-regular-green' style='font-size: 15px;'>$dayName</p>";
                                     echo "<p class='p-regular-grey' style='font-size: 15px;'>$formattedDate</p>";
                                 echo "</div>";
-                            echo "</div>";
+                            // echo "</div>";
                             
-                            echo "<div>";
+                            // echo "<div>";
                                 echo "<div class='card-green-scroll-timeslot'>";
                                     echo "<div class='btn-container-2'>";
                                         // Sort timeslots by start time
@@ -74,11 +77,16 @@
                                             $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                             $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                             $formattedTimeRange = "$start_time - $end_time";
-                                            echo "<a href='' style='text-decoration: none;'><button class='button-timeslot'>$formattedTimeRange</button></a>";
+                                            $slot_type = ucfirst($timeslot->slot_type);
+                                            if ($timeslot->slot_status == 'reserved') {
+                                                echo "<button class='button-second'>$formattedTimeRange<br>$slot_type</button>";
+                                            } else {
+                                                echo "<a href='". URLROOT ."Undergrad/reserveTimeslot/$timeslot->slot_id' style='text-decoration: none;'><button class='button-timeslot' onclick='confirmReserve(event)'>$formattedTimeRange<br>$slot_type</button></a>";
+                                            }
                                         }
                                     echo "</div>";
                                 echo "</div>";
-                            echo "</div>";
+                            // echo "</div>";
                         }
                     echo "</div>";
                     } else {
@@ -89,4 +97,16 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function confirmReserve(event) {
+            event.preventDefault(); // Prevent the default action of the link
+            if (confirm("You're about to reserve the timelsot. Continue?")) {
+                // If the user confirms the edit, proceed with the link action
+                window.location.href = event.target.parentElement.href; // Redirect to the link URL
+            } else {
+                // If the user cancels, do nothing or handle as needed
+            }
+        }
+    </script>
 </body>
