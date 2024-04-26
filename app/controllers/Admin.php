@@ -287,6 +287,85 @@ class Admin extends Controller
         $this->view('admin/ad_reg_doctor', $data);
     }
 
+    public function ad_pharmacies()
+    {
+        $usernames = $this->userModel->getUsernames();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
+            $data = [
+                'name' => trim($_POST['name']),
+                'address' => trim($_POST['address']),
+                'email' => trim($_POST['email']),
+                'contact_num' => trim($_POST['contact_num']),
+                'username' => trim($_POST['username']),
+                'password' => trim($_POST['password']),
+                'origin_password' => trim($_POST['password']),
+                'confirm_password' => trim($_POST['confirm_password']),
+                'usernames' => $usernames,
+                'signup_alert' => ''
+            ];
+
+            if (strlen($data['username']) < 8) {
+                $data['signup_alert'] = '*Username must be atleast 8 characters';
+            } else {
+                // Convert the new_username to lowercase
+                $newUsernameLower = strtolower($data['username']);
+
+                foreach ($data['usernames'] as $usernames) {
+                    // Convert each username in the array to lowercase
+                    $existingUsernameLower = strtolower($usernames->username);
+
+                    // Compare the lowercase versions of the usernames
+                    if ($newUsernameLower === $existingUsernameLower) {
+                        // If there is a match, set the alert message
+                        $data['signup_alert'] = '*Username has already taken';
+                        break; // Exit the loop as soon as a match is found
+                    }
+                }
+            }
+
+            if ($this->userModel->findUserByEmail($data['email'])) {
+                $data['signup_alert'] = '*Email is already taken';
+            } elseif (strlen($data['password']) < 8) {
+                $data['signup_alert'] = '*Password must be atleast 8 characters';
+            } else {
+                if ($data['password'] != $data['confirm_password']) {
+                    $data['signup_alert'] = '*Passwords do not match';
+                }
+            }
+
+            if (empty($data['signup_alert'])) {
+
+                //hash password
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                if ($this->userModel->reg_pharmacy($data)) {
+                    $this->sendRegisteremail($data);
+                    redirect('admin/ad_pharmacies');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                $this->view('admin/ad_pharmacies', $data);
+            }
+        }  else{
+            $data = [
+                'name' => '',
+                'address' => '',
+                'email' => '',
+                'contact_num' => '',
+                'username' => '',
+                'password' => '',
+                'confirm_password' => '',
+                'signup_alert' => ''
+            ];
+            $this->view('admin/ad_pharmacies', $data);
+        }
+        
+        $this->view('admin/ad_pharmacies', $data);
+    }
+
     public function ad_users()
     {
 
@@ -853,4 +932,5 @@ class Admin extends Controller
             return false;
         }
     }
+
 }
