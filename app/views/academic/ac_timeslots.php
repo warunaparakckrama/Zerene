@@ -1,5 +1,9 @@
 <?php $currentPage = 'ac_timeslots'; ?>
 
+<?php 
+$timeslot = $data['timeslot'];
+?>;
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,35 +31,37 @@
                     <p class="p-regular">Create New Timeslot</p>
                     <div class="card-green-7">
                         <div>
-                            <form action="<?php echo URLROOT;?>Academic/addTimeslots/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST" id="timeslotForm" >
-                            <label for="slot_date">Date : </label>
-                            <input type="date" id="" name="slot_date" class="date" value="" required>
-<div>
+                            <form action="<?php echo URLROOT; ?>Academic/addTimeslots/<?php echo $user_id = $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
+                                <label for="slot_date">Date : </label>
+                                <input type="date" id="" name="slot_date" class="date" value="" required>
+                                <div>
 
-    <label for="slot_start">Start : </label>
-    <input type="time" id="" name="slot_start" class="time" value="" required>
+                                    <label for="slot_start">Start : </label>
+                                    <input type="time" id="" name="slot_start" class="time" value="" required>
 
-    <label for="slot_finish">Finish : </label>
-    <input type="time" id="" name="slot_finish" class="time" value="" required>
-</div>
+                                    <label for="slot_finish">Finish : </label>
+                                    <input type="time" id="" name="slot_finish" class="time" value="" required>
+                                </div>
 
-                            <label for="slot_interval">Interval : </label>
-                            <select name="slot_interval" class="interval">
-                                <option value="30">30 minutes</option>
-                                <option value="60">1 hour</option>
-                            </select>
+                                <label for="slot_interval">Interval : </label>
+                                <select name="slot_interval" class="interval">
+                                    <option value="30">30 minutes</option>
+                                    <option value="60">1 hour</option>
+                                </select>
 
-                            <label for="slot_type">Type : </label>
-                            <select name="slot_type" class="type">
-                                <option value="online">Online</option>
-                                <option value="physical">Physical</option>
-                            </select>
+                                <label for="slot_type">Type : </label>
+                                <select name="slot_type" class="type">
+                                    <option value="online">Online</option>
+                                    <option value="physical">Physical</option>
+                                </select>
 
-                            <div class="btn-container-2">
-                                <button class="button-main" type="submit">Create</button>
-                                <button class="button-danger" type="button" onclick="cancelCreate()">Cancel</button>
-                            </div>
+                                <div class="btn-container-2">
+                                    <button class="button-main" type="submit">Create</button>
+                                    <button class="button-danger" type="button" onclick="cancelCreate()">Cancel</button>
+                                </div>
                             </form>
+
+
                         </div>
                     </div>
 
@@ -111,7 +117,7 @@
                                     $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                     $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                     $formattedTimeRange = "$start_time - $end_time";
-                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
                                 }
                                 echo "</div>";
                                 echo "</div>";
@@ -137,7 +143,7 @@
                                     $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                     $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                     $formattedTimeRange = "$start_time - $end_time";
-                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
                                 }
                                 echo "</div>";
                                 echo "</div>";
@@ -176,5 +182,16 @@
         function cancelCreate() {
             document.getElementById('timeslotForm').reset();
         }
+        // Check if success message is available
+        var successMessage = "<?php echo isset($successMessage) ? $successMessage : ''; ?>";
+        if (successMessage !== '') {
+            // Display the success message using JavaScript
+            alert(successMessage); // You can replace this with your preferred way of displaying the message
+        }
     </script>
+
+
+
+
+
 </body>

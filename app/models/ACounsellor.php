@@ -27,7 +27,7 @@ class ACounsellor
                     'slot_start' => date('H:i:s', $current),
                     'slot_finish' => date('H:i:s', $slot_end),
                     'slot_type' => $data['slot_type'],
-                    'slot_interval' => $data['slot_interval'], 
+                    'slot_interval' => $data['slot_interval'],
                     'created_by' => $data['created_by']
                 ];
             }
@@ -41,7 +41,7 @@ class ACounsellor
             $this->db->bind(':slot_start', $slot['slot_start']);
             $this->db->bind(':slot_finish', $slot['slot_finish']);
             $this->db->bind(':slot_type', $slot['slot_type']);
-            $this->db->bind(':slot_interval', $slot['slot_interval']); 
+            $this->db->bind(':slot_interval', $slot['slot_interval']);
             $this->db->bind(':created_by', $slot['created_by']);
             $this->db->execute();
         }
@@ -55,6 +55,14 @@ class ACounsellor
         $this->db->bind(':username', $username);
         $results = $this->db->resultSet();
         return $results;
+    }
+
+    public function getTimeslotById($id)
+    {
+        $this->db->query('SELECT * FROM timeslot WHERE slot_id = :id');
+        $this->db->bind(':id',$id);
+        $result = $this->db->single();
+        return $result;
     }
 
     public function getRequestLetterforCounsellor($id)
@@ -208,4 +216,18 @@ class ACounsellor
         $this->db->execute();
     }
 
+    public function countNewRequestLetters()
+    {
+        $this->db->query('SELECT COUNT(*) AS count FROM request_letter WHERE notification_status = 0 AND status = "pending"');
+        $result = $this->db->single();
+        return $result->count;
+    }
+
+    public function updateRequestLetterNotifyStatus($requestLetterId, $status)
+    {
+        $this->db->query('UPDATE request_letter SET status = :status WHERE letter_id = :id');
+        $this->db->bind(':status', $status);
+        $this->db->bind(':id', $requestLetterId);
+        $this->db->execute();
+    }
 }

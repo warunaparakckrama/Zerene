@@ -57,6 +57,8 @@ class Academic extends Controller
 
         $request = $this->acModel->getRequestLetterforCounsellor($id);
 
+        $newRequestCount = $this->acModel->countNewRequestLetters();
+
         // Pass the data to the view
         // Sort yet to complete requests by date in descending order
         usort($yetToCompleteRequests, function ($a, $b) {
@@ -74,7 +76,8 @@ class Academic extends Controller
             'yetToCompleteRequests' => $yetToCompleteRequests,
             'letter' => $letter,
             'undergrad' => $undergrad,
-            'request' => $request
+            'request' => $request,
+            'newRequestCount' => $newRequestCount
         ];
 
         // Load the view and pass the data to it
@@ -247,6 +250,8 @@ class Academic extends Controller
         $data = [
             'letter' => $letter,
         ];
+        //set notifi status to 1
+
         $this->view('academic/ac_req_letter_view', $data);
     }
 
@@ -271,6 +276,15 @@ class Academic extends Controller
         $request = $this->acModel->getReqLetterbyletterid($requestId);
         $data['request'] = $request;
         $this->view('academic/ac_opletter_view', $data);
+    }
+
+    public function ac_view_timeslot($id)
+    {
+        $timeslot = $this->acModel->getTimeslotById($id);
+        $data = [
+            'timeslot' => $timeslot
+        ];
+        $this->view('academic/ac_view_timeslot', $data);
     }
 
 
@@ -404,9 +418,9 @@ class Academic extends Controller
     public function addTimeslots($user_id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+    
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
+    
             $data = [
                 'slot_date' => trim($_POST['slot_date']),
                 'slot_start' => trim($_POST['slot_start']),
@@ -416,21 +430,24 @@ class Academic extends Controller
                 'slot_status' => trim($_POST['slot_status']),
                 'created_by' => trim($_POST['created_by']),
             ];
-
+    
             $current_username = $this->userModel->getUsernameById($user_id);
             $data['created_by'] = $current_username;
-
+     
             if ($this->acModel->createTimeslots($data)) {
+                $successMessage = "Timeslots created successfully!";
                 redirect('academic/ac_timeslots');
             } else {
-                die('Something went wrong');
+                $errorMessage = "Failed to create timeslots. Please try again.";
             }
-
+    
             $data['timeslot'] = $this->acModel->getTimeslots($current_username);
-            $this->view('procounsellor/pc_timeslot', $data);
+            $this->view('academic/ac_timeslots', $data, ['successMessage' => $successMessage ?? null, 'errorMessage' => $errorMessage ?? null]);
         }
         $this->view('academic/ac_timeslots');
     }
+    
+
 
     public function sentFeedback($user_id)
     {
@@ -513,6 +530,5 @@ class Academic extends Controller
         $session_id = $_SESSION['user_id'];
         $data['op details'] = $this->acModel->getOpDetails($session_id);
         $this->view('academic/ac_opletters', $data);
-        }
+    }
 }
-
