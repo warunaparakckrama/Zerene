@@ -27,7 +27,7 @@ $reserve = $data['reserve'];
 
             <div>
 
-                <?php if ($timeslot->slot_status === 'reserved') : ?>
+                <?php if ($timeslot->slot_status === 'reserved' || $timeslot->slot_status === 'pending') : ?>
                     <div class="card-white">
                         <p class="p-regular">Reserve Details</p>
                         <div class="card-green-7">
@@ -35,11 +35,20 @@ $reserve = $data['reserve'];
                                 <p>Date: <?php echo $data['timeslot']->slot_date; ?></p>
                                 <p>Reserved Timeslot: <?php echo $data['timeslot']->slot_start; ?> - <?php echo $data['timeslot']->slot_finish; ?></p>
                                 <p>Reserved By: <?php echo $data['reserve']->ug_user_id; ?></p>
-                                <p>Type: <?php echo $data['timeslot']->slot_type; ?></p>
+                                <p>Type: <?php echo $data['timeslot']->slot_type; ?></p><br>
                                 <div class="btn-container-2">
-                                    <form action="<?php echo URLROOT; ?>Procounsellor/deleteTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete the timeslot?')">
-                                        <button type="submit" class="button-danger no-underline">Delete</button>
-                                    </form>
+                                    <?php if ($data['timeslot']->slot_status == 'pending') : ?>                 
+                                        <p><?php echo $data['reserve']->ug_user_id; ?> User has requested to cancel the reservation:</p>
+                                        <a href="<?php echo URLROOT; ?>Procounsellor/changeSlotStatus/<?php echo $data['reserve']->slot_id; ?>" style="text-decoration: none;">
+                                            <button class="button-main">Allow</button>
+                                        </a>
+                                    <?php elseif ($data['timeslot']->slot_status == 'reserved') : ?>
+                                        <!-- No button rendering needed for reserved status -->
+                                    <?php else : ?>
+                                        <button class="button-second" disabled>Allowed</button>
+                                    <?php endif; ?>
+
+
                                 </div>
                             </div>
                         </div>
