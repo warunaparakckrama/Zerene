@@ -220,6 +220,25 @@ class Procounsellor extends Controller
         $this->view('procounsellor/pc_quiz_review', $data);
     }
 
+    public function pc_view_quiz_response($id)
+    {
+        $response = $this->ugModel->getResponseByResponseId($id);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $question = $this->ugModel->getQuestionsfromQuestionnaireId($response->questionnaire_id);
+        $answer = $this->ugModel->getAnswersfromQuestionnaireId($response->questionnaire_id);
+        $undergrad = $this->adminModel->getUgById($response->user_id);
+
+        $data =[
+            'response' =>$response,
+            'questionnaire' =>$questionnaire,
+            'question' => $question,
+            'answer' => $answer,
+            'undergrad' =>$undergrad
+        ];
+
+        $this->view('procounsellor/pc_view_quiz_response', $data);
+    }
+
     //function controllers
     public function sentFeedback($user_id)
     {
@@ -255,7 +274,7 @@ class Procounsellor extends Controller
 
                 // post notifications
                 if ($this->userModel->addFeedback($data)) {
-                    redirect('undergrad/feedback');
+                    redirect('procounsellor/pc_feedback');
                 } else {
                     die('Something went wrong');
                 }
