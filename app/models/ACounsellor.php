@@ -49,10 +49,10 @@ class ACounsellor
         return true;
     }
 
-    public function getTimeslots($username)
+    public function getTimeslots($id)
     {
-        $this->db->query('SELECT * FROM timeslot WHERE is_deleted = FALSE AND created_by = :username');
-        $this->db->bind(':username', $username);
+        $this->db->query('SELECT * FROM timeslot WHERE is_deleted = FALSE AND created_by = :id');
+        $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
         return $results;
     }
@@ -63,6 +63,37 @@ class ACounsellor
         $this->db->bind(':id',$id);
         $result = $this->db->single();
         return $result;
+    }
+
+    public function deleteTimeslot($timeslotId)
+    {
+        error_log('Deleting timeslot: ' . $timeslotId);
+
+        $this->db->query('UPDATE timeslot SET is_deleted = 1 WHERE slot_id = :timeslotId');
+        $this->db->bind(':timeslotId', $timeslotId);
+
+        $result = $this->db->execute();
+
+        if ($result) {
+            error_log('Timeslot deleted successfully.');
+        } else {
+            error_log('Error deleting timeslot.');
+        }
+
+        return $result;
+    }
+
+    public function updateTimeslot($timeslot)
+    {
+        $this->db->query('UPDATE timeslot SET slot_date = :slot_date, slot_start = :slot_start, slot_finish = :slot_finish, slot_type = :slot_type WHERE slot_id = :slot_id');
+
+        $this->db->bind(':slot_id', $timeslot->slot_id);
+        $this->db->bind(':slot_date', $timeslot->slot_date);
+        $this->db->bind(':slot_start', $timeslot->slot_start);
+        $this->db->bind(':slot_finish', $timeslot->slot_finish);
+        $this->db->bind(':slot_type', $timeslot->slot_type);
+
+        return $this->db->execute();
     }
 
     public function getRequestLetterforCounsellor($id)
@@ -229,5 +260,26 @@ class ACounsellor
         $this->db->bind(':status', $status);
         $this->db->bind(':id', $requestLetterId);
         $this->db->execute();
+    }
+
+    public function getReserveDetails($timeslotId)
+    {
+        $this->db->query('SELECT * FROM timeslot_reserve WHERE slot_id = :timeslotId AND is_cancelled=0');
+        $this->db->bind(':timeslotId', $timeslotId);
+        return $this->db->single();
+    }
+
+    public function updateSlotStatus($timeslotId)
+    {
+        $this->db->query('UPDATE timeslot SET slot_status = "free" WHERE slot_id = :timeslotId');
+        $this->db->bind(':timeslotId', $timeslotId);
+        return $this->db->execute();
+    }
+
+    public function updateReserveCancel($reserveID)
+    {
+        $this->db->query('UPDATE timeslot_reserve SET is_cancelled = 1 WHERE reserve_id = :reserveID');
+        $this->db->bind(':reserveID', $reserveID);
+        return $this->db->execute();
     }
 }
