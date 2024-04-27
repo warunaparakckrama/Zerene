@@ -61,7 +61,6 @@ class PCounsellor
     {
         $this->db->query('SELECT * FROM timeslot WHERE slot_id = :timeslotId');
         $this->db->bind(':timeslotId', $timeslotId);
-
         return $this->db->single(); // Ensure your database interaction methods are functioning correctly
     }
 
@@ -94,6 +93,13 @@ class PCounsellor
         $this->db->bind(':slot_type', $timeslot->slot_type);
 
         return $this->db->execute();
+    }
+
+    public function getReserveDetails($timeslotId)
+    {
+        $this->db->query('SELECT * FROM timeslot_reserve WHERE slot_id = :timeslotId AND is_cancelled=0');
+        $this->db->bind(':timeslotId', $timeslotId);
+        return $this->db->single();
     }
 
     public function getMsgRequestfromCounId($id)

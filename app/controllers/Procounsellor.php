@@ -175,14 +175,30 @@ class Procounsellor extends Controller
     {
         $id = $_SESSION['user_id'];
         $timeslot = $this->pcModel->getTimeslots($id);
-
         $data = [
             'timeslot' => $timeslot,
         ];
-
         $this->view('procounsellor/pc_timeslot', $data);
     }
 
+    public function pc_view_timeslot($timeslotId)
+    {
+        $reserve = $this->pcModel->getReserveDetails($timeslotId);
+        $timeslot = $this->pcModel->getTimeslotById($timeslotId);
+        if ($timeslot) {
+            $data = [
+                'reserve' => $reserve,
+                'timeslot' => $timeslot,
+                'slot_date_err' => '',
+                'slot_start_err' => '',
+                'slot_finish_err' => '',
+                'slot_type_err' => ''
+            ];
+            $this->view('procounsellor/pc_view_timeslot', $data);
+        } else {
+            die('Timeslot not found');
+        }
+    }
 
     public function pc_feedback()
     {
@@ -629,26 +645,6 @@ class Procounsellor extends Controller
             } else {
                 die('Something went wrong');
             }
-        }
-    }
-
-
-    public function pc_view_timeslot($timeslotId)
-    {
-        $timeslot = $this->pcModel->getTimeslotById($timeslotId);
-
-        if ($timeslot) {
-            $data = [
-                'timeslot' => $timeslot,
-                'slot_date_err' => '',
-                'slot_start_err' => '',
-                'slot_finish_err' => '',
-                'slot_type_err' => ''
-            ];
-
-            $this->view('procounsellor/pc_view_timeslot', $data);
-        } else {
-            die('Timeslot not found');
         }
     }
 

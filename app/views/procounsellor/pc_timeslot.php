@@ -109,8 +109,11 @@ $timeslot = $data['timeslot'];
                                     $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                     $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                     $formattedTimeRange = "$start_time - $end_time";
-                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
-                                }
+                                    if ($timeslot->slot_status === 'reserved') {
+                                        echo '<button class="button-second no-underline">' . $formattedTimeRange . '<br>Reserved</button>';
+                                    } else {
+                                        echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    }                                }
                                 echo "</div>";
                                 echo "</div>";
                             }
@@ -131,11 +134,15 @@ $timeslot = $data['timeslot'];
                                 echo "<div class='btn-container-2'>";
                                 // Sort timeslots by start time
                                 usort($data['timeslots'], 'sortTimeslotsByStartTime');
-                                foreach ($data['timeslots'] as $timeslot) {
+                                foreach ($data['timeslots'] as $timeslot){
                                     $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                     $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                     $formattedTimeRange = "$start_time - $end_time";
-                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    if ($timeslot->slot_status === 'reserved') {
+                                        echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-second no-underline">' . $formattedTimeRange . '<br>Reserved</a>';
+                                    } else {
+                                        echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    }                               
                                 }
                                 echo "</div>";
                                 echo "</div>";
