@@ -80,7 +80,7 @@
                                             if ($timeslot->slot_status == 'reserved') {
                                                 echo "<a href='". URLROOT. "Undergrad/cancelTimeslot/$timeslot->slot_id' style='text-decoration: none;'><button class='button-second-timeslot' onclick='confirmCancel(event)'>$formattedTimeRange<br>$slot_type</button></a>";
                                             } elseif ($timeslot->slot_status == 'pending') {
-                                                echo "<button class='button-cancel-timeslot' disabled>$formattedTimeRange<br>$slot_type</button>";
+                                                echo "<button class='button-cancel-timeslot' disabled>$formattedTimeRange<br>(Unavaiable)</button>";
                                             } else {
                                                 echo "<a href='". URLROOT ."Undergrad/reserveTimeslot/$timeslot->slot_id' style='text-decoration: none;'><button class='button-timeslot' onclick='confirmReserve(event)'>$formattedTimeRange<br>$slot_type</button></a>";
                                             }
