@@ -27,7 +27,7 @@ class PCounsellor
                     'slot_start' => date('H:i:s', $current),
                     'slot_finish' => date('H:i:s', $slot_end),
                     'slot_type' => $data['slot_type'],
-                    'slot_interval' => $data['slot_interval'], 
+                    'slot_interval' => $data['slot_interval'],
                     'created_by' => $data['created_by']
                 ];
             }
@@ -41,7 +41,7 @@ class PCounsellor
             $this->db->bind(':slot_start', $slot['slot_start']);
             $this->db->bind(':slot_finish', $slot['slot_finish']);
             $this->db->bind(':slot_type', $slot['slot_type']);
-            $this->db->bind(':slot_interval', $slot['slot_interval']); 
+            $this->db->bind(':slot_interval', $slot['slot_interval']);
             $this->db->bind(':created_by', $slot['created_by']);
             $this->db->execute();
         }
@@ -61,7 +61,6 @@ class PCounsellor
     {
         $this->db->query('SELECT * FROM timeslot WHERE slot_id = :timeslotId');
         $this->db->bind(':timeslotId', $timeslotId);
-
         return $this->db->single(); // Ensure your database interaction methods are functioning correctly
     }
 
@@ -96,6 +95,28 @@ class PCounsellor
         return $this->db->execute();
     }
 
+    public function getReserveDetails($timeslotId)
+    {
+        $this->db->query('SELECT * FROM timeslot_reserve WHERE slot_id = :timeslotId AND is_cancelled=0');
+        $this->db->bind(':timeslotId', $timeslotId);
+        return $this->db->single();
+    }
+
+    public function updateSlotStatus($timeslotId)
+    {
+        $this->db->query('UPDATE timeslot SET slot_status = "free" WHERE slot_id = :timeslotId');
+        $this->db->bind(':timeslotId', $timeslotId);
+        return $this->db->execute();
+    }
+
+    public function updateReserveCancel($reserveID)
+    {
+        $this->db->query('UPDATE timeslot_reserve SET is_cancelled = 1 WHERE reserve_id = :reserveID');
+        $this->db->bind(':reserveID', $reserveID);
+        return $this->db->execute();
+    }
+
+
     public function getMsgRequestfromCounId($id)
     {
         $this->db->query('SELECT * FROM msg_request WHERE to_user_id = :id');
@@ -104,7 +125,8 @@ class PCounsellor
         return $results;
     }
 
-    public function addUgDirects($data){
+    public function addUgDirects($data)
+    {
         $this->db->query('INSERT INTO ug_direct (ug_user_id, from_user_id, to_user_id, directed_at) VALUES (:ug_user_id, :from_user_id, :to_user_id, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
         $this->db->bind(':ug_user_id', $data['ug_user_id']);
         $this->db->bind(':from_user_id', $data['coun_user_id']);
@@ -122,9 +144,9 @@ class PCounsellor
         $this->db->query('SELECT is_clicked FROM ug_direct WHERE ug_user_id = :id AND from_user_id = :coun_user_id');
         $this->db->bind(':id', $id);
         $this->db->bind(':coun_user_id', $coun_user_id);
-        
+
         $result = $this->db->single();
-    
+
         if ($result) {
             // If there is a result, return the value of is_clicked
             return $result->is_clicked;
@@ -134,28 +156,32 @@ class PCounsellor
         }
     }
 
-    public function getUgDirectsforDoctor($id){
+    public function getUgDirectsforDoctor($id)
+    {
         $this->db->query('SELECT * FROM ug_direct WHERE to_user_id = :id');
         $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
         return $results;
     }
 
-    public function getUgDirectsfromUg($id){
+    public function getUgDirectsfromUg($id)
+    {
         $this->db->query('SELECT * FROM ug_direct WHERE ug_user_id = :id');
         $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
         return $results;
     }
 
-    public function getRangesfromQuizId($questionnaire_id){
+    public function getRangesfromQuizId($questionnaire_id)
+    {
         $this->db->query('SELECT * FROM quiz_range WHERE questionnaire_id = :questionnaire_id');
         $this->db->bind(':questionnaire_id', $questionnaire_id);
         $results = $this->db->resultSet();
         return $results;
     }
 
-    public function addNotes($data){
+    public function addNotes($data)
+    {
         $this->db->query('INSERT INTO notes (by_user_id, of_user_id, heading, content, created_at) VALUES (:by_user_id, :of_user_id, :heading, :content, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
         $this->db->bind(':by_user_id', $data['by_user_id']);
         $this->db->bind(':of_user_id', $data['of_user_id']);
@@ -170,7 +196,7 @@ class PCounsellor
 
     public function getNotes($id, $coun_user_id)
     {
-        
+
         $this->db->query('SELECT * FROM notes WHERE of_user_id = :id AND by_user_id = :coun_user_id AND is_deleted = 0');
         $this->db->bind(':id', $id);
         $this->db->bind(':coun_user_id', $coun_user_id);
