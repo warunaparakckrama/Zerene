@@ -1,0 +1,10 @@
+.msg-flash {
+    background-color: rgb(237, 242, 189);
+    color: rgb(255, 255, 255);
+    padding: 8px 0;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+}
