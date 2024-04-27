@@ -18,7 +18,6 @@
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Pharmacies</p></div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>
@@ -38,7 +37,7 @@
                                 <input type="email" name="email" placeholder="Enter Pharmacy Email" class="form-signup" style="width: 50%;" required>
 
                                 <label for="password">Contact Number: </label>
-                                <input type="tel" name="contact_num" placeholder="Format: 012 345 6789" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" class="form-signup" style="width: 50%; font-size: 15px; padding-left: 10px;" value="" required>
+                                <input type="text" name="contact_num" placeholder="Enter contact number" class="form-signup" style="width: 50%; font-size: 15px; padding-left: 10px;" value="" required>
 
                                 <label for="username">Username: </label>
                                 <input type="text" name="username" placeholder="Enter Username" class="form-signup" style="width: 50%; font-size: 15px; padding-left: 10px;" required>

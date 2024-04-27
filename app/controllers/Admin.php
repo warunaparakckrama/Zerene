@@ -382,11 +382,13 @@ class Admin extends Controller
         $counselors = $this->adminModel->getCounselors();
         $doctors = $this->adminModel->getDoctors();
         $admins = $this->adminModel->getAdmins();
+        $pharmacies = $this->adminModel->getPharmacies();
         $data = [
             'undergrads' => $undergrads,
             'counselors' => $counselors,
             'doctors' => $doctors,
-            'admins' => $admins
+            'admins' => $admins,
+            'pharmacies' => $pharmacies
         ];
         $this->view('admin/ad_users', $data);
     }

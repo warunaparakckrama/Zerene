@@ -1,5 +1,5 @@
 <?php
-$currentPage = 'support_view';
+$currentPage = 'ad_support';
 $feedback = $data['feedback'];
 ?>
 
@@ -22,7 +22,6 @@ $feedback = $data['feedback'];
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Support</p>
                 </div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>
@@ -43,7 +42,7 @@ $feedback = $data['feedback'];
                                 <?php else : ?>
                                     <form action="<?php echo URLROOT; ?>Admin/resolveFeedback/<?php echo $feedback->feedback_id; ?>" method="POST">
                                         <label for="title" class="p-regular-green"><b>Comment: </b></label>
-                                        <input type="text" name="comment" class="" value="" required>
+                                        <input type="text" name="comment" class="input" value="" required>
                                         <div class="btn-container-2" style="margin-top: 10px;">
                                             <button class="button-main" type="submit">Resolve</button>
                                     </form>
