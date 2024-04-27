@@ -28,7 +28,7 @@
             <div class="subgrid-1">
                 <div class="subgrid-2">
                     <p class="p-bold-grey" style="font-size: 80px; line-height: 80px;">Hello</p>
-                    <p class="p-regular-grey" style="font-size: 80px; line-height: 80px; padding-bottom: 10px;">Counselor!</p>
+                    <p class="p-regular-grey" style="font-size: 80px; line-height: 80px; padding-bottom: 10px;">Counsellor!</p>
                     <p class="p-regular">Hope you’re having a good day...</p>
                     <p class="p-regular">Let's give a helping hand, Shall We?</p>
                     <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
