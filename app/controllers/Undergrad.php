@@ -188,9 +188,17 @@ class Undergrad extends Controller
         $this->view('undergrad/view_prescripton', $data);
     }
 
-    public function prescription_view($id){
+    public function prescription_view($id)
+    {
+        $porescription = $this->docModel->getPrescriptionById($id);
+        $medicine = $this->docModel->getMedicine($id);
+        $doctor = $this->adminModel->getDoctorById($id);
         $data = [
-            'id' => $id
+            'prescription' => $porescription,
+            'medicine' => $medicine,
+            'doctor' => $doctor
+
+
         ];
         $this->view('undergrad/prescription_view', $data);
     }
