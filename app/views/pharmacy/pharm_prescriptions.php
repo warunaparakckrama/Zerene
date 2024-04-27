@@ -1,5 +1,5 @@
 <?php
-$currentPage = 'pharm_home';
+$currentPage = 'pharm_prescriptions';
 ?>
 
 <head>
@@ -18,17 +18,8 @@ $currentPage = 'pharm_home';
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Home</p></div>
-            </div>
-            <div class="subgrid-1">
                 <div class="subgrid-2">
-                    <p class="p-bold-grey" style="font-size: 80px; line-height: 80px;">Hello</p>
-                    <p class="p-regular-grey" style="font-size: 80px; line-height: 80px; padding-bottom: 10px;">Pharmacist!</p>
-                    <p class="p-regular">Hope you’re having a good day...</p>
-                    <p class="p-regular">Let's give a helping hand, Shall we?</p>
-                    <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
-                        
-                    </div>
+                    <p class="p-title" style="font-size: 40px;">Prescriptions</p>
                 </div>
             </div>
         </div>
