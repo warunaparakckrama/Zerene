@@ -22,7 +22,7 @@
                 <a href="<?php echo URLROOT; ?>doctor/doc_professionals" class="top <?php echo ($currentPage === 'doc_professionals') ? 'active' : ''; ?>" id="sb-link3">Professionals</a>
                 <a href="<?php echo URLROOT; ?>doctor/doc_undergrad" class="top <?php echo ($currentPage === 'doc_undergrad') ? 'active' : ''; ?>" id="sb-link5">Undergraduates</a>
                 <a href="<?php echo URLROOT; ?>doctor/doc_chats" class="top <?php echo ($currentPage === 'doc_chats') ? 'active' : ''; ?>" id="sb-link6">Chats</a>
-                <a href="<?php echo URLROOT; ?>doctor/prescription" class="top <?php echo ($currentPage === 'prescription') ? 'active' : ''; ?>" id="sb-link7">Prescriptions</a>
+                <a href="<?php echo URLROOT; ?>doctor/doc_prescription" class="top <?php echo ($currentPage === 'doc_prescription') ? 'active' : ''; ?>" id="sb-link7">Prescriptions</a>
                 <a href="<?php echo URLROOT; ?>doctor/doc_timeslots" class="top <?php echo ($currentPage === 'doc_timeslots') ? 'active' : ''; ?>" id="sb-link8">Timeslots</a>
             </div>
             <div class="sidebar-container3">

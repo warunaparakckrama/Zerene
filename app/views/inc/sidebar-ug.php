@@ -17,7 +17,7 @@
             <a href="<?php echo URLROOT; ?>undergrad/home" class="top <?php echo ($currentPage === 'home') ? 'active' : ''; ?>">Home</a>
             <a href="<?php echo URLROOT; ?>undergrad/questionnaires" class="top <?php echo ($currentPage === 'questionnaires') ? 'active' : ''; ?>">Questionnaires</a>
             <a href="<?php echo URLROOT; ?>undergrad/professionals" class="top <?php echo ($currentPage === 'professionals') ? 'active' : ''; ?>">Professionals</a>
-            <a href="<?php echo URLROOT; ?>undergrad/home" class="top <?php echo ($currentPage === 'request_letters') ? 'active' : ''; ?>">Request Letters</a>
+            <a href="<?php echo URLROOT; ?>undergrad/request_letters" class="top <?php echo ($currentPage === 'request_letters') ? 'active' : ''; ?>">Request Letters</a>
             <a href="<?php echo URLROOT; ?>undergrad/timeslots" class="top <?php echo ($currentPage === 'timeslots') ? 'active' : ''; ?>">Timeslots</a>
             <a href="<?php echo URLROOT; ?>undergrad/chats" class="top <?php echo ($currentPage === 'chats') ? 'active' : ''; ?>">Chats</a>
             <a href="<?php echo URLROOT; ?>undergrad/resources" class="top <?php echo ($currentPage === 'resources') ? 'active' : ''; ?>">Resources</a>

@@ -19,7 +19,7 @@ define('IMG', 'http://localhost/Zerene/public/img/');
 //js root
 define('JS', 'http://localhost/Zerene/public/js/');
 //upload root
-define('UPLOAD', 'C:/xampp/htdocs/Zerene/app/uploads/');
+define('UPLOAD', 'C:/xampp/htdocs/zereneuploads/');
 //encryption key
 define('ENCKEY', 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO');
 //undergrad profile pictures

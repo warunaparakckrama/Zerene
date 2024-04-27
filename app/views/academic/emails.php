@@ -59,6 +59,12 @@
                             </p>
                           </td>
                         </tr>
+                        <tr>
+                          <td>
+                          <!-- <?php $filename = basename($request_letter->document_path);?> -->
+                            <p class="p-regular-green"><b>Documents: </b><a href="{$filepath}" download="attachment">Download</a></p> 
+                          </td>
+                        </tr>
                       </table>
                     </td>
                   </tr>

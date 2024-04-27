@@ -29,9 +29,9 @@
                 <div class="card-white">
                     <p class="p-regular-green">Send a Request Letter</p>
                     <div class="card-green-5">
-                        <form action="<?php echo URLROOT;?>Undergrad/submitRequestLetter/<?php echo $undergrad->ug_id;?>" class="" enctype="multipart/form-data" method="POST">
+                        <form action="<?php echo URLROOT;?>Undergrad/submitRequestLetter/<?php echo $undergrad->user_id;?>" class="" enctype="multipart/form-data" method="POST">
                             <div style="font-size: 18px; color: var(--zerene-green)">
-                                <input type="hidden" name="coun_id" value="<?php echo $id;?>">    
+                                <input type="hidden" name="coun_user_id" value="<?php echo $id;?>">    
 
                                 <label for="subject">Subject: </label>
                                 <input type="text" name="subject" placeholder="enter your subject here" style="width: 50%;" required><br><br>
@@ -40,6 +40,7 @@
                                 <textarea name="content" id="" rows="10" class="textarea-1" required></textarea><br><br>
 
                                 <label for="document">Attach any documents here: (pdf only)</label>
+                                
                                 <input type="file" id="document" name="document" accept=".pdf"><br><br>
 
                                 <!-- Display file upload error if it exists -->
