@@ -9,9 +9,9 @@
 <body>
     <section class="sec-signup">
         <div class="grid-signup-1">
-            <p class="p-regular">Undergraduate</p>
+            <p class="p-regular" style="margin-bottom: -20px;">Undergraduate</p>
             <p class="p-bold" style="font-size: 50px; padding-bottom: 10px;">Sign Up</p>
-            <p style="padding-bottom: 10px;">Enter following details to create your free account!</p>
+            <p style="padding-bottom: 10px;" class="p-regular-grey">Enter following details to create your free account!</p>
 
             <form action="<?php echo URLROOT; ?>users/signup" method="POST">
                 <div class="grid-signup-form">
@@ -68,8 +68,9 @@
                     <label for="confirm_password">Re-enter:</label>
                     <input type="password" id="signup-rpassword" name="confirm_password" placeholder="Re-enter Password" class="form-signup" value="<?php echo $data['confirm_password']; ?>" required>
                     
-                    <div>
+                    <div class="btn-container-2">
                         <button class="button-main" style="margin-left: 0px;" type="submit">Sign Up</button>
+                        <button class="button-danger" style="margin-left: 0px;" type="reset">Cancel</button>
                     </div>
                     <p class="p-error" style="font-size: 15px;"><?php echo isset($data['signup_alert']) ? $data['signup_alert'] : ''; ?></p>
 
@@ -78,7 +79,8 @@
         </div>
         <div class="grid-signup-2">
             <img src="<?php echo IMG; ?>signup.svg" alt="signup" width="400" height="400.53">
-            <p class="p-regular">Already have an Account? <a href="<?php echo URLROOT; ?>users/login" style="color: var(--zerene-black);">Log in</p>
+            <p class="p-regular">Already have an Account? <a href="<?php echo URLROOT; ?>users/login" style="color: var(--zerene-black);">Log in</a></p>
+            <p class="p-regular-green" style="font-size: 15px;">Back to <a href="<?php echo URLROOT;?>" style="color: var(--zerene-green);">Home</a></p>
         </div>
     </section>
 </body>
