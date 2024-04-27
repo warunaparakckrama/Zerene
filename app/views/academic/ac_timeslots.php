@@ -2,7 +2,7 @@
 
 <?php 
 $timeslot = $data['timeslot'];
-?>;
+?>
 
 <head>
     <meta charset="UTF-8">

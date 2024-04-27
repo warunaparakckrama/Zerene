@@ -251,6 +251,7 @@ class Academic extends Controller
             'letter' => $letter,
         ];
         //set notifi status to 1
+        $this->acModel->updateRequestLetterNotifyStatus($letter_id, 1);
 
         $this->view('academic/ac_req_letter_view', $data);
     }

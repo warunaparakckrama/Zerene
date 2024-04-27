@@ -14,23 +14,8 @@ $completedRequests = $data['completedRequests'];
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
     <title><?php echo SITENAME; ?> | Opinion Letters</title>
-    <style>
-        .notification-icon {
-    position: relative;
-    cursor: pointer;
-}
 
-.badge {
-    position: absolute;
-    top: 51px;
-    right: 830px;
-    background-color: red;
-    color: white;
-    border-radius: 80%;
-    padding: 6px;
-    font-size: 10px;
-}
-    </style>
+
 </head>
 
 <body>
@@ -44,32 +29,21 @@ $completedRequests = $data['completedRequests'];
                     <p class="p-title" style="font-size: 40px;">Opinion Letters</p>
                 </div>
                 <div class="subgrid-3">
-                    <!-- <div class="grid-search-2"> -->
+
                     <div class="search-container">
-                        <!-- <form action="/action_page.php">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button type="submit" class="button"><img src="<?php echo IMG; ?>search.svg" alt="search" class="btn-icon"></button>
-                </form> -->
+
                     </div>
 
                     <div class="notification-icon" id="notification-icon">
-                       <a href="" class="notify"><img src="<?php echo IMG; ?>bell.svg" alt="notify" class="btn-icon"></a>
-                       <?php if($data['newRequestCount']> 0){
-                            echo '<span class="badge" id="notification-badge">'.$data['newRequestCount'].'</span>';
-                           
-                    } ?>
-                    
-                                             
-  
+                        <button class="notify">
+
+                            <img src="<?php echo IMG; ?>bell.svg" alt="notify" class="btn-icon" height="20px" width="20px">
+                        </button>
+                    <!-- notification count  -->
+                        <?php if ($data['newRequestCount'] > 0) {
+                            echo '<span class="badge" id="notification-badge">' . $data['newRequestCount'] . '</span>';
+                        } ?>
                     </div>
-                    
-
-
-                    <!-- <a href="#" class="notify">
-                <button class="button"><img src="<?php echo IMG; ?>chat.svg" alt="notify" class="btn-icon"></button>
-            </a> -->
-                    <!-- </div> -->
-                    <!-- <?php require APPROOT . '/views/inc/searchbar.php'; ?> -->
                 </div>
             </div>
 
@@ -140,31 +114,16 @@ $completedRequests = $data['completedRequests'];
         </div>
     </section>
     <script>
-        // Function to toggle the pop-up notification
-        function togglePopup() {
-            var popup = document.getElementById("popup-notification");
-            if (popup.style.display === "none") {
-                popup.style.display = "block";
-            } else {
-                popup.style.display = "none";
-            }
-        }
+        // // Function to toggle the pop-up notification
+        // function togglePopup() {
+        //     var popup = document.getElementById("popup-notification");
+        //     if (popup.style.display === "none") {
+        //         popup.style.display = "block";
+        //     } else {
+        //         popup.style.display = "none";
+        //     }
+        // }
 
-        // Function to close the pop-up notification
-        function closePopup() {
-            var popup = document.getElementById("popup-notification");
-            popup.style.display = "none";
-        }
-
-        // Event listener for clicking the notification icon
-        document.getElementById("notification-icon").addEventListener("click", function() {
-            togglePopup();
-        });
-
-        // Event listener for clicking the close button on the pop-up
-        document.getElementById("close-popup").addEventListener("click", function() {
-            closePopup();
-        });
     </script>
 
 </body>

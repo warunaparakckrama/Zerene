@@ -215,7 +215,7 @@ class ACounsellor
         $this->db->bind(':id', $requestLetterId);
         $this->db->execute();
     }
-
+// notification status for request letter
     public function countNewRequestLetters()
     {
         $this->db->query('SELECT COUNT(*) AS count FROM request_letter WHERE notification_status = 0 AND status = "pending"');
@@ -225,7 +225,7 @@ class ACounsellor
 
     public function updateRequestLetterNotifyStatus($requestLetterId, $status)
     {
-        $this->db->query('UPDATE request_letter SET status = :status WHERE letter_id = :id');
+        $this->db->query('UPDATE request_letter SET notification_status = :status WHERE letter_id = :id');
         $this->db->bind(':status', $status);
         $this->db->bind(':id', $requestLetterId);
         $this->db->execute();
