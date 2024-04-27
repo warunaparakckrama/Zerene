@@ -33,6 +33,13 @@ class Pharmacy extends Controller
         $this->view('pharmacy/pharm_profile', $data);
     }
 
+    public function pharm_prescriptions(){
+        $data = [
+            'currentPage' => 'pharm_prescriptions'
+        ];
+        $this->view('pharmacy/pharm_prescriptions', $data);
+    }
+
     public function changePwdPharm($user_id){
         $pharmacy = $this->adminModel->getPharmacyById($user_id);
         $user_details = $this->userModel->findUserDetails($user_id);
