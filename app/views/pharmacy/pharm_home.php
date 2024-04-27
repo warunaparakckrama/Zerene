@@ -27,8 +27,11 @@ $currentPage = 'pharm_home';
                     <p class="p-regular">Hope you’re having a good day...</p>
                     <p class="p-regular">Let's give a helping hand, Shall we?</p>
                     <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
-                        
+                        <a href="<?php echo URLROOT;?>pharmacy/pharm_prescriptions" style="text-decoration: none;"><button class="button-main">Prescriptions</button></a>  
                     </div>
+                </div>
+                <div class="subgrid-2" style="justify-content: center;">
+                    <img src="<?php echo IMG;?>pharm.svg" alt="" width="507" height="461">
                 </div>
             </div>
         </div>

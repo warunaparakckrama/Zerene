@@ -21,6 +21,7 @@
         </div>
         
         <div class="sidebar-container-3">
+            <a href="<?php echo URLROOT; ?>pharmacy/pharm_feedback" class="bottom <?php echo ($currentPage === 'pharm_feedback') ? 'active' : ''; ?>"">Feedback</a>
             <a href="<?php echo URLROOT; ?>users/logout" class="bottom">Log out</a>
         </div>
     </div>

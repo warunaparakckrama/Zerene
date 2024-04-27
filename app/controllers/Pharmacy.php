@@ -47,6 +47,13 @@ class Pharmacy extends Controller
         $this->view('pharmacy/pharm_prescriptions', $data);
     }
 
+    public function pharm_feedback(){
+        $data = [
+            'currentPage' => 'pharm_feedback'
+        ];
+        $this->view('pharmacy/pharm_feedback', $data);
+    }
+
     public function pharm_pres_view($pres_id){
         $prescription = $this->docModel->getPrescriptionById($pres_id);
         $medicine = $this->docModel->getMedicine($pres_id);
@@ -172,6 +179,11 @@ class Pharmacy extends Controller
         }
 
         $this->view('pharmacy/pharm_profile', $data);
+    }
+
+    public function markIssueStatus($pres_id){
+        $this->pharmModel->markAsIssued($pres_id);
+        redirect('pharmacy/pharm_prescriptions');
     }
     
 }

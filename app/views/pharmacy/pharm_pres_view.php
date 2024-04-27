@@ -129,7 +129,14 @@
                     </div>
 
                 </div>
-                <div class="btn-container"><button class="button-main" id="download">Download PDF</button></div>
+                <div class="btn-container">
+                    <button class="button-main" id="download">Download PDF</button>
+                    <?php if ($prescription->is_issued == 1) : ?>
+                        <button class="button-second" disabled>Medicine Dispensed</button>
+                    <?php else : ?>
+                            <a href="<?php echo URLROOT;?>Pharmacy/markIssueStatus/<?php echo $prescription->pres_id;?>" style="text-decoration: none;"><button class="button-main">Mark as Issued</button></a>
+                    <?php endif; ?>
+                </div>
             </div>
                 </div>
 

@@ -26,30 +26,61 @@ $doctor = $data['doctor'];
             </div>
 
             <div>
-                <p class="p-regular-green">Total Prescriptions</p>
-                <div class="card-white-scroll" style="height: 500px;">
+                <p class="p-regular-green">Recieved Prescriptions</p>
+                <div class="card-white-scroll" style="height: 230px;">
                     <?php foreach ($data['prescription'] as $prescription) : ?>
-                        <div class="card-green">
-                            <img src="<?php echo IMG; ?>note1.svg" alt="">
-                            <div>
-                                <p class="p-regular-green" style="margin-bottom: -10px;">Prescription No. <?php echo $prescription->pres_id; ?></p>
-                                <?php foreach ($data['doctor'] as $doctor) : ?>
-                                    <?php if ($doctor->user_id == $prescription->doc_user_id) : ?>
-                                        <p class="p-regular-grey" style="font-size: 15px;">Diagnosed by Dr. <?php echo $doctor->first_name . ' ' . $doctor->last_name; ?></p>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                                <?php
-                                $dateTime = new DateTime($prescription->date);
-                                $formattedDateTime = $dateTime->format('jS M, y');
-                                ?>
-                                <p class="p-regular-green" style="font-size: 15px;">Issued on: <b><?php echo $formattedDateTime; ?></b></p>
+                        <?php if ($prescription->is_issued == 0) : ?>
+                            <div class="card-green">
+                                <img src="<?php echo IMG; ?>note1.svg" alt="">
+                                <div>
+                                    <p class="p-regular-green" style="margin-bottom: -10px;">Prescription No. <?php echo $prescription->pres_id; ?></p>
+                                    <?php foreach ($data['doctor'] as $doctor) : ?>
+                                        <?php if ($doctor->user_id == $prescription->doc_user_id) : ?>
+                                            <p class="p-regular-grey" style="font-size: 15px;">Diagnosed by Dr. <?php echo $doctor->first_name . ' ' . $doctor->last_name; ?></p>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                    <?php
+                                    $dateTime = new DateTime($prescription->date);
+                                    $formattedDateTime = $dateTime->format('jS M, y');
+                                    ?>
+                                    <p class="p-regular-green" style="font-size: 15px;">Issued on: <b><?php echo $formattedDateTime; ?></b></p>
+                                </div>
+                                <div class="btn-container">
+                                    <a href="<?php echo URLROOT; ?>Pharmacy/pharm_pres_view/<?php echo $prescription->pres_id; ?>" style="text-decoration: none;"><button class="button-main">View Prescription</button></a>
+                                </div>
                             </div>
-                            <div class="btn-container">
-                                <a href="<?php echo URLROOT; ?>Pharmacy/pharm_pres_view/<?php echo $prescription->pres_id; ?>" style="text-decoration: none;"><button class="button-main">View Prescription</button></a>
-                            </div>
-                        </div>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
+
+                <p class="p-regular-green">Issued Prescriptions</p>
+                <div class="card-white-scroll" style="height: 230px;">
+                    <?php foreach ($data['prescription'] as $prescription) : ?>
+                        <?php if ($prescription->is_issued == 1) : ?>
+                            <div class="card-green">
+                                <img src="<?php echo IMG; ?>note1.svg" alt="">
+                                <div>
+                                    <p class="p-regular-green" style="margin-bottom: -10px;">Prescription No. <?php echo $prescription->pres_id; ?></p>
+                                    <?php foreach ($data['doctor'] as $doctor) : ?>
+                                        <?php if ($doctor->user_id == $prescription->doc_user_id) : ?>
+                                            <p class="p-regular-grey" style="font-size: 15px;">Diagnosed by Dr. <?php echo $doctor->first_name . ' ' . $doctor->last_name; ?></p>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                    <?php
+                                    $dateTime = new DateTime($prescription->date);
+                                    $formattedDateTime = $dateTime->format('jS M, y');
+                                    ?>
+                                    <p class="p-regular-green" style="font-size: 15px;">Issued on: <b><?php echo $formattedDateTime; ?></b></p>
+                                </div>
+                                <div class="btn-container">
+                                    <a href="<?php echo URLROOT; ?>Pharmacy/pharm_pres_view/<?php echo $prescription->pres_id; ?>" style="text-decoration: none;"><button class="button-main">View Prescription</button></a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+
+                
             </div>
         </div>
     </section>
