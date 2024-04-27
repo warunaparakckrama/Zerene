@@ -1,6 +1,7 @@
 <?php
 
-class Chat extends Controller{
+class Chat extends Controller
+{
     private $chatModel;
     private $userModel;
     private $adminModel;
@@ -17,10 +18,23 @@ class Chat extends Controller{
         $this->ugModel = $this->model('Undergraduate');
     }
 
-    public function sendMessage(){
+    // Encryption function
+    public function encryptMessage($message, $key)
+    {
+        // Use AES encryption with CBC mode and PKCS7 padding
+        $cipher = "aes-256-cbc";
+        $iv_length = openssl_cipher_iv_length($cipher);
+        $iv = openssl_random_pseudo_bytes($iv_length);
+        $encrypted = openssl_encrypt($message, $cipher, $key, OPENSSL_RAW_DATA, $iv);
+        return base64_encode($iv . $encrypted);
+    }
+
+
+    public function sendMessage()
+    {
         $_POST = json_decode(file_get_contents('php://input'), true);
-        if(!isset($_POST)){
-            $array['Status']= "Post not set";
+        if (!isset($_POST)) {
+            $array['Status'] = "Post not set";
             echo json_encode($array);
             die();
         }
@@ -29,8 +43,9 @@ class Chat extends Controller{
         $received_by = $_POST['receiver'];
         $message = $_POST['message'];
 
-        $this->chatModel->storeMessage($roomid, $sent_by, $received_by, $message);
+        $key = ENCKEY;
+        $encryptedMessage = $this->encryptMessage($message, $key);
 
+        $this->chatModel->storeMessage($roomid, $sent_by, $received_by, $encryptedMessage);
     }
 }
-?>

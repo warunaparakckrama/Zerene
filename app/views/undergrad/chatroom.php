@@ -34,6 +34,18 @@
                     $counsellor = $data['counsellor'];
                     $receiver_username = $receiver->username;
 
+                    // Decryption function
+                    $key = ENCKEY;
+                    function decryptMessage($encrypted, $key)
+                    {
+                        $cipher = "aes-256-cbc";
+                        $iv_length = openssl_cipher_iv_length($cipher);
+                        $encrypted = base64_decode($encrypted);
+                        $iv = substr($encrypted, 0, $iv_length);
+                        $encrypted = substr($encrypted, $iv_length);
+                        return openssl_decrypt($encrypted, $cipher, $key, OPENSSL_RAW_DATA, $iv);
+                    }
+
                     $sql = "SELECT * FROM chat_connection WHERE from_user = '$from' AND to_user = '$to' OR from_user = '$to' AND to_user = '$from'";
                     $result = $con->query($sql);
                     if($result->num_rows > 0){
@@ -76,7 +88,8 @@
                                         $result = $con->query($sql);
                                         if($result->num_rows > 0){
                                             while($row = $result->fetch_assoc()){
-
+                                                
+                                                $decryptedMessage = decryptMessage($row['message'], $key);
                                                 $currentDate = date('jS M, Y', strtotime($row['date']));
                                                 // Check if the current date is different from the previous date
                                                 if ($currentDate != $previousDate) {
@@ -90,7 +103,7 @@
                                                     echo "<div class='chat-message-1'>";
                                                     echo "-you-";
                                                     echo "<br>";
-                                                    echo $row['message'];
+                                                    echo $decryptedMessage;
                                                     echo "<br><br>";
                                                     echo "(" . date('h:i A', strtotime($row['date'])) . ")";
                                                     echo "</div>";
@@ -98,7 +111,7 @@
                                                     echo "<div class='chat-message-2'>";
                                                     echo "-".$professional->first_name."-";
                                                     echo "<br>";
-                                                    echo $row['message'];
+                                                    echo $decryptedMessage;
                                                     echo " <br><br>";
                                                     echo "(" . date('h:i A', strtotime($row['date'])) . ")";
                                                     echo "</div>";
