@@ -19,16 +19,16 @@
         </div>
 
         <div class="sidebar-container3">
-            <a href="<?php echo URLROOT; ?>admin/ad_home" class="top <?php echo ($currentPage === 'ad_home') ? 'active' : ''; ?>" id="sb-link1">Home</a>
+            <a href="<?php echo URLROOT; ?>admin/ad_home" class="top <?php echo ($currentPage === 'ad_home') ? 'active' : ''; ?>" id="sb-link1">Dashboard</a>
             <a href="#" class="top dd-btn <?php echo ($currentPage === 'ad_registrations') ? 'active' : '';?>">Registrations</a>
             <div class="dropdown-container">
                 <a href="<?php echo URLROOT; ?>admin/ad_reg_admin" class="dd-content">Administrators</a>
                 <a href="<?php echo URLROOT; ?>admin/ad_reg_counsellor" class="dd-content">Counsellors</a>
                 <a href="<?php echo URLROOT; ?>admin/ad_reg_doctor" class="dd-content">Psychiatrists</a>
             </div>
+            <a href="<?php echo URLROOT; ?>admin/ad_pharmacies" class="top <?php echo ($currentPage === 'ad_pharmacies') ? 'active' : ''; ?>">Pharmacies</a>
             <a href="<?php echo URLROOT; ?>admin/ad_users" class="top <?php echo ($currentPage === 'ad_users') ? 'active' : ''; ?>" id="sb-link6">Users</a>
             <a href="<?php echo URLROOT; ?>admin/ad_notifications" class="top <?php echo ($currentPage === 'ad_notifications') ? 'active' : ''; ?>" id="sb-link7">Notifications</a>
-            <a href="<?php echo URLROOT; ?>admin/newsletters" class="top <?php echo ($currentPage === 'newsletters') ? 'active' : ''; ?>" id="sb-link8">Newsletters</a>
             <a href="<?php echo URLROOT; ?>admin/ad_support" class="top <?php echo ($currentPage === 'ad_support') ? 'active' : ''; ?>" id="sb-link9">Support</a>
         </div>
 

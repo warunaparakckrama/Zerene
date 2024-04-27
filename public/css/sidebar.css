@@ -51,6 +51,7 @@
     text-decoration: none;
     color: var(--zerene-white);
     background-color: var(--zerene-green);
+
     width: 210px;
     padding-left: 20px;
     transition: all 300ms ease;

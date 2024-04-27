@@ -212,4 +212,12 @@ class PCounsellor
 
         return $result;
     }
+
+    public function getResponseForQuiz($id)
+    {
+        $this->db->query('SELECT * FROM response WHERE questionnaire_id = :id');
+        $this->db->bind(':id', $id);
+        $results = $this->db->single();
+        return $results;
+    }
 }

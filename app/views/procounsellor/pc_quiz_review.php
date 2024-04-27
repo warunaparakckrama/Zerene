@@ -42,7 +42,7 @@ $range = $data['range'];
                             <p class="p-regular-green">Number of Answers: <b><?php echo $questionnaire->num_of_answers; ?></b></p>
                         </div>
                         <div class="btn-container">
-                            <a href="" style="text-decoration: none;"><button class="button-main">View Questionnaire</button></a>
+                            <a href="<?php echo URLROOT; ?>Procounsellor/pc_view_quiz_response/<?php echo $response->response_id;?>" style="text-decoration: none;"><button class="button-main">View Questionnaire</button></a>
                         </div>
                     </div>
                 </div>

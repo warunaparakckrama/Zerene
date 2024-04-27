@@ -47,7 +47,7 @@
                     $this->db->bind(':user_id', $user_id);
                     $this->db->bind(':ug_id', $ug_id);
                     $this->db->execute();
-                    return true; // Both inserts successful
+                    return $user_id; // Both inserts successful
                 } else {
                     return false;
                 }
@@ -192,24 +192,65 @@
             }
         }
 
-        public function login($username,$password){
-            $this->db->query('SELECT * FROM users WHERE username=:username AND is_deleted = FALSE');
-            $this->db->bind(':username',$username);
-    
-            $row=$this->db->single();
-    
-            $user_password=$row->password;
-            if(password_verify($password,$user_password)){
-                return $row;
-            }elseif($password === $user_password){
-                return $row;
-            }else{
+        public function reg_pharmacy($data){
+            $this->db->query('INSERT INTO pharmacy (pharmacy_name, pharmacy_address, contact_num) VALUES(:name, :address, :contact_num)');
+            // Bind values
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':address', $data['address']);
+            $this->db->bind(':contact_num', $data['contact_num']);
+
+            // Execute
+            $pharmacy = $this->db->execute();
+            if ($pharmacy) {
+                $pharmacy_id = $this->db->lastInsertedId();
+                // If pharmacy insertion is successful, proceed to insert email and password into a separate table
+                $this->db->query('INSERT INTO users (username, password, email, user_type) VALUES (:username, :password, :email, :user_type)');
+                $this->db->bind(':username', $data['username']);
+                $this->db->bind(':password', $data['password']);
+                $this->db->bind(':email', $data['email']);
+                $this->db->bind(':user_type', 'pharmacy');
+
+                $userInserted = $this->db->execute();
+
+                if ($userInserted) {
+                    $user_id = $this->db->lastInsertedId();
+                    // Step 3: Update the 'pharmacy' table with the 'user_id' from 'users' table
+                    $this->db->query('UPDATE pharmacy SET user_id = :user_id WHERE pharmacy_id = :pharmacy_id');
+                    $this->db->bind(':user_id', $user_id);
+                    $this->db->bind(':pharmacy_id', $pharmacy_id);
+                    $this->db->execute();
+                    return true; // Both inserts successful
+                } else {
+                    return false;
+                }
+
+            } 
+            
+            else {
                 return false;
             }
         }
 
+        public function login($username, $password) {
+            $this->db->query('SELECT * FROM users WHERE BINARY username = :username AND is_deleted = FALSE');
+            $this->db->bind(':username', $username);
+        
+            $row = $this->db->single();
+        
+            if ($row) {
+                $user_password = $row->password;
+                if (password_verify($password, $user_password)) {
+                    return $row; // Successful login
+                } else {
+                    return 'incorrect_password'; // Incorrect password
+                }
+            } else {
+                return 'no_user_found'; // Username not found
+            }
+        }        
+
         public function findUserByUsername($username){
-            $this->db->query('SELECT * FROM users WHERE username = :username AND is_deleted = FALSE');
+            $this->db->query('SELECT * FROM users WHERE BINARY username = :username AND is_deleted = FALSE');
             // Bind value
             $this->db->bind(':username', $username);
     
@@ -285,7 +326,7 @@
         }
 
         public function getUsernameById($user_id){
-            $sql = "SELECT username FROM users WHERE user_id = :user_id";
+            $sql = "SELECT username FROM users WHERE user_id = :user_id AND is_deleted = FALSE";
             $this->db->query($sql);
             $this->db->bind(':user_id', $user_id);
 
@@ -361,6 +402,7 @@
                 $this->db->bind(':new_password', $new_password);
                 $this->db->bind(':user_id', $user_id);
                 $this->db->execute();
+
                 
                 return true; // Password update successful
             } else{
@@ -535,4 +577,57 @@
                 return false;
             }
         }
+
+        public function addVerifyCode($data){
+            $this->db->query('UPDATE undergraduate SET verify_code = :verify_code WHERE user_id = :user_id AND is_deleted = FALSE');
+            $this->db->bind(':user_id', $data['user_id']);
+            $this->db->bind(':verify_code', $data['verify_code']);
+            $this->db->execute();
+            
+            if ($this->db->rowCount() > 0) {
+                return true; // Update successful
+            } else {
+                return false; // No matching row found or no changes made
+            }
+        }
+
+        public function getVerifyCode($user_id){ 
+            $this->db->query('SELECT verify_code FROM undergraduate WHERE user_id = :user_id AND is_deleted = FALSE');
+            $this->db->bind(':user_id', $user_id);
+            try {
+                $this->db->execute();
+                $result = $this->db->single();
+    
+                // Return verify code from the database
+                return $result->verify_code;
+            } catch (PDOException $e) {
+                // Handle the error or return an indication of failure
+                return false;
+            }
+        }
+
+        public function setVerifyStatus($user_id){
+            $this->db->query('UPDATE undergraduate SET is_verified= TRUE WHERE user_id=:user_id AND is_deleted=FALSE');
+            $this->db->bind('user_id', $user_id);
+            $this->db->execute();
+
+            if ($this->db->rowCount() > 0) {
+                return true; // Update successful
+            } else {
+                return false; // No matching row found or no changes made
+            }
+        }
+
+        public function checkVerifyStatus($user_id){
+            $this->db->query('SELECT is_verified FROM undergraduate where user_id=:user_id');
+            $this->db->bind(':user_id', $user_id);
+            $result = $this->db->single();
+            
+            if ($result && $result->is_verified == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
     }

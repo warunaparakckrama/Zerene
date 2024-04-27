@@ -110,6 +110,24 @@
             }
         }
 
+        public function getPharmacies(){
+            $this->db->query('SELECT * FROM pharmacy WHERE is_deleted = FALSE');
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
+        public function getPharmacyById($id){
+            $this->db->query('SELECT * FROM pharmacy WHERE user_id = :user_id');
+            $this->db->bind(':user_id', $id);
+            $row = $this->db->single();
+            
+            if($this->db->rowCount()>0){
+                return $row;
+            }else{
+                return null;
+            }
+        }
+
         public function getNotifications(){
             $this->db->query('SELECT * FROM notifications WHERE is_deleted = FALSE');
             $results= $this->db->resultSet();
@@ -133,22 +151,22 @@
             $this->db->query('INSERT INTO notifications (author, subject, user_type, content, created_at) VALUES (:author, :subject, :user_type, :content, DATE_FORMAT(NOW(), "%Y-%m-%d %H:%i:%s"))');
             $this->db->bind(':author', $data['author']);
             $this->db->bind(':subject', $data['subject']);
-            if ($data['user_type'] === "all users") {
+            if ($data['user_type'] == "all users") {
                 $this->db->bind(':user_type', 'all users');
             }
-            elseif ($data['user_type'] === 'admin') {
+            elseif ($data['user_type'] == 'admin') {
                 $this->db->bind(':user_type', 'admin');
             }
-            elseif ($data['user_type'] === "undergrad") {
-                $this->db->bind(':user_type', 'undergrad');
+            elseif ($data['user_type'] == "undergraduate") {
+                $this->db->bind(':user_type', 'undergraduate');
             }
-            elseif ($data['user_type'] === "academic") {
-                $this->db->bind(':user_type', 'academic');
+            elseif ($data['user_type'] == "acounsellor") {
+                $this->db->bind(':user_type', 'acounsellor');
             }
-            elseif ($data['user_type'] === "professional") {
-                $this->db->bind(':user_type', 'professional');
+            elseif ($data['user_type'] == "pcounsellor") {
+                $this->db->bind(':user_type', 'pcounsellor');
             }
-            elseif ($data['user_type'] === "doctor") {
+            elseif ($data['user_type'] == "doctor") {
                 $this->db->bind(':user_type', 'doctor');
             }
             $this->db->bind(':content', $data['content']);
@@ -165,30 +183,31 @@
         }
 
         public function updateNotifications($data){
-            $this->db->query('UPDATE notifications SET subject = :subject, user_type = :user_type, content = :content WHERE notification_id = :notification_id');
+            $this->db->query('UPDATE notifications SET author= :author, subject = :subject, user_type = :user_type, content = :content, created_at=:created_at WHERE notification_id = :notification_id');
             // Bind values
             $this->db->bind(':notification_id', $data['notification_id']);
+            $this->db->bind(':author', $data['author']);
             $this->db->bind(':subject', $data['subject']);
-            if ($data['user_type'] === "all users") {
+            if ($data['user_type'] == "all users") {
                 $this->db->bind(':user_type', 'all users');
             }
-            elseif ($data['user_type'] === 'admin') {
+            elseif ($data['user_type'] == 'admin') {
                 $this->db->bind(':user_type', 'admin');
             }
-            elseif ($data['user_type'] === "undergrad") {
-                $this->db->bind(':user_type', 'undergrad');
+            elseif ($data['user_type'] == "undergraduate") {
+                $this->db->bind(':user_type', 'undergraduate');
             }
-            elseif ($data['user_type'] === "academic") {
-                $this->db->bind(':user_type', 'academic');
+            elseif ($data['user_type'] == "acounsellor") {
+                $this->db->bind(':user_type', 'acounsellor');
             }
-            elseif ($data['user_type'] === "professional") {
-                $this->db->bind(':user_type', 'professional');
+            elseif ($data['user_type'] == "pcounsellor") {
+                $this->db->bind(':user_type', 'pcounsellor');
             }
-            elseif ($data['user_type'] === "doctor") {
+            elseif ($data['user_type'] == "doctor") {
                 $this->db->bind(':user_type', 'doctor');
             }
             $this->db->bind(':content', $data['content']);
-            $this->db->execute();
+            $this->db->bind(':created_at', date('Y-m-d H:i:s'));
 
             // Execute
             if($this->db->execute())
@@ -260,21 +279,31 @@
             }
         }
 
-        public function solveFeedback($feedback_id){
-            $this->db->beginTransaction();
+        public function solveFeedback($data){
+            $this->db->query('UPDATE feedback SET status = "resolved", comment = :comment WHERE feedback_id = :feedback_id');
+            $this->db->bind(':feedback_id', $data['feedback_id']);
+            $this->db->bind(':comment', $data['comment']);
+            $feedbackSolved = $this->db->execute();
 
-            $this->db->query('UPDATE feedback SET status = "resolved" WHERE feedback_id = :feedback_id');
-            $this->db->bind(':feedback_id', $feedback_id);
-            $feedbackDeleted = $this->db->execute();
-
-            // Commit or rollback the transaction based on delete success
-            if ($feedbackDeleted) {
-                $this->db->commit();
+            if ($feedbackSolved) {
                 return true;
-            } else {
-                $this->db->rollBack();
+            }
+            else {
                 return false;
             }
+        }
+
+        public function getEmailsbyUserType($user_type){
+            $this->db->query('SELECT email FROM users WHERE user_type = :user_type AND is_deleted = FALSE');
+            $this->db->bind(':user_type', $user_type);
+            $results = $this->db->resultSet();
+            return $results;
+        }
+
+        public function getEmails(){
+            $this->db->query('SELECT email FROM users WHERE is_deleted = FALSE');
+            $results = $this->db->resultSet();
+            return $results;
         }
     }   
 

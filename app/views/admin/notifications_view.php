@@ -20,7 +20,6 @@
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Notifications</p></div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>
@@ -38,38 +37,6 @@
                                 <a href="<?php echo URLROOT; ?>Admin/deleteNotifications/<?php echo $notification->notification_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Remove</button></a>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <p class="p-regular-green">Edit Notification</p>
-                <div class="card-white">
-                    <div class="card-green-5">
-                        <form action="<?php echo URLROOT; ?>Admin/editNotifications/<?php echo $notification->notification_id; ?>" method="POST">
-                            <div style="font-size: 15px;">
-                                <label for="subject">Subject: </label>
-                                <input type="text" name="subject" placeholder="Enter your subject here" style="font-size: 15px; width: 50%;" required>
-                                <br><br>
-
-                                <label for="user_type">User Type: </label>
-                                <select name="user_type" class="option">
-                                    <option value="all users" <?php echo ($data['user_type'] === 'all users') ? 'selected' : ''; ?>>All Users</option>
-                                    <option value="admin" <?php echo ($data['user_type'] === 'admin') ? 'selected' : ''; ?>>Administrators</option>
-                                    <option value="undergrad" <?php echo ($data['user_type'] === 'undergrad') ? 'selected' : ''; ?>>Undergraduates</option>
-                                    <option value="academic" <?php echo ($data['user_type'] === 'academic') ? 'selected' : ''; ?>>Counsellors (Academic)</option>
-                                    <option value="professional" <?php echo ($data['user_type'] === 'professional') ? 'selected' : ''; ?>>Counsellors (Professional)</option>
-                                    <option value="doctors" <?php echo ($data['user_type'] === 'doctor') ? 'selected' : ''; ?>>Psychiatrists</option>
-                                </select><br>
-
-                                <label for="content">Content: </label>
-                                <textarea name="content" rows="10" placeholder="Enter your message here" class="textarea-1" required></textarea>
-                                <p></p><br>
-
-                                <div class="btn-container-2">
-                                    <button class="button-main" type="submit">Edit</button>
-                                    <button class="button-danger" type="reset">Cancel</button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
 

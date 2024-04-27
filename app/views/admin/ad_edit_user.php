@@ -21,7 +21,6 @@
 
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Users</p></div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>
@@ -52,6 +51,8 @@
                         <div class="rectangle">
                             <p>Change User Password</p>
                             <form action="<?php echo URLROOT; ?>Admin/changePwdUser/<?php echo $user->user_id; ?>" method="POST" class="subgrid-1" style="font-size: 15px;">
+                                <input type="hidden" name="user_email" value="<?php echo $user->email;?>">
+
                                 <label for="" class="p-regular-grey">Your Password :</label>
                                 <input type="password" name="admin_password" required>
 
@@ -72,6 +73,8 @@
                         <div class="rectangle">
                             <p>Change Username</p>
                             <form action="<?php echo URLROOT; ?>Admin/changeUsernameUser/<?php echo $user->user_id; ?>" method="POST" class="subgrid-1" style="font-size: 15px;">
+                                <input type="hidden" name="user_email" value="<?php echo $user->email;?>">
+
                                 <label for="nusername" class="p-regular-grey">New Username :</label>
                                 <input type="text" name="new_username" required>
 

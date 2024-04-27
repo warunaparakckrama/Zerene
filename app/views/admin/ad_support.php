@@ -22,7 +22,6 @@ $currentPage = 'ad_support';
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Support</p>
                 </div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>
@@ -50,11 +49,11 @@ $currentPage = 'ad_support';
                                         <td>
                                             <div class="btn-container-2">
                                                 <a href="<?php echo URLROOT; ?>admin/support_view/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                <?php if($feedback->status == 'resolved') : ?>
+                                                <!-- <?php if($feedback->status == 'resolved') : ?>
                                                     <button class="button-second" disabled>Resolved</button>
                                                     <?php else : ?>
                                                     <a href="<?php echo URLROOT; ?>Admin/resolveFeedback/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-main" onclick="confirmResolve(event)">Resolve</button></a>
-                                                <?php endif; ?>
+                                                <?php endif; ?> -->
                                                 <a href="<?php echo URLROOT; ?>Admin/delFeedback/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                             </div>
                                         </td>
@@ -91,11 +90,11 @@ $currentPage = 'ad_support';
                                             <div class="btn-container-2">
                                                 <div class="btn-container">
                                                     <a href="<?php echo URLROOT; ?>admin/support_view/<?php echo $complaint->feedback_id; ?>" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                    <?php if($complaint->status == 'resolved') : ?>
+                                                    <!-- <?php if($complaint->status == 'resolved') : ?>
                                                         <button class="button-second" disabled>Resolved</button>
                                                         <?php else : ?>
                                                         <a href="<?php echo URLROOT; ?>Admin/resolveFeedback/<?php echo $complaint->feedback_id; ?>" style="text-decoration: none;"><button class="button-main" onclick="confirmResolve(event)">Resolve</button></a>
-                                                    <?php endif; ?>
+                                                    <?php endif; ?> -->
                                                     <a href="<?php echo URLROOT; ?>Admin/delFeedback/<?php echo $complaint->feedback_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                                 </div>
                                             </div>

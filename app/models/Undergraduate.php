@@ -165,7 +165,7 @@ class Undergraduate
     }
 
     public function getRequestLettersfromLetterId($id){
-        $this->db->query('SELECT * FROM request_letter WHERE letter_id = :id');
+        $this->db->query('SELECT * FROM request_letter WHERE letter_id = :id ORDER BY sent_at ASC');
         $this->db->bind(':id', $id);
         $row = $this->db->single();
         return $row;
@@ -184,6 +184,17 @@ class Undergraduate
             } else {
                 return false;
             }
+        } else {
+            return false;
+        }
+    }
+
+    public function cancelTimeslotReserve($id){
+        $this->db->query('UPDATE timeslot SET slot_status = :slot_status WHERE slot_id = :id');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':slot_status', 'pending');
+        if ($this->db->execute()) {
+            return true;
         } else {
             return false;
         }

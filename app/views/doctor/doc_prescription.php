@@ -3,6 +3,7 @@ $currentPage = 'doc_prescription';
 $undergrad = $data['undergrad'];
 $counsellor = $data['counsellor'];
 $direct = $data['direct'];
+$created = $data['created'];
 ?>
 
 <head>
@@ -30,7 +31,7 @@ $direct = $data['direct'];
 
             <div>
                 <p class="p-regular-green">Directed Undergraduates</p>
-                <div class="card-white-scroll" style="height: 500px;">
+                <div class="card-white-scroll" style="height: 300px;">
                     <?php foreach ($data['direct'] as $direct) : ?>
                         <?php foreach ($data['undergrad'] as $undergrad) : ?>
                             <?php foreach ($data['counsellor'] as $counsellor) : ?>
@@ -53,7 +54,31 @@ $direct = $data['direct'];
                         <?php endforeach; ?>
                     <?php endforeach; ?>
                 </div>
+                <p class="p-regular-green">Created prescriptions</p>
+                <div class="card-white-scroll" style="height: 300px;">
+                
+                    <?php foreach ($data['created'] as $created) : ?>
+                        <?php foreach ($data['undergrad'] as $undergrad) : ?>
+                            
+                                <?php if ($undergrad->user_id === $created->ug_user_id ) : ?>
+                                    <div class="card-green">
+                                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
+                                        <div>
+                                            <a href="" class="a-name">
+                                                <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username; ?></p>
+                                            </a>
+                                            <p class="p-regular-grey" style="font-size: 15px;"><?php echo $undergrad->university . ' ' . $undergrad->faculty; ?></p>
+                                        </div>
+                                        <div class="btn-container">
+                                            <a href="<?php echo URLROOT;?>doctor/doc_template/<?php echo $created->pres_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        
+                        
+                    <?php endforeach; ?> 
+                </div>
             </div>
-        </div>
     </section>
 </body>
