@@ -18,7 +18,6 @@
 
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Registrations</p></div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>
