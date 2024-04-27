@@ -290,7 +290,7 @@ class Procounsellor extends Controller
 
                 // post notifications
                 if ($this->userModel->addFeedback($data)) {
-                    flash('feedback-msg', 'Feedback is sent');
+                    flash('feedback-flash', 'Feedback is successfully sent');
                     redirect('procounsellor/pc_feedback');
                 } else {
                     die('Something went wrong');

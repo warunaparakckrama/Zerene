@@ -1,10 +1,11 @@
-.msg-flash {
-    background-color: rgb(237, 242, 189);
-    color: rgb(255, 255, 255);
-    padding: 8px 0;
-    border: 1px solid black;
-    border-radius: 5px;
-    cursor: pointer;
+.msg-flash{
+    background-color: var(--zerene-white);
+    border-radius: var(--border-radius-6);
+    border: 1px solid #C83A3A;
+    padding: var(--card-padding-10);
     text-align: center;
-    width: 100%;
+    height: fit-content;
+    width: fit-content;
+    margin-bottom: 5px;
+    color: var(--zerene-green);
 }

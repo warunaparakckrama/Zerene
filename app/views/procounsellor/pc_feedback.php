@@ -27,6 +27,8 @@
                     <div class="card-white">
                         <p class="p-regular-green">Submit Feedback/ Complaints</p>
                         <div class="card-green-5">
+                        <?php flash('feedback-flash'); ?>
+
                             <form action="<?php echo URLROOT;?>Procounsellor/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST">
                                 <div style="font-size: 18px; color: var(--zerene-green)">
                                     <label for="type">Type: </label>
