@@ -39,7 +39,7 @@
                                         <div class="card-green">
                                             <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
                                             <div>
-                                                <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p>
+                                                <a href="<?php echo URLROOT;?>Doctor/doc_quiz_review/<?php echo $response->response_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
                                                 <p class="p-regular-grey" style="font-size: 15px;"><?php echo $undergrad->university.' '.$undergrad->faculty;?></p>
                                                 <?php $dateTime = new DateTime($response->attempted_at); $formattedDateTime = $dateTime->format('jS M, y \a\t h:iA');?>
                                                 <p class="p-regular-green" style="font-size: 15px;"><?php echo $questionnaire->questionnaire_name.' | '.$formattedDateTime;?></p>

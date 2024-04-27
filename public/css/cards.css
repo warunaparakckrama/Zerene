@@ -28,7 +28,7 @@
     border: 2px var(--zerene-green);
     border-style: solid;
     padding: var(--card-padding-15);
-    align-items: top;
+    align-items: center;
     overflow-y: auto;
     margin-bottom: 10px;
 }
@@ -76,6 +76,8 @@
     background-color: var(--zerene-light);
     border-radius: var(--border-radius-8);
     padding: 10px;
+    /* padding-right: 10px; */
+    /* padding-left: 10px; */
     margin-bottom: 10px;
     align-items: center;
     height: fit-content;

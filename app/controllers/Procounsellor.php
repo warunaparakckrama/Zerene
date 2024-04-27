@@ -107,12 +107,14 @@ class Procounsellor extends Controller
         $request = $this->ugModel->getMsgRequest();
         $counsellor = $this->adminModel->getCounsellorById($id);
         $all_counsellors = $this->adminModel->getCounselors();
+        $all_doctors = $this->adminModel->getDoctors();
         $undergrad = $this->adminModel->getUndergrads();
         $connection = $this->chatModel->getChatConnection();
         $data = [
             'request' => $request,
             'counsellor' => $counsellor,
             'all_counsellors' => $all_counsellors,
+            'all_doctors' => $all_doctors,
             'undergrad' => $undergrad,
             'connection' => $connection
         ];

@@ -29,7 +29,6 @@
                         <div class="card-green-5">
                             <form action="<?php echo URLROOT;?>Procounsellor/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST">
                                 <div style="font-size: 18px; color: var(--zerene-green)">
-
                                     <label for="type">Type: </label>
                                     <select name="type" class="type">
                                         <option value="feedback">Feedback</option>

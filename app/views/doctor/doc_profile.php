@@ -25,17 +25,16 @@
             <div>
 
                 <div class="card-white">
-                    <p class="p-regular-grey">User Account</p>
                     <div class="subgrid-4">
 
                     <div class="rectangle">
                             <p>General</p>
                             <table>
                                 <tr>
-                                    <td class="p-regular-grey">Username</td>
+                                    <td class="p-regular-grey">Name</td>
                                     <td class="p-regular-grey">:</td>
                                     <td class="p-title"><?php echo $doctor->first_name.' '.$doctor->last_name;?></td>
-                                </tr>
+                                </tr>   
                                 <tr>
                                     <td class="p-regular-grey">Email</td>
                                     <td class="p-regular-grey">:</td>

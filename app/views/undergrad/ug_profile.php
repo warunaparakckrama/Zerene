@@ -58,13 +58,13 @@
                             <p>Change Password</p>
                             <form action="<?php echo URLROOT;?>Undergrad/changePwdUG/<?php echo $undergrad->user_id;?>" method="POST" class="subgrid-1" style="font-size: 15px;">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
-                                <input type="password" id="current_password" name="current_password" class="" required>
+                                <input type="password" id="current_password" name="current_password" class="password-box" required>
 
                                 <label for="fname" class="p-regular-grey">New Password :</label>
-                                <input type="password" id="new_password" name="new_password" class="" required>
+                                <input type="password" id="new_password" name="new_password" class="password-box" required>
 
                                 <label for="fname" class="p-regular-grey">Confirm Password :</label>
-                                <input type="password" id="confirm_password" name="confirm_password" class="" required>
+                                <input type="password" id="confirm_password" name="confirm_password" class="password-box" required>
                                 <div class="btn-container-2">
                                     <button class="button-main" type="submit">Change</button>
                                     <button class="button-danger" type="reset">Cancel</button>
@@ -80,7 +80,7 @@
                                 <input type="text" name="new_username" style="margin-bottom: 5px;" required>
                                 
                                 <label for="nusername" class="p-regular-grey">Password :</label>
-                                <input type="password" name="password"  required>
+                                <input type="password" name="password" class="password-box" required>
                                 
                                 <div class="btn-container-2">
                                     <button class="button-main" type="submit">Change</button>

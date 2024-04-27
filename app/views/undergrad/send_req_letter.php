@@ -40,6 +40,7 @@
                                 <textarea name="content" id="" rows="10" class="textarea-1" required></textarea><br><br>
 
                                 <label for="document">Attach any documents here: (pdf only)</label>
+                                
                                 <input type="file" id="document" name="document" accept=".pdf"><br><br>
 
                                 <!-- Display file upload error if it exists -->

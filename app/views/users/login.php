@@ -10,7 +10,6 @@
     <body>
         <section class="sec-login">
             <div class="log-grid-1">
-                <!-- <?php flash('register_success');?> -->
                 <img src="<?php echo IMG;?>logo - main black.svg" alt="zerene logo main black" width="230" height="38">
             </div>
             <div class="log-grid-2">
@@ -18,24 +17,25 @@
             </div>
             <div class="log-grid-3">
 
-                <form action="<?php echo URLROOT;?>users/login" method="POST" autocomplete="on">
-                    <div class="log-subgrid-1">
-                        <p class="p-regular">Username<sup>*</sup></p>
-                        <input type="text" id="username" name="username" placeholder="username" style="margin-bottom: 10px; " class="input <?php echo (!empty($data['username_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['username']; ?>">
-                        <p class="p-error"><?php echo $data['username_err']; ?></p>
-                        <p class="p-regular">Password<sup>*</sup></p>
-                        <input type="password" id="password" name="password" placeholder="password" class="input <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>">
-                        <p class="p-error"><?php echo $data['password_err']; ?></p>
+                <form action="<?php echo URLROOT;?>users/login" method="POST">
+                    <div class="log-subgrid-1" style="font-size: 18px;">
+                        <p class="p-regular-grey">Username<sup>*</sup></p>
+                        <input type="text" name="username" placeholder="username" style="margin-bottom: 10px; " class="input" value="<?php echo $data['username']; ?>" required>
+                        
+                        <p class="p-regular-grey">Password<sup>*</sup></p>
+                        <input type="password" id="password" name="password" placeholder="password" class="input" value="<?php echo $data['password']; ?>" required>
+                        
                     </div>
                     <div class="log-subgrid-2">
                         <p class="p-regular" style="font-size: 15px;">Forgot Password?</p>
                     </div>
+                    <p class="p-error" style="font-size: 15px;"><?php echo isset($data['login_alert']) ? $data['login_alert'] : ''; ?></p>
                     <div class="log-subgrid-1" style="justify-items: center;">
                         <button class="button-main" type="submit">Log in</button>
                     </div>
                 </form>
 
-                <p class="p-regular">Don't have an Account? <a href="<?php echo URLROOT;?>users/signup" style="color: var(--zerene-black);">Sign Up</a></p>
+                <p class="p-regular-green" style="font-size: 15px;">Don't have an Account? <a href="<?php echo URLROOT;?>users/signup" style="color: var(--zerene-green);">Sign Up</a></p>
             </div>
         </section>  
     </body>
