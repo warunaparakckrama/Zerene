@@ -13,7 +13,7 @@
         <div class="search-container">
             <form>
                 <input type="text" id="searchInput" placeholder="Search.." name="search">
-                <!-- Add a div to contain the dropdown -->
+                Add a div to contain the dropdown
                 <div id="searchDropdown" class="search-dropdown"></div>
             </form>
         </div>

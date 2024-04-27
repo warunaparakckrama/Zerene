@@ -219,7 +219,11 @@ class Academic extends Controller
 
     public function ac_profile()
     {
-        $data = [];
+        $id = $_SESSION['user_id'];
+        $counselor = $this->adminModel->getCounsellorById($id);
+        $data = [
+            'counselor' => $counselor
+        ];
         $this->view('academic/ac_profile', $data);
     }
 
