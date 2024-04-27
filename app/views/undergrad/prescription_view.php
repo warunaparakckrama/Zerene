@@ -68,7 +68,6 @@
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Prescription</p>
                     <div>
-                <p class="p-regular-green">Prescription Preview</p>
                 <div class="card-white-scroll" style="height: 500px;">
 
                     <div class="card-green-3" id="prescription">
