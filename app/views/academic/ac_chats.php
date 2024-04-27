@@ -26,7 +26,7 @@
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Chats</p>
                 </div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
+                <div class="subgrid-3"></div>
             </div>
 
 

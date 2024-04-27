@@ -1,3 +1,7 @@
+<?php
+$counselor = $data['counselor'];
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +18,7 @@
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Profile</p></div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
+                <div class="subgrid-3"></div>
             </div>
 
             <div>
@@ -40,6 +44,18 @@
                                     <td class="p-regular-grey">E-mail</td>
                                     <td class="p-regular-grey">:</td>
                                     <td class="p-title"><?php echo $_SESSION['user_email']; ?></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-regular-grey">University</td>
+                                    <td class="p-regular-grey">:</td>
+                                    <td class="p-title"><?php echo $counselor->university; ?></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-regular-grey">Faculty</td>
+                                    <td class="p-regular-grey">:</td>
+                                    <td class="p-title"><?php echo $counselor->faculty; ?></td>
                                 </tr>
                             </table>
                         </div>

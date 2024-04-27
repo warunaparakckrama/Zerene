@@ -175,14 +175,30 @@ class Procounsellor extends Controller
     {
         $id = $_SESSION['user_id'];
         $timeslot = $this->pcModel->getTimeslots($id);
-
         $data = [
             'timeslot' => $timeslot,
         ];
-
         $this->view('procounsellor/pc_timeslot', $data);
     }
 
+    public function pc_view_timeslot($timeslotId)
+    {
+        $reserve = $this->pcModel->getReserveDetails($timeslotId);
+        $timeslot = $this->pcModel->getTimeslotById($timeslotId);
+        if ($timeslot) {
+            $data = [
+                'reserve' => $reserve,
+                'timeslot' => $timeslot,
+                'slot_date_err' => '',
+                'slot_start_err' => '',
+                'slot_finish_err' => '',
+                'slot_type_err' => ''
+            ];
+            $this->view('procounsellor/pc_view_timeslot', $data);
+        } else {
+            die('Timeslot not found');
+        }
+    }
 
     public function pc_feedback()
     {
@@ -228,12 +244,12 @@ class Procounsellor extends Controller
         $answer = $this->ugModel->getAnswersfromQuestionnaireId($response->questionnaire_id);
         $undergrad = $this->adminModel->getUgById($response->user_id);
 
-        $data =[
-            'response' =>$response,
-            'questionnaire' =>$questionnaire,
+        $data = [
+            'response' => $response,
+            'questionnaire' => $questionnaire,
             'question' => $question,
             'answer' => $answer,
-            'undergrad' =>$undergrad
+            'undergrad' => $undergrad
         ];
 
         $this->view('procounsellor/pc_view_quiz_response', $data);
@@ -535,12 +551,12 @@ class Procounsellor extends Controller
     }
 
     public function deleteNote($noteID)
-    {   
+    {
         $note = $this->pcModel->getNotesFromID($noteID);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->pcModel->deleteNote($noteID)) {
-                redirect('procounsellor/pc_ug_profile/'. $note->of_user_id);
+                redirect('procounsellor/pc_ug_profile/' . $note->of_user_id);
             } else {
                 die('Something went wrong');
             }
@@ -632,24 +648,24 @@ class Procounsellor extends Controller
         }
     }
 
-
-    public function pc_view_timeslot($timeslotId)
+    public function changeSlotStatus($slotID)
     {
-        $timeslot = $this->pcModel->getTimeslotById($timeslotId);
+        $timeslot = $this->pcModel->getTimeslotById($slotID);
+        $reserve = $this->pcModel->getReserveDetails($slotID);
 
-        if ($timeslot) {
-            $data = [
-                'timeslot' => $timeslot,
-                'slot_date_err' => '',
-                'slot_start_err' => '',
-                'slot_finish_err' => '',
-                'slot_type_err' => ''
-            ];
+        $data = [
+            'timeslot' => $timeslot,
+            'reserve' => $reserve
+        ];
 
-            $this->view('procounsellor/pc_view_timeslot', $data);
+        if ($this->pcModel->updateSlotStatus($slotID) && $this->pcModel->updateReserveCancel($reserve->reserve_id)) {
+            redirect('procounsellor/pc_view_timeslot/' . $slotID);
         } else {
-            die('Timeslot not found');
+            die('Something went wrong');
         }
+
+
+        $this->view('procounsellor/pc_view_timeslot', $data);
     }
 
     public function quizResults($id)

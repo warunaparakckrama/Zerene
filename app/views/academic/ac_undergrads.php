@@ -24,7 +24,7 @@ $counsellor = $data['counsellor'];
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Undergraduates</p>
                 </div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
+                <div class="subgrid-3"></div>
             </div>
 
             <div>

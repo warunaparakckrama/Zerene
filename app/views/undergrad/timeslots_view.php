@@ -1,13 +1,10 @@
 <?php 
     $currentPage = 'timeslots';
     $timeslot = $data['timeslot'];
-    $id = $data['id'];
-    $reserve = $data['reserve'];
 
     // Grouping timeslots by date and separating them into two arrays: pastTimeslots and futureTimeslots
     $pastTimeslots = [];
     $futureTimeslots = [];
-    $timeslot_data = [];
     $today = date('Y-m-d');
     foreach ($data['timeslot'] as $timeslot) {
         $formattedDate = date('Y-m-d', strtotime($timeslot->slot_date));
@@ -76,14 +73,7 @@
                                             $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                             $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                             $formattedTimeRange = "$start_time - $end_time";
-                                            $slot_type = ucfirst($timeslot->slot_type);
-                                            if ($timeslot->slot_status == 'reserved') {
-                                                echo "<a href='". URLROOT. "Undergrad/cancelTimeslot/$timeslot->slot_id' style='text-decoration: none;'><button class='button-second-timeslot' onclick='confirmCancel(event)'>$formattedTimeRange<br>$slot_type</button></a>";
-                                            } elseif ($timeslot->slot_status == 'pending') {
-                                                echo "<button class='button-cancel-timeslot' disabled>$formattedTimeRange<br>(Unavaiable)</button>";
-                                            } else {
-                                                echo "<a href='". URLROOT ."Undergrad/reserveTimeslot/$timeslot->slot_id' style='text-decoration: none;'><button class='button-timeslot' onclick='confirmReserve(event)'>$formattedTimeRange<br>$slot_type</button></a>";
-                                            }
+                                            echo "<a href='' style='text-decoration: none;'><button class='button-timeslot'>$formattedTimeRange</button></a>";
                                         }
                                     echo "</div>";
                                 echo "</div>";
@@ -98,26 +88,4 @@
             </div>
         </div>
     </section>
-
-    <script>
-        function confirmReserve(event) {
-            event.preventDefault(); // Prevent the default action of the link
-            if (confirm("You're about to reserve the timelsot. Continue?")) {
-                // If the user confirms the edit, proceed with the link action
-                window.location.href = event.target.parentElement.href; // Redirect to the link URL
-            } else {
-                // If the user cancels, do nothing or handle as needed
-            }
-        }
-
-        function confirmCancel(event){
-            event.preventDefault(); // Prevent the default action of the link
-            if (confirm("You're about to cancel the reservation. Continue?")) {
-                // If the user confirms the edit, proceed with the link action
-                window.location.href = event.target.parentElement.href; // Redirect to the link URL
-            } else {
-                // If the user cancels, do nothing or handle as needed
-            }
-        }
-    </script>
 </body>

@@ -22,18 +22,21 @@
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Home</p>
                 </div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
+                <div class="subgrid-3"></div>
             </div>
 
             <div class="subgrid-1">
                 <div class="subgrid-2">
                     <p class="p-bold-grey" style="font-size: 80px; line-height: 80px;">Hello</p>
-                    <p class="p-regular-grey" style="font-size: 80px; line-height: 80px; padding-bottom: 10px;">Counselor!</p>
+                    <p class="p-regular-grey" style="font-size: 80px; line-height: 80px; padding-bottom: 10px;">Counsellor!</p>
                     <p class="p-regular">Hope you’re having a good day...</p>
                     <p class="p-regular">Let's give a helping hand, Shall We?</p>
                     <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
-                        <button class="button-main" style="margin-left: 0px">Opinion Letters</button>
-                        <button class="button-main">Undergraduates</button>
+                    <a href="<?php echo URLROOT; ?>academic/ac_opletters" style="text-decoration: none;"> <button class="button-main" style="margin-left: 0px">Opinion Letters
+                    
+                    <?php if ($data['newRequestCount'] > 0) {
+                            echo  '<span class="badge1" id="notification-badge">' . $data['newRequestCount'] . '</span>';} ?></button>  </a>
+                      <a href="<?php echo URLROOT;?>academic/ac_undergrads" style="text-decoration:none;">  <button class="button-main">Undergraduates</button> </a>
                     </div>
                 </div>
                 <div class="subgrid-2" style="justify-content: center;">
