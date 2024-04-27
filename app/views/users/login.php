@@ -27,7 +27,7 @@
                         
                     </div>
                     <div class="log-subgrid-2">
-                        <p class="p-regular" style="font-size: 15px;">Forgot Password?</p>
+                        <a href="" style="color: var(--zerene-green)"><p style="font-size: 15px;">Forgot Password?</p></a>
                     </div>
                     <p class="p-error" style="font-size: 15px;"><?php echo isset($data['login_alert']) ? $data['login_alert'] : ''; ?></p>
                     <div class="log-subgrid-1" style="justify-items: center;">
