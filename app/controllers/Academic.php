@@ -35,7 +35,10 @@ class Academic extends Controller
 
     public function ac_home()
     {
-        $data = [];
+        $newRequestCount = $this->acModel->countNewRequestLetters();
+        $data = [
+            'newRequestCount' => $newRequestCount
+        ];
         $this->view('academic/ac_home', $data);
     }
 
@@ -155,7 +158,8 @@ class Academic extends Controller
 
     public function ac_timeslots()
     {
-        $username = $this->userModel->getUsernameById($_SESSION['user_id']);
+        $id = $_SESSION['user_id'];
+        $username = $this->userModel->getUsernameById($id);
         $timeslot = $this->acModel->getTimeslots($username);
         $data = [
             'slot_type' => '',
@@ -421,7 +425,7 @@ class Academic extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    
+            
             $data = [
                 'slot_date' => trim($_POST['slot_date']),
                 'slot_start' => trim($_POST['slot_start']),
@@ -431,19 +435,22 @@ class Academic extends Controller
                 'slot_status' => trim($_POST['slot_status']),
                 'created_by' => trim($_POST['created_by']),
             ];
-    
+            
             $current_username = $this->userModel->getUsernameById($user_id);
-            $data['created_by'] = $current_username;
+            $data['created_by'] = $user_id;
      
             if ($this->acModel->createTimeslots($data)) {
-                $successMessage = "Timeslots created successfully!";
+                // If timeslot creation is successful, redirect to the same page
                 redirect('academic/ac_timeslots');
             } else {
-                $errorMessage = "Failed to create timeslots. Please try again.";
+                // If something went wrong, display an error message
+                die('Something went wrong');
             }
-    
+            
+            // Fetch timeslots regardless of the outcome of the creation attempt
             $data['timeslot'] = $this->acModel->getTimeslots($current_username);
-            $this->view('academic/ac_timeslots', $data, ['successMessage' => $successMessage ?? null, 'errorMessage' => $errorMessage ?? null]);
+            $this->view('academic/ac_timeslots', $data);
+            
         }
         $this->view('academic/ac_timeslots');
     }

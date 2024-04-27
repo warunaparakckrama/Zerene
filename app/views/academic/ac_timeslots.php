@@ -178,18 +178,6 @@ $timeslot = $data['timeslot'];
         </div>
     </section>
 
-    <script>
-        function cancelCreate() {
-            document.getElementById('timeslotForm').reset();
-        }
-        // Check if success message is available
-        var successMessage = "<?php echo isset($successMessage) ? $successMessage : ''; ?>";
-        if (successMessage !== '') {
-            // Display the success message using JavaScript
-            alert(successMessage); // You can replace this with your preferred way of displaying the message
-        }
-    </script>
-
 
 
 
