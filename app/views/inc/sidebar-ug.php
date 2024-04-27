@@ -23,7 +23,6 @@
             <a href="<?php echo URLROOT; ?>undergrad/prescriptions" class="top <?php echo ($currentPage === 'prescriptions') ? 'active' : ''; ?>">Prescriptions</a>
         </div>
         <div class="sidebar-container3">
-            <a href="" class="bottom">Help & Info</a>
             <a href="<?php echo URLROOT; ?>undergrad/feedback" class="bottom <?php echo ($currentPage === 'feedback') ? 'active' : ''; ?>">Feedback</a>
             <a href="<?php echo URLROOT; ?>users/logout" class="bottom">Log out</a>
         </div>

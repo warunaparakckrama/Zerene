@@ -189,6 +189,17 @@ class Undergraduate
         }
     }
 
+    public function cancelTimeslotReserve($id){
+        $this->db->query('UPDATE timeslot SET slot_status = :slot_status WHERE slot_id = :id');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':slot_status', 'pending');
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getTimeslotDetails($id){
         $this->db->query('SELECT * FROM timeslot WHERE slot_id = :id');
         $this->db->bind(':id', $id);
