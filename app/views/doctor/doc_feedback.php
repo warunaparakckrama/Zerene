@@ -1,15 +1,13 @@
-<!DOCTYPE html>
 <?php $currernt_page = 'doc_feedback'; ?>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
     <title><?php echo SITENAME;?> | Feedback</title>
-    
-
 </head>
+
 <body>
     <section class="sec-1">
         <div>
@@ -17,15 +15,14 @@
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
-                <p class="p-title" style="font-size: 40px;">Feedback</p>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
+                <div class="subgrid-2><p class="p-title" style="font-size: 40px;">Feedback</p></div>
             </div>
 
             <div>
                     <div class="card-white">
                         <p class="p-regular">Submit Feedback/ Complaints</p>
 
-                        <div class="card-green">
+                        <div class="card-green-5">
                             <form action="<?php echo URLROOT;?>Doctor/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST">
                             
                        <div style="font-size: 18px; color: var(--zerene-green)">
@@ -58,4 +55,3 @@
     </section>
     
 </body>
-</html>

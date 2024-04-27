@@ -22,7 +22,6 @@ $timeslot = $data['timeslot'];
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Timeslots</p>
                 </div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>
@@ -149,26 +148,6 @@ $timeslot = $data['timeslot'];
                     <?php endif; ?>
                 </div>
 
-
-
-
-                <div class="card-white">
-                    <p class="p-regular">Reserved</p>
-                    <div class="card-green-2">
-                        <div>
-                            <p class="p-regular-grey" style="font-size: 20px;">Monday</p>
-                            <p class="p-regular-grey" style="font-size: 15px;">2024-01-29</p>
-                        </div>
-                        <div class="btn-container-2">
-                            <button class="button-second">2.00-2.30pm</button>
-                            <button class="button-second">2.00-2.30pm</button>
-                            <button class="button-second">2.00-2.30pm</button>
-                            <button class="button-second">2.00-2.30pm</button>
-                            <button class="button-second">2.00-2.30pm</button>
-                            <button class="button-second">2.00-2.30pm</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

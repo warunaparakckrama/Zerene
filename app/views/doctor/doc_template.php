@@ -67,7 +67,6 @@ $medicine = $data['medicine'];
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Prescription</p>
                 </div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>
