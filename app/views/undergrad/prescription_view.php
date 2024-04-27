@@ -60,19 +60,24 @@
 <body>
     <section class="sec-1">
         <div>
-            <?php require APPROOT . '/views/inc/sidebar-ug.php'; ?>
+            <?php require APPROOT . '/views/inc/sidebar-doc.php'; ?>
         </div>
 
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Prescription</p>
-                    <div>
+                </div>
+                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
+            </div>
+
+            <div>
+                <p class="p-regular-green"></p>
                 <div class="card-white-scroll" style="height: 500px;">
 
                     <div class="card-green-3" id="prescription">
                         <div class="prescription-container">
-                            <table class="prescription-table">
+                            <table class="prescription-table" id="prescription">
                                 <tbody>
                                     <th class="col1 merged-cells" colspan=4 style="background-color:#3d8994; color:#FEFEFE"><img src="<?php echo IMG;?>logo - white.svg" width="15%" alt=""><p style="font-size: 30px;">Medical Prescription</p></th>
                                     <tr>
@@ -148,7 +153,9 @@
             // Specify the filename for the downloaded PDF
 
             html2pdf(element, {
-                filename: filename
+                filename: filename,
+                format: 'a4',
+                orientation: 'portrait'
             });
         });
     </script>
