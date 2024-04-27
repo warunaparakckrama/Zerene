@@ -9,7 +9,7 @@
             <img src="<?php echo IMG; ?>logo - white.svg" alt="logo white" width="213" height="35.18">
         </div>
         <div class="sidebar-container2">
-            <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="ug avatar" width="80" height="80">
+            <img src="<?php echo IMG; ?>ug-avatar-sb.svg" alt="ug avatar" width="80" height="80">
             <p class="p-regular" style="color: var(--zerene-light);"><?php echo $_SESSION['user_name']; ?></p>
             <a href="<?php echo URLROOT; ?>undergrad/ug_profile" style="text-decoration: none;"><button class="button-second">View Profile</button></a>
         </div>

@@ -165,7 +165,7 @@ class Undergraduate
     }
 
     public function getRequestLettersfromLetterId($id){
-        $this->db->query('SELECT * FROM request_letter WHERE letter_id = :id');
+        $this->db->query('SELECT * FROM request_letter WHERE letter_id = :id ORDER BY sent_at ASC');
         $this->db->bind(':id', $id);
         $row = $this->db->single();
         return $row;

@@ -19,13 +19,11 @@
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Profile</p></div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
             </div>
 
             <div>
 
                 <div class="card-white">
-                    <p class="p-regular-grey">User Account</p>
                     <div class="subgrid-4">
 
                         <div class="rectangle">
