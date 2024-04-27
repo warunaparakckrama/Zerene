@@ -152,7 +152,7 @@ $timeslot = $data['timeslot'];
 
 
 
-                <div class="card-white">
+                <!-- <div class="card-white">
                     <p class="p-regular">Reserved</p>
                     <div class="card-green-2">
                         <div>
@@ -168,7 +168,7 @@ $timeslot = $data['timeslot'];
                             <button class="button-second">2.00-2.30pm</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
