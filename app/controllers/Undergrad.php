@@ -7,6 +7,7 @@ class Undergrad extends Controller
     private $adminModel;
     private $ugModel;
     private $pcModel;
+    private $docModel;
 
     public function __construct()
     {
@@ -17,6 +18,7 @@ class Undergrad extends Controller
         $this->adminModel = $this->model('Administrator');
         $this->ugModel = $this->model('Undergraduate');
         $this->pcModel = $this->model('PCounsellor');
+        $this->docModel = $this->model('psychiatrist');
     }
 
     //user view controllers
@@ -37,6 +39,23 @@ class Undergrad extends Controller
             'response' => $response
         ];
         $this->view('undergrad/questionnaires', $data);
+    }
+
+    public function answer_view($id){
+        $response = $this->ugModel->getResponseByResponseId($id);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $question = $this->ugModel->getQuestionsfromQuestionnaireId($response->questionnaire_id);
+        $answer = $this->ugModel->getAnswersfromQuestionnaireId($response->questionnaire_id);
+        $undergrad = $this->adminModel->getUgById($response->user_id);
+
+        $data = [
+            'response' =>$response,
+            'questionnaire' =>$questionnaire,
+            'question' => $question,
+            'answer' => $answer,
+            'undergrad' =>$undergrad
+        ];
+        $this->view('undergrad/answer_view', $data);
     }
 
     public function quiz_view($questionnaire_id)
@@ -139,7 +158,7 @@ class Undergrad extends Controller
         $reserve = $this->ugModel->getReserveDetails($_SESSION['user_id']);
         $data = [
             'timeslot' => $timeslot,
-            'coun_user_id' => $id,
+            'id' => $id,
             'reserve' => $reserve
         ];
         $this->view('undergrad/timeslots_view', $data);
@@ -162,10 +181,43 @@ class Undergrad extends Controller
         $this->view('undergrad/chats', $data);
     }
 
-    public function resources()
+    public function prescriptions()
+    {   $user_id = $_SESSION['user_id'];
+        $prescription = $this->docModel->getPrescriptionforUg($user_id);
+        $doctor = $this->adminModel->getDoctors();
+        $data = [
+            'prescription' => $prescription,
+            'doctor' => $doctor,
+            'user_id' => $user_id
+        ];
+        $this->view('undergrad/prescriptions', $data);
+    }
+
+    public function view_prescripton($id)
     {
-        $data = [];
-        $this->view('undergrad/resources', $data);
+        $prescription = $this->docModel->getPrescriptionById($id);
+        $doctor = $this->adminModel->getDoctorById($prescription->doc_user_id);
+        $data = [
+            'prescription' => $prescription,
+            'doctor' => $doctor,
+            'id' => $id
+        ];
+        $this->view('undergrad/view_prescripton', $data);
+    }
+
+    public function prescription_view($id)
+    {
+        $porescription = $this->docModel->getPrescriptionById($id);
+        $medicine = $this->docModel->getMedicine($id);
+        $doctor = $this->adminModel->getDoctorById($id);
+        $data = [
+            'prescription' => $porescription,
+            'medicine' => $medicine,
+            'doctor' => $doctor
+
+
+        ];
+        $this->view('undergrad/prescription_view', $data);
     }
 
     public function ug_profile()
@@ -380,8 +432,13 @@ class Undergrad extends Controller
     }
 
     public function cancelTimeslot($slot_id)
-    {
-        
+    {   
+        $timeslot = $this->ugModel->getTimeslotDetails($slot_id);
+      if ($this->ugModel->cancelTimeslotReserve($slot_id)) {
+          redirect('undergrad/timeslots_view/'. $timeslot->created_by);
+      }  else{
+            die('Something went wrong');
+      }
     }
 
     public function submitResponses($user_id) //questionnaire_id need to be resolved

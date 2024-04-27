@@ -1,6 +1,7 @@
 <?php
     $currentPage = 'ac_opletters_view'; 
     $letter = $data['letter'];
+    $request= $data['request'];
 ?>
 
 <head>
@@ -29,7 +30,8 @@
                     <div style="font-size: 15px;">
                         <p class="p-regular-green"><b>Subject: </b><?php echo $letter->letter_subject;?></p><br>
                         <p class="p-regular-green"><b>Content: </b><?php echo $letter->letter_body;?></p><br>
-                        <!-- <a href="<?php echo $letter->document_path;?>" download><p>Document</p></a> -->
+                        <?php $filename = basename($request->document_path);?>
+                            <p class="p-regular-green"><a href="http://localhost/zereneuploads/documents/<?php echo $filename;?> " download="attachment">Attachment</a></p>
                         <?php $dateTime = new DateTime($letter->date); $formattedDateTime = $dateTime->format('jS M, y \|\ h:iA');?>
                         <p class="p-regular-green"><b>Sent At: </b><?php echo $formattedDateTime;?></p>
                     </div>

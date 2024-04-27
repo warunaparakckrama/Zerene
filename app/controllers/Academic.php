@@ -264,10 +264,13 @@ class Academic extends Controller
     public function ac_opletter_view($id)
     {
         $letter = $this->acModel->getOpLetterbyid($id);
-
+        
         $data = [
             'letter' => $letter,
         ];
+        $requestId =$data['letter']->req_letter_id;
+        $request = $this->acModel->getReqLetterbyletterid($requestId);
+        $data['request'] = $request;
         $this->view('academic/ac_opletter_view', $data);
     }
 
@@ -485,7 +488,7 @@ class Academic extends Controller
         $emailContent = str_replace('{sender_lname}', $data['coun_lname'], $emailContent);
         $emailContent = str_replace('{sender_email}', $data['coun_email'], $emailContent);
         $emailContent = str_replace('{date}', $date, $emailContent);
-        $emailContent = str_replace('{$filepath}', $request->document_path, $emailContent);
+        $emailContent = str_replace('{document_link}',$request->document_path, $emailContent);
 
         // Set the Content-Type header to indicate that the email content is HTML
         $headers = "MIME-Version: 1.0" . "\r\n";
@@ -507,4 +510,5 @@ class Academic extends Controller
         $data['op details'] = $this->acModel->getOpDetails($session_id);
         $this->view('academic/ac_opletters', $data);
     }
+    
 }

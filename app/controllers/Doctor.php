@@ -144,10 +144,13 @@ class Doctor extends Controller
         $direct = $this->docModel->getDirectedUndergrads($id);
         $undergrad = $this->adminModel->getUndergrads();
         $counsellor = $this->adminModel->getCounselors();
+        $created = $this->docModel->getCreatedPrescriptionById($id);
+        
         $data = [
             'direct' => $direct,
             'undergrad' => $undergrad,
-            'counsellor' => $counsellor
+            'counsellor' => $counsellor,
+            'created' => $created
         ];
         $this->view('doctor/doc_prescription', $data);
     }
@@ -160,6 +163,7 @@ class Doctor extends Controller
         $data = [
             'doctor' => $doctor,
             'undergrad' => $undergrad,
+            'ug_user_id' => $ug_user_id,
             
         ];
 
@@ -333,8 +337,12 @@ class Doctor extends Controller
     public function doc_ug_profile($id)
     {   
         $undergrad = $this->adminModel->getUgById($id);
+        $UgPress = $this->docModel->getAllPrescriptionsByUgId($id);
+        $prescription = $this->docModel->getPrescriptionById($id);
         $data = [
-            'undergrad' => $undergrad
+            'undergrad' => $undergrad,
+            'UgPress' => $UgPress,
+            'prescription' => $prescription
         ];
         $this->view('doctor/doc_ug_profile', $data);
     }
@@ -456,11 +464,13 @@ class Doctor extends Controller
     }
 
     public function addPrescription($doc_user_id)
-    {
+    {   
+        $ug_user_id = $_SESSION['user_id'];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'ug_user_id' => trim($_POST['ug_user_id']),
                 'ug_name' => trim($_POST['ug_name']),
                 'age' => trim($_POST['age']),
                 'gender' => trim($_POST['gender']),
@@ -473,6 +483,7 @@ class Doctor extends Controller
             $drug = $_POST['drug'];
             $unit = $_POST['unit'];
             $dosage = $_POST['dosage'];
+            $instructions = $_POST['instructions'];
             $unitType = $_POST['unit_type']; // Added
             $dosageType = $_POST['dosage_type']; // Added
             $numRecords = count($drug);
@@ -485,6 +496,7 @@ class Doctor extends Controller
                     'drug' => $drug[$i],
                     'unit' => $unit[$i],
                     'dosage' => $dosage[$i],
+                    'instructions' => $instructions[$i],
                     'unit_type' => $unitType[$i], // Added
                     'dosage_type' => $dosageType[$i], // Added
                 ];
@@ -560,5 +572,9 @@ class Doctor extends Controller
                 $this->view('academic/ac_feedback', $data);
             }
         }
+    }
+
+    public function downloadPrescription(){
+        require_once APPROOT.'libraries/dompdf/autoload.inc.php';
     }
 }

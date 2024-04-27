@@ -38,7 +38,7 @@ $counsellor = $data['counsellor'];
                                     <a href="" class="a-name">
                                         <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username; ?></p>
                                     </a>
-                                    <p class="p-regular-grey"><?php echo $undergrad->university . ' ' . $undergrad->faculty; ?></p>
+                                    <p class="p-regular-grey" style="font-size: 15px;"><?php echo $undergrad->university . ' ' . $undergrad->faculty; ?></p>
                                 </div>
                                 <div class="btn-container">
                                 <a href="<?php echo URLROOT;?>academic/ac_undergraduate_profile/<?php echo $undergrad->user_id;?>" style="text-decoration: none;">

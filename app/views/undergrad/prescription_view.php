@@ -1,8 +1,8 @@
-<?php
-$currentPage = 'doc_prescription';
-$prescription = $data['prescription'];
-$doctor = $data['doctor'];
-$medicine = $data['medicine'];
+<?php 
+    $currentPage = 'prescriptions';
+    $prescription = $data['prescription'];
+    $doctor = $data['doctor'];
+    $medicine = $data['medicine'];
 ?>
 
 <head>
@@ -11,7 +11,8 @@ $medicine = $data['medicine'];
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
-    <title><?php echo SITENAME;?> | Prescription</title>
+    <title><?php echo SITENAME; ?> | Prescriptions</title>
+
     <style>
         .prescription-table {
             width: 100%;
@@ -71,12 +72,12 @@ $medicine = $data['medicine'];
             </div>
 
             <div>
-                <p class="p-regular-green">Prescription Preview</p>
+                <p class="p-regular-green"></p>
                 <div class="card-white-scroll" style="height: 500px;">
 
                     <div class="card-green-3" id="prescription">
                         <div class="prescription-container">
-                            <table class="prescription-table">
+                            <table class="prescription-table" id="prescription">
                                 <tbody>
                                     <th class="col1 merged-cells" colspan=4 style="background-color:#3d8994; color:#FEFEFE"><img src="<?php echo IMG;?>logo - white.svg" width="15%" alt=""><p style="font-size: 30px;">Medical Prescription</p></th>
                                     <tr>
@@ -131,8 +132,16 @@ $medicine = $data['medicine'];
                 </div>
                 <div class="btn-container"><button class="button-main" id="download">Download PDF</button></div>
             </div>
+                </div>
 
+            </div>
+        </div>
     </section>
+</body>
+
+                                      
+
+                             
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
@@ -144,7 +153,9 @@ $medicine = $data['medicine'];
             // Specify the filename for the downloaded PDF
 
             html2pdf(element, {
-                filename: filename
+                filename: filename,
+                format: 'a4',
+                orientation: 'portrait'
             });
         });
     </script>

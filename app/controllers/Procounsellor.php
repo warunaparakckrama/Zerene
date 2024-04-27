@@ -64,6 +64,29 @@ class Procounsellor extends Controller
         $this->view('procounsellor/pc_createq', $data);
     }
 
+    public function pc_createNotes($id)
+    {
+        $undergrad = $this->adminModel->getUgById($id);
+        $coun_user_id = $_SESSION['user_id'];
+        $note = $this->pcModel->getNotes($id, $coun_user_id);
+        $data = [
+            'undergrad' => $undergrad,
+            'note' => $note,
+        ];
+
+        $this->view('procounsellor/pc_createNotes', $data);
+    }
+
+    public function pc_viewNote($noteID)
+    {
+        $note = $this->pcModel->getNotesFromID($noteID);
+        $data = [
+            'note' => $note,
+        ];
+
+        $this->view('procounsellor/pc_viewNote', $data);
+    }
+
     public function pc_undergrad()
     {
         $id = $_SESSION['user_id'];
@@ -168,13 +191,15 @@ class Procounsellor extends Controller
     }
 
     public function pc_ug_profile($id)
-    {   
+    {
         $coun_user_id = $_SESSION['user_id'];
         $direct = $this->pcModel->checkUgDirects($id, $coun_user_id);
         $undergrad = $this->adminModel->getUgById($id);
+        $note = $this->pcModel->getNotes($id, $coun_user_id);
         $data = [
             'undergrad' => $undergrad,
-            'direct' => $direct
+            'direct' => $direct,
+            'note' => $note
         ];
         $this->view('procounsellor/pc_ug_profile', $data);
     }
@@ -183,14 +208,35 @@ class Procounsellor extends Controller
     {
         $response = $this->ugModel->getResponseByResponseId($id);
         $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $range = $this->pcModel->getRangesfromQuizId($response->questionnaire_id);
         $results = $this->quizResults($id);
 
         $data = [
             'response' => $response,
             'questionnaire' => $questionnaire,
-            'results' => $results
+            'results' => $results,
+            'range' => $range
         ];
         $this->view('procounsellor/pc_quiz_review', $data);
+    }
+
+    public function pc_view_quiz_response($id)
+    {
+        $response = $this->ugModel->getResponseByResponseId($id);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $question = $this->ugModel->getQuestionsfromQuestionnaireId($response->questionnaire_id);
+        $answer = $this->ugModel->getAnswersfromQuestionnaireId($response->questionnaire_id);
+        $undergrad = $this->adminModel->getUgById($response->user_id);
+
+        $data =[
+            'response' =>$response,
+            'questionnaire' =>$questionnaire,
+            'question' => $question,
+            'answer' => $answer,
+            'undergrad' =>$undergrad
+        ];
+
+        $this->view('procounsellor/pc_view_quiz_response', $data);
     }
 
     //function controllers
@@ -228,7 +274,7 @@ class Procounsellor extends Controller
 
                 // post notifications
                 if ($this->userModel->addFeedback($data)) {
-                    redirect('undergrad/feedback');
+                    redirect('procounsellor/pc_feedback');
                 } else {
                     die('Something went wrong');
                 }
@@ -364,69 +410,62 @@ class Procounsellor extends Controller
                 'quiz_type' => trim($_POST['quiz_type']),
                 'num_questions' => trim($_POST['num_questions']),
                 'num_answers' => trim($_POST['num_answers']),
-                'quiz_name_err' => '',
-                'quiz_type_err' => '',
-                'num_questions_err' => '',
-                'num_answers_err' => '',
+                'num_ranges' => trim($_POST['num_ranges']),
+                'm_factor' => trim($_POST['m_factor']),
             ];
 
-            if (empty($data['quiz_name'])) {
-                $data['quiz_name_err'] = 'Please enter questionnaire name';
-            }
+            // Validated
 
-            if (empty($data['quiz_type'])) {
-                $data['quiz_type_err'] = 'Please select questionnaire type';
-            }
+            // Create the questionnaire
+            if ($this->counsellorModel->addQuestionnaire($user_id, $data)) {
+                $questionnaire_id = $this->counsellorModel->getLastInsertedQuizId(); // Adjust this based on your actual method to get the last inserted quiz ID
+                // Loop through each question and insert into the database
+                for ($i = 1; $i <= $data['num_questions']; $i++) {
+                    $questionKey = 'question' . $i;
 
-            if (empty($data['num_questions'])) {
-                $data['num_questions_err'] = 'Please enter number of questions';
-            }
+                    if (!empty($_POST[$questionKey])) {
+                        $questionText = trim($_POST[$questionKey]);
 
-            if (empty($data['num_answers'])) {
-                $data['num_answers_err'] = 'Please enter number of answers';
-            }
-
-
-            if (empty($data['quiz_name_err']) && empty($data['quiz_type_err']) && empty($data['num_questions_err']) && empty($data['num_answers_err'])) {
-                // Validated
-
-                // Create the questionnaire
-                if ($this->counsellorModel->addQuestionnaire($user_id, $data)) {
-                    $questionnaire_id = $this->counsellorModel->getLastInsertedQuizId(); // Adjust this based on your actual method to get the last inserted quiz ID
-                    // Loop through each question and insert into the database
-                    for ($i = 1; $i <= $data['num_questions']; $i++) {
-                        $questionKey = 'question' . $i;
-
-                        if (!empty($_POST[$questionKey])) {
-                            $questionText = trim($_POST[$questionKey]);
-
-                            // Insert the question into the database
-                            $this->counsellorModel->addQuestion($questionnaire_id, $questionText);
-                        }
+                        // Insert the question into the database
+                        $this->counsellorModel->addQuestion($questionnaire_id, $questionText);
                     }
-
-                    // Capture and insert answers for each question
-                    $j = $data['num_answers'];
-                    for ($i = 1; $i <= $j; $i++) {
-
-                        $answerKey = 'answer' . $i;
-
-                        if (!empty($_POST[$answerKey])) {
-                            $answerText = trim($_POST[$answerKey]);
-
-                            // Insert the answer into the database
-                            $this->counsellorModel->addAnswer($questionnaire_id, $i, $answerText);
-                        }
-                    }
-
-                    flash('user_message', 'Questionnaire created successfully');
-                    redirect('procounsellor/pc_createq');
-                } else {
-                    die('Something went wrong');
                 }
+
+                // Capture and insert answers for each question
+                $j = $data['num_answers'];
+                for ($i = 1; $i <= $j; $i++) {
+
+                    $answerKey = 'answer' . $i;
+
+                    if (!empty($_POST[$answerKey])) {
+                        $answerText = trim($_POST[$answerKey]);
+
+                        // Insert the answer into the database
+                        $this->counsellorModel->addAnswer($questionnaire_id, $i, $answerText);
+                    }
+                }
+
+                // Capture and insert ranges for the marking scheme
+                $numRanges = $data['num_ranges'];
+                $m_factor = $data['m_factor'];
+                for ($i = 1; $i <= $numRanges; $i++) {
+                    $minRangeKey = 'min_range' . $i;
+                    $maxRangeKey = 'max_range' . $i;
+                    $rangeNameKey = 'range_name' . $i;
+
+                    if (!empty($_POST[$minRangeKey]) && !empty($_POST[$maxRangeKey]) && !empty($_POST[$rangeNameKey])) {
+                        $minRange = trim($_POST[$minRangeKey]);
+                        $maxRange = trim($_POST[$maxRangeKey]);
+                        $rangeName = trim($_POST[$rangeNameKey]);
+
+                        // Insert the range into the database
+                        $this->counsellorModel->addRange($questionnaire_id, $minRange, $maxRange, $rangeName, $m_factor);
+                    }
+                }
+
+                redirect('procounsellor/pc_createq');
             } else {
-                // Load view with errors
-                $this->view('procounsellor/pc_createq', $data);
+                die('Something went wrong');
             }
         } else {
             $data = [
@@ -434,17 +473,80 @@ class Procounsellor extends Controller
                 'quiz_type' => '',
                 'num_questions' => '',
                 'num_answers' => '',
-                'quiz_name_err' => '',
-                'quiz_type_err' => '',
-                'num_questions_err' => '',
-                'num_answers_err' => ''
+                'num_ranges' => '',
             ];
-
-            $this->view('procounsellor/pc_createq', $data);
         }
 
         $this->view('procounsellor/pc_createq', $data);
     }
+
+    public function createNotes($id)
+    {
+        $coun_user_id = $_SESSION['user_id'];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'by_user_id' => $coun_user_id,
+                'of_user_id' => $id,
+                'heading' => trim($_POST['heading']),
+                'content' => trim($_POST['content']),
+                'heading_err' => '',
+                'content_err' => '',
+            ];
+
+            if ($this->pcModel->addNotes($data)) {
+                redirect('procounsellor/pc_ug_profile/' . $id);
+            } else {
+                die('Something went wrong');
+            }
+            $this->view('procounsellor/pc_createNotes/' . $id);
+        }
+
+        $data['note'] = $this->pcModel->getNotes($id, $coun_user_id);
+        $this->view('procounsellor/pc_createNotes', $data);
+    }
+
+    public function editNote($noteID)
+    {
+        $note = $this->pcModel->getNotesFromID($noteID);
+
+        if (!$note) {
+            die('Note not found');
+        }
+
+        $data = [
+            'note' => $note,
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data['note']->heading = trim($_POST['heading']);
+            $data['note']->content = trim($_POST['content']);
+
+            if ($this->pcModel->updateNote($noteID)) {
+                redirect('procounsellor/pc_ug_profile/' . $noteID);
+            } else {
+                die('Something went wrong');
+            }
+        }
+
+        $this->view('procounsellor/pc_viewNote', $data);
+    }
+
+    public function deleteNote($noteID)
+    {   
+        $note = $this->pcModel->getNotesFromID($noteID);
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->pcModel->deleteNote($noteID)) {
+                redirect('procounsellor/pc_ug_profile/'. $note->of_user_id);
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
+
 
     public function addTimeslots($user_id)
     {
@@ -554,6 +656,7 @@ class Procounsellor extends Controller
     {
         $response = $this->ugModel->getResponseByResponseId($id);
         $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $range = $this->pcModel->getRangesfromQuizId($response->questionnaire_id);
 
         if ($questionnaire->questionnaire_name === 'DASS-21') {
             $Depression = '';
@@ -563,6 +666,9 @@ class Procounsellor extends Controller
                 'depression' => $Depression,
                 'anxiety' => $Anxiety,
                 'stress' => $Stress,
+                'mark1' => 0,
+                'mark2' => 0,
+                'mark3' => 0
             ];
             $i = 1;
             $mark1 = 0;
@@ -571,7 +677,7 @@ class Procounsellor extends Controller
             for ($i = 1; $i <= 7; $i++) {
                 $mark1 = $response->{'q' . $i . '_response'} * 2 + $mark1;
             }
-            
+
             for ($i = 8; $i <= 14; $i++) {
                 $mark2 = $response->{'q' . $i . '_response'} * 2 + $mark2;
             }
@@ -579,6 +685,9 @@ class Procounsellor extends Controller
             for ($i = 15; $i <= 21; $i++) {
                 $mark3 = $response->{'q' . $i . '_response'} * 2 + $mark3;
             }
+            $data['mark1'] = $mark1;
+            $data['mark2'] = $mark2;
+            $data['mark3'] = $mark3;
 
             //Depression
             if ($mark1 >= 28) {
@@ -623,10 +732,37 @@ class Procounsellor extends Controller
             $data['stress'] = $Stress;
 
             return $data;
+        } else {
+            $i = 1;
+            $mark = 0;
+            $final_mark = '';
+            $result = '';
+            $data = [
+                'final_mark' => $final_mark,
+                'result' => $result,
+            ];
+
+            $num_of_quiz = $questionnaire->num_of_questions;
+            for ($i = 1; $i <= $num_of_quiz; $i++) {
+                $mark = $response->{'q' . $i . '_response'} + $mark;
+            }
+
+            foreach ($range as $range) {
+                if ($mark >= $range->min_value && $mark <= $range->max_value) {
+                    $final_mark = $mark * $range->multiply_by;
+                    $result = $range->range_name;
+                    $data['final_mark'] = $final_mark;
+                    $data['result'] = $result;
+                    break;
+                }
+            }
+
+            return $data;
         }
     }
 
-    public function ugDirects($ug_user_id){
+    public function ugDirects($ug_user_id)
+    {
         $coun_user_id = $_SESSION['user_id'];
         $counsellor = $this->adminModel->getCounsellorById($coun_user_id);
         $doctor = $this->adminModel->getDoctors();
@@ -644,7 +780,7 @@ class Procounsellor extends Controller
         ];
 
         if ($this->pcModel->addUgDirects($data)) {
-            redirect('procounsellor/pc_ug_profile/'.$ug_user_id);
+            redirect('procounsellor/pc_ug_profile/' . $ug_user_id);
         } else {
             die('Something went wrong');
         }
