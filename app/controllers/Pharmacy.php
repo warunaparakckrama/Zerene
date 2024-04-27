@@ -5,6 +5,8 @@ class Pharmacy extends Controller
 
     private $userModel;
     private $adminModel;
+    private $pharmModel;
+    private $docModel;
 
     public function __construct()
     {
@@ -13,6 +15,8 @@ class Pharmacy extends Controller
         }
         $this->userModel = $this->model('User');
         $this->adminModel = $this->model('Administrator');
+        $this->pharmModel = $this->model('PharmModel');
+        $this->docModel = $this->model('psychiatrist');
     }
 
     public function pharm_home(){
@@ -34,10 +38,25 @@ class Pharmacy extends Controller
     }
 
     public function pharm_prescriptions(){
+        $prescription = $this->pharmModel->getPrescriptions();
+        $doctor = $this->adminModel->getDoctors();
         $data = [
-            'currentPage' => 'pharm_prescriptions'
+            'prescription' => $prescription,
+            'doctor' => $doctor,
         ];
         $this->view('pharmacy/pharm_prescriptions', $data);
+    }
+
+    public function pharm_pres_view($pres_id){
+        $prescription = $this->docModel->getPrescriptionById($pres_id);
+        $medicine = $this->docModel->getMedicine($pres_id);
+        $doctor = $this->adminModel->getDoctorById($prescription->doc_user_id);
+        $data = [
+            'prescription' => $prescription,
+            'medicine' => $medicine,
+            'doctor' => $doctor,
+        ];
+        $this->view('pharmacy/pharm_pres_view', $data);
     }
 
     public function changePwdPharm($user_id){
