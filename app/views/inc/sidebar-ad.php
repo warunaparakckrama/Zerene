@@ -19,7 +19,7 @@
         </div>
 
         <div class="sidebar-container3">
-            <a href="<?php echo URLROOT; ?>admin/ad_home" class="top <?php echo ($currentPage === 'ad_home') ? 'active' : ''; ?>" id="sb-link1">Home</a>
+            <a href="<?php echo URLROOT; ?>admin/ad_home" class="top <?php echo ($currentPage === 'ad_home') ? 'active' : ''; ?>" id="sb-link1">Dashboard</a>
             <a href="#" class="top dd-btn <?php echo ($currentPage === 'ad_registrations') ? 'active' : '';?>">Registrations</a>
             <div class="dropdown-container">
                 <a href="<?php echo URLROOT; ?>admin/ad_reg_admin" class="dd-content">Administrators</a>

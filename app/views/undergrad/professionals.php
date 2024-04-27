@@ -24,7 +24,6 @@
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Professionals</p></div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
             </div>
             
             <div>
@@ -44,16 +43,16 @@
                                     <?php if($request->to_user_id == $counsellor->user_id ) :?>
                                         <?php $requestFound = true; ?>
                                         <?php if($request->is_clicked == 1) : ?>
-                                            <button class="button-second" disabled>Request Sent</button>
+                                            <button class="button-second" disabled>Chat Created</button>
                                             <?php else : ?>
-                                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message</button></a>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
 
                                 <!-- If no message request is found, display the "Message Request" button -->
                                 <?php if(!$requestFound) : ?>
-                                    <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                    <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message</button></a>
                                 <?php endif; ?>
 
                                 <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
@@ -79,16 +78,16 @@
                                     <?php if($request->to_user_id == $counsellor->user_id ) :?>
                                         <?php $requestFound = true; ?>
                                         <?php if($request->is_clicked == 1) : ?>
-                                            <button class="button-second" disabled>Request Sent</button>
+                                            <button class="button-second" disabled>Chat Created</button>
                                             <?php else : ?>
-                                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                                <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message</button></a>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
 
                                 <!-- If no message request is found, display the "Message Request" button -->
                                 <?php if(!$requestFound) : ?>
-                                    <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                    <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">Message</button></a>
                                 <?php endif; ?>
 
                                 <a href="<?php echo URLROOT;?>Undergrad/professional_profile/<?php echo $counsellor->user_id;?>" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
@@ -127,10 +126,10 @@
 
                                 <!-- Display the appropriate button -->
                                 <?php if ($requestSentButton) : ?>
-                                    <button class="button-second" disabled>Request Sent</button>
+                                    <button class="button-second" disabled>Chat Created</button>
                                 <?php elseif ($messageRequestButton) : ?>
                                     <a href="<?php echo URLROOT;?>Undergrad/MsgRequest/<?php echo $doctor->user_id;?>" style="text-decoration: none;">
-                                        <button class="button-main">Message Request</button>
+                                        <button class="button-main">Message</button>
                                     </a>
                                 <?php endif; ?>
 

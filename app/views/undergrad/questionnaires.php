@@ -20,7 +20,6 @@
                 
                 <div class="subgrid-1">
                     <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Questionnaires</p></div>
-                    <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
                 </div>
 
                 <div>
@@ -53,6 +52,9 @@
                                             $formattedDateTime = $dateTime->format('jS M, y \a\t h:iA');
                                         ?>
                                         <p class="p-regular-grey" style="font-size: 15px;"><?php echo $formattedDateTime;?></p>
+                                    </div>
+                                    <div class="btn-container">
+                                        <a href="<?php echo URLROOT;?>undergrad/answer_view/<?php echo $response->response_id;?>" style="text-decoration: none;"><button class="button-main">View Answers</button></a>
                                     </div>
                                 </div>
                             <?php endif; ?>

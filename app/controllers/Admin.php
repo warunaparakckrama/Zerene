@@ -5,6 +5,7 @@ class Admin extends Controller
 {
     private $userModel;
     private $adminModel;
+    private $chartModel;
 
 
     public function __construct()
@@ -14,6 +15,7 @@ class Admin extends Controller
         }
         $this->userModel = $this->model('User');
         $this->adminModel = $this->model('Administrator');
+        $this->chartModel = $this->model('ChartModel');
     }
 
     //page view controllers
@@ -25,8 +27,14 @@ class Admin extends Controller
     }
 
     public function ad_home()
-    {
-        $data = [];
+    {   $usercount = $this->chartModel->countUserTypes();
+        $facultycount = $this->chartModel->countByFaculty();
+        $monthlycount = $this->chartModel->countMonthlyUsers();
+        $data = [
+            'usercount' => $usercount,
+            'facultycount' => $facultycount,
+            'monthlycount' => $monthlycount
+        ];
         $this->view('admin/ad_home', $data);
     }
 
@@ -374,11 +382,13 @@ class Admin extends Controller
         $counselors = $this->adminModel->getCounselors();
         $doctors = $this->adminModel->getDoctors();
         $admins = $this->adminModel->getAdmins();
+        $pharmacies = $this->adminModel->getPharmacies();
         $data = [
             'undergrads' => $undergrads,
             'counselors' => $counselors,
             'doctors' => $doctors,
-            'admins' => $admins
+            'admins' => $admins,
+            'pharmacies' => $pharmacies
         ];
         $this->view('admin/ad_users', $data);
     }
@@ -941,4 +951,5 @@ class Admin extends Controller
             return false;
         }
     }
+
 }

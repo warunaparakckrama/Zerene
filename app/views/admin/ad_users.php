@@ -17,7 +17,6 @@
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Users</p></div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
             </div>
 
             <div>
@@ -117,6 +116,39 @@
                                         <div class="btn-container-2">
                                             <a href="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
                                             <a href="<?php echo URLROOT;?>Users/deleteDoc/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p class="p-regular-green">Pharmacies</p>
+                <div class="card-white-table">
+                    <div class="table-container">
+                        <table class="table-1">
+                            <thead>
+                                <tr>
+                                    <th>Pharmacy Name</th>
+                                    <th>Pharmacy Address</th>
+                                    <th>Contact Number</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php foreach ($data['pharmacies'] as $pharmacies) : ?>
+                                <tr>
+                                    <td><?php echo $pharmacies->pharmacy_name?></td>
+                                    <td><?php echo $pharmacies->pharmacy_address?></td>
+                                    <td><?php echo $pharmacies->contact_num?></td>
+                                    <td>
+                                        <div class="btn-container-2">
+                                            <a href="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $pharmacies->user_id;?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
+                                            <a href="<?php echo URLROOT;?>Users/deleteDoc/<?php echo $pharmacies->user_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
                                         </div>
                                     </td>
                                 </tr>

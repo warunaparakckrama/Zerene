@@ -41,6 +41,23 @@ class Undergrad extends Controller
         $this->view('undergrad/questionnaires', $data);
     }
 
+    public function answer_view($id){
+        $response = $this->ugModel->getResponseByResponseId($id);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $question = $this->ugModel->getQuestionsfromQuestionnaireId($response->questionnaire_id);
+        $answer = $this->ugModel->getAnswersfromQuestionnaireId($response->questionnaire_id);
+        $undergrad = $this->adminModel->getUgById($response->user_id);
+
+        $data = [
+            'response' =>$response,
+            'questionnaire' =>$questionnaire,
+            'question' => $question,
+            'answer' => $answer,
+            'undergrad' =>$undergrad
+        ];
+        $this->view('undergrad/answer_view', $data);
+    }
+
     public function quiz_view($questionnaire_id)
     {
         $questionnaire = $this->ugModel->getQuestionnairesfromId($questionnaire_id);
@@ -141,7 +158,7 @@ class Undergrad extends Controller
         $reserve = $this->ugModel->getReserveDetails($_SESSION['user_id']);
         $data = [
             'timeslot' => $timeslot,
-            'coun_user_id' => $id,
+            'id' => $id,
             'reserve' => $reserve
         ];
         $this->view('undergrad/timeslots_view', $data);
@@ -415,8 +432,13 @@ class Undergrad extends Controller
     }
 
     public function cancelTimeslot($slot_id)
-    {
-        
+    {   
+        $timeslot = $this->ugModel->getTimeslotDetails($slot_id);
+      if ($this->ugModel->cancelTimeslotReserve($slot_id)) {
+          redirect('undergrad/timeslots_view/'. $timeslot->created_by);
+      }  else{
+            die('Something went wrong');
+      }
     }
 
     public function submitResponses($user_id) //questionnaire_id need to be resolved
