@@ -244,12 +244,12 @@ class Procounsellor extends Controller
         $answer = $this->ugModel->getAnswersfromQuestionnaireId($response->questionnaire_id);
         $undergrad = $this->adminModel->getUgById($response->user_id);
 
-        $data =[
-            'response' =>$response,
-            'questionnaire' =>$questionnaire,
+        $data = [
+            'response' => $response,
+            'questionnaire' => $questionnaire,
             'question' => $question,
             'answer' => $answer,
-            'undergrad' =>$undergrad
+            'undergrad' => $undergrad
         ];
 
         $this->view('procounsellor/pc_view_quiz_response', $data);
@@ -551,12 +551,12 @@ class Procounsellor extends Controller
     }
 
     public function deleteNote($noteID)
-    {   
+    {
         $note = $this->pcModel->getNotesFromID($noteID);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->pcModel->deleteNote($noteID)) {
-                redirect('procounsellor/pc_ug_profile/'. $note->of_user_id);
+                redirect('procounsellor/pc_ug_profile/' . $note->of_user_id);
             } else {
                 die('Something went wrong');
             }
@@ -651,19 +651,19 @@ class Procounsellor extends Controller
     public function changeSlotStatus($slotID)
     {
         $timeslot = $this->pcModel->getTimeslotById($slotID);
-        $reserve =$this->pcModel->getReserveDetails($slotID);
+        $reserve = $this->pcModel->getReserveDetails($slotID);
 
         $data = [
             'timeslot' => $timeslot,
             'reserve' => $reserve
         ];
-                    
-            if ($this->pcModel->updateSlotStatus($slotID) && $this->pcModel->updateReserveCancel($reserve->reserve_id)) {
-                redirect('procounsellor/pc_view_timeslot/'. $slotID);
-            } else {
-                die('Something went wrong');
-            }
-        
+
+        if ($this->pcModel->updateSlotStatus($slotID) && $this->pcModel->updateReserveCancel($reserve->reserve_id)) {
+            redirect('procounsellor/pc_view_timeslot/' . $slotID);
+        } else {
+            die('Something went wrong');
+        }
+
 
         $this->view('procounsellor/pc_view_timeslot', $data);
     }
