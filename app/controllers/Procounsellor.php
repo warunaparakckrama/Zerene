@@ -336,7 +336,7 @@ class Procounsellor extends Controller
 
                     // Update the user's password
                     if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
-                        flash('user_message', 'Password updated successfully');
+                        flash('password-flash', 'Password updated successfully');
                         redirect('procounsellor/pc_profile');
                     } else {
                         die('Something went wrong');
