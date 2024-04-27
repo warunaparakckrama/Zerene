@@ -23,7 +23,7 @@ $user_id = $data['user_id'];
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2">
-                    <p class="p-title" style="font-size: 40px;">Resources</p>
+                    <p class="p-title" style="font-size: 40px;">Prescriptions</p>
                 </div>
             </div>
 
