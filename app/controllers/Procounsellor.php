@@ -657,16 +657,13 @@ class Procounsellor extends Controller
             'timeslot' => $timeslot,
             'reserve' => $reserve
         ];
-    
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            
+                    
             if ($this->pcModel->updateSlotStatus($slotID) && $this->pcModel->updateReserveCancel($reserve->reserve_id)) {
                 redirect('procounsellor/pc_view_timeslot/'. $slotID);
             } else {
                 die('Something went wrong');
             }
-        }
+        
 
         $this->view('procounsellor/pc_view_timeslot', $data);
     }
