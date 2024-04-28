@@ -1,0 +1,11 @@
+.msg-flash{
+    background-color: var(--zerene-white);
+    border-radius: var(--border-radius-6);
+    border: 1px solid #C83A3A;
+    padding: var(--card-padding-10);
+    text-align: center;
+    height: fit-content;
+    width: fit-content;
+    margin-bottom: 5px;
+    color: var(--zerene-green);
+}

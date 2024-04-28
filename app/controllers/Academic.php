@@ -159,8 +159,7 @@ class Academic extends Controller
     public function ac_timeslots()
     {
         $id = $_SESSION['user_id'];
-        $username = $this->userModel->getUsernameById($id);
-        $timeslot = $this->acModel->getTimeslots($username);
+        $timeslot = $this->acModel->getTimeslots($id);
         $data = [
             'slot_type' => '',
             'timeslot' => $timeslot,
@@ -290,10 +289,16 @@ class Academic extends Controller
     public function ac_view_timeslot($id)
     {
         $timeslot = $this->acModel->getTimeslotById($id);
-        $data = [
-            'timeslot' => $timeslot
-        ];
-        $this->view('academic/ac_view_timeslot', $data);
+        $reserve = $this->acModel->getReserveDetails($id);
+        if($timeslot){
+            $data = [
+                'timeslot' => $timeslot,
+                'reserve' => $reserve
+            ];
+            $this->view('academic/ac_view_timeslot', $data);
+        }else{
+            die('Timeslot not found');
+        }
     }
 
 
@@ -436,13 +441,12 @@ class Academic extends Controller
                 'slot_finish' => trim($_POST['slot_finish']),
                 'slot_type' => trim($_POST['slot_type']),
                 'slot_interval' => trim($_POST['slot_interval']),
-                'slot_status' => trim($_POST['slot_status']),
+                'slot_status' => '',
                 'created_by' => trim($_POST['created_by']),
             ];
             
-            $current_username = $this->userModel->getUsernameById($user_id);
             $data['created_by'] = $user_id;
-     
+            
             if ($this->acModel->createTimeslots($data)) {
                 // If timeslot creation is successful, redirect to the same page
                 redirect('academic/ac_timeslots');
@@ -452,15 +456,86 @@ class Academic extends Controller
             }
             
             // Fetch timeslots regardless of the outcome of the creation attempt
+            $current_username = $this->userModel->getUsernameById($user_id);
             $data['timeslot'] = $this->acModel->getTimeslots($current_username);
             $this->view('academic/ac_timeslots', $data);
             
         }
         $this->view('academic/ac_timeslots');
     }
+
+    public function changeSlotStatus($slotID)
+    {
+        $timeslot = $this->acModel->getTimeslotById($slotID);
+        $reserve = $this->acModel->getReserveDetails($slotID);
+
+        $data = [
+            'timeslot' => $timeslot,
+            'reserve' => $reserve
+        ];
+
+        if ($this->acModel->updateSlotStatus($slotID) && $this->acModel->updateReserveCancel($reserve->reserve_id)) {
+            redirect('academic/ac_view_timeslot/' . $slotID);
+        } else {
+            die('Something went wrong');
+        }
+
+
+        $this->view('academic/ac_view_timeslot', $data);
+    }
+
+    public function editTimeslot($timeslotId)
+    {
+        $timeslot = $this->acModel->getTimeslotById($timeslotId);
+
+        if (!$timeslot) {
+            die('Timeslot not found');
+        }
+
+        $data = [
+            'timeslot' => $timeslot,
+            'slot_date_err' => '',
+            'slot_start_err' => '',
+            'slot_finish_err' => '',
+            'slot_type_err' => ''
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data['timeslot']->slot_date = trim($_POST['slot_date']);
+            $data['timeslot']->slot_start = trim($_POST['slot_start']);
+            $data['timeslot']->slot_finish = trim($_POST['slot_finish']);
+            $data['timeslot']->slot_type = trim($_POST['slot_type']);
+
+            $this->handleEditTimeslot($data);
+        }
+
+        $this->view('academic/ac_view_timeslot', $data);
+    }
+
+    private function handleEditTimeslot(&$data)
+    {
+        if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
+            if ($this->acModel->updateTimeslot($data['timeslot'])) {
+                redirect('academic/ac_timeslot');
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
+
+    public function deleteTimeslot($timeslotId)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->acModel->deleteTimeslot($timeslotId)) {
+                redirect('academic/ac_timeslot');
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
+
     
-
-
+    
     public function sentFeedback($user_id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

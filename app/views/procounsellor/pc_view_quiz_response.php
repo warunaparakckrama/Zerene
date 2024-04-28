@@ -26,7 +26,7 @@ $undergrad = $data['undergrad'];
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">View Questionnaire</p>
                 </div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
+                <div></div>
             </div>
             <div>
                 <p class="p-regular-green"><?php echo $questionnaire->questionnaire_name ?> - <?php echo $undergrad->username ?></p>

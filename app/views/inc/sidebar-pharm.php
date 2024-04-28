@@ -17,9 +17,11 @@
         </div>
         <div class="sidebar-container-3">
             <a href="<?php echo URLROOT;?>pharmacy/pharm_home" class="top <?php echo ($currentPage === 'pharm_home') ? 'active' : ''; ?>" >Home</a>
+            <a href="<?php echo URLROOT;?>pharmacy/pharm_prescriptions" class="top <?php echo ($currentPage === 'pharm_prescriptions') ? 'active' : ''; ?>" >Prescriptions</a>
         </div>
         
         <div class="sidebar-container-3">
+            <a href="<?php echo URLROOT; ?>pharmacy/pharm_feedback" class="bottom <?php echo ($currentPage === 'pharm_feedback') ? 'active' : ''; ?>"">Feedback</a>
             <a href="<?php echo URLROOT; ?>users/logout" class="bottom">Log out</a>
         </div>
     </div>

@@ -1,8 +1,8 @@
-<?php $currentPage = 'ac_timeslots'; ?>
-
-<?php 
-$timeslot = $data['timeslot'];
-?>
+<?php
+ $currentPage = 'ac_timeslots'; 
+ $timeslot = $data['timeslot'];
+ 
+ ?>
 
 <head>
     <meta charset="UTF-8">
@@ -117,7 +117,14 @@ $timeslot = $data['timeslot'];
                                     $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                     $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                     $formattedTimeRange = "$start_time - $end_time";
-                                    echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    // echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    if ($timeslot->slot_status === 'reserved') {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-second no-underline">' . $formattedTimeRange . '<br>Reserved</a>';
+                                    } elseif ($timeslot->slot_status === 'pending') {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-second-timeslot no-underline">' . $formattedTimeRange . '<br>Ask to Cancel</a>';
+                                    } else {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    }
                                 }
                                 echo "</div>";
                                 echo "</div>";
@@ -143,7 +150,14 @@ $timeslot = $data['timeslot'];
                                     $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                     $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                     $formattedTimeRange = "$start_time - $end_time";
-                                    echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    // echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    if ($timeslot->slot_status === 'reserved') {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-second no-underline">' . $formattedTimeRange . '<br>Reserved</a>';
+                                    } elseif ($timeslot->slot_status === 'pending') {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-second-timeslot no-underline">' . $formattedTimeRange . '<br>Ask to Cancel</a>';
+                                    } else {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    }
                                 }
                                 echo "</div>";
                                 echo "</div>";
@@ -157,7 +171,7 @@ $timeslot = $data['timeslot'];
                     <?php endif; ?>
                 </div>
 
-                <div class="card-white">
+                <!-- <div class="card-white">
                     <p class="p-regular">Reserved</p>
                     <div class="card-green-2">
                         <div>
@@ -173,7 +187,7 @@ $timeslot = $data['timeslot'];
                             <button class="button-second">2.00-2.30pm</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
