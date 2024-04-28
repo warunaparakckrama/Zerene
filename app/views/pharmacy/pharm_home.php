@@ -8,7 +8,7 @@ $currentPage = 'pharm_home';
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
-    <title><?php echo SITENAME; ?> | Counsellor</title>
+    <title><?php echo SITENAME; ?> | Pharmacist</title>
 </head>
 
 <body>
@@ -27,9 +27,11 @@ $currentPage = 'pharm_home';
                     <p class="p-regular">Hope you’re having a good day...</p>
                     <p class="p-regular">Let's give a helping hand, Shall we?</p>
                     <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
-                        <a href="" style="text-decoration: none;"><button class="button-main" style="margin-left: 0px">View Profile</button></a>
-                        <a href="" style="text-decoration: none;"><button class="button-main">Questionnaires</button></a>
+                        <a href="<?php echo URLROOT;?>pharmacy/pharm_prescriptions" style="text-decoration: none;"><button class="button-main">Prescriptions</button></a>  
                     </div>
+                </div>
+                <div class="subgrid-2" style="justify-content: center;">
+                    <img src="<?php echo IMG;?>pharm.svg" alt="" width="507" height="461">
                 </div>
             </div>
         </div>
