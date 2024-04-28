@@ -63,13 +63,16 @@ class Doctor extends Controller
     {   
         $response = $this->ugModel->getResponseByResponseId($id);
         $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $range = $this->pcModel->getRangesfromQuizId($response->questionnaire_id);
         require_once APPROOT.'/controllers/Procounsellor.php';
         $PCController = new Procounsellor();
         $results = $PCController->quizResults($id);
         $data = [
             'response' => $response,
             'questionnaire' => $questionnaire,
-            'results' => $results
+            'results' => $results,
+            'range' => $range
+
         ];
         $this->view('doctor/doc_quiz_review', $data);
     }
