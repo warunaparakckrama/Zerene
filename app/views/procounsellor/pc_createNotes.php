@@ -29,6 +29,7 @@ $undergrad = $data['undergrad'];
                 <p class="p-regular-green">Create Notes</p>
                 <div class="card-white">
                 <div class="card-green-5">
+                <?php flash('note-flash'); ?>
                     <form action="<?php echo URLROOT; ?>Procounsellor/createNotes/<?php echo $undergrad->user_id; ?>" method="post">
                         <label for="heading">Heading:</label><br>
                         <input type="text" id="heading" name="heading" class="password-box" required><br>

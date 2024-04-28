@@ -29,6 +29,8 @@ $timeslot = $data['timeslot'];
                 <p class="p-regular-green">Create Timeslot</p>
                 <div class="card-white">
                     <div class="card-green-7">
+                    <?php flash('time-flash'); ?>
+                    <?php flash('update-flash'); ?>
                         <form action="<?php echo URLROOT; ?>Procounsellor/addTimeslots/<?php echo $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
                             <label for="slot_date">Date : </label>
                             <input type="date" id="" name="slot_date" class="date" value="" required>
@@ -160,27 +162,6 @@ $timeslot = $data['timeslot'];
                         <p>No timeslots created yet.</p>
                     <?php endif; ?>
                 </div>
-
-
-
-
-                <!-- <div class="card-white">
-                    <p class="p-regular">Reserved</p>
-                    <div class="card-green-2">
-                        <div>
-                            <p class="p-regular-grey" style="font-size: 20px;">Monday</p>
-                            <p class="p-regular-grey" style="font-size: 15px;">2024-01-29</p>
-                        </div>
-                        <div class="btn-container-2">
-                            <button class="button-second">2.00-2.30pm</button>
-                            <button class="button-second">2.00-2.30pm</button>
-                            <button class="button-second">2.00-2.30pm</button>
-                            <button class="button-second">2.00-2.30pm</button>
-                            <button class="button-second">2.00-2.30pm</button>
-                            <button class="button-second">2.00-2.30pm</button>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </section>

@@ -1,6 +1,6 @@
-<?php 
-    $currentPage = 'pc_profile'; 
-    $counsellor = $data['counsellor'];
+<?php
+$currentPage = 'pc_profile';
+$counsellor = $data['counsellor'];
 ?>
 
 <head>
@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
-    <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
-    <title><?php echo $_SESSION['user_name'];?> | Profile</title>
+    <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <title><?php echo $_SESSION['user_name']; ?> | Profile</title>
 </head>
 
 <body>
@@ -19,7 +19,9 @@
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Profile</p></div>
+                <div class="subgrid-2">
+                    <p class="p-title" style="font-size: 40px;">Profile</p>
+                </div>
                 <div></div>
             </div>
 
@@ -32,14 +34,19 @@
                             <p>General</p>
                             <table>
                                 <tr>
+                                    <td class="p-regular-grey">Username</td>
+                                    <td class="p-regular-grey">:</td>
+                                    <td class="p-title"><?php echo $counsellor->username; ?></td>
+                                </tr>
+                                <tr>
                                     <td class="p-regular-grey">Name</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></td>
+                                    <td class="p-title"><?php echo $counsellor->first_name . ' ' . $counsellor->last_name; ?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">Counsellor Type</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $counsellor->coun_type;?></td>
+                                    <td class="p-title"><?php echo $counsellor->coun_type; ?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">Email</td>
@@ -61,6 +68,7 @@
 
                         <div class="rectangle">
                             <p>Change Password</p>
+                            <?php flash('password-flash'); ?>
                             <form action="<?php echo URLROOT; ?>Procounsellor/changePwdProcounsellor/<?php echo $counsellor->user_id ?>" method="POST" class="subgrid-1" style="font-size: 16px;">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
                                 <input type="password" id="current_password" name="current_password" class="password-box" required>
@@ -80,10 +88,11 @@
 
                         <div class="rectangle">
                             <p>Change Username</p>
+                            <?php flash('username-flash'); ?>
                             <form action="<?php echo URLROOT; ?>Procounsellor/changeUSernameProcounsellor/<?php echo $counsellor->user_id ?>" method="POST" class="subgrid-1">
                                 <label for="cusername" class="p-regular-grey" style="font-size: 16px;">New Username :</label>
                                 <input type="text" name="new_username" class="password-box" required>
-                                
+
                                 <label for="nusername" class="p-regular-grey" style="font-size: 16px;">Password :</label>
                                 <input type="password" name="password" class="password-box" required>
 

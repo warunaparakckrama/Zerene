@@ -39,6 +39,7 @@
                 <p class="p-regular-green">Create Questionnaires</p>
                 <div class="card-white-scroll" style="max-height: 500px;">
                     <div class="card-green-5">
+                    <?php flash('quiz-flash'); ?>
                         <form action="<?php echo URLROOT; ?>Procounsellor/createQuestionnaire/<?php echo $_SESSION['user_id']; ?>" method="POST">
                             <div style="font-size: 15px;">
                                 <label for="quizName">Questionnaire Name:</label>

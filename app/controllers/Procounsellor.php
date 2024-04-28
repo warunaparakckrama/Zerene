@@ -290,6 +290,7 @@ class Procounsellor extends Controller
 
                 // post notifications
                 if ($this->userModel->addFeedback($data)) {
+                    flash('feedback-flash', 'Feedback is successfully sent');
                     redirect('procounsellor/pc_feedback');
                 } else {
                     die('Something went wrong');
@@ -335,6 +336,7 @@ class Procounsellor extends Controller
 
                     // Update the user's password
                     if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
+                        flash('password-flash', 'Password updated successfully!');
                         redirect('procounsellor/pc_profile');
                     } else {
                         die('Something went wrong');
@@ -399,6 +401,7 @@ class Procounsellor extends Controller
             if (empty($data['username_alert'])) {
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
+                    flash('username-flash', 'Username updated successfully!');
                     redirect('procounsellor/pc_profile');
                 } else {
                     die('Something went wrong');
@@ -476,7 +479,7 @@ class Procounsellor extends Controller
                         $this->counsellorModel->addRange($questionnaire_id, $minRange, $maxRange, $rangeName, $m_factor);
                     }
                 }
-
+                flash('quiz-flash', 'Quiz is successfully Created!');
                 redirect('procounsellor/pc_createq');
             } else {
                 die('Something went wrong');
@@ -511,6 +514,7 @@ class Procounsellor extends Controller
             ];
 
             if ($this->pcModel->addNotes($data)) {
+                flash('note-flash', 'Note is successfully Created!');
                 redirect('procounsellor/pc_ug_profile/' . $id);
             } else {
                 die('Something went wrong');
@@ -583,6 +587,7 @@ class Procounsellor extends Controller
             $data['created_by'] = $_SESSION['user_id'];
 
             if ($this->pcModel->createTimeslots($data)) {
+                flash('time-flash', 'Timeslot is successfully created!');
                 redirect('procounsellor/pc_timeslot');
             } else {
                 die('Something went wrong');
@@ -628,6 +633,7 @@ class Procounsellor extends Controller
     {
         if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
             if ($this->pcModel->updateTimeslot($data['timeslot'])) {
+                flash('update-flash', 'Timeslot is successfully Updated!');
                 redirect('procounsellor/pc_timeslot');
             } else {
                 die('Something went wrong');
