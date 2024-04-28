@@ -136,6 +136,7 @@
                 var minInput = document.createElement('input');
                 minInput.type = 'number';
                 minInput.id = 'minRange' + rangeNumber;
+                minInput.classList.add('input');
                 minInput.name = 'min_range' + rangeNumber;
                 minInput.placeholder = 'Minimum Value';
                 minInput.required = true;
@@ -144,6 +145,7 @@
                 var maxInput = document.createElement('input');
                 maxInput.type = 'number';
                 maxInput.id = 'maxRange' + rangeNumber;
+                maxInput.classList.add('input');
                 maxInput.name = 'max_range' + rangeNumber;
                 maxInput.placeholder = 'Maximum Value';
                 maxInput.required = true;
@@ -152,6 +154,7 @@
                 var nameInput = document.createElement('input');
                 nameInput.type = 'text';
                 nameInput.id = 'rangeName' + rangeNumber;
+                nameInput.classList.add('input');
                 nameInput.name = 'range_name' + rangeNumber;
                 nameInput.placeholder = 'Range Name';
                 nameInput.required = true;
