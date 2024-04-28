@@ -1,5 +1,5 @@
 <?php
-$currentPage = 'doc_timeslot';
+$currentPage = 'doc_timeslots';
 $timeslot = $data['timeslot'];
 ?>
 
