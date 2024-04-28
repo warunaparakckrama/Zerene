@@ -30,7 +30,7 @@
                     <p class="p-regular-green">Undergraduate details</p>
 
                     <div class="card-green">
-                        <img src="<?php echo IMG; ?>OBJECTS.svg" alt="profile pic" class="card-profile-2">
+                        <img src="<?php echo IMG; ?>ug.svg" alt="profile pic" class="card-profile-2">
                         <div style="font-size: 18px;;">
                             <p class="p-regular-green" style="font-size: 20px; margin-bottom: -5px;"><?php echo $undergrad->username;?></p>
                             <p class="p-light-grey" style="margin-bottom: -10px;"><?php echo $undergrad->gender.' | '.$undergrad->age.' ';?>years</p>

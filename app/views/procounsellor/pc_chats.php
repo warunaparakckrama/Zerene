@@ -36,7 +36,7 @@
                             <?php if ($request->from_user_id === $undergrad->user_id) : ?>
                                 <?php if ($request->to_user_id === $counsellor->user_id) : ?>
                                     <div class="card-green">
-                                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile">
+                                        <img src="<?php echo IMG; ?>ug.svg" alt="quiz" class="card-profile">
                                         <div>
                                             <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $undergrad->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
                                             <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $undergrad->university;?> | <?php echo $undergrad->faculty;?></p>
@@ -57,7 +57,7 @@
                         <?php foreach ($data['all_counsellors'] as $all_counsellors):?>
                             <?php if ($connection->from_user === $_SESSION['user_id'] && $connection->to_user === $all_counsellors->user_id):?>
                                 <div class="card-green">
-                                    <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile">
+                                    <img src="<?php echo IMG; ?>counsellor.svg" alt="quiz" class="card-profile">
                                     <div>
                                         <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $connection->to_user;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $all_counsellors->first_name.' '.$all_counsellors->last_name;?></p></a>
                                         <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $all_counsellors->university;?> | <?php echo $all_counsellors->faculty;?></p>
@@ -68,7 +68,7 @@
                                 </div>
                                 <?php elseif (($connection->to_user === $_SESSION['user_id'] && $connection->from_user === $all_counsellors->user_id)):?>
                                 <div class="card-green">
-                                    <img src="<?php echo IMG; ?>pro-avatar2.svg" alt="quiz" class="card-profile2">
+                                    <img src="<?php echo IMG; ?>counsellor.svg" alt="quiz" class="card-profile2">
                                     <div>
                                         <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $connection->from_user;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $all_counsellors->first_name.' '.$all_counsellors->last_name;?></p></a>
                                         <p class="p-regular" style="color: var(--zerene-grey); font-size: 15px;"><?php echo $all_counsellors->university;?> | <?php echo $all_counsellors->faculty;?></p>
@@ -88,7 +88,7 @@
                         <?php foreach ($data['all_doctors'] as $all_doctors):?>
                             <?php if ($connection->from_user === $_SESSION['user_id'] && $connection->to_user === $all_doctors->user_id):?>
                                 <div class="card-green">
-                                    <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="quiz" class="card-profile">
+                                    <img src="<?php echo IMG; ?>doctor.svg" alt="quiz" class="card-profile">
                                     <div>
                                         <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $connection->to_user;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $all_doctors->first_name.' '.$all_doctors->last_name;?></p></a>
                                         <p class="p-regular-grey" style="font-size: 15px;"><?php echo $all_doctors->hospital;?></p>
@@ -100,7 +100,7 @@
                                 </div>
                                 <?php elseif (($connection->to_user === $_SESSION['user_id'] && $connection->from_user === $all_doctors->user_id)):?>
                                 <div class="card-green">
-                                    <img src="<?php echo IMG; ?>pro-avatar2.svg" alt="quiz" class="card-profile2">
+                                    <img src="<?php echo IMG; ?>doctor.svg" alt="quiz" class="card-profile2">
                                     <div>
                                         <a href="<?php echo URLROOT;?>procounsellor/pc_chatroom/<?php echo $connection->from_user;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $all_doctors->first_name.' '.$all_doctors->last_name;?></p></a>
                                         <p class="p-regular-grey" style="font-size: 15px;"><?php echo $all_doctors->hospital;?></p>

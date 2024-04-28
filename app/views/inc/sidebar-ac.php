@@ -13,7 +13,7 @@
 
         <div class="sidebar-container2">
             <a href="">
-                <img src="<?php echo IMG; ?>pro-avatar2.svg" alt="ug avatar" width="80" height="80">
+                <img src="<?php echo IMG; ?>counsellor-sb.svg" alt="ug avatar" width="80" height="80">
             </a>
             <p class="p-regular" style="color: var(--zerene-light);"><?php echo $_SESSION['user_name']; ?></p>
             <a href="<?php echo URLROOT; ?>academic/ac_profile" style="text-decoration: none;"><button class="button-second">View Profile</button></a>

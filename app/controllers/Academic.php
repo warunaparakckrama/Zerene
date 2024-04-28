@@ -34,8 +34,8 @@ class Academic extends Controller
     }
 
     public function ac_home()
-    {
-        $newRequestCount = $this->acModel->countNewRequestLetters();
+    {   $id = $_SESSION['user_id'];
+        $newRequestCount = $this->acModel->countNewRequestLetters($id);
         $data = [
             'newRequestCount' => $newRequestCount
         ];
@@ -60,7 +60,7 @@ class Academic extends Controller
 
         $request = $this->acModel->getRequestLetterforCounsellor($id);
 
-        $newRequestCount = $this->acModel->countNewRequestLetters();
+        $newRequestCount = $this->acModel->countNewRequestLetters($id);
 
         // Pass the data to the view
         // Sort yet to complete requests by date in descending order

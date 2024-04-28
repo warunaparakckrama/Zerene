@@ -58,8 +58,8 @@ $timeslot = $data['timeslot'];
                     </div>
                 </div>
 
+                <p class="p-regular-green">Created Timeslots</p>
                 <div class="card-white">
-                    <p class="p-regular">Created Timeslots</p>
                     <?php if (isset($data['timeslot']) && !empty($data['timeslot'])) : ?>
                         <?php
                         // Grouping timeslots by date and separating them into two arrays: pastTimeslots and futureTimeslots

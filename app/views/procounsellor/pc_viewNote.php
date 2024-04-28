@@ -25,13 +25,13 @@ $note = $data['note'];
 
             <div>
 
+                <p class="p-regular-green">Note Details</p>
                 <div class="card-white">
-                    <p class="p-regular">Note Details</p>
                     <div class="card-green-7">
                         <div>
-                            <p class="p-regular-green">Note No. :</p><p> <?php echo $data['note']->note_id; ?></p><br>
-                            <p class="p-regular-green">Heading :</p><p> <?php echo $data['note']->heading; ?></p><br>
-                            <p class="p-regular-green">Content : </p> <p> <?php echo $data['note']->content; ?></p><br>
+                            <p class="p-regular-green" style="font-size: 18px;">Note No. :</p><p class="p-regular-grey" style="font-size: 15px;"> <?php echo $data['note']->note_id; ?></p><br>
+                            <p class="p-regular-green" style="font-size: 18px;">Heading :</p><p class="p-regular-grey" style="font-size: 15px;"> <?php echo $data['note']->heading; ?></p><br>
+                            <p class="p-regular-green" style="font-size: 18px;">Content : </p><p class="p-regular-grey" style="font-size: 15px;"> <?php echo $data['note']->content; ?></p><br>
                             <div class="btn-container-2">
                                 <form action="<?php echo URLROOT; ?>Procounsellor/deleteNote/<?php echo $data['note']->note_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete the note?')">
                                     <button type="submit" class="button-danger no-underline">Delete</button>

@@ -247,9 +247,10 @@ class ACounsellor
         $this->db->execute();
     }
 // notification status for request letter
-    public function countNewRequestLetters()
+    public function countNewRequestLetters($id)
     {
-        $this->db->query('SELECT COUNT(*) AS count FROM request_letter WHERE notification_status = 0 AND status = "pending"');
+        $this->db->query('SELECT COUNT(*) AS count FROM request_letter WHERE notification_status = 0 AND status = "pending" AND to_coun_user_id = :id');
+        $this->db->bind(':id', $id);
         $result = $this->db->single();
         return $result->count;
     }

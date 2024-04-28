@@ -29,11 +29,11 @@ $feedback = $data['feedback'];
                 <div class="card-white">
                     <div class="card-green-3" style="font-size: 15px;">
                         <div>
-                            <p class="p-regular-green"><b>Username: </b><?php echo $feedback->username; ?></p><br>
-                            <p class="p-regular-green"><b>Email: </b><?php echo $feedback->email; ?></p><br>
-                            <p class="p-regular-green"><b>Title: </b><?php echo $feedback->title; ?></p><br>
-                            <p class="p-regular-green"><b>Status: </b><?php echo $feedback->status; ?></p><br>
-                            <p class="p-regular-green"><b>Content: </b><?php echo $feedback->content; ?></p><br>
+                            <p class="p-regular-green">Username:</p><p class="p-regular-grey"><?php echo $feedback->username; ?></p>
+                            <p class="p-regular-green">Email:</p><p class="p-regular-grey"><?php echo $feedback->email; ?></p>
+                            <p class="p-regular-green">Title: </p><p class="p-regular-grey"><?php echo $feedback->title; ?></p>
+                            <p class="p-regular-green">Status:</p><p class="p-regular-grey"><?php echo $feedback->status; ?></p>
+                            <p class="p-regular-green">Content:</p><p class="p-regular-grey"><?php echo $feedback->content; ?></p><br>
 
                             <?php if ($feedback->status == 'resolved') : ?>
                                 <p class="p-regular-green"><b>Comment: </b><?php echo $feedback->comment; ?></p><br>
@@ -43,6 +43,11 @@ $feedback = $data['feedback'];
                                     <form action="<?php echo URLROOT; ?>Admin/resolveFeedback/<?php echo $feedback->feedback_id; ?>" method="POST">
                                         <label for="title" class="p-regular-green"><b>Comment: </b></label>
                                         <input type="text" name="comment" class="input" value="" required>
+
+                                        <input type="hidden" name="email" value="<?php echo $feedback->email; ?>">
+                                        <input type="hidden" name="title" value="<?php echo $feedback->title; ?>">
+                                        <input type="hidden" name="content" value="<?php echo $feedback->content; ?>">
+                                        
                                         <div class="btn-container-2" style="margin-top: 10px;">
                                             <button class="button-main" type="submit">Resolve</button>
                                     </form>

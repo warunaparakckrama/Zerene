@@ -27,7 +27,7 @@
                     <?php foreach ($data['counsellor'] as $counsellor) : ?>
                         <?php if ($counsellor->coun_type === 'Professional') : ?>
                             <div class="card-green">
-                                <img src="<?php echo IMG; ?>pro-avatar1.svg" alt="pro pic" class="card-profile">
+                                <img src="<?php echo IMG; ?>counsellor.svg" alt="pro pic" class="card-profile">
                                 <div>
                                     <a href="" class="a-name"><p class="p-regular-green" style="margin-bottom: -5px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
                                     <p class="p-regular" style="color:var(--zerene-grey); font-size: 15px"><?php echo $counsellor->university.' '.$counsellor->faculty;?></p>
@@ -45,7 +45,7 @@
                     <?php foreach ($data['doctor'] as $doctor) : ?>
                         <?php if($doctor->user_id !== $_SESSION['user_id']) : ?>
                             <div class="card-green">
-                                <img src="<?php echo IMG; ?>pro-avatar1.svg" alt="pro pic" class="card-profile">
+                                <img src="<?php echo IMG; ?>doctor.svg" alt="pro pic" class="card-profile">
                                 <div>
                                     <a href="" class="a-name"><p class="p-regular-green" style="margin-bottom: -5px;"><?php echo $doctor->first_name.' '.$doctor->last_name;?></p></a>
                                     <p class="p-regular" style="color:var(--zerene-grey); font-size: 15px"><?php echo $doctor->hospital;?></p>

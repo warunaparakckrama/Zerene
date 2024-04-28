@@ -1,4 +1,4 @@
-<?php $currentPage = 'doctor_view_timeslot'; ?>
+<?php $currentPage = 'doc_timeslots'; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -22,14 +22,14 @@
             </div>
 
             <div>
+                <p class="p-regular-green">Timeslot Details</p>
                 <div class="card-white">
-                    <p class="p-regular">Timeslot Details</p>
                     <div class="card-green-7">
                         <div>
-                            <p>Date: <?php echo $data['timeslot']->slot_date; ?></p>
-                            <p>Start Time: <?php echo $data['timeslot']->slot_start; ?></p>
-                            <p>Finish Time: <?php echo $data['timeslot']->slot_finish; ?></p>
-                            <p>Type: <?php echo $data['timeslot']->slot_type; ?></p>
+                            <p class="p-regular-green" style="font-size: 15px;">Date: <?php echo $data['timeslot']->slot_date; ?></p>
+                            <p class="p-regular-green" style="font-size: 15px;">Start Time: <?php echo $data['timeslot']->slot_start; ?></p>
+                            <p class="p-regular-green" style="font-size: 15px;">Finish Time: <?php echo $data['timeslot']->slot_finish; ?></p>
+                            <p class="p-regular-green" style="font-size: 15px; margin-bottom: 10px;" >Type: <?php echo $data['timeslot']->slot_type; ?></p>
                             <div class="btn-container-2">
                                 <form action="<?php echo URLROOT; ?>Doctor/deleteTimeslotDoc/<?php echo $data['timeslot']->slot_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this timeslot?')">
                                     <button type="submit" class="button-danger no-underline">Delete</button>

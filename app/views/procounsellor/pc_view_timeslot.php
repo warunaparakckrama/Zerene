@@ -32,12 +32,12 @@ $reserve = $data['reserve'];
                     <div class="card-white">
                         <div class="card-green-7">
                             <div>
-                                <p>Date: <?php echo $data['timeslot']->slot_date; ?></p>
-                                <p>Reserved Timeslot: <?php echo $data['timeslot']->slot_start; ?> - <?php echo $data['timeslot']->slot_finish; ?></p>
-                                <p>Reserved By: <?php echo $data['reserve']->ug_user_id; ?></p>
-                                <p>Type: <?php echo $data['timeslot']->slot_type; ?></p><br>
+                                <p class="p-regular-green" style="font-size: 15px;">Date: <?php echo $data['timeslot']->slot_date; ?></p>
+                                <p class="p-regular-green" style="font-size: 15px;">Reserved Timeslot: <?php echo $data['timeslot']->slot_start; ?> - <?php echo $data['timeslot']->slot_finish; ?></p>
+                                <p class="p-regular-green" style="font-size: 15px;">Reserved By: <?php echo $data['reserve']->ug_user_id; ?></p>
+                                <p class="p-regular-green" style="font-size: 15px;">Type: <?php echo $data['timeslot']->slot_type; ?></p><br>
                                 <div class="btn-container-2">
-                                    <?php if ($data['timeslot']->slot_status == 'pending') : ?>                 
+                                    <?php if ($data['timeslot']->slot_status == 'pending') : ?>
                                         <p><?php echo $data['reserve']->ug_user_id; ?> User has requested to cancel the reservation:</p>
                                         <a href="<?php echo URLROOT; ?>Procounsellor/changeSlotStatus/<?php echo $data['reserve']->slot_id; ?>" style="text-decoration: none;">
                                             <button class="button-main">Allow</button>
@@ -58,10 +58,10 @@ $reserve = $data['reserve'];
                     <div class="card-white">
                         <div class="card-green-7">
                             <div>
-                                <p class="p-regular-green" style="font-size: 18px;">Date: <?php echo $data['timeslot']->slot_date; ?></p>
-                                <p class="p-regular-green" style="font-size: 18px;">Start Time: <?php echo $data['timeslot']->slot_start; ?></p>
-                                <p class="p-regular-green" style="font-size: 18px;">Finish Time: <?php echo $data['timeslot']->slot_finish; ?></p>
-                                <p class="p-regular-green" style="font-size: 18px; margin-bottom: 10px;">Type: <?php echo $data['timeslot']->slot_type; ?></p>
+                                <p class="p-regular-green" style="font-size: 15px;">Date: <?php echo $data['timeslot']->slot_date; ?></p>
+                                <p class="p-regular-green" style="font-size: 15px;">Start Time: <?php echo $data['timeslot']->slot_start; ?></p>
+                                <p class="p-regular-green" style="font-size: 15px;">Finish Time: <?php echo $data['timeslot']->slot_finish; ?></p>
+                                <p class="p-regular-green" style="font-size: 15px; margin-bottom: 10px;">Type: <?php echo $data['timeslot']->slot_type; ?></p>
                                 <div class="btn-container-2">
                                     <form action="<?php echo URLROOT; ?>Procounsellor/deleteTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete the timeslot?')">
                                         <button type="submit" class="button-danger no-underline">Delete</button>

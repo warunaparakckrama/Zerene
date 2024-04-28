@@ -1,4 +1,4 @@
-<?php $currernt_page = 'doc_feedback'; ?>
+<?php $currentPage = 'doc_feedback'; ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,12 +15,12 @@
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2><p class="p-title" style="font-size: 40px;">Feedback</p></div>
+                <div class="subgrid-2"><p class="p-title" style="color: var(--zerene-green); font-size: 40px;">Feedback</p></div>
             </div>
 
             <div>
+                <p class="p-regular-green">Submit Feedback/ Complaints</p>
                     <div class="card-white">
-                        <p class="p-regular">Submit Feedback/ Complaints</p>
 
                         <div class="card-green-5">
                             <form action="<?php echo URLROOT;?>Doctor/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST">
@@ -34,10 +34,10 @@
                                     </select><br><br>
 
                                     <label for="title">Title: </label>
-                                    <input type="text" name="title" placeholder="Enter your title" style="width: 50%;"><br><br>
+                                    <input type="text" name="title" placeholder="Enter your title" style="width: 50%;" required><br><br>
 
                                     <label for="content">Content: </label>
-                                    <textarea name="content" rows="10" class="textarea-1"></textarea><br><br>
+                                    <textarea name="content" rows="10" class="textarea-1" required></textarea><br><br>
 
                                     <div class="btn-container-2">
                                         <a href="" style="text-decoration: none;"><button class="button-main" type="submit">Submit</button></a>

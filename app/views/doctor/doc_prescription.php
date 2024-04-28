@@ -36,7 +36,7 @@ $created = $data['created'];
                             <?php foreach ($data['counsellor'] as $counsellor) : ?>
                                 <?php if ($undergrad->user_id === $direct->ug_user_id && $counsellor->user_id === $direct->from_user_id) : ?>
                                     <div class="card-green">
-                                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
+                                        <img src="<?php echo IMG; ?>ug.svg" alt="profile pic" class="card-profile">
                                         <div>
                                             <a href="" class="a-name">
                                                 <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username; ?></p>
@@ -61,7 +61,7 @@ $created = $data['created'];
                             
                                 <?php if ($undergrad->user_id === $created->ug_user_id ) : ?>
                                     <div class="card-green">
-                                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
+                                        <img src="<?php echo IMG; ?>ug.svg" alt="profile pic" class="card-profile">
                                         <div>
                                             <a href="" class="a-name">
                                                 <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username; ?></p>

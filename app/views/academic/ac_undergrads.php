@@ -33,7 +33,7 @@ $counsellor = $data['counsellor'];
                     <?php foreach ($data['undergrad'] as $undergrad) : ?>
                         <?php if ($undergrad->faculty === $counsellor->faculty) : ?>
                             <div class="card-green">
-                                <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
+                                <img src="<?php echo IMG; ?>ug.svg" alt="profile pic" class="card-profile">
                                 <div>
                                     <a href="" class="a-name">
                                         <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username; ?></p>

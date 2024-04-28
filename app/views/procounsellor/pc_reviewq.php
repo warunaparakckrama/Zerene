@@ -33,7 +33,7 @@
                             <?php foreach ($data['questionnaire'] as $questionnaire) : ?>
                                 <?php if ($response->user_id === $undergrad->user_id && $response->questionnaire_id === $questionnaire->questionnaire_id) : ?>
                                     <div class="card-green">
-                                        <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
+                                        <img src="<?php echo IMG; ?>ug.svg" alt="profile pic" class="card-profile">
                                         <div>
                                             <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p>
                                             <p class="p-regular-grey" style="font-size: 15px;"><?php echo $undergrad->university.' '. $undergrad->faculty;?></p>

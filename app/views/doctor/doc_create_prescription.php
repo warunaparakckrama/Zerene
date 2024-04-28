@@ -33,7 +33,7 @@
                             <input type="hidden" name="ug_user_id" value="<?php echo $ug_user_id;?>">
 
                             <label for="ug_name">Patient's Name:</label>
-                            <input type="text" name="ug_name" style="width: 50%;" required>
+                            <input type="text" name="ug_name" class="input" style="width: 50%;" required>
 
                             <label for="age">Patient's Age :</label>
                             <input type="hidden" name="age" value="<?php echo $undergrad->age;?>">
@@ -44,7 +44,7 @@
                             <p class="p-regular-green"><?php echo $undergrad->gender;?></p>
 
                             <label for="diagnosed_with">Diagnosed with :</label>
-                            <input type="text" name="diagnosed_with" style="width: 50%;" required>
+                            <input type="text" name="diagnosed_with" class="input" style="width: 50%;" required>
 
                             <label for="diagnosed_by">Diagnosed By :</label>
                             <input type="hidden" name="diagnosed_by" value="<?php echo $doctor->first_name.' '.$doctor->last_name;?>">
@@ -61,7 +61,7 @@
                         <div id="medicine-container">
                             <div id="medicine-row" class="card-green-2">
                                 <label for="drug">Drug Name:</label>
-                                <input type="text" name="drug[]" style="width: 50%;" required>
+                                <input type="text" name="drug[]" class="input" style="width: 50%;" required>
 
                                 <label for="unit">Quantity:</label>
                                 <div>
@@ -81,7 +81,7 @@
                                     </select>
                                 </div>
                                 <label for="Instructions">Instructions:</label>
-                                <input type="text" name="instructions[]" style="width: 50%;" required>
+                                <input type="text" name="instructions[]" class="input" style="width: 50%;" required>
 
 
 

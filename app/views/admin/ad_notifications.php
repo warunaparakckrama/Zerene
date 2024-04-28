@@ -72,7 +72,7 @@
                         <form action="<?php echo URLROOT; ?>Admin/submitNotifications/<?php echo $_SESSION['user_id']; ?>" method="POST">
                             <div style="font-size: 15px;">
                                 <label for="subject">Subject: </label>
-                                <input type="text" name="subject" placeholder="Enter your subject here" style="width: 50%; font-size: 15px;" required>
+                                <input type="text" name="subject" class="input" placeholder="Enter your subject here" style="width: 50%; font-size: 15px;" required>
                                 <br><br>
 
                                 <label for="user_type">User Type: </label>

@@ -36,7 +36,7 @@
                                 <?php foreach($data['questionnaire'] as $questionnaire) :?>
                                     <?php if($direct->ug_user_id == $response->user_id && $response->user_id == $undergrad->user_id && $response->questionnaire_id == $questionnaire->questionnaire_id) :?>
                                         <div class="card-green">
-                                            <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
+                                            <img src="<?php echo IMG; ?>ug.svg" alt="profile pic" class="card-profile">
                                             <div>
                                                 <a href="<?php echo URLROOT;?>Doctor/doc_quiz_review/<?php echo $response->response_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
                                                 <p class="p-regular-grey" style="font-size: 15px;"><?php echo $undergrad->university.' '.$undergrad->faculty;?></p>

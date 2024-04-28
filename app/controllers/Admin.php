@@ -848,9 +848,15 @@ class Admin extends Controller
             $data = [
                 'feedback_id' => $feedback_id,
                 'comment' => trim($_POST['comment']),
+                'email' => trim($_POST['email']),
+                'title' => trim($_POST['title']),
+                'content' => trim($_POST['content']),
+                'comment' => trim($_POST['comment']),
+
             ];
 
             if ($this->adminModel->solveFeedback($data)) {
+                $this->sentFeedbackEmail($data);
                 redirect('admin/support_view/' . $feedback_id);
             } else {
                 die('Something went wrong');
@@ -946,6 +952,35 @@ class Admin extends Controller
 
         // Implode the extracted email addresses
         $receiver = implode(', ', $receiverEmails);
+
+        if (mail($receiver, $subject, $body, $headers)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function sentFeedbackEmail($data){
+        $receiver = $data['email'];
+        $subject = $data['title'];
+        $content = $data['content'];
+        $comment = $data['comment'];
+        $sender = "From: zerenecounselor@gmail.com";
+
+        $filePath = __DIR__ . '/../views/admin/ad_email_feedback.php';
+        $date = date('Y-m-d');
+        $emailContent = file_get_contents($filePath);
+
+        $emailContent = str_replace('{subject_here}', $subject, $emailContent);
+        $emailContent = str_replace('{content_here}', $content, $emailContent);
+        $emailContent = str_replace('{comment_here}', $comment, $emailContent);
+        $emailContent = str_replace('{date}', $date, $emailContent);
+
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= $sender;
+
+        $body = $emailContent;
 
         if (mail($receiver, $subject, $body, $headers)) {
             return true;

@@ -28,11 +28,11 @@ $note = $data['note'];
             </div>
 
             <div>
+                <p class="p-regular-green">Undergraduate Details</p>
                 <div class="card-white">
-                    <p class="p-regular-green">Undergraduate Details</p>
                     <div class="card-green-2">
                         <div>
-                            <img src="<?php echo IMG; ?>ug-avatar2.svg" alt="profile picture" class="card-profile-2">
+                            <img src="<?php echo IMG; ?>ug.svg" alt="profile picture" class="card-profile-2">
                         </div>
                         <div style="font-size: 18px;">
                             <p class="p-regular-green" style="font-size: 20px; margin-bottom: -5px;"><?php echo $undergrad->username; ?></p>
@@ -54,11 +54,11 @@ $note = $data['note'];
                     </div>
                 </div>
                 <div>
-                    <div class="card-white-scroll">
                     <p class="p-regular-green">Created Notes of <?php echo $undergrad->username; ?></p>
+                    <div class="card-white-scroll" style="height: 300px;">
                     <?php foreach ($data['note'] as $note) : ?>
                         <div class="card-green">
-                                <img src="<?php echo IMG; ?>note1.svg" alt="pro pic" class="card-profile">
+                                <img src="<?php echo IMG; ?>note1.svg" alt="pro pic" class="">
                                 <div>
                                     <p class="p-regular-green" style="margin-bottom: -5px;"><?php echo $note->heading?></p></a>
                                     <p class="p-regular" style="color:var(--zerene-grey); font-size: 15px"><?php echo $note->created_at?></p>
