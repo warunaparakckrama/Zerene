@@ -18,7 +18,7 @@
 
                 <div class="subgrid-1">
                         <p class="p-title" style="font-size: 40px;">Feedback</p>
-                    <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php';?></div>
+                    <div></div>
                 </div>
 
                 <div>
@@ -27,6 +27,8 @@
                     <div class="card-white">
                         <p class="p-regular-green">Submit Feedback/ Complaints</p>
                         <div class="card-green-5">
+                        <?php flash('feedback-flash'); ?>
+
                             <form action="<?php echo URLROOT;?>Procounsellor/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST">
                                 <div style="font-size: 18px; color: var(--zerene-green)">
                                     <label for="type">Type: </label>
