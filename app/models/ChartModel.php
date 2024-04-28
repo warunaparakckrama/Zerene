@@ -76,5 +76,31 @@ class ChartModel
     
         return $monthlyCounts;
     }
+
+    public function countDailyUsers(){
+        // Define the SQL query to count occurrences of users for each day where is_deleted is 0
+        $query = "SELECT COUNT(*) as total_count, DAY(created_at) as day, MONTH(created_at) as month
+                  FROM users
+                  WHERE is_deleted = 0
+                  GROUP BY MONTH(created_at), DAY(created_at)";
+    
+        // Prepare and execute the query
+        $this->db->query($query);
+        $results = $this->db->resultSet();
+    
+        // Initialize an array to store the results
+        $dailyCounts = [];
+    
+        // Iterate through the results and store the counts in the array
+        foreach ($results as $result) {
+            // Construct a key for the month and year (e.g., "3oth July")
+            $dayMonth = date('jS F', strtotime("2023-$result->month-$result->day"));
+    
+            // Store the total count for the day and month
+            $dailyCounts[$dayMonth] = $result->total_count;
+        }
+    
+        return $dailyCounts;
+    }
     
 }

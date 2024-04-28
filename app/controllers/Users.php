@@ -47,8 +47,8 @@ class Users extends Controller
                 // Define allowed domain names
                 $allowedDomains = [
                     'stu.ucsc.cmb.ac.lk',
-                    'fos.uoc.cmb.ac.lk',
-                    'foa.uoc.cmb.ac.lk'
+                    'stu.cmb.ac.lk',
+                    
                     // Add more allowed domains if needed
                 ];
 

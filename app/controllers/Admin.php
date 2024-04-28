@@ -30,10 +30,12 @@ class Admin extends Controller
     {   $usercount = $this->chartModel->countUserTypes();
         $facultycount = $this->chartModel->countByFaculty();
         $monthlycount = $this->chartModel->countMonthlyUsers();
+        $dailyCount = $this->chartModel->countDailyUsers();
         $data = [
             'usercount' => $usercount,
             'facultycount' => $facultycount,
-            'monthlycount' => $monthlycount
+            'monthlycount' => $monthlycount,
+            'dailyCount' => $dailyCount
         ];
         $this->view('admin/ad_home', $data);
     }

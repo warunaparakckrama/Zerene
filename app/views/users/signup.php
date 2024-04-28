@@ -41,10 +41,9 @@
                         <option value="Faculty of Arts">Faculty of Arts</option>
                         <option value="Faculty of Law">Faculty of Law</option>
                         <option value="Faculty of Science">Faculty of Science</option>
-                        <option value="Faculty of Statistics">Faculty of Statistics</option>
                         <option value="School of Computing" selected>School of Computing</option>
                         <option value="Faculty of Management & Finance">Faculty of Management & Finance</option>
-                        <option value="Faculty of Medicine">Faculty of Medicine</option>
+                        <option value="Faculty of Medical Sciences">Faculty of Medicial Sciences</option>
                     </select>
                     
 
@@ -84,4 +83,3 @@
         </div>
     </section>
 </body>
-<!-- </html> -->

@@ -5,6 +5,8 @@ $facultycount = $data['facultycount'];
 $facultynames = array_keys($facultycount);
 $monthlycount = $data['monthlycount'];
 $months = array_keys($monthlycount);
+$dailycount = $data['dailyCount'];
+$days = array_keys($dailycount);
 
 ?>
 
@@ -126,6 +128,14 @@ $months = array_keys($monthlycount);
                         }
                     }
                 },
+                scales: {
+                    y: {
+                        ticks: {
+                            stepSize: 1, // Set the interval between ticks to 1
+                            beginAtZero: true // Start the axis at zero
+                        }
+                    }
+                }
 
             }
         };
@@ -187,12 +197,15 @@ $months = array_keys($monthlycount);
 
         //monthly count line chart
         //setup block
-        const monthlycount = <?php echo json_encode(array_values($monthlycount)); ?>;
+        // const monthlycount = <?php echo json_encode(array_values($monthlycount)); ?>;
+        const dailycount = <?php echo json_encode(array_values($dailycount)); ?>;
         const data3 = {
-            labels: <?php echo json_encode($months); ?>,
+            // labels: <?php echo json_encode($months); ?>,
+            labels: <?php echo json_encode($days); ?>,
             datasets: [{
                 label: 'Number of Users',
-                data: monthlycount,
+                // data: monthlycount,
+                data: dailycount,
                 fill: false,
                 borderColor: colorVariants,
                 tension: 0.1
@@ -207,7 +220,8 @@ $months = array_keys($monthlycount);
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Monthly Registrations',
+                        // text: 'Monthly Registrations',
+                        text: 'Daily Registrations',
                         font: {
                             size: 15,
                             family: 'Poppins',
