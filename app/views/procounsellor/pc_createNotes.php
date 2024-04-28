@@ -38,7 +38,7 @@ $undergrad = $data['undergrad'];
 
                         <div class="btn-container-2">
                             <button class="button-main" type="submit">Submit</button>
-                            <button class="button-danger" type="reset" onclick="window.location.reload();">Cancel</button>
+                            <button class="button-danger" type="reset">Cancel</button>
                         </div>
                     </form>
                 </div>

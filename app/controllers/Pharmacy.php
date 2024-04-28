@@ -68,7 +68,6 @@ class Pharmacy extends Controller
 
                     // Update the user's password
                     if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
-                        flash('user_message', 'Password updated successfully');
                         redirect('pharmacy/pharm_profile');
                     } else {
                         die('Something went wrong');
@@ -134,7 +133,6 @@ class Pharmacy extends Controller
             if (empty($data['username_alert'])) {
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                    flash('user_message', 'Username updated successfully');
                     redirect('pharmacy/pharm_profile');
                 } else {
                     die('Something went wrong');

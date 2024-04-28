@@ -316,7 +316,6 @@ class Undergrad extends Controller
             if (empty($data['username_alert'])) {
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                    flash('user_message', 'Username updated successfully');
                     redirect('undergrad/ug_profile');
                 } else {
                     die('Something went wrong');
@@ -368,7 +367,6 @@ class Undergrad extends Controller
 
                     // Update the user's password
                     if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
-                        flash('user_message', 'Password updated successfully');
                         redirect('undergrad/ug_profile');
                     } else {
                         die('Something went wrong');
@@ -444,7 +442,6 @@ class Undergrad extends Controller
 
             // Validate and store responses
             if ($this->ugModel->storeResponses($data)) {
-                flash('user_message', 'Responses stored successfully');
                 redirect('undergrad/quiz_review/' . $questionnaire_id); // Adjust the redirect URL accordingly
             } else {
                 die('Something went wrong');

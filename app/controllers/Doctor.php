@@ -250,7 +250,6 @@ class Doctor extends Controller
             if (empty($data['username_alert'])) {
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                    flash('user_message', 'Username updated successfully');
                     redirect('doctor/doc_profile'); 
                 } else {
                     die('Something went wrong');
@@ -303,7 +302,6 @@ class Doctor extends Controller
 
                     // Update the user's password
                     if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
-                        flash('user_message', 'Password updated successfully');
                         redirect('doctor/doc_profile');
                     } else {
                         die('Something went wrong');

@@ -516,7 +516,6 @@ class Admin extends Controller
             if (empty($data['username_alert'])) {
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                    flash('user_message', 'Username updated successfully');
                     redirect('admin/ad_profile');
                 } else {
                     die('Something went wrong');
@@ -643,7 +642,6 @@ class Admin extends Controller
 
                     // Update the user's password
                     if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
-                        flash('user_message', 'Password updated successfully');
                         redirect('admin/ad_profile');
                     } else {
                         die('Something went wrong');
@@ -811,7 +809,6 @@ class Admin extends Controller
     public function deleteNotifications($notify_id)
     {
         if ($this->adminModel->deleteNotify($notify_id)) {
-            //   flash('post_message', 'user Removed');
             redirect('admin/ad_notifications');
         } else {
             die('Something went wrong');
@@ -821,7 +818,6 @@ class Admin extends Controller
     public function delFeedback($feedback_id)
     {
         if ($this->adminModel->deleteFeedback($feedback_id)) {
-            //   flash('post_message', 'user Removed');
             redirect('admin/ad_support');
         } else {
             die('Something went wrong');

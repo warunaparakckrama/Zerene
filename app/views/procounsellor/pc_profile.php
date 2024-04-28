@@ -76,7 +76,6 @@
                                 </div>
                                 <p class="p-error"><?php echo isset($data['password_alert']) ? $data['password_alert'] : ''; ?></p>
                             </form>
-                            <?php flash('password-flash'); ?>
                         </div>
 
                         <div class="rectangle">

@@ -290,7 +290,6 @@ class Procounsellor extends Controller
 
                 // post notifications
                 if ($this->userModel->addFeedback($data)) {
-                    flash('feedback-flash', 'Feedback is successfully sent');
                     redirect('procounsellor/pc_feedback');
                 } else {
                     die('Something went wrong');
@@ -336,7 +335,6 @@ class Procounsellor extends Controller
 
                     // Update the user's password
                     if ($this->userModel->updatePassword($user_id, $data['new_password'])) {
-                        flash('password-flash', 'Password updated successfully');
                         redirect('procounsellor/pc_profile');
                     } else {
                         die('Something went wrong');
@@ -401,7 +399,6 @@ class Procounsellor extends Controller
             if (empty($data['username_alert'])) {
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                    flash('user_message', 'Username updated successfully');
                     redirect('procounsellor/pc_profile');
                 } else {
                     die('Something went wrong');
