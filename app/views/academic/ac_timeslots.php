@@ -1,4 +1,8 @@
-<?php $currentPage = 'ac_timeslots'; ?>
+<?php
+ $currentPage = 'ac_timeslots'; 
+ $timeslot = $data['timeslot'];
+ 
+ ?>
 
 <head>
     <meta charset="UTF-8">
@@ -19,41 +23,45 @@
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Timeslots</p>
                 </div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
+                <div class="subgrid-3"></div>
             </div>
 
             <div>
                 <div class="card-white">
                     <p class="p-regular">Create New Timeslot</p>
-                    <div class="card-green-6">
+                    <div class="card-green-7">
                         <div>
-                            <form action="<?php echo URLROOT;?>Academic/addTimeslots/<?php echo $user_id=$_SESSION['user_id'];?>" method="POST" id="timeslotForm" >
-                            <label for="slot_date">Date : </label>
-                            <input type="date" id="" name="slot_date" class="date" value="" required>
+                            <form action="<?php echo URLROOT; ?>Academic/addTimeslots/<?php echo $user_id = $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
+                                <label for="slot_date">Date : </label>
+                                <input type="date" id="" name="slot_date" class="date" value="" required>
+                                <div>
 
-                            <label for="slot_start">Start : </label>
-                            <input type="time" id="" name="slot_start" class="time" value="" required>
+                                    <label for="slot_start">Start : </label>
+                                    <input type="time" id="" name="slot_start" class="time" value="" required>
 
-                            <label for="slot_finish">Finish : </label>
-                            <input type="time" id="" name="slot_finish" class="time" value="" required>
+                                    <label for="slot_finish">Finish : </label>
+                                    <input type="time" id="" name="slot_finish" class="time" value="" required>
+                                </div>
 
-                            <label for="slot_interval">Interval : </label>
-                            <select name="slot_interval" class="interval">
-                                <option value="30">30 minutes</option>
-                                <option value="60">1 hour</option>
-                            </select>
+                                <label for="slot_interval">Interval : </label>
+                                <select name="slot_interval" class="interval">
+                                    <option value="30">30 minutes</option>
+                                    <option value="60">1 hour</option>
+                                </select>
 
-                            <label for="slot_type">Type : </label>
-                            <select name="slot_type" class="type">
-                                <option value="online">Online</option>
-                                <option value="physical">Physical</option>
-                            </select>
+                                <label for="slot_type">Type : </label>
+                                <select name="slot_type" class="type">
+                                    <option value="online">Online</option>
+                                    <option value="physical">Physical</option>
+                                </select>
 
-                            <div class="btn-container-2">
-                                <button class="button-main" type="submit">Create</button>
-                                <button class="button-danger" type="button" onclick="cancelCreate()">Cancel</button>
-                            </div>
+                                <div class="btn-container-2">
+                                    <button class="button-main" type="submit">Create</button>
+                                    <button class="button-danger" type="button" onclick="cancelCreate()">Cancel</button>
+                                </div>
                             </form>
+
+
                         </div>
                     </div>
 
@@ -109,7 +117,14 @@
                                     $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                     $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                     $formattedTimeRange = "$start_time - $end_time";
-                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    // echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    if ($timeslot->slot_status === 'reserved') {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-second no-underline">' . $formattedTimeRange . '<br>Reserved</a>';
+                                    } elseif ($timeslot->slot_status === 'pending') {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-second-timeslot no-underline">' . $formattedTimeRange . '<br>Ask to Cancel</a>';
+                                    } else {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    }
                                 }
                                 echo "</div>";
                                 echo "</div>";
@@ -135,7 +150,14 @@
                                     $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                     $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                     $formattedTimeRange = "$start_time - $end_time";
-                                    echo '<a href="' . URLROOT . 'Procounsellor/pc_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    // echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    if ($timeslot->slot_status === 'reserved') {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-second no-underline">' . $formattedTimeRange . '<br>Reserved</a>';
+                                    } elseif ($timeslot->slot_status === 'pending') {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-second-timeslot no-underline">' . $formattedTimeRange . '<br>Ask to Cancel</a>';
+                                    } else {
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                    }
                                 }
                                 echo "</div>";
                                 echo "</div>";
@@ -149,7 +171,7 @@
                     <?php endif; ?>
                 </div>
 
-                <div class="card-white">
+                <!-- <div class="card-white">
                     <p class="p-regular">Reserved</p>
                     <div class="card-green-2">
                         <div>
@@ -165,14 +187,13 @@
                             <button class="button-second">2.00-2.30pm</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
 
-    <script>
-        function cancelCreate() {
-            document.getElementById('timeslotForm').reset();
-        }
-    </script>
+
+
+
+
 </body>

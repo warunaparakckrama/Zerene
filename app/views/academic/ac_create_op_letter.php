@@ -20,7 +20,7 @@
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Opinion Letters</p></div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
+                <div class="subgrid-3"></div>
             </div>
 
             <div>
@@ -36,7 +36,7 @@
                                 <textarea name="content" rows="10" placeholder="Enter your message here" class="textarea-1" required></textarea><br><br>
 
                                 <div class="btn-container-2">
-                                    <button class="button-main" type="submit">Send Letter</button>
+                                    <button class="button-main" type="submit" >Send Letter</button>
                                     <button class="button-danger" type="reset">Cancel</button>
                                 </div>
                             </div>

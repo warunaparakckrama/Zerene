@@ -36,11 +36,12 @@
 
                     <p class="p-regular-green">Questionnaire</p>
                     <div class="card-white-scroll" style="height: 400px;">
-                        <div class="card-green-3">
+                        <div>
                             <form action="<?php echo URLROOT;?>Undergrad/submitResponses/<?php echo $_SESSION['user_id'];?>" method="POST">
                             <input type="hidden" name="questionnaire_id" value="<?php echo $questionnaire->questionnaire_id; ?>">
                                 <div>
                                     <?php foreach ($data['question'] as $i => $question) : ?>
+                                        <div  class="card-green-3">
                                         <div style="margin-bottom: 10px;">
                                             <p class="p-regular-green" style="font-size: 17px; font-weight:500; margin-top: 10px;"><?php echo ($i + 1).'. '. $question->question_text ?></p>
                                             <label class="radio">
@@ -66,6 +67,7 @@
                                                 </label>
                                             <?php endif; ?>
                                         </div>
+                                        </div>
                                     <?php endforeach; ?>
                                     <div class="btn-container-2">
                                         <button class="button-main" type="submit">Submit</button>
@@ -73,7 +75,7 @@
                                     </div>
                                 </div>  
                             </form>
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
