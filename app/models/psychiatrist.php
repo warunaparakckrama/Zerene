@@ -202,6 +202,20 @@ class psychiatrist
         return $results;
     }
 
+    public function countNewDirectedUg($id){
+    $this->db->query('SELECT COUNT(*) AS count from ug_direct WHERE to_user_id = :to_user_id AND status = "new"');
+    $this->db->bind(':to_user_id', $id);
+    $result = $this->db->single();
+        return $result->count;
+    }
+
+    public function updateNewDirectedUgCount($ug_id, $status)
+    {
+        $this->db->query('UPDATE ug_direct SET status = :status WHERE ug_user_id = :ug_id');
+        $this->db->bind(':status', $status);
+        $this->db->bind(':ug_id', $ug_id);
+        $this->db->execute();
+    }
 
     
 }

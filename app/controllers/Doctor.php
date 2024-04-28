@@ -33,7 +33,11 @@ class Doctor extends Controller
 
     public function doc_home()
     {
-        $data = [];
+        $id = $_SESSION['user_id'];
+        $notification = $this->docModel->countNewDirectedUg($id);
+        $data = [
+            'notification' => $notification,
+        ];
         $this->view('doctor/doc_home', $data);
     }
 
@@ -59,13 +63,16 @@ class Doctor extends Controller
     {   
         $response = $this->ugModel->getResponseByResponseId($id);
         $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $range = $this->pcModel->getRangesfromQuizId($response->questionnaire_id);
         require_once APPROOT.'/controllers/Procounsellor.php';
         $PCController = new Procounsellor();
         $results = $PCController->quizResults($id);
         $data = [
             'response' => $response,
             'questionnaire' => $questionnaire,
-            'results' => $results
+            'results' => $results,
+            'range' => $range
+
         ];
         $this->view('doctor/doc_quiz_review', $data);
     }
@@ -160,6 +167,7 @@ class Doctor extends Controller
         $id = $_SESSION['user_id'];
         $doctor = $this->adminModel->getDoctorById($id);
         $undergrad = $this->adminModel->getUgById($ug_user_id);
+        $this->docModel->updateNewDirectedUgCount($ug_user_id,'viewed');
         $data = [
             'doctor' => $doctor,
             'undergrad' => $undergrad,
