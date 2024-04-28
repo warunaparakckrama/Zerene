@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .question-input {
             display: none;
@@ -39,8 +40,7 @@
                 <p class="p-regular-green">Create Questionnaires</p>
                 <div class="card-white-scroll" style="max-height: 500px;">
                     <div class="card-green-5">
-                    <?php flash('quiz-flash'); ?>
-                        <form action="<?php echo URLROOT; ?>Procounsellor/createQuestionnaire/<?php echo $_SESSION['user_id']; ?>" method="POST">
+                        <form action="<?php echo URLROOT; ?>Procounsellor/createQuestionnaire/<?php echo $_SESSION['user_id']; ?>" method="POST" id="quizform">
                             <div style="font-size: 15px;">
                                 <label for="quizName">Questionnaire Name:</label>
                                 <input type="text" id="quizName" name="quiz_name" class="password-box" required><br>
@@ -76,7 +76,7 @@
                                 <input type="number" id="mFactor" name="m_factor" min="1" required class="password-box"><br><br>
 
                                 <div class="btn-container-2">
-                                    <a href="" style="text-decoration: none;"><button class="button-main" type="submit" onclick="">Submit</button></a>
+                                    <a href="" style="text-decoration: none;"><button class="button-main" type="submit" onclick="showAlert(event)">Submit</button></a>
                                     <a href="" style="text-decoration: none;"><button class="button-danger" type="reset" onclick="window.location.reload();">Cancel</button></a>
                                 </div>
                             </div>
@@ -172,6 +172,18 @@
                 event.preventDefault(); // Prevent the default action of the link
             }
             alert("questionnaire submitted successfully!");
+        }
+
+        function showAlert(e) {
+            e.preventDefault();
+            Swal.fire({
+                text: "Questionnaire created Successfully!",
+                icon: "success",
+                confirmButtonColor: "#3d8994",
+                background: "#E5F3F6"
+            }).then((response)=>{
+                document.getElementById("quizform").submit();
+            });
         }
     </script>
 </body>

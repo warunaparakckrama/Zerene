@@ -47,7 +47,6 @@ $note = $data['note'];
                                         <button class="button-main">Direct to Psychiatrist</button>
                                     </a>
                                 <?php endif; ?>
-                                <!-- <a href="<?php echo URLROOT; ?>Procounsellor/ugDirects/<?php echo $undergrad->user_id; ?>" style="text-decoration: none;"><button class="button-main">Direct to Psychiatrist</button></a> -->
                                 <a href="<?php echo URLROOT; ?>procounsellor/pc_createNotes/<?php echo $undergrad->user_id; ?>" style="text-decoration: none;"><button class="button-main">Add a note</button></a>
                             </div>
                         </div>

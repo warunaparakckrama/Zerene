@@ -9,6 +9,7 @@ $timeslot = $data['timeslot'];
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title><?php echo $_SESSION['user_name']; ?> | Timeslots</title>
 </head>
 
@@ -29,9 +30,7 @@ $timeslot = $data['timeslot'];
                 <p class="p-regular-green">Create Timeslot</p>
                 <div class="card-white">
                     <div class="card-green-7">
-                    <?php flash('time-flash'); ?>
-                    <?php flash('update-flash'); ?>
-                        <form action="<?php echo URLROOT; ?>Procounsellor/addTimeslots/<?php echo $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
+                        <form action="<?php echo URLROOT; ?>Procounsellor/addTimeslots/<?php echo $_SESSION['user_id']; ?>" method="POST" id="timeslotform">
                             <label for="slot_date">Date : </label>
                             <input type="date" id="" name="slot_date" class="date" value="" required>
 
@@ -54,7 +53,7 @@ $timeslot = $data['timeslot'];
                             </select>
 
                             <div class="btn-container-2">
-                                <button class="button-main" type="submit">Create</button>
+                                <button class="button-main" type="submit" onclick="showAlert(event)">Create</button>
                                 <button class="button-danger" type="button" onclick="cancelCreate()">Cancel</button>
                             </div>
                         </form>
@@ -169,6 +168,18 @@ $timeslot = $data['timeslot'];
     <script>
         function cancelCreate() {
             document.getElementById('timeslotForm').reset();
+        }
+
+        function showAlert(e) {
+            e.preventDefault();
+            Swal.fire({
+                text: "Timeslot created Successfully!",
+                icon: "success",
+                confirmButtonColor: "#3d8994",
+                background: "#E5F3F6"
+            }).then((response)=>{
+                document.getElementById("timeslotform").submit();
+            });
         }
     </script>
 

@@ -9,6 +9,7 @@ $undergrad = $data['undergrad'];
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title><?php echo SITENAME; ?> | Notes</title>
 </head>
 
@@ -29,8 +30,7 @@ $undergrad = $data['undergrad'];
                 <p class="p-regular-green">Create Notes</p>
                 <div class="card-white">
                     <div class="card-green-5">
-                        <?php flash('note-flash'); ?>
-                        <form id="noteForm" action="<?php echo URLROOT; ?>Procounsellor/createNotes/<?php echo $undergrad->user_id; ?>" method="post">
+                        <form action="<?php echo URLROOT; ?>Procounsellor/createNotes/<?php echo $undergrad->user_id; ?>" method="post" id="noteForm">
                             <label for="heading">Heading:</label><br>
                             <input type="text" id="heading" name="heading" class="password-box" required><br>
 
@@ -38,7 +38,7 @@ $undergrad = $data['undergrad'];
                             <textarea id="content" name="content" rows="15" cols="100" class="textarea-1" required></textarea><br>
 
                             <div class="btn-container-2">
-                                <button class="button-main" type="submit">Submit</button>
+                                <button class="button-main" type="submit" onclick="showAlert(event)">Submit</button>
                                 <button class="button-danger" type="reset">Cancel</button>
                             </div>
                         </form>
@@ -48,12 +48,16 @@ $undergrad = $data['undergrad'];
         </div>
     </section>
     <script>
-        // Function to show an alert after the note is submitted
-        function showSubmitAlert() {
-            alert("Note submitted successfully!");
+        function showAlert(e) {
+            e.preventDefault();
+            Swal.fire({
+                text: "Note created Successfully!",
+                icon: "success",
+                confirmButtonColor: "#3d8994",
+                background: "#E5F3F6"
+            }).then((response)=>{
+                document.getElementById("noteForm").submit();
+            });
         }
-
-        // Add an event listener to the form's submit event
-        document.getElementById('noteForm').addEventListener('submit', showSubmitAlert);
     </script>
 </body>

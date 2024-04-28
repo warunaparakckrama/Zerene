@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
         <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
         <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <title><?php echo SITENAME;?> | Feedback</title>
     </head>
 
@@ -25,8 +26,7 @@
                     <div class="card-white">
                         <p class="p-regular-green">Submit Feedback/ Complaints</p>
                         <div class="card-green-5">
-                        <?php flash('feedback-flash'); ?>
-                            <form action="<?php echo URLROOT;?>Procounsellor/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST">
+                            <form action="<?php echo URLROOT;?>Procounsellor/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST" id="feedbackform">
                                 <div style="font-size: 18px; color: var(--zerene-green)">
                                     <label for="type">Type: </label>
                                     <select name="type" class="type">
@@ -41,7 +41,7 @@
                                     <textarea name="content" rows="10" class="textarea-1"></textarea><br><br>
 
                                     <div class="btn-container-2">
-                                        <a href="" style="text-decoration: none;"><button class="button-main" type="submit">Submit</button></a>
+                                        <a href="" style="text-decoration: none;"><button class="button-main" type="submit" onclick="showAlert(event)">Submit</button></a>
                                         <a href="" style="text-decoration: none;"><button class="button-danger" type="reset">Cancel</button></a>
                                     </div>
                                 </div>
@@ -54,7 +54,17 @@
             </div>
         </section>
         <script>
-        
+        function showAlert(e) {
+            e.preventDefault();
+            Swal.fire({
+                text: "Feedback sent Successfully!",
+                icon: "success",
+                confirmButtonColor: "#3d8994",
+                background: "#E5F3F6"
+            }).then((response)=>{
+                document.getElementById("feedbackform").submit();
+            });
+        }
         </script>
 
     </body>

@@ -10,6 +10,7 @@ $reserve = $data['reserve'];
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title><?php echo $_SESSION['user_name']; ?> | View Timeslot</title>
 </head>
 
@@ -76,7 +77,7 @@ $reserve = $data['reserve'];
                     <div class="card-white">
                         <p class="p-regular">Edit Timeslot</p>
                         <div class="card-green-7">
-                            <form action="<?php echo URLROOT; ?>Procounsellor/editTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" id="timeslotForm">
+                            <form action="<?php echo URLROOT; ?>Procounsellor/editTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" id="editform">
                                 <label for="slot_date">Date : </label>
                                 <input type="date" id="slot_date" name="slot_date" class="date" value="<?php echo $data['timeslot']->slot_date; ?>" required>
 
@@ -94,7 +95,7 @@ $reserve = $data['reserve'];
 
                                 <div class="btn-container-4">
                                     <div class="btn-container-2">
-                                        <button class="button-main" type="submit">Update</button>
+                                        <button class="button-main" type="submit" onclick="showAlert(event)">Update</button>
                                         <button class="button-danger" type="button" onclick="cancelEdit()">Cancel Edit</button>
                                     </div>
                                     <div>
@@ -111,11 +112,23 @@ $reserve = $data['reserve'];
 
     <script>
         function cancelEdit() {
-            document.getElementById('timeslotForm').reset();
+            document.getElementById('editform').reset();
         }
 
         function goBack() {
             window.history.back();
+        }
+
+        function showAlert(e) {
+            e.preventDefault();
+            Swal.fire({
+                text: "Timeslot updated Successfully!",
+                icon: "success",
+                confirmButtonColor: "#3d8994",
+                background: "#E5F3F6"
+            }).then((response)=>{
+                document.getElementById("editform").submit();
+            });
         }
     </script>
 </body>
