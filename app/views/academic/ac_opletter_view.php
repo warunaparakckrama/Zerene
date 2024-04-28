@@ -1,5 +1,5 @@
 <?php
-    $currentPage = 'ac_opletters_view'; 
+    $currentPage = 'ac_opletters'; 
     $letter = $data['letter'];
     $request= $data['request'];
 ?>

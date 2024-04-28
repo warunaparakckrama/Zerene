@@ -20,15 +20,15 @@ $reserve = $data ['reserve'];
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
+                <p class="p-title" style="font-size: 40px;">View Timeslot</p>
                 <div class="subgrid-2">
-                    <p class="p-title" style="font-size: 40px;">View Timeslot</p>
                 </div>
             </div>
 
             <div>
             <?php if ($timeslot->slot_status === 'reserved' || $timeslot->slot_status === 'pending') : ?>
                 <div class="card-white">
-                    <p class="p-regular">Reserve Details</p>
+                    <p class="p-regular-green">Reserve Details</p>
                     <div class="card-green-7">
                         <div>
                             <p>Date: <?php echo $data['timeslot']->slot_date; ?></p>
@@ -51,15 +51,15 @@ $reserve = $data ['reserve'];
                     </div>
                 </div>
             <?php else : ?>
+                <p class="p-regular-green">Timeslot Details</p>
                 <div class="card-white">
-                    <p class="p-regular">Timeslot Details</p>
                     <div class="card-green-7">
                         <div>
 
-                            <p>Date: <?php echo $data['timeslot']->slot_date; ?></p>
-                                <p>Start Time: <?php echo $data['timeslot']->slot_start; ?></p>
-                                <p>Finish Time: <?php echo $data['timeslot']->slot_finish; ?></p>
-                                <p>Type: <?php echo $data['timeslot']->slot_type; ?></p>
+                            <p class="p-regular-green" style="font-size: 18px;">Date: <?php echo $data['timeslot']->slot_date; ?></p>
+                                <p class="p-regular-green" style="font-size: 18px;">Start Time: <?php echo $data['timeslot']->slot_start; ?></p>
+                                <p class="p-regular-green" style="font-size: 18px;">Finish Time: <?php echo $data['timeslot']->slot_finish; ?></p>
+                                <p class="p-regular-green" style="font-size: 18px; margin-bottom: 10px;">Type: <?php echo $data['timeslot']->slot_type; ?></p>
                                 <div class="btn-container-2">
                                     <form action="<?php echo URLROOT; ?>Procounsellor/deleteTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete the timeslot?')">
                                         <button type="submit" class="button-danger no-underline">Delete</button>
@@ -68,8 +68,8 @@ $reserve = $data ['reserve'];
                         </div>
                     </div>
                 </div>
+                <p class="p-regular-green">Edit Timeslot</p>
                 <div class="card-white">
-                        <p class="p-regular">Edit Timeslot</p>
                         <div class="card-green-7">
                             <form action="<?php echo URLROOT; ?>Procounsellor/editTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" id="timeslotForm">
                                 <label for="slot_date">Date : </label>
@@ -90,9 +90,9 @@ $reserve = $data ['reserve'];
                                 <div class="btn-container-4">
                                     <div class="btn-container-2">
                                         <button class="button-main" type="submit">Update</button>
-                                        <button class="button-danger" type="button" onclick="cancelEdit()">Cancel Edit</button>
+                                        <button class="button-danger" type="button" onclick="cancelEdit()">Cancel</button>
                                     </div>
-                                    <div>
+                                    <div class="btn-container">
                                         <button class="button-main" type="button" onclick="goBack()">Back</button>
                                     </div>
                                 </div>

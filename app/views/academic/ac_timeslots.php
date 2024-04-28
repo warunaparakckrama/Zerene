@@ -27,8 +27,8 @@
             </div>
 
             <div>
+                <p class="p-regular-green">Create New Timeslot</p>
                 <div class="card-white">
-                    <p class="p-regular">Create New Timeslot</p>
                     <div class="card-green-7">
                         <div>
                             <form action="<?php echo URLROOT; ?>Academic/addTimeslots/<?php echo $user_id = $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
@@ -67,8 +67,8 @@
 
                 </div>
 
+                <p class="p-regular-green">Created Timeslots</p>
                 <div class="card-white">
-                    <p class="p-regular">Created Timeslots</p>
                     <?php if (isset($data['timeslot']) && !empty($data['timeslot'])) : ?>
                         <?php
                         // Grouping timeslots by date and separating them into two arrays: pastTimeslots and futureTimeslots

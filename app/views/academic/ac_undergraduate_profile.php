@@ -1,4 +1,4 @@
-<?php $currentPage = 'undergraduate_profile';?>
+<?php $currentPage = 'ac_undergrads';?>
 <?php 
     $undergraduate = $data['undergraduate'];
     $id = $data['id'];

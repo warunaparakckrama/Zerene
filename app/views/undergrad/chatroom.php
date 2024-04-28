@@ -21,7 +21,7 @@
 
             <div>
                 <?php 
-                    $con = new mysqli("localhost", "root", "", "zerene-1");
+                    $con = new mysqli("localhost", "root", "", "zerene");
 
                     $to = $data['user_id'];
                     $from = $_SESSION['user_id'];
