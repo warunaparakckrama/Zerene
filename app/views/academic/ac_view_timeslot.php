@@ -1,5 +1,5 @@
 <?php 
-$currentPage = 'ac_view_timeslot'; 
+$currentPage = 'ac_timeslots'; 
 $timeslot = $data['timeslot'];
 $reserve = $data ['reserve'];
 ?>
@@ -38,7 +38,7 @@ $reserve = $data ['reserve'];
                            <div class="btn-container-2">
                            <?php if ($data['timeslot']->slot_status == 'pending') : ?>                 
                                         <p><?php echo $data['reserve']->ug_user_id; ?> User has requested to cancel the reservation:</p>
-                                        <a href="<?php echo URLROOT; ?>Procounsellor/changeSlotStatus/<?php echo $data['reserve']->slot_id; ?>" style="text-decoration: none;">
+                                        <a href="<?php echo URLROOT; ?>Academic/changeSlotStatus/<?php echo $data['reserve']->slot_id; ?>" style="text-decoration: none;">
                                             <button class="button-main">Allow</button>
                                         </a>
                                     <?php elseif ($data['timeslot']->slot_status == 'reserved') : ?>
@@ -61,7 +61,7 @@ $reserve = $data ['reserve'];
                                 <p class="p-regular-green" style="font-size: 18px;">Finish Time: <?php echo $data['timeslot']->slot_finish; ?></p>
                                 <p class="p-regular-green" style="font-size: 18px; margin-bottom: 10px;">Type: <?php echo $data['timeslot']->slot_type; ?></p>
                                 <div class="btn-container-2">
-                                    <form action="<?php echo URLROOT; ?>Procounsellor/deleteTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete the timeslot?')">
+                                    <form action="<?php echo URLROOT; ?>Academic/deleteTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete the timeslot?')">
                                         <button type="submit" class="button-danger no-underline">Delete</button>
                                     </form>
                                 </div>
@@ -71,7 +71,7 @@ $reserve = $data ['reserve'];
                 <p class="p-regular-green">Edit Timeslot</p>
                 <div class="card-white">
                         <div class="card-green-7">
-                            <form action="<?php echo URLROOT; ?>Procounsellor/editTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" id="timeslotForm">
+                            <form action="<?php echo URLROOT; ?>Academic/editTimeslot/<?php echo $data['timeslot']->slot_id; ?>" method="POST" id="timeslotForm">
                                 <label for="slot_date">Date : </label>
                                 <input type="date" id="slot_date" name="slot_date" class="date" value="<?php echo $data['timeslot']->slot_date; ?>" required>
 

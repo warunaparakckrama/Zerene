@@ -1,5 +1,5 @@
 <?php
-$currentPage = 'pc_view_quiz_response';
+$currentPage = 'pc_questionnaires';
 $questionnaire = $data['questionnaire'];
 $response = $data['response'];
 $question = $data['question'];
@@ -24,12 +24,12 @@ $undergrad = $data['undergrad'];
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2">
-                    <p class="p-title" style="font-size: 40px;">View Questionnaire</p>
+                    <p class="p-title" style="font-size: 40px;">Questionnaires</p>
                 </div>
                 <div></div>
             </div>
             <div>
-                <p class="p-regular-green"><?php echo $questionnaire->questionnaire_name ?> - <?php echo $undergrad->username ?></p>
+                <p class="p-regular-green"><?php echo $questionnaire->questionnaire_name ?> (<?php echo $undergrad->username ?>)</p>
                 <div class="card-white-scroll" style="height: 550px;">
                     
                         <div>

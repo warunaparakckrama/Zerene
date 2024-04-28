@@ -516,7 +516,7 @@ class Academic extends Controller
     {
         if (empty($data['slot_date_err']) && empty($data['slot_start_err']) && empty($data['slot_finish_err']) && empty($data['slot_type_err'])) {
             if ($this->acModel->updateTimeslot($data['timeslot'])) {
-                redirect('academic/ac_timeslot');
+                redirect('academic/ac_timeslots');
             } else {
                 die('Something went wrong');
             }
@@ -527,7 +527,7 @@ class Academic extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->acModel->deleteTimeslot($timeslotId)) {
-                redirect('academic/ac_timeslot');
+                redirect('academic/ac_timeslots');
             } else {
                 die('Something went wrong');
             }

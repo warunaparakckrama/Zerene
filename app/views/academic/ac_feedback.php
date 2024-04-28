@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<?php $currernt_page = 'ac_feedback'; ?>
-<html lang="en">
+
+<?php $currentPage = 'ac_feedback'; ?>
+
 
 <head>
     <meta charset="UTF-8">
@@ -60,4 +60,3 @@
 
 </body>
 
-</html>
