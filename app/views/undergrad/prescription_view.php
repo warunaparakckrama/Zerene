@@ -60,15 +60,14 @@
 <body>
     <section class="sec-1">
         <div>
-            <?php require APPROOT . '/views/inc/sidebar-doc.php'; ?>
+            <?php require APPROOT . '/views/inc/sidebar-ug.php'; ?>
         </div>
 
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2">
-                    <p class="p-title" style="font-size: 40px;">Prescription</p>
+                    <p class="p-title" style="font-size: 40px;">Prescriptions</p>
                 </div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>

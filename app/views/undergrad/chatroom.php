@@ -68,7 +68,7 @@
                     echo
                         "<div class='name-card'>
                             <div>
-                            <img src='".URLROOT."public/img/pro-avatar1.svg' alt='profile' class='profile-picture'>
+                            <img src='".URLROOT."public/img/counsellor.svg' alt='profile' class='profile-picture'>
                             </div>
                             <div>
                             <p class='p-regular-green' style='font-size: 15px;'>$professional->first_name $professional->last_name</p>

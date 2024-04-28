@@ -36,7 +36,7 @@
                         <?php foreach ($data['counsellor'] as $counsellor) : ?>
                             <?php if ($request->from_user_id === $user_id && $request->to_user_id === $counsellor->user_id ) : ?>
                                 <div class="card-green">
-                                    <img src="<?php echo IMG; ?>pro-avatar1.svg" alt="quiz" class="card-profile2">
+                                    <img src="<?php echo IMG; ?>counsellor.svg" alt="quiz" class="card-profile">
                                     <div>
                                         <a href="<?php echo URLROOT; ?>undergrad/chatroom/<?php echo $counsellor->user_id; ?>" class="a-name">
                                             <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name . ' ' . $counsellor->last_name; ?></p>
@@ -53,7 +53,7 @@
                         <?php foreach ($data['doctor'] as $doctor) : ?>
                             <?php if ($request->from_user_id === $user_id && $request->to_user_id === $doctor->user_id) : ?>
                                 <div class="card-green">
-                                    <img src="<?php echo IMG; ?>doc-avatar2.svg" alt="quiz" class="card-profile">
+                                    <img src="<?php echo IMG; ?>doctor.svg" alt="quiz" class="card-profile">
                                     <div>
                                         <a href="<?php echo URLROOT; ?>undergrad/chatroom/<?php echo $doctor->user_id; ?>" class="a-name">
                                             <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $doctor->first_name . ' ' . $doctor->last_name; ?></p>

@@ -32,7 +32,7 @@
                     <?php foreach ($data['counsellor'] as $counsellor) : ?>
                         <?php if ($counsellor->coun_type === 'Academic' && $undergrad->faculty === $counsellor->faculty) : ?>
                         <div class="card-green">
-                            <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
+                            <img src="<?php echo IMG;?>counsellor.svg" alt="profile pic" class="card-profile">
                             <div>
                                 <a href="<?php echo URLROOT;?>Undergrad/timeslots_view/<?php echo $counsellor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
                                 <p class="p-regular-grey" style="font-size: 15px;"><?php echo$counsellor->university. ' | '.$counsellor->faculty;?></p>
@@ -50,7 +50,7 @@
                     <?php foreach ($data['counsellor'] as $counsellor) : ?>
                         <?php if ($counsellor->coun_type === 'Professional' && $undergrad->university === $counsellor->university) : ?>
                         <div class="card-green">
-                            <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
+                            <img src="<?php echo IMG;?>counsellor.svg" alt="profile pic" class="card-profile">
                             <div>
                                 <a href="<?php echo URLROOT;?>Undergrad/timeslots_view/<?php echo $counsellor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p></a>
                                 <p class="p-regular-grey" style="font-size: 15px;"><?php echo $counsellor->university.' | '.$counsellor->faculty;?></p>
@@ -69,9 +69,9 @@
                         <?php foreach($data['doctor'] as $doctor) : ?>
                             <?php if ($direct->to_user_id == $doctor->user_id) : ?>
                                 <div class="card-green">
-                                    <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile pic" class="card-profile">
+                                    <img src="<?php echo IMG;?>doctor.svg" alt="profile pic" class="card-profile">
                                     <div>
-                                        <a href="<?php echo URLROOT;?>Undergrad/timeslots_view/<?php echo $doctor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $doctor->first_name.' '.$doctor->last_name;?></p></a>
+                                        <a href="<?php echo URLROOT;?>Undergrad/timeslots_view/<?php echo $doctor->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;">Dr. <?php echo $doctor->first_name.' '.$doctor->last_name;?></p></a>
                                         <p class="p-regular-grey" style="font-size: 15px;">University in charge: <?php echo $doctor->uni_in_charge?></p>
                                     </div>
                                     <div class="btn-container">

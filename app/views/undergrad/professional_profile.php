@@ -32,7 +32,7 @@
                     <div class="card-green-2">
                         <?php if ($counsellor !== null && $id === $counsellor->user_id) : ?>
                             <div>
-                                <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile picture" class="card-profile-2">
+                                <img src="<?php echo IMG;?>counsellor.svg" alt="profile picture" class="card-profile-2">
                             </div>
                             <div>
                                 <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></p>
@@ -60,7 +60,7 @@
                             </div>
                         <?php elseif ($doctor !== null && $id === $doctor->user_id) : ?>
                             <div>
-                                <img src="<?php echo IMG;?>pro-avatar1.svg" alt="profile picture" class="card-profile-2">
+                                <img src="<?php echo IMG;?>doctor.svg" alt="profile picture" class="card-profile-2">
                             </div>
                             <div>
                                 <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $doctor->first_name.' '.$doctor->last_name;?></p>
