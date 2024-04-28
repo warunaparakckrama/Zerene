@@ -186,9 +186,9 @@ button.notify:hover{
 .button-cancel-timeslot{
     display: flex;
     cursor: pointer;
-    color: var(--zerene-danger);
-    background-color: var(--zerene-white);
-    border: 1px solid var(--zerene-danger);
+    color: var(--zerene-green);
+    background-color: var(--zerene-light);
+    border: 1px solid var(--zerene-green);
     border-radius: 8px;
     font-size: 15px;
     font-family: "Poppins", sans-serif;

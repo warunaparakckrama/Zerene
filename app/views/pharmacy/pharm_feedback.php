@@ -1,4 +1,4 @@
-<?php $currentPage = 'feedback'; ?>
+<?php $currentPage = 'pharm_feedback'; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
     <body>
         <section class="sec-1">
             <div>
-                <?php require APPROOT . '/views/inc/sidebar-ug.php'; ?>
+                <?php require APPROOT . '/views/inc/sidebar-pharm.php'; ?>
             </div>
             <div class="grid-1">
 
@@ -33,10 +33,10 @@
                                     </select><br><br>
 
                                     <label for="title">Title: </label>
-                                    <input type="text" name="title" placeholder="Enter your title" style="width: 50%;" class="input" required><br><br>
+                                    <input type="text" name="title" placeholder="Enter your title" style="width: 50%;" class="input"><br><br>
 
                                     <label for="content">Content: </label>
-                                    <textarea name="content" rows="10" class="textarea-1" required></textarea><br><br>
+                                    <textarea name="content" rows="10" class="textarea-1"></textarea><br><br>
 
                                     <div class="btn-container-2">
                                         <a href="" style="text-decoration: none;"><button class="button-main" type="submit">Submit</button></a>

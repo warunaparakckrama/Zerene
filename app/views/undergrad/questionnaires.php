@@ -53,6 +53,9 @@
                                         ?>
                                         <p class="p-regular-grey" style="font-size: 15px;"><?php echo $formattedDateTime;?></p>
                                     </div>
+                                    <div class="btn-container">
+                                        <a href="<?php echo URLROOT;?>undergrad/answer_view/<?php echo $response->response_id;?>" style="text-decoration: none;"><button class="button-main">View Answers</button></a>
+                                    </div>
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; ?>

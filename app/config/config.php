@@ -23,6 +23,6 @@ define('UPLOAD', 'C:/xampp/htdocs/zereneuploads/');
 //encryption key
 define('ENCKEY', 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO');
 //undergrad profile pictures
-define('UGMALE', 'http://localhost/Zerene/public/img/ug-avatar1.svg');
-define('UGFEMALE', 'http://localhost/Zerene/public/img/ug-avatar2.svg');
+define('UGMALE', 'http://localhost/Zerene/public/img/ug-avatar-male-sb.svg');
+define('UGFEMALE', 'http://localhost/Zerene/public/img/ug-avatar-female-sb.svg');
 define('UGNS', 'http://localhost/Zerene/public/img/ug-avatar3.svg');

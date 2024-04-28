@@ -38,7 +38,7 @@ body{
 
 .home-grid-right{
     display: grid;
-    align-items: center;
+    align-items: top;
     justify-content: center;
     /* border: 1px solid red; */
 }

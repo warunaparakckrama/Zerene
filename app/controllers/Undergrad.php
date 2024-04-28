@@ -41,6 +41,23 @@ class Undergrad extends Controller
         $this->view('undergrad/questionnaires', $data);
     }
 
+    public function answer_view($id){
+        $response = $this->ugModel->getResponseByResponseId($id);
+        $questionnaire = $this->ugModel->getQuestionnairesfromId($response->questionnaire_id);
+        $question = $this->ugModel->getQuestionsfromQuestionnaireId($response->questionnaire_id);
+        $answer = $this->ugModel->getAnswersfromQuestionnaireId($response->questionnaire_id);
+        $undergrad = $this->adminModel->getUgById($response->user_id);
+
+        $data = [
+            'response' =>$response,
+            'questionnaire' =>$questionnaire,
+            'question' => $question,
+            'answer' => $answer,
+            'undergrad' =>$undergrad
+        ];
+        $this->view('undergrad/answer_view', $data);
+    }
+
     public function quiz_view($questionnaire_id)
     {
         $questionnaire = $this->ugModel->getQuestionnairesfromId($questionnaire_id);
@@ -190,11 +207,11 @@ class Undergrad extends Controller
 
     public function prescription_view($id)
     {
-        $porescription = $this->docModel->getPrescriptionById($id);
+        $prescription = $this->docModel->getPrescriptionById($id);
         $medicine = $this->docModel->getMedicine($id);
         $doctor = $this->adminModel->getDoctorById($id);
         $data = [
-            'prescription' => $porescription,
+            'prescription' => $prescription,
             'medicine' => $medicine,
             'doctor' => $doctor
 
