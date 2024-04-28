@@ -17,7 +17,9 @@ $counselor = $data['counselor'];
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Profile</p></div>
+                <div class="subgrid-2">
+                    <p class="p-title" style="font-size: 40px;">Profile</p>
+                </div>
                 <div class="subgrid-3"></div>
             </div>
 
@@ -30,28 +32,25 @@ $counselor = $data['counselor'];
                             <p>General</p>
                             <table>
                                 <tr>
-                                    <td class="p-regular-grey">User ID</td>
+                                <td class="p-regular-grey">Name</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $_SESSION['user_id']; ?></td>
+                                    <td class="p-title"><?php echo $counselor->first_name.' '.$counselor->last_name;?></td>
                                 </tr>
                                 <tr>
-                                    <td class="p-regular-grey">Username</td>
+                                    <td class="p-regular-grey">Counsellor Type</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $_SESSION['user_name']; ?></td>
+                                    <td class="p-title"><?php echo $counselor->coun_type;?></td>
                                 </tr>
-                                
                                 <tr>
-                                    <td class="p-regular-grey">E-mail</td>
+                                    <td class="p-regular-grey">Email</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $_SESSION['user_email']; ?></td>
+                                    <td class="p-title"><?php echo $counselor->email; ?></td>
                                 </tr>
-
                                 <tr>
                                     <td class="p-regular-grey">University</td>
                                     <td class="p-regular-grey">:</td>
                                     <td class="p-title"><?php echo $counselor->university; ?></td>
                                 </tr>
-
                                 <tr>
                                     <td class="p-regular-grey">Faculty</td>
                                     <td class="p-regular-grey">:</td>

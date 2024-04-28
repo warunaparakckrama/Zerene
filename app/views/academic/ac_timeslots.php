@@ -117,13 +117,14 @@
                                     $start_time = date('h:ia', strtotime($timeslot->slot_start));
                                     $end_time = date('h:ia', strtotime($timeslot->slot_finish));
                                     $formattedTimeRange = "$start_time - $end_time";
+                                    $slot_type = ucfirst($timeslot->slot_type);
                                     // echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
                                     if ($timeslot->slot_status === 'reserved') {
                                         echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-second no-underline">' . $formattedTimeRange . '<br>Reserved</a>';
                                     } elseif ($timeslot->slot_status === 'pending') {
-                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-second-timeslot no-underline">' . $formattedTimeRange . '<br>Ask to Cancel</a>';
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-second-timeslot no-underline">' . $formattedTimeRange . '<br>Asked to Cancel</a>';
                                     } else {
-                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '</a>';
+                                        echo '<a href="' . URLROOT . 'academic/ac_view_timeslot/' . $timeslot->slot_id . '" class="button-main no-underline">' . $formattedTimeRange . '<br>'.$slot_type .'</a>';
                                     }
                                 }
                                 echo "</div>";

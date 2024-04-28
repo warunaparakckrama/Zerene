@@ -290,13 +290,13 @@ class Academic extends Controller
     {
         $timeslot = $this->acModel->getTimeslotById($id);
         $reserve = $this->acModel->getReserveDetails($id);
-        if($timeslot){
+        if ($timeslot) {
             $data = [
                 'timeslot' => $timeslot,
                 'reserve' => $reserve
             ];
             $this->view('academic/ac_view_timeslot', $data);
-        }else{
+        } else {
             die('Timeslot not found');
         }
     }
@@ -432,9 +432,9 @@ class Academic extends Controller
     public function addTimeslots($user_id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
+
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            
+
             $data = [
                 'slot_date' => trim($_POST['slot_date']),
                 'slot_start' => trim($_POST['slot_start']),
@@ -444,9 +444,9 @@ class Academic extends Controller
                 'slot_status' => '',
                 'created_by' => trim($_POST['created_by']),
             ];
-            
+
             $data['created_by'] = $user_id;
-            
+
             if ($this->acModel->createTimeslots($data)) {
                 // If timeslot creation is successful, redirect to the same page
                 redirect('academic/ac_timeslots');
@@ -454,12 +454,11 @@ class Academic extends Controller
                 // If something went wrong, display an error message
                 die('Something went wrong');
             }
-            
+
             // Fetch timeslots regardless of the outcome of the creation attempt
             $current_username = $this->userModel->getUsernameById($user_id);
             $data['timeslot'] = $this->acModel->getTimeslots($current_username);
             $this->view('academic/ac_timeslots', $data);
-            
         }
         $this->view('academic/ac_timeslots');
     }
@@ -534,8 +533,8 @@ class Academic extends Controller
         }
     }
 
-    
-    
+
+
     public function sentFeedback($user_id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
