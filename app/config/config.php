@@ -4,7 +4,7 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'zerene-1'); //our dbname
+define('DB_NAME', 'zerene'); //our dbname
 
 //App root
 define('APPROOT', dirname(dirname(__FILE__)));
