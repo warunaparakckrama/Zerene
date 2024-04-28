@@ -1,6 +1,6 @@
 <?php
 $currentPage = 'pc_createNotes';
-$undergrad = $data['undergrad']; 
+$undergrad = $data['undergrad'];
 ?>
 
 <head>
@@ -28,24 +28,32 @@ $undergrad = $data['undergrad'];
             <div>
                 <p class="p-regular-green">Create Notes</p>
                 <div class="card-white">
-                <div class="card-green-5">
-                <?php flash('note-flash'); ?>
-                    <form action="<?php echo URLROOT; ?>Procounsellor/createNotes/<?php echo $undergrad->user_id; ?>" method="post">
-                        <label for="heading">Heading:</label><br>
-                        <input type="text" id="heading" name="heading" class="password-box" required><br>
+                    <div class="card-green-5">
+                        <?php flash('note-flash'); ?>
+                        <form id="noteForm" action="<?php echo URLROOT; ?>Procounsellor/createNotes/<?php echo $undergrad->user_id; ?>" method="post">
+                            <label for="heading">Heading:</label><br>
+                            <input type="text" id="heading" name="heading" class="password-box" required><br>
 
-                        <label for="content">Body:</label><br>
-                        <textarea id="content" name="content" rows="15" cols="100" class="textarea-1" required></textarea><br>
+                            <label for="content">Body:</label><br>
+                            <textarea id="content" name="content" rows="15" cols="100" class="textarea-1" required></textarea><br>
 
-                        <div class="btn-container-2">
-                            <button class="button-main" type="submit">Submit</button>
-                            <button class="button-danger" type="reset">Cancel</button>
-                        </div>
-                    </form>
+                            <div class="btn-container-2">
+                                <button class="button-main" type="submit">Submit</button>
+                                <button class="button-danger" type="reset">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            </div>
-        </div>
         </div>
     </section>
+    <script>
+        // Function to show an alert after the note is submitted
+        function showSubmitAlert() {
+            alert("Note submitted successfully!");
+        }
+
+        // Add an event listener to the form's submit event
+        document.getElementById('noteForm').addEventListener('submit', showSubmitAlert);
+    </script>
 </body>

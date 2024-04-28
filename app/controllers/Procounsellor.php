@@ -401,6 +401,7 @@ class Procounsellor extends Controller
             if (empty($data['username_alert'])) {
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
+                    $_SESSION['user_name'] = $data['new_username'];
                     flash('username-flash', 'Username updated successfully!');
                     redirect('procounsellor/pc_profile');
                 } else {
