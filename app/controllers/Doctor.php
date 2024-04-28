@@ -33,7 +33,11 @@ class Doctor extends Controller
 
     public function doc_home()
     {
-        $data = [];
+        $id = $_SESSION['user_id'];
+        $notification = $this->docModel->countNewDirectedUg($id);
+        $data = [
+            'notification' => $notification,
+        ];
         $this->view('doctor/doc_home', $data);
     }
 
@@ -160,6 +164,7 @@ class Doctor extends Controller
         $id = $_SESSION['user_id'];
         $doctor = $this->adminModel->getDoctorById($id);
         $undergrad = $this->adminModel->getUgById($ug_user_id);
+        $this->docModel->updateNewDirectedUgCount($ug_user_id,'viewed');
         $data = [
             'doctor' => $doctor,
             'undergrad' => $undergrad,
