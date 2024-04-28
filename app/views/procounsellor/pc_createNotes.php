@@ -1,5 +1,5 @@
 <?php
-$currentPage = 'pc_createNotes';
+$currentPage = 'pc_undergrad';
 $undergrad = $data['undergrad']; 
 ?>
 
@@ -30,10 +30,10 @@ $undergrad = $data['undergrad'];
                 <div class="card-white">
                 <div class="card-green-5">
                     <form action="<?php echo URLROOT; ?>Procounsellor/createNotes/<?php echo $undergrad->user_id; ?>" method="post">
-                        <label for="heading">Heading:</label><br>
+                        <label for="heading" style="font-size: 18px;" class="p-regular-green">Heading:</label><br>
                         <input type="text" id="heading" name="heading" class="password-box" required><br>
 
-                        <label for="content">Body:</label><br>
+                        <label for="content"  style="font-size: 18px;" class="p-regular-green">Body:</label><br>
                         <textarea id="content" name="content" rows="15" cols="100" class="textarea-1" required></textarea><br>
 
                         <div class="btn-container-2">

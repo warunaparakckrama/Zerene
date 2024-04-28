@@ -1,4 +1,4 @@
-<?php $currentPage = 'pc_viewNote';
+<?php $currentPage = 'pc_undergrad';
 $note = $data['note'];
 ?>
 

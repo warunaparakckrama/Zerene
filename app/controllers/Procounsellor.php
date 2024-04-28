@@ -772,6 +772,16 @@ class Procounsellor extends Controller
                     $data['result'] = $result;
                     break;
                 }
+                elseif ($mark < $range->min_value) {
+                    $final_mark = $mark;
+                    $data['final_mark'] = $final_mark;
+                    $data['result'] = 'low';
+                }
+                elseif ($mark > $range->min_value) {
+                    $final_mark = $mark;
+                    $data['final_mark'] = $final_mark;
+                    $data['result'] = 'high';
+                }
             }
 
             return $data;
