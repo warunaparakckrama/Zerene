@@ -23,7 +23,6 @@
         <div class="grid-1">
             <div class="subgrid-1">
                 <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Undergraduates</p></div>
-                <div class="subgrid-3"><?php require APPROOT . '/views/inc/searchbar.php'; ?></div>
             </div>
 
             <div>
@@ -49,21 +48,27 @@
                 <div class="card-white-scroll" style="height: 300px;">
                 
                     <?php foreach ($data['UgPress'] as $UgPress) : ?>
+                         
                         
                                     <div class="card-green">
                                         <img src="<?php echo IMG; ?>note1.svg" alt="profile pic" class="card-profile">
                                         <div>
-                                            <a href="" class="a-name">
-                                                <p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad ->username; ?></p>
-                                            </a>
+                                            
+                                                <p class="p-regular-green" style=" margin-bottom: -10px;">Prescription No.<?php echo $UgPress->pres_id; ?></p>
+                                      
+                                                <?php
+                                    $dateTime = new DateTime($UgPress->date);
+                                    $formattedDateTime = $dateTime->format('jS M, y');
+                                ?>
+                                <p class="p-regular-green" style="font-size: 15px;">Issued on: <b><?php echo $formattedDateTime;?></b></p>
                                             
                                         </div>
                                         <div class="btn-container">
                                             <a href="<?php echo URLROOT;?>doctor/doc_template/<?php echo $UgPress->pres_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
                                         </div>
                                     </div>
-                                             
-                    <?php endforeach; ?> 
+                        <?php endforeach; ?>                     
+                    
                 </div>
 
             </div>
