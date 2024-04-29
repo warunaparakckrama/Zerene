@@ -576,8 +576,8 @@ class Procounsellor extends Controller
                 'slot_finish' => trim($_POST['slot_finish']),
                 'slot_interval' => trim($_POST['slot_interval']),
                 'slot_type' => trim($_POST['slot_type']),
-                'slot_status' => '', // Add this line
-                'created_by' => '', // Add this line
+                'slot_status' => '', 
+                'created_by' => '', 
                 'slot_date_err' => '',
                 'slot_start_err' => '',
                 'slot_finish_err' => '',
@@ -587,19 +587,24 @@ class Procounsellor extends Controller
 
             $data['created_by'] = $_SESSION['user_id'];
 
-            if ($this->pcModel->createTimeslots($data)) {
-                flash('time-flash', 'Timeslot is successfully created!');
-                redirect('procounsellor/pc_timeslot');
+            if ($this->pcModel->isSlotAvailable($data['slot_date'], $data['slot_start'], $data['slot_finish'])) {
+                if ($this->pcModel->createTimeslots($data)) {
+                    redirect('procounsellor/pc_timeslot');
+                } else {
+                    die('Something went wrong');
+                }
+            
             } else {
-                die('Something went wrong');
+                redirect('procounsellor/pc_timeslot');
             }
-
-            $username = $this->userModel->getUsernameById($user_id);
-            $data['timeslot'] = $this->pcModel->getTimeslots($username);
-            $this->view('procounsellor/pc_timeslot', $data);
         }
-        $this->view('procounsellor/pc_timeslot');
+
+        $username = $this->userModel->getUsernameById($user_id);
+        $data['timeslot'] = $this->pcModel->getTimeslots($username);
+        $this->view('procounsellor/pc_timeslot', $data);
     }
+
+
 
     public function editTimeslot($timeslotId)
     {

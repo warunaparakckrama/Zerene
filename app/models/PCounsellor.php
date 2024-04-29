@@ -49,6 +49,29 @@ class PCounsellor
         return true;
     }
 
+    public function isSlotAvailable($slot_date, $slot_start, $slot_finish)
+    {
+        $sql = "SELECT * FROM timeslot 
+            WHERE slot_date = :slot_date 
+            AND (
+                (slot_start <= :slot_start AND slot_finish >= :slot_start) OR
+                (slot_start <= :slot_finish AND slot_finish >= :slot_finish) OR
+                (slot_start >= :slot_start AND slot_finish <= :slot_finish)
+            ) AND is_deleted = 0 ";
+
+        $this->db->query($sql);
+        $this->db->bind(':slot_date', $slot_date);
+        $this->db->bind(':slot_start', $slot_start);
+        $this->db->bind(':slot_finish', $slot_finish);
+        $this->db->execute();
+
+        if ($this->db->rowCount() > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function getTimeslots($id)
     {
         $this->db->query('SELECT * FROM timeslot WHERE is_deleted = FALSE AND created_by = :id');

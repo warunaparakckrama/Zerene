@@ -61,7 +61,7 @@ $undergrad = $data['undergrad'];
                                         $selectedAnswer = '';
                                 }
                                 ?>
-                                <p class="p-regular-grey" style="font-size: 15px;">Answer : <?php echo $selectedAnswer ?></p>
+                                <p class="p-regular-grey" style="font-size: 16px;">Answer : <?php echo $selectedAnswer ?></p>
                                 </div>
                                 </div>
                             <?php endforeach ?>

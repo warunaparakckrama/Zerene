@@ -1,6 +1,6 @@
-<?php
-$currentPage = 'pc_profile';
-$counsellor = $data['counsellor'];
+<?php 
+    $currentPage = 'pc_profile'; 
+    $counsellor = $data['counsellor'];
 ?>
 
 <head>
@@ -8,9 +8,8 @@ $counsellor = $data['counsellor'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
-    <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title><?php echo $_SESSION['user_name']; ?> | Profile</title>
+    <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
+    <title><?php echo $_SESSION['user_name'];?> | Profile</title>
 </head>
 
 <body>
@@ -20,9 +19,7 @@ $counsellor = $data['counsellor'];
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2">
-                    <p class="p-title" style="font-size: 40px;">Profile</p>
-                </div>
+                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Profile</p></div>
                 <div></div>
             </div>
 
@@ -34,20 +31,20 @@ $counsellor = $data['counsellor'];
                         <div class="rectangle">
                             <p>General</p>
                             <table>
-                                <tr>
+                            <tr>
                                     <td class="p-regular-grey">Username</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $counsellor->username; ?></td>
+                                    <td class="p-title"><?php echo $counsellor->username;?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">Name</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $counsellor->first_name . ' ' . $counsellor->last_name; ?></td>
+                                    <td class="p-title"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">Counsellor Type</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $counsellor->coun_type; ?></td>
+                                    <td class="p-title"><?php echo $counsellor->coun_type;?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">Email</td>
@@ -69,7 +66,7 @@ $counsellor = $data['counsellor'];
 
                         <div class="rectangle">
                             <p>Change Password</p>
-                            <form action="<?php echo URLROOT; ?>Procounsellor/changePwdProcounsellor/<?php echo $counsellor->user_id ?>" method="POST" class="subgrid-1" style="font-size: 16px;" id="passwordform">
+                            <form action="<?php echo URLROOT; ?>Procounsellor/changePwdProcounsellor/<?php echo $counsellor->user_id ?>" method="POST" class="subgrid-1" style="font-size: 16px;">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
                                 <input type="password" id="current_password" name="current_password" class="password-box" required>
 
@@ -79,7 +76,7 @@ $counsellor = $data['counsellor'];
                                 <label for="fname" class="p-regular-grey">Confirm Password :</label>
                                 <input type="password" id="confirm_password" name="confirm_password" class="password-box" required>
                                 <div class="btn-container-2">
-                                    <button class="button-main" type="submit" onclick="showAlert1(event)">Change</button>
+                                    <button class="button-main" type="submit">Change</button>
                                     <button class="button-danger" type="reset">Cancel</button>
                                 </div>
                                 <p class="p-error"><?php echo isset($data['password_alert']) ? $data['password_alert'] : ''; ?></p>
@@ -88,15 +85,15 @@ $counsellor = $data['counsellor'];
 
                         <div class="rectangle">
                             <p>Change Username</p>
-                            <form action="<?php echo URLROOT; ?>Procounsellor/changeUSernameProcounsellor/<?php echo $counsellor->user_id ?>" method="POST" class="subgrid-1" id="usernameform">
+                            <form action="<?php echo URLROOT; ?>Procounsellor/changeUSernameProcounsellor/<?php echo $counsellor->user_id ?>" method="POST" class="subgrid-1">
                                 <label for="cusername" class="p-regular-grey" style="font-size: 16px;">New Username :</label>
                                 <input type="text" name="new_username" class="password-box" required>
-
+                                
                                 <label for="nusername" class="p-regular-grey" style="font-size: 16px;">Password :</label>
                                 <input type="password" name="password" class="password-box" required>
 
                                 <div class="btn-container-2">
-                                    <button class="button-main" type="submit" onclick="showAlert2(event)">Change</button>
+                                    <button class="button-main" type="submit">Change</button>
                                     <button class="button-danger" type="reset">Cancel</button>
                                 </div>
                                 <p class="p-error"><?php echo isset($data['username_alert']) ? $data['username_alert'] : ''; ?></p>
@@ -110,29 +107,4 @@ $counsellor = $data['counsellor'];
 
         </div>
     </section>
-    <script>
-        function showAlert1(e) {
-            e.preventDefault();
-            Swal.fire({
-                text: "Password changed Successfully!",
-                icon: "success",
-                confirmButtonColor: "#3d8994",
-                background: "#E5F3F6"
-            }).then((response)=>{
-                document.getElementById("passwordform").submit();
-            });
-        }
-
-        function showAlert2(e) {
-            e.preventDefault();
-            Swal.fire({
-                text: "Username changed Successfully!",
-                icon: "success",
-                confirmButtonColor: "#3d8994",
-                background: "#E5F3F6"
-            }).then((response)=>{
-                document.getElementById("usernameform").submit();
-            });
-        }
-    </script>
 </body>

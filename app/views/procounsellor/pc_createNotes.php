@@ -35,7 +35,7 @@ $undergrad = $data['undergrad'];
                             <input type="text" id="heading" name="heading" class="password-box" required><br>
 
                             <label for="content">Body:</label><br>
-                            <textarea id="content" name="content" rows="15" cols="100" class="textarea-1" required></textarea><br>
+                            <textarea id="content" name="content" rows="5" class="textarea-1" required></textarea><br>
 
                             <div class="btn-container-2">
                                 <button class="button-main" type="submit" onclick="showAlert(event)">Submit</button>
@@ -49,15 +49,27 @@ $undergrad = $data['undergrad'];
     </section>
     <script>
         function showAlert(e) {
+            // prevent submit on click button submit
             e.preventDefault();
-            Swal.fire({
-                text: "Note created Successfully!",
-                icon: "success",
-                confirmButtonColor: "#3d8994",
-                background: "#E5F3F6"
-            }).then((response)=>{
-                document.getElementById("noteForm").submit();
-            });
+            
+            // check all input fields are filled
+            var status = document.getElementById("noteForm").checkValidity();
+
+            if (status) {
+                // trigger success alert
+                Swal.fire({
+                    text: "Note created Successfully!",
+                    icon: "success",
+                    confirmButtonColor: "#3d8994",
+                    background: "#E5F3F6"
+                }).then((response) => {
+                    // after confirm submit form
+                    document.getElementById("noteForm").submit();
+                });
+            }else{
+                // if any empty field show error
+                document.getElementById("noteForm").reportValidity();
+            }
         }
     </script>
 </body>
