@@ -26,7 +26,7 @@
                 <a href="<?php echo URLROOT; ?>doctor/doc_timeslots" class="top <?php echo ($currentPage === 'doc_timeslots') ? 'active' : ''; ?>" id="sb-link8">Timeslots</a>
             </div>
             <div class="sidebar-container3">
-                <a href="" class="bottom">Help & Info</a>
+                <a href="" class="bottom"></a>
                 <a href="<?php echo URLROOT;?>doctor/doc_feedback" class="bottom <?php echo($currentPage === 'doc_feedback')? 'active' : ''; ?>" id="sb-link9">Feedback</a>
                 <a href="<?php echo URLROOT;?>users/logout" class="bottom">Log out</a>
             </div>
