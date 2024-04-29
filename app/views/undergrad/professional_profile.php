@@ -44,14 +44,14 @@ $id = $data['id'];
                                 <p class="p-regular-grey" style="font-size: 15px; margin-bottom: 5px;"><?php echo $counsellor->email; ?></p>
                                 <div style="display: flex; flex-direction: row; gap: 10px;">
                                     <?php if (empty($data['request']) || !in_array($counsellor->user_id, array_column($data['request'], 'to_user_id'))) : ?>
-                                        <a href="<?php echo URLROOT; ?>Undergrad/MsgRequest/<?php echo $counsellor->user_id; ?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                        <a href="<?php echo URLROOT; ?>Undergrad/MsgRequest/<?php echo $counsellor->user_id; ?>" style="text-decoration: none;"><button class="button-main">Message</button></a>
                                     <?php else : ?>
                                         <?php foreach ($data['request'] as $request) : ?>
                                             <?php if ($request->to_user_id == $counsellor->user_id) : ?>
                                                 <?php if ($request->is_clicked == 1) : ?>
                                                     <button class="button-second">Chat Created</button>
                                                 <?php else : ?>
-                                                    <a href="<?php echo URLROOT; ?>Undergrad/MsgRequest/<?php echo $counsellor->user_id; ?>" style="text-decoration: none;"><button class="button-main">Message Request</button></a>
+                                                    <a href="<?php echo URLROOT; ?>Undergrad/MsgRequest/<?php echo $counsellor->user_id; ?>" style="text-decoration: none;"><button class="button-main">Message</button></a>
                                                 <?php endif; ?>
                                             <?php endif; ?>
                                         <?php endforeach; ?>

@@ -46,6 +46,11 @@
 
                 <p class="p-regular-green">Sent Request Letters</p>
                 <div class="card-white-scroll" style="height: 215px;">
+                <?php
+                 usort($data['request_letter'], function($a, $b) {
+                    return strtotime($b->sent_at) - strtotime($a->sent_at);
+                });
+                ?>
                     <?php foreach($data['request_letter'] as $request_letter) : ?>
                         <?php foreach($data['counsellor'] as $counsellor) : ?>
                             <?php if ($request_letter->to_coun_user_id == $counsellor->user_id) : ?>

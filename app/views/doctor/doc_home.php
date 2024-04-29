@@ -48,7 +48,7 @@ $notification = $data['notification'];
                     <p class="p-regular">Hope you’re having a good day...</p>
                     <p class="p-regular">Let's Give a helping hand, Shall we?</p>
                     <div style="display: flex; flex-direction: row; margin-top: 20px; gap: 10px;">
-                        <a href="<?php echo URLROOT . "doctor/doc_prescription/"; ?>" style="text-decoration: none;"> <button class="button-main" style="margin-left: 0px"> directed Undergraduates<?php if ($data['notification'] > 0) {
+                        <a href="<?php echo URLROOT . "doctor/doc_undergrad/"; ?>" style="text-decoration: none;"> <button class="button-main" style="margin-left: 0px"> directed Undergraduates<?php if ($data['notification'] > 0) {
                             echo '<span class="badge1" id="notification-badge">' . $notification . '</span>';
                 }
                 ?></button>

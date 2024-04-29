@@ -74,7 +74,7 @@
                             </div>
                             <div>
                             <p class='p-regular-green' style='font-size: 15px;'>$professional->first_name $professional->last_name</p>
-                            <p class='p-regular-grey' style='font-size: 15px;'>(Active Status)</p>
+                            <p class='p-regular-grey' style='font-size: 15px;'></p>
                             </div>
                         </div>";
 

@@ -108,6 +108,9 @@ class Undergrad extends Controller
         $undergrad = $this->adminModel->getUgById($id);
         $counsellor = $this->adminModel->getCounselors();
         $request_letter = $this->ugModel->getRequestLettersfromId($id);
+        usort($request_letter, function($a, $b) {
+            return strtotime($b->sent_at) - strtotime($a->sent_at);
+        });
         $data = [
             'counsellor' => $counsellor,
             'undergrad' => $undergrad,
