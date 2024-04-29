@@ -27,8 +27,6 @@
                     <div class="card-white">
                         <p class="p-regular-green">Submit Feedback/ Complaints</p>
                         <div class="card-green-5">
-                        <?php flash('feedback-flash'); ?>
-
                             <form action="<?php echo URLROOT;?>Procounsellor/sentFeedback/<?php echo $_SESSION['user_id'];?>" method="POST">
                                 <div style="font-size: 18px; color: var(--zerene-green)">
                                     <label for="type">Type: </label>
@@ -38,10 +36,10 @@
                                     </select><br><br>
 
                                     <label for="title">Title: </label>
-                                    <input type="text" name="title" placeholder="Enter your title" class="input"><br><br>
+                                    <input type="text" name="title" placeholder="Enter your title" class="input" required><br><br>
 
                                     <label for="content">Content: </label>
-                                    <textarea name="content" rows="10" class="textarea-1"></textarea><br><br>
+                                    <textarea name="content" rows="10" class="textarea-1" required></textarea><br><br>
 
                                     <div class="btn-container-2">
                                         <a href="" style="text-decoration: none;"><button class="button-main" type="submit">Submit</button></a>

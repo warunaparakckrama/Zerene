@@ -1,5 +1,5 @@
 <?php
-$currentPage = 'pc_view_timeslot';
+$currentPage = 'pc_timeslot';
 $timeslot = $data['timeslot'];
 $reserve = $data['reserve'];
 ?>
@@ -34,7 +34,14 @@ $reserve = $data['reserve'];
                         <div class="card-green-7">
                             <div>
                                 <p class="p-regular-green" style="font-size: 15px;">Date: <b><?php echo $data['timeslot']->slot_date; ?></b></p>
-                                <p class="p-regular-green" style="font-size: 15px;">Reserved Timeslot: <b><?php echo $data['timeslot']->slot_start; ?> - <?php echo $data['timeslot']->slot_finish; ?></b></p>
+                                <?php
+                                    $slot_start = strtotime($data['timeslot']->slot_start);
+                                    $slot_finish = strtotime($data['timeslot']->slot_finish);
+
+                                    $start_time = date("h:ia", $slot_start);
+                                    $finish_time = date("h:ia", $slot_finish);
+                                ?>
+                                <p class="p-regular-green" style="font-size: 15px;">Reserved Timeslot: <b><?php echo  $start_time . ' - ' . $finish_time; ?></b></p>
                                 <!-- <p class="p-regular-green" style="font-size: 15px;">Reserved By: <?php echo $data['reserve']->ug_user_id; ?></p> -->
                                 <p class="p-regular-green" style="font-size: 15px;">Type: <b><?php echo $data['timeslot']->slot_type; ?></b></p><br>
                                 <div class="btn-container-2">

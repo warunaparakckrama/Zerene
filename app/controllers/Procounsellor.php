@@ -92,7 +92,7 @@ class Procounsellor extends Controller
         $id = $_SESSION['user_id'];
         $counsellor = $this->adminModel->getCounsellorById($id);
         $undergrad = $this->adminModel->getUndergrads();
-        $request = $this->pcModel->getMsgRequestfromCounId($counsellor->coun_id);
+        $request = $this->pcModel->getMsgRequestfromCounId($id);
         $data = [
             'undergrad' => $undergrad,
             'counsellor' => $counsellor,
@@ -268,16 +268,7 @@ class Procounsellor extends Controller
                 'email' => trim($_POST['email']),
                 'title' => trim($_POST['title']),
                 'content' => trim($_POST['content']),
-                'title_err' => '',
-                'content_err' => '',
             ];
-
-            if (empty($data['title'])) {
-                $data['title_err'] = 'Please enter the title';
-            }
-            if (empty($data['content'])) {
-                $data['content_err'] = 'Please enter the content';
-            }
 
             if (empty($data['title_err']) && empty($data['content_err'])) {
                 // Validated
@@ -290,7 +281,6 @@ class Procounsellor extends Controller
 
                 // post notifications
                 if ($this->userModel->addFeedback($data)) {
-                    flash('feedback-flash', 'Feedback is successfully sent');
                     redirect('procounsellor/pc_feedback');
                 } else {
                     die('Something went wrong');
@@ -428,7 +418,7 @@ class Procounsellor extends Controller
                 'num_questions' => trim($_POST['num_questions']),
                 'num_answers' => trim($_POST['num_answers']),
                 'num_ranges' => trim($_POST['num_ranges']),
-                'm_factor' => trim($_POST['m_factor']),
+                // 'm_factor' => trim($_POST['m_factor']),
             ];
 
             // Validated
@@ -464,7 +454,7 @@ class Procounsellor extends Controller
 
                 // Capture and insert ranges for the marking scheme
                 $numRanges = $data['num_ranges'];
-                $m_factor = $data['m_factor'];
+                // $m_factor = $data['m_factor'];
                 for ($i = 1; $i <= $numRanges; $i++) {
                     $minRangeKey = 'min_range' . $i;
                     $maxRangeKey = 'max_range' . $i;
@@ -476,7 +466,7 @@ class Procounsellor extends Controller
                         $rangeName = trim($_POST[$rangeNameKey]);
 
                         // Insert the range into the database
-                        $this->counsellorModel->addRange($questionnaire_id, $minRange, $maxRange, $rangeName, $m_factor);
+                        $this->counsellorModel->addRange($questionnaire_id, $minRange, $maxRange, $rangeName);
                     }
                 }
 

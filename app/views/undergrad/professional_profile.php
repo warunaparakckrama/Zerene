@@ -1,5 +1,5 @@
 <?php
-$currentPage = 'professional_profile';
+$currentPage = 'professionals';
 $counsellor = $data['counsellor'];
 $doctor = $data['doctor'];
 $request = $data['request'];

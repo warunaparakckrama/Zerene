@@ -56,18 +56,20 @@ $note = $data['note'];
                 <div>
                     <p class="p-regular-green">Created Notes of <?php echo $undergrad->username; ?></p>
                     <div class="card-white-scroll" style="height: 300px;">
-                    <?php foreach ($data['note'] as $note) : ?>
-                        <div class="card-green">
+                        <?php foreach ($data['note'] as $note) : ?>
+                            <div class="card-green">
                                 <img src="<?php echo IMG; ?>note1.svg" alt="pro pic" class="">
                                 <div>
-                                    <p class="p-regular-green" style="margin-bottom: -5px;"><?php echo $note->heading?></p></a>
-                                    <p class="p-regular" style="color:var(--zerene-grey); font-size: 15px"><?php echo $note->created_at?></p>
+                                    <p class="p-regular-green" style="margin-bottom: -5px;"><?php echo $note->heading ?></p></a>
+                                    <?php $created_at = new DateTime($note->created_at);
+                                    $formatted_date = $created_at->format('jS M, Y \a\t g.ia'); ?>
+                                    <p class="p-regular" style="color:var(--zerene-grey); font-size: 15px"><?php echo $formatted_date;?></p>
                                 </div>
                                 <div class="btn-container">
-                                    <a href="<?php echo URLROOT;?>procounsellor/pc_viewNote/<?php echo $note->note_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
+                                    <a href="<?php echo URLROOT; ?>procounsellor/pc_viewNote/<?php echo $note->note_id; ?>" style="text-decoration: none;"><button class="button-main">View</button></a>
                                 </div>
                             </div>
-                            <?php endforeach; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

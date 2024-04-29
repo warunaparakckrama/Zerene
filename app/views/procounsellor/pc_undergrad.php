@@ -48,15 +48,15 @@
                 <div class="card-white-scroll"  style="height: 300px;">
                     <?php foreach($data['request'] as $request) : ?>
                         <?php foreach ($data['undergrad'] as $undergrad) : ?>
-                            <?php if ($undergrad->faculty !== $counsellor->faculty && $undergrad->ug_id === $request->from_user_id) : ?>
+                            <?php if ($undergrad->faculty !== $counsellor->faculty && $undergrad->user_id == $request->from_user_id) : ?>
                                 <div class="card-green">
-                                    <img src="<?php echo IMG; ?>ug-avatar1.svg" alt="profile pic" class="card-profile">
+                                    <img src="<?php echo IMG; ?>ug.svg" alt="profile pic" class="card-profile">
                                     <div>
                                         <a href="<?php echo URLROOT;?>Procounsellor/pc_ug_profile/<?php echo $undergrad->user_id;?>" class="a-name"><p class="p-regular-green" style=" margin-bottom: -10px;"><?php echo $undergrad->username;?></p></a>
                                         <p class="p-regular-grey" style="font-size: 15px;"><?php echo $undergrad->university.' '.$undergrad->faculty;?></p>
                                     </div>
                                     <div class="btn-container">
-                                        <a href="<?php echo URLROOT;?>Procounsellor/pc_ug_profile/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">Profile</button></a>
+                                        <a href="<?php echo URLROOT;?>Procounsellor/pc_ug_profile/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">View Profile</button></a>
                                     </div>
                                 </div>
                             <?php endif; ?>
