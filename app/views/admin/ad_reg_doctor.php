@@ -45,8 +45,8 @@
 
                                 <label for="hospital">Hospital in Charge: </label>
                                 <select name="hospital" class="option" style="width: 50%;">
-                                    <option value="General Hospital - Colombo" <?php echo ($data['hospital'] === 'General Hospital - Colombo') ? 'selected' : ''; ?>>General Hospital - Colombo</option>
-                                    <option value="Teaching Hospital - Ragama" <?php echo ($data['hospital'] === 'Teaching Hospital - Ragama') ? 'selected' : ''; ?>>Teaching Hospital - Ragama</option>
+                                    <option value="National Hospital - Colombo" <?php echo ($data['hospital'] === 'National Hospital - Colombo') ? 'selected' : ''; ?>>National Hospital - Colombo</option>
+                                    <option value="National Institute of Mental Health - Sri Lanka" <?php echo ($data['hospital'] === 'National Institute of Mental Health - Sri Lanka') ? 'selected' : ''; ?>>National Institute of Mental Health - Sri Lanka</option>
                                     <option value="Teaching Hospital - Lady Ridgeway Hospital for Children" <?php echo ($data['hospital'] === 'Teaching Hospital - Lady Ridgeway Hospital for Children') ? 'selected' : ''; ?>>Teaching Hospital - Lady Ridgeway Hospital for Children</option>
                                     <option value="Mental Hospital - Angoda" <?php echo ($data['hospital'] === 'Mental Hospital - Ragama') ? 'selected' : ''; ?>>Mental Hospital - Angoda</option>
                                 </select>
