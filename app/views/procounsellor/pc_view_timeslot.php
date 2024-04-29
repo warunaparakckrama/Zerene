@@ -33,15 +33,15 @@ $reserve = $data['reserve'];
                     <div class="card-white">
                         <div class="card-green-7">
                             <div>
-                                <p class="p-regular-green" style="font-size: 15px;">Date: <?php echo $data['timeslot']->slot_date; ?></p>
-                                <p class="p-regular-green" style="font-size: 15px;">Reserved Timeslot: <?php echo $data['timeslot']->slot_start; ?> - <?php echo $data['timeslot']->slot_finish; ?></p>
-                                <p class="p-regular-green" style="font-size: 15px;">Reserved By: <?php echo $data['reserve']->ug_user_id; ?></p>
-                                <p class="p-regular-green" style="font-size: 15px;">Type: <?php echo $data['timeslot']->slot_type; ?></p><br>
+                                <p class="p-regular-green" style="font-size: 15px;">Date: <b><?php echo $data['timeslot']->slot_date; ?></b></p>
+                                <p class="p-regular-green" style="font-size: 15px;">Reserved Timeslot: <b><?php echo $data['timeslot']->slot_start; ?> - <?php echo $data['timeslot']->slot_finish; ?></b></p>
+                                <!-- <p class="p-regular-green" style="font-size: 15px;">Reserved By: <?php echo $data['reserve']->ug_user_id; ?></p> -->
+                                <p class="p-regular-green" style="font-size: 15px;">Type: <b><?php echo $data['timeslot']->slot_type; ?></b></p><br>
                                 <div class="btn-container-2">
                                     <?php if ($data['timeslot']->slot_status == 'pending') : ?>
-                                        <p class="p-regular-grey" style="font-size: 17px;"><b>ser<?php echo $data['reserve']->ug_user_id; ?></b> has requested to cancel the reservation:</p>
+                                        <!-- <p class="p-regular-grey" style="font-size: 17px;"><b><?php echo $data['reserve']->ug_user_id; ?></b> has requested to cancel the reservation:</p> -->
                                         <a href="<?php echo URLROOT; ?>Procounsellor/changeSlotStatus/<?php echo $data['reserve']->slot_id; ?>" style="text-decoration: none;">
-                                            <button class="button-main" onclick="return confirm('Are you sure you want to Allow the Cancellation?')">Allow</button>
+                                            <button class="button-main" onclick="return confirm('Are you sure you want to Allow the Cancellation?')">Allow Cancellation</button>
                                         </a>
                                     <?php elseif ($data['timeslot']->slot_status == 'reserved') : ?>
                                         <!-- No button rendering needed for reserved status -->
