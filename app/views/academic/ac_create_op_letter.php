@@ -1,6 +1,6 @@
 <?php
-    $currentPage = 'ac_opletters';
-    $req_letter_id = $data['req_letter_id'];
+$currentPage = 'ac_opletters';
+$req_letter_id = $data['req_letter_id'];
 ?>
 
 <head>
@@ -19,36 +19,37 @@
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Opinion Letters</p></div>
+                <div class="subgrid-2">
+                    <p class="p-title" style="font-size: 40px;">Opinion Letters</p>
+                </div>
                 <div><img src="<?php echo IMG; ?>zerene-admin.svg" alt="ug avatar" width="40" height="40" style="float: inline-end;"></div>
-            <div>
-                <div class="card-white">
-                    <p class="p-regular-green">Create Opinion Letter</p>
-                    <div class="card-green-5">
-                        <form action="<?php echo URLROOT;?>academic/ac_create_op_letter/<?php echo $req_letter_id;?>" method="POST">
-                            <div style="font-size: 15px;">
-                                <label for="subject">Subject: </label>
-                                <input type="text" name="subject" style="font-size: 15px; width: 50%;" required><br><br>
+            </div>
+                <div>                   
+                    <div class="card-white">
+                        <p class="p-regular-green">Create Opinion Letter</p>
+                        <div class="card-green-5">
+                            <form action="<?php echo URLROOT; ?>academic/ac_create_op_letter/<?php echo $req_letter_id; ?>" method="POST">
+                                <div style="font-size: 15px;">
+                                    <label for="subject">Subject: </label>
+                                    <input type="text" name="subject" placeholder="Enter your subject here" class="input" required><br><br>
 
-                                <label for="content">Letter Body: </label>
-                                <textarea name="content" rows="10" placeholder="Enter your message here" class="textarea-1" required></textarea><br><br>
+                                    <label for="content">Letter Body: </label>
+                                    <textarea name="content" rows="10" placeholder="Enter your message here" class="textarea-1" required></textarea><br><br>
 
-                                <div class="btn-container-2">
-                                    <button class="button-main" type="submit" >Send Letter</button>
-                                    <button class="button-danger" type="reset">Cancel</button>
+                                    <div class="btn-container-2">
+                                        <button class="button-main" type="submit">Send Letter</button>
+                                        <button class="button-danger" type="reset">Cancel</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
 
+
+
             </div>
-
-        </div>
-
-
-        </div>
     </section>
 
 

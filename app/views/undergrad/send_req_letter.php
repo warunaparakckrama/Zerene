@@ -34,14 +34,14 @@
                                 <input type="hidden" name="coun_user_id" value="<?php echo $id;?>">    
 
                                 <label for="subject">Subject: </label>
-                                <input type="text" name="subject" placeholder="enter your subject here" style="width: 50%;" required><br><br>
+                                <input type="text" name="subject" placeholder="enter your subject here" class="input" required><br><br>
 
                                 <label for="content">Content: </label><br>
                                 <textarea name="content" id="" rows="10" class="textarea-1" required></textarea><br><br>
 
                                 <label for="document">Attach any documents here: (pdf only)</label>
                                 
-                                <input type="file" id="document" name="document" accept=".pdf"><br><br>
+                                <input type="file" id="document" name="document" accept=".pdf" class="button-second"><br><br>
 
                                 <!-- Display file upload error if it exists -->
                                 <?php if (!empty($data['upload_error'])): ?>
