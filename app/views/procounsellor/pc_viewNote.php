@@ -30,12 +30,12 @@ $note = $data['note'];
                 <div class="card-white">
                     <div class="card-green-7">
                         <div>
-                            <p class="p-regular-green" style="font-size: 18px;">Note No. :</p><p class="p-regular-grey" style="font-size: 15px;"> <?php echo $data['note']->note_id; ?></p><br>
-                            <p class="p-regular-green" style="font-size: 18px;">Heading :</p><p class="p-regular-grey" style="font-size: 15px;"> <?php echo $data['note']->heading; ?></p><br>
-                            <p class="p-regular-green" style="font-size: 18px;">Content : </p><p class="p-regular-grey" style="font-size: 15px;"> <?php echo $data['note']->content; ?></p><br>
+                            <p class="p-regular-green" style="font-size: 15px;"><b>Note No. :</b></p><p class="p-regular-grey" style="font-size: 15px;"> <?php echo $data['note']->note_id; ?></p>
+                            <p class="p-regular-green" style="font-size: 15px;"><b>Heading :</b></p><p class="p-regular-grey" style="font-size: 15px;"> <?php echo $data['note']->heading; ?></p>
+                            <p class="p-regular-green" style="font-size: 15px;"><b>Content : </b></p><p class="p-regular-grey" style="font-size: 15px;"> <?php echo $data['note']->content; ?></p><br>
                             <div class="btn-container-2">
                                 <form action="<?php echo URLROOT; ?>Procounsellor/deleteNote/<?php echo $data['note']->note_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete the note?')">
-                                    <button type="submit" class="button-danger no-underline">Delete</button>
+                                    <button type="submit" class="button-danger no-underline" onclick="return confirm('Are you sure you want to delete the note?')">Delete</button>
                                 </form>
                             </div>
                         </div>
@@ -44,14 +44,4 @@ $note = $data['note'];
             </div>
         </div>
     </section>
-
-    <script>
-        function cancelEdit() {
-            document.getElementById('timeslotForm').reset();
-        }
-
-        function goBack() {
-            window.history.back();
-        }
-    </script>
 </body>
