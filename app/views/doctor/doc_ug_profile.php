@@ -52,7 +52,7 @@
                          
                         
                                     <div class="card-green">
-                                        <img src="<?php echo IMG; ?>note1.svg" alt="profile pic" class="card-profile">
+                                        <img src="<?php echo IMG; ?>note1.svg" alt="profile pic">
                                         <div>
                                             
                                                 <p class="p-regular-green" style=" margin-bottom: -10px;">Prescription No.<?php echo $UgPress->pres_id; ?></p>

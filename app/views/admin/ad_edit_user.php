@@ -56,13 +56,13 @@
                                 <input type="hidden" name="user_email" value="<?php echo $user->email;?>">
 
                                 <label for="" class="p-regular-grey">Your Password :</label>
-                                <input type="password" name="admin_password" required>
+                                <input type="password" name="admin_password" class="password-box" required>
 
                                 <label for="" class="p-regular-grey">New Password :</label>
-                                <input type="password" name="new_password" required>
+                                <input type="password" name="new_password" class="password-box" required>
 
                                 <label for="" class="p-regular-grey">Confirm New Password :</label>
-                                <input type="password" name="confirm_password" required>
+                                <input type="password" name="confirm_password" class="password-box" required>
 
                                 <div class="btn-container-2" style="margin-top: 10px;">
                                     <button class="button-main" type="submit">Change</button>
@@ -78,10 +78,10 @@
                                 <input type="hidden" name="user_email" value="<?php echo $user->email;?>">
 
                                 <label for="nusername" class="p-regular-grey">New Username :</label>
-                                <input type="text" name="new_username" required>
+                                <input type="text" name="new_username" class="password-box" required>
 
                                 <label for="" class="p-regular-grey">Your Password :</label>
-                                <input type="password" name="admin_password" required>
+                                <input type="password" name="admin_password" class="password-box" required>
 
                                 <div class="btn-container-2" style="margin-top: 10px;">
                                     <button class="button-main" type="submit">Change</button>

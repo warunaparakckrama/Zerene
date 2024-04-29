@@ -34,7 +34,7 @@
                                     </select><br><br>
 
                                     <label for="title">Title: </label>
-                                    <input type="text" name="title" placeholder="Enter your title" style="width: 50%;" class="input"><br><br>
+                                    <input type="text" name="title" placeholder="Enter your title" class="input"><br><br>
 
                                     <label for="content">Content: </label>
                                     <textarea name="content" rows="10" class="textarea-1"></textarea><br><br>

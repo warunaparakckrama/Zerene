@@ -22,8 +22,8 @@ $doctor = $data['doctor'];
             <div class="subgrid-1">
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Prescriptions</p>
-                    <div><img src="<?php echo IMG; ?>zerene-admin.svg" alt="ug avatar" width="40" height="40" style="float: inline-end;"></div>
                 </div>
+                <div><img src="<?php echo IMG; ?>zerene-admin.svg" alt="ug avatar" width="40" height="40" style="float: inline-end;"></div>
             </div>
 
             <div>
