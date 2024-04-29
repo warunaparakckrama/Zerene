@@ -183,7 +183,7 @@ class Users extends Controller
         $masked_email = $this->emailHide($email);
         $data = [
             'user_id' => $user_id,
-            'email' => $masked_email,
+            'masked_email' => $masked_email,
             'verify_alert' => ''
         ];
 
@@ -394,6 +394,7 @@ class Users extends Controller
     {
         $code = $this->userModel->getVerifyCode($user_id);
         $email = $this->userModel->getEmailById($user_id);
+        $masked_email = $this->emailHide($email);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //process form
@@ -402,6 +403,7 @@ class Users extends Controller
                 'user_id' => $user_id,
                 'code' => $code,
                 'email' => $email,
+                'masked_email' => $masked_email,
                 'verify_code' => trim($_POST['verify_code']),
                 'verify_alert' => ''
             ];

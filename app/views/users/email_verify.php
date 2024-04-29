@@ -19,7 +19,7 @@
         </div>
         <div class="log-grid-3">
             <p class="p-regular-green" style="margin-bottom: 10px;">Email Verification</p>
-            <p class="p-regular-grey" style="font-size: 15px;">We have sent you a verification code to <b><?php echo $data['email'];?></b>.</p>
+            <p class="p-regular-grey" style="font-size: 15px;">We have sent you a verification code to <b><?php echo $data['masked_email'];?></b>.</p>
             <p class="p-regular-grey" style="font-size: 15px;"> Please enter the 6-digit code to verify your email</p><br>
 
             <form action="<?php echo URLROOT;?>Users/verifyEmailcode/<?php echo $data['user_id'];?>" method="POST">
