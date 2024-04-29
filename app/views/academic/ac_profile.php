@@ -1,5 +1,5 @@
 <?php
-$counselor = $data['counselor'];
+$counsellor = $data['counsellor'];
 ?>
 
 <head>
@@ -20,7 +20,7 @@ $counselor = $data['counselor'];
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Profile</p>
                 </div>
-                <div class="subgrid-3"></div>
+                <div><img src="<?php echo IMG; ?>counsellor-sb.svg" alt="ug avatar" width="30" height="30" style="float: inline-end;"></div>
             </div>
 
             <div>
@@ -34,27 +34,27 @@ $counselor = $data['counselor'];
                                 <tr>
                                 <td class="p-regular-grey">Name</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $counselor->first_name.' '.$counselor->last_name;?></td>
+                                    <td class="p-title"><?php echo $counsellor->first_name.' '.$counsellor->last_name;?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">Counsellor Type</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $counselor->coun_type;?></td>
+                                    <td class="p-title"><?php echo $counsellor->coun_type;?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">Email</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $counselor->email; ?></td>
+                                    <td class="p-title"><?php echo $counsellor->email; ?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">University</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $counselor->university; ?></td>
+                                    <td class="p-title"><?php echo $counsellor->university; ?></td>
                                 </tr>
                                 <tr>
                                     <td class="p-regular-grey">Faculty</td>
                                     <td class="p-regular-grey">:</td>
-                                    <td class="p-title"><?php echo $counselor->faculty; ?></td>
+                                    <td class="p-title"><?php echo $counsellor->faculty; ?></td>
                                 </tr>
                             </table>
                         </div>

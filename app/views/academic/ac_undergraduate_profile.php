@@ -24,7 +24,7 @@ $id = $data['id'];
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Undergraduate Profile</p>
                 </div>
-                <div class="subgrid-3"></div>
+                <div><img src="<?php echo IMG; ?>counsellor-sb.svg" alt="ug avatar" width="30" height="30" style="float: inline-end;"></div>
             </div>
 
             <div>

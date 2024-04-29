@@ -219,9 +219,9 @@ class Academic extends Controller
     public function ac_profile()
     {
         $id = $_SESSION['user_id'];
-        $counselor = $this->adminModel->getCounsellorById($id);
+        $counsellor = $this->adminModel->getCounsellorById($id);
         $data = [
-            'counselor' => $counselor
+            'counsellor' => $counsellor
         ];
         $this->view('academic/ac_profile', $data);
     }
@@ -374,56 +374,64 @@ class Academic extends Controller
 
     public function changeUsernameAcademic($user_id)
     {
+        $counsellor = $this->adminModel->getCounsellorById($user_id);
+        $current_username = $this->userModel->getUsernameById($user_id);
+        $username = $this->userModel->getUsernames();
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'current_username' => trim($_POST['current_username']),
+                'counsellor' => $counsellor,
+                'current_username' => $current_username,
+                'username' => $username,
                 'new_username' => trim($_POST['new_username']),
-                'current_username_err' => '',
-                'new_username_err' => ''
+                'password' => trim($_POST['password']),
+                'username_alert' => ''
             ];
 
-            if (empty($data['current_username'])) {
-                $data['current_username_err'] = 'Please enter current username';
-            }
-            if (empty($data['new_username'])) {
-                $data['new_username_err'] = 'Please enter new username';
-            }
+            if (strlen($data['new_username']) < 8) {
+                $data['username_alert'] = '*Username must be atleast 8 characters';
+            } elseif ($data['new_username'] == $data['current_username']) {
+                $data['username_alert'] = '*New username cannot be same as the current username';
+            } else {
+                // Convert the new_username to lowercase
+                $newUsernameLower = strtolower($data['new_username']);
 
-            if (empty($data['current_username_err']) && empty($data['new_username_err'])) {
-                // Validated
+                foreach ($data['username'] as $username) {
+                    // Convert each username in the array to lowercase
+                    $existingUsernameLower = strtolower($username->username);
 
-                // Fetch the current username from db
-                $current_username = $this->userModel->getUsernameById($user_id);
-
-                //
-                if (($data['current_username'] != $current_username)) {
-                    $data['current_username_err'] = 'Current username is incorrect';
-                } else {
-
-                    // Update the username
-                    if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                        // flash('user_message', 'Username updated successfully');
-                        redirect('academic/ac_profile');
-                    } else {
-                        die('Something went wrong');
+                    // Compare the lowercase versions of the usernames
+                    if ($newUsernameLower === $existingUsernameLower) {
+                        // If there is a match, set the alert message
+                        $data['username_alert'] = '*Username already exists/ is a variation of current username';
+                        break; // Exit the loop as soon as a match is found
                     }
+                }
+            }
+
+            // Fetch the hashed password from the database based on the user ID
+            $hashed_password_from_db = $this->userModel->getPasswordById($user_id);
+
+            // Verify if the entered current password matches the hashed password from the database
+            if (!password_verify($data['password'], $hashed_password_from_db)) {
+                $data['username_alert'] = '*Incorrect Password';
+            }
+
+            if (empty($data['username_alert'])) {
+                // Update the username
+                if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
+                    $_SESSION['user_name'] = $data['new_username'];
+                    redirect('academic/ac_profile');
+                } else {
+                    die('Something went wrong');
                 }
             } else {
                 // Load view with errors
                 $this->view('academic/ac_profile', $data);
             }
-        } else {
-            $data = [
-                'current_username' => '',
-                'new_username' => '',
-                'current_username_err' => '',
-                'new_username_err' => ''
-            ];
-
-            $this->view('academic/ac_profile', $data);
         }
 
         $this->view('academic/ac_profile', $data);
