@@ -153,6 +153,9 @@ class Doctor extends Controller
         $counsellor = $this->adminModel->getCounselors();
         $created = $this->docModel->getCreatedPrescriptionById($id);
         
+        usort($created, function($a, $b) {
+            return strtotime($b->date) - strtotime($a->date);
+        });
         $data = [
             'direct' => $direct,
             'undergrad' => $undergrad,
