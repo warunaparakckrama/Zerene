@@ -23,7 +23,7 @@ $request = $data['request'];
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Opinion Letters</p>
                 </div>
-                <div><img src="<?php echo IMG; ?>counsellor-sb.svg" alt="ug avatar" width="30" height="30" style="float: inline-end;"></div>
+                <div><img src="<?php echo IMG; ?>zerene-admin.svg" alt="ug avatar" width="40" height="40" style="float: inline-end;"></div>
             </div>
 
             <div class="card-white">

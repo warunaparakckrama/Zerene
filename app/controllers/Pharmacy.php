@@ -167,7 +167,7 @@ class Pharmacy extends Controller
             if (empty($data['username_alert'])) {
                 // Update the username
                 if ($this->userModel->updateUsername($user_id, $data['new_username'])) {
-                    flash('user_message', 'Username updated successfully');
+                    $_SESSION['user_name'] = $data['new_username'];
                     redirect('pharmacy/pharm_profile');
                 } else {
                     die('Something went wrong');

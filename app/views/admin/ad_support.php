@@ -22,6 +22,7 @@ $currentPage = 'ad_support';
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Support</p>
                 </div>
+                <div><img src="<?php echo IMG; ?>zerene-admin.svg" alt="ug avatar" width="40" height="40" style="float: inline-end;"></div>
             </div>
 
             <div>
@@ -49,7 +50,7 @@ $currentPage = 'ad_support';
                                         <td>
                                             <div class="btn-container-2">
                                                 <a href="<?php echo URLROOT; ?>admin/support_view/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                <!-- <?php if($feedback->status == 'resolved') : ?>
+                                                <!-- <?php if ($feedback->status == 'resolved') : ?>
                                                     <button class="button-second" disabled>Resolved</button>
                                                     <?php else : ?>
                                                     <a href="<?php echo URLROOT; ?>Admin/resolveFeedback/<?php echo $feedback->feedback_id; ?>" style="text-decoration: none;"><button class="button-main" onclick="confirmResolve(event)">Resolve</button></a>
@@ -90,7 +91,7 @@ $currentPage = 'ad_support';
                                             <div class="btn-container-2">
                                                 <div class="btn-container">
                                                     <a href="<?php echo URLROOT; ?>admin/support_view/<?php echo $complaint->feedback_id; ?>" style="text-decoration: none;"><button class="button-main">View</button></a>
-                                                    <!-- <?php if($complaint->status == 'resolved') : ?>
+                                                    <!-- <?php if ($complaint->status == 'resolved') : ?>
                                                         <button class="button-second" disabled>Resolved</button>
                                                         <?php else : ?>
                                                         <a href="<?php echo URLROOT; ?>Admin/resolveFeedback/<?php echo $complaint->feedback_id; ?>" style="text-decoration: none;"><button class="button-main" onclick="confirmResolve(event)">Resolve</button></a>
