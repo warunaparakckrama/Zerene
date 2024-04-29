@@ -217,5 +217,25 @@ class psychiatrist
         $this->db->execute();
     }
 
+
+    public function deleteprescription($id)
+    {
+        error_log('Deleting prescription: ' . $id);
+
+        $this->db->query('UPDATE prescription SET is_deleted = 1 WHERE pres_id = :pres_id');
+        $this->db->bind(':pres_id', $id);
+
+        $result = $this->db->execute();
+
+        if ($result) {
+            error_log('Timeslot deleted successfully.');
+        } else {
+            error_log('Error deleting timeslot.');
+        }
+
+        return $result;
+    }
+    
+
     
 }

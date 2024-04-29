@@ -588,4 +588,18 @@ class Doctor extends Controller
     public function downloadPrescription(){
         require_once APPROOT.'libraries/dompdf/autoload.inc.php';
     }
+
+
+    public function removePrescription($pres_id)
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($this->docModel->deleteprescription($pres_id)) {
+            // Redirect to the correct URL after successful deletion
+            redirect('doctor/doc_prescription');
+        } else {
+            die('Something went wrong');
+        }
+    }
+}
+
 }

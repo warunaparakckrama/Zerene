@@ -74,6 +74,12 @@ $created = $data['created'];
                                         </div>
                                         <div class="btn-container">
                                             <a href="<?php echo URLROOT;?>doctor/doc_template/<?php echo $created->pres_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
+                                            <div class="btn-container-2">
+                                            <form action="<?php echo URLROOT; ?>Doctor/removePrescription/<?php echo $created->pres_id; ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this prescription?')">
+                                            <button type="submit" class="button-danger no-underline">Delete</button>
+                                            </form>
+
+                            </div>
                                             
                                         </div>
                                     </div>
