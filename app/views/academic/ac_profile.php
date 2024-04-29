@@ -8,6 +8,7 @@ $counsellor = $data['counsellor'];
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
     <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <title><?php echo $_SESSION['user_name']; ?> | Profile</title>
 </head>
 
 <body>
@@ -63,13 +64,13 @@ $counsellor = $data['counsellor'];
                             <p>Change Password</p>
                             <form name="changePwdAcademic" action="<?php echo URLROOT; ?>Academic/changePwdAcademic/<?php echo $_SESSION['user_id']; ?>" method="POST" class="subgrid-1" style="font-size: 15px;">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
-                                <input type="password" id="current_password" name="current_password" class="" required>
+                                <input type="password" id="current_password" name="current_password" class="password-box" required>
 
                                 <label for="fname" class="p-regular-grey">New Password :</label>
-                                <input type="password" id="new_password" name="new_password" class="form-default" required>
+                                <input type="password" id="new_password" name="new_password" class="password-box" required>
 
                                 <label for="fname" class="p-regular-grey">Confirm Password :</label>
-                                <input type="password" id="confirm_password" name="confirm_password" placeholder="" class="form-default" required>
+                                <input type="password" id="confirm_password" name="confirm_password" placeholder="" class="password-box" required>
 
                                 <div class="btn-container-2">
                                     <button class="button-main" type="submit">Change</button>
@@ -83,10 +84,10 @@ $counsellor = $data['counsellor'];
                             <p>Change Username</p>
                             <form name="changeUsernameAcademic" action="<?php echo URLROOT; ?>Academic/changeUsernameAcademic/<?php echo $_SESSION['user_id']; ?>" method="POST" class="subgrid-1" style="font-size: 15px;">
                                 <label for="cusername" class="p-regular-grey">New Username :</label>
-                                <input type="text" id="new_username" name="current_username" class="" required>
+                                <input type="text" id="new_username" name="new_username" required>
 
                                 <label for="nusername" class="p-regular-grey">Password :</label>
-                                <input type="password" name="password" required>
+                                <input type="password" name="password" class="password-box" required>
 
                                 <div class="btn-container-2">
                                     <button class="button-main" type="submit">Change</button>

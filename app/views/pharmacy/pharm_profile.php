@@ -51,13 +51,13 @@
                             <p>Change Password</p>
                             <form name="changePwdAdmin" action="<?php echo URLROOT;?>Pharmacy/changePwdPharm/<?php echo $pharmacy->user_id;?>" method="POST" class="subgrid-1" style="font-size: 15px;;">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
-                                <input type="password" name="current_password" class="" required>
+                                <input type="password" name="current_password" class="password-box" required>
                                 
                                 <label for="fname" class="p-regular-grey">New Password :</label>
-                                <input type="password" name="new_password" class="" required>
+                                <input type="password" name="new_password" class="password-box" required>
                                 
                                 <label for="fname" class="p-regular-grey">Confirm Password :</label>
-                                <input type="password" name="confirm_password" class="" required>
+                                <input type="password" name="confirm_password" class="password-box" required>
                                 <div class="btn-container-2">
                                     <button class="button-main" type="submit">Change</button>
                                     <button class="button-danger" type="reset">Cancel</button>
@@ -70,10 +70,10 @@
                             <p>Change Username</p>
                             <form name="changeUsernameAdmin" action="<?php echo URLROOT;?>Pharmacy/changeUsernamePharm/<?php echo $pharmacy->user_id;?>" method="POST" class="subgrid-1" style="font-size: 15px;">
                                 <label for="nusername" class="p-regular-grey">New Username :</label>
-                                <input type="text" name="new_username" class="" required>
+                                <input type="text" name="new_username" class="password-box" required>
 
                                 <label for="nusername" class="p-regular-grey">Password :</label>
-                                <input type="password" name="password"  required>
+                                <input type="password" name="password" class="password-box" required>
                                 
                                 <div class="btn-container-2">
                                     <button class="button-main" type="submit">Change</button>

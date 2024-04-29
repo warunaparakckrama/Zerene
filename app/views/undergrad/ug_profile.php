@@ -1,5 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en"> -->
+
 <?php $currentPage = 'ug_profile'; 
     $undergrad = $data['undergrad'];
 ?>
@@ -75,7 +74,7 @@
                             <p>Change Username</p>
                             <form action="<?php echo URLROOT;?>Undergrad/changeUsernameUG/<?php echo $undergrad->user_id;?>" method="POST" class="subgrid-1" style="font-size: 15px;">
                                 <label for="cusername" class="p-regular-grey">New Username :</label>
-                                <input type="text" name="new_username" style="margin-bottom: 5px;" required>
+                                <input type="text" name="new_username" style="margin-bottom: 5px;"  required>
                                 
                                 <label for="nusername" class="p-regular-grey">Password :</label>
                                 <input type="password" name="password" class="password-box" required>
@@ -96,4 +95,3 @@
         </div>
     </section>
 </body>
-<!-- </html> -->
