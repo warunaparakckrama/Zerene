@@ -2,7 +2,6 @@
 $currentPage = 'pc_view_timeslot';
 $timeslot = $data['timeslot'];
 $reserve = $data['reserve'];
-$undergrad = $data['undergrad'];
 ?>
 
 <head>
@@ -40,7 +39,7 @@ $undergrad = $data['undergrad'];
                                 <p class="p-regular-green" style="font-size: 15px;">Type: <?php echo $data['timeslot']->slot_type; ?></p><br>
                                 <div class="btn-container-2">
                                     <?php if ($data['timeslot']->slot_status == 'pending') : ?>
-                                        <p class="p-regular-grey" style="font-size: 17px;"><b><?php echo $data['undergrad']->username;?></b> has requested to cancel the reservation:</p>
+                                        <p class="p-regular-grey" style="font-size: 17px;"><b>User<?php echo $data['reserve']->ug_user_id; ?></b> has requested to cancel the reservation:</p>
                                         <a href="<?php echo URLROOT; ?>Procounsellor/changeSlotStatus/<?php echo $data['reserve']->slot_id; ?>" style="text-decoration: none;">
                                             <button class="button-main" onclick="return confirm('Are you sure you want to Allow the Cancellation?')">Allow</button>
                                         </a>
