@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo CSS; ?>main.css">
     <link rel="stylesheet" href="<?php echo CSS; ?>dashboard.css">
-    <link rel="shortcut icon" href="<?php echo IMG;?>favicon.svg" type="image/x-icon">
-    <title><?php echo SITENAME;?> | Users</title>
+    <link rel="shortcut icon" href="<?php echo IMG; ?>favicon.svg" type="image/x-icon">
+    <title><?php echo SITENAME; ?> | Users</title>
 </head>
 
 <body>
@@ -16,7 +16,10 @@
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Users</p></div>
+                <div class="subgrid-2">
+                    <p class="p-title" style="font-size: 40px;">Users</p>
+                </div>
+                <div><img src="<?php echo IMG; ?>zerene-admin.svg" alt="ug avatar" width="40" height="40" style="float: inline-end;"></div>
             </div>
 
             <div>
@@ -35,18 +38,18 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($data['undergrads'] as $undergrad) : ?>
-                                <tr>
-                                    <td><?php echo $undergrad->user_id?></td>
-                                    <td><?php echo $undergrad->username?></td>
-                                    <td><?php echo $undergrad->university?></td>
-                                    <td><?php echo $undergrad->faculty?></td>
-                                    <td>
-                                        <div class="btn-container-2">
-                                            <a href="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
-                                            <a href="<?php echo URLROOT;?>Users/deleteUG/<?php echo $undergrad->user_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><?php echo $undergrad->user_id ?></td>
+                                        <td><?php echo $undergrad->username ?></td>
+                                        <td><?php echo $undergrad->university ?></td>
+                                        <td><?php echo $undergrad->faculty ?></td>
+                                        <td>
+                                            <div class="btn-container-2">
+                                                <a href="<?php echo URLROOT; ?>Admin/ad_edit_user/<?php echo $undergrad->user_id; ?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
+                                                <a href="<?php echo URLROOT; ?>Users/deleteUG/<?php echo $undergrad->user_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -69,21 +72,21 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($data['counselors'] as $counselor) : ?>
-                                <tr>
-                                    <td><?php echo $counselor->user_id?></td>
-                                    <td><?php echo $counselor->coun_type?></td>
-                                    <td><?php echo $counselor->first_name?></td>
-                                    <td><?php echo $counselor->last_name?></td>
-                                    <td><?php echo $counselor->username?></td>
-                                    <td>
-                                        <div class="btn-container-2">
-                                            <a href="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $counselor->user_id;?>" style="text-decoration: none;"><button class="button-main">Edit</button></a> 
-                                            <a href="<?php echo URLROOT;?>Users/deleteCoun/<?php echo $counselor->user_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><?php echo $counselor->user_id ?></td>
+                                        <td><?php echo $counselor->coun_type ?></td>
+                                        <td><?php echo $counselor->first_name ?></td>
+                                        <td><?php echo $counselor->last_name ?></td>
+                                        <td><?php echo $counselor->username ?></td>
+                                        <td>
+                                            <div class="btn-container-2">
+                                                <a href="<?php echo URLROOT; ?>Admin/ad_edit_user/<?php echo $counselor->user_id; ?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
+                                                <a href="<?php echo URLROOT; ?>Users/deleteCoun/<?php echo $counselor->user_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -106,21 +109,21 @@
                             <tbody>
 
                                 <?php foreach ($data['doctors'] as $doctor) : ?>
-                                <tr>
-                                    <td><?php echo $doctor->user_id?></td>
-                                    <td><?php echo $doctor->first_name?></td>
-                                    <td><?php echo $doctor->last_name?></td>
-                                    <td><?php echo $doctor->username?></td>
-                                    <td><?php echo $doctor->hospital?></td>
-                                    <td>
-                                        <div class="btn-container-2">
-                                            <a href="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
-                                            <a href="<?php echo URLROOT;?>Users/deleteDoc/<?php echo $doctor->user_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><?php echo $doctor->user_id ?></td>
+                                        <td><?php echo $doctor->first_name ?></td>
+                                        <td><?php echo $doctor->last_name ?></td>
+                                        <td><?php echo $doctor->username ?></td>
+                                        <td><?php echo $doctor->hospital ?></td>
+                                        <td>
+                                            <div class="btn-container-2">
+                                                <a href="<?php echo URLROOT; ?>Admin/ad_edit_user/<?php echo $doctor->user_id; ?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
+                                                <a href="<?php echo URLROOT; ?>Users/deleteDoc/<?php echo $doctor->user_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -141,19 +144,19 @@
                             <tbody>
 
                                 <?php foreach ($data['pharmacies'] as $pharmacies) : ?>
-                                <tr>
-                                    <td><?php echo $pharmacies->pharmacy_name?></td>
-                                    <td><?php echo $pharmacies->pharmacy_address?></td>
-                                    <td><?php echo $pharmacies->contact_num?></td>
-                                    <td>
-                                        <div class="btn-container-2">
-                                            <a href="<?php echo URLROOT;?>Admin/ad_edit_user/<?php echo $pharmacies->user_id;?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
-                                            <a href="<?php echo URLROOT;?>Users/deleteDoc/<?php echo $pharmacies->user_id;?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><?php echo $pharmacies->pharmacy_name ?></td>
+                                        <td><?php echo $pharmacies->pharmacy_address ?></td>
+                                        <td><?php echo $pharmacies->contact_num ?></td>
+                                        <td>
+                                            <div class="btn-container-2">
+                                                <a href="<?php echo URLROOT; ?>Admin/ad_edit_user/<?php echo $pharmacies->user_id; ?>" style="text-decoration: none;"><button class="button-main">Edit</button></a>
+                                                <a href="<?php echo URLROOT; ?>Users/deleteDoc/<?php echo $pharmacies->user_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Delete</button></a>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -172,12 +175,12 @@
                             <tbody>
 
                                 <?php foreach ($data['admins'] as $admin) : ?>
-                                <tr>
-                                    <td><?php echo $admin->username?></td>
-                                    <td><?php echo $admin->email?></td>
-                                </tr>
+                                    <tr>
+                                        <td><?php echo $admin->username ?></td>
+                                        <td><?php echo $admin->email ?></td>
+                                    </tr>
                                 <?php endforeach; ?>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -196,6 +199,5 @@
                 // If the user cancels, do nothing or handle as needed
             }
         }
-
     </script>
 </body>

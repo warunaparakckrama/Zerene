@@ -20,6 +20,7 @@
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Registrations</p>
                 </div>
+                <div><img src="<?php echo IMG; ?>zerene-admin.svg" alt="ug avatar" width="40" height="40" style="float: inline-end;"></div>
             </div>
 
             <div>
@@ -82,7 +83,7 @@
                                     <button class="button-main" type="submit" onclick="">Register</button>
                                     <button class="button-danger" type="reset" onclick="">Cancel</button>
                                 </div>
-                                <p class="p-error"><?php echo isset($data['signup_alert']) ? $data['signup_alert'] : '';?></p>
+                                <p class="p-error"><?php echo isset($data['signup_alert']) ? $data['signup_alert'] : ''; ?></p>
                             </div>
                         </form>
                     </div>

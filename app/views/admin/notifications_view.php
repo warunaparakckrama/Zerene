@@ -1,6 +1,6 @@
 <?php
-    $currentPage = 'ad_notifications';
-    $notification = $data['notification'];
+$currentPage = 'ad_notifications';
+$notification = $data['notification'];
 ?>
 
 <head>
@@ -19,7 +19,10 @@
         </div>
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Notifications</p></div>
+                <div class="subgrid-2">
+                    <p class="p-title" style="font-size: 40px;">Notifications</p>
+                </div>
+                <div><img src="<?php echo IMG; ?>zerene-admin.svg" alt="ug avatar" width="40" height="40" style="float: inline-end;"></div>
             </div>
 
             <div>
@@ -27,12 +30,18 @@
                 <div class="card-white">
                     <div class="card-green-5">
                         <div style="font-size: 15px;">
-                            <p class="p-regular-green"><b>Author: </b></p><p class="p-regular-grey"><?php echo $notification->author; ?></p>
-                            <p class="p-regular-green"><b>Subject: </b></p><p class="p-regular-grey"><?php echo $notification->subject; ?></p>
-                            <p class="p-regular-green"><b>User Type: </b></p><p class="p-regular-grey"><?php echo $notification->user_type; ?></p>
-                            <?php $dateTime = new DateTime($notification->created_at); $formattedDateTime = $dateTime->format('jS M, y \|\ h:iA');?>
-                            <p class="p-regular-green"><b>Created at: </b></p><p class="p-regular-grey"><?php echo $formattedDateTime; ?></p><br>
-                            <p class="p-regular-green"><b>Content: </b></p><p class="p-regular-grey"><?php echo $notification->content; ?></p><br>
+                            <p class="p-regular-green"><b>Author: </b></p>
+                            <p class="p-regular-grey"><?php echo $notification->author; ?></p>
+                            <p class="p-regular-green"><b>Subject: </b></p>
+                            <p class="p-regular-grey"><?php echo $notification->subject; ?></p>
+                            <p class="p-regular-green"><b>User Type: </b></p>
+                            <p class="p-regular-grey"><?php echo $notification->user_type; ?></p>
+                            <?php $dateTime = new DateTime($notification->created_at);
+                            $formattedDateTime = $dateTime->format('jS M, y \|\ h:iA'); ?>
+                            <p class="p-regular-green"><b>Created at: </b></p>
+                            <p class="p-regular-grey"><?php echo $formattedDateTime; ?></p><br>
+                            <p class="p-regular-green"><b>Content: </b></p>
+                            <p class="p-regular-grey"><?php echo $notification->content; ?></p><br>
                             <div class="btn-container-2">
                                 <a href="<?php echo URLROOT; ?>Admin/deleteNotifications/<?php echo $notification->notification_id; ?>" style="text-decoration: none;"><button class="button-danger" onclick="confirmDelete(event)">Remove</button></a>
                             </div>

@@ -17,7 +17,10 @@
 
         <div class="grid-1">
             <div class="subgrid-1">
-                <div class="subgrid-2"><p class="p-title" style="font-size: 40px;">Pharmacies</p></div>
+                <div class="subgrid-2">
+                    <p class="p-title" style="font-size: 40px;">Pharmacies</p>
+                </div>
+                <div><img src="<?php echo IMG; ?>zerene-admin.svg" alt="ug avatar" width="40" height="40" style="float: inline-end;"></div>
             </div>
 
             <div>
@@ -25,7 +28,7 @@
                     <p class="p-regular-green">Create Account (Pharmacy)</p>
 
                     <div>
-                        <form action="<?php echo URLROOT;?>Admin/ad_pharmacies" method="POST">
+                        <form action="<?php echo URLROOT; ?>Admin/ad_pharmacies" method="POST">
                             <div class="card-green-2" style="font-size: 15px;">
                                 <label for="name">Pharamcy Name: </label>
                                 <input type="text" name="name" placeholder="Enter Pharmacy Name" class="form-signup" style="width: 50%; font-size: 15px; padding-left: 10px;" required>
@@ -53,7 +56,7 @@
                                     <button class="button-danger" type="reset">Cancel</button>
                                 </div>
 
-                                <p class="p-error"><?php echo isset($data['signup_alert']) ? $data['signup_alert'] : '';?></p>
+                                <p class="p-error"><?php echo isset($data['signup_alert']) ? $data['signup_alert'] : ''; ?></p>
                             </div>
                         </form>
                     </div>
