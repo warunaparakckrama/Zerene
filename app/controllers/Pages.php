@@ -47,7 +47,7 @@ class Pages extends Controller{
     }
 
     public function sendContactusMail($data){
-        $receiver = 'warunamuhandiramalage2002@gmail.com';
+        $receiver = 'contactmeuz1325@gmail.com';
         $subject = 'Homepage Contact';
         $name = $data['name'];
         $email = $data['email'];

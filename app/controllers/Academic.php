@@ -574,7 +574,7 @@ class Academic extends Controller
 
     public function sendEmail1($data, $request)
     {
-        $receiver = "111ashanpraboda@gmail.com";
+        $receiver = "contactmeuz1325@gmail.com";
         $sender = "From: zerenecounselor@gmail.com";
         $subject = $data['subject'];
         $filePath = __DIR__ . '/../views/academic/ac_emails.php';

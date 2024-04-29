@@ -56,7 +56,11 @@ $created = $data['created'];
                 </div>
                 <p class="p-regular-green">Created prescriptions</p>
                 <div class="card-white-scroll" style="height: 300px;">
-                
+                <?php
+                 usort($data['created'], function($a, $b) {
+                    return strtotime($b->date) - strtotime($a->date);
+                });
+                ?>
                     <?php foreach ($data['created'] as $created) : ?>
                         <?php foreach ($data['undergrad'] as $undergrad) : ?>
                             
@@ -71,13 +75,13 @@ $created = $data['created'];
                                         </div>
                                         <div class="btn-container">
                                             <a href="<?php echo URLROOT;?>doctor/doc_template/<?php echo $created->pres_id;?>" style="text-decoration: none;"><button class="button-main">View</button></a>
+                                            
                                         </div>
                                     </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
-                        
-                        
-                    <?php endforeach; ?> 
+                         <?php endforeach; ?> 
+                     
                 </div>
             </div>
     </section>
