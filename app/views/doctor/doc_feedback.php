@@ -30,13 +30,13 @@
                        <div style="font-size: 18px; color: var(--zerene-green)">
 
                                     <label for="type">Type: </label>
-                                    <select name="type">
+                                    <select name="type" class="option">
                                         <option value="feedback">Feedback</option>
                                         <option value="complaint">Complaint</option>
                                     </select><br><br>
 
                                     <label for="title">Title: </label>
-                                    <input type="text" name="title" placeholder="Enter your title" style="width: 50%;" required><br><br>
+                                    <input type="text" name="title" placeholder="Enter your title" class="input" required><br><br>
 
                                     <label for="content">Content: </label>
                                     <textarea name="content" rows="10" class="textarea-1" required></textarea><br><br>

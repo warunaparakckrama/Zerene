@@ -31,13 +31,13 @@ $timeslot = $data['timeslot'];
                     <div class="card-green-7">
                         <form action="<?php echo URLROOT; ?>Doctor/addTimeslotsDoc/<?php echo $_SESSION['user_id']; ?>" method="POST" id="timeslotForm">
                             <label for="slot_date">Date : </label>
-                            <input type="date" id="" name="slot_date" class="date" value="" required>
+                            <input type="date" id="" name="slot_date" class="date" value="" required><br>
 
                             <label for="slot_start">Start : </label>
                             <input type="time" id="" name="slot_start" class="time" value="" required>
 
                             <label for="slot_finish">Finish : </label>
-                            <input type="time" id="" name="slot_finish" class="time" value="" required>
+                            <input type="time" id="" name="slot_finish" class="time" value="" required><br>
 
                             <label for="slot_interval">Interval : </label>
                             <select name="slot_interval" class="interval">

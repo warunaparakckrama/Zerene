@@ -30,11 +30,11 @@ $feedback = $data['feedback'];
                 <div class="card-white">
                     <div class="card-green-3" style="font-size: 15px;">
                         <div>
-                            <p class="p-regular-green">Username:</p><p class="p-regular-grey"><?php echo $feedback->username; ?></p>
-                            <p class="p-regular-green">Email:</p><p class="p-regular-grey"><?php echo $feedback->email; ?></p>
-                            <p class="p-regular-green">Title: </p><p class="p-regular-grey"><?php echo $feedback->title; ?></p>
-                            <p class="p-regular-green">Status:</p><p class="p-regular-grey"><?php echo $feedback->status; ?></p>
-                            <p class="p-regular-green">Content:</p><p class="p-regular-grey"><?php echo $feedback->content; ?></p><br>
+                            <p class="p-regular-green"><b>Username:</b></p><p class="p-regular-grey"><?php echo $feedback->username; ?></p>
+                            <p class="p-regular-green"><b>Email:</b></p><p class="p-regular-grey"><?php echo $feedback->email; ?></p>
+                            <p class="p-regular-green"><b>Title:</b></p><p class="p-regular-grey"><?php echo $feedback->title; ?></p>
+                            <p class="p-regular-green"><b>Status:</b></p><p class="p-regular-grey"><?php echo $feedback->status; ?></p>
+                            <p class="p-regular-green"><b>Content:</b></p><p class="p-regular-grey"><?php echo $feedback->content; ?></p><br>
 
                             <?php if ($feedback->status == 'resolved') : ?>
                                 <p class="p-regular-green"><b>Comment: </b><?php echo $feedback->comment; ?></p><br>

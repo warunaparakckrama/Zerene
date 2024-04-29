@@ -84,7 +84,7 @@ $counsellor = $data['counsellor'];
                             <p>Change Username</p>
                             <form name="changeUsernameAcademic" action="<?php echo URLROOT; ?>Academic/changeUsernameAcademic/<?php echo $_SESSION['user_id']; ?>" method="POST" class="subgrid-1" style="font-size: 15px;">
                                 <label for="cusername" class="p-regular-grey">New Username :</label>
-                                <input type="text" id="new_username" name="new_username" required>
+                                <input type="text" id="new_username" name="new_username" class="password-box" required>
 
                                 <label for="nusername" class="p-regular-grey">Password :</label>
                                 <input type="password" name="password" class="password-box" required>
