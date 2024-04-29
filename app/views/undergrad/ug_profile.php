@@ -1,5 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en"> -->
+
 <?php $currentPage = 'ug_profile'; 
     $undergrad = $data['undergrad'];
 ?>
@@ -97,4 +96,3 @@
         </div>
     </section>
 </body>
-<!-- </html> -->

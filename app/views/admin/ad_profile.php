@@ -48,10 +48,10 @@
                             <form name="changePwdAdmin" action="<?php echo URLROOT; ?>Admin/changePwdAdmin/<?php echo $admin->user_id; ?>" method="POST" class="subgrid-1" style="font-size: 15px;;">
                                 <label for="fname" class="p-regular-grey">Current Password :</label>
                                 <input type="password" name="current_password" class="password-box" required>
-
+                                
                                 <label for="fname" class="p-regular-grey">New Password :</label>
                                 <input type="password" name="new_password" class="password-box" required>
-
+                                
                                 <label for="fname" class="p-regular-grey">Confirm Password :</label>
                                 <input type="password" name="confirm_password" class="password-box" required>
                                 <div class="btn-container-2">
@@ -70,7 +70,7 @@
 
                                 <label for="nusername" class="p-regular-grey">Password :</label>
                                 <input type="password" name="password" class="password-box" required>
-
+                                
                                 <div class="btn-container-2">
                                     <button class="button-main" type="submit">Change</button>
                                     <button class="button-danger" type="reset">Cancel</button>

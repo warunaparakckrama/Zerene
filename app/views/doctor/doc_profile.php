@@ -1,5 +1,4 @@
-<!-- <!DOCTYPE html> -->
-<!-- <html lang="en"> -->
+
 <?php $currentPage = 'doc_profile';
       $doctor = $data['doctor'];
 ?>
