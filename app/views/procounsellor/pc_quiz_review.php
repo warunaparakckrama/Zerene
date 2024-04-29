@@ -25,7 +25,7 @@ $range = $data['range'];
                 <div class="subgrid-2">
                     <p class="p-title" style="font-size: 40px;">Questionnaires</p>
                 </div>
-                <div></div>
+                <div><img src="<?php echo IMG; ?>counsellor-sb.svg" alt="ug avatar" width="30" height="30" style="float: inline-end;"></div>
             </div>
 
             <div>
