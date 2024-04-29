@@ -185,10 +185,12 @@ class Procounsellor extends Controller
     {
         $reserve = $this->pcModel->getReserveDetails($timeslotId);
         $timeslot = $this->pcModel->getTimeslotById($timeslotId);
+        $undergrad = $this->adminModel->getUgById($reserve->ug_user_id);
         if ($timeslot) {
             $data = [
                 'reserve' => $reserve,
                 'timeslot' => $timeslot,
+                'undergrad'=> $undergrad,
                 'slot_date_err' => '',
                 'slot_start_err' => '',
                 'slot_finish_err' => '',
