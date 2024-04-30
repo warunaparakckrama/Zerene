@@ -71,8 +71,8 @@
 
                                 <div id="rangeField"></div><br>
 
-                                <label for="">Multiplication Factor(If none, Select 1)</label>
-                                <input type="number" id="mFactor" name="m_factor" min="1" required class="password-box"><br><br>
+                                <!-- <label for="">Multiplication Factor(If none, Select 1)</label>
+                                <input type="number" id="mFactor" name="m_factor" min="1" required class="password-box"><br><br> -->
 
                                 <div class="btn-container-2">
                                     <a href="" style="text-decoration: none;"><button class="button-main" type="submit" onclick="">Submit</button></a>

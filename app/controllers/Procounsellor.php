@@ -421,11 +421,9 @@ class Procounsellor extends Controller
                 // 'm_factor' => trim($_POST['m_factor']),
             ];
 
-            // Validated
-
             // Create the questionnaire
             if ($this->counsellorModel->addQuestionnaire($user_id, $data)) {
-                $questionnaire_id = $this->counsellorModel->getLastInsertedQuizId(); // Adjust this based on your actual method to get the last inserted quiz ID
+                $questionnaire_id = $this->counsellorModel->getLastInsertedQuizId(); 
                 // Loop through each question and insert into the database
                 for ($i = 1; $i <= $data['num_questions']; $i++) {
                     $questionKey = 'question' . $i;
