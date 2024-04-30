@@ -78,7 +78,7 @@
                     echo
                     "<div class='name-card'>
                             <div>
-                            <img src='" . URLROOT . "public/img/pro-avatar1.svg' alt='profile' class='profile-picture'>
+                            <img src='" . URLROOT . "public/img/chat.svg' alt='profile' class='profile-picture'>
                             </div>
                             <div>
                             <p class='p-regular-green' style='font-size: 15px;'>$msg_receiver_name</p>
