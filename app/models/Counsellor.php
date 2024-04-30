@@ -21,9 +21,6 @@
             if ($data['quiz_type'] === "Depression") {
                 $this->db->bind(':quiz_type', 'Depression');
             }
-            if ($data['quiz_type'] === "Other") {
-                $this->db->bind(':quiz_type', 'Other');
-            }
             $this->db->bind(':num_questions', $data['num_questions']);
             $this->db->bind(':num_answers', $data['num_answers']);
             $this->db->bind(':user_id', $user_id);

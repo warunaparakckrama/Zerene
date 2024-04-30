@@ -51,7 +51,6 @@
                                     <option value="Stress <?php echo ($data['quiz_type'] === 'Stress') ? 'selected' : ''; ?> ">Stress</option>
                                     <option value="Anxiety <?php echo ($data['quiz_type'] === 'Anxiety') ? 'selected' : ''; ?> ">Anxiety</option>
                                     <option value="Depression <?php echo ($data['quiz_type'] === 'Depression') ? 'selected' : ''; ?> ">Depression</option>
-                                    <option value="Other <?php echo ($data['quiz_type'] === 'Other') ? 'selected' : ''; ?> ">Other</option>
                                 </select><br>
                                 <p class="p-error"><?php echo $data['quiz_type_err']; ?></p><br>
 
